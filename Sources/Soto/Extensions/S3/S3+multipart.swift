@@ -141,9 +141,8 @@ extension S3 {
         logger: Logger = AWSClient.loggingDisabled,
         progress: @escaping (Double) async throws -> Void = { _ in }
     ) async throws -> Int64 {
-        let eventLoop = self.client.eventLoopGroup.any()
         let fileIO = NonBlockingFileIO(threadPool: threadPool)
-        let fileHandle = try await fileIO.openFile(path: filename, mode: .write, flags: .allowFileCreation(), eventLoop: eventLoop).get()
+        let fileHandle = try await fileIO.openFile(path: filename, mode: .write, flags: .allowFileCreation())
         let progressValue = ManagedAtomic(0)
 
         let downloaded: Int64
@@ -154,7 +153,7 @@ extension S3 {
                 logger: logger
             ) { byteBuffer, fileSize in
                 let bufferSize = byteBuffer.readableBytes
-                _ = try await fileIO.write(fileHandle: fileHandle, buffer: byteBuffer, eventLoop: eventLoop).get()
+                _ = try await fileIO.write(fileHandle: fileHandle, buffer: byteBuffer)
                 let progressIntValue = progressValue.wrappingIncrementThenLoad(by: bufferSize, ordering: .relaxed)
                 try await progress(Double(progressIntValue) / Double(fileSize))
             }
@@ -233,12 +232,9 @@ extension S3 {
         logger: Logger = AWSClient.loggingDisabled,
         progress: @escaping @Sendable (Double) async throws -> Void = { _ in }
     ) async throws -> CompleteMultipartUploadOutput {
-        let eventLoop = self.client.eventLoopGroup.any()
-
         return try await openFileForMultipartUpload(
             filename: filename,
             logger: logger,
-            on: eventLoop,
             threadPool: threadPool
         ) { fileHandle, fileRegion, fileIO in
             let length = Double(fileRegion.readableBytes)
@@ -252,8 +248,7 @@ extension S3 {
                     fileHandle,
                     fileIO: fileIO,
                     chunkSize: partSize,
-                    byteBufferAllocator: self.config.byteBufferAllocator,
-                    eventLoop: eventLoop
+                    byteBufferAllocator: self.config.byteBufferAllocator
                 ),
                 concurrentUploads: concurrentUploads,
                 abortOnFail: abortOnFail,
@@ -322,12 +317,9 @@ extension S3 {
         threadPool: NIOThreadPool = .singleton,
         progress: @escaping (Double) async throws -> Void = { _ in }
     ) async throws -> CompleteMultipartUploadOutput {
-        let eventLoop = self.client.eventLoopGroup.any()
-
         return try await openFileForMultipartUpload(
             filename: filename,
             logger: logger,
-            on: eventLoop,
             threadPool: threadPool
         ) { fileHandle, fileRegion, fileIO in
             let length = Double(fileRegion.readableBytes)
@@ -341,8 +333,7 @@ extension S3 {
                     fileHandle,
                     fileIO: fileIO,
                     chunkSize: partSize,
-                    byteBufferAllocator: self.config.byteBufferAllocator,
-                    eventLoop: eventLoop
+                    byteBufferAllocator: self.config.byteBufferAllocator
                 ),
                 concurrentUploads: concurrentUploads,
                 abortOnFail: abortOnFail,
@@ -635,12 +626,11 @@ extension S3 {
     func openFileForMultipartUpload(
         filename: String,
         logger: Logger,
-        on eventLoop: EventLoop,
         threadPool: NIOThreadPool,
         uploadCallback: @escaping (NIOFileHandle, FileRegion, NonBlockingFileIO) async throws -> CompleteMultipartUploadOutput
     ) async throws -> CompleteMultipartUploadOutput {
         let fileIO = NonBlockingFileIO(threadPool: threadPool)
-        let (fileHandle, fileRegion) = try await fileIO.openFile(path: filename, eventLoop: eventLoop).get()
+        let (fileHandle, fileRegion) = try await fileIO.openFile(path: filename)
 
         logger.debug("Open file \(filename)")
 
