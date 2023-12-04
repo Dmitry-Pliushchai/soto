@@ -580,6 +580,7 @@ extension Transfer {
                 .init(state: .failure, matcher: try! JMESPathMatcher("server.state", expected: "STOP_FAILED")),
             ],
             minDelayTime: .seconds(30),
+            maxDelayTime: .seconds(3600),
             command: self.describeServer
         )
         return try await self.client.waitUntil(input, waiter: waiter, maxWaitTime: maxWaitTime, logger: logger, on: eventLoop)
@@ -597,6 +598,7 @@ extension Transfer {
                 .init(state: .failure, matcher: try! JMESPathMatcher("server.state", expected: "START_FAILED")),
             ],
             minDelayTime: .seconds(30),
+            maxDelayTime: .seconds(3600),
             command: self.describeServer
         )
         return try await self.client.waitUntil(input, waiter: waiter, maxWaitTime: maxWaitTime, logger: logger, on: eventLoop)

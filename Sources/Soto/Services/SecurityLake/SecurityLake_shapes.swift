@@ -26,13 +26,13 @@ import SotoCore
 extension SecurityLake {
     // MARK: Enums
 
-    public enum AccessType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lakeformation = "LAKEFORMATION"
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum AwsLogSourceName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AwsLogSourceName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudTrailMgmt = "CLOUD_TRAIL_MGMT"
         case lambdaExecution = "LAMBDA_EXECUTION"
         case route53 = "ROUTE53"
@@ -42,7 +42,7 @@ extension SecurityLake {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataLakeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataLakeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case initialized = "INITIALIZED"
@@ -50,20 +50,20 @@ extension SecurityLake {
         public var description: String { return self.rawValue }
     }
 
-    public enum HttpMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum HttpMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case post = "POST"
         case put = "PUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceCollectionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceCollectionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case collecting = "COLLECTING"
         case misconfigured = "MISCONFIGURED"
         case notCollecting = "NOT_COLLECTING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SubscriberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SubscriberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deactivated = "DEACTIVATED"
         case pending = "PENDING"

@@ -21,7 +21,9 @@
 ///
 ///  Introduction  The Amazon Interactive Video Service (IVS) real-time API is REST compatible, using a standard HTTP
 /// 	  API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses,
-/// 	  including errors.  Terminology:   A stage  is a virtual space where participants can exchange video in real time.   A participant token is a token that authenticates a participant when they join a stage.   A participant object represents participants (people) in the stage and contains information about them. When a token is created, it includes a participant ID; when a participant uses that token to join a stage, the participant is associated with that participant ID There is a 1:1 mapping between participant tokens and participants.    Resources  The following resources contain information about your IVS live stream (see Getting Started with Amazon IVS Real-Time Streaming):    Stage — A stage is a virtual space where participants can exchange video in real time.    Tagging  A tag is a metadata label that you assign to an AWS resource. A tag comprises a key and a value, both set by you. For example, you might set a tag as topic:nature to label a particular video category. See Tagging AWS Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there. Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see Access Tags). The Amazon IVS real-time API has these tag-related endpoints: TagResource, UntagResource, and ListTagsForResource. The following resource supports tagging: Stage. At most 50 tags can be applied to a resource.  Stages Endpoints     CreateParticipantToken — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.    CreateStage — Creates a new stage (and optionally participant tokens).    DeleteStage — Shuts down and deletes the specified stage (disconnecting all participants).    DisconnectParticipant — Disconnects a specified participant and revokes the participant permanently from a specified stage.    GetParticipant — Gets information about the specified participant token.    GetStage — Gets information for the specified stage.    GetStageSession — Gets information for the specified stage session.    ListParticipantEvents — Lists events for a specified participant that occurred during a specified stage session.    ListParticipants — Lists all participants in a specified stage session.    ListStages — Gets summary information about all stages in your account, in the AWS region where the API request is processed.    ListStageSessions — Gets all sessions for a specified stage.    UpdateStage — Updates a stage’s configuration.    Tags Endpoints     ListTagsForResource — Gets information about AWS tags for the specified ARN.    TagResource — Adds or updates tags for the AWS resource with the specified ARN.    UntagResource — Removes tags from the resource with the specified ARN.
+/// 	  including errors.  Terminology:   A stage  is a virtual space where participants can exchange video in real time.   A participant token is a token that authenticates a participant when they join a stage.   A participant object represents participants (people) in the stage and contains information about them. When a token is created, it includes a participant ID; when a participant uses that token to join a stage, the participant is associated with that participant ID. There is a 1:1 mapping between participant tokens and participants.   Server-side composition: The composition process composites participants of a stage into a single video and forwards it to a set of outputs (e.g., IVS channels). Composition endpoints support this process.   Server-side composition: A composition controls the look of the outputs, including how participants are positioned in the video.    Resources  The following resources contain information about your IVS live stream (see Getting Started with Amazon IVS Real-Time Streaming):    Stage — A stage is a virtual space where participants can exchange video in real time.    Tagging  A tag is a metadata label that you assign to an AWS resource. A tag comprises a key and a value, both set by you. For example, you might set a tag as topic:nature to label a particular video category. See Tagging AWS Resources for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there. Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see Access Tags). The Amazon IVS real-time API has these tag-related endpoints: TagResource, UntagResource, and ListTagsForResource. The following resource supports tagging: Stage. At most 50 tags can be applied to a resource.  Stages Endpoints     CreateParticipantToken — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.    CreateStage — Creates a new stage (and optionally participant tokens).    DeleteStage — Shuts down and deletes the specified stage (disconnecting all participants).    DisconnectParticipant — Disconnects a specified participant and revokes the participant permanently from a specified stage.    GetParticipant — Gets information about the specified participant token.    GetStage — Gets information for the specified stage.    GetStageSession — Gets information for the specified stage session.    ListParticipantEvents — Lists events for a specified participant that occurred during a specified stage session.    ListParticipants — Lists all participants in a specified stage session.    ListStages — Gets summary information about all stages in your account, in the AWS region where the API request is processed.    ListStageSessions — Gets all sessions for a specified stage.    UpdateStage — Updates a stage’s configuration.    Composition Endpoints     GetComposition — Gets information about the specified Composition resource.    ListCompositions — Gets summary information about all Compositions in your account, in the AWS region where the API request is processed.    StartComposition — Starts a Composition from a stage based on the configuration provided in the request.    StopComposition — Stops and deletes a Composition resource. Any broadcast from the Composition resource is stopped.    EncoderConfiguration Endpoints     CreateEncoderConfiguration — Creates an EncoderConfiguration object.    DeleteEncoderConfiguration — Deletes an EncoderConfiguration resource. Ensures that no Compositions are using this template; otherwise, returns an error.    GetEncoderConfiguration — Gets information about the specified EncoderConfiguration resource.    ListEncoderConfigurations — Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.    StorageConfiguration Endpoints     CreateStorageConfiguration — Creates a new storage configuration, used to enable
+/// 		recording to Amazon S3.    DeleteStorageConfiguration — Deletes the storage configuration for the specified ARN.    GetStorageConfiguration — Gets the storage configuration for the specified ARN.    ListStorageConfigurations — Gets summary information about all storage configurations in your
+/// 		account, in the AWS region where the API request is processed.    Tags Endpoints     ListTagsForResource — Gets information about AWS tags for the specified ARN.    TagResource — Adds or updates tags for the AWS resource with the specified ARN.    UntagResource — Removes tags from the resource with the specified ARN.
 public struct IVSRealTime: AWSService {
     // MARK: Member variables
 
@@ -66,6 +68,11 @@ public struct IVSRealTime: AWSService {
 
     // MARK: API Calls
 
+    /// Creates an EncoderConfiguration object.
+    public func createEncoderConfiguration(_ input: CreateEncoderConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateEncoderConfigurationResponse> {
+        return self.client.execute(operation: "CreateEncoderConfiguration", path: "/CreateEncoderConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire. Tokens always are scoped to the stage for which they are created. Encryption keys are owned by Amazon IVS and never used directly by your application.
     public func createParticipantToken(_ input: CreateParticipantTokenRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateParticipantTokenResponse> {
         return self.client.execute(operation: "CreateParticipantToken", path: "/CreateParticipantToken", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -76,14 +83,43 @@ public struct IVSRealTime: AWSService {
         return self.client.execute(operation: "CreateStage", path: "/CreateStage", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a new storage configuration, used to enable recording to Amazon S3.
+    /// 	  When a StorageConfiguration is created, IVS will modify the S3 bucketPolicy of the provided bucket.
+    /// 	  This will ensure that IVS has sufficient permissions to write content to the provided bucket.
+    public func createStorageConfiguration(_ input: CreateStorageConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateStorageConfigurationResponse> {
+        return self.client.execute(operation: "CreateStorageConfiguration", path: "/CreateStorageConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes an EncoderConfiguration resource. Ensures that no Compositions are using this template; otherwise, returns an error.
+    public func deleteEncoderConfiguration(_ input: DeleteEncoderConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteEncoderConfigurationResponse> {
+        return self.client.execute(operation: "DeleteEncoderConfiguration", path: "/DeleteEncoderConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Shuts down and deletes the specified stage (disconnecting all participants).
     public func deleteStage(_ input: DeleteStageRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteStageResponse> {
         return self.client.execute(operation: "DeleteStage", path: "/DeleteStage", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes the storage configuration for the specified ARN. If you try to delete a storage configuration that is used by a Composition, you will get an error (409 ConflictException).
+    /// 	  To avoid this, for all Compositions that reference the storage configuration, first use StopComposition and wait for it to complete,
+    /// 	  then use DeleteStorageConfiguration.
+    public func deleteStorageConfiguration(_ input: DeleteStorageConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteStorageConfigurationResponse> {
+        return self.client.execute(operation: "DeleteStorageConfiguration", path: "/DeleteStorageConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Disconnects a specified participant and revokes the participant permanently from a specified stage.
     public func disconnectParticipant(_ input: DisconnectParticipantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DisconnectParticipantResponse> {
         return self.client.execute(operation: "DisconnectParticipant", path: "/DisconnectParticipant", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get information about the specified Composition resource.
+    public func getComposition(_ input: GetCompositionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetCompositionResponse> {
+        return self.client.execute(operation: "GetComposition", path: "/GetComposition", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets information about the specified EncoderConfiguration resource.
+    public func getEncoderConfiguration(_ input: GetEncoderConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetEncoderConfigurationResponse> {
+        return self.client.execute(operation: "GetEncoderConfiguration", path: "/GetEncoderConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about the specified participant token.
@@ -99,6 +135,21 @@ public struct IVSRealTime: AWSService {
     /// Gets information for the specified stage session.
     public func getStageSession(_ input: GetStageSessionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetStageSessionResponse> {
         return self.client.execute(operation: "GetStageSession", path: "/GetStageSession", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets the storage configuration for the specified ARN.
+    public func getStorageConfiguration(_ input: GetStorageConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetStorageConfigurationResponse> {
+        return self.client.execute(operation: "GetStorageConfiguration", path: "/GetStorageConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets summary information about all Compositions in your account, in the AWS region where the API request is processed.
+    public func listCompositions(_ input: ListCompositionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCompositionsResponse> {
+        return self.client.execute(operation: "ListCompositions", path: "/ListCompositions", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.
+    public func listEncoderConfigurations(_ input: ListEncoderConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListEncoderConfigurationsResponse> {
+        return self.client.execute(operation: "ListEncoderConfigurations", path: "/ListEncoderConfigurations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists events for a specified participant that occurred during a specified stage session.
@@ -121,9 +172,25 @@ public struct IVSRealTime: AWSService {
         return self.client.execute(operation: "ListStages", path: "/ListStages", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets summary information about all storage configurations in your account,
+    /// 	  in the AWS region where the API request is processed.
+    public func listStorageConfigurations(_ input: ListStorageConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListStorageConfigurationsResponse> {
+        return self.client.execute(operation: "ListStorageConfigurations", path: "/ListStorageConfigurations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Gets information about AWS tags for the specified ARN.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceResponse> {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Starts a Composition from a stage based on the configuration provided in the request. A Composition is an ephemeral resource that exists after this endpoint returns successfully. Composition stops and the resource is deleted:   When StopComposition is called.   After a 1-minute timeout, when all participants are disconnected from the stage.   After a 1-minute timeout, if there are no participants in the stage when StartComposition is called.   When broadcasting to the IVS channel fails and all retries are exhausted.   When broadcasting is disconnected and all attempts to reconnect are exhausted.
+    public func startComposition(_ input: StartCompositionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartCompositionResponse> {
+        return self.client.execute(operation: "StartComposition", path: "/StartComposition", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Stops and deletes a Composition resource. Any broadcast from the Composition resource is stopped.
+    public func stopComposition(_ input: StopCompositionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StopCompositionResponse> {
+        return self.client.execute(operation: "StopComposition", path: "/StopComposition", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Adds or updates tags for the AWS resource with the specified ARN.
@@ -154,6 +221,112 @@ extension IVSRealTime {
 // MARK: Paginators
 
 extension IVSRealTime {
+    /// Gets summary information about all Compositions in your account, in the AWS region where the API request is processed.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listCompositionsPaginator<Result>(
+        _ input: ListCompositionsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListCompositionsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listCompositions,
+            inputKey: \ListCompositionsRequest.nextToken,
+            outputKey: \ListCompositionsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listCompositionsPaginator(
+        _ input: ListCompositionsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListCompositionsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listCompositions,
+            inputKey: \ListCompositionsRequest.nextToken,
+            outputKey: \ListCompositionsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listEncoderConfigurationsPaginator<Result>(
+        _ input: ListEncoderConfigurationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListEncoderConfigurationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listEncoderConfigurations,
+            inputKey: \ListEncoderConfigurationsRequest.nextToken,
+            outputKey: \ListEncoderConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listEncoderConfigurationsPaginator(
+        _ input: ListEncoderConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListEncoderConfigurationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listEncoderConfigurations,
+            inputKey: \ListEncoderConfigurationsRequest.nextToken,
+            outputKey: \ListEncoderConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists events for a specified participant that occurred during a specified stage session.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -365,6 +538,80 @@ extension IVSRealTime {
             onPage: onPage
         )
     }
+
+    /// Gets summary information about all storage configurations in your account,
+    /// 	  in the AWS region where the API request is processed.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listStorageConfigurationsPaginator<Result>(
+        _ input: ListStorageConfigurationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListStorageConfigurationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listStorageConfigurations,
+            inputKey: \ListStorageConfigurationsRequest.nextToken,
+            outputKey: \ListStorageConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listStorageConfigurationsPaginator(
+        _ input: ListStorageConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListStorageConfigurationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listStorageConfigurations,
+            inputKey: \ListStorageConfigurationsRequest.nextToken,
+            outputKey: \ListStorageConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+}
+
+extension IVSRealTime.ListCompositionsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> IVSRealTime.ListCompositionsRequest {
+        return .init(
+            filterByEncoderConfigurationArn: self.filterByEncoderConfigurationArn,
+            filterByStageArn: self.filterByStageArn,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension IVSRealTime.ListEncoderConfigurationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> IVSRealTime.ListEncoderConfigurationsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
 }
 
 extension IVSRealTime.ListParticipantEventsRequest: AWSPaginateToken {
@@ -405,6 +652,15 @@ extension IVSRealTime.ListStageSessionsRequest: AWSPaginateToken {
 
 extension IVSRealTime.ListStagesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> IVSRealTime.ListStagesRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension IVSRealTime.ListStorageConfigurationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> IVSRealTime.ListStorageConfigurationsRequest {
         return .init(
             maxResults: self.maxResults,
             nextToken: token

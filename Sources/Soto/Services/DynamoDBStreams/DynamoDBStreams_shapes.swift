@@ -26,20 +26,20 @@ import SotoCore
 extension DynamoDBStreams {
     // MARK: Enums
 
-    public enum KeyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hash = "HASH"
         case range = "RANGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insert = "INSERT"
         case modify = "MODIFY"
         case remove = "REMOVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShardIteratorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShardIteratorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
         case atSequenceNumber = "AT_SEQUENCE_NUMBER"
         case latest = "LATEST"
@@ -47,7 +47,7 @@ extension DynamoDBStreams {
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case enabled = "ENABLED"
@@ -55,7 +55,7 @@ extension DynamoDBStreams {
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamViewType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamViewType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case keysOnly = "KEYS_ONLY"
         case newAndOldImages = "NEW_AND_OLD_IMAGES"
         case newImage = "NEW_IMAGE"

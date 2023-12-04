@@ -26,7 +26,7 @@ import SotoCore
 extension Location {
     // MARK: Enums
 
-    public enum BatchItemErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum BatchItemErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Access to the resource was denied.
         case accessDeniedError = "AccessDeniedError"
         /// The target resource already exists.
@@ -42,19 +42,19 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum DimensionUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum DimensionUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case feet = "Feet"
         case meters = "Meters"
         public var description: String { return self.rawValue }
     }
 
-    public enum DistanceUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum DistanceUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kilometers = "Kilometers"
         case miles = "Miles"
         public var description: String { return self.rawValue }
     }
 
-    public enum IntendedUse: String, CustomStringConvertible, Codable, Sendable {
+    public enum IntendedUse: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates that results of the operation are for single use, e.g., displaying results on a map or presenting options to users.
         case singleUse = "SingleUse"
         /// Indicates that results of the operation may be stored locally.
@@ -62,7 +62,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum PositionFiltering: String, CustomStringConvertible, Codable, Sendable {
+    public enum PositionFiltering: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Filters device position updates according to their accuracy
         case accuracyBased = "AccuracyBased"
         /// Filters device position updates according to the distance between them
@@ -72,7 +72,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum PricingPlan: String, CustomStringConvertible, Codable, Sendable {
+    public enum PricingPlan: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// This pricing plan must be picked for mobile asset management use cases
         case mobileAssetManagement = "MobileAssetManagement"
         /// This pricing plan must be picked for mobile asset tracking use cases.
@@ -82,7 +82,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum RouteMatrixErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum RouteMatrixErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case departurePositionNotFound = "DeparturePositionNotFound"
         case destinationPositionNotFound = "DestinationPositionNotFound"
         case otherValidationError = "OtherValidationError"
@@ -92,7 +92,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// List all active API keys.
         case active = "Active"
         /// List all expired API keys.
@@ -100,7 +100,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum TravelMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TravelMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bicycle = "Bicycle"
         case car = "Car"
         case motorcycle = "Motorcycle"
@@ -109,7 +109,7 @@ extension Location {
         public var description: String { return self.rawValue }
     }
 
-    public enum VehicleWeightUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum VehicleWeightUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kilograms = "Kilograms"
         case pounds = "Pounds"
         public var description: String { return self.rawValue }

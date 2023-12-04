@@ -26,19 +26,19 @@ import SotoCore
 extension LexRuntimeService {
     // MARK: Enums
 
-    public enum ConfirmationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfirmationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case confirmed = "Confirmed"
         case denied = "Denied"
         case none = "None"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case generic = "application/vnd.amazonaws.card.generic"
         public var description: String { return self.rawValue }
     }
 
-    public enum DialogActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DialogActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case close = "Close"
         case confirmIntent = "ConfirmIntent"
         case delegate = "Delegate"
@@ -47,7 +47,7 @@ extension LexRuntimeService {
         public var description: String { return self.rawValue }
     }
 
-    public enum DialogState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DialogState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case confirmIntent = "ConfirmIntent"
         case elicitIntent = "ElicitIntent"
         case elicitSlot = "ElicitSlot"
@@ -57,14 +57,14 @@ extension LexRuntimeService {
         public var description: String { return self.rawValue }
     }
 
-    public enum FulfillmentState: String, CustomStringConvertible, Codable, Sendable {
+    public enum FulfillmentState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case fulfilled = "Fulfilled"
         case readyForFulfillment = "ReadyForFulfillment"
         public var description: String { return self.rawValue }
     }
 
-    public enum MessageFormatType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessageFormatType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case composite = "Composite"
         case customPayload = "CustomPayload"
         case plainText = "PlainText"

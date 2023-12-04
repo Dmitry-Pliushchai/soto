@@ -26,36 +26,36 @@ import SotoCore
 extension DataSync {
     // MARK: Enums
 
-    public enum AgentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AgentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case offline = "OFFLINE"
         case online = "ONLINE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Atime: String, CustomStringConvertible, Codable, Sendable {
+    public enum Atime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bestEffort = "BEST_EFFORT"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AzureAccessTier: String, CustomStringConvertible, Codable, Sendable {
+    public enum AzureAccessTier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case archive = "ARCHIVE"
         case cool = "COOL"
         case hot = "HOT"
         public var description: String { return self.rawValue }
     }
 
-    public enum AzureBlobAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AzureBlobAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sas = "SAS"
         public var description: String { return self.rawValue }
     }
 
-    public enum AzureBlobType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AzureBlobType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case block = "BLOCK"
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoveryJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoveryJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case completedWithIssues = "COMPLETED_WITH_ISSUES"
         case failed = "FAILED"
@@ -66,42 +66,42 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoveryResourceFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoveryResourceFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case svm = "SVM"
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoveryResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoveryResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cluster = "CLUSTER"
         case svm = "SVM"
         case volume = "VOLUME"
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoverySystemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoverySystemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case netAppONTAP = "NetAppONTAP"
         public var description: String { return self.rawValue }
     }
 
-    public enum EfsInTransitEncryption: String, CustomStringConvertible, Codable, Sendable {
+    public enum EfsInTransitEncryption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case tls12 = "TLS1_2"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `public` = "PUBLIC"
         case fips = "FIPS"
         case privateLink = "PRIVATE_LINK"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case simplePattern = "SIMPLE_PATTERN"
         public var description: String { return self.rawValue }
     }
 
-    public enum Gid: String, CustomStringConvertible, Codable, Sendable {
+    public enum Gid: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case both = "BOTH"
         case intValue = "INT_VALUE"
         case name = "NAME"
@@ -109,13 +109,13 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum HdfsAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HdfsAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kerberos = "KERBEROS"
         case simple = "SIMPLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HdfsDataTransferProtection: String, CustomStringConvertible, Codable, Sendable {
+    public enum HdfsDataTransferProtection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case authentication = "AUTHENTICATION"
         case disabled = "DISABLED"
         case integrity = "INTEGRITY"
@@ -123,7 +123,7 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum HdfsRpcProtection: String, CustomStringConvertible, Codable, Sendable {
+    public enum HdfsRpcProtection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case authentication = "AUTHENTICATION"
         case disabled = "DISABLED"
         case integrity = "INTEGRITY"
@@ -131,27 +131,27 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum LocationFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum LocationFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationTime = "CreationTime"
         case locationType = "LocationType"
         case locationUri = "LocationUri"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "BASIC"
         case off = "OFF"
         case transfer = "TRANSFER"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mtime: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mtime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case preserve = "PRESERVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum NfsVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum NfsVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automatic = "AUTOMATIC"
         case nfs3 = "NFS3"
         case nfs40 = "NFS4_0"
@@ -159,25 +159,25 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectStorageServerProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectStorageServerProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         case https = "HTTPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectTags: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectTags: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case preserve = "PRESERVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectVersionIds: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectVersionIds: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case include = "INCLUDE"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Operator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `in` = "In"
         case beginsWith = "BeginsWith"
         case contains = "Contains"
@@ -191,38 +191,38 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum OverwriteMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum OverwriteMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case always = "ALWAYS"
         case never = "NEVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum PhaseStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhaseStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case pending = "PENDING"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum PosixPermissions: String, CustomStringConvertible, Codable, Sendable {
+    public enum PosixPermissions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case preserve = "PRESERVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PreserveDeletedFiles: String, CustomStringConvertible, Codable, Sendable {
+    public enum PreserveDeletedFiles: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case preserve = "PRESERVE"
         case remove = "REMOVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PreserveDevices: String, CustomStringConvertible, Codable, Sendable {
+    public enum PreserveDevices: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case preserve = "PRESERVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -230,19 +230,19 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case errorsOnly = "ERRORS_ONLY"
         case successesAndErrors = "SUCCESSES_AND_ERRORS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportOutputType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportOutputType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case standard = "STANDARD"
         case summaryOnly = "SUMMARY_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3StorageClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3StorageClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deepArchive = "DEEP_ARCHIVE"
         case glacier = "GLACIER"
         case glacierInstantRetrieval = "GLACIER_INSTANT_RETRIEVAL"
@@ -254,14 +254,14 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum SmbSecurityDescriptorCopyFlags: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmbSecurityDescriptorCopyFlags: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case ownerDacl = "OWNER_DACL"
         case ownerDaclSacl = "OWNER_DACL_SACL"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmbVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmbVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automatic = "AUTOMATIC"
         case smb1 = "SMB1"
         case smb2 = "SMB2"
@@ -270,14 +270,14 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageSystemConnectivityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StorageSystemConnectivityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fail = "FAIL"
         case pass = "PASS"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case launching = "LAUNCHING"
         case preparing = "PREPARING"
@@ -288,19 +288,19 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationTime = "CreationTime"
         case locationId = "LocationId"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskQueueing: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskQueueing: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creating = "CREATING"
         case queued = "QUEUED"
@@ -309,13 +309,13 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransferMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransferMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case changed = "CHANGED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Uid: String, CustomStringConvertible, Codable, Sendable {
+    public enum Uid: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case both = "BOTH"
         case intValue = "INT_VALUE"
         case name = "NAME"
@@ -323,7 +323,7 @@ extension DataSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum VerifyMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerifyMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case onlyFilesTransferred = "ONLY_FILES_TRANSFERRED"
         case pointInTimeConsistent = "POINT_IN_TIME_CONSISTENT"
@@ -412,18 +412,22 @@ extension DataSync {
         public let agentArn: String?
         /// The name of an agent.
         public let name: String?
-        /// The status of an agent. For more information, see DataSync agent statuses.
+        /// The platform-related details about the agent, such as the version number.
+        public let platform: Platform?
+        /// The status of an agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?
         public let status: AgentStatus?
 
-        public init(agentArn: String? = nil, name: String? = nil, status: AgentStatus? = nil) {
+        public init(agentArn: String? = nil, name: String? = nil, platform: Platform? = nil, status: AgentStatus? = nil) {
             self.agentArn = agentArn
             self.name = name
+            self.platform = platform
             self.status = status
         }
 
         private enum CodingKeys: String, CodingKey {
             case agentArn = "AgentArn"
             case name = "Name"
+            case platform = "Platform"
             case status = "Status"
         }
     }
@@ -878,11 +882,11 @@ extension DataSync {
     }
 
     public struct CreateLocationFsxWindowsRequest: AWSEncodableShape {
-        /// Specifies the name of the Windows domain that the FSx for Windows File Server belongs to.
+        /// Specifies the name of the Windows domain that the FSx for Windows File Server belongs to. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for FSx for Windows File Server locations.
         public let domain: String?
         /// Specifies the Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
         public let fsxFilesystemArn: String
-        /// Specifies the password of the user who has the permissions to access files and folders in the file system.
+        /// Specifies the password of the user who has the permissions to access files and folders in the file system. For more information, see required permissions for FSx for Windows File Server locations.
         public let password: String
         /// Specifies the ARNs of the security groups that provide access to your file system's preferred subnet.  If you choose a security group that doesn't allow connections from within itself, do one of the following:   Configure the security group to allow it to communicate within itself.   Choose a different security group that can communicate with the mount target's security group.
         public let securityGroupArns: [String]
@@ -890,7 +894,7 @@ extension DataSync {
         public let subdirectory: String?
         /// Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
         public let tags: [TagListEntry]?
-        /// Specifies the user who has the permissions to access files, folders, and metadata in your file system. For information about choosing a user with sufficient permissions, see Required permissions.
+        /// Specifies the user who has the permissions to access files, folders, and metadata in your file system. For information about choosing a user with the right level of access for your transfer, see required permissions for FSx for Windows File Server locations.
         public let user: String
 
         public init(domain: String? = nil, fsxFilesystemArn: String, password: String, securityGroupArns: [String], subdirectory: String? = nil, tags: [TagListEntry]? = nil, user: String) {
@@ -1149,8 +1153,7 @@ extension DataSync {
 
         public func validate(name: String) throws {
             try self.validate(self.accessKey, name: "accessKey", parent: name, max: 200)
-            try self.validate(self.accessKey, name: "accessKey", parent: name, min: 1)
-            try self.validate(self.accessKey, name: "accessKey", parent: name, pattern: "^.+$")
+            try self.validate(self.accessKey, name: "accessKey", parent: name, pattern: "^.*$")
             try self.agentArns.forEach {
                 try validate($0, name: "agentArns[]", parent: name, max: 128)
                 try validate($0, name: "agentArns[]", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$")
@@ -1161,8 +1164,7 @@ extension DataSync {
             try self.validate(self.bucketName, name: "bucketName", parent: name, min: 3)
             try self.validate(self.bucketName, name: "bucketName", parent: name, pattern: "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$")
             try self.validate(self.secretKey, name: "secretKey", parent: name, max: 200)
-            try self.validate(self.secretKey, name: "secretKey", parent: name, min: 1)
-            try self.validate(self.secretKey, name: "secretKey", parent: name, pattern: "^.+$")
+            try self.validate(self.secretKey, name: "secretKey", parent: name, pattern: "^.*$")
             try self.validate(self.serverCertificate, name: "serverCertificate", parent: name, max: 32768)
             try self.validate(self.serverHostname, name: "serverHostname", parent: name, max: 255)
             try self.validate(self.serverHostname, name: "serverHostname", parent: name, pattern: "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$")
@@ -1269,7 +1271,7 @@ extension DataSync {
     public struct CreateLocationSmbRequest: AWSEncodableShape {
         /// Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
         public let agentArns: [String]
-        /// Specifies the Windows domain name that your SMB file server belongs to.  For more information, see required permissions for SMB locations.
+        /// Specifies the Windows domain name that your SMB file server belongs to.  If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for SMB locations.
         public let domain: String?
         /// Specifies the version of the SMB protocol that DataSync uses to access your SMB file server.
         public let mountOptions: SmbMountOptions?
@@ -1523,7 +1525,7 @@ extension DataSync {
     }
 
     public struct DescribeAgentRequest: AWSEncodableShape {
-        /// Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
+        /// Specifies the Amazon Resource Name (ARN) of the DataSync agent that you want information about.
         public let agentArn: String
 
         public init(agentArn: String) {
@@ -1543,25 +1545,28 @@ extension DataSync {
     public struct DescribeAgentResponse: AWSDecodableShape {
         /// The ARN of the agent.
         public let agentArn: String?
-        /// The time that the agent was activated (that is, created in your account).
+        /// The time that the agent was activated.
         public let creationTime: Date?
-        /// The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public internet.
+        /// The type of service endpoint that your agent is connected to.
         public let endpointType: EndpointType?
-        /// The time that the agent last connected to DataSync.
+        /// The last time that the agent was communicating with the DataSync service.
         public let lastConnectionTime: Date?
         /// The name of the agent.
         public let name: String?
-        /// The subnet and the security group that DataSync used to access a VPC endpoint.
+        /// The platform-related details about the agent, such as the version number.
+        public let platform: Platform?
+        /// The network configuration that the agent uses when connecting to a VPC service endpoint.
         public let privateLinkConfig: PrivateLinkConfig?
-        /// The status of the agent. If the status is ONLINE, then the agent is configured properly and is available to use. The Running status is the normal running status for an agent. If the status is OFFLINE, the agent's VM is turned off or the agent is in an unhealthy state. When the issue that caused the unhealthy state is resolved, the agent returns to ONLINE status.
+        /// The status of the agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?
         public let status: AgentStatus?
 
-        public init(agentArn: String? = nil, creationTime: Date? = nil, endpointType: EndpointType? = nil, lastConnectionTime: Date? = nil, name: String? = nil, privateLinkConfig: PrivateLinkConfig? = nil, status: AgentStatus? = nil) {
+        public init(agentArn: String? = nil, creationTime: Date? = nil, endpointType: EndpointType? = nil, lastConnectionTime: Date? = nil, name: String? = nil, platform: Platform? = nil, privateLinkConfig: PrivateLinkConfig? = nil, status: AgentStatus? = nil) {
             self.agentArn = agentArn
             self.creationTime = creationTime
             self.endpointType = endpointType
             self.lastConnectionTime = lastConnectionTime
             self.name = name
+            self.platform = platform
             self.privateLinkConfig = privateLinkConfig
             self.status = status
         }
@@ -1572,6 +1577,7 @@ extension DataSync {
             case endpointType = "EndpointType"
             case lastConnectionTime = "LastConnectionTime"
             case name = "Name"
+            case platform = "Platform"
             case privateLinkConfig = "PrivateLinkConfig"
             case status = "Status"
         }
@@ -2451,7 +2457,7 @@ extension DataSync {
         public let filesSkipped: Int64?
         /// The actual number of files, objects, and directories that DataSync transferred over the network. This value is updated periodically during the task execution's TRANSFERRING phase when something is read from the source and sent over the network. If DataSync fails to transfer something, this value can be less than EstimatedFilesToTransfer. In some cases, this value can also be greater than EstimatedFilesToTransfer. This element is implementation-specific for some location types, so don't use it as an exact indication of what transferred or to monitor your task execution.
         public let filesTransferred: Int64?
-        /// The number of files, objects, and directories that DataSync verified during your transfer.
+        /// The number of files, objects, and directories that DataSync verified during your transfer.  When you configure your task to verify only the data that's transferred, DataSync doesn't verify directories in some situations or files that fail to transfer.
         public let filesVerified: Int64?
         /// A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
         public let includes: [FilterRule]?
@@ -3610,6 +3616,19 @@ extension DataSync {
         }
     }
 
+    public struct Platform: AWSDecodableShape {
+        /// The version of the DataSync agent.  Beginning December 7, 2023, we will discontinue version 1 DataSync agents. Check the DataSync console to see if you have affected agents. If you do, replace those agents before then to avoid data transfer or storage discovery disruptions. If you need more help, contact Amazon Web Services Support.
+        public let version: String?
+
+        public init(version: String? = nil) {
+            self.version = version
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case version = "Version"
+        }
+    }
+
     public struct PrivateLinkConfig: AWSDecodableShape {
         /// Specifies the VPC endpoint provided by Amazon Web Services PrivateLink that your agent connects to.
         public let privateLinkEndpoint: String?
@@ -4587,8 +4606,7 @@ extension DataSync {
 
         public func validate(name: String) throws {
             try self.validate(self.accessKey, name: "accessKey", parent: name, max: 200)
-            try self.validate(self.accessKey, name: "accessKey", parent: name, min: 1)
-            try self.validate(self.accessKey, name: "accessKey", parent: name, pattern: "^.+$")
+            try self.validate(self.accessKey, name: "accessKey", parent: name, pattern: "^.*$")
             try self.agentArns?.forEach {
                 try validate($0, name: "agentArns[]", parent: name, max: 128)
                 try validate($0, name: "agentArns[]", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$")
@@ -4598,8 +4616,7 @@ extension DataSync {
             try self.validate(self.locationArn, name: "locationArn", parent: name, max: 128)
             try self.validate(self.locationArn, name: "locationArn", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$")
             try self.validate(self.secretKey, name: "secretKey", parent: name, max: 200)
-            try self.validate(self.secretKey, name: "secretKey", parent: name, min: 1)
-            try self.validate(self.secretKey, name: "secretKey", parent: name, pattern: "^.+$")
+            try self.validate(self.secretKey, name: "secretKey", parent: name, pattern: "^.*$")
             try self.validate(self.serverCertificate, name: "serverCertificate", parent: name, max: 32768)
             try self.validate(self.serverPort, name: "serverPort", parent: name, max: 65536)
             try self.validate(self.serverPort, name: "serverPort", parent: name, min: 1)
@@ -4624,18 +4641,18 @@ extension DataSync {
     }
 
     public struct UpdateLocationSmbRequest: AWSEncodableShape {
-        /// The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
+        /// Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
         public let agentArns: [String]?
-        /// The name of the Windows domain that the SMB server belongs to.
+        /// Specifies the Windows domain name that your SMB file server belongs to.  If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for SMB locations.
         public let domain: String?
-        /// The Amazon Resource Name (ARN) of the SMB location to update.
+        /// Specifies the ARN of the SMB location that you want to update.
         public let locationArn: String
         public let mountOptions: SmbMountOptions?
-        /// The password of the user who can mount the share has the permissions to access files and folders in the SMB share.
+        /// Specifies the password of the user who can mount your SMB file server and has permission to access the files and folders involved in your transfer. For more information, see required permissions for SMB locations.
         public let password: String?
-        /// The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder that you specified, DataSync must have permissions to mount the SMB share and to access all the data in that share. To ensure this, do either of the following:   Ensure that the user/password specified belongs to the user who can mount the share and who has the appropriate permissions for all of the files and directories that you want DataSync to access.   Use credentials of a member of the Backup Operators group to mount the share.    Doing either of these options enables the agent to access the data. For the agent to access directories, you must also enable all execute access.
+        /// Specifies the name of the share exported by your SMB file server where DataSync will read or write data. You can include a subdirectory in the share path (for example, /path/to/subdirectory). Make sure that other SMB clients in your network can also mount this path. To copy all data in the specified subdirectory, DataSync must be able to mount the SMB share and access all of its data. For more information, see required permissions for SMB locations.
         public let subdirectory: String?
-        /// The user who can mount the share has the permissions to access files and folders in the SMB share.
+        /// Specifies the user name that can mount your SMB file server and has permission to access the files and folders involved in your transfer. For information about choosing a user with the right level of access for your transfer, see required permissions for SMB locations.
         public let user: String?
 
         public init(agentArns: [String]? = nil, domain: String? = nil, locationArn: String, mountOptions: SmbMountOptions? = nil, password: String? = nil, subdirectory: String? = nil, user: String? = nil) {

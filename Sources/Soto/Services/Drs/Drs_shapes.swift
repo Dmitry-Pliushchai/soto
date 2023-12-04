@@ -26,7 +26,7 @@ import SotoCore
 extension Drs {
     // MARK: Enums
 
-    public enum DataReplicationErrorString: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationErrorString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agentNotSeen = "AGENT_NOT_SEEN"
         case failedToAttachStagingDisks = "FAILED_TO_ATTACH_STAGING_DISKS"
         case failedToAuthenticateWithService = "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
@@ -44,7 +44,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachStagingDisks = "ATTACH_STAGING_DISKS"
         case authenticateWithService = "AUTHENTICATE_WITH_SERVICE"
         case bootReplicationServer = "BOOT_REPLICATION_SERVER"
@@ -59,7 +59,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
@@ -68,7 +68,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backlog = "BACKLOG"
         case continuous = "CONTINUOUS"
         case creatingSnapshot = "CREATING_SNAPSHOT"
@@ -82,7 +82,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum EC2InstanceState: String, CustomStringConvertible, Codable, Sendable {
+    public enum EC2InstanceState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notFound = "NOT_FOUND"
         case pending = "PENDING"
         case running = "RUNNING"
@@ -93,20 +93,20 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExtensionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExtensionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case extended = "EXTENDED"
         case extensionError = "EXTENSION_ERROR"
         case notExtended = "NOT_EXTENDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FailbackLaunchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailbackLaunchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case drill = "DRILL"
         case recovery = "RECOVERY"
         public var description: String { return self.rawValue }
     }
 
-    public enum FailbackReplicationError: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailbackReplicationError: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agentNotSeen = "AGENT_NOT_SEEN"
         case failbackClientNotSeen = "FAILBACK_CLIENT_NOT_SEEN"
         case failedGettingReplicationState = "FAILED_GETTING_REPLICATION_STATE"
@@ -131,7 +131,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum FailbackState: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailbackState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failbackCompleted = "FAILBACK_COMPLETED"
         case failbackError = "FAILBACK_ERROR"
         case failbackInProgress = "FAILBACK_IN_PROGRESS"
@@ -142,7 +142,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum InitiatedBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum InitiatedBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associateNetworkRecovery = "ASSOCIATE_NETWORK_RECOVERY"
         case createNetworkRecovery = "CREATE_NETWORK_RECOVERY"
         case diagnostic = "DIAGNOSTIC"
@@ -155,7 +155,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobLogEvent: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobLogEvent: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cleanupEnd = "CLEANUP_END"
         case cleanupFail = "CLEANUP_FAIL"
         case cleanupStart = "CLEANUP_START"
@@ -186,21 +186,21 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case pending = "PENDING"
         case started = "STARTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createConvertedSnapshot = "CREATE_CONVERTED_SNAPSHOT"
         case launch = "LAUNCH"
         case terminate = "TERMINATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LastLaunchResult: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastLaunchResult: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case notStarted = "NOT_STARTED"
         case pending = "PENDING"
@@ -208,13 +208,13 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum LastLaunchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastLaunchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case drill = "DRILL"
         case recovery = "RECOVERY"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchActionCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchActionCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case configuration = "CONFIGURATION"
         case monitoring = "MONITORING"
         case other = "OTHER"
@@ -223,32 +223,32 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchActionParameterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchActionParameterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dynamic = "DYNAMIC"
         case ssmStore = "SSM_STORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchActionRunStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchActionRunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ssmAutomation = "SSM_AUTOMATION"
         case ssmCommand = "SSM_COMMAND"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchDisposition: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchDisposition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case stopped = "STOPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case launched = "LAUNCHED"
@@ -257,20 +257,20 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum OriginEnvironment: String, CustomStringConvertible, Codable, Sendable {
+    public enum OriginEnvironment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aws = "AWS"
         case onPremises = "ON_PREMISES"
         public var description: String { return self.rawValue }
     }
 
-    public enum PITPolicyRuleUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum PITPolicyRuleUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case day = "DAY"
         case hour = "HOUR"
         case minute = "MINUTE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoveryInstanceDataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoveryInstanceDataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachStagingDisks = "ATTACH_STAGING_DISKS"
         case authenticateWithService = "AUTHENTICATE_WITH_SERVICE"
         case bootReplicationServer = "BOOT_REPLICATION_SERVER"
@@ -292,7 +292,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoveryInstanceDataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoveryInstanceDataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
@@ -301,7 +301,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoveryInstanceDataReplicationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoveryInstanceDataReplicationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backlog = "BACKLOG"
         case continuous = "CONTINUOUS"
         case creatingSnapshot = "CREATING_SNAPSHOT"
@@ -317,7 +317,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoveryResult: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoveryResult: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associateFail = "ASSOCIATE_FAIL"
         case associateSuccess = "ASSOCIATE_SUCCESS"
         case fail = "FAIL"
@@ -328,19 +328,19 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoverySnapshotsOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoverySnapshotsOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationDataPlaneRouting: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationDataPlaneRouting: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case privateIp = "PRIVATE_IP"
         case publicIp = "PUBLIC_IP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationDefaultLargeStagingDiskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationDefaultLargeStagingDiskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case gp2 = "GP2"
         case gp3 = "GP3"
@@ -348,14 +348,14 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationEbsEncryption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationEbsEncryption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "CUSTOM"
         case `default` = "DEFAULT"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationReplicatedDiskStagingDiskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationReplicatedDiskStagingDiskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case gp2 = "GP2"
         case gp3 = "GP3"
@@ -366,13 +366,13 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationDirection: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationDirection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failback = "FAILBACK"
         case failover = "FAILOVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case inProgress = "IN_PROGRESS"
         case protected = "PROTECTED"
@@ -380,7 +380,7 @@ extension Drs {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetInstanceTypeRightSizingMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetInstanceTypeRightSizingMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "BASIC"
         case inAws = "IN_AWS"
         case none = "NONE"
@@ -536,6 +536,8 @@ extension Drs {
         public let exportBucketArn: String?
         /// Launch disposition.
         public let launchDisposition: LaunchDisposition?
+        /// DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        public let launchIntoSourceInstance: Bool?
         /// Licensing.
         public let licensing: Licensing?
         /// Whether we want to activate post-launch actions.
@@ -545,11 +547,12 @@ extension Drs {
         /// Target instance type right-sizing method.
         public let targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod?
 
-        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchDisposition: LaunchDisposition? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, tags: [String: String]? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
+        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchDisposition: LaunchDisposition? = nil, launchIntoSourceInstance: Bool? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, tags: [String: String]? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
             self.copyPrivateIp = copyPrivateIp
             self.copyTags = copyTags
             self.exportBucketArn = exportBucketArn
             self.launchDisposition = launchDisposition
+            self.launchIntoSourceInstance = launchIntoSourceInstance
             self.licensing = licensing
             self.postLaunchEnabled = postLaunchEnabled
             self.tags = tags
@@ -571,6 +574,7 @@ extension Drs {
             case copyTags = "copyTags"
             case exportBucketArn = "exportBucketArn"
             case launchDisposition = "launchDisposition"
+            case launchIntoSourceInstance = "launchIntoSourceInstance"
             case licensing = "licensing"
             case postLaunchEnabled = "postLaunchEnabled"
             case tags = "tags"
@@ -2010,6 +2014,8 @@ extension Drs {
         public let ec2LaunchTemplateID: String?
         /// The state of the Recovery Instance in EC2 after the recovery operation.
         public let launchDisposition: LaunchDisposition?
+        /// Launch into existing instance properties.
+        public let launchIntoInstanceProperties: LaunchIntoInstanceProperties?
         /// The licensing configuration to be used for this launch configuration.
         public let licensing: Licensing?
         /// The name of the launch configuration.
@@ -2021,11 +2027,12 @@ extension Drs {
         /// Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
         public let targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod?
 
-        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, ec2LaunchTemplateID: String? = nil, launchDisposition: LaunchDisposition? = nil, licensing: Licensing? = nil, name: String? = nil, postLaunchEnabled: Bool? = nil, sourceServerID: String? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
+        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, ec2LaunchTemplateID: String? = nil, launchDisposition: LaunchDisposition? = nil, launchIntoInstanceProperties: LaunchIntoInstanceProperties? = nil, licensing: Licensing? = nil, name: String? = nil, postLaunchEnabled: Bool? = nil, sourceServerID: String? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
             self.copyPrivateIp = copyPrivateIp
             self.copyTags = copyTags
             self.ec2LaunchTemplateID = ec2LaunchTemplateID
             self.launchDisposition = launchDisposition
+            self.launchIntoInstanceProperties = launchIntoInstanceProperties
             self.licensing = licensing
             self.name = name
             self.postLaunchEnabled = postLaunchEnabled
@@ -2038,6 +2045,7 @@ extension Drs {
             case copyTags = "copyTags"
             case ec2LaunchTemplateID = "ec2LaunchTemplateID"
             case launchDisposition = "launchDisposition"
+            case launchIntoInstanceProperties = "launchIntoInstanceProperties"
             case licensing = "licensing"
             case name = "name"
             case postLaunchEnabled = "postLaunchEnabled"
@@ -2059,6 +2067,8 @@ extension Drs {
         public let launchConfigurationTemplateID: String?
         /// Launch disposition.
         public let launchDisposition: LaunchDisposition?
+        /// DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        public let launchIntoSourceInstance: Bool?
         /// Licensing.
         public let licensing: Licensing?
         /// Post-launch actions activated.
@@ -2068,13 +2078,14 @@ extension Drs {
         /// Target instance type right-sizing method.
         public let targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod?
 
-        public init(arn: String? = nil, copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchConfigurationTemplateID: String? = nil, launchDisposition: LaunchDisposition? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, tags: [String: String]? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
+        public init(arn: String? = nil, copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchConfigurationTemplateID: String? = nil, launchDisposition: LaunchDisposition? = nil, launchIntoSourceInstance: Bool? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, tags: [String: String]? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
             self.arn = arn
             self.copyPrivateIp = copyPrivateIp
             self.copyTags = copyTags
             self.exportBucketArn = exportBucketArn
             self.launchConfigurationTemplateID = launchConfigurationTemplateID
             self.launchDisposition = launchDisposition
+            self.launchIntoSourceInstance = launchIntoSourceInstance
             self.licensing = licensing
             self.postLaunchEnabled = postLaunchEnabled
             self.tags = tags
@@ -2088,10 +2099,29 @@ extension Drs {
             case exportBucketArn = "exportBucketArn"
             case launchConfigurationTemplateID = "launchConfigurationTemplateID"
             case launchDisposition = "launchDisposition"
+            case launchIntoSourceInstance = "launchIntoSourceInstance"
             case licensing = "licensing"
             case postLaunchEnabled = "postLaunchEnabled"
             case tags = "tags"
             case targetInstanceTypeRightSizingMethod = "targetInstanceTypeRightSizingMethod"
+        }
+    }
+
+    public struct LaunchIntoInstanceProperties: AWSEncodableShape & AWSDecodableShape {
+        /// Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.
+        public let launchIntoEC2InstanceID: String?
+
+        public init(launchIntoEC2InstanceID: String? = nil) {
+            self.launchIntoEC2InstanceID = launchIntoEC2InstanceID
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.launchIntoEC2InstanceID, name: "launchIntoEC2InstanceID", parent: name, max: 255)
+            try self.validate(self.launchIntoEC2InstanceID, name: "launchIntoEC2InstanceID", parent: name, pattern: "^i-[0-9a-fA-F]{8,}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case launchIntoEC2InstanceID = "launchIntoEC2InstanceID"
         }
     }
 
@@ -2464,7 +2494,7 @@ extension Drs {
         /// Whether the launch action is active.
         public let active: Bool
         public let category: LaunchActionCategory
-        public let description: String?
+        public let description: String
         public let name: String
         /// Whether the launch will not be marked as failed if this action fails.
         public let optional: Bool
@@ -2472,7 +2502,7 @@ extension Drs {
         public let parameters: [String: LaunchActionParameter]?
         public let resourceId: String
 
-        public init(actionCode: String, actionId: String, actionVersion: String, active: Bool, category: LaunchActionCategory, description: String? = nil, name: String, optional: Bool, order: Int = 0, parameters: [String: LaunchActionParameter]? = nil, resourceId: String) {
+        public init(actionCode: String, actionId: String, actionVersion: String, active: Bool, category: LaunchActionCategory, description: String, name: String, optional: Bool, order: Int = 0, parameters: [String: LaunchActionParameter]? = nil, resourceId: String) {
             self.actionCode = actionCode
             self.actionId = actionId
             self.actionVersion = actionVersion
@@ -2489,7 +2519,7 @@ extension Drs {
         public func validate(name: String) throws {
             try self.validate(self.actionCode, name: "actionCode", parent: name, max: 1011)
             try self.validate(self.actionCode, name: "actionCode", parent: name, min: 1)
-            try self.validate(self.actionCode, name: "actionCode", parent: name, pattern: "^([A-Za-z0-9-])+$")
+            try self.validate(self.actionCode, name: "actionCode", parent: name, pattern: "^([A-Za-z0-9-/:])+$")
             try self.validate(self.actionId, name: "actionId", parent: name, max: 64)
             try self.validate(self.actionId, name: "actionId", parent: name, min: 1)
             try self.validate(self.actionId, name: "actionId", parent: name, pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
@@ -3880,6 +3910,8 @@ extension Drs {
         public let copyTags: Bool?
         /// The state of the Recovery Instance in EC2 after the recovery operation.
         public let launchDisposition: LaunchDisposition?
+        /// Launch into existing instance properties.
+        public let launchIntoInstanceProperties: LaunchIntoInstanceProperties?
         /// The licensing configuration to be used for this launch configuration.
         public let licensing: Licensing?
         /// The name of the launch configuration.
@@ -3891,10 +3923,11 @@ extension Drs {
         /// Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
         public let targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod?
 
-        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, launchDisposition: LaunchDisposition? = nil, licensing: Licensing? = nil, name: String? = nil, postLaunchEnabled: Bool? = nil, sourceServerID: String, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
+        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, launchDisposition: LaunchDisposition? = nil, launchIntoInstanceProperties: LaunchIntoInstanceProperties? = nil, licensing: Licensing? = nil, name: String? = nil, postLaunchEnabled: Bool? = nil, sourceServerID: String, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
             self.copyPrivateIp = copyPrivateIp
             self.copyTags = copyTags
             self.launchDisposition = launchDisposition
+            self.launchIntoInstanceProperties = launchIntoInstanceProperties
             self.licensing = licensing
             self.name = name
             self.postLaunchEnabled = postLaunchEnabled
@@ -3903,6 +3936,7 @@ extension Drs {
         }
 
         public func validate(name: String) throws {
+            try self.launchIntoInstanceProperties?.validate(name: "\(name).launchIntoInstanceProperties")
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.sourceServerID, name: "sourceServerID", parent: name, max: 19)
             try self.validate(self.sourceServerID, name: "sourceServerID", parent: name, min: 19)
@@ -3913,6 +3947,7 @@ extension Drs {
             case copyPrivateIp = "copyPrivateIp"
             case copyTags = "copyTags"
             case launchDisposition = "launchDisposition"
+            case launchIntoInstanceProperties = "launchIntoInstanceProperties"
             case licensing = "licensing"
             case name = "name"
             case postLaunchEnabled = "postLaunchEnabled"
@@ -3932,6 +3967,8 @@ extension Drs {
         public let launchConfigurationTemplateID: String
         /// Launch disposition.
         public let launchDisposition: LaunchDisposition?
+        /// DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+        public let launchIntoSourceInstance: Bool?
         /// Licensing.
         public let licensing: Licensing?
         /// Whether we want to activate post-launch actions.
@@ -3939,12 +3976,13 @@ extension Drs {
         /// Target instance type right-sizing method.
         public let targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod?
 
-        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchConfigurationTemplateID: String, launchDisposition: LaunchDisposition? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
+        public init(copyPrivateIp: Bool? = nil, copyTags: Bool? = nil, exportBucketArn: String? = nil, launchConfigurationTemplateID: String, launchDisposition: LaunchDisposition? = nil, launchIntoSourceInstance: Bool? = nil, licensing: Licensing? = nil, postLaunchEnabled: Bool? = nil, targetInstanceTypeRightSizingMethod: TargetInstanceTypeRightSizingMethod? = nil) {
             self.copyPrivateIp = copyPrivateIp
             self.copyTags = copyTags
             self.exportBucketArn = exportBucketArn
             self.launchConfigurationTemplateID = launchConfigurationTemplateID
             self.launchDisposition = launchDisposition
+            self.launchIntoSourceInstance = launchIntoSourceInstance
             self.licensing = licensing
             self.postLaunchEnabled = postLaunchEnabled
             self.targetInstanceTypeRightSizingMethod = targetInstanceTypeRightSizingMethod
@@ -3965,6 +4003,7 @@ extension Drs {
             case exportBucketArn = "exportBucketArn"
             case launchConfigurationTemplateID = "launchConfigurationTemplateID"
             case launchDisposition = "launchDisposition"
+            case launchIntoSourceInstance = "launchIntoSourceInstance"
             case licensing = "licensing"
             case postLaunchEnabled = "postLaunchEnabled"
             case targetInstanceTypeRightSizingMethod = "targetInstanceTypeRightSizingMethod"

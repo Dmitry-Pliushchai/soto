@@ -26,7 +26,7 @@ import SotoCore
 extension CleanRooms {
     // MARK: Enums
 
-    public enum AggregateFunctionName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregateFunctionName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avg = "AVG"
         case count = "COUNT"
         case countDistinct = "COUNT_DISTINCT"
@@ -35,65 +35,74 @@ extension CleanRooms {
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case countDistinct = "COUNT_DISTINCT"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalysisFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sql = "SQL"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalysisMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directQuery = "DIRECT_QUERY"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalysisRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aggregation = "AGGREGATION"
         case custom = "CUSTOM"
         case list = "LIST"
         public var description: String { return self.rawValue }
     }
 
-    public enum CollaborationQueryLogStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CollaborationQueryLogStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfiguredTableAnalysisRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfiguredTableAnalysisRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aggregation = "AGGREGATION"
         case custom = "CUSTOM"
         case list = "LIST"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterableMemberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DifferentialPrivacyAggregationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case avg = "AVG"
+        case count = "COUNT"
+        case countDistinct = "COUNT_DISTINCT"
+        case stddev = "STDDEV"
+        case sum = "SUM"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum FilterableMemberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case invited = "INVITED"
         public var description: String { return self.rawValue }
     }
 
-    public enum JoinOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum JoinOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case and = "AND"
         case or = "OR"
         public var description: String { return self.rawValue }
     }
 
-    public enum JoinRequiredOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum JoinRequiredOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case queryRunner = "QUERY_RUNNER"
         public var description: String { return self.rawValue }
     }
 
-    public enum MemberAbility: String, CustomStringConvertible, Codable, Sendable {
+    public enum MemberAbility: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canQuery = "CAN_QUERY"
         case canReceiveResults = "CAN_RECEIVE_RESULTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MemberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MemberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case invited = "INVITED"
         case left = "LEFT"
@@ -101,20 +110,20 @@ extension CleanRooms {
         public var description: String { return self.rawValue }
     }
 
-    public enum MembershipQueryLogStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MembershipQueryLogStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum MembershipStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MembershipStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case collaborationDeleted = "COLLABORATION_DELETED"
         case removed = "REMOVED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParameterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParameterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bigint = "BIGINT"
         case boolean = "BOOLEAN"
         case char = "CHAR"
@@ -133,7 +142,18 @@ extension CleanRooms {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProtectedQueryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrivacyBudgetTemplateAutoRefresh: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case calendarMonth = "CALENDAR_MONTH"
+        case none = "NONE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum PrivacyBudgetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case differentialPrivacy = "DIFFERENTIAL_PRIVACY"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ProtectedQueryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case failed = "FAILED"
@@ -144,18 +164,18 @@ extension CleanRooms {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProtectedQueryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProtectedQueryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sql = "SQL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResultFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResultFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case parquet = "PARQUET"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScalarFunctions: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScalarFunctions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case abs = "ABS"
         case cast = "CAST"
         case ceiling = "CEILING"
@@ -172,12 +192,12 @@ extension CleanRooms {
         public var description: String { return self.rawValue }
     }
 
-    public enum SchemaType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchemaType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case table = "TABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetProtectedQueryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetProtectedQueryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         public var description: String { return self.rawValue }
     }
@@ -487,10 +507,13 @@ extension CleanRooms {
         public let allowedAnalyses: [String]
         /// The Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when allowedAnalyses is ANY_QUERY.
         public let allowedAnalysisProviders: [String]?
+        /// The differential privacy configuration.
+        public let differentialPrivacy: DifferentialPrivacyConfiguration?
 
-        public init(allowedAnalyses: [String], allowedAnalysisProviders: [String]? = nil) {
+        public init(allowedAnalyses: [String], allowedAnalysisProviders: [String]? = nil, differentialPrivacy: DifferentialPrivacyConfiguration? = nil) {
             self.allowedAnalyses = allowedAnalyses
             self.allowedAnalysisProviders = allowedAnalysisProviders
+            self.differentialPrivacy = differentialPrivacy
         }
 
         public func validate(name: String) throws {
@@ -503,11 +526,13 @@ extension CleanRooms {
                 try validate($0, name: "allowedAnalysisProviders[]", parent: name, min: 12)
                 try validate($0, name: "allowedAnalysisProviders[]", parent: name, pattern: "^\\d+$")
             }
+            try self.differentialPrivacy?.validate(name: "\(name).differentialPrivacy")
         }
 
         private enum CodingKeys: String, CodingKey {
             case allowedAnalyses = "allowedAnalyses"
             case allowedAnalysisProviders = "allowedAnalysisProviders"
+            case differentialPrivacy = "differentialPrivacy"
         }
     }
 
@@ -718,7 +743,7 @@ extension CleanRooms {
             try self.validate(self.analysisTemplateArns, name: "analysisTemplateArns", parent: name, min: 1)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -782,7 +807,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.names.forEach {
                 try validate($0, name: "names[]", parent: name, max: 128)
                 try validate($0, name: "names[]", parent: name, pattern: "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$")
@@ -980,6 +1005,239 @@ extension CleanRooms {
         }
     }
 
+    public struct CollaborationConfiguredAudienceModelAssociation: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the configured audience model association.
+        public let arn: String
+        /// The unique ARN for the configured audience model's associated collaboration.
+        public let collaborationArn: String
+        /// A unique identifier for the collaboration that the configured audience model associations belong to. Accepts collaboration ID.
+        public let collaborationId: String
+        /// The Amazon Resource Name (ARN) of the configure audience model.
+        public let configuredAudienceModelArn: String
+        /// The time at which the configured audience model association was created.
+        public let createTime: Date
+        /// The identifier used to reference members of the collaboration. Only supports AWS account ID.
+        public let creatorAccountId: String
+        /// The description of the configured audience model association.
+        public let description: String?
+        /// The identifier of the configured audience model association.
+        public let id: String
+        /// The name of the configured audience model association.
+        public let name: String
+        /// The most recent time at which the configured audience model association was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, configuredAudienceModelArn: String, createTime: Date, creatorAccountId: String, description: String? = nil, id: String, name: String, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.configuredAudienceModelArn = configuredAudienceModelArn
+            self.createTime = createTime
+            self.creatorAccountId = creatorAccountId
+            self.description = description
+            self.id = id
+            self.name = name
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case configuredAudienceModelArn = "configuredAudienceModelArn"
+            case createTime = "createTime"
+            case creatorAccountId = "creatorAccountId"
+            case description = "description"
+            case id = "id"
+            case name = "name"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct CollaborationConfiguredAudienceModelAssociationSummary: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the configured audience model association.
+        public let arn: String
+        /// The unique ARN for the configured audience model's associated collaboration.
+        public let collaborationArn: String
+        /// A unique identifier for the collaboration that the configured audience model associations belong to. Accepts collaboration ID.
+        public let collaborationId: String
+        /// The time at which the configured audience model association was created.
+        public let createTime: Date
+        /// The identifier used to reference members of the collaboration. Only supports AWS account ID.
+        public let creatorAccountId: String
+        /// The description of the configured audience model association.
+        public let description: String?
+        /// The identifier of the configured audience model association.
+        public let id: String
+        /// The name of the configured audience model association.
+        public let name: String
+        /// The most recent time at which the configured audience model association was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, createTime: Date, creatorAccountId: String, description: String? = nil, id: String, name: String, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.creatorAccountId = creatorAccountId
+            self.description = description
+            self.id = id
+            self.name = name
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case creatorAccountId = "creatorAccountId"
+            case description = "description"
+            case id = "id"
+            case name = "name"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct CollaborationPrivacyBudgetSummary: AWSDecodableShape {
+        /// The includes epsilon provided and utility in terms of aggregations.
+        public let budget: PrivacyBudget
+        /// The ARN of the collaboration that includes this privacy budget.
+        public let collaborationArn: String
+        /// The unique identifier of the collaboration that includes this privacy budget.
+        public let collaborationId: String
+        /// The time at which the privacy budget was created.
+        public let createTime: Date
+        /// The unique identifier of the account that created this privacy budget.
+        public let creatorAccountId: String
+        /// The unique identifier of the collaboration privacy budget.
+        public let id: String
+        /// The ARN of the collaboration privacy budget template.
+        public let privacyBudgetTemplateArn: String
+        /// The unique identifier of the collaboration privacy budget template.
+        public let privacyBudgetTemplateId: String
+        /// The type of privacy budget template.
+        public let type: PrivacyBudgetType
+        /// The most recent time at which the privacy budget was updated.
+        public let updateTime: Date
+
+        public init(budget: PrivacyBudget, collaborationArn: String, collaborationId: String, createTime: Date, creatorAccountId: String, id: String, privacyBudgetTemplateArn: String, privacyBudgetTemplateId: String, type: PrivacyBudgetType, updateTime: Date) {
+            self.budget = budget
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.creatorAccountId = creatorAccountId
+            self.id = id
+            self.privacyBudgetTemplateArn = privacyBudgetTemplateArn
+            self.privacyBudgetTemplateId = privacyBudgetTemplateId
+            self.type = type
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case budget = "budget"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case creatorAccountId = "creatorAccountId"
+            case id = "id"
+            case privacyBudgetTemplateArn = "privacyBudgetTemplateArn"
+            case privacyBudgetTemplateId = "privacyBudgetTemplateId"
+            case type = "type"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct CollaborationPrivacyBudgetTemplate: AWSDecodableShape {
+        /// The ARN of the collaboration privacy budget template.
+        public let arn: String
+        /// How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queried across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes.
+        public let autoRefresh: PrivacyBudgetTemplateAutoRefresh
+        /// The ARN of the collaboration that includes this collaboration privacy budget template.
+        public let collaborationArn: String
+        /// The unique identifier of the collaboration that includes this collaboration privacy budget template.
+        public let collaborationId: String
+        /// The time at which the collaboration privacy budget template was created.
+        public let createTime: Date
+        /// The unique identifier of the account that created this collaboration privacy budget template.
+        public let creatorAccountId: String
+        /// The unique identifier of the collaboration privacy budget template.
+        public let id: String
+        /// Specifies the epsilon and noise parameters for the privacy budget template.
+        public let parameters: PrivacyBudgetTemplateParametersOutput
+        /// The type of privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+        /// The most recent time at which the collaboration privacy budget template was updated.
+        public let updateTime: Date
+
+        public init(arn: String, autoRefresh: PrivacyBudgetTemplateAutoRefresh, collaborationArn: String, collaborationId: String, createTime: Date, creatorAccountId: String, id: String, parameters: PrivacyBudgetTemplateParametersOutput, privacyBudgetType: PrivacyBudgetType, updateTime: Date) {
+            self.arn = arn
+            self.autoRefresh = autoRefresh
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.creatorAccountId = creatorAccountId
+            self.id = id
+            self.parameters = parameters
+            self.privacyBudgetType = privacyBudgetType
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case autoRefresh = "autoRefresh"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case creatorAccountId = "creatorAccountId"
+            case id = "id"
+            case parameters = "parameters"
+            case privacyBudgetType = "privacyBudgetType"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct CollaborationPrivacyBudgetTemplateSummary: AWSDecodableShape {
+        /// The ARN of the collaboration privacy budget template.
+        public let arn: String
+        /// The ARN of the collaboration that contains this collaboration privacy budget template.
+        public let collaborationArn: String
+        /// The unique identifier of the collaboration that contains this collaboration privacy budget template.
+        public let collaborationId: String
+        /// The time at which the collaboration privacy budget template was created.
+        public let createTime: Date
+        /// The unique identifier of the account that created this collaboration privacy budget template.
+        public let creatorAccountId: String
+        /// The unique identifier of the collaboration privacy budget template.
+        public let id: String
+        /// The type of the privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+        /// The most recent time at which the collaboration privacy budget template was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, createTime: Date, creatorAccountId: String, id: String, privacyBudgetType: PrivacyBudgetType, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.creatorAccountId = creatorAccountId
+            self.id = id
+            self.privacyBudgetType = privacyBudgetType
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case creatorAccountId = "creatorAccountId"
+            case id = "id"
+            case privacyBudgetType = "privacyBudgetType"
+            case updateTime = "updateTime"
+        }
+    }
+
     public struct CollaborationSummary: AWSDecodableShape {
         /// The ARN of the collaboration.
         public let arn: String
@@ -1043,6 +1301,116 @@ extension CleanRooms {
         private enum CodingKeys: String, CodingKey {
             case name = "name"
             case type = "type"
+        }
+    }
+
+    public struct ConfiguredAudienceModelAssociation: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the configured audience model association.
+        public let arn: String
+        /// The Amazon Resource Name (ARN) of the collaboration that contains this configured audience model association.
+        public let collaborationArn: String
+        /// A unique identifier of the collaboration that contains this configured audience model association.
+        public let collaborationId: String
+        /// The Amazon Resource Name (ARN) of the configured audience model that was used for this configured audience model association.
+        public let configuredAudienceModelArn: String
+        /// The time at which the configured audience model association was created.
+        public let createTime: Date
+        /// The description of the configured audience model association.
+        public let description: String?
+        /// A unique identifier of the configured audience model association.
+        public let id: String
+        /// When TRUE, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration. When FALSE, indicates that the configured audience model resource owner will manage permissions related to the given collaboration.
+        public let manageResourcePolicies: Bool
+        /// The Amazon Resource Name (ARN) of the membership that contains this configured audience model association.
+        public let membershipArn: String
+        /// A unique identifier for the membership that contains this configured audience model association.
+        public let membershipId: String
+        /// The name of the configured audience model association.
+        public let name: String
+        /// The most recent time at which the configured audience model association was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, configuredAudienceModelArn: String, createTime: Date, description: String? = nil, id: String, manageResourcePolicies: Bool, membershipArn: String, membershipId: String, name: String, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.configuredAudienceModelArn = configuredAudienceModelArn
+            self.createTime = createTime
+            self.description = description
+            self.id = id
+            self.manageResourcePolicies = manageResourcePolicies
+            self.membershipArn = membershipArn
+            self.membershipId = membershipId
+            self.name = name
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case configuredAudienceModelArn = "configuredAudienceModelArn"
+            case createTime = "createTime"
+            case description = "description"
+            case id = "id"
+            case manageResourcePolicies = "manageResourcePolicies"
+            case membershipArn = "membershipArn"
+            case membershipId = "membershipId"
+            case name = "name"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct ConfiguredAudienceModelAssociationSummary: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the configured audience model association.
+        public let arn: String
+        /// The Amazon Resource Name (ARN) of the collaboration that contains the configured audience model association.
+        public let collaborationArn: String
+        /// A unique identifier of the collaboration that configured audience model is associated with.
+        public let collaborationId: String
+        /// The Amazon Resource Name (ARN) of the configured audience model that was used for this configured audience model association.
+        public let configuredAudienceModelArn: String
+        /// The time at which the configured audience model association was created.
+        public let createTime: Date
+        /// The description of the configured audience model association.
+        public let description: String?
+        /// A unique identifier of the configured audience model association.
+        public let id: String
+        /// The Amazon Resource Name (ARN) of the membership that contains the configured audience model association.
+        public let membershipArn: String
+        /// A unique identifier of the membership that contains the configured audience model association.
+        public let membershipId: String
+        /// The name of the configured audience model association.
+        public let name: String
+        /// The most recent time at which the configured audience model association was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, configuredAudienceModelArn: String, createTime: Date, description: String? = nil, id: String, membershipArn: String, membershipId: String, name: String, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.configuredAudienceModelArn = configuredAudienceModelArn
+            self.createTime = createTime
+            self.description = description
+            self.id = id
+            self.membershipArn = membershipArn
+            self.membershipId = membershipId
+            self.name = name
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case configuredAudienceModelArn = "configuredAudienceModelArn"
+            case createTime = "createTime"
+            case description = "description"
+            case id = "id"
+            case membershipArn = "membershipArn"
+            case membershipId = "membershipId"
+            case name = "name"
+            case updateTime = "updateTime"
         }
     }
 
@@ -1298,7 +1666,7 @@ extension CleanRooms {
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$")
             try self.source.validate(name: "\(name).source")
@@ -1338,6 +1706,8 @@ extension CleanRooms {
         public let creatorDisplayName: String
         /// The abilities granted to the collaboration creator.
         public let creatorMemberAbilities: [MemberAbility]
+        /// The collaboration creator's payment responsibilities set by the collaboration creator.  If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer.
+        public let creatorPaymentConfiguration: PaymentConfiguration?
         /// The settings for client-side encryption with Cryptographic Computing for Clean Rooms.
         public let dataEncryptionMetadata: DataEncryptionMetadata?
         /// A description of the collaboration provided by the collaboration owner.
@@ -1351,9 +1721,10 @@ extension CleanRooms {
         /// An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
         public let tags: [String: String]?
 
-        public init(creatorDisplayName: String, creatorMemberAbilities: [MemberAbility], dataEncryptionMetadata: DataEncryptionMetadata? = nil, description: String, members: [MemberSpecification], name: String, queryLogStatus: CollaborationQueryLogStatus, tags: [String: String]? = nil) {
+        public init(creatorDisplayName: String, creatorMemberAbilities: [MemberAbility], creatorPaymentConfiguration: PaymentConfiguration? = nil, dataEncryptionMetadata: DataEncryptionMetadata? = nil, description: String, members: [MemberSpecification], name: String, queryLogStatus: CollaborationQueryLogStatus, tags: [String: String]? = nil) {
             self.creatorDisplayName = creatorDisplayName
             self.creatorMemberAbilities = creatorMemberAbilities
+            self.creatorPaymentConfiguration = creatorPaymentConfiguration
             self.dataEncryptionMetadata = dataEncryptionMetadata
             self.description = description
             self.members = members
@@ -1387,6 +1758,7 @@ extension CleanRooms {
         private enum CodingKeys: String, CodingKey {
             case creatorDisplayName = "creatorDisplayName"
             case creatorMemberAbilities = "creatorMemberAbilities"
+            case creatorPaymentConfiguration = "creatorPaymentConfiguration"
             case dataEncryptionMetadata = "dataEncryptionMetadata"
             case description = "description"
             case members = "members"
@@ -1406,6 +1778,75 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case collaboration = "collaboration"
+        }
+    }
+
+    public struct CreateConfiguredAudienceModelAssociationInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// A unique identifier for the configured audience model that you want to associate.
+        public let configuredAudienceModelArn: String
+        /// The name of the configured audience model association.
+        public let configuredAudienceModelAssociationName: String
+        /// A description of the configured audience model association.
+        public let description: String?
+        /// When TRUE, indicates that the resource policy for the configured audience model resource being associated is configured for Clean Rooms to manage permissions related to the given collaboration. When FALSE, indicates that the configured audience model resource owner will manage permissions related to the given collaboration. Setting this to TRUE requires you to have permissions to create, update, and delete the resource policy for the cleanrooms-ml resource when you call the DeleteConfiguredAudienceModelAssociation resource. In addition, if you are the collaboration creator and specify TRUE, you must have the same permissions when you call the DeleteMember and DeleteCollaboration APIs.
+        public let manageResourcePolicies: Bool
+        /// A unique identifier for one of your memberships for a collaboration. The configured audience model is associated to the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+        public let tags: [String: String]?
+
+        public init(configuredAudienceModelArn: String, configuredAudienceModelAssociationName: String, description: String? = nil, manageResourcePolicies: Bool, membershipIdentifier: String, tags: [String: String]? = nil) {
+            self.configuredAudienceModelArn = configuredAudienceModelArn
+            self.configuredAudienceModelAssociationName = configuredAudienceModelAssociationName
+            self.description = description
+            self.manageResourcePolicies = manageResourcePolicies
+            self.membershipIdentifier = membershipIdentifier
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.configuredAudienceModelArn, name: "configuredAudienceModelArn", parent: name, max: 2048)
+            try self.validate(self.configuredAudienceModelArn, name: "configuredAudienceModelArn", parent: name, min: 20)
+            try self.validate(self.configuredAudienceModelArn, name: "configuredAudienceModelArn", parent: name, pattern: "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:configured-audience-model/[-a-zA-Z0-9_/.]+$")
+            try self.validate(self.configuredAudienceModelAssociationName, name: "configuredAudienceModelAssociationName", parent: name, max: 100)
+            try self.validate(self.configuredAudienceModelAssociationName, name: "configuredAudienceModelAssociationName", parent: name, min: 1)
+            try self.validate(self.configuredAudienceModelAssociationName, name: "configuredAudienceModelAssociationName", parent: name, pattern: "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$")
+            try self.validate(self.description, name: "description", parent: name, max: 255)
+            try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.tags?.forEach {
+                try validate($0.key, name: "tags.key", parent: name, max: 128)
+                try validate($0.key, name: "tags.key", parent: name, min: 1)
+                try validate($0.value, name: "tags[\"\($0.key)\"]", parent: name, max: 256)
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuredAudienceModelArn = "configuredAudienceModelArn"
+            case configuredAudienceModelAssociationName = "configuredAudienceModelAssociationName"
+            case description = "description"
+            case manageResourcePolicies = "manageResourcePolicies"
+            case tags = "tags"
+        }
+    }
+
+    public struct CreateConfiguredAudienceModelAssociationOutput: AWSDecodableShape {
+        /// Information about the configured audience model association.
+        public let configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation
+
+        public init(configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation) {
+            self.configuredAudienceModelAssociation = configuredAudienceModelAssociation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuredAudienceModelAssociation = "configuredAudienceModelAssociation"
         }
     }
 
@@ -1431,7 +1872,7 @@ extension CleanRooms {
             try self.analysisRulePolicy.validate(name: "\(name).analysisRulePolicy")
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -1483,17 +1924,17 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.description, name: "description", parent: name, max: 255)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$")
             try self.validate(self.roleArn, name: "roleArn", parent: name, max: 512)
             try self.validate(self.roleArn, name: "roleArn", parent: name, min: 32)
-            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=,./@-]+$")
+            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=./@-]+$")
             try self.tags?.forEach {
                 try validate($0.key, name: "tags.key", parent: name, max: 128)
                 try validate($0.key, name: "tags.key", parent: name, min: 1)
@@ -1596,14 +2037,17 @@ extension CleanRooms {
         public let collaborationIdentifier: String
         /// The default protected query result configuration as specified by the member who can receive results.
         public let defaultResultConfiguration: MembershipProtectedQueryResultConfiguration?
-        /// An indicator as to whether query logging has been enabled or disabled for the collaboration.
+        /// The payment responsibilities accepted by the collaboration member. Not required if the collaboration member has the member ability to run queries.  Required if the collaboration member doesn't have the member ability to run queries but is configured as a payer by the collaboration creator.
+        public let paymentConfiguration: MembershipPaymentConfiguration?
+        /// An indicator as to whether query logging has been enabled or disabled for the membership.
         public let queryLogStatus: MembershipQueryLogStatus
         /// An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
         public let tags: [String: String]?
 
-        public init(collaborationIdentifier: String, defaultResultConfiguration: MembershipProtectedQueryResultConfiguration? = nil, queryLogStatus: MembershipQueryLogStatus, tags: [String: String]? = nil) {
+        public init(collaborationIdentifier: String, defaultResultConfiguration: MembershipProtectedQueryResultConfiguration? = nil, paymentConfiguration: MembershipPaymentConfiguration? = nil, queryLogStatus: MembershipQueryLogStatus, tags: [String: String]? = nil) {
             self.collaborationIdentifier = collaborationIdentifier
             self.defaultResultConfiguration = defaultResultConfiguration
+            self.paymentConfiguration = paymentConfiguration
             self.queryLogStatus = queryLogStatus
             self.tags = tags
         }
@@ -1611,7 +2055,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.defaultResultConfiguration?.validate(name: "\(name).defaultResultConfiguration")
             try self.tags?.forEach {
                 try validate($0.key, name: "tags.key", parent: name, max: 128)
@@ -1624,6 +2068,7 @@ extension CleanRooms {
         private enum CodingKeys: String, CodingKey {
             case collaborationIdentifier = "collaborationIdentifier"
             case defaultResultConfiguration = "defaultResultConfiguration"
+            case paymentConfiguration = "paymentConfiguration"
             case queryLogStatus = "queryLogStatus"
             case tags = "tags"
         }
@@ -1642,14 +2087,72 @@ extension CleanRooms {
         }
     }
 
+    public struct CreatePrivacyBudgetTemplateInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, you can use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queries across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes.
+        public let autoRefresh: PrivacyBudgetTemplateAutoRefresh
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget template is created in the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// Specifies your parameters for the privacy budget template.
+        public let parameters: PrivacyBudgetTemplateParametersInput
+        /// Specifies the type of the privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+        /// An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+        public let tags: [String: String]?
+
+        public init(autoRefresh: PrivacyBudgetTemplateAutoRefresh, membershipIdentifier: String, parameters: PrivacyBudgetTemplateParametersInput, privacyBudgetType: PrivacyBudgetType, tags: [String: String]? = nil) {
+            self.autoRefresh = autoRefresh
+            self.membershipIdentifier = membershipIdentifier
+            self.parameters = parameters
+            self.privacyBudgetType = privacyBudgetType
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.parameters.validate(name: "\(name).parameters")
+            try self.tags?.forEach {
+                try validate($0.key, name: "tags.key", parent: name, max: 128)
+                try validate($0.key, name: "tags.key", parent: name, min: 1)
+                try validate($0.value, name: "tags[\"\($0.key)\"]", parent: name, max: 256)
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case autoRefresh = "autoRefresh"
+            case parameters = "parameters"
+            case privacyBudgetType = "privacyBudgetType"
+            case tags = "tags"
+        }
+    }
+
+    public struct CreatePrivacyBudgetTemplateOutput: AWSDecodableShape {
+        /// A summary of the elements in the privacy budget template.
+        public let privacyBudgetTemplate: PrivacyBudgetTemplate
+
+        public init(privacyBudgetTemplate: PrivacyBudgetTemplate) {
+            self.privacyBudgetTemplate = privacyBudgetTemplate
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case privacyBudgetTemplate = "privacyBudgetTemplate"
+        }
+    }
+
     public struct DataEncryptionMetadata: AWSEncodableShape & AWSDecodableShape {
-        /// Indicates whether encrypted tables can contain cleartext data (true) or are to cryptographically process every column (false).
+        /// Indicates whether encrypted tables can contain cleartext data (TRUE) or are to cryptographically process every column (FALSE).
         public let allowCleartext: Bool
-        /// Indicates whether Fingerprint columns can contain duplicate entries (true) or are to contain only non-repeated values (false).
+        /// Indicates whether Fingerprint columns can contain duplicate entries (TRUE) or are to contain only non-repeated values (FALSE).
         public let allowDuplicates: Bool
-        /// Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (true) or can only be joined on Fingerprint columns of the same name (false).
+        /// Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (TRUE) or can only be joined on Fingerprint columns of the same name (FALSE).
         public let allowJoinsOnColumnsWithDifferentNames: Bool
-        /// Indicates whether NULL values are to be copied as NULL to encrypted tables (true) or cryptographically processed (false).
+        /// Indicates whether NULL values are to be copied as NULL to encrypted tables (TRUE) or cryptographically processed (FALSE).
         public let preserveNulls: Bool
 
         public init(allowCleartext: Bool, allowDuplicates: Bool, allowJoinsOnColumnsWithDifferentNames: Bool, preserveNulls: Bool) {
@@ -1686,10 +2189,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, max: 36)
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, min: 36)
-            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1714,13 +2217,45 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
     }
 
     public struct DeleteCollaborationOutput: AWSDecodableShape {
+        public init() {}
+    }
+
+    public struct DeleteConfiguredAudienceModelAssociationInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "configuredAudienceModelAssociationIdentifier", location: .uri("configuredAudienceModelAssociationIdentifier")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// A unique identifier of the configured audience model association that you want to delete.
+        public let configuredAudienceModelAssociationIdentifier: String
+        /// A unique identifier of the membership that contains the audience model association that you want to delete.
+        public let membershipIdentifier: String
+
+        public init(configuredAudienceModelAssociationIdentifier: String, membershipIdentifier: String) {
+            self.configuredAudienceModelAssociationIdentifier = configuredAudienceModelAssociationIdentifier
+            self.membershipIdentifier = membershipIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, max: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, min: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteConfiguredAudienceModelAssociationOutput: AWSDecodableShape {
         public init() {}
     }
 
@@ -1743,7 +2278,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1772,10 +2307,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1800,7 +2335,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1832,7 +2367,7 @@ extension CleanRooms {
             try self.validate(self.accountId, name: "accountId", parent: name, pattern: "^\\d+$")
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1857,7 +2392,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1865,6 +2400,268 @@ extension CleanRooms {
 
     public struct DeleteMembershipOutput: AWSDecodableShape {
         public init() {}
+    }
+
+    public struct DeletePrivacyBudgetTemplateInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "privacyBudgetTemplateIdentifier", location: .uri("privacyBudgetTemplateIdentifier"))
+        ]
+
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget template is deleted from the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// A unique identifier for your privacy budget template.
+        public let privacyBudgetTemplateIdentifier: String
+
+        public init(membershipIdentifier: String, privacyBudgetTemplateIdentifier: String) {
+            self.membershipIdentifier = membershipIdentifier
+            self.privacyBudgetTemplateIdentifier = privacyBudgetTemplateIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, max: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, min: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeletePrivacyBudgetTemplateOutput: AWSDecodableShape {
+        public init() {}
+    }
+
+    public struct DifferentialPrivacyColumn: AWSEncodableShape & AWSDecodableShape {
+        /// The name of the column, such as user_id, that contains the unique identifier of your users, whose privacy you want to protect. If you want to turn on differential privacy for two or more tables in a collaboration, you must configure the same column as the user identifier column in both analysis rules.
+        public let name: String
+
+        public init(name: String) {
+            self.name = name
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case name = "name"
+        }
+    }
+
+    public struct DifferentialPrivacyConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// The name of the column (such as user_id) that contains the unique identifier of your users whose privacy you want to protect. If you want to turn on diﬀerential privacy for two or more tables in a collaboration, you must conﬁgure the same column as the user identiﬁer column in both analysis rules.
+        public let columns: [DifferentialPrivacyColumn]
+
+        public init(columns: [DifferentialPrivacyColumn]) {
+            self.columns = columns
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.columns, name: "columns", parent: name, max: 1)
+            try self.validate(self.columns, name: "columns", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columns = "columns"
+        }
+    }
+
+    public struct DifferentialPrivacyParameters: AWSDecodableShape {
+        /// Provides the sensitivity parameters that you can use to better understand the total amount of noise in query results.
+        public let sensitivityParameters: [DifferentialPrivacySensitivityParameters]
+
+        public init(sensitivityParameters: [DifferentialPrivacySensitivityParameters]) {
+            self.sensitivityParameters = sensitivityParameters
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case sensitivityParameters = "sensitivityParameters"
+        }
+    }
+
+    public struct DifferentialPrivacyPreviewAggregation: AWSDecodableShape {
+        /// The maximum number of aggregations that the member who can query can run given the epsilon and noise parameters.
+        public let maxCount: Int
+        /// The type of aggregation function.
+        public let type: DifferentialPrivacyAggregationType
+
+        public init(maxCount: Int, type: DifferentialPrivacyAggregationType) {
+            self.maxCount = maxCount
+            self.type = type
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxCount = "maxCount"
+            case type = "type"
+        }
+    }
+
+    public struct DifferentialPrivacyPreviewParametersInput: AWSEncodableShape {
+        /// The epsilon value that you want to preview.
+        public let epsilon: Int
+        /// Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+        public let usersNoisePerQuery: Int
+
+        public init(epsilon: Int, usersNoisePerQuery: Int) {
+            self.epsilon = epsilon
+            self.usersNoisePerQuery = usersNoisePerQuery
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.epsilon, name: "epsilon", parent: name, max: 20)
+            try self.validate(self.epsilon, name: "epsilon", parent: name, min: 1)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, max: 100)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, min: 10)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case epsilon = "epsilon"
+            case usersNoisePerQuery = "usersNoisePerQuery"
+        }
+    }
+
+    public struct DifferentialPrivacyPrivacyBudget: AWSDecodableShape {
+        /// This information includes the configured epsilon value and the utility in terms of total aggregations, as well as the remaining aggregations.
+        public let aggregations: [DifferentialPrivacyPrivacyBudgetAggregation]
+        /// The epsilon value that you configured.
+        public let epsilon: Int
+
+        public init(aggregations: [DifferentialPrivacyPrivacyBudgetAggregation], epsilon: Int) {
+            self.aggregations = aggregations
+            self.epsilon = epsilon
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregations = "aggregations"
+            case epsilon = "epsilon"
+        }
+    }
+
+    public struct DifferentialPrivacyPrivacyBudgetAggregation: AWSDecodableShape {
+        /// The maximum number of aggregation functions that you can perform with the given privacy budget.
+        public let maxCount: Int
+        /// The remaining number of aggregation functions that can be run with the available privacy budget.
+        public let remainingCount: Int
+        /// The different types of aggregation functions that you can perform.
+        public let type: DifferentialPrivacyAggregationType
+
+        public init(maxCount: Int, remainingCount: Int, type: DifferentialPrivacyAggregationType) {
+            self.maxCount = maxCount
+            self.remainingCount = remainingCount
+            self.type = type
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxCount = "maxCount"
+            case remainingCount = "remainingCount"
+            case type = "type"
+        }
+    }
+
+    public struct DifferentialPrivacyPrivacyImpact: AWSDecodableShape {
+        /// The number of aggregation functions that you can perform.
+        public let aggregations: [DifferentialPrivacyPreviewAggregation]
+
+        public init(aggregations: [DifferentialPrivacyPreviewAggregation]) {
+            self.aggregations = aggregations
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregations = "aggregations"
+        }
+    }
+
+    public struct DifferentialPrivacySensitivityParameters: AWSDecodableShape {
+        /// The aggregation expression that was run.
+        public let aggregationExpression: String
+        /// The type of aggregation function that was run.
+        public let aggregationType: DifferentialPrivacyAggregationType
+        /// The upper bound of the aggregation expression.
+        public let maxColumnValue: Float?
+        /// The lower bound of the aggregation expression.
+        public let minColumnValue: Float?
+        /// The maximum number of rows contributed by a user in a SQL query.
+        public let userContributionLimit: Int
+
+        public init(aggregationExpression: String, aggregationType: DifferentialPrivacyAggregationType, maxColumnValue: Float? = nil, minColumnValue: Float? = nil, userContributionLimit: Int) {
+            self.aggregationExpression = aggregationExpression
+            self.aggregationType = aggregationType
+            self.maxColumnValue = maxColumnValue
+            self.minColumnValue = minColumnValue
+            self.userContributionLimit = userContributionLimit
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregationExpression = "aggregationExpression"
+            case aggregationType = "aggregationType"
+            case maxColumnValue = "maxColumnValue"
+            case minColumnValue = "minColumnValue"
+            case userContributionLimit = "userContributionLimit"
+        }
+    }
+
+    public struct DifferentialPrivacyTemplateParametersInput: AWSEncodableShape {
+        /// The epsilon value that you want to use.
+        public let epsilon: Int
+        /// Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+        public let usersNoisePerQuery: Int
+
+        public init(epsilon: Int, usersNoisePerQuery: Int) {
+            self.epsilon = epsilon
+            self.usersNoisePerQuery = usersNoisePerQuery
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.epsilon, name: "epsilon", parent: name, max: 20)
+            try self.validate(self.epsilon, name: "epsilon", parent: name, min: 1)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, max: 100)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, min: 10)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case epsilon = "epsilon"
+            case usersNoisePerQuery = "usersNoisePerQuery"
+        }
+    }
+
+    public struct DifferentialPrivacyTemplateParametersOutput: AWSDecodableShape {
+        /// The epsilon value that you specified.
+        public let epsilon: Int
+        /// Noise added per query is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+        public let usersNoisePerQuery: Int
+
+        public init(epsilon: Int, usersNoisePerQuery: Int) {
+            self.epsilon = epsilon
+            self.usersNoisePerQuery = usersNoisePerQuery
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case epsilon = "epsilon"
+            case usersNoisePerQuery = "usersNoisePerQuery"
+        }
+    }
+
+    public struct DifferentialPrivacyTemplateUpdateParameters: AWSEncodableShape {
+        /// The updated epsilon value that you want to use.
+        public let epsilon: Int?
+        /// The updated value of noise added per query. It is measured in terms of the number of users whose contributions you want to obscure. This value governs the rate at which the privacy budget is depleted.
+        public let usersNoisePerQuery: Int?
+
+        public init(epsilon: Int? = nil, usersNoisePerQuery: Int? = nil) {
+            self.epsilon = epsilon
+            self.usersNoisePerQuery = usersNoisePerQuery
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.epsilon, name: "epsilon", parent: name, max: 20)
+            try self.validate(self.epsilon, name: "epsilon", parent: name, min: 1)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, max: 100)
+            try self.validate(self.usersNoisePerQuery, name: "usersNoisePerQuery", parent: name, min: 10)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case epsilon = "epsilon"
+            case usersNoisePerQuery = "usersNoisePerQuery"
+        }
     }
 
     public struct GetAnalysisTemplateInput: AWSEncodableShape {
@@ -1886,10 +2683,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, max: 36)
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, min: 36)
-            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1929,7 +2726,7 @@ extension CleanRooms {
             try self.validate(self.analysisTemplateArn, name: "analysisTemplateArn", parent: name, pattern: "^arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+$")
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1948,6 +2745,47 @@ extension CleanRooms {
         }
     }
 
+    public struct GetCollaborationConfiguredAudienceModelAssociationInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier")),
+            AWSMemberEncoding(label: "configuredAudienceModelAssociationIdentifier", location: .uri("configuredAudienceModelAssociationIdentifier"))
+        ]
+
+        /// A unique identifier for the collaboration that the configured audience model association belongs to. Accepts a collaboration ID.
+        public let collaborationIdentifier: String
+        /// A unique identifier for the configured audience model association that you want to retrieve.
+        public let configuredAudienceModelAssociationIdentifier: String
+
+        public init(collaborationIdentifier: String, configuredAudienceModelAssociationIdentifier: String) {
+            self.collaborationIdentifier = collaborationIdentifier
+            self.configuredAudienceModelAssociationIdentifier = configuredAudienceModelAssociationIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, max: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, min: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetCollaborationConfiguredAudienceModelAssociationOutput: AWSDecodableShape {
+        /// The metadata of the configured audience model association.
+        public let collaborationConfiguredAudienceModelAssociation: CollaborationConfiguredAudienceModelAssociation
+
+        public init(collaborationConfiguredAudienceModelAssociation: CollaborationConfiguredAudienceModelAssociation) {
+            self.collaborationConfiguredAudienceModelAssociation = collaborationConfiguredAudienceModelAssociation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case collaborationConfiguredAudienceModelAssociation = "collaborationConfiguredAudienceModelAssociation"
+        }
+    }
+
     public struct GetCollaborationInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier"))
@@ -1963,7 +2801,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1979,6 +2817,88 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case collaboration = "collaboration"
+        }
+    }
+
+    public struct GetCollaborationPrivacyBudgetTemplateInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier")),
+            AWSMemberEncoding(label: "privacyBudgetTemplateIdentifier", location: .uri("privacyBudgetTemplateIdentifier"))
+        ]
+
+        /// A unique identifier for one of your collaborations.
+        public let collaborationIdentifier: String
+        /// A unique identifier for one of your privacy budget templates.
+        public let privacyBudgetTemplateIdentifier: String
+
+        public init(collaborationIdentifier: String, privacyBudgetTemplateIdentifier: String) {
+            self.collaborationIdentifier = collaborationIdentifier
+            self.privacyBudgetTemplateIdentifier = privacyBudgetTemplateIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, max: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, min: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetCollaborationPrivacyBudgetTemplateOutput: AWSDecodableShape {
+        /// Returns the details of the privacy budget template that you requested.
+        public let collaborationPrivacyBudgetTemplate: CollaborationPrivacyBudgetTemplate
+
+        public init(collaborationPrivacyBudgetTemplate: CollaborationPrivacyBudgetTemplate) {
+            self.collaborationPrivacyBudgetTemplate = collaborationPrivacyBudgetTemplate
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case collaborationPrivacyBudgetTemplate = "collaborationPrivacyBudgetTemplate"
+        }
+    }
+
+    public struct GetConfiguredAudienceModelAssociationInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "configuredAudienceModelAssociationIdentifier", location: .uri("configuredAudienceModelAssociationIdentifier")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// A unique identifier for the configured audience model association that you want to retrieve.
+        public let configuredAudienceModelAssociationIdentifier: String
+        /// A unique identifier for the membership that contains the configured audience model association that you want to retrieve.
+        public let membershipIdentifier: String
+
+        public init(configuredAudienceModelAssociationIdentifier: String, membershipIdentifier: String) {
+            self.configuredAudienceModelAssociationIdentifier = configuredAudienceModelAssociationIdentifier
+            self.membershipIdentifier = membershipIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, max: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, min: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetConfiguredAudienceModelAssociationOutput: AWSDecodableShape {
+        /// Information about the configured audience model association that you requested.
+        public let configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation
+
+        public init(configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation) {
+            self.configuredAudienceModelAssociation = configuredAudienceModelAssociation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuredAudienceModelAssociation = "configuredAudienceModelAssociation"
         }
     }
 
@@ -2001,7 +2921,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2039,10 +2959,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2076,7 +2996,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2110,7 +3030,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2126,6 +3046,47 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case membership = "membership"
+        }
+    }
+
+    public struct GetPrivacyBudgetTemplateInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "privacyBudgetTemplateIdentifier", location: .uri("privacyBudgetTemplateIdentifier"))
+        ]
+
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget template is retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// A unique identifier for your privacy budget template.
+        public let privacyBudgetTemplateIdentifier: String
+
+        public init(membershipIdentifier: String, privacyBudgetTemplateIdentifier: String) {
+            self.membershipIdentifier = membershipIdentifier
+            self.privacyBudgetTemplateIdentifier = privacyBudgetTemplateIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, max: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, min: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetPrivacyBudgetTemplateOutput: AWSDecodableShape {
+        /// Returns the details of the privacy budget template that you requested.
+        public let privacyBudgetTemplate: PrivacyBudgetTemplate
+
+        public init(privacyBudgetTemplate: PrivacyBudgetTemplate) {
+            self.privacyBudgetTemplate = privacyBudgetTemplate
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case privacyBudgetTemplate = "privacyBudgetTemplate"
         }
     }
 
@@ -2148,10 +3109,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, max: 36)
-            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, min: 1)
-            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, min: 36)
+            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2193,7 +3154,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$")
         }
@@ -2233,7 +3194,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?$")
         }
@@ -2303,7 +3264,7 @@ extension CleanRooms {
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
         }
 
@@ -2350,7 +3311,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
@@ -2372,6 +3333,157 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case collaborationAnalysisTemplateSummaries = "collaborationAnalysisTemplateSummaries"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListCollaborationConfiguredAudienceModelAssociationsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken"))
+        ]
+
+        /// A unique identifier for the collaboration that the configured audience model association belongs to. Accepts a collaboration ID.
+        public let collaborationIdentifier: String
+        /// The maximum size of the results that is returned per call.
+        public let maxResults: Int?
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(collaborationIdentifier: String, maxResults: Int? = nil, nextToken: String? = nil) {
+            self.collaborationIdentifier = collaborationIdentifier
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListCollaborationConfiguredAudienceModelAssociationsOutput: AWSDecodableShape {
+        /// The metadata of the configured audience model association within a collaboration.
+        public let collaborationConfiguredAudienceModelAssociationSummaries: [CollaborationConfiguredAudienceModelAssociationSummary]
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(collaborationConfiguredAudienceModelAssociationSummaries: [CollaborationConfiguredAudienceModelAssociationSummary], nextToken: String? = nil) {
+            self.collaborationConfiguredAudienceModelAssociationSummaries = collaborationConfiguredAudienceModelAssociationSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case collaborationConfiguredAudienceModelAssociationSummaries = "collaborationConfiguredAudienceModelAssociationSummaries"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListCollaborationPrivacyBudgetTemplatesInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken"))
+        ]
+
+        /// A unique identifier for one of your collaborations.
+        public let collaborationIdentifier: String
+        /// The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+        public let maxResults: Int?
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(collaborationIdentifier: String, maxResults: Int? = nil, nextToken: String? = nil) {
+            self.collaborationIdentifier = collaborationIdentifier
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListCollaborationPrivacyBudgetTemplatesOutput: AWSDecodableShape {
+        /// An array that summarizes the collaboration privacy budget templates. The summary includes collaboration information, creation information, the privacy budget type.
+        public let collaborationPrivacyBudgetTemplateSummaries: [CollaborationPrivacyBudgetTemplateSummary]
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(collaborationPrivacyBudgetTemplateSummaries: [CollaborationPrivacyBudgetTemplateSummary], nextToken: String? = nil) {
+            self.collaborationPrivacyBudgetTemplateSummaries = collaborationPrivacyBudgetTemplateSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case collaborationPrivacyBudgetTemplateSummaries = "collaborationPrivacyBudgetTemplateSummaries"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListCollaborationPrivacyBudgetsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "collaborationIdentifier", location: .uri("collaborationIdentifier")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "privacyBudgetType", location: .querystring("privacyBudgetType"))
+        ]
+
+        /// A unique identifier for one of your collaborations.
+        public let collaborationIdentifier: String
+        /// The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+        public let maxResults: Int?
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+        /// Specifies the type of the privacy budget.
+        public let privacyBudgetType: PrivacyBudgetType
+
+        public init(collaborationIdentifier: String, maxResults: Int? = nil, nextToken: String? = nil, privacyBudgetType: PrivacyBudgetType) {
+            self.collaborationIdentifier = collaborationIdentifier
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.privacyBudgetType = privacyBudgetType
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListCollaborationPrivacyBudgetsOutput: AWSDecodableShape {
+        /// Summaries of the collaboration privacy budgets.
+        public let collaborationPrivacyBudgetSummaries: [CollaborationPrivacyBudgetSummary]
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(collaborationPrivacyBudgetSummaries: [CollaborationPrivacyBudgetSummary], nextToken: String? = nil) {
+            self.collaborationPrivacyBudgetSummaries = collaborationPrivacyBudgetSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case collaborationPrivacyBudgetSummaries = "collaborationPrivacyBudgetSummaries"
             case nextToken = "nextToken"
         }
     }
@@ -2422,6 +3534,55 @@ extension CleanRooms {
         }
     }
 
+    public struct ListConfiguredAudienceModelAssociationsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken"))
+        ]
+
+        /// The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+        public let maxResults: Int?
+        /// A unique identifier for a membership that contains the configured audience model associations that you want to retrieve.
+        public let membershipIdentifier: String
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, membershipIdentifier: String, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.membershipIdentifier = membershipIdentifier
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListConfiguredAudienceModelAssociationsOutput: AWSDecodableShape {
+        /// Summaries of the configured audience model associations that you requested.
+        public let configuredAudienceModelAssociationSummaries: [ConfiguredAudienceModelAssociationSummary]
+        /// The token value provided to access the next page of results.
+        public let nextToken: String?
+
+        public init(configuredAudienceModelAssociationSummaries: [ConfiguredAudienceModelAssociationSummary], nextToken: String? = nil) {
+            self.configuredAudienceModelAssociationSummaries = configuredAudienceModelAssociationSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuredAudienceModelAssociationSummaries = "configuredAudienceModelAssociationSummaries"
+            case nextToken = "nextToken"
+        }
+    }
+
     public struct ListConfiguredTableAssociationsInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
@@ -2447,7 +3608,7 @@ extension CleanRooms {
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
         }
 
@@ -2536,7 +3697,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
@@ -2608,6 +3769,108 @@ extension CleanRooms {
         }
     }
 
+    public struct ListPrivacyBudgetTemplatesInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken"))
+        ]
+
+        /// The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+        public let maxResults: Int?
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget templates are retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, membershipIdentifier: String, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.membershipIdentifier = membershipIdentifier
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListPrivacyBudgetTemplatesOutput: AWSDecodableShape {
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+        /// An array that summarizes the privacy budget templates. The summary includes collaboration information, creation information, and privacy budget type.
+        public let privacyBudgetTemplateSummaries: [PrivacyBudgetTemplateSummary]
+
+        public init(nextToken: String? = nil, privacyBudgetTemplateSummaries: [PrivacyBudgetTemplateSummary]) {
+            self.nextToken = nextToken
+            self.privacyBudgetTemplateSummaries = privacyBudgetTemplateSummaries
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "nextToken"
+            case privacyBudgetTemplateSummaries = "privacyBudgetTemplateSummaries"
+        }
+    }
+
+    public struct ListPrivacyBudgetsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "privacyBudgetType", location: .querystring("privacyBudgetType"))
+        ]
+
+        /// The maximum size of the results that is returned per call. Service chooses a default if it has not been set. Service may return a nextToken even if the maximum results has not been met.
+        public let maxResults: Int?
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget is retrieved from the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+        /// The privacy budget type.
+        public let privacyBudgetType: PrivacyBudgetType
+
+        public init(maxResults: Int? = nil, membershipIdentifier: String, nextToken: String? = nil, privacyBudgetType: PrivacyBudgetType) {
+            self.maxResults = maxResults
+            self.membershipIdentifier = membershipIdentifier
+            self.nextToken = nextToken
+            self.privacyBudgetType = privacyBudgetType
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListPrivacyBudgetsOutput: AWSDecodableShape {
+        /// The token value retrieved from a previous call to access the next page of results.
+        public let nextToken: String?
+        /// An array that summarizes the privacy budgets. The summary includes collaboration information, membership information, privacy budget template information, and privacy budget details.
+        public let privacyBudgetSummaries: [PrivacyBudgetSummary]
+
+        public init(nextToken: String? = nil, privacyBudgetSummaries: [PrivacyBudgetSummary]) {
+            self.nextToken = nextToken
+            self.privacyBudgetSummaries = privacyBudgetSummaries
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "nextToken"
+            case privacyBudgetSummaries = "privacyBudgetSummaries"
+        }
+    }
+
     public struct ListProtectedQueriesInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
@@ -2637,7 +3900,7 @@ extension CleanRooms {
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
         }
 
@@ -2688,7 +3951,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 10240)
@@ -2754,11 +4017,14 @@ extension CleanRooms {
         public let displayName: String
         /// The abilities granted to the collaboration member.
         public let memberAbilities: [MemberAbility]
+        /// The collaboration member's payment responsibilities set by the collaboration creator.  If the collaboration creator hasn't speciﬁed anyone as the member paying for query compute costs, then the member who can query is the default payer.
+        public let paymentConfiguration: PaymentConfiguration?
 
-        public init(accountId: String, displayName: String, memberAbilities: [MemberAbility]) {
+        public init(accountId: String, displayName: String, memberAbilities: [MemberAbility], paymentConfiguration: PaymentConfiguration? = nil) {
             self.accountId = accountId
             self.displayName = displayName
             self.memberAbilities = memberAbilities
+            self.paymentConfiguration = paymentConfiguration
         }
 
         public func validate(name: String) throws {
@@ -2774,6 +4040,7 @@ extension CleanRooms {
             case accountId = "accountId"
             case displayName = "displayName"
             case memberAbilities = "memberAbilities"
+            case paymentConfiguration = "paymentConfiguration"
         }
     }
 
@@ -2790,18 +4057,21 @@ extension CleanRooms {
         public let membershipArn: String?
         /// The unique ID for the member's associated membership, if present.
         public let membershipId: String?
-        /// The status of the member. Valid values are `INVITED`, `ACTIVE`, `LEFT`, and `REMOVED`.
+        /// The collaboration member's payment responsibilities set by the collaboration creator.
+        public let paymentConfiguration: PaymentConfiguration
+        /// The status of the member.
         public let status: MemberStatus
         /// The time the member metadata was last updated.
         public let updateTime: Date
 
-        public init(abilities: [MemberAbility], accountId: String, createTime: Date, displayName: String, membershipArn: String? = nil, membershipId: String? = nil, status: MemberStatus, updateTime: Date) {
+        public init(abilities: [MemberAbility], accountId: String, createTime: Date, displayName: String, membershipArn: String? = nil, membershipId: String? = nil, paymentConfiguration: PaymentConfiguration, status: MemberStatus, updateTime: Date) {
             self.abilities = abilities
             self.accountId = accountId
             self.createTime = createTime
             self.displayName = displayName
             self.membershipArn = membershipArn
             self.membershipId = membershipId
+            self.paymentConfiguration = paymentConfiguration
             self.status = status
             self.updateTime = updateTime
         }
@@ -2813,6 +4083,7 @@ extension CleanRooms {
             case displayName = "displayName"
             case membershipArn = "membershipArn"
             case membershipId = "membershipId"
+            case paymentConfiguration = "paymentConfiguration"
             case status = "status"
             case updateTime = "updateTime"
         }
@@ -2839,14 +4110,16 @@ extension CleanRooms {
         public let id: String
         /// The abilities granted to the collaboration member.
         public let memberAbilities: [MemberAbility]
-        /// An indicator as to whether query logging has been enabled or disabled for the collaboration.
+        /// The payment responsibilities accepted by the collaboration member.
+        public let paymentConfiguration: MembershipPaymentConfiguration
+        /// An indicator as to whether query logging has been enabled or disabled for the membership.
         public let queryLogStatus: MembershipQueryLogStatus
-        /// The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.
+        /// The status of the membership.
         public let status: MembershipStatus
         /// The time the membership metadata was last updated.
         public let updateTime: Date
 
-        public init(arn: String, collaborationArn: String, collaborationCreatorAccountId: String, collaborationCreatorDisplayName: String, collaborationId: String, collaborationName: String, createTime: Date, defaultResultConfiguration: MembershipProtectedQueryResultConfiguration? = nil, id: String, memberAbilities: [MemberAbility], queryLogStatus: MembershipQueryLogStatus, status: MembershipStatus, updateTime: Date) {
+        public init(arn: String, collaborationArn: String, collaborationCreatorAccountId: String, collaborationCreatorDisplayName: String, collaborationId: String, collaborationName: String, createTime: Date, defaultResultConfiguration: MembershipProtectedQueryResultConfiguration? = nil, id: String, memberAbilities: [MemberAbility], paymentConfiguration: MembershipPaymentConfiguration, queryLogStatus: MembershipQueryLogStatus, status: MembershipStatus, updateTime: Date) {
             self.arn = arn
             self.collaborationArn = collaborationArn
             self.collaborationCreatorAccountId = collaborationCreatorAccountId
@@ -2857,6 +4130,7 @@ extension CleanRooms {
             self.defaultResultConfiguration = defaultResultConfiguration
             self.id = id
             self.memberAbilities = memberAbilities
+            self.paymentConfiguration = paymentConfiguration
             self.queryLogStatus = queryLogStatus
             self.status = status
             self.updateTime = updateTime
@@ -2873,9 +4147,23 @@ extension CleanRooms {
             case defaultResultConfiguration = "defaultResultConfiguration"
             case id = "id"
             case memberAbilities = "memberAbilities"
+            case paymentConfiguration = "paymentConfiguration"
             case queryLogStatus = "queryLogStatus"
             case status = "status"
             case updateTime = "updateTime"
+        }
+    }
+
+    public struct MembershipPaymentConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// The payment responsibilities accepted by the collaboration member for query compute costs.
+        public let queryCompute: MembershipQueryComputePaymentConfig
+
+        public init(queryCompute: MembershipQueryComputePaymentConfig) {
+            self.queryCompute = queryCompute
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case queryCompute = "queryCompute"
         }
     }
 
@@ -2894,12 +4182,25 @@ extension CleanRooms {
             try self.outputConfiguration.validate(name: "\(name).outputConfiguration")
             try self.validate(self.roleArn, name: "roleArn", parent: name, max: 512)
             try self.validate(self.roleArn, name: "roleArn", parent: name, min: 32)
-            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=,./@-]+$")
+            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=./@-]+$")
         }
 
         private enum CodingKeys: String, CodingKey {
             case outputConfiguration = "outputConfiguration"
             case roleArn = "roleArn"
+        }
+    }
+
+    public struct MembershipQueryComputePaymentConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Indicates whether the collaboration member has accepted to pay for query compute costs (TRUE) or has not accepted to pay for query compute costs (FALSE). If the collaboration creator has not specified anyone to pay for query compute costs, then the member who can query is the default payer.  An error message is returned for the following reasons:    If you set the value to FALSE but you are responsible to pay for query compute costs.    If you set the value to TRUE but you are not responsible to pay for query compute costs.
+        public let isResponsible: Bool
+
+        public init(isResponsible: Bool) {
+            self.isResponsible = isResponsible
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case isResponsible = "isResponsible"
         }
     }
 
@@ -2922,12 +4223,14 @@ extension CleanRooms {
         public let id: String
         /// The abilities granted to the collaboration member.
         public let memberAbilities: [MemberAbility]
-        /// The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.
+        /// The payment responsibilities accepted by the collaboration member.
+        public let paymentConfiguration: MembershipPaymentConfiguration
+        /// The status of the membership.
         public let status: MembershipStatus
         /// The time the membership metadata was last updated.
         public let updateTime: Date
 
-        public init(arn: String, collaborationArn: String, collaborationCreatorAccountId: String, collaborationCreatorDisplayName: String, collaborationId: String, collaborationName: String, createTime: Date, id: String, memberAbilities: [MemberAbility], status: MembershipStatus, updateTime: Date) {
+        public init(arn: String, collaborationArn: String, collaborationCreatorAccountId: String, collaborationCreatorDisplayName: String, collaborationId: String, collaborationName: String, createTime: Date, id: String, memberAbilities: [MemberAbility], paymentConfiguration: MembershipPaymentConfiguration, status: MembershipStatus, updateTime: Date) {
             self.arn = arn
             self.collaborationArn = collaborationArn
             self.collaborationCreatorAccountId = collaborationCreatorAccountId
@@ -2937,6 +4240,7 @@ extension CleanRooms {
             self.createTime = createTime
             self.id = id
             self.memberAbilities = memberAbilities
+            self.paymentConfiguration = paymentConfiguration
             self.status = status
             self.updateTime = updateTime
         }
@@ -2951,7 +4255,212 @@ extension CleanRooms {
             case createTime = "createTime"
             case id = "id"
             case memberAbilities = "memberAbilities"
+            case paymentConfiguration = "paymentConfiguration"
             case status = "status"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct PaymentConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// The collaboration member's payment responsibilities set by the collaboration creator for query compute costs.
+        public let queryCompute: QueryComputePaymentConfig
+
+        public init(queryCompute: QueryComputePaymentConfig) {
+            self.queryCompute = queryCompute
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case queryCompute = "queryCompute"
+        }
+    }
+
+    public struct PreviewPrivacyImpactInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// A unique identifier for one of your memberships for a collaboration. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// Specifies the desired epsilon and noise parameters to preview.
+        public let parameters: PreviewPrivacyImpactParametersInput
+
+        public init(membershipIdentifier: String, parameters: PreviewPrivacyImpactParametersInput) {
+            self.membershipIdentifier = membershipIdentifier
+            self.parameters = parameters
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.parameters.validate(name: "\(name).parameters")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case parameters = "parameters"
+        }
+    }
+
+    public struct PreviewPrivacyImpactOutput: AWSDecodableShape {
+        /// An estimate of the number of aggregation functions that the member who can query can run given the epsilon and noise parameters. This does not change the privacy budget.
+        public let privacyImpact: PrivacyImpact
+
+        public init(privacyImpact: PrivacyImpact) {
+            self.privacyImpact = privacyImpact
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case privacyImpact = "privacyImpact"
+        }
+    }
+
+    public struct PrivacyBudgetSummary: AWSDecodableShape {
+        /// The provided privacy budget.
+        public let budget: PrivacyBudget
+        /// The ARN of the collaboration that contains this privacy budget.
+        public let collaborationArn: String
+        /// The unique identifier of the collaboration that contains this privacy budget.
+        public let collaborationId: String
+        /// The time at which the privacy budget was created.
+        public let createTime: Date
+        /// The unique identifier of the privacy budget.
+        public let id: String
+        /// The Amazon Resource Name (ARN) of the member who created the privacy budget summary.
+        public let membershipArn: String
+        /// The identifier for a membership resource.
+        public let membershipId: String
+        /// The ARN of the privacy budget template.
+        public let privacyBudgetTemplateArn: String
+        /// The unique identifier of the privacy budget template.
+        public let privacyBudgetTemplateId: String
+        /// Specifies the type of the privacy budget.
+        public let type: PrivacyBudgetType
+        /// The most recent time at which the privacy budget was updated.
+        public let updateTime: Date
+
+        public init(budget: PrivacyBudget, collaborationArn: String, collaborationId: String, createTime: Date, id: String, membershipArn: String, membershipId: String, privacyBudgetTemplateArn: String, privacyBudgetTemplateId: String, type: PrivacyBudgetType, updateTime: Date) {
+            self.budget = budget
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.id = id
+            self.membershipArn = membershipArn
+            self.membershipId = membershipId
+            self.privacyBudgetTemplateArn = privacyBudgetTemplateArn
+            self.privacyBudgetTemplateId = privacyBudgetTemplateId
+            self.type = type
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case budget = "budget"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case id = "id"
+            case membershipArn = "membershipArn"
+            case membershipId = "membershipId"
+            case privacyBudgetTemplateArn = "privacyBudgetTemplateArn"
+            case privacyBudgetTemplateId = "privacyBudgetTemplateId"
+            case type = "type"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct PrivacyBudgetTemplate: AWSDecodableShape {
+        /// The ARN of the privacy budget template.
+        public let arn: String
+        /// How often the privacy budget refreshes.  If you plan to regularly bring new data into the collaboration, use CALENDAR_MONTH to automatically get a new privacy budget for the collaboration every calendar month. Choosing this option allows arbitrary amounts of information to be revealed about rows of the data when repeatedly queried across refreshes. Avoid choosing this if the same rows will be repeatedly queried between privacy budget refreshes.
+        public let autoRefresh: PrivacyBudgetTemplateAutoRefresh
+        /// The ARN of the collaboration that contains this privacy budget template.
+        public let collaborationArn: String
+        /// The unique ID of the collaboration that contains this privacy budget template.
+        public let collaborationId: String
+        /// The time at which the privacy budget template was created.
+        public let createTime: Date
+        /// The unique identifier of the privacy budget template.
+        public let id: String
+        /// The Amazon Resource Name (ARN) of the member who created the privacy budget template.
+        public let membershipArn: String
+        /// The identifier for a membership resource.
+        public let membershipId: String
+        /// Specifies the epislon and noise parameters for the privacy budget template.
+        public let parameters: PrivacyBudgetTemplateParametersOutput
+        /// Specifies the type of the privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+        /// The most recent time at which the privacy budget template was updated.
+        public let updateTime: Date
+
+        public init(arn: String, autoRefresh: PrivacyBudgetTemplateAutoRefresh, collaborationArn: String, collaborationId: String, createTime: Date, id: String, membershipArn: String, membershipId: String, parameters: PrivacyBudgetTemplateParametersOutput, privacyBudgetType: PrivacyBudgetType, updateTime: Date) {
+            self.arn = arn
+            self.autoRefresh = autoRefresh
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.id = id
+            self.membershipArn = membershipArn
+            self.membershipId = membershipId
+            self.parameters = parameters
+            self.privacyBudgetType = privacyBudgetType
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case autoRefresh = "autoRefresh"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case id = "id"
+            case membershipArn = "membershipArn"
+            case membershipId = "membershipId"
+            case parameters = "parameters"
+            case privacyBudgetType = "privacyBudgetType"
+            case updateTime = "updateTime"
+        }
+    }
+
+    public struct PrivacyBudgetTemplateSummary: AWSDecodableShape {
+        /// The ARN of the privacy budget template.
+        public let arn: String
+        /// The ARN of the collaboration that contains this privacy budget template.
+        public let collaborationArn: String
+        /// The unique ID of the collaboration that contains this privacy budget template.
+        public let collaborationId: String
+        /// The time at which the privacy budget template was created.
+        public let createTime: Date
+        /// The unique identifier of the privacy budget template.
+        public let id: String
+        /// The Amazon Resource Name (ARN) of the member who created the privacy budget template.
+        public let membershipArn: String
+        /// The identifier for a membership resource.
+        public let membershipId: String
+        /// The type of the privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+        /// The most recent time at which the privacy budget template was updated.
+        public let updateTime: Date
+
+        public init(arn: String, collaborationArn: String, collaborationId: String, createTime: Date, id: String, membershipArn: String, membershipId: String, privacyBudgetType: PrivacyBudgetType, updateTime: Date) {
+            self.arn = arn
+            self.collaborationArn = collaborationArn
+            self.collaborationId = collaborationId
+            self.createTime = createTime
+            self.id = id
+            self.membershipArn = membershipArn
+            self.membershipId = membershipId
+            self.privacyBudgetType = privacyBudgetType
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case collaborationArn = "collaborationArn"
+            case collaborationId = "collaborationId"
+            case createTime = "createTime"
+            case id = "id"
+            case membershipArn = "membershipArn"
+            case membershipId = "membershipId"
+            case privacyBudgetType = "privacyBudgetType"
             case updateTime = "updateTime"
         }
     }
@@ -2959,6 +4468,8 @@ extension CleanRooms {
     public struct ProtectedQuery: AWSDecodableShape {
         /// The time at which the protected query was created.
         public let createTime: Date
+        /// The sensitivity parameters of the differential privacy results of the protected query.
+        public let differentialPrivacy: DifferentialPrivacyParameters?
         /// An error thrown by the protected query.
         public let error: ProtectedQueryError?
         /// The identifier for a protected query instance.
@@ -2978,8 +4489,9 @@ extension CleanRooms {
         /// The status of the query.
         public let status: ProtectedQueryStatus
 
-        public init(createTime: Date, error: ProtectedQueryError? = nil, id: String, membershipArn: String, membershipId: String, result: ProtectedQueryResult? = nil, resultConfiguration: ProtectedQueryResultConfiguration? = nil, sqlParameters: ProtectedQuerySQLParameters? = nil, statistics: ProtectedQueryStatistics? = nil, status: ProtectedQueryStatus) {
+        public init(createTime: Date, differentialPrivacy: DifferentialPrivacyParameters? = nil, error: ProtectedQueryError? = nil, id: String, membershipArn: String, membershipId: String, result: ProtectedQueryResult? = nil, resultConfiguration: ProtectedQueryResultConfiguration? = nil, sqlParameters: ProtectedQuerySQLParameters? = nil, statistics: ProtectedQueryStatistics? = nil, status: ProtectedQueryStatus) {
             self.createTime = createTime
+            self.differentialPrivacy = differentialPrivacy
             self.error = error
             self.id = id
             self.membershipArn = membershipArn
@@ -2993,6 +4505,7 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case createTime = "createTime"
+            case differentialPrivacy = "differentialPrivacy"
             case error = "error"
             case id = "id"
             case membershipArn = "membershipArn"
@@ -3178,6 +4691,19 @@ extension CleanRooms {
         }
     }
 
+    public struct QueryComputePaymentConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Indicates whether the collaboration creator has configured the collaboration member to pay for query compute costs (TRUE) or has not configured the collaboration member to pay for query compute costs (FALSE). Exactly one member can be configured to pay for query compute costs. An error is returned if the collaboration creator sets a TRUE value for more than one member in the collaboration.  If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a FALSE value for the member who can query.
+        public let isResponsible: Bool
+
+        public init(isResponsible: Bool) {
+            self.isResponsible = isResponsible
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case isResponsible = "isResponsible"
+        }
+    }
+
     public struct Schema: AWSDecodableShape {
         /// The analysis method for the schema. The only valid value is currently DIRECT_QUERY.
         public let analysisMethod: AnalysisMethod?
@@ -3304,7 +4830,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.resultConfiguration?.validate(name: "\(name).resultConfiguration")
             try self.sqlParameters.validate(name: "\(name).sqlParameters")
         }
@@ -3418,12 +4944,12 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, max: 36)
             try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, min: 36)
-            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.analysisTemplateIdentifier, name: "analysisTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.description, name: "description", parent: name, max: 255)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3465,7 +4991,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, max: 36)
             try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, min: 36)
-            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.collaborationIdentifier, name: "collaborationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.description, name: "description", parent: name, max: 255)
             try self.validate(self.description, name: "description", parent: name, min: 1)
             try self.validate(self.description, name: "description", parent: name, pattern: "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
@@ -3493,6 +5019,61 @@ extension CleanRooms {
         }
     }
 
+    public struct UpdateConfiguredAudienceModelAssociationInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "configuredAudienceModelAssociationIdentifier", location: .uri("configuredAudienceModelAssociationIdentifier")),
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier"))
+        ]
+
+        /// A unique identifier for the configured audience model association that you want to update.
+        public let configuredAudienceModelAssociationIdentifier: String
+        /// A new description for the configured audience model association.
+        public let description: String?
+        /// A unique identifier of the membership that contains the configured audience model association that you want to update.
+        public let membershipIdentifier: String
+        /// A new name for the configured audience model association.
+        public let name: String?
+
+        public init(configuredAudienceModelAssociationIdentifier: String, description: String? = nil, membershipIdentifier: String, name: String? = nil) {
+            self.configuredAudienceModelAssociationIdentifier = configuredAudienceModelAssociationIdentifier
+            self.description = description
+            self.membershipIdentifier = membershipIdentifier
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, max: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, min: 36)
+            try self.validate(self.configuredAudienceModelAssociationIdentifier, name: "configuredAudienceModelAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.description, name: "description", parent: name, max: 255)
+            try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.validate(self.name, name: "name", parent: name, max: 100)
+            try self.validate(self.name, name: "name", parent: name, min: 1)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^(?!\\s*$)[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case description = "description"
+            case name = "name"
+        }
+    }
+
+    public struct UpdateConfiguredAudienceModelAssociationOutput: AWSDecodableShape {
+        /// Details about the configured audience model association that you updated.
+        public let configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation
+
+        public init(configuredAudienceModelAssociation: ConfiguredAudienceModelAssociation) {
+            self.configuredAudienceModelAssociation = configuredAudienceModelAssociation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuredAudienceModelAssociation = "configuredAudienceModelAssociation"
+        }
+    }
+
     public struct UpdateConfiguredTableAnalysisRuleInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "analysisRuleType", location: .uri("analysisRuleType")),
@@ -3516,7 +5097,7 @@ extension CleanRooms {
             try self.analysisRulePolicy.validate(name: "\(name).analysisRulePolicy")
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3562,15 +5143,15 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableAssociationIdentifier, name: "configuredTableAssociationIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.description, name: "description", parent: name, max: 255)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.roleArn, name: "roleArn", parent: name, max: 512)
             try self.validate(self.roleArn, name: "roleArn", parent: name, min: 32)
-            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=,./@-]+$")
+            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:aws:iam::[\\w]+:role/[\\w+=./@-]+$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3613,7 +5194,7 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, max: 36)
             try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, min: 36)
-            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.configuredTableIdentifier, name: "configuredTableIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.description, name: "description", parent: name, max: 255)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\t\\r\\n]*$")
             try self.validate(self.name, name: "name", parent: name, max: 100)
@@ -3649,7 +5230,7 @@ extension CleanRooms {
         public let defaultResultConfiguration: MembershipProtectedQueryResultConfiguration?
         /// The unique identifier of the membership.
         public let membershipIdentifier: String
-        /// An indicator as to whether query logging has been enabled or disabled for the collaboration.
+        /// An indicator as to whether query logging has been enabled or disabled for the membership.
         public let queryLogStatus: MembershipQueryLogStatus?
 
         public init(defaultResultConfiguration: MembershipProtectedQueryResultConfiguration? = nil, membershipIdentifier: String, queryLogStatus: MembershipQueryLogStatus? = nil) {
@@ -3662,7 +5243,7 @@ extension CleanRooms {
             try self.defaultResultConfiguration?.validate(name: "\(name).defaultResultConfiguration")
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3680,6 +5261,57 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case membership = "membership"
+        }
+    }
+
+    public struct UpdatePrivacyBudgetTemplateInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "membershipIdentifier", location: .uri("membershipIdentifier")),
+            AWSMemberEncoding(label: "privacyBudgetTemplateIdentifier", location: .uri("privacyBudgetTemplateIdentifier"))
+        ]
+
+        /// A unique identifier for one of your memberships for a collaboration. The privacy budget template is updated in the collaboration that this membership belongs to. Accepts a membership ID.
+        public let membershipIdentifier: String
+        /// Specifies the epsilon and noise parameters for the privacy budget template.
+        public let parameters: PrivacyBudgetTemplateUpdateParameters?
+        /// A unique identifier for your privacy budget template that you want to update.
+        public let privacyBudgetTemplateIdentifier: String
+        /// Specifies the type of the privacy budget template.
+        public let privacyBudgetType: PrivacyBudgetType
+
+        public init(membershipIdentifier: String, parameters: PrivacyBudgetTemplateUpdateParameters? = nil, privacyBudgetTemplateIdentifier: String, privacyBudgetType: PrivacyBudgetType) {
+            self.membershipIdentifier = membershipIdentifier
+            self.parameters = parameters
+            self.privacyBudgetTemplateIdentifier = privacyBudgetTemplateIdentifier
+            self.privacyBudgetType = privacyBudgetType
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+            try self.parameters?.validate(name: "\(name).parameters")
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, max: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, min: 36)
+            try self.validate(self.privacyBudgetTemplateIdentifier, name: "privacyBudgetTemplateIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case parameters = "parameters"
+            case privacyBudgetType = "privacyBudgetType"
+        }
+    }
+
+    public struct UpdatePrivacyBudgetTemplateOutput: AWSDecodableShape {
+        /// Summary of the privacy budget template.
+        public let privacyBudgetTemplate: PrivacyBudgetTemplate
+
+        public init(privacyBudgetTemplate: PrivacyBudgetTemplate) {
+            self.privacyBudgetTemplate = privacyBudgetTemplate
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case privacyBudgetTemplate = "privacyBudgetTemplate"
         }
     }
 
@@ -3705,10 +5337,10 @@ extension CleanRooms {
         public func validate(name: String) throws {
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, max: 36)
             try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, min: 36)
-            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.membershipIdentifier, name: "membershipIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
             try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, max: 36)
-            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, min: 1)
-            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, pattern: "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, min: 36)
+            try self.validate(self.protectedQueryIdentifier, name: "protectedQueryIdentifier", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3751,7 +5383,7 @@ extension CleanRooms {
         }
 
         public func validate(name: String) throws {
-            try self.validate(self.text, name: "text", parent: name, max: 15000)
+            try self.validate(self.text, name: "text", parent: name, max: 90000)
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3789,6 +5421,96 @@ extension CleanRooms {
 
         private enum CodingKeys: String, CodingKey {
             case s3 = "s3"
+        }
+    }
+
+    public struct PreviewPrivacyImpactParametersInput: AWSEncodableShape {
+        /// An array that specifies the epsilon and noise parameters.
+        public let differentialPrivacy: DifferentialPrivacyPreviewParametersInput?
+
+        public init(differentialPrivacy: DifferentialPrivacyPreviewParametersInput? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        public func validate(name: String) throws {
+            try self.differentialPrivacy?.validate(name: "\(name).differentialPrivacy")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
+        }
+    }
+
+    public struct PrivacyBudget: AWSDecodableShape {
+        /// An object that specifies the epsilon parameter and the utility in terms of total aggregations, as well as the remaining aggregations available.
+        public let differentialPrivacy: DifferentialPrivacyPrivacyBudget?
+
+        public init(differentialPrivacy: DifferentialPrivacyPrivacyBudget? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
+        }
+    }
+
+    public struct PrivacyBudgetTemplateParametersInput: AWSEncodableShape {
+        /// An object that specifies the epsilon and noise parameters.
+        public let differentialPrivacy: DifferentialPrivacyTemplateParametersInput?
+
+        public init(differentialPrivacy: DifferentialPrivacyTemplateParametersInput? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        public func validate(name: String) throws {
+            try self.differentialPrivacy?.validate(name: "\(name).differentialPrivacy")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
+        }
+    }
+
+    public struct PrivacyBudgetTemplateParametersOutput: AWSDecodableShape {
+        /// The epsilon and noise parameters.
+        public let differentialPrivacy: DifferentialPrivacyTemplateParametersOutput?
+
+        public init(differentialPrivacy: DifferentialPrivacyTemplateParametersOutput? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
+        }
+    }
+
+    public struct PrivacyBudgetTemplateUpdateParameters: AWSEncodableShape {
+        /// An object that specifies the new values for the epsilon and noise parameters.
+        public let differentialPrivacy: DifferentialPrivacyTemplateUpdateParameters?
+
+        public init(differentialPrivacy: DifferentialPrivacyTemplateUpdateParameters? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        public func validate(name: String) throws {
+            try self.differentialPrivacy?.validate(name: "\(name).differentialPrivacy")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
+        }
+    }
+
+    public struct PrivacyImpact: AWSDecodableShape {
+        /// An object that lists the number and type of aggregation functions you can perform.
+        public let differentialPrivacy: DifferentialPrivacyPrivacyImpact?
+
+        public init(differentialPrivacy: DifferentialPrivacyPrivacyImpact? = nil) {
+            self.differentialPrivacy = differentialPrivacy
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case differentialPrivacy = "differentialPrivacy"
         }
     }
 

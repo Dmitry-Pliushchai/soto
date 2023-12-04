@@ -26,28 +26,28 @@ import SotoCore
 extension DynamoDB {
     // MARK: Enums
 
-    public enum AttributeAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum AttributeAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case add = "ADD"
         case delete = "DELETE"
         case put = "PUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum BackupStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BackupStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creating = "CREATING"
         case deleted = "DELETED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BackupType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BackupType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsBackup = "AWS_BACKUP"
         case system = "SYSTEM"
         case user = "USER"
         public var description: String { return self.rawValue }
     }
 
-    public enum BackupTypeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum BackupTypeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case awsBackup = "AWS_BACKUP"
         case system = "SYSTEM"
@@ -55,7 +55,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum BatchStatementErrorCodeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum BatchStatementErrorCodeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "AccessDenied"
         case conditionalCheckFailed = "ConditionalCheckFailed"
         case duplicateItem = "DuplicateItem"
@@ -70,13 +70,13 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum BillingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum BillingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case payPerRequest = "PAY_PER_REQUEST"
         case provisioned = "PROVISIONED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `in` = "IN"
         case beginsWith = "BEGINS_WITH"
         case between = "BETWEEN"
@@ -93,25 +93,25 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConditionalOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConditionalOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case and = "AND"
         case or = "OR"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContinuousBackupsStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContinuousBackupsStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContributorInsightsAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContributorInsightsAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disable = "DISABLE"
         case enable = "ENABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContributorInsightsStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContributorInsightsStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case enabled = "ENABLED"
@@ -120,7 +120,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum DestinationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DestinationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case disabled = "DISABLED"
         case disabling = "DISABLING"
@@ -129,32 +129,32 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dynamodbJson = "DYNAMODB_JSON"
         case ion = "ION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullExport = "FULL_EXPORT"
         case incrementalExport = "INCREMENTAL_EXPORT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportViewType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportViewType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case newAndOldImages = "NEW_AND_OLD_IMAGES"
         case newImage = "NEW_IMAGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlobalTableStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlobalTableStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -162,7 +162,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -171,7 +171,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -179,40 +179,40 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum InputCompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputCompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case none = "NONE"
         case zstd = "ZSTD"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case dynamodbJson = "DYNAMODB_JSON"
         case ion = "ION"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hash = "HASH"
         case range = "RANGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PointInTimeRecoveryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PointInTimeRecoveryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProjectionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProjectionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case include = "INCLUDE"
         case keysOnly = "KEYS_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicaStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicaStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case creationFailed = "CREATION_FAILED"
@@ -223,20 +223,20 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReturnConsumedCapacity: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReturnConsumedCapacity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case indexes = "INDEXES"
         case none = "NONE"
         case total = "TOTAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReturnItemCollectionMetrics: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReturnItemCollectionMetrics: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case size = "SIZE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReturnValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReturnValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allNew = "ALL_NEW"
         case allOld = "ALL_OLD"
         case none = "NONE"
@@ -245,19 +245,19 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReturnValuesOnConditionCheckFailure: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReturnValuesOnConditionCheckFailure: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allOld = "ALL_OLD"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3SseAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3SseAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aes256 = "AES256"
         case kms = "KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SSEStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SSEStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case enabled = "ENABLED"
@@ -266,20 +266,20 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum SSEType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SSEType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aes256 = "AES256"
         case kms = "KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScalarAttributeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScalarAttributeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case b = "B"
         case n = "N"
         case s = "S"
         public var description: String { return self.rawValue }
     }
 
-    public enum Select: String, CustomStringConvertible, Codable, Sendable {
+    public enum Select: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allAttributes = "ALL_ATTRIBUTES"
         case allProjectedAttributes = "ALL_PROJECTED_ATTRIBUTES"
         case count = "COUNT"
@@ -287,7 +287,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamViewType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamViewType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case keysOnly = "KEYS_ONLY"
         case newAndOldImages = "NEW_AND_OLD_IMAGES"
         case newImage = "NEW_IMAGE"
@@ -295,13 +295,13 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum TableClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case standard = "STANDARD"
         case standardInfrequentAccess = "STANDARD_INFREQUENT_ACCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case archived = "ARCHIVED"
         case archiving = "ARCHIVING"
@@ -312,7 +312,7 @@ extension DynamoDB {
         public var description: String { return self.rawValue }
     }
 
-    public enum TimeToLiveStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimeToLiveStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case enabled = "ENABLED"
@@ -2391,7 +2391,7 @@ extension DynamoDB {
         public let exportStatus: ExportStatus?
         /// Point in time from which table data was exported.
         public let exportTime: Date?
-        /// Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+        /// The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
         public let exportType: ExportType?
         /// Status code for the result of the failed export.
         public let failureCode: String?
@@ -2472,7 +2472,7 @@ extension DynamoDB {
         public let exportArn: String?
         /// Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
         public let exportStatus: ExportStatus?
-        /// Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+        /// The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
         public let exportType: ExportType?
 
         public init(exportArn: String? = nil, exportStatus: ExportStatus? = nil, exportType: ExportType? = nil) {
@@ -2495,7 +2495,7 @@ extension DynamoDB {
         public let exportFormat: ExportFormat?
         /// Time in the past from which to export table data, counted in seconds from the start of the Unix epoch. The table export will be a snapshot of the table's state at this point in time.
         public let exportTime: Date?
-        /// Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+        /// Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. The default value is FULL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
         public let exportType: ExportType?
         /// Optional object containing the parameters specific to an incremental export.
         public let incrementalExportSpecification: IncrementalExportSpecification?
@@ -3106,7 +3106,7 @@ extension DynamoDB {
         public let exportFromTime: Date?
         /// Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.
         public let exportToTime: Date?
-        /// Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES.
+        /// The view type that was chosen for the export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES. The default value is NEW_AND_OLD_IMAGES.
         public let exportViewType: ExportViewType?
 
         public init(exportFromTime: Date? = nil, exportToTime: Date? = nil, exportViewType: ExportViewType? = nil) {
@@ -6145,7 +6145,7 @@ public struct DynamoDBErrorType: AWSErrorType {
     public static var tableInUseException: Self { .init(.tableInUseException) }
     /// A source table with the name TableName does not currently exist within the subscriber's account or the subscriber is operating in the wrong Amazon Web Services Region.
     public static var tableNotFoundException: Self { .init(.tableNotFoundException) }
-    /// The entire transaction request was canceled. DynamoDB cancels a TransactWriteItems request under the following circumstances:   A condition in one of the condition expressions is not met.   A table in the TransactWriteItems request is in a different account or region.   More than one action in the TransactWriteItems operation targets the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (larger than 400 KB), or a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   There is a user error, such as an invalid data format.   DynamoDB cancels a TransactGetItems request under the following circumstances:   There is an ongoing TransactGetItems operation that conflicts with a concurrent PutItem, UpdateItem, DeleteItem or TransactWriteItems request. In this case the TransactGetItems operation fails with a TransactionCanceledException.   A table in the TransactGetItems request is in a different account or region.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.    If using Java, DynamoDB lists the cancellation reasons on the CancellationReasons property. This property is not set for other languages. Transaction cancellation reasons are ordered in the order of requested items, if an item has no error it will have None code and Null message.  Cancellation reason codes and possible error messages:   No Errors:   Code: None    Message: null      Conditional Check Failed:   Code: ConditionalCheckFailed    Message: The conditional request failed.      Item Collection Size Limit Exceeded:   Code: ItemCollectionSizeLimitExceeded    Message: Collection size exceeded.     Transaction Conflict:   Code: TransactionConflict    Message: Transaction is ongoing for the item.     Provisioned Throughput Exceeded:   Code: ProvisionedThroughputExceeded    Messages:   The level of configured provisioned throughput for the table was exceeded. Consider increasing your provisioning level with the UpdateTable API.  This Message is received when provisioned throughput is exceeded is on a provisioned DynamoDB table.    The level of configured provisioned throughput for one or more global secondary indexes of the table was exceeded. Consider increasing your provisioning level for the under-provisioned global secondary indexes with the UpdateTable API.  This message is returned when provisioned throughput is exceeded is on a provisioned GSI.        Throttling Error:   Code: ThrottlingError    Messages:    Throughput exceeds the current capacity of your table or index. DynamoDB is automatically scaling your table or index so please try again shortly. If exceptions persist, check if you have a hot key: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.  This message is returned when writes get throttled on an On-Demand table as DynamoDB is automatically scaling the table.    Throughput exceeds the current capacity for one or more global secondary indexes. DynamoDB is automatically scaling your index so please try again shortly.  This message is returned when writes get throttled on an On-Demand GSI as DynamoDB is automatically scaling the GSI.        Validation Error:   Code: ValidationError    Messages:    One or more parameter values were invalid.   The update expression attempted to update the secondary index key beyond allowed size limits.   The update expression attempted to update the secondary index key to unsupported type.   An operand in the update expression has an incorrect data type.   Item size to update has exceeded the maximum allowed size.   Number overflow. Attempting to store a number with magnitude larger than supported range.   Type mismatch for attribute to update.   Nesting Levels have exceeded supported limits.   The document path provided in the update expression is invalid for update.   The provided expression refers to an attribute that does not exist in the item.
+    /// The entire transaction request was canceled. DynamoDB cancels a TransactWriteItems request under the following circumstances:   A condition in one of the condition expressions is not met.   A table in the TransactWriteItems request is in a different account or region.   More than one action in the TransactWriteItems operation targets the same item.   There is insufficient provisioned capacity for the transaction to be completed.   An item size becomes too large (larger than 400 KB), or a local secondary index (LSI) becomes too large, or a similar validation error occurs because of changes made by the transaction.   There is a user error, such as an invalid data format.    There is an ongoing TransactWriteItems operation that conflicts with a concurrent  TransactWriteItems request. In this case the TransactWriteItems operation  fails with a TransactionCanceledException.    DynamoDB cancels a TransactGetItems request under the following circumstances:   There is an ongoing TransactGetItems operation that conflicts with a concurrent PutItem, UpdateItem, DeleteItem or TransactWriteItems request. In this case the TransactGetItems operation fails with a TransactionCanceledException.   A table in the TransactGetItems request is in a different account or region.   There is insufficient provisioned capacity for the transaction to be completed.   There is a user error, such as an invalid data format.    If using Java, DynamoDB lists the cancellation reasons on the CancellationReasons property. This property is not set for other languages. Transaction cancellation reasons are ordered in the order of requested items, if an item has no error it will have None code and Null message.  Cancellation reason codes and possible error messages:   No Errors:   Code: None    Message: null      Conditional Check Failed:   Code: ConditionalCheckFailed    Message: The conditional request failed.      Item Collection Size Limit Exceeded:   Code: ItemCollectionSizeLimitExceeded    Message: Collection size exceeded.     Transaction Conflict:   Code: TransactionConflict    Message: Transaction is ongoing for the item.     Provisioned Throughput Exceeded:   Code: ProvisionedThroughputExceeded    Messages:   The level of configured provisioned throughput for the table was exceeded. Consider increasing your provisioning level with the UpdateTable API.  This Message is received when provisioned throughput is exceeded is on a provisioned DynamoDB table.    The level of configured provisioned throughput for one or more global secondary indexes of the table was exceeded. Consider increasing your provisioning level for the under-provisioned global secondary indexes with the UpdateTable API.  This message is returned when provisioned throughput is exceeded is on a provisioned GSI.        Throttling Error:   Code: ThrottlingError    Messages:    Throughput exceeds the current capacity of your table or index. DynamoDB is automatically scaling your table or index so please try again shortly. If exceptions persist, check if you have a hot key: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html.  This message is returned when writes get throttled on an On-Demand table as DynamoDB is automatically scaling the table.    Throughput exceeds the current capacity for one or more global secondary indexes. DynamoDB is automatically scaling your index so please try again shortly.  This message is returned when writes get throttled on an On-Demand GSI as DynamoDB is automatically scaling the GSI.        Validation Error:   Code: ValidationError    Messages:    One or more parameter values were invalid.   The update expression attempted to update the secondary index key beyond allowed size limits.   The update expression attempted to update the secondary index key to unsupported type.   An operand in the update expression has an incorrect data type.   Item size to update has exceeded the maximum allowed size.   Number overflow. Attempting to store a number with magnitude larger than supported range.   Type mismatch for attribute to update.   Nesting Levels have exceeded supported limits.   The document path provided in the update expression is invalid for update.   The provided expression refers to an attribute that does not exist in the item.
     public static var transactionCanceledException: Self { .init(.transactionCanceledException) }
     /// Operation was rejected because there is an ongoing transaction for the item.
     public static var transactionConflictException: Self { .init(.transactionConflictException) }

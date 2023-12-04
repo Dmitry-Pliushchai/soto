@@ -26,13 +26,13 @@ import SotoCore
 extension Snowball {
     // MARK: Enums
 
-    public enum AddressType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsShip = "AWS_SHIP"
         case custPickup = "CUST_PICKUP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ClusterState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClusterState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awaitingQuorum = "AwaitingQuorum"
         case cancelled = "Cancelled"
         case complete = "Complete"
@@ -41,13 +41,13 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceServiceName: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceServiceName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nfsOnDeviceService = "NFS_ON_DEVICE_SERVICE"
         case s3OnDeviceService = "S3_ON_DEVICE_SERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImpactLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImpactLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case il2 = "IL2"
         case il4 = "IL4"
         case il5 = "IL5"
@@ -56,7 +56,7 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobState: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "Cancelled"
         case complete = "Complete"
         case inProgress = "InProgress"
@@ -73,40 +73,40 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `import` = "IMPORT"
         case export = "EXPORT"
         case localUse = "LOCAL_USE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LongTermPricingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LongTermPricingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneMonth = "OneMonth"
         case oneYear = "OneYear"
         case threeYear = "ThreeYear"
         public var description: String { return self.rawValue }
     }
 
-    public enum RemoteManagement: String, CustomStringConvertible, Codable, Sendable {
+    public enum RemoteManagement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case installedAutostart = "INSTALLED_AUTOSTART"
         case installedOnly = "INSTALLED_ONLY"
         case notInstalled = "NOT_INSTALLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eksAnywhere = "EKS_ANYWHERE"
         case kubernetes = "KUBERNETES"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShipmentState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShipmentState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case received = "RECEIVED"
         case returned = "RETURNED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShippingLabelStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShippingLabelStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case succeeded = "Succeeded"
@@ -114,7 +114,7 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShippingOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShippingOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case express = "EXPRESS"
         case nextDay = "NEXT_DAY"
         case secondDay = "SECOND_DAY"
@@ -122,7 +122,7 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum SnowballCapacity: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnowballCapacity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPreference = "NoPreference"
         case t100 = "T100"
         case t13 = "T13"
@@ -137,7 +137,7 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum SnowballType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnowballType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case edge = "EDGE"
         case edgeC = "EDGE_C"
         case edgeCg = "EDGE_CG"
@@ -151,12 +151,12 @@ extension Snowball {
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum StorageUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tb = "TB"
         public var description: String { return self.rawValue }
     }
 
-    public enum TransferOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransferOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `import` = "IMPORT"
         case export = "EXPORT"
         case localUse = "LOCAL_USE"

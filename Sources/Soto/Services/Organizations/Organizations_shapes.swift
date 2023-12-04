@@ -26,20 +26,20 @@ import SotoCore
 extension Organizations {
     // MARK: Enums
 
-    public enum AccountJoinedMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountJoinedMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case invited = "INVITED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AccountStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case pendingClosure = "PENDING_CLOSURE"
         case suspended = "SUSPENDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addOrganizationsServiceLinkedRole = "ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"
         case approveAllFeatures = "APPROVE_ALL_FEATURES"
         case enableAllFeatures = "ENABLE_ALL_FEATURES"
@@ -47,13 +47,13 @@ extension Organizations {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChildType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChildType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case organizationalUnit = "ORGANIZATIONAL_UNIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum CreateAccountFailureReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum CreateAccountFailureReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountLimitExceeded = "ACCOUNT_LIMIT_EXCEEDED"
         case concurrentAccountModification = "CONCURRENT_ACCOUNT_MODIFICATION"
         case emailAlreadyExists = "EMAIL_ALREADY_EXISTS"
@@ -72,28 +72,28 @@ extension Organizations {
         public var description: String { return self.rawValue }
     }
 
-    public enum CreateAccountState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CreateAccountState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EffectivePolicyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EffectivePolicyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aiservicesOptOutPolicy = "AISERVICES_OPT_OUT_POLICY"
         case backupPolicy = "BACKUP_POLICY"
         case tagPolicy = "TAG_POLICY"
         public var description: String { return self.rawValue }
     }
 
-    public enum HandshakePartyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HandshakePartyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case email = "EMAIL"
         case organization = "ORGANIZATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum HandshakeResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HandshakeResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case email = "EMAIL"
         case masterEmail = "MASTER_EMAIL"
@@ -105,7 +105,7 @@ extension Organizations {
         public var description: String { return self.rawValue }
     }
 
-    public enum HandshakeState: String, CustomStringConvertible, Codable, Sendable {
+    public enum HandshakeState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accepted = "ACCEPTED"
         case canceled = "CANCELED"
         case declined = "DECLINED"
@@ -115,25 +115,25 @@ extension Organizations {
         public var description: String { return self.rawValue }
     }
 
-    public enum IAMUserAccessToBilling: String, CustomStringConvertible, Codable, Sendable {
+    public enum IAMUserAccessToBilling: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case deny = "DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrganizationFeatureSet: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrganizationFeatureSet: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case consolidatedBilling = "CONSOLIDATED_BILLING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case organizationalUnit = "ORGANIZATIONAL_UNIT"
         case root = "ROOT"
         public var description: String { return self.rawValue }
     }
 
-    public enum PolicyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PolicyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aiservicesOptOutPolicy = "AISERVICES_OPT_OUT_POLICY"
         case backupPolicy = "BACKUP_POLICY"
         case serviceControlPolicy = "SERVICE_CONTROL_POLICY"
@@ -141,14 +141,14 @@ extension Organizations {
         public var description: String { return self.rawValue }
     }
 
-    public enum PolicyTypeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PolicyTypeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enabled = "ENABLED"
         case pendingDisable = "PENDING_DISABLE"
         case pendingEnable = "PENDING_ENABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case organizationalUnit = "ORGANIZATIONAL_UNIT"
         case root = "ROOT"

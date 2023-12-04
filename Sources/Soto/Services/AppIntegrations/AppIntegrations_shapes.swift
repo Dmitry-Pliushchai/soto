@@ -182,13 +182,13 @@ extension AppIntegrations {
         /// The configuration for what data should be pulled from the source.
         public let objectConfiguration: [String: [String: [String]]]?
         /// The name of the data and how often it should be pulled from the source.
-        public let scheduleConfig: ScheduleConfiguration
+        public let scheduleConfig: ScheduleConfiguration?
         /// The URI of the data source.
         public let sourceURI: String
         /// The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
         public let tags: [String: String]?
 
-        public init(clientToken: String? = CreateDataIntegrationRequest.idempotencyToken(), description: String? = nil, fileConfiguration: FileConfiguration? = nil, kmsKey: String, name: String, objectConfiguration: [String: [String: [String]]]? = nil, scheduleConfig: ScheduleConfiguration, sourceURI: String, tags: [String: String]? = nil) {
+        public init(clientToken: String? = CreateDataIntegrationRequest.idempotencyToken(), description: String? = nil, fileConfiguration: FileConfiguration? = nil, kmsKey: String, name: String, objectConfiguration: [String: [String: [String]]]? = nil, scheduleConfig: ScheduleConfiguration? = nil, sourceURI: String, tags: [String: String]? = nil) {
             self.clientToken = clientToken
             self.description = description
             self.fileConfiguration = fileConfiguration
@@ -219,7 +219,7 @@ extension AppIntegrations {
                 try validate($0.key, name: "objectConfiguration.key", parent: name, min: 1)
                 try validate($0.key, name: "objectConfiguration.key", parent: name, pattern: "\\S")
             }
-            try self.scheduleConfig.validate(name: "\(name).scheduleConfig")
+            try self.scheduleConfig?.validate(name: "\(name).scheduleConfig")
             try self.validate(self.sourceURI, name: "sourceURI", parent: name, max: 1000)
             try self.validate(self.sourceURI, name: "sourceURI", parent: name, min: 1)
             try self.validate(self.sourceURI, name: "sourceURI", parent: name, pattern: "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)$")

@@ -19,7 +19,7 @@
 
 /// Service object for interacting with AWS Bedrock service.
 ///
-/// Describes the API operations for creating and managing Bedrock models.
+/// Describes the API operations for creating and managing Amazon Bedrock models.
 public struct Bedrock: AWSService {
     // MARK: Member variables
 
@@ -55,10 +55,14 @@ public struct Bedrock: AWSService {
             apiVersion: "2023-04-20",
             endpoint: endpoint,
             serviceEndpoints: [
+                "bedrock-ap-northeast-1": "bedrock.ap-northeast-1.amazonaws.com",
                 "bedrock-ap-southeast-1": "bedrock.ap-southeast-1.amazonaws.com",
+                "bedrock-eu-central-1": "bedrock.eu-central-1.amazonaws.com",
                 "bedrock-fips-us-east-1": "bedrock-fips.us-east-1.amazonaws.com",
                 "bedrock-fips-us-west-2": "bedrock-fips.us-west-2.amazonaws.com",
+                "bedrock-runtime-ap-northeast-1": "bedrock-runtime.ap-northeast-1.amazonaws.com",
                 "bedrock-runtime-ap-southeast-1": "bedrock-runtime.ap-southeast-1.amazonaws.com",
+                "bedrock-runtime-eu-central-1": "bedrock-runtime.eu-central-1.amazonaws.com",
                 "bedrock-runtime-fips-us-east-1": "bedrock-runtime-fips.us-east-1.amazonaws.com",
                 "bedrock-runtime-fips-us-west-2": "bedrock-runtime-fips.us-west-2.amazonaws.com",
                 "bedrock-runtime-us-east-1": "bedrock-runtime.us-east-1.amazonaws.com",
@@ -75,7 +79,7 @@ public struct Bedrock: AWSService {
 
     // MARK: API Calls
 
-    /// Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
+    /// Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Amazon Bedrock returns validation loss metrics and output generations  after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
     public func createModelCustomizationJob(_ input: CreateModelCustomizationJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateModelCustomizationJobResponse> {
         return self.client.execute(operation: "CreateModelCustomizationJob", path: "/model-customization-jobs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -100,12 +104,12 @@ public struct Bedrock: AWSService {
         return self.client.execute(operation: "DeleteProvisionedModelThroughput", path: "/provisioned-model-throughput/{provisionedModelId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get the properties associated with a Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
+    /// Get the properties associated with a Amazon Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
     public func getCustomModel(_ input: GetCustomModelRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetCustomModelResponse> {
         return self.client.execute(operation: "GetCustomModel", path: "/custom-models/{modelIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get details about a Bedrock foundation model.
+    /// Get details about a Amazon Bedrock foundation model.
     public func getFoundationModel(_ input: GetFoundationModelRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetFoundationModelResponse> {
         return self.client.execute(operation: "GetFoundationModel", path: "/foundation-models/{modelIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -130,7 +134,7 @@ public struct Bedrock: AWSService {
         return self.client.execute(operation: "ListCustomModels", path: "/custom-models", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// List of Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
+    /// List of Amazon Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
     public func listFoundationModels(_ input: ListFoundationModelsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListFoundationModelsResponse> {
         return self.client.execute(operation: "ListFoundationModels", path: "/foundation-models", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

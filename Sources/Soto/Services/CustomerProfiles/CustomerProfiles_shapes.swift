@@ -26,37 +26,37 @@ import SotoCore
 extension CustomerProfiles {
     // MARK: Enums
 
-    public enum AttributeMatchingModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum AttributeMatchingModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case manyToMany = "MANY_TO_MANY"
         case oneToOne = "ONE_TO_ONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConflictResolvingModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConflictResolvingModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case recency = "RECENCY"
         case source = "SOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataPullMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataPullMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "Complete"
         case incremental = "Incremental"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventStreamDestinationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventStreamDestinationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case unhealthy = "UNHEALTHY"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventStreamState: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventStreamState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case running = "RUNNING"
         case stopped = "STOPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FieldContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emailAddress = "EMAIL_ADDRESS"
         case name = "NAME"
         case number = "NUMBER"
@@ -65,14 +65,14 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum Gender: String, CustomStringConvertible, Codable, Sendable {
+    public enum Gender: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case female = "FEMALE"
         case male = "MALE"
         case unspecified = "UNSPECIFIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityResolutionJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityResolutionJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case findMatching = "FIND_MATCHING"
@@ -83,7 +83,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobScheduleDayOfTheWeek: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobScheduleDayOfTheWeek: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case friday = "FRIDAY"
         case monday = "MONDAY"
         case saturday = "SATURDAY"
@@ -94,13 +94,13 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogicalOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogicalOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case and = "AND"
         case or = "OR"
         public var description: String { return self.rawValue }
     }
 
-    public enum MarketoConnectorOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum MarketoConnectorOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addition = "ADDITION"
         case between = "BETWEEN"
         case division = "DIVISION"
@@ -120,13 +120,13 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum MatchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MatchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mlBasedMatching = "ML_BASED_MATCHING"
         case ruleBasedMatching = "RULE_BASED_MATCHING"
         public var description: String { return self.rawValue }
     }
 
-    public enum Operator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equalTo = "EQUAL_TO"
         case greaterThan = "GREATER_THAN"
         case lessThan = "LESS_THAN"
@@ -134,7 +134,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperatorPropertiesKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperatorPropertiesKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case concatFormat = "CONCAT_FORMAT"
         case dataType = "DATA_TYPE"
         case destinationDataType = "DESTINATION_DATA_TYPE"
@@ -152,21 +152,21 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum PartyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PartyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case business = "BUSINESS"
         case individual = "INDIVIDUAL"
         case other = "OTHER"
         public var description: String { return self.rawValue }
     }
 
-    public enum RuleBasedMatchingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RuleBasedMatchingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inProgress = "IN_PROGRESS"
         case pending = "PENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3ConnectorOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3ConnectorOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addition = "ADDITION"
         case between = "BETWEEN"
         case division = "DIVISION"
@@ -190,32 +190,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum SalesforceConnectorOperator: String, CustomStringConvertible, Codable, Sendable {
-        case addition = "ADDITION"
-        case between = "BETWEEN"
-        case contains = "CONTAINS"
-        case division = "DIVISION"
-        case equalTo = "EQUAL_TO"
-        case greaterThan = "GREATER_THAN"
-        case greaterThanOrEqualTo = "GREATER_THAN_OR_EQUAL_TO"
-        case lessThan = "LESS_THAN"
-        case lessThanOrEqualTo = "LESS_THAN_OR_EQUAL_TO"
-        case maskAll = "MASK_ALL"
-        case maskFirstN = "MASK_FIRST_N"
-        case maskLastN = "MASK_LAST_N"
-        case multiplication = "MULTIPLICATION"
-        case noOp = "NO_OP"
-        case notEqualTo = "NOT_EQUAL_TO"
-        case projection = "PROJECTION"
-        case subtraction = "SUBTRACTION"
-        case validateNonNegative = "VALIDATE_NON_NEGATIVE"
-        case validateNonNull = "VALIDATE_NON_NULL"
-        case validateNonZero = "VALIDATE_NON_ZERO"
-        case validateNumeric = "VALIDATE_NUMERIC"
-        public var description: String { return self.rawValue }
-    }
-
-    public enum ServiceNowConnectorOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SalesforceConnectorOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addition = "ADDITION"
         case between = "BETWEEN"
         case contains = "CONTAINS"
@@ -240,7 +215,32 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceConnectorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceNowConnectorOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case addition = "ADDITION"
+        case between = "BETWEEN"
+        case contains = "CONTAINS"
+        case division = "DIVISION"
+        case equalTo = "EQUAL_TO"
+        case greaterThan = "GREATER_THAN"
+        case greaterThanOrEqualTo = "GREATER_THAN_OR_EQUAL_TO"
+        case lessThan = "LESS_THAN"
+        case lessThanOrEqualTo = "LESS_THAN_OR_EQUAL_TO"
+        case maskAll = "MASK_ALL"
+        case maskFirstN = "MASK_FIRST_N"
+        case maskLastN = "MASK_LAST_N"
+        case multiplication = "MULTIPLICATION"
+        case noOp = "NO_OP"
+        case notEqualTo = "NOT_EQUAL_TO"
+        case projection = "PROJECTION"
+        case subtraction = "SUBTRACTION"
+        case validateNonNegative = "VALIDATE_NON_NEGATIVE"
+        case validateNonNull = "VALIDATE_NON_NULL"
+        case validateNonZero = "VALIDATE_NON_ZERO"
+        case validateNumeric = "VALIDATE_NUMERIC"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum SourceConnectorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case marketo = "Marketo"
         case s3 = "S3"
         case salesforce = "Salesforce"
@@ -249,7 +249,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum StandardIdentifier: String, CustomStringConvertible, Codable, Sendable {
+    public enum StandardIdentifier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `case` = "CASE"
         case asset = "ASSET"
         case lookupOnly = "LOOKUP_ONLY"
@@ -261,7 +261,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum Statistic: String, CustomStringConvertible, Codable, Sendable {
+    public enum Statistic: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case average = "AVERAGE"
         case count = "COUNT"
         case firstOccurrence = "FIRST_OCCURRENCE"
@@ -273,7 +273,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case complete = "COMPLETE"
         case failed = "FAILED"
@@ -284,7 +284,7 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arithmetic = "Arithmetic"
         case filter = "Filter"
         case map = "Map"
@@ -295,24 +295,24 @@ extension CustomerProfiles {
         public var description: String { return self.rawValue }
     }
 
-    public enum TriggerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TriggerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case event = "Event"
         case ondemand = "OnDemand"
         case scheduled = "Scheduled"
         public var description: String { return self.rawValue }
     }
 
-    public enum Unit: String, CustomStringConvertible, Codable, Sendable {
+    public enum Unit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case days = "DAYS"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appflowIntegration = "APPFLOW_INTEGRATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ZendeskConnectorOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ZendeskConnectorOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addition = "ADDITION"
         case division = "DIVISION"
         case greaterThan = "GREATER_THAN"
@@ -1746,6 +1746,72 @@ extension CustomerProfiles {
             case status = "Status"
             case unhealthySince = "UnhealthySince"
             case uri = "Uri"
+        }
+    }
+
+    public struct DetectProfileObjectTypeRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName"))
+        ]
+
+        /// The unique name of the domain.
+        public let domainName: String
+        /// A string that is serialized from a JSON object.
+        public let objects: [String]
+
+        public init(domainName: String, objects: [String]) {
+            self.domainName = domainName
+            self.objects = objects
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 64)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 1)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-zA-Z0-9_-]+$")
+            try self.objects.forEach {
+                try validate($0, name: "objects[]", parent: name, max: 256000)
+                try validate($0, name: "objects[]", parent: name, min: 1)
+            }
+            try self.validate(self.objects, name: "objects", parent: name, max: 5)
+            try self.validate(self.objects, name: "objects", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case objects = "Objects"
+        }
+    }
+
+    public struct DetectProfileObjectTypeResponse: AWSDecodableShape {
+        /// Detected ProfileObjectType mappings from given objects. A maximum of one mapping is supported.
+        public let detectedProfileObjectTypes: [DetectedProfileObjectType]?
+
+        public init(detectedProfileObjectTypes: [DetectedProfileObjectType]? = nil) {
+            self.detectedProfileObjectTypes = detectedProfileObjectTypes
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case detectedProfileObjectTypes = "DetectedProfileObjectTypes"
+        }
+    }
+
+    public struct DetectedProfileObjectType: AWSDecodableShape {
+        /// A map of the name and the ObjectType field.
+        public let fields: [String: ObjectTypeField]?
+        /// A list of unique keys that can be used to map data to a profile.
+        public let keys: [String: [ObjectTypeKey]]?
+        /// The format of sourceLastUpdatedTimestamp that was detected in fields.
+        public let sourceLastUpdatedTimestampFormat: String?
+
+        public init(fields: [String: ObjectTypeField]? = nil, keys: [String: [ObjectTypeKey]]? = nil, sourceLastUpdatedTimestampFormat: String? = nil) {
+            self.fields = fields
+            self.keys = keys
+            self.sourceLastUpdatedTimestampFormat = sourceLastUpdatedTimestampFormat
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case fields = "Fields"
+            case keys = "Keys"
+            case sourceLastUpdatedTimestampFormat = "SourceLastUpdatedTimestampFormat"
         }
     }
 

@@ -26,6 +26,11 @@ extension IoTTwinMaker {
         return try await self.client.execute(operation: "BatchPutPropertyValues", path: "/workspaces/{workspaceId}/entity-properties", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "data.", logger: logger, on: eventLoop)
     }
 
+    /// Cancels the metadata transfer job.
+    public func cancelMetadataTransferJob(_ input: CancelMetadataTransferJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CancelMetadataTransferJobResponse {
+        return try await self.client.execute(operation: "CancelMetadataTransferJob", path: "/metadata-transfer-jobs/{metadataTransferJobId}/cancel", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
     /// Creates a component type.
     public func createComponentType(_ input: CreateComponentTypeRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateComponentTypeResponse {
         return try await self.client.execute(operation: "CreateComponentType", path: "/workspaces/{workspaceId}/component-types/{componentTypeId}", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
@@ -34,6 +39,11 @@ extension IoTTwinMaker {
     /// Creates an entity.
     public func createEntity(_ input: CreateEntityRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateEntityResponse {
         return try await self.client.execute(operation: "CreateEntity", path: "/workspaces/{workspaceId}/entities", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
+    /// Creates a new metadata transfer job.
+    public func createMetadataTransferJob(_ input: CreateMetadataTransferJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateMetadataTransferJobResponse {
+        return try await self.client.execute(operation: "CreateMetadataTransferJob", path: "/metadata-transfer-jobs", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
 
     /// Creates a scene.
@@ -76,7 +86,7 @@ extension IoTTwinMaker {
         return try await self.client.execute(operation: "DeleteWorkspace", path: "/workspaces/{workspaceId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
 
-    /// Run queries to access information from your knowledge graph of entities within individual workspaces.
+    /// Run queries to access information from your knowledge graph of entities within individual workspaces.  The ExecuteQuery action only works with Amazon Web Services Java SDK2. ExecuteQuery will not work with any Amazon Web Services Java SDK version &lt; 2.x.
     public func executeQuery(_ input: ExecuteQueryRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ExecuteQueryResponse {
         return try await self.client.execute(operation: "ExecuteQuery", path: "/queries/execution", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
@@ -89,6 +99,11 @@ extension IoTTwinMaker {
     /// Retrieves information about an entity.
     public func getEntity(_ input: GetEntityRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetEntityResponse {
         return try await self.client.execute(operation: "GetEntity", path: "/workspaces/{workspaceId}/entities/{entityId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
+    /// Gets a nmetadata transfer job.
+    public func getMetadataTransferJob(_ input: GetMetadataTransferJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetMetadataTransferJobResponse {
+        return try await self.client.execute(operation: "GetMetadataTransferJob", path: "/metadata-transfer-jobs/{metadataTransferJobId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
 
     /// Gets the pricing plan.
@@ -126,9 +141,24 @@ extension IoTTwinMaker {
         return try await self.client.execute(operation: "ListComponentTypes", path: "/workspaces/{workspaceId}/component-types-list", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
 
+    /// This API lists the components of an entity.
+    public func listComponents(_ input: ListComponentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListComponentsResponse {
+        return try await self.client.execute(operation: "ListComponents", path: "/workspaces/{workspaceId}/entities/{entityId}/components-list", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
     /// Lists all entities in a workspace.
     public func listEntities(_ input: ListEntitiesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListEntitiesResponse {
         return try await self.client.execute(operation: "ListEntities", path: "/workspaces/{workspaceId}/entities-list", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
+    /// Lists the metadata transfer jobs.
+    public func listMetadataTransferJobs(_ input: ListMetadataTransferJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListMetadataTransferJobsResponse {
+        return try await self.client.execute(operation: "ListMetadataTransferJobs", path: "/metadata-transfer-jobs-list", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
+    }
+
+    /// This API lists the properties of a component.
+    public func listProperties(_ input: ListPropertiesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListPropertiesResponse {
+        return try await self.client.execute(operation: "ListProperties", path: "/workspaces/{workspaceId}/properties-list", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api.", logger: logger, on: eventLoop)
     }
 
     /// Lists all scenes in a workspace.
@@ -196,7 +226,7 @@ extension IoTTwinMaker {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension IoTTwinMaker {
-    /// Run queries to access information from your knowledge graph of entities within individual workspaces.
+    /// Run queries to access information from your knowledge graph of entities within individual workspaces.  The ExecuteQuery action only works with Amazon Web Services Java SDK2. ExecuteQuery will not work with any Amazon Web Services Java SDK version &lt; 2.x.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -284,6 +314,28 @@ extension IoTTwinMaker {
         )
     }
 
+    /// This API lists the components of an entity.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listComponentsPaginator(
+        _ input: ListComponentsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListComponentsRequest, ListComponentsResponse> {
+        return .init(
+            input: input,
+            command: self.listComponents,
+            inputKey: \ListComponentsRequest.nextToken,
+            outputKey: \ListComponentsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Lists all entities in a workspace.
     /// Return PaginatorSequence for operation.
     ///
@@ -301,6 +353,50 @@ extension IoTTwinMaker {
             command: self.listEntities,
             inputKey: \ListEntitiesRequest.nextToken,
             outputKey: \ListEntitiesResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Lists the metadata transfer jobs.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listMetadataTransferJobsPaginator(
+        _ input: ListMetadataTransferJobsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListMetadataTransferJobsRequest, ListMetadataTransferJobsResponse> {
+        return .init(
+            input: input,
+            command: self.listMetadataTransferJobs,
+            inputKey: \ListMetadataTransferJobsRequest.nextToken,
+            outputKey: \ListMetadataTransferJobsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// This API lists the properties of a component.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listPropertiesPaginator(
+        _ input: ListPropertiesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListPropertiesRequest, ListPropertiesResponse> {
+        return .init(
+            input: input,
+            command: self.listProperties,
+            inputKey: \ListPropertiesRequest.nextToken,
+            outputKey: \ListPropertiesResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

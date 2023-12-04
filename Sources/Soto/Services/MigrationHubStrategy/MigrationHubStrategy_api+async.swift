@@ -71,6 +71,11 @@ extension MigrationHubStrategy {
         return try await self.client.execute(operation: "GetServerStrategies", path: "/get-server-strategies/{serverId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of all the servers fetched from customer vCenter using Strategy Recommendation Collector.
+    public func listAnalyzableServers(_ input: ListAnalyzableServersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListAnalyzableServersResponse {
+        return try await self.client.execute(operation: "ListAnalyzableServers", path: "/list-analyzable-servers", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     ///  Retrieves a list of all the application components (processes).
     public func listApplicationComponents(_ input: ListApplicationComponentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListApplicationComponentsResponse {
         return try await self.client.execute(operation: "ListApplicationComponents", path: "/list-applicationcomponents", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -148,6 +153,28 @@ extension MigrationHubStrategy {
             command: self.getServerDetails,
             inputKey: \GetServerDetailsRequest.nextToken,
             outputKey: \GetServerDetailsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of all the servers fetched from customer vCenter using Strategy Recommendation Collector.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listAnalyzableServersPaginator(
+        _ input: ListAnalyzableServersRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListAnalyzableServersRequest, ListAnalyzableServersResponse> {
+        return .init(
+            input: input,
+            command: self.listAnalyzableServers,
+            inputKey: \ListAnalyzableServersRequest.nextToken,
+            outputKey: \ListAnalyzableServersResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

@@ -26,42 +26,42 @@ import SotoCore
 extension ChimeSDKIdentity {
     // MARK: Enums
 
-    public enum AllowMessages: String, CustomStringConvertible, Codable, Sendable {
+    public enum AllowMessages: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AppInstanceUserEndpointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AppInstanceUserEndpointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case apns = "APNS"
         case apnsSandbox = "APNS_SANDBOX"
         case gcm = "GCM"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointStatusReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointStatusReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case invalidDeviceToken = "INVALID_DEVICE_TOKEN"
         case invalidPinpointArn = "INVALID_PINPOINT_ARN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExpirationCriterion: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExpirationCriterion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdTimestamp = "CREATED_TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum RespondsTo: String, CustomStringConvertible, Codable, Sendable {
+    public enum RespondsTo: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case standardMessages = "STANDARD_MESSAGES"
         public var description: String { return self.rawValue }
     }
 
-    public enum StandardMessages: String, CustomStringConvertible, Codable, Sendable {
+    public enum StandardMessages: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case auto = "AUTO"
         case mentions = "MENTIONS"
@@ -69,7 +69,7 @@ extension ChimeSDKIdentity {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetedMessages: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetedMessages: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case none = "NONE"
         public var description: String { return self.rawValue }

@@ -26,20 +26,20 @@ import SotoCore
 extension WAF {
     // MARK: Enums
 
-    public enum ChangeAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delete = "DELETE"
         case insert = "INSERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeTokenStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeTokenStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insync = "INSYNC"
         case pending = "PENDING"
         case provisioned = "PROVISIONED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eq = "EQ"
         case ge = "GE"
         case gt = "GT"
@@ -49,12 +49,12 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum GeoMatchConstraintType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeoMatchConstraintType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case country = "Country"
         public var description: String { return self.rawValue }
     }
 
-    public enum GeoMatchConstraintValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeoMatchConstraintValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `as` = "AS"
         case `do` = "DO"
         case `in` = "IN"
@@ -307,13 +307,13 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum IPSetDescriptorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IPSetDescriptorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ipv4 = "IPV4"
         case ipv6 = "IPV6"
         public var description: String { return self.rawValue }
     }
 
-    public enum MatchFieldType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MatchFieldType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allQueryArgs = "ALL_QUERY_ARGS"
         case body = "BODY"
         case header = "HEADER"
@@ -324,7 +324,7 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum PositionalConstraint: String, CustomStringConvertible, Codable, Sendable {
+    public enum PositionalConstraint: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CONTAINS"
         case containsWord = "CONTAINS_WORD"
         case endsWith = "ENDS_WITH"
@@ -333,7 +333,7 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum PredicateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PredicateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case byteMatch = "ByteMatch"
         case geoMatch = "GeoMatch"
         case ipMatch = "IPMatch"
@@ -344,12 +344,12 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum RateKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum RateKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ip = "IP"
         public var description: String { return self.rawValue }
     }
 
-    public enum TextTransformation: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextTransformation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cmdLine = "CMD_LINE"
         case compressWhiteSpace = "COMPRESS_WHITE_SPACE"
         case htmlEntityDecode = "HTML_ENTITY_DECODE"
@@ -359,20 +359,20 @@ extension WAF {
         public var description: String { return self.rawValue }
     }
 
-    public enum WafActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WafActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case block = "BLOCK"
         case count = "COUNT"
         public var description: String { return self.rawValue }
     }
 
-    public enum WafOverrideActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WafOverrideActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "COUNT"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum WafRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WafRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case group = "GROUP"
         case rateBased = "RATE_BASED"
         case regular = "REGULAR"
@@ -739,7 +739,7 @@ extension WAF {
         public let rateLimit: Int64
         public let tags: [Tag]?
 
-        public init(changeToken: String, metricName: String, name: String, rateKey: RateKey, rateLimit: Int64 = 0, tags: [Tag]? = nil) {
+        public init(changeToken: String, metricName: String, name: String, rateKey: RateKey, rateLimit: Int64, tags: [Tag]? = nil) {
             self.changeToken = changeToken
             self.metricName = metricName
             self.name = name
@@ -2355,7 +2355,7 @@ extension WAF {
         /// The WebACLId of the WebACL for which you want GetSampledRequests to return a sample of requests.
         public let webAclId: String
 
-        public init(maxItems: Int64 = 0, ruleId: String, timeWindow: TimeWindow, webAclId: String) {
+        public init(maxItems: Int64, ruleId: String, timeWindow: TimeWindow, webAclId: String) {
             self.maxItems = maxItems
             self.ruleId = ruleId
             self.timeWindow = timeWindow
@@ -4527,7 +4527,7 @@ extension WAF {
         /// An array of RuleUpdate objects that you want to insert into or delete from a RateBasedRule.
         public let updates: [RuleUpdate]
 
-        public init(changeToken: String, rateLimit: Int64 = 0, ruleId: String, updates: [RuleUpdate]) {
+        public init(changeToken: String, rateLimit: Int64, ruleId: String, updates: [RuleUpdate]) {
             self.changeToken = changeToken
             self.rateLimit = rateLimit
             self.ruleId = ruleId

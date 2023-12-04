@@ -26,18 +26,18 @@ import SotoCore
 extension MediaStoreData {
     // MARK: Enums
 
-    public enum ItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case folder = "FOLDER"
         case object = "OBJECT"
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum StorageClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case temporal = "TEMPORAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum UploadAvailability: String, CustomStringConvertible, Codable, Sendable {
+    public enum UploadAvailability: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case standard = "STANDARD"
         case streaming = "STREAMING"
         public var description: String { return self.rawValue }

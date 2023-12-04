@@ -131,7 +131,7 @@ extension MediaLive {
         return try await self.client.execute(operation: "DeleteTags", path: "/prod/tags/{ResourceArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get account configuration
+    /// Describe account configuration
     public func describeAccountConfiguration(_ input: DescribeAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeAccountConfigurationResponse {
         return try await self.client.execute(operation: "DescribeAccountConfiguration", path: "/prod/accountConfiguration", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

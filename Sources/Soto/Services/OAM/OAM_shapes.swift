@@ -26,7 +26,7 @@ import SotoCore
 extension OAM {
     // MARK: Enums
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsApplicationinsightsApplication = "AWS::ApplicationInsights::Application"
         case awsCloudwatchMetric = "AWS::CloudWatch::Metric"
         case awsLogsLoggroup = "AWS::Logs::LogGroup"

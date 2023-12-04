@@ -26,12 +26,13 @@ import SotoCore
 extension Glue {
     // MARK: Enums
 
-    public enum AdditionalOptionKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum AdditionalOptionKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cacheOption = "performanceTuning.caching"
+        case observationsOption = "observations.scope"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avg = "avg"
         case count = "count"
         case countDistinct = "countDistinct"
@@ -50,7 +51,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum BackfillErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum BackfillErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case encryptedPartitionError = "ENCRYPTED_PARTITION_ERROR"
         case internalError = "INTERNAL_ERROR"
         case invalidPartitionTypeDataError = "INVALID_PARTITION_TYPE_DATA_ERROR"
@@ -59,7 +60,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum BlueprintRunState: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlueprintRunState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case rollingBack = "ROLLING_BACK"
         case running = "RUNNING"
@@ -67,7 +68,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum BlueprintStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlueprintStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case failed = "FAILED"
@@ -75,19 +76,28 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum CatalogEncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CatalogEncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case ssekms = "SSE-KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CloudWatchEncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CloudWatchEncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case ssekms = "SSE-KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnStatisticsType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnStatisticsState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case failed = "FAILED"
+        case running = "RUNNING"
+        case starting = "STARTING"
+        case stopped = "STOPPED"
+        case succeeded = "SUCCEEDED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ColumnStatisticsType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case binary = "BINARY"
         case boolean = "BOOLEAN"
         case date = "DATE"
@@ -98,7 +108,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Comparator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Comparator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         case greaterThan = "GREATER_THAN"
         case greaterThanEquals = "GREATER_THAN_EQUALS"
@@ -107,7 +117,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Compatibility: String, CustomStringConvertible, Codable, Sendable {
+    public enum Compatibility: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backward = "BACKWARD"
         case backwardAll = "BACKWARD_ALL"
         case disabled = "DISABLED"
@@ -119,13 +129,13 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum CompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bzip2 = "bzip2"
         case gzip = "gzip"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectionPropertyKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectionPropertyKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case configFiles = "CONFIG_FILES"
         case connectionUrl = "CONNECTION_URL"
         case connectorClassName = "CONNECTOR_CLASS_NAME"
@@ -168,7 +178,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "CUSTOM"
         case jdbc = "JDBC"
         case kafka = "KAFKA"
@@ -179,7 +189,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum CrawlState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CrawlState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case error = "ERROR"
@@ -189,7 +199,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum CrawlerHistoryState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CrawlerHistoryState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case running = "RUNNING"
@@ -197,92 +207,92 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum CrawlerLineageSettings: String, CustomStringConvertible, Codable, Sendable {
+    public enum CrawlerLineageSettings: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disable = "DISABLE"
         case enable = "ENABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CrawlerState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CrawlerState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ready = "READY"
         case running = "RUNNING"
         case stopping = "STOPPING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CsvHeaderOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum CsvHeaderOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absent = "ABSENT"
         case present = "PRESENT"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum CsvSerdeOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum CsvSerdeOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lazySimpleSerDe = "LazySimpleSerDe"
         case none = "None"
         case openCSVSerDe = "OpenCSVSerDe"
         public var description: String { return self.rawValue }
     }
 
-    public enum DQStopJobOnFailureTiming: String, CustomStringConvertible, Codable, Sendable {
+    public enum DQStopJobOnFailureTiming: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterDataLoad = "AfterDataLoad"
         case immediate = "Immediate"
         public var description: String { return self.rawValue }
     }
 
-    public enum DQTransformOutput: String, CustomStringConvertible, Codable, Sendable {
+    public enum DQTransformOutput: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case evaluationResults = "EvaluationResults"
         case primaryInput = "PrimaryInput"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avro = "AVRO"
         case json = "JSON"
         case protobuf = "PROTOBUF"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataQualityRuleResultStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataQualityRuleResultStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case fail = "FAIL"
         case pass = "PASS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeleteBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeleteBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleteFromDatabase = "DELETE_FROM_DATABASE"
         case deprecateInDatabase = "DEPRECATE_IN_DATABASE"
         case log = "LOG"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeltaTargetCompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeltaTargetCompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case snappy = "snappy"
         case uncompressed = "uncompressed"
         public var description: String { return self.rawValue }
     }
 
-    public enum EnableHybridValues: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnableHybridValues: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `false` = "FALSE"
         case `true` = "TRUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExecutionClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecutionClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case flex = "FLEX"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExistCondition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExistCondition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mustExist = "MUST_EXIST"
         case none = "NONE"
         case notExist = "NOT_EXIST"
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldName: String, CustomStringConvertible, Codable, Sendable {
+    public enum FieldName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case crawlId = "CRAWL_ID"
         case dpuHour = "DPU_HOUR"
         case endTime = "END_TIME"
@@ -291,13 +301,13 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterLogicalOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterLogicalOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case and = "AND"
         case or = "OR"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterOperation: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterOperation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eq = "EQ"
         case gt = "GT"
         case gte = "GTE"
@@ -308,7 +318,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eq = "EQ"
         case ge = "GE"
         case gt = "GT"
@@ -318,13 +328,13 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case columnextracted = "COLUMNEXTRACTED"
         case constant = "CONSTANT"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlueRecordType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlueRecordType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bigdecimal = "BIGDECIMAL"
         case byte = "BYTE"
         case date = "DATE"
@@ -338,7 +348,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum HudiTargetCompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HudiTargetCompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "gzip"
         case lzo = "lzo"
         case snappy = "snappy"
@@ -346,7 +356,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum JDBCConnectionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JDBCConnectionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mysql = "mysql"
         case oracle = "oracle"
         case postgresql = "postgresql"
@@ -355,7 +365,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum JDBCDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JDBCDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `struct` = "STRUCT"
         case array = "ARRAY"
         case bigint = "BIGINT"
@@ -398,19 +408,19 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum JdbcMetadataEntry: String, CustomStringConvertible, Codable, Sendable {
+    public enum JdbcMetadataEntry: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case comments = "COMMENTS"
         case rawtypes = "RAWTYPES"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobBookmarksEncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobBookmarksEncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csekms = "CSE-KMS"
         case disabled = "DISABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobRunState: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobRunState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case failed = "FAILED"
         case running = "RUNNING"
@@ -423,7 +433,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum JoinType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JoinType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equijoin = "equijoin"
         case left = "left"
         case leftAnti = "leftanti"
@@ -433,49 +443,49 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Language: String, CustomStringConvertible, Codable, Sendable {
+    public enum Language: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case python = "PYTHON"
         case scala = "SCALA"
         public var description: String { return self.rawValue }
     }
 
-    public enum LastCrawlStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastCrawlStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case failed = "FAILED"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Logical: String, CustomStringConvertible, Codable, Sendable {
+    public enum Logical: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case and = "AND"
         case any = "ANY"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogicalOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogicalOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MLUserDataEncryptionModeString: String, CustomStringConvertible, Codable, Sendable {
+    public enum MLUserDataEncryptionModeString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case ssekms = "SSE-KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MetadataOperation: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetadataOperation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case create = "CREATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum NodeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NodeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case crawler = "CRAWLER"
         case job = "JOB"
         case trigger = "TRIGGER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParamType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParamType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bool = "bool"
         case complex = "complex"
         case float = "float"
@@ -486,7 +496,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum ParquetCompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParquetCompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "gzip"
         case lzo = "lzo"
         case none = "none"
@@ -495,7 +505,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum PartitionIndexStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PartitionIndexStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -503,7 +513,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Permission: String, CustomStringConvertible, Codable, Sendable {
+    public enum Permission: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case alter = "ALTER"
         case createDatabase = "CREATE_DATABASE"
@@ -516,7 +526,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cellFilterPermission = "CELL_FILTER_PERMISSION"
         case columnPermission = "COLUMN_PERMISSION"
         case nestedCellPermission = "NESTED_CELL_PERMISSION"
@@ -524,7 +534,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum PiiType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PiiType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case columnAudit = "ColumnAudit"
         case columnMasking = "ColumnMasking"
         case rowAudit = "RowAudit"
@@ -532,14 +542,14 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case group = "GROUP"
         case role = "ROLE"
         case user = "USER"
         public var description: String { return self.rawValue }
     }
 
-    public enum QuoteChar: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuoteChar: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "disabled"
         case quillemet = "quillemet"
         case quote = "quote"
@@ -547,60 +557,60 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecrawlBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecrawlBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case crawlEventMode = "CRAWL_EVENT_MODE"
         case crawlEverything = "CRAWL_EVERYTHING"
         case crawlNewFoldersOnly = "CRAWL_NEW_FOLDERS_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum RegistryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RegistryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case federated = "FEDERATED"
         case foreign = "FOREIGN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case archive = "ARCHIVE"
         case file = "FILE"
         case jar = "JAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3EncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3EncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case ssekms = "SSE-KMS"
         case sses3 = "SSE-S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduleState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduleState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notScheduled = "NOT_SCHEDULED"
         case scheduled = "SCHEDULED"
         case transitioning = "TRANSITIONING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SchemaDiffType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchemaDiffType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case syntaxDiff = "SYNTAX_DIFF"
         public var description: String { return self.rawValue }
     }
 
-    public enum SchemaStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchemaStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case deleting = "DELETING"
         case pending = "PENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SchemaVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchemaVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case deleting = "DELETING"
         case failure = "FAILURE"
@@ -608,7 +618,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Separator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Separator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case comma = "comma"
         case ctrla = "ctrla"
         case pipe = "pipe"
@@ -617,7 +627,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum SessionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SessionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case provisioning = "PROVISIONING"
         case ready = "READY"
@@ -627,31 +637,33 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum Sort: String, CustomStringConvertible, Codable, Sendable {
+    public enum Sort: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASC"
         case descending = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortDirectionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortDirectionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceControlAuthStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceControlAuthStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsSecretsManager = "AWS_SECRETS_MANAGER"
         case personalAccessToken = "PERSONAL_ACCESS_TOKEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceControlProvider: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceControlProvider: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsCodeCommit = "AWS_CODE_COMMIT"
+        case bitbucket = "BITBUCKET"
         case github = "GITHUB"
+        case gitlab = "GITLAB"
         public var description: String { return self.rawValue }
     }
 
-    public enum StartingPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum StartingPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case earliest = "earliest"
         case latest = "latest"
         case timestamp = "timestamp"
@@ -659,7 +671,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum StatementState: String, CustomStringConvertible, Codable, Sendable {
+    public enum StatementState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
@@ -669,7 +681,20 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableOptimizerEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case completed = "completed"
+        case failed = "failed"
+        case inProgress = "in_progress"
+        case starting = "starting"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TableOptimizerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case compaction = "compaction"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TargetFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avro = "avro"
         case csv = "csv"
         case delta = "delta"
@@ -680,14 +705,14 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskRunSortColumnType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskRunSortColumnType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case status = "STATUS"
         case taskRunType = "TASK_RUN_TYPE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskStatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskStatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case running = "RUNNING"
         case starting = "STARTING"
@@ -698,7 +723,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case evaluation = "EVALUATION"
         case exportLabels = "EXPORT_LABELS"
         case findMatches = "FIND_MATCHES"
@@ -707,7 +732,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransformSortColumnType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransformSortColumnType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case lastModified = "LAST_MODIFIED"
         case name = "NAME"
@@ -716,19 +741,19 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransformStatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransformStatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleting = "DELETING"
         case notReady = "NOT_READY"
         case ready = "READY"
         public var description: String { return self.rawValue }
     }
 
-    public enum TransformType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransformType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case findMatches = "FIND_MATCHES"
         public var description: String { return self.rawValue }
     }
 
-    public enum TriggerState: String, CustomStringConvertible, Codable, Sendable {
+    public enum TriggerState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activated = "ACTIVATED"
         case activating = "ACTIVATING"
         case created = "CREATED"
@@ -740,7 +765,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum TriggerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TriggerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conditional = "CONDITIONAL"
         case event = "EVENT"
         case onDemand = "ON_DEMAND"
@@ -748,25 +773,25 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum UnionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case distinct = "DISTINCT"
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case log = "LOG"
         case updateInDatabase = "UPDATE_IN_DATABASE"
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateCatalogBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateCatalogBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case log = "LOG"
         case updateInDatabase = "UPDATE_IN_DATABASE"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case g025X = "G.025X"
         case g1X = "G.1X"
         case g2X = "G.2X"
@@ -777,7 +802,7 @@ extension Glue {
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowRunStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowRunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case error = "ERROR"
         case running = "RUNNING"
@@ -1831,6 +1856,104 @@ extension Glue {
         }
     }
 
+    public struct BatchGetTableOptimizerEntry: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String?
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String?
+        /// The name of the table.
+        public let tableName: String?
+        /// The type of table optimizer.
+        public let type: TableOptimizerType?
+
+        public init(catalogId: String? = nil, databaseName: String? = nil, tableName: String? = nil, type: TableOptimizerType? = nil) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "catalogId"
+            case databaseName = "databaseName"
+            case tableName = "tableName"
+            case type = "type"
+        }
+    }
+
+    public struct BatchGetTableOptimizerError: AWSDecodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String?
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String?
+        /// An ErrorDetail object containing code and message details about the error.
+        public let error: ErrorDetail?
+        /// The name of the table.
+        public let tableName: String?
+        /// The type of table optimizer.
+        public let type: TableOptimizerType?
+
+        public init(catalogId: String? = nil, databaseName: String? = nil, error: ErrorDetail? = nil, tableName: String? = nil, type: TableOptimizerType? = nil) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.error = error
+            self.tableName = tableName
+            self.type = type
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "catalogId"
+            case databaseName = "databaseName"
+            case error = "error"
+            case tableName = "tableName"
+            case type = "type"
+        }
+    }
+
+    public struct BatchGetTableOptimizerRequest: AWSEncodableShape {
+        /// A list of BatchGetTableOptimizerEntry objects specifying the table optimizers to retrieve.
+        public let entries: [BatchGetTableOptimizerEntry]
+
+        public init(entries: [BatchGetTableOptimizerEntry]) {
+            self.entries = entries
+        }
+
+        public func validate(name: String) throws {
+            try self.entries.forEach {
+                try $0.validate(name: "\(name).entries[]")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case entries = "Entries"
+        }
+    }
+
+    public struct BatchGetTableOptimizerResponse: AWSDecodableShape {
+        /// A list of errors from the operation.
+        public let failures: [BatchGetTableOptimizerError]?
+        /// A list of BatchTableOptimizer objects.
+        public let tableOptimizers: [BatchTableOptimizer]?
+
+        public init(failures: [BatchGetTableOptimizerError]? = nil, tableOptimizers: [BatchTableOptimizer]? = nil) {
+            self.failures = failures
+            self.tableOptimizers = tableOptimizers
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case failures = "Failures"
+            case tableOptimizers = "TableOptimizers"
+        }
+    }
+
     public struct BatchGetTriggersRequest: AWSEncodableShape {
         /// A list of trigger names, which may be the names returned from the ListTriggers operation.
         public let triggerNames: [String]
@@ -1995,6 +2118,31 @@ extension Glue {
         private enum CodingKeys: String, CodingKey {
             case jobName = "JobName"
             case jobRunId = "JobRunId"
+        }
+    }
+
+    public struct BatchTableOptimizer: AWSDecodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String?
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String?
+        /// The name of the table.
+        public let tableName: String?
+        /// A TableOptimizer object that contains details on the configuration and last run of a table optimzer.
+        public let tableOptimizer: TableOptimizer?
+
+        public init(catalogId: String? = nil, databaseName: String? = nil, tableName: String? = nil, tableOptimizer: TableOptimizer? = nil) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.tableOptimizer = tableOptimizer
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "catalogId"
+            case databaseName = "databaseName"
+            case tableName = "tableName"
+            case tableOptimizer = "tableOptimizer"
         }
     }
 
@@ -2808,6 +2956,10 @@ extension Glue {
         public let catalogSource: CatalogSource?
         /// Specifies a target that uses a Glue Data Catalog table.
         public let catalogTarget: BasicCatalogTarget?
+        /// Specifies a source generated with standard connection options.
+        public let connectorDataSource: ConnectorDataSource?
+        /// Specifies a target generated with standard connection options.
+        public let connectorDataTarget: ConnectorDataTarget?
         /// Specifies a transform that uses custom code you provide to perform the data transformation. The output is a collection of DynamicFrames.
         public let customCode: CustomCode?
         public let directJDBCSource: DirectJDBCSource?
@@ -2924,7 +3076,7 @@ extension Glue {
         /// Specifies a transform that combines the rows from two or more datasets into a single result.
         public let union: Union?
 
-        public init(aggregate: Aggregate? = nil, amazonRedshiftSource: AmazonRedshiftSource? = nil, amazonRedshiftTarget: AmazonRedshiftTarget? = nil, applyMapping: ApplyMapping? = nil, athenaConnectorSource: AthenaConnectorSource? = nil, catalogDeltaSource: CatalogDeltaSource? = nil, catalogHudiSource: CatalogHudiSource? = nil, catalogKafkaSource: CatalogKafkaSource? = nil, catalogKinesisSource: CatalogKinesisSource? = nil, catalogSource: CatalogSource? = nil, catalogTarget: BasicCatalogTarget? = nil, customCode: CustomCode? = nil, directJDBCSource: DirectJDBCSource? = nil, directKafkaSource: DirectKafkaSource? = nil, directKinesisSource: DirectKinesisSource? = nil, dropDuplicates: DropDuplicates? = nil, dropFields: DropFields? = nil, dropNullFields: DropNullFields? = nil, dynamicTransform: DynamicTransform? = nil, dynamoDBCatalogSource: DynamoDBCatalogSource? = nil, evaluateDataQuality: EvaluateDataQuality? = nil, evaluateDataQualityMultiFrame: EvaluateDataQualityMultiFrame? = nil, fillMissingValues: FillMissingValues? = nil, filter: Filter? = nil, governedCatalogSource: GovernedCatalogSource? = nil, governedCatalogTarget: GovernedCatalogTarget? = nil, jdbcConnectorSource: JDBCConnectorSource? = nil, jdbcConnectorTarget: JDBCConnectorTarget? = nil, join: Join? = nil, merge: Merge? = nil, microsoftSQLServerCatalogSource: MicrosoftSQLServerCatalogSource? = nil, microsoftSQLServerCatalogTarget: MicrosoftSQLServerCatalogTarget? = nil, mySQLCatalogSource: MySQLCatalogSource? = nil, mySQLCatalogTarget: MySQLCatalogTarget? = nil, oracleSQLCatalogSource: OracleSQLCatalogSource? = nil, oracleSQLCatalogTarget: OracleSQLCatalogTarget? = nil, piiDetection: PIIDetection? = nil, postgreSQLCatalogSource: PostgreSQLCatalogSource? = nil, postgreSQLCatalogTarget: PostgreSQLCatalogTarget? = nil, recipe: Recipe? = nil, redshiftSource: RedshiftSource? = nil, redshiftTarget: RedshiftTarget? = nil, relationalCatalogSource: RelationalCatalogSource? = nil, renameField: RenameField? = nil, s3CatalogDeltaSource: S3CatalogDeltaSource? = nil, s3CatalogHudiSource: S3CatalogHudiSource? = nil, s3CatalogSource: S3CatalogSource? = nil, s3CatalogTarget: S3CatalogTarget? = nil, s3CsvSource: S3CsvSource? = nil, s3DeltaCatalogTarget: S3DeltaCatalogTarget? = nil, s3DeltaDirectTarget: S3DeltaDirectTarget? = nil, s3DeltaSource: S3DeltaSource? = nil, s3DirectTarget: S3DirectTarget? = nil, s3GlueParquetTarget: S3GlueParquetTarget? = nil, s3HudiCatalogTarget: S3HudiCatalogTarget? = nil, s3HudiDirectTarget: S3HudiDirectTarget? = nil, s3HudiSource: S3HudiSource? = nil, s3JsonSource: S3JsonSource? = nil, s3ParquetSource: S3ParquetSource? = nil, selectFields: SelectFields? = nil, selectFromCollection: SelectFromCollection? = nil, snowflakeSource: SnowflakeSource? = nil, snowflakeTarget: SnowflakeTarget? = nil, sparkConnectorSource: SparkConnectorSource? = nil, sparkConnectorTarget: SparkConnectorTarget? = nil, sparkSQL: SparkSQL? = nil, spigot: Spigot? = nil, splitFields: SplitFields? = nil, union: Union? = nil) {
+        public init(aggregate: Aggregate? = nil, amazonRedshiftSource: AmazonRedshiftSource? = nil, amazonRedshiftTarget: AmazonRedshiftTarget? = nil, applyMapping: ApplyMapping? = nil, athenaConnectorSource: AthenaConnectorSource? = nil, catalogDeltaSource: CatalogDeltaSource? = nil, catalogHudiSource: CatalogHudiSource? = nil, catalogKafkaSource: CatalogKafkaSource? = nil, catalogKinesisSource: CatalogKinesisSource? = nil, catalogSource: CatalogSource? = nil, catalogTarget: BasicCatalogTarget? = nil, connectorDataSource: ConnectorDataSource? = nil, connectorDataTarget: ConnectorDataTarget? = nil, customCode: CustomCode? = nil, directJDBCSource: DirectJDBCSource? = nil, directKafkaSource: DirectKafkaSource? = nil, directKinesisSource: DirectKinesisSource? = nil, dropDuplicates: DropDuplicates? = nil, dropFields: DropFields? = nil, dropNullFields: DropNullFields? = nil, dynamicTransform: DynamicTransform? = nil, dynamoDBCatalogSource: DynamoDBCatalogSource? = nil, evaluateDataQuality: EvaluateDataQuality? = nil, evaluateDataQualityMultiFrame: EvaluateDataQualityMultiFrame? = nil, fillMissingValues: FillMissingValues? = nil, filter: Filter? = nil, governedCatalogSource: GovernedCatalogSource? = nil, governedCatalogTarget: GovernedCatalogTarget? = nil, jdbcConnectorSource: JDBCConnectorSource? = nil, jdbcConnectorTarget: JDBCConnectorTarget? = nil, join: Join? = nil, merge: Merge? = nil, microsoftSQLServerCatalogSource: MicrosoftSQLServerCatalogSource? = nil, microsoftSQLServerCatalogTarget: MicrosoftSQLServerCatalogTarget? = nil, mySQLCatalogSource: MySQLCatalogSource? = nil, mySQLCatalogTarget: MySQLCatalogTarget? = nil, oracleSQLCatalogSource: OracleSQLCatalogSource? = nil, oracleSQLCatalogTarget: OracleSQLCatalogTarget? = nil, piiDetection: PIIDetection? = nil, postgreSQLCatalogSource: PostgreSQLCatalogSource? = nil, postgreSQLCatalogTarget: PostgreSQLCatalogTarget? = nil, recipe: Recipe? = nil, redshiftSource: RedshiftSource? = nil, redshiftTarget: RedshiftTarget? = nil, relationalCatalogSource: RelationalCatalogSource? = nil, renameField: RenameField? = nil, s3CatalogDeltaSource: S3CatalogDeltaSource? = nil, s3CatalogHudiSource: S3CatalogHudiSource? = nil, s3CatalogSource: S3CatalogSource? = nil, s3CatalogTarget: S3CatalogTarget? = nil, s3CsvSource: S3CsvSource? = nil, s3DeltaCatalogTarget: S3DeltaCatalogTarget? = nil, s3DeltaDirectTarget: S3DeltaDirectTarget? = nil, s3DeltaSource: S3DeltaSource? = nil, s3DirectTarget: S3DirectTarget? = nil, s3GlueParquetTarget: S3GlueParquetTarget? = nil, s3HudiCatalogTarget: S3HudiCatalogTarget? = nil, s3HudiDirectTarget: S3HudiDirectTarget? = nil, s3HudiSource: S3HudiSource? = nil, s3JsonSource: S3JsonSource? = nil, s3ParquetSource: S3ParquetSource? = nil, selectFields: SelectFields? = nil, selectFromCollection: SelectFromCollection? = nil, snowflakeSource: SnowflakeSource? = nil, snowflakeTarget: SnowflakeTarget? = nil, sparkConnectorSource: SparkConnectorSource? = nil, sparkConnectorTarget: SparkConnectorTarget? = nil, sparkSQL: SparkSQL? = nil, spigot: Spigot? = nil, splitFields: SplitFields? = nil, union: Union? = nil) {
             self.aggregate = aggregate
             self.amazonRedshiftSource = amazonRedshiftSource
             self.amazonRedshiftTarget = amazonRedshiftTarget
@@ -2936,6 +3088,8 @@ extension Glue {
             self.catalogKinesisSource = catalogKinesisSource
             self.catalogSource = catalogSource
             self.catalogTarget = catalogTarget
+            self.connectorDataSource = connectorDataSource
+            self.connectorDataTarget = connectorDataTarget
             self.customCode = customCode
             self.directJDBCSource = directJDBCSource
             self.directKafkaSource = directKafkaSource
@@ -3008,6 +3162,8 @@ extension Glue {
             try self.catalogKinesisSource?.validate(name: "\(name).catalogKinesisSource")
             try self.catalogSource?.validate(name: "\(name).catalogSource")
             try self.catalogTarget?.validate(name: "\(name).catalogTarget")
+            try self.connectorDataSource?.validate(name: "\(name).connectorDataSource")
+            try self.connectorDataTarget?.validate(name: "\(name).connectorDataTarget")
             try self.customCode?.validate(name: "\(name).customCode")
             try self.directJDBCSource?.validate(name: "\(name).directJDBCSource")
             try self.directKafkaSource?.validate(name: "\(name).directKafkaSource")
@@ -3080,6 +3236,8 @@ extension Glue {
             case catalogKinesisSource = "CatalogKinesisSource"
             case catalogSource = "CatalogSource"
             case catalogTarget = "CatalogTarget"
+            case connectorDataSource = "ConnectorDataSource"
+            case connectorDataTarget = "ConnectorDataTarget"
             case customCode = "CustomCode"
             case directJDBCSource = "DirectJDBCSource"
             case directKafkaSource = "DirectKafkaSource"
@@ -3418,6 +3576,87 @@ extension Glue {
         }
     }
 
+    public struct ColumnStatisticsTaskRun: AWSDecodableShape {
+        /// The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.
+        public let catalogID: String?
+        /// A list of the column names. If none is supplied, all column names for the table will be used by default.
+        public let columnNameList: [String]?
+        /// The identifier for the particular column statistics task run.
+        public let columnStatisticsTaskRunId: String?
+        /// The time that this task was created.
+        public let creationTime: Date?
+        /// The Amazon Web Services account ID.
+        public let customerId: String?
+        /// The database where the table resides.
+        public let databaseName: String?
+        /// The calculated DPU usage in seconds for all autoscaled workers.
+        public let dpuSeconds: Double?
+        /// The end time of the task.
+        public let endTime: Date?
+        /// The error message for the job.
+        public let errorMessage: String?
+        /// The last point in time when this task was modified.
+        public let lastUpdated: Date?
+        /// The number of workers used to generate column statistics. The job is preconfigured to autoscale up to 25 instances.
+        public let numberOfWorkers: Int?
+        /// The IAM role that the service assumes to generate statistics.
+        public let role: String?
+        /// The percentage of rows used to generate statistics. If none is supplied, the entire table will be used to generate stats.
+        public let sampleSize: Double?
+        /// Name of the security configuration that is used to encrypt CloudWatch logs for the column stats task run.
+        public let securityConfiguration: String?
+        /// The start time of the task.
+        public let startTime: Date?
+        /// The status of the task run.
+        public let status: ColumnStatisticsState?
+        /// The name of the table for which column statistics is generated.
+        public let tableName: String?
+        /// The type of workers being used for generating stats. The default is g.1x.
+        public let workerType: String?
+
+        public init(catalogID: String? = nil, columnNameList: [String]? = nil, columnStatisticsTaskRunId: String? = nil, creationTime: Date? = nil, customerId: String? = nil, databaseName: String? = nil, dpuSeconds: Double? = nil, endTime: Date? = nil, errorMessage: String? = nil, lastUpdated: Date? = nil, numberOfWorkers: Int? = nil, role: String? = nil, sampleSize: Double? = nil, securityConfiguration: String? = nil, startTime: Date? = nil, status: ColumnStatisticsState? = nil, tableName: String? = nil, workerType: String? = nil) {
+            self.catalogID = catalogID
+            self.columnNameList = columnNameList
+            self.columnStatisticsTaskRunId = columnStatisticsTaskRunId
+            self.creationTime = creationTime
+            self.customerId = customerId
+            self.databaseName = databaseName
+            self.dpuSeconds = dpuSeconds
+            self.endTime = endTime
+            self.errorMessage = errorMessage
+            self.lastUpdated = lastUpdated
+            self.numberOfWorkers = numberOfWorkers
+            self.role = role
+            self.sampleSize = sampleSize
+            self.securityConfiguration = securityConfiguration
+            self.startTime = startTime
+            self.status = status
+            self.tableName = tableName
+            self.workerType = workerType
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogID = "CatalogID"
+            case columnNameList = "ColumnNameList"
+            case columnStatisticsTaskRunId = "ColumnStatisticsTaskRunId"
+            case creationTime = "CreationTime"
+            case customerId = "CustomerId"
+            case databaseName = "DatabaseName"
+            case dpuSeconds = "DPUSeconds"
+            case endTime = "EndTime"
+            case errorMessage = "ErrorMessage"
+            case lastUpdated = "LastUpdated"
+            case numberOfWorkers = "NumberOfWorkers"
+            case role = "Role"
+            case sampleSize = "SampleSize"
+            case securityConfiguration = "SecurityConfiguration"
+            case startTime = "StartTime"
+            case status = "Status"
+            case tableName = "TableName"
+            case workerType = "WorkerType"
+        }
+    }
+
     public struct Condition: AWSEncodableShape & AWSDecodableShape {
         /// The name of the crawler to which this condition applies.
         public let crawlerName: String?
@@ -3611,6 +3850,76 @@ extension Glue {
 
         private enum CodingKeys: String, CodingKey {
             case connections = "Connections"
+        }
+    }
+
+    public struct ConnectorDataSource: AWSEncodableShape & AWSDecodableShape {
+        /// The connectionType, as provided to the underlying Glue library. This node type supports
+        /// the following connection types:     opensearch     azuresql     azurecosmos     bigquery     saphana     teradata     vertica
+        public let connectionType: String
+        /// A map specifying connection options for the node. You can find standard connection options for the corresponding connection type in the  Connection parameters section of the Glue documentation.
+        public let data: [String: String]
+        /// The name of this source node.
+        public let name: String
+        /// Specifies the data schema for this source.
+        public let outputSchemas: [GlueSchema]?
+
+        public init(connectionType: String, data: [String: String], name: String, outputSchemas: [GlueSchema]? = nil) {
+            self.connectionType = connectionType
+            self.data = data
+            self.name = name
+            self.outputSchemas = outputSchemas
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.connectionType, name: "connectionType", parent: name, pattern: "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\S\\r\\n\"'])*$")
+            try self.validate(self.name, name: "name", parent: name, pattern: "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\r\\n])*$")
+            try self.outputSchemas?.forEach {
+                try $0.validate(name: "\(name).outputSchemas[]")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectionType = "ConnectionType"
+            case data = "Data"
+            case name = "Name"
+            case outputSchemas = "OutputSchemas"
+        }
+    }
+
+    public struct ConnectorDataTarget: AWSEncodableShape & AWSDecodableShape {
+        /// The connectionType, as provided to the underlying Glue library. This node type supports
+        /// the following connection types:     opensearch     azuresql     azurecosmos     bigquery     saphana     teradata     vertica
+        public let connectionType: String
+        /// A map specifying connection options for the node. You can find standard connection options for the  corresponding connection type in the   Connection parameters section of the Glue documentation.
+        public let data: [String: String]
+        /// The nodes that are inputs to the data target.
+        public let inputs: [String]?
+        /// The name of this target node.
+        public let name: String
+
+        public init(connectionType: String, data: [String: String], inputs: [String]? = nil, name: String) {
+            self.connectionType = connectionType
+            self.data = data
+            self.inputs = inputs
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.connectionType, name: "connectionType", parent: name, pattern: "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\S\\r\\n\"'])*$")
+            try self.inputs?.forEach {
+                try validate($0, name: "inputs[]", parent: name, pattern: "^[A-Za-z0-9_-]*$")
+            }
+            try self.validate(self.inputs, name: "inputs", parent: name, max: 1)
+            try self.validate(self.inputs, name: "inputs", parent: name, min: 1)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^([\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF]|[^\\r\\n])*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectionType = "ConnectionType"
+            case data = "Data"
+            case inputs = "Inputs"
+            case name = "Name"
         }
     }
 
@@ -5331,6 +5640,52 @@ extension Glue {
         }
     }
 
+    public struct CreateTableOptimizerRequest: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String
+        /// The name of the table.
+        public let tableName: String
+        /// A TableOptimizerConfiguration object representing the configuration of a table optimizer.
+        public let tableOptimizerConfiguration: TableOptimizerConfiguration
+        /// The type of table optimizer. Currently, the only valid value is compaction.
+        public let type: TableOptimizerType
+
+        public init(catalogId: String, databaseName: String, tableName: String, tableOptimizerConfiguration: TableOptimizerConfiguration, type: TableOptimizerType) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.tableOptimizerConfiguration = tableOptimizerConfiguration
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.tableOptimizerConfiguration.validate(name: "\(name).tableOptimizerConfiguration")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+            case tableOptimizerConfiguration = "TableOptimizerConfiguration"
+            case type = "Type"
+        }
+    }
+
+    public struct CreateTableOptimizerResponse: AWSDecodableShape {
+        public init() {}
+    }
+
     public struct CreateTableRequest: AWSEncodableShape {
         /// The ID of the Data Catalog in which to create the Table. If none is supplied, the Amazon Web Services account ID is used by default.
         public let catalogId: String?
@@ -5798,6 +6153,31 @@ extension Glue {
         }
     }
 
+    public struct DataQualityAnalyzerResult: AWSDecodableShape {
+        /// A description of the data quality analyzer.
+        public let description: String?
+        /// A map of metrics associated with the evaluation of the analyzer.
+        public let evaluatedMetrics: [String: Double]?
+        /// An evaluation message.
+        public let evaluationMessage: String?
+        /// The name of the data quality analyzer.
+        public let name: String?
+
+        public init(description: String? = nil, evaluatedMetrics: [String: Double]? = nil, evaluationMessage: String? = nil, name: String? = nil) {
+            self.description = description
+            self.evaluatedMetrics = evaluatedMetrics
+            self.evaluationMessage = evaluationMessage
+            self.name = name
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case description = "Description"
+            case evaluatedMetrics = "EvaluatedMetrics"
+            case evaluationMessage = "EvaluationMessage"
+            case name = "Name"
+        }
+    }
+
     public struct DataQualityEvaluationRunAdditionalRunOptions: AWSEncodableShape & AWSDecodableShape {
         /// Whether or not to enable CloudWatch metrics.
         public let cloudWatchMetricsEnabled: Bool?
@@ -5815,7 +6195,51 @@ extension Glue {
         }
     }
 
+    public struct DataQualityMetricValues: AWSDecodableShape {
+        /// The actual value of the data quality metric.
+        public let actualValue: Double?
+        /// The expected value of the data quality metric according to the analysis of historical data.
+        public let expectedValue: Double?
+        /// The lower limit of the data quality metric value according to the analysis of historical data.
+        public let lowerLimit: Double?
+        /// The upper limit of the data quality metric value according to the analysis of historical data.
+        public let upperLimit: Double?
+
+        public init(actualValue: Double? = nil, expectedValue: Double? = nil, lowerLimit: Double? = nil, upperLimit: Double? = nil) {
+            self.actualValue = actualValue
+            self.expectedValue = expectedValue
+            self.lowerLimit = lowerLimit
+            self.upperLimit = upperLimit
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case actualValue = "ActualValue"
+            case expectedValue = "ExpectedValue"
+            case lowerLimit = "LowerLimit"
+            case upperLimit = "UpperLimit"
+        }
+    }
+
+    public struct DataQualityObservation: AWSDecodableShape {
+        /// A description of the data quality observation.
+        public let description: String?
+        /// An object of type MetricBasedObservation representing the observation that is based on evaluated data quality metrics.
+        public let metricBasedObservation: MetricBasedObservation?
+
+        public init(description: String? = nil, metricBasedObservation: MetricBasedObservation? = nil) {
+            self.description = description
+            self.metricBasedObservation = metricBasedObservation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case description = "Description"
+            case metricBasedObservation = "MetricBasedObservation"
+        }
+    }
+
     public struct DataQualityResult: AWSDecodableShape {
+        /// A list of DataQualityAnalyzerResult objects representing the results for each analyzer.
+        public let analyzerResults: [DataQualityAnalyzerResult]?
         /// The date and time when this data quality run completed.
         public let completedOn: Date?
         /// The table associated with the data quality result, if any.
@@ -5826,6 +6250,8 @@ extension Glue {
         public let jobName: String?
         /// The job run ID associated with the data quality result, if any.
         public let jobRunId: String?
+        /// A list of DataQualityObservation objects representing the observations generated after evaluating the rules and analyzers.
+        public let observations: [DataQualityObservation]?
         /// A unique result ID for the data quality result.
         public let resultId: String?
         /// A list of DataQualityRuleResult objects representing the results for each rule.
@@ -5839,12 +6265,14 @@ extension Glue {
         /// The date and time when this data quality run started.
         public let startedOn: Date?
 
-        public init(completedOn: Date? = nil, dataSource: DataSource? = nil, evaluationContext: String? = nil, jobName: String? = nil, jobRunId: String? = nil, resultId: String? = nil, ruleResults: [DataQualityRuleResult]? = nil, rulesetEvaluationRunId: String? = nil, rulesetName: String? = nil, score: Double? = nil, startedOn: Date? = nil) {
+        public init(analyzerResults: [DataQualityAnalyzerResult]? = nil, completedOn: Date? = nil, dataSource: DataSource? = nil, evaluationContext: String? = nil, jobName: String? = nil, jobRunId: String? = nil, observations: [DataQualityObservation]? = nil, resultId: String? = nil, ruleResults: [DataQualityRuleResult]? = nil, rulesetEvaluationRunId: String? = nil, rulesetName: String? = nil, score: Double? = nil, startedOn: Date? = nil) {
+            self.analyzerResults = analyzerResults
             self.completedOn = completedOn
             self.dataSource = dataSource
             self.evaluationContext = evaluationContext
             self.jobName = jobName
             self.jobRunId = jobRunId
+            self.observations = observations
             self.resultId = resultId
             self.ruleResults = ruleResults
             self.rulesetEvaluationRunId = rulesetEvaluationRunId
@@ -5854,11 +6282,13 @@ extension Glue {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case analyzerResults = "AnalyzerResults"
             case completedOn = "CompletedOn"
             case dataSource = "DataSource"
             case evaluationContext = "EvaluationContext"
             case jobName = "JobName"
             case jobRunId = "JobRunId"
+            case observations = "Observations"
             case resultId = "ResultId"
             case ruleResults = "RuleResults"
             case rulesetEvaluationRunId = "RulesetEvaluationRunId"
@@ -7094,6 +7524,47 @@ extension Glue {
         private enum CodingKeys: String, CodingKey {
             case id = "Id"
         }
+    }
+
+    public struct DeleteTableOptimizerRequest: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String
+        /// The name of the table.
+        public let tableName: String
+        /// The type of table optimizer.
+        public let type: TableOptimizerType
+
+        public init(catalogId: String, databaseName: String, tableName: String, type: TableOptimizerType) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+            case type = "Type"
+        }
+    }
+
+    public struct DeleteTableOptimizerResponse: AWSDecodableShape {
+        public init() {}
     }
 
     public struct DeleteTableRequest: AWSEncodableShape {
@@ -8698,6 +9169,88 @@ extension Glue {
         }
     }
 
+    public struct GetColumnStatisticsTaskRunRequest: AWSEncodableShape {
+        /// The identifier for the particular column statistics task run.
+        public let columnStatisticsTaskRunId: String
+
+        public init(columnStatisticsTaskRunId: String) {
+            self.columnStatisticsTaskRunId = columnStatisticsTaskRunId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.columnStatisticsTaskRunId, name: "columnStatisticsTaskRunId", parent: name, max: 255)
+            try self.validate(self.columnStatisticsTaskRunId, name: "columnStatisticsTaskRunId", parent: name, min: 1)
+            try self.validate(self.columnStatisticsTaskRunId, name: "columnStatisticsTaskRunId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columnStatisticsTaskRunId = "ColumnStatisticsTaskRunId"
+        }
+    }
+
+    public struct GetColumnStatisticsTaskRunResponse: AWSDecodableShape {
+        /// A ColumnStatisticsTaskRun object representing the details of the column stats run.
+        public let columnStatisticsTaskRun: ColumnStatisticsTaskRun?
+
+        public init(columnStatisticsTaskRun: ColumnStatisticsTaskRun? = nil) {
+            self.columnStatisticsTaskRun = columnStatisticsTaskRun
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columnStatisticsTaskRun = "ColumnStatisticsTaskRun"
+        }
+    }
+
+    public struct GetColumnStatisticsTaskRunsRequest: AWSEncodableShape {
+        /// The name of the database where the table resides.
+        public let databaseName: String
+        /// The maximum size of the response.
+        public let maxResults: Int?
+        /// A continuation token, if this is a continuation call.
+        public let nextToken: String?
+        /// The name of the table.
+        public let tableName: String
+
+        public init(databaseName: String, maxResults: Int? = nil, nextToken: String? = nil, tableName: String) {
+            self.databaseName = databaseName
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.tableName = tableName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case databaseName = "DatabaseName"
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+            case tableName = "TableName"
+        }
+    }
+
+    public struct GetColumnStatisticsTaskRunsResponse: AWSDecodableShape {
+        /// A list of column statistics task runs.
+        public let columnStatisticsTaskRuns: [ColumnStatisticsTaskRun]?
+        /// A continuation token, if not all task runs have yet been returned.
+        public let nextToken: String?
+
+        public init(columnStatisticsTaskRuns: [ColumnStatisticsTaskRun]? = nil, nextToken: String? = nil) {
+            self.columnStatisticsTaskRuns = columnStatisticsTaskRuns
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columnStatisticsTaskRuns = "ColumnStatisticsTaskRuns"
+            case nextToken = "NextToken"
+        }
+    }
+
     public struct GetConnectionRequest: AWSEncodableShape {
         /// The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.
         public let catalogId: String?
@@ -9034,6 +9587,8 @@ extension Glue {
     }
 
     public struct GetDataQualityResultResponse: AWSDecodableShape {
+        /// A list of DataQualityAnalyzerResult objects representing the results for each analyzer.
+        public let analyzerResults: [DataQualityAnalyzerResult]?
         /// The date and time when the run for this data quality result was completed.
         public let completedOn: Date?
         /// The table associated with the data quality result, if any.
@@ -9044,6 +9599,8 @@ extension Glue {
         public let jobName: String?
         /// The job run ID associated with the data quality result, if any.
         public let jobRunId: String?
+        /// A list of DataQualityObservation objects representing the observations generated after evaluating the rules and analyzers.
+        public let observations: [DataQualityObservation]?
         /// A unique result ID for the data quality result.
         public let resultId: String?
         /// A list of DataQualityRuleResult objects representing the results for each rule.
@@ -9057,12 +9614,14 @@ extension Glue {
         /// The date and time when the run for this data quality result started.
         public let startedOn: Date?
 
-        public init(completedOn: Date? = nil, dataSource: DataSource? = nil, evaluationContext: String? = nil, jobName: String? = nil, jobRunId: String? = nil, resultId: String? = nil, ruleResults: [DataQualityRuleResult]? = nil, rulesetEvaluationRunId: String? = nil, rulesetName: String? = nil, score: Double? = nil, startedOn: Date? = nil) {
+        public init(analyzerResults: [DataQualityAnalyzerResult]? = nil, completedOn: Date? = nil, dataSource: DataSource? = nil, evaluationContext: String? = nil, jobName: String? = nil, jobRunId: String? = nil, observations: [DataQualityObservation]? = nil, resultId: String? = nil, ruleResults: [DataQualityRuleResult]? = nil, rulesetEvaluationRunId: String? = nil, rulesetName: String? = nil, score: Double? = nil, startedOn: Date? = nil) {
+            self.analyzerResults = analyzerResults
             self.completedOn = completedOn
             self.dataSource = dataSource
             self.evaluationContext = evaluationContext
             self.jobName = jobName
             self.jobRunId = jobRunId
+            self.observations = observations
             self.resultId = resultId
             self.ruleResults = ruleResults
             self.rulesetEvaluationRunId = rulesetEvaluationRunId
@@ -9072,11 +9631,13 @@ extension Glue {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case analyzerResults = "AnalyzerResults"
             case completedOn = "CompletedOn"
             case dataSource = "DataSource"
             case evaluationContext = "EvaluationContext"
             case jobName = "JobName"
             case jobRunId = "JobRunId"
+            case observations = "Observations"
             case resultId = "ResultId"
             case ruleResults = "RuleResults"
             case rulesetEvaluationRunId = "RulesetEvaluationRunId"
@@ -10782,6 +11343,68 @@ extension Glue {
 
         private enum CodingKeys: String, CodingKey {
             case statement = "Statement"
+        }
+    }
+
+    public struct GetTableOptimizerRequest: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String
+        /// The name of the table.
+        public let tableName: String
+        /// The type of table optimizer.
+        public let type: TableOptimizerType
+
+        public init(catalogId: String, databaseName: String, tableName: String, type: TableOptimizerType) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+            case type = "Type"
+        }
+    }
+
+    public struct GetTableOptimizerResponse: AWSDecodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String?
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String?
+        /// The name of the table.
+        public let tableName: String?
+        /// The optimizer associated with the specified table.
+        public let tableOptimizer: TableOptimizer?
+
+        public init(catalogId: String? = nil, databaseName: String? = nil, tableName: String? = nil, tableOptimizer: TableOptimizer? = nil) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.tableOptimizer = tableOptimizer
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+            case tableOptimizer = "TableOptimizer"
         }
     }
 
@@ -13156,6 +13779,45 @@ extension Glue {
         }
     }
 
+    public struct ListColumnStatisticsTaskRunsRequest: AWSEncodableShape {
+        /// The maximum size of the response.
+        public let maxResults: Int?
+        /// A continuation token, if this is a continuation call.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct ListColumnStatisticsTaskRunsResponse: AWSDecodableShape {
+        /// A list of column statistics task run IDs.
+        public let columnStatisticsTaskRunIds: [String]?
+        /// A continuation token, if not all task run IDs have yet been returned.
+        public let nextToken: String?
+
+        public init(columnStatisticsTaskRunIds: [String]? = nil, nextToken: String? = nil) {
+            self.columnStatisticsTaskRunIds = columnStatisticsTaskRunIds
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columnStatisticsTaskRunIds = "ColumnStatisticsTaskRunIds"
+            case nextToken = "NextToken"
+        }
+    }
+
     public struct ListCrawlersRequest: AWSEncodableShape {
         /// The maximum size of a list to return.
         public let maxResults: Int?
@@ -13882,6 +14544,80 @@ extension Glue {
         }
     }
 
+    public struct ListTableOptimizerRunsRequest: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String
+        /// The maximum number of optimizer runs to return on each call.
+        public let maxResults: Int?
+        /// A continuation token, if this is a continuation call.
+        public let nextToken: String?
+        /// The name of the table.
+        public let tableName: String
+        /// The type of table optimizer. Currently, the only valid value is compaction.
+        public let type: TableOptimizerType
+
+        public init(catalogId: String, databaseName: String, maxResults: Int? = nil, nextToken: String? = nil, tableName: String, type: TableOptimizerType) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.tableName = tableName
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+            case tableName = "TableName"
+            case type = "Type"
+        }
+    }
+
+    public struct ListTableOptimizerRunsResponse: AWSDecodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String?
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String?
+        /// A continuation token for paginating the returned list of optimizer runs, returned if the current segment of the list is not the last.
+        public let nextToken: String?
+        /// The name of the table.
+        public let tableName: String?
+        /// A list of the optimizer runs associated with a table.
+        public let tableOptimizerRuns: [TableOptimizerRun]?
+
+        public init(catalogId: String? = nil, databaseName: String? = nil, nextToken: String? = nil, tableName: String? = nil, tableOptimizerRuns: [TableOptimizerRun]? = nil) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.nextToken = nextToken
+            self.tableName = tableName
+            self.tableOptimizerRuns = tableOptimizerRuns
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case nextToken = "NextToken"
+            case tableName = "TableName"
+            case tableOptimizerRuns = "TableOptimizerRuns"
+        }
+    }
+
     public struct ListTriggersRequest: AWSEncodableShape {
         ///  The name of the job for which to retrieve triggers. The trigger that can start this job is returned. If there is no such trigger, all triggers are returned.
         public let dependentJobName: String?
@@ -14301,6 +15037,27 @@ extension Glue {
         private enum CodingKeys: String, CodingKey {
             case metadataKey = "MetadataKey"
             case metadataValue = "MetadataValue"
+        }
+    }
+
+    public struct MetricBasedObservation: AWSDecodableShape {
+        /// The name of the data quality metric used for generating the observation.
+        public let metricName: String?
+        /// An object of type DataQualityMetricValues representing the analysis of the data quality metric value.
+        public let metricValues: DataQualityMetricValues?
+        /// A list of new data quality rules generated as part of the observation based on the data quality metric value.
+        public let newRules: [String]?
+
+        public init(metricName: String? = nil, metricValues: DataQualityMetricValues? = nil, newRules: [String]? = nil) {
+            self.metricName = metricName
+            self.metricValues = metricValues
+            self.newRules = newRules
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case metricName = "MetricName"
+            case metricValues = "MetricValues"
+            case newRules = "NewRules"
         }
     }
 
@@ -15883,6 +16640,31 @@ extension Glue {
         }
     }
 
+    public struct RunMetrics: AWSDecodableShape {
+        /// The duration of the job in hours.
+        public let jobDurationInHour: String?
+        /// The number of bytes removed by the compaction job run.
+        public let numberOfBytesCompacted: String?
+        /// The number of DPU hours consumed by the job.
+        public let numberOfDpus: String?
+        /// The number of files removed by the compaction job run.
+        public let numberOfFilesCompacted: String?
+
+        public init(jobDurationInHour: String? = nil, numberOfBytesCompacted: String? = nil, numberOfDpus: String? = nil, numberOfFilesCompacted: String? = nil) {
+            self.jobDurationInHour = jobDurationInHour
+            self.numberOfBytesCompacted = numberOfBytesCompacted
+            self.numberOfDpus = numberOfDpus
+            self.numberOfFilesCompacted = numberOfFilesCompacted
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case jobDurationInHour = "JobDurationInHour"
+            case numberOfBytesCompacted = "NumberOfBytesCompacted"
+            case numberOfDpus = "NumberOfDpus"
+            case numberOfFilesCompacted = "NumberOfFilesCompacted"
+        }
+    }
+
     public struct RunStatementRequest: AWSEncodableShape {
         /// The statement code to be run.
         public let code: String
@@ -17167,7 +17949,7 @@ extension Glue {
         /// The total number of segments.
         public let totalSegments: Int
 
-        public init(segmentNumber: Int = 0, totalSegments: Int = 0) {
+        public init(segmentNumber: Int = 0, totalSegments: Int) {
             self.segmentNumber = segmentNumber
             self.totalSegments = totalSegments
         }
@@ -17957,6 +18739,81 @@ extension Glue {
         }
     }
 
+    public struct StartColumnStatisticsTaskRunRequest: AWSEncodableShape {
+        /// The ID of the Data Catalog where the table reside. If none is supplied, the Amazon Web Services account ID is used by default.
+        public let catalogID: String?
+        /// A list of the column names to generate statistics. If none is supplied, all column names for the table will be used by default.
+        public let columnNameList: [String]?
+        /// The name of the database where the table resides.
+        public let databaseName: String
+        /// The IAM role that the service assumes to generate statistics.
+        public let role: String
+        /// The percentage of rows used to generate statistics. If none is supplied, the entire table will be used to generate stats.
+        public let sampleSize: Double?
+        /// Name of the security configuration that is used to encrypt CloudWatch logs for the column stats task run.
+        public let securityConfiguration: String?
+        /// The name of the table to generate statistics.
+        public let tableName: String
+
+        public init(catalogID: String? = nil, columnNameList: [String]? = nil, databaseName: String, role: String, sampleSize: Double? = nil, securityConfiguration: String? = nil, tableName: String) {
+            self.catalogID = catalogID
+            self.columnNameList = columnNameList
+            self.databaseName = databaseName
+            self.role = role
+            self.sampleSize = sampleSize
+            self.securityConfiguration = securityConfiguration
+            self.tableName = tableName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogID, name: "catalogID", parent: name, max: 255)
+            try self.validate(self.catalogID, name: "catalogID", parent: name, min: 1)
+            try self.validate(self.catalogID, name: "catalogID", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.columnNameList?.forEach {
+                try validate($0, name: "columnNameList[]", parent: name, max: 255)
+                try validate($0, name: "columnNameList[]", parent: name, min: 1)
+                try validate($0, name: "columnNameList[]", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            }
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.role, name: "role", parent: name, max: 255)
+            try self.validate(self.role, name: "role", parent: name, min: 1)
+            try self.validate(self.role, name: "role", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.sampleSize, name: "sampleSize", parent: name, max: 100.0)
+            try self.validate(self.sampleSize, name: "sampleSize", parent: name, min: 0.0)
+            try self.validate(self.securityConfiguration, name: "securityConfiguration", parent: name, max: 255)
+            try self.validate(self.securityConfiguration, name: "securityConfiguration", parent: name, min: 1)
+            try self.validate(self.securityConfiguration, name: "securityConfiguration", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogID = "CatalogID"
+            case columnNameList = "ColumnNameList"
+            case databaseName = "DatabaseName"
+            case role = "Role"
+            case sampleSize = "SampleSize"
+            case securityConfiguration = "SecurityConfiguration"
+            case tableName = "TableName"
+        }
+    }
+
+    public struct StartColumnStatisticsTaskRunResponse: AWSDecodableShape {
+        /// The identifier for the column statistics task run.
+        public let columnStatisticsTaskRunId: String?
+
+        public init(columnStatisticsTaskRunId: String? = nil) {
+            self.columnStatisticsTaskRunId = columnStatisticsTaskRunId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case columnStatisticsTaskRunId = "ColumnStatisticsTaskRunId"
+        }
+    }
+
     public struct StartCrawlerRequest: AWSEncodableShape {
         /// Name of the crawler to start.
         public let name: String
@@ -18547,6 +19404,33 @@ extension Glue {
         }
     }
 
+    public struct StopColumnStatisticsTaskRunRequest: AWSEncodableShape {
+        /// The name of the database where the table resides.
+        public let databaseName: String
+        /// The name of the table.
+        public let tableName: String
+
+        public init(databaseName: String, tableName: String) {
+            self.databaseName = databaseName
+            self.tableName = tableName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+        }
+    }
+
+    public struct StopColumnStatisticsTaskRunResponse: AWSDecodableShape {
+        public init() {}
+    }
+
     public struct StopCrawlerRequest: AWSEncodableShape {
         /// Name of the crawler to stop.
         public let name: String
@@ -19080,6 +19964,78 @@ extension Glue {
             case targetTable = "TargetTable"
             case viewExpandedText = "ViewExpandedText"
             case viewOriginalText = "ViewOriginalText"
+        }
+    }
+
+    public struct TableOptimizer: AWSDecodableShape {
+        /// A TableOptimizerConfiguration object that was specified when creating or updating a table optimizer.
+        public let configuration: TableOptimizerConfiguration?
+        /// A TableOptimizerRun object representing the last run of the table optimizer.
+        public let lastRun: TableOptimizerRun?
+        /// The type of table optimizer. Currently, the only valid value is compaction.
+        public let type: TableOptimizerType?
+
+        public init(configuration: TableOptimizerConfiguration? = nil, lastRun: TableOptimizerRun? = nil, type: TableOptimizerType? = nil) {
+            self.configuration = configuration
+            self.lastRun = lastRun
+            self.type = type
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configuration = "configuration"
+            case lastRun = "lastRun"
+            case type = "type"
+        }
+    }
+
+    public struct TableOptimizerConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// Whether table optimization is enabled.
+        public let enabled: Bool?
+        /// A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.
+        public let roleArn: String?
+
+        public init(enabled: Bool? = nil, roleArn: String? = nil) {
+            self.enabled = enabled
+            self.roleArn = roleArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.roleArn, name: "roleArn", parent: name, max: 2048)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, min: 20)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case enabled = "enabled"
+            case roleArn = "roleArn"
+        }
+    }
+
+    public struct TableOptimizerRun: AWSDecodableShape {
+        /// Represents the epoch timestamp at which the compaction job ended.
+        public let endTimestamp: Date?
+        /// An error that occured during the optimizer run.
+        public let error: String?
+        /// An event type representing the status of the table optimizer run.
+        public let eventType: TableOptimizerEventType?
+        /// A RunMetrics object containing metrics for the optimizer run.
+        public let metrics: RunMetrics?
+        /// Represents the epoch timestamp at which the compaction job was started within Lake Formation.
+        public let startTimestamp: Date?
+
+        public init(endTimestamp: Date? = nil, error: String? = nil, eventType: TableOptimizerEventType? = nil, metrics: RunMetrics? = nil, startTimestamp: Date? = nil) {
+            self.endTimestamp = endTimestamp
+            self.error = error
+            self.eventType = eventType
+            self.metrics = metrics
+            self.startTimestamp = startTimestamp
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case endTimestamp = "endTimestamp"
+            case error = "error"
+            case eventType = "eventType"
+            case metrics = "metrics"
+            case startTimestamp = "startTimestamp"
         }
     }
 
@@ -20233,9 +21189,9 @@ extension Glue {
         public let folder: String?
         /// The name of the Glue job to be synchronized to or from the remote repository.
         public let jobName: String?
-        /// The provider for the remote repository.
+        ///  The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
         public let provider: SourceControlProvider?
-        /// The name of the remote repository that contains the job artifacts.
+        /// The name of the remote repository that contains the job artifacts.  For BitBucket providers, RepositoryName should include WorkspaceName. Use the format /.
         public let repositoryName: String?
         /// The owner of the remote repository that contains the job artifacts.
         public let repositoryOwner: String?
@@ -20600,9 +21556,9 @@ extension Glue {
         public let folder: String?
         /// The name of the Glue job to be synchronized to or from the remote repository.
         public let jobName: String?
-        /// The provider for the remote repository.
+        ///  The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET.
         public let provider: SourceControlProvider?
-        /// The name of the remote repository that contains the job artifacts.
+        /// The name of the remote repository that contains the job artifacts.  For BitBucket providers, RepositoryName should include WorkspaceName. Use the format /.
         public let repositoryName: String?
         /// The owner of the remote repository that contains the job artifacts.
         public let repositoryOwner: String?
@@ -20667,6 +21623,52 @@ extension Glue {
         private enum CodingKeys: String, CodingKey {
             case jobName = "JobName"
         }
+    }
+
+    public struct UpdateTableOptimizerRequest: AWSEncodableShape {
+        /// The Catalog ID of the table.
+        public let catalogId: String
+        /// The name of the database in the catalog in which the table resides.
+        public let databaseName: String
+        /// The name of the table.
+        public let tableName: String
+        /// A TableOptimizerConfiguration object representing the configuration of a table optimizer.
+        public let tableOptimizerConfiguration: TableOptimizerConfiguration
+        /// The type of table optimizer. Currently, the only valid value is compaction.
+        public let type: TableOptimizerType
+
+        public init(catalogId: String, databaseName: String, tableName: String, tableOptimizerConfiguration: TableOptimizerConfiguration, type: TableOptimizerType) {
+            self.catalogId = catalogId
+            self.databaseName = databaseName
+            self.tableName = tableName
+            self.tableOptimizerConfiguration = tableOptimizerConfiguration
+            self.type = type
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.databaseName, name: "databaseName", parent: name, max: 255)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, min: 1)
+            try self.validate(self.databaseName, name: "databaseName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.validate(self.tableName, name: "tableName", parent: name, max: 255)
+            try self.validate(self.tableName, name: "tableName", parent: name, min: 1)
+            try self.validate(self.tableName, name: "tableName", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+            try self.tableOptimizerConfiguration.validate(name: "\(name).tableOptimizerConfiguration")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case databaseName = "DatabaseName"
+            case tableName = "TableName"
+            case tableOptimizerConfiguration = "TableOptimizerConfiguration"
+            case type = "Type"
+        }
+    }
+
+    public struct UpdateTableOptimizerResponse: AWSDecodableShape {
+        public init() {}
     }
 
     public struct UpdateTableRequest: AWSEncodableShape {
@@ -21189,6 +22191,9 @@ public struct GlueErrorType: AWSErrorType {
     enum Code: String {
         case accessDeniedException = "AccessDeniedException"
         case alreadyExistsException = "AlreadyExistsException"
+        case columnStatisticsTaskNotRunningException = "ColumnStatisticsTaskNotRunningException"
+        case columnStatisticsTaskRunningException = "ColumnStatisticsTaskRunningException"
+        case columnStatisticsTaskStoppingException = "ColumnStatisticsTaskStoppingException"
         case concurrentModificationException = "ConcurrentModificationException"
         case concurrentRunsExceededException = "ConcurrentRunsExceededException"
         case conditionCheckFailureException = "ConditionCheckFailureException"
@@ -21243,6 +22248,12 @@ public struct GlueErrorType: AWSErrorType {
     public static var accessDeniedException: Self { .init(.accessDeniedException) }
     /// A resource to be created or added already exists.
     public static var alreadyExistsException: Self { .init(.alreadyExistsException) }
+    /// An exception thrown when you try to stop a task run when there is no task running.
+    public static var columnStatisticsTaskNotRunningException: Self { .init(.columnStatisticsTaskNotRunningException) }
+    /// An exception thrown when you try to start another job while running a column stats generation job.
+    public static var columnStatisticsTaskRunningException: Self { .init(.columnStatisticsTaskRunningException) }
+    /// An exception thrown when you try to stop a task run.
+    public static var columnStatisticsTaskStoppingException: Self { .init(.columnStatisticsTaskStoppingException) }
     /// Two processes are trying to modify a resource simultaneously.
     public static var concurrentModificationException: Self { .init(.concurrentModificationException) }
     /// Too many jobs are being run concurrently.

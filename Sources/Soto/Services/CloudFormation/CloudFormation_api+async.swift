@@ -166,7 +166,7 @@ extension CloudFormation {
         return try await self.client.execute(operation: "DescribeStackSetOperation", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack doesn't exist, an ValidationError is returned.
+    /// Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack doesn't exist, a ValidationError is returned.
     public func describeStacks(_ input: DescribeStacksInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeStacksOutput {
         return try await self.client.execute(operation: "DescribeStacks", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -442,7 +442,7 @@ extension CloudFormation {
         )
     }
 
-    /// Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack doesn't exist, an ValidationError is returned.
+    /// Returns the description for the specified stack; if no stack name was specified, then it returns the description for all the stacks created.  If the stack doesn't exist, a ValidationError is returned.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:

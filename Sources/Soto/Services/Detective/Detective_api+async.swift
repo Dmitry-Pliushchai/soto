@@ -76,6 +76,11 @@ extension Detective {
         return try await self.client.execute(operation: "EnableOrganizationAdminAccount", path: "/orgs/enableAdminAccount", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns the investigation results of an investigation for a behavior graph.
+    public func getInvestigation(_ input: GetInvestigationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetInvestigationResponse {
+        return try await self.client.execute(operation: "GetInvestigation", path: "/investigations/getInvestigation", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns the membership details for specified member accounts for a behavior graph.
     public func getMembers(_ input: GetMembersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetMembersResponse {
         return try await self.client.execute(operation: "GetMembers", path: "/graph/members/get", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -89,6 +94,16 @@ extension Detective {
     /// Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account. Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.
     public func listGraphs(_ input: ListGraphsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListGraphsResponse {
         return try await self.client.execute(operation: "ListGraphs", path: "/graphs/list", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get the indicators from an investigation
+    public func listIndicators(_ input: ListIndicatorsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIndicatorsResponse {
+        return try await self.client.execute(operation: "ListIndicators", path: "/investigations/listIndicators", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List all Investigations.
+    public func listInvestigations(_ input: ListInvestigationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListInvestigationsResponse {
+        return try await self.client.execute(operation: "ListInvestigations", path: "/investigations/listInvestigations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves the list of open and accepted behavior graph invitations for the member account. This operation can only be called by an invited member account. Open invitations are invitations that the member account has not responded to. The results do not include behavior graphs for which the member account declined the invitation. The results also do not include behavior graphs that the member account resigned from or was removed from.
@@ -116,6 +131,11 @@ extension Detective {
         return try await self.client.execute(operation: "RejectInvitation", path: "/invitation/removal", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// initiate an investigation on an entity in a graph
+    public func startInvestigation(_ input: StartInvestigationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartInvestigationResponse {
+        return try await self.client.execute(operation: "StartInvestigation", path: "/investigations/startInvestigation", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Sends a request to enable data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as follows.   If Detective enabled the member account, then the new status is ENABLED.   If Detective cannot enable the member account, the status remains ACCEPTED_BUT_DISABLED.
     public func startMonitoringMember(_ input: StartMonitoringMemberRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
         return try await self.client.execute(operation: "StartMonitoringMember", path: "/graph/member/monitoringstate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -134,6 +154,11 @@ extension Detective {
     /// Starts a data source packages for the behavior graph.
     public func updateDatasourcePackages(_ input: UpdateDatasourcePackagesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
         return try await self.client.execute(operation: "UpdateDatasourcePackages", path: "/graph/datasources/update", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Update the state of an investigation.
+    public func updateInvestigationState(_ input: UpdateInvestigationStateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
+        return try await self.client.execute(operation: "UpdateInvestigationState", path: "/investigations/updateInvestigationState", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the configuration for the Organizations integration in the current Region. Can only be called by the Detective administrator account for the organization.

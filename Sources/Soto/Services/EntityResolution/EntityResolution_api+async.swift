@@ -21,7 +21,12 @@ import SotoCore
 extension EntityResolution {
     // MARK: Async API Calls
 
-    /// Creates a MatchingWorkflow object which stores the configuration of the data processing job  to be run.  It is important to note that there should not be a pre-existing MatchingWorkflow  with the same name. To modify an existing workflow, utilize the UpdateMatchingWorkflow API.
+    /// Creates an IdMappingWorkflow object which stores the configuration of the data processing job to be run. Each IdMappingWorkflow must have a unique workflow name. To modify an existing workflow, use the UpdateIdMappingWorkflow API.
+    public func createIdMappingWorkflow(_ input: CreateIdMappingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateIdMappingWorkflowOutput {
+        return try await self.client.execute(operation: "CreateIdMappingWorkflow", path: "/idmappingworkflows", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a MatchingWorkflow object which stores the configuration of the data processing job to be run. It is important to note that there should not be a pre-existing MatchingWorkflow with the same name. To modify an existing workflow, utilize the UpdateMatchingWorkflow API.
     public func createMatchingWorkflow(_ input: CreateMatchingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateMatchingWorkflowOutput {
         return try await self.client.execute(operation: "CreateMatchingWorkflow", path: "/matchingworkflows", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -31,14 +36,29 @@ extension EntityResolution {
         return try await self.client.execute(operation: "CreateSchemaMapping", path: "/schemas", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes the MatchingWorkflow with a given name. This operation will succeed even if a  workflow with the given name does not exist.
+    /// Deletes the IdMappingWorkflow with a given name. This operation will succeed even if a workflow with the given name does not exist.
+    public func deleteIdMappingWorkflow(_ input: DeleteIdMappingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteIdMappingWorkflowOutput {
+        return try await self.client.execute(operation: "DeleteIdMappingWorkflow", path: "/idmappingworkflows/{workflowName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the MatchingWorkflow with a given name. This operation will succeed even if a workflow with the given name does not exist.
     public func deleteMatchingWorkflow(_ input: DeleteMatchingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteMatchingWorkflowOutput {
         return try await self.client.execute(operation: "DeleteMatchingWorkflow", path: "/matchingworkflows/{workflowName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes the SchemaMapping with a given name. This operation will succeed even if a schema  with the given name does not exist. This operation will fail if there is a DataIntegrationWorkflow  object that references the SchemaMapping in the workflow's InputSourceConfig.
+    /// Deletes the SchemaMapping with a given name. This operation will succeed even if a schema with the given name does not exist. This operation will fail if there is a MatchingWorkflow object that references the SchemaMapping in the workflow's InputSourceConfig.
     public func deleteSchemaMapping(_ input: DeleteSchemaMappingInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteSchemaMappingOutput {
         return try await self.client.execute(operation: "DeleteSchemaMapping", path: "/schemas/{schemaName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets the status, metrics, and errors (if there are any) that are associated with a job.
+    public func getIdMappingJob(_ input: GetIdMappingJobInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetIdMappingJobOutput {
+        return try await self.client.execute(operation: "GetIdMappingJob", path: "/idmappingworkflows/{workflowName}/jobs/{jobId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the IdMappingWorkflow with a given name, if it exists.
+    public func getIdMappingWorkflow(_ input: GetIdMappingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetIdMappingWorkflowOutput {
+        return try await self.client.execute(operation: "GetIdMappingWorkflow", path: "/idmappingworkflows/{workflowName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns the corresponding Match ID of a customer record if the record has been processed.
@@ -56,9 +76,24 @@ extension EntityResolution {
         return try await self.client.execute(operation: "GetMatchingWorkflow", path: "/matchingworkflows/{workflowName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns the ProviderService of a given name.
+    public func getProviderService(_ input: GetProviderServiceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetProviderServiceOutput {
+        return try await self.client.execute(operation: "GetProviderService", path: "/providerservices/{providerName}/{providerServiceName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns the SchemaMapping of a given name.
     public func getSchemaMapping(_ input: GetSchemaMappingInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSchemaMappingOutput {
         return try await self.client.execute(operation: "GetSchemaMapping", path: "/schemas/{schemaName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all ID mapping jobs for a given workflow.
+    public func listIdMappingJobs(_ input: ListIdMappingJobsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIdMappingJobsOutput {
+        return try await self.client.execute(operation: "ListIdMappingJobs", path: "/idmappingworkflows/{workflowName}/jobs", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of all the IdMappingWorkflows that have been created for an Amazon Web Services account.
+    public func listIdMappingWorkflows(_ input: ListIdMappingWorkflowsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIdMappingWorkflowsOutput {
+        return try await self.client.execute(operation: "ListIdMappingWorkflows", path: "/idmappingworkflows", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all jobs for a given workflow.
@@ -71,6 +106,11 @@ extension EntityResolution {
         return try await self.client.execute(operation: "ListMatchingWorkflows", path: "/matchingworkflows", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns a list of all the ProviderServices that are available in this Amazon Web Services Region.
+    public func listProviderServices(_ input: ListProviderServicesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListProviderServicesOutput {
+        return try await self.client.execute(operation: "ListProviderServices", path: "/providerservices", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a list of all the SchemaMappings that have been created for an Amazon Web Services account.
     public func listSchemaMappings(_ input: ListSchemaMappingsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSchemaMappingsOutput {
         return try await self.client.execute(operation: "ListSchemaMappings", path: "/schemas", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -81,7 +121,12 @@ extension EntityResolution {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Starts the MatchingJob of a workflow. The workflow must have previously been created  using the CreateMatchingWorkflow endpoint.
+    /// Starts the IdMappingJob of a workflow. The workflow must have previously been created using the CreateIdMappingWorkflow endpoint.
+    public func startIdMappingJob(_ input: StartIdMappingJobInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartIdMappingJobOutput {
+        return try await self.client.execute(operation: "StartIdMappingJob", path: "/idmappingworkflows/{workflowName}/jobs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Starts the MatchingJob of a workflow. The workflow must have previously been created using the CreateMatchingWorkflow endpoint.
     public func startMatchingJob(_ input: StartMatchingJobInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartMatchingJobOutput {
         return try await self.client.execute(operation: "StartMatchingJob", path: "/matchingworkflows/{workflowName}/jobs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -96,9 +141,19 @@ extension EntityResolution {
         return try await self.client.execute(operation: "UntagResource", path: "/tags/{resourceArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates an existing MatchingWorkflow. This method is identical to  CreateMatchingWorkflow, except it uses an HTTP PUT request instead of  a POST request, and the MatchingWorkflow must already exist for the  method to succeed.
+    /// Updates an existing IdMappingWorkflow. This method is identical to CreateIdMappingWorkflow, except it uses an HTTP PUT request instead of a POST request, and the IdMappingWorkflow must already exist for the method to succeed.
+    public func updateIdMappingWorkflow(_ input: UpdateIdMappingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateIdMappingWorkflowOutput {
+        return try await self.client.execute(operation: "UpdateIdMappingWorkflow", path: "/idmappingworkflows/{workflowName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates an existing MatchingWorkflow. This method is identical to CreateMatchingWorkflow, except it uses an HTTP PUT request instead of a POST request, and the MatchingWorkflow must already exist for the method to succeed.
     public func updateMatchingWorkflow(_ input: UpdateMatchingWorkflowInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateMatchingWorkflowOutput {
         return try await self.client.execute(operation: "UpdateMatchingWorkflow", path: "/matchingworkflows/{workflowName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates a schema mapping.  A schema is immutable if it is being used by a workflow. Therefore, you can't update a schema mapping if it's associated with a workflow.
+    public func updateSchemaMapping(_ input: UpdateSchemaMappingInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateSchemaMappingOutput {
+        return try await self.client.execute(operation: "UpdateSchemaMapping", path: "/schemas/{schemaName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -106,6 +161,50 @@ extension EntityResolution {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension EntityResolution {
+    /// Lists all ID mapping jobs for a given workflow.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listIdMappingJobsPaginator(
+        _ input: ListIdMappingJobsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListIdMappingJobsInput, ListIdMappingJobsOutput> {
+        return .init(
+            input: input,
+            command: self.listIdMappingJobs,
+            inputKey: \ListIdMappingJobsInput.nextToken,
+            outputKey: \ListIdMappingJobsOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns a list of all the IdMappingWorkflows that have been created for an Amazon Web Services account.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listIdMappingWorkflowsPaginator(
+        _ input: ListIdMappingWorkflowsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListIdMappingWorkflowsInput, ListIdMappingWorkflowsOutput> {
+        return .init(
+            input: input,
+            command: self.listIdMappingWorkflows,
+            inputKey: \ListIdMappingWorkflowsInput.nextToken,
+            outputKey: \ListIdMappingWorkflowsOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Lists all jobs for a given workflow.
     /// Return PaginatorSequence for operation.
     ///
@@ -145,6 +244,28 @@ extension EntityResolution {
             command: self.listMatchingWorkflows,
             inputKey: \ListMatchingWorkflowsInput.nextToken,
             outputKey: \ListMatchingWorkflowsOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns a list of all the ProviderServices that are available in this Amazon Web Services Region.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listProviderServicesPaginator(
+        _ input: ListProviderServicesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListProviderServicesInput, ListProviderServicesOutput> {
+        return .init(
+            input: input,
+            command: self.listProviderServices,
+            inputKey: \ListProviderServicesInput.nextToken,
+            outputKey: \ListProviderServicesOutput.nextToken,
             logger: logger,
             on: eventLoop
         )

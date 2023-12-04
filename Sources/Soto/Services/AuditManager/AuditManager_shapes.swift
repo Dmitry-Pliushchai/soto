@@ -26,14 +26,14 @@ import SotoCore
 extension AuditManager {
     // MARK: Enums
 
-    public enum AccountStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         case pendingActivation = "PENDING_ACTIVATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case create = "CREATE"
         case delete = "DELETE"
@@ -45,25 +45,25 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum AssessmentReportDestinationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssessmentReportDestinationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssessmentReportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssessmentReportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssessmentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssessmentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ControlResponse: String, CustomStringConvertible, Codable, Sendable {
+    public enum ControlResponse: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `defer` = "DEFER"
         case automate = "AUTOMATE"
         case ignore = "IGNORE"
@@ -71,47 +71,47 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum ControlSetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ControlSetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case reviewed = "REVIEWED"
         case underReview = "UNDER_REVIEW"
         public var description: String { return self.rawValue }
     }
 
-    public enum ControlStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ControlStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inactive = "INACTIVE"
         case reviewed = "REVIEWED"
         case underReview = "UNDER_REVIEW"
         public var description: String { return self.rawValue }
     }
 
-    public enum ControlType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ControlType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "Custom"
         case standard = "Standard"
         public var description: String { return self.rawValue }
     }
 
-    public enum DelegationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DelegationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case inProgress = "IN_PROGRESS"
         case underReview = "UNDER_REVIEW"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeleteResources: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeleteResources: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case all = "ALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum EvidenceFinderBackfillStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EvidenceFinderBackfillStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EvidenceFinderEnablementStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EvidenceFinderEnablementStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableInProgress = "DISABLE_IN_PROGRESS"
         case disabled = "DISABLED"
         case enableInProgress = "ENABLE_IN_PROGRESS"
@@ -119,25 +119,25 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportDestinationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportDestinationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum FrameworkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FrameworkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "Custom"
         case standard = "Standard"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeywordInputType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeywordInputType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inputText = "INPUT_TEXT"
         case selectFromList = "SELECT_FROM_LIST"
         case uploadFile = "UPLOAD_FILE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case assessment = "ASSESSMENT"
         case assessmentReport = "ASSESSMENT_REPORT"
         case control = "CONTROL"
@@ -146,13 +146,13 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum RoleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RoleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case processOwner = "PROCESS_OWNER"
         case resourceOwner = "RESOURCE_OWNER"
         public var description: String { return self.rawValue }
     }
 
-    public enum SettingAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum SettingAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case defaultAssessmentReportsDestination = "DEFAULT_ASSESSMENT_REPORTS_DESTINATION"
         case defaultExportDestination = "DEFAULT_EXPORT_DESTINATION"
@@ -164,14 +164,14 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareRequestAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareRequestAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accept = "ACCEPT"
         case decline = "DECLINE"
         case revoke = "REVOKE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareRequestStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareRequestStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case declined = "DECLINED"
         case expired = "EXPIRED"
@@ -183,26 +183,26 @@ extension AuditManager {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareRequestType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareRequestType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case received = "RECEIVED"
         case sent = "SENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daily = "DAILY"
         case monthly = "MONTHLY"
         case weekly = "WEEKLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceSetUpOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceSetUpOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case proceduralControlsMapping = "Procedural_Controls_Mapping"
         case systemControlsMapping = "System_Controls_Mapping"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsApiCall = "AWS_API_Call"
         case awsCloudtrail = "AWS_Cloudtrail"
         case awsConfig = "AWS_Config"
@@ -3993,6 +3993,8 @@ extension AuditManager {
             try self.awsAccounts?.forEach {
                 try $0.validate(name: "\(name).awsAccounts[]")
             }
+            try self.validate(self.awsAccounts, name: "awsAccounts", parent: name, max: 200)
+            try self.validate(self.awsAccounts, name: "awsAccounts", parent: name, min: 1)
             try self.awsServices?.forEach {
                 try $0.validate(name: "\(name).awsServices[]")
             }

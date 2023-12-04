@@ -89,6 +89,11 @@ public struct Wisdom: AWSService {
         return self.client.execute(operation: "CreateKnowledgeBase", path: "/knowledgeBases", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a Wisdom quick response.
+    public func createQuickResponse(_ input: CreateQuickResponseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateQuickResponseResponse> {
+        return self.client.execute(operation: "CreateQuickResponse", path: "/knowledgeBases/{knowledgeBaseId}/quickResponses", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Wisdom session for each contact on which Wisdom is enabled.
     public func createSession(_ input: CreateSessionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateSessionResponse> {
         return self.client.execute(operation: "CreateSession", path: "/assistants/{assistantId}/sessions", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -109,9 +114,19 @@ public struct Wisdom: AWSService {
         return self.client.execute(operation: "DeleteContent", path: "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes the quick response import job.
+    public func deleteImportJob(_ input: DeleteImportJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteImportJobResponse> {
+        return self.client.execute(operation: "DeleteImportJob", path: "/knowledgeBases/{knowledgeBaseId}/importJobs/{importJobId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes the knowledge base.  When you use this API to delete an external knowledge base such as Salesforce or ServiceNow, you must also delete the Amazon AppIntegrations DataIntegration. This is because you can't reuse the DataIntegration after it's been associated with an external knowledge base. However, you can delete and recreate it. See DeleteDataIntegration and CreateDataIntegration in the Amazon AppIntegrations API Reference.
     public func deleteKnowledgeBase(_ input: DeleteKnowledgeBaseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteKnowledgeBaseResponse> {
         return self.client.execute(operation: "DeleteKnowledgeBase", path: "/knowledgeBases/{knowledgeBaseId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a quick response.
+    public func deleteQuickResponse(_ input: DeleteQuickResponseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteQuickResponseResponse> {
+        return self.client.execute(operation: "DeleteQuickResponse", path: "/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves information about an assistant.
@@ -134,9 +149,19 @@ public struct Wisdom: AWSService {
         return self.client.execute(operation: "GetContentSummary", path: "/knowledgeBases/{knowledgeBaseId}/contents/{contentId}/summary", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves the started import job.
+    public func getImportJob(_ input: GetImportJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetImportJobResponse> {
+        return self.client.execute(operation: "GetImportJob", path: "/knowledgeBases/{knowledgeBaseId}/importJobs/{importJobId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves information about the knowledge base.
     public func getKnowledgeBase(_ input: GetKnowledgeBaseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetKnowledgeBaseResponse> {
         return self.client.execute(operation: "GetKnowledgeBase", path: "/knowledgeBases/{knowledgeBaseId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the quick response.
+    public func getQuickResponse(_ input: GetQuickResponseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetQuickResponseResponse> {
+        return self.client.execute(operation: "GetQuickResponse", path: "/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
@@ -164,9 +189,19 @@ public struct Wisdom: AWSService {
         return self.client.execute(operation: "ListContents", path: "/knowledgeBases/{knowledgeBaseId}/contents", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Lists information about import jobs.
+    public func listImportJobs(_ input: ListImportJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListImportJobsResponse> {
+        return self.client.execute(operation: "ListImportJobs", path: "/knowledgeBases/{knowledgeBaseId}/importJobs", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists the knowledge bases.
     public func listKnowledgeBases(_ input: ListKnowledgeBasesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListKnowledgeBasesResponse> {
         return self.client.execute(operation: "ListKnowledgeBases", path: "/knowledgeBases", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists information about quick response.
+    public func listQuickResponses(_ input: ListQuickResponsesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListQuickResponsesResponse> {
+        return self.client.execute(operation: "ListQuickResponses", path: "/knowledgeBases/{knowledgeBaseId}/quickResponses", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the tags for the specified resource.
@@ -194,6 +229,11 @@ public struct Wisdom: AWSService {
         return self.client.execute(operation: "SearchContent", path: "/knowledgeBases/{knowledgeBaseId}/search", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Searches existing Wisdom quick responses in a Wisdom knowledge base.
+    public func searchQuickResponses(_ input: SearchQuickResponsesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<SearchQuickResponsesResponse> {
+        return self.client.execute(operation: "SearchQuickResponses", path: "/knowledgeBases/{knowledgeBaseId}/search/quickResponses", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Searches for sessions.
     public func searchSessions(_ input: SearchSessionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<SearchSessionsResponse> {
         return self.client.execute(operation: "SearchSessions", path: "/assistants/{assistantId}/searchSessions", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -202,6 +242,11 @@ public struct Wisdom: AWSService {
     /// Get a URL to upload content to a knowledge base. To upload content, first make a PUT request to the returned URL with your file, making sure to include the required headers. Then use CreateContent to finalize the content creation process or UpdateContent to modify an existing resource. You can only upload content to a knowledge base of type CUSTOM.
     public func startContentUpload(_ input: StartContentUploadRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartContentUploadResponse> {
         return self.client.execute(operation: "StartContentUpload", path: "/knowledgeBases/{knowledgeBaseId}/upload", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Start an asynchronous job to import Wisdom resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Wisdom quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.
+    public func startImportJob(_ input: StartImportJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartImportJobResponse> {
+        return self.client.execute(operation: "StartImportJob", path: "/knowledgeBases/{knowledgeBaseId}/importJobs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Adds the specified tags to the specified resource.
@@ -222,6 +267,11 @@ public struct Wisdom: AWSService {
     /// Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Wisdom using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view.
     public func updateKnowledgeBaseTemplateUri(_ input: UpdateKnowledgeBaseTemplateUriRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateKnowledgeBaseTemplateUriResponse> {
         return self.client.execute(operation: "UpdateKnowledgeBaseTemplateUri", path: "/knowledgeBases/{knowledgeBaseId}/templateUri", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates an existing Wisdom quick response.
+    public func updateQuickResponse(_ input: UpdateQuickResponseRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateQuickResponseResponse> {
+        return self.client.execute(operation: "UpdateQuickResponse", path: "/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -396,6 +446,59 @@ extension Wisdom {
         )
     }
 
+    /// Lists information about import jobs.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listImportJobsPaginator<Result>(
+        _ input: ListImportJobsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListImportJobsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listImportJobs,
+            inputKey: \ListImportJobsRequest.nextToken,
+            outputKey: \ListImportJobsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listImportJobsPaginator(
+        _ input: ListImportJobsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListImportJobsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listImportJobs,
+            inputKey: \ListImportJobsRequest.nextToken,
+            outputKey: \ListImportJobsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists the knowledge bases.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -444,6 +547,59 @@ extension Wisdom {
             command: self.listKnowledgeBases,
             inputKey: \ListKnowledgeBasesRequest.nextToken,
             outputKey: \ListKnowledgeBasesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists information about quick response.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listQuickResponsesPaginator<Result>(
+        _ input: ListQuickResponsesRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListQuickResponsesResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listQuickResponses,
+            inputKey: \ListQuickResponsesRequest.nextToken,
+            outputKey: \ListQuickResponsesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listQuickResponsesPaginator(
+        _ input: ListQuickResponsesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListQuickResponsesResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listQuickResponses,
+            inputKey: \ListQuickResponsesRequest.nextToken,
+            outputKey: \ListQuickResponsesResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -555,6 +711,59 @@ extension Wisdom {
         )
     }
 
+    /// Searches existing Wisdom quick responses in a Wisdom knowledge base.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func searchQuickResponsesPaginator<Result>(
+        _ input: SearchQuickResponsesRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, SearchQuickResponsesResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.searchQuickResponses,
+            inputKey: \SearchQuickResponsesRequest.nextToken,
+            outputKey: \SearchQuickResponsesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func searchQuickResponsesPaginator(
+        _ input: SearchQuickResponsesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (SearchQuickResponsesResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.searchQuickResponses,
+            inputKey: \SearchQuickResponsesRequest.nextToken,
+            outputKey: \SearchQuickResponsesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Searches for sessions.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -638,9 +847,29 @@ extension Wisdom.ListContentsRequest: AWSPaginateToken {
     }
 }
 
+extension Wisdom.ListImportJobsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Wisdom.ListImportJobsRequest {
+        return .init(
+            knowledgeBaseId: self.knowledgeBaseId,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
 extension Wisdom.ListKnowledgeBasesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Wisdom.ListKnowledgeBasesRequest {
         return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension Wisdom.ListQuickResponsesRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Wisdom.ListQuickResponsesRequest {
+        return .init(
+            knowledgeBaseId: self.knowledgeBaseId,
             maxResults: self.maxResults,
             nextToken: token
         )
@@ -661,6 +890,18 @@ extension Wisdom.QueryAssistantRequest: AWSPaginateToken {
 extension Wisdom.SearchContentRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Wisdom.SearchContentRequest {
         return .init(
+            knowledgeBaseId: self.knowledgeBaseId,
+            maxResults: self.maxResults,
+            nextToken: token,
+            searchExpression: self.searchExpression
+        )
+    }
+}
+
+extension Wisdom.SearchQuickResponsesRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Wisdom.SearchQuickResponsesRequest {
+        return .init(
+            attributes: self.attributes,
             knowledgeBaseId: self.knowledgeBaseId,
             maxResults: self.maxResults,
             nextToken: token,

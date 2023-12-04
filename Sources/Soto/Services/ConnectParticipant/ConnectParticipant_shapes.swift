@@ -26,14 +26,14 @@ import SotoCore
 extension ConnectParticipant {
     // MARK: Enums
 
-    public enum ArtifactStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ArtifactStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case approved = "APPROVED"
         case inProgress = "IN_PROGRESS"
         case rejected = "REJECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChatItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChatItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachment = "ATTACHMENT"
         case chatEnded = "CHAT_ENDED"
         case connectionAck = "CONNECTION_ACK"
@@ -49,13 +49,13 @@ extension ConnectParticipant {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connectionCredentials = "CONNECTION_CREDENTIALS"
         case websocket = "WEBSOCKET"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agent = "AGENT"
         case customBot = "CUSTOM_BOT"
         case customer = "CUSTOMER"
@@ -63,13 +63,13 @@ extension ConnectParticipant {
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanDirection: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanDirection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backward = "BACKWARD"
         case forward = "FORWARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }

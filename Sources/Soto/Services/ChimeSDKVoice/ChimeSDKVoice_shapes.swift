@@ -26,19 +26,19 @@ import SotoCore
 extension ChimeSDKVoice {
     // MARK: Enums
 
-    public enum AlexaSkillStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AlexaSkillStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CallLegType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CallLegType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case callee = "Callee"
         case caller = "Caller"
         public var description: String { return self.rawValue }
     }
 
-    public enum CallingNameStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CallingNameStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case unassigned = "Unassigned"
         case updateFailed = "UpdateFailed"
         case updateInProgress = "UpdateInProgress"
@@ -46,13 +46,13 @@ extension ChimeSDKVoice {
         public var description: String { return self.rawValue }
     }
 
-    public enum Capability: String, CustomStringConvertible, Codable, Sendable {
+    public enum Capability: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sms = "SMS"
         case voice = "Voice"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "AccessDenied"
         case badRequest = "BadRequest"
         case conflict = "Conflict"
@@ -72,51 +72,51 @@ extension ChimeSDKVoice {
         public var description: String { return self.rawValue }
     }
 
-    public enum GeoMatchLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeoMatchLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case areaCode = "AreaCode"
         case country = "Country"
         public var description: String { return self.rawValue }
     }
 
-    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enUs = "en-US"
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationTarget: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationTarget: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eventBridge = "EventBridge"
         case sns = "SNS"
         case sqs = "SQS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NumberSelectionBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumberSelectionBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avoidSticky = "AvoidSticky"
         case preferSticky = "PreferSticky"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrderedPhoneNumberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrderedPhoneNumberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acquired = "Acquired"
         case failed = "Failed"
         case processing = "Processing"
         public var description: String { return self.rawValue }
     }
 
-    public enum OriginationRouteProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum OriginationRouteProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tcp = "TCP"
         case udp = "UDP"
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberAssociationName: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberAssociationName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sipRuleId = "SipRuleId"
         case voiceConnectorGroupId = "VoiceConnectorGroupId"
         case voiceConnectorId = "VoiceConnectorId"
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberOrderStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberOrderStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelRequested = "CancelRequested"
         case cancelled = "Cancelled"
         case changeRequested = "ChangeRequested"
@@ -131,19 +131,19 @@ extension ChimeSDKVoice {
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberOrderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberOrderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case new = "New"
         case porting = "Porting"
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberProductType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberProductType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sipMediaApplicationDialIn = "SipMediaApplicationDialIn"
         case voiceConnector = "VoiceConnector"
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acquireFailed = "AcquireFailed"
         case acquireInProgress = "AcquireInProgress"
         case assigned = "Assigned"
@@ -158,26 +158,26 @@ extension ChimeSDKVoice {
         public var description: String { return self.rawValue }
     }
 
-    public enum PhoneNumberType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PhoneNumberType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case local = "Local"
         case tollFree = "TollFree"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProxySessionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProxySessionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case closed = "Closed"
         case inProgress = "InProgress"
         case open = "Open"
         public var description: String { return self.rawValue }
     }
 
-    public enum SipRuleTriggerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SipRuleTriggerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case requestUriHostname = "RequestUriHostname"
         case toPhoneNumber = "ToPhoneNumber"
         public var description: String { return self.rawValue }
     }
 
-    public enum VoiceConnectorAwsRegion: String, CustomStringConvertible, Codable, Sendable {
+    public enum VoiceConnectorAwsRegion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case apNortheast1 = "ap-northeast-1"
         case apNortheast2 = "ap-northeast-2"
         case apSoutheast1 = "ap-southeast-1"

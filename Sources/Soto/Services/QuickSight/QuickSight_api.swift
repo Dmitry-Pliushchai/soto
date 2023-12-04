@@ -148,6 +148,11 @@ public struct QuickSight: AWSService {
         return self.client.execute(operation: "CreateRefreshSchedule", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Use CreateRoleMembership to add an existing Amazon QuickSight group to an existing role.
+    public func createRoleMembership(_ input: CreateRoleMembershipRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateRoleMembershipResponse> {
+        return self.client.execute(operation: "CreateRoleMembership", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members/{MemberName}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a template either from a TemplateDefinition or from an existing Amazon QuickSight analysis or template. You can use the resulting
     /// 			template to create additional dashboards, templates, or analyses. A template is an entity in Amazon QuickSight that encapsulates the metadata
     /// 			required to create an analysis and that you can use to create s dashboard. A template adds
@@ -252,6 +257,11 @@ public struct QuickSight: AWSService {
         return self.client.execute(operation: "DeleteIAMPolicyAssignment", path: "/accounts/{AwsAccountId}/namespace/{Namespace}/iam-policy-assignments/{AssignmentName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes all access scopes and authorized targets that are associated with a service from the Amazon QuickSight IAM Identity Center application. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+    public func deleteIdentityPropagationConfig(_ input: DeleteIdentityPropagationConfigRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteIdentityPropagationConfigResponse> {
+        return self.client.execute(operation: "DeleteIdentityPropagationConfig", path: "/accounts/{AwsAccountId}/identity-propagation-config/{Service}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not  deleted. To delete these assets, you use the API operations for the relevant asset.
     public func deleteNamespace(_ input: DeleteNamespaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteNamespaceResponse> {
         return self.client.execute(operation: "DeleteNamespace", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -260,6 +270,16 @@ public struct QuickSight: AWSService {
     /// Deletes a refresh schedule from a dataset.
     public func deleteRefreshSchedule(_ input: DeleteRefreshScheduleRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteRefreshScheduleResponse> {
         return self.client.execute(operation: "DeleteRefreshSchedule", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Removes custom permissions from the role.
+    public func deleteRoleCustomPermission(_ input: DeleteRoleCustomPermissionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteRoleCustomPermissionResponse> {
+        return self.client.execute(operation: "DeleteRoleCustomPermission", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Removes a group from a role.
+    public func deleteRoleMembership(_ input: DeleteRoleMembershipRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteRoleMembershipResponse> {
+        return self.client.execute(operation: "DeleteRoleMembership", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members/{MemberName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a template.
@@ -455,6 +475,11 @@ public struct QuickSight: AWSService {
         return self.client.execute(operation: "DescribeRefreshSchedule", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules/{ScheduleId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes all custom permissions that are  mapped to a role.
+    public func describeRoleCustomPermission(_ input: DescribeRoleCustomPermissionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeRoleCustomPermissionResponse> {
+        return self.client.execute(operation: "DescribeRoleCustomPermission", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes a template's metadata.
     public func describeTemplate(_ input: DescribeTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeTemplateResponse> {
         return self.client.execute(operation: "DescribeTemplate", path: "/accounts/{AwsAccountId}/templates/{TemplateId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -616,6 +641,11 @@ public struct QuickSight: AWSService {
         return self.client.execute(operation: "ListIAMPolicyAssignmentsForUser", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Lists all services and authorized targets that the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts that use IAM Identity Center.
+    public func listIdentityPropagationConfigs(_ input: ListIdentityPropagationConfigsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIdentityPropagationConfigsResponse> {
+        return self.client.execute(operation: "ListIdentityPropagationConfigs", path: "/accounts/{AwsAccountId}/identity-propagation-config", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists the history of SPICE ingestions for a dataset.
     public func listIngestions(_ input: ListIngestionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIngestionsResponse> {
         return self.client.execute(operation: "ListIngestions", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/ingestions", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -629,6 +659,11 @@ public struct QuickSight: AWSService {
     /// Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules.
     public func listRefreshSchedules(_ input: ListRefreshSchedulesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRefreshSchedulesResponse> {
         return self.client.execute(operation: "ListRefreshSchedules", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all groups that are associated with a role.
+    public func listRoleMemberships(_ input: ListRoleMembershipsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRoleMembershipsResponse> {
+        return self.client.execute(operation: "ListRoleMemberships", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/members", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the tags assigned to a resource.
@@ -847,6 +882,11 @@ public struct QuickSight: AWSService {
         return self.client.execute(operation: "UpdateIAMPolicyAssignment", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/{AssignmentName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Adds or updates services and authorized targets to configure what the Amazon QuickSight IAM Identity Center application can access. This operation is only supported for Amazon QuickSight accounts using IAM Identity Center
+    public func updateIdentityPropagationConfig(_ input: UpdateIdentityPropagationConfigRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateIdentityPropagationConfigResponse> {
+        return self.client.execute(operation: "UpdateIdentityPropagationConfig", path: "/accounts/{AwsAccountId}/identity-propagation-config/{Service}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates the content and status of IP rules. To use this operation, you
     /// 			must
     /// 			provide the entire map of rules. You can use the DescribeIpRestriction
@@ -863,6 +903,11 @@ public struct QuickSight: AWSService {
     /// Updates a refresh schedule for a dataset.
     public func updateRefreshSchedule(_ input: UpdateRefreshScheduleRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateRefreshScheduleResponse> {
         return self.client.execute(operation: "UpdateRefreshSchedule", path: "/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-schedules", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the custom permissions that are associated with a role.
+    public func updateRoleCustomPermission(_ input: UpdateRoleCustomPermissionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateRoleCustomPermissionResponse> {
+        return self.client.execute(operation: "UpdateRoleCustomPermission", path: "/accounts/{AwsAccountId}/namespaces/{Namespace}/roles/{Role}/custom-permission", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a template from an existing Amazon QuickSight analysis or another template.
@@ -1839,6 +1884,59 @@ extension QuickSight {
             command: self.listNamespaces,
             inputKey: \ListNamespacesRequest.nextToken,
             outputKey: \ListNamespacesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists all groups that are associated with a role.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRoleMembershipsPaginator<Result>(
+        _ input: ListRoleMembershipsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRoleMembershipsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRoleMemberships,
+            inputKey: \ListRoleMembershipsRequest.nextToken,
+            outputKey: \ListRoleMembershipsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRoleMembershipsPaginator(
+        _ input: ListRoleMembershipsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRoleMembershipsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRoleMemberships,
+            inputKey: \ListRoleMembershipsRequest.nextToken,
+            outputKey: \ListRoleMembershipsResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -2821,6 +2919,18 @@ extension QuickSight.ListNamespacesRequest: AWSPaginateToken {
             awsAccountId: self.awsAccountId,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension QuickSight.ListRoleMembershipsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> QuickSight.ListRoleMembershipsRequest {
+        return .init(
+            awsAccountId: self.awsAccountId,
+            maxResults: self.maxResults,
+            namespace: self.namespace,
+            nextToken: token,
+            role: self.role
         )
     }
 }

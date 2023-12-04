@@ -54,6 +54,12 @@ public struct SimSpaceWeaver: AWSService {
             serviceProtocol: .restjson,
             apiVersion: "2022-10-28",
             endpoint: endpoint,
+            variantEndpoints: [
+                [.fips]: .init(endpoints: [
+                    "us-gov-east-1": "simspaceweaver.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "simspaceweaver.us-gov-west-1.amazonaws.com"
+                ])
+            ],
             errorType: SimSpaceWeaverErrorType.self,
             timeout: timeout,
             byteBufferAllocator: byteBufferAllocator,

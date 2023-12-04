@@ -391,6 +391,7 @@ extension SsmSap {
 extension SsmSap.ListApplicationsInput: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> SsmSap.ListApplicationsInput {
         return .init(
+            filters: self.filters,
             maxResults: self.maxResults,
             nextToken: token
         )

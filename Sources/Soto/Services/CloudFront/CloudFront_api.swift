@@ -182,6 +182,11 @@ public struct CloudFront: AWSService {
         return self.client.execute(operation: "CreateKeyGroup", path: "/2020-05-31/key-group", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Specifies the Key Value Store resource to add to your account. In your account, the Key Value Store names must be unique. You can also import Key Value Store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
+    public func createKeyValueStore(_ input: CreateKeyValueStoreRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateKeyValueStoreResult> {
+        return self.client.execute(operation: "CreateKeyValueStore", path: "/2020-05-31/key-value-store", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Enables additional CloudWatch metrics for the specified CloudFront distribution. The
     /// 			additional metrics incur an additional cost. For more information, see Viewing additional CloudFront distribution metrics in
     /// 			the Amazon CloudFront Developer Guide.
@@ -307,6 +312,11 @@ public struct CloudFront: AWSService {
         return self.client.execute(operation: "DeleteKeyGroup", path: "/2020-05-31/key-group/{Id}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Specifies the Key Value Store to delete.
+    @discardableResult public func deleteKeyValueStore(_ input: DeleteKeyValueStoreRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteKeyValueStore", path: "/2020-05-31/key-value-store/{Name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Disables additional CloudWatch metrics for the specified CloudFront
     /// 			distribution.
     public func deleteMonitoringSubscription(_ input: DeleteMonitoringSubscriptionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteMonitoringSubscriptionResult> {
@@ -382,6 +392,11 @@ public struct CloudFront: AWSService {
     /// 			ListFunctions.
     public func describeFunction(_ input: DescribeFunctionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeFunctionResult> {
         return self.client.execute(operation: "DescribeFunction", path: "/2020-05-31/function/{Name}/describe", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Specifies the Key Value Store and its configuration.
+    public func describeKeyValueStore(_ input: DescribeKeyValueStoreRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeKeyValueStoreResult> {
+        return self.client.execute(operation: "DescribeKeyValueStore", path: "/2020-05-31/key-value-store/{Name}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets a cache policy, including the following metadata:   The policy's identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy's identifier. If the cache policy
@@ -715,6 +730,11 @@ public struct CloudFront: AWSService {
         return self.client.execute(operation: "ListKeyGroups", path: "/2020-05-31/key-group", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Specifies the Key Value Stores to list.
+    public func listKeyValueStores(_ input: ListKeyValueStoresRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListKeyValueStoresResult> {
+        return self.client.execute(operation: "ListKeyValueStores", path: "/2020-05-31/key-value-store", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Gets the list of CloudFront origin access controls in this Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If
     /// 			the total number of items in the list exceeds the maximum that you specify, or the
     /// 			default maximum, the response is paginated. To get the next page of items, send another
@@ -887,6 +907,11 @@ public struct CloudFront: AWSService {
     /// 					the fields that you modified and those that you didn't.
     public func updateKeyGroup(_ input: UpdateKeyGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateKeyGroupResult> {
         return self.client.execute(operation: "UpdateKeyGroup", path: "/2020-05-31/key-group/{Id}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Specifies the Key Value Store to update.
+    public func updateKeyValueStore(_ input: UpdateKeyValueStoreRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateKeyValueStoreResult> {
+        return self.client.execute(operation: "UpdateKeyValueStore", path: "/2020-05-31/key-value-store/{Name}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a CloudFront origin access control.
@@ -1111,6 +1136,59 @@ extension CloudFront {
         )
     }
 
+    /// Specifies the Key Value Stores to list.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listKeyValueStoresPaginator<Result>(
+        _ input: ListKeyValueStoresRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListKeyValueStoresResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listKeyValueStores,
+            inputKey: \ListKeyValueStoresRequest.marker,
+            outputKey: \ListKeyValueStoresResult.keyValueStoreList?.nextMarker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listKeyValueStoresPaginator(
+        _ input: ListKeyValueStoresRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListKeyValueStoresResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listKeyValueStores,
+            inputKey: \ListKeyValueStoresRequest.marker,
+            outputKey: \ListKeyValueStoresResult.keyValueStoreList?.nextMarker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// List streaming distributions.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -1189,6 +1267,16 @@ extension CloudFront.ListInvalidationsRequest: AWSPaginateToken {
             distributionId: self.distributionId,
             marker: token,
             maxItems: self.maxItems
+        )
+    }
+}
+
+extension CloudFront.ListKeyValueStoresRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CloudFront.ListKeyValueStoresRequest {
+        return .init(
+            marker: token,
+            maxItems: self.maxItems,
+            status: self.status
         )
     }
 }

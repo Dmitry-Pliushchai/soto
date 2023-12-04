@@ -26,13 +26,13 @@ import SotoCore
 extension IVS {
     // MARK: Enums
 
-    public enum ChannelLatencyMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelLatencyMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case low = "LOW"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case advancedHDChannelType = "ADVANCED_HD"
         case advancedSDChannelType = "ADVANCED_SD"
         case basicChannelType = "BASIC"
@@ -40,20 +40,20 @@ extension IVS {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordingConfigurationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordingConfigurationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case interval = "INTERVAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum RenditionConfigurationRendition: String, CustomStringConvertible, Codable, Sendable {
+    public enum RenditionConfigurationRendition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullHd = "FULL_HD"
         case hd = "HD"
         case lowestResolution = "LOWEST_RESOLUTION"
@@ -61,27 +61,27 @@ extension IVS {
         public var description: String { return self.rawValue }
     }
 
-    public enum RenditionConfigurationRenditionSelection: String, CustomStringConvertible, Codable, Sendable {
+    public enum RenditionConfigurationRenditionSelection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case custom = "CUSTOM"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamHealth: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamHealth: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case starving = "STARVING"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamState: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case live = "LIVE"
         case offline = "OFFLINE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThumbnailConfigurationResolution: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThumbnailConfigurationResolution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullHd = "FULL_HD"
         case hd = "HD"
         case lowestResolution = "LOWEST_RESOLUTION"
@@ -89,13 +89,13 @@ extension IVS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ThumbnailConfigurationStorage: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThumbnailConfigurationStorage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case latest = "LATEST"
         case sequential = "SEQUENTIAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum TranscodePreset: String, CustomStringConvertible, Codable, Sendable {
+    public enum TranscodePreset: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case constrainedBandwidthTranscodePreset = "CONSTRAINED_BANDWIDTH_DELIVERY"
         case higherBandwidthTranscodePreset = "HIGHER_BANDWIDTH_DELIVERY"
         public var description: String { return self.rawValue }

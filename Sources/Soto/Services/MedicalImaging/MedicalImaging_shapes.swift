@@ -26,7 +26,7 @@ import SotoCore
 extension MedicalImaging {
     // MARK: Enums
 
-    public enum DatastoreStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatastoreStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
@@ -35,14 +35,14 @@ extension MedicalImaging {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImageSetState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImageSetState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleted = "DELETED"
         case locked = "LOCKED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImageSetWorkflowStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImageSetWorkflowStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case copied = "COPIED"
         case copyFailed = "COPY_FAILED"
         case copying = "COPYING"
@@ -56,7 +56,7 @@ extension MedicalImaging {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -64,7 +64,7 @@ extension MedicalImaging {
         public var description: String { return self.rawValue }
     }
 
-    public enum Operator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case between = "BETWEEN"
         case equal = "EQUAL"
         public var description: String { return self.rawValue }
@@ -325,7 +325,7 @@ extension MedicalImaging {
         public let clientToken: String
         /// The data store name.
         public let datastoreName: String?
-        /// The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+        /// The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
         public let kmsKeyArn: String?
         /// The tags provided when creating a data store.
         public let tags: [String: String]?
@@ -584,7 +584,7 @@ extension MedicalImaging {
         public let datastoreName: String
         /// The data store status.
         public let datastoreStatus: DatastoreStatus
-        /// The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+        /// The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
         public let kmsKeyArn: String?
         /// The timestamp when the data store was last updated.
         public let updatedAt: Date?
@@ -1050,13 +1050,13 @@ extension MedicalImaging {
     }
 
     public struct ImageSetsMetadataSummary: AWSDecodableShape {
-        /// The time an image set is created in AWS HealthImaging. Sample creation  date is provided in 1985-04-12T23:20:50.52Z format.
+        /// The time an image set is created. Sample creation  date is provided in 1985-04-12T23:20:50.52Z format.
         public let createdAt: Date?
         /// The DICOM tags associated with the image set.
         public let dicomTags: DICOMTags?
         /// The image set identifier.
         public let imageSetId: String
-        /// The time when an image was last updated in AWS HealthImaging.
+        /// The time an image set was last updated.
         public let updatedAt: Date?
         /// The image set version.
         public let version: Int?
@@ -1643,7 +1643,7 @@ public struct MedicalImagingErrorType: AWSErrorType {
     public static var serviceQuotaExceededException: Self { .init(.serviceQuotaExceededException) }
     /// The request was denied due to throttling.
     public static var throttlingException: Self { .init(.throttlingException) }
-    /// The input fails to satisfy the constraints specified by an AWS service.
+    /// The input fails to satisfy the constraints set by the service.
     public static var validationException: Self { .init(.validationException) }
 }
 

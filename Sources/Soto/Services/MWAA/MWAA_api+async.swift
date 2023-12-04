@@ -57,6 +57,7 @@ extension MWAA {
     }
 
     ///  Internal only. Publishes environment health metrics to Amazon CloudWatch.
+    @available(*, deprecated, message: "This API is for internal use and not meant for public use, and is no longer available.")
     public func publishMetrics(_ input: PublishMetricsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> PublishMetricsOutput {
         return try await self.client.execute(operation: "PublishMetrics", path: "/metrics/environments/{EnvironmentName}", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "ops.", logger: logger, on: eventLoop)
     }

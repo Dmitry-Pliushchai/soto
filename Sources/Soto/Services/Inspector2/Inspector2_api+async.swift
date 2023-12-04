@@ -66,7 +66,7 @@ extension Inspector2 {
         return try await self.client.execute(operation: "CancelSbomExport", path: "/sbomexport/cancel", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a filter resource using specified filter criteria.
+    /// Creates a filter resource using specified filter criteria. When the filter action is set to SUPPRESS this action creates a suppression rule.
     public func createFilter(_ input: CreateFilterRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateFilterResponse {
         return try await self.client.execute(operation: "CreateFilter", path: "/filters/create", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

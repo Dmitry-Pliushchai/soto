@@ -22,8 +22,8 @@ extension Route53RecoveryCluster {
     // MARK: Async API Calls
 
     /// Get the state for a routing control. A routing control is a simple on/off switch that you
-    /// 				can use to route traffic to cells. When a routing control state is On, traffic flows to a cell. When
-    /// 				the state is Off, traffic does not flow.  Before you can create a routing control, you must first create a cluster, and then host the control
+    /// 				can use to route traffic to cells. When a routing control state is set to ON, traffic flows to a cell. When
+    /// 				the state is set to OFF, traffic does not flow.  Before you can create a routing control, you must first create a cluster, and then host the control
     /// 				in a control panel on the cluster. For more information, see
     /// 					Create routing control structures in the Amazon Route 53 Application Recovery Controller Developer Guide.
     /// 				You access one of the endpoints for the cluster to get or update the routing control state to
@@ -42,8 +42,8 @@ extension Route53RecoveryCluster {
     /// 			state for each routing control, along with the control panel name and control panel ARN for the routing controls.
     /// 			If you specify a control panel ARN, this call lists the routing controls in the control panel. Otherwise, it lists
     /// 			all the routing controls in the cluster. A routing control is a simple on/off switch in Route 53 ARC that you
-    /// 			can use to route traffic to cells. When a routing control state is On, traffic flows to a cell. When
-    /// 			the state is Off, traffic does not flow. Before you can create a routing control, you must first create a cluster, and then host the control
+    /// 			can use to route traffic to cells. When a routing control state is set to ON, traffic flows to a cell. When
+    /// 			the state is set to OFF, traffic does not flow. Before you can create a routing control, you must first create a cluster, and then host the control
     /// 			in a control panel on the cluster. For more information, see
     /// 				Create routing control structures in the Amazon Route 53 Application Recovery Controller Developer Guide.
     /// 			You access one of the endpoints for the cluster to get or update the routing control state to
@@ -56,8 +56,8 @@ extension Route53RecoveryCluster {
         return try await self.client.execute(operation: "ListRoutingControls", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Set the state of the routing control to reroute traffic. You can set the value to be On or
-    /// 			Off. When the state is On, traffic flows to a cell. When the state is Off, traffic does not
+    /// Set the state of the routing control to reroute traffic. You can set the value to ON or
+    /// 			OFF. When the state is ON, traffic flows to a cell. When the state is OFF, traffic does not
     /// 			flow. With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing
     /// 				control state updates that help prevent unexpected outcomes, like fail open traffic routing. However,
     /// 				there are scenarios when you might want to bypass the routing control safeguards that are enforced with
@@ -76,8 +76,8 @@ extension Route53RecoveryCluster {
         return try await self.client.execute(operation: "UpdateRoutingControlState", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Set multiple routing control states. You can set the value for each state to be On or Off.
-    /// 			When the state is On, traffic flows to a cell. When it's Off, traffic does not
+    /// Set multiple routing control states. You can set the value for each state to be ON or OFF.
+    /// 			When the state is ON, traffic flows to a cell. When it's OFF, traffic does not
     /// 			flow. With Route 53 ARC, you can add safety rules for routing controls, which are safeguards for routing
     /// 				control state updates that help prevent unexpected outcomes, like fail open traffic routing. However,
     /// 				there are scenarios when you might want to bypass the routing control safeguards that are enforced with
@@ -105,8 +105,8 @@ extension Route53RecoveryCluster {
     /// 			state for each routing control, along with the control panel name and control panel ARN for the routing controls.
     /// 			If you specify a control panel ARN, this call lists the routing controls in the control panel. Otherwise, it lists
     /// 			all the routing controls in the cluster. A routing control is a simple on/off switch in Route 53 ARC that you
-    /// 			can use to route traffic to cells. When a routing control state is On, traffic flows to a cell. When
-    /// 			the state is Off, traffic does not flow. Before you can create a routing control, you must first create a cluster, and then host the control
+    /// 			can use to route traffic to cells. When a routing control state is set to ON, traffic flows to a cell. When
+    /// 			the state is set to OFF, traffic does not flow. Before you can create a routing control, you must first create a cluster, and then host the control
     /// 			in a control panel on the cluster. For more information, see
     /// 				Create routing control structures in the Amazon Route 53 Application Recovery Controller Developer Guide.
     /// 			You access one of the endpoints for the cluster to get or update the routing control state to

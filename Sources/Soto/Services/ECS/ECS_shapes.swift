@@ -26,7 +26,7 @@ import SotoCore
 extension ECS {
     // MARK: Enums
 
-    public enum AgentUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AgentUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case staged = "STAGED"
@@ -36,37 +36,37 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ApplicationProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case grpc = "grpc"
         case http = "http"
         case http2 = "http2"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssignPublicIp: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssignPublicIp: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum CPUArchitecture: String, CustomStringConvertible, Codable, Sendable {
+    public enum CPUArchitecture: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arm64 = "ARM64"
         case x8664 = "X86_64"
         public var description: String { return self.rawValue }
     }
 
-    public enum CapacityProviderField: String, CustomStringConvertible, Codable, Sendable {
+    public enum CapacityProviderField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CapacityProviderStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CapacityProviderStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CapacityProviderUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CapacityProviderUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleteComplete = "DELETE_COMPLETE"
         case deleteFailed = "DELETE_FAILED"
         case deleteInProgress = "DELETE_IN_PROGRESS"
@@ -76,7 +76,7 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClusterField: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClusterField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachments = "ATTACHMENTS"
         case configurations = "CONFIGURATIONS"
         case settings = "SETTINGS"
@@ -85,25 +85,25 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClusterSettingName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClusterSettingName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case containerInsights = "containerInsights"
         public var description: String { return self.rawValue }
     }
 
-    public enum Compatibility: String, CustomStringConvertible, Codable, Sendable {
+    public enum Compatibility: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case external = "EXTERNAL"
         case fargate = "FARGATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Connectivity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Connectivity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connected = "CONNECTED"
         case disconnected = "DISCONNECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContainerCondition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContainerCondition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case healthy = "HEALTHY"
         case start = "START"
@@ -111,13 +111,13 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContainerInstanceField: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContainerInstanceField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case containerInstanceHealth = "CONTAINER_INSTANCE_HEALTH"
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContainerInstanceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContainerInstanceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deregistering = "DEREGISTERING"
         case draining = "DRAINING"
@@ -126,72 +126,72 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentControllerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentControllerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeDeploy = "CODE_DEPLOY"
         case ecs = "ECS"
         case external = "EXTERNAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentRolloutState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentRolloutState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DesiredStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DesiredStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pending = "PENDING"
         case running = "RUNNING"
         case stopped = "STOPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceCgroupPermission: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceCgroupPermission: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mknod = "mknod"
         case read = "read"
         case write = "write"
         public var description: String { return self.rawValue }
     }
 
-    public enum EFSAuthorizationConfigIAM: String, CustomStringConvertible, Codable, Sendable {
+    public enum EFSAuthorizationConfigIAM: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EFSTransitEncryption: String, CustomStringConvertible, Codable, Sendable {
+    public enum EFSTransitEncryption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EnvironmentFileType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnvironmentFileType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3 = "s3"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExecuteCommandLogging: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecuteCommandLogging: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case none = "NONE"
         case override = "OVERRIDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FirelensConfigurationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FirelensConfigurationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fluentbit = "fluentbit"
         case fluentd = "fluentd"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case unhealthy = "UNHEALTHY"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceHealthCheckState: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceHealthCheckState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case impaired = "IMPAIRED"
         case initializing = "INITIALIZING"
         case insufficientData = "INSUFFICIENT_DATA"
@@ -199,26 +199,26 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceHealthCheckType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceHealthCheckType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case containerRuntime = "CONTAINER_RUNTIME"
         public var description: String { return self.rawValue }
     }
 
-    public enum IpcMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum IpcMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case host = "host"
         case none = "none"
         case task = "task"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case external = "EXTERNAL"
         case fargate = "FARGATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogDriver: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogDriver: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsfirelens = "awsfirelens"
         case awslogs = "awslogs"
         case fluentd = "fluentd"
@@ -230,24 +230,24 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum ManagedAgentName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ManagedAgentName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case executeCommandAgent = "ExecuteCommandAgent"
         public var description: String { return self.rawValue }
     }
 
-    public enum ManagedScalingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ManagedScalingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ManagedTerminationProtection: String, CustomStringConvertible, Codable, Sendable {
+    public enum ManagedTerminationProtection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsvpc = "awsvpc"
         case bridge = "bridge"
         case host = "host"
@@ -255,7 +255,7 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum OSFamily: String, CustomStringConvertible, Codable, Sendable {
+    public enum OSFamily: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linux = "LINUX"
         case windowsServer2004Core = "WINDOWS_SERVER_2004_CORE"
         case windowsServer2016Full = "WINDOWS_SERVER_2016_FULL"
@@ -267,134 +267,141 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum PidMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum PidMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case host = "host"
         case task = "task"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlacementConstraintType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlacementConstraintType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case distinctInstance = "distinctInstance"
         case memberOf = "memberOf"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlacementStrategyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlacementStrategyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case binpack = "binpack"
         case random = "random"
         case spread = "spread"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlatformDeviceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlatformDeviceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gpu = "GPU"
         public var description: String { return self.rawValue }
     }
 
-    public enum PropagateTags: String, CustomStringConvertible, Codable, Sendable {
+    public enum PropagateTags: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case service = "SERVICE"
         case taskDefinition = "TASK_DEFINITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProxyConfigurationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProxyConfigurationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appmesh = "APPMESH"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gpu = "GPU"
         case inferenceAccelerator = "InferenceAccelerator"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScaleUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScaleUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case percent = "PERCENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SchedulingStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchedulingStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daemon = "DAEMON"
         case replica = "REPLICA"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scope: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case shared = "shared"
         case task = "task"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceField: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SettingName: String, CustomStringConvertible, Codable, Sendable {
+    public enum SettingName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsvpcTrunking = "awsvpcTrunking"
         case containerInsights = "containerInsights"
         case containerInstanceLongArnFormat = "containerInstanceLongArnFormat"
         case fargateFipsMode = "fargateFIPSMode"
         case fargateTaskRetirementWaitPeriod = "fargateTaskRetirementWaitPeriod"
+        case guardDutyActivate = "guardDutyActivate"
         case serviceLongArnFormat = "serviceLongArnFormat"
         case tagResourceAuthorization = "tagResourceAuthorization"
         case taskLongArnFormat = "taskLongArnFormat"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SettingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case awsManaged = "aws_managed"
+        case user = "user"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum StabilityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StabilityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case stabilizing = "STABILIZING"
         case steadyState = "STEADY_STATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case containerInstance = "container-instance"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskDefinitionFamilyStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskDefinitionFamilyStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case all = "ALL"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskDefinitionField: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskDefinitionField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskDefinitionPlacementConstraintType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskDefinitionPlacementConstraintType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case memberOf = "memberOf"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskDefinitionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskDefinitionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleteInProgress = "DELETE_IN_PROGRESS"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskField: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskSetField: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskSetField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tags = "TAGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskStopCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskStopCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case essentialContainerExited = "EssentialContainerExited"
         case serviceSchedulerInitiated = "ServiceSchedulerInitiated"
         case spotInterruption = "SpotInterruption"
@@ -404,13 +411,13 @@ extension ECS {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransportProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransportProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tcp = "tcp"
         case udp = "udp"
         public var description: String { return self.rawValue }
     }
 
-    public enum UlimitName: String, CustomStringConvertible, Codable, Sendable {
+    public enum UlimitName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case core = "core"
         case cpu = "cpu"
         case data = "data"
@@ -824,7 +831,7 @@ extension ECS {
         /// 			Region. If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a
         /// 			Cloud Map namespace with the "API calls" method of instance discovery only. This instance
         /// 			discovery method is the "HTTP" namespace type in the Command Line Interface. Other types of instance
-        /// 			discovery aren't used by Service Connect. If you update the service with an empty string "" for the namespace name,
+        /// 			discovery aren't used by Service Connect. If you update the cluster with an empty string "" for the namespace name,
         /// 			the cluster configuration for Service Connect is removed. Note that the namespace will
         /// 			remain in Cloud Map and must be deleted separately. For more information about Cloud Map, see Working
         /// 				with Services in the Cloud Map Developer Guide.
@@ -1828,7 +1835,7 @@ extension ECS {
         /// 				defaultCapacityProviderStrategy for the cluster is used. A capacity provider strategy may contain a maximum of 6 capacity providers.
         public let capacityProviderStrategy: [CapacityProviderStrategyItem]?
         /// An identifier that you provide to ensure the idempotency of the request. It must be
-        /// 			unique and is case sensitive. Up to 32 ASCII characters are allowed.
+        /// 			unique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.
         public let clientToken: String?
         /// The short name or full Amazon Resource Name (ARN) of the cluster that you run your service on.
         /// 			If you do not specify a cluster, the default cluster is assumed.
@@ -2087,8 +2094,8 @@ extension ECS {
         /// 			used. The PutClusterCapacityProviders API operation is used to update the
         /// 			list of available capacity providers for a cluster after the cluster is created.
         public let capacityProviderStrategy: [CapacityProviderStrategyItem]?
-        /// The identifier that you provide to ensure the idempotency of the request. It's case
-        /// 			sensitive and must be unique. It can be up to 32 ASCII characters are allowed.
+        /// An identifier that you provide to ensure the idempotency of the request. It must be
+        /// 			unique and is case sensitive. Up to 36 ASCII characters in the range of 33-126 (inclusive) are allowed.
         public let clientToken: String?
         /// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the
         /// 			task set in.
@@ -4671,8 +4678,8 @@ extension ECS {
         /// 					network mode.   This parameter is available for both the EC2 and Fargate launch types.   This parameter is available for both the Linux and Windows operating systems.   The container instance must have at least version 1.67.0 of the container agent
         /// 					and at least version 1.67.0-1 of the ecs-init package    You can specify a maximum of 100 port ranges per container.   You do not specify a hostPortRange. The value of the hostPortRange is set
         /// 					as follows:   For containers in a task with the awsvpc network mode,
-        /// 							the hostPort is set to the same value as the
-        /// 								containerPort. This is a static mapping
+        /// 							the hostPortRange is set to the same value as the
+        /// 								containerPortRange. This is a static mapping
         /// 							strategy.   For containers in a task with the bridge network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.     The containerPortRange valid values are between 1 and
         /// 					65535.   A port can only be included in one port mapping per container.   You cannot specify overlapping port ranges.   The first port in the range must be less than last port in the range.   Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports. For more information, see  Issue #11185 on the Github website. For information about how to  turn off the docker-proxy in the Docker daemon config file, see Docker daemon in the Amazon ECS Developer Guide.   You can call  DescribeTasks to view the hostPortRange which
         /// 			are the host ports that are bound to the container ports.
@@ -4815,7 +4822,8 @@ extension ECS {
         /// 			protocol that your application uses. If you set this parameter, Amazon ECS adds
         /// 			protocol-specific connection handling to the Service Connect proxy. If you set this
         /// 			parameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch. If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't
-        /// 			add protocol-specific telemetry for TCP. Tasks that run in a namespace can use short names to connect
+        /// 			add protocol-specific telemetry for TCP.  appProtocol is immutable in a Service Connect service. Updating this field
+        /// 			requires a service deletion and redeployment. Tasks that run in a namespace can use short names to connect
         /// 	to services in the namespace. Tasks can connect to services across all of the clusters in the namespace.
         /// 	Tasks connect through a managed proxy container
         /// 	that collects logs and metrics for increased visibility.
@@ -4835,8 +4843,8 @@ extension ECS {
         /// 					network mode.   This parameter is available for both the EC2 and Fargate launch types.   This parameter is available for both the Linux and Windows operating systems.   The container instance must have at least version 1.67.0 of the container agent
         /// 					and at least version 1.67.0-1 of the ecs-init package    You can specify a maximum of 100 port ranges per container.   You do not specify a hostPortRange. The value of the hostPortRange is set
         /// 					as follows:   For containers in a task with the awsvpc network mode,
-        /// 							the hostPort is set to the same value as the
-        /// 								containerPort. This is a static mapping
+        /// 							the hostPortRange is set to the same value as the
+        /// 								containerPortRange. This is a static mapping
         /// 							strategy.   For containers in a task with the bridge network mode, the Amazon ECS agent finds open host ports from the default ephemeral range and passes it to docker to bind them to the container ports.     The containerPortRange valid values are between 1 and
         /// 					65535.   A port can only be included in one port mapping per container.   You cannot specify overlapping port ranges.   The first port in the range must be less than last port in the range.   Docker recommends that you turn off the docker-proxy in the Docker daemon config file when you have a large number of ports. For more information, see  Issue #11185 on the Github website. For information about how to  turn off the docker-proxy in the Docker daemon config file, see Docker daemon in the Amazon ECS Developer Guide.   You can call  DescribeTasks to view the hostPortRange which
         /// 			are the host ports that are bound to the container ports.
@@ -4874,7 +4882,10 @@ extension ECS {
         /// 			hyphens (-). The name can't start with a hyphen. For more information, see Service Connect in the Amazon Elastic Container Service Developer Guide.
         public let name: String?
         /// The protocol used for the port mapping. Valid values are tcp and
-        /// 				udp. The default is tcp.
+        /// 			udp. The default is tcp. protocol is immutable in a
+        /// 			Service Connect service. Updating this field requires a service deletion and
+        /// 			redeployment.
+        ///
         public let `protocol`: TransportProtocol?
 
         public init(appProtocol: ApplicationProtocol? = nil, containerPort: Int? = nil, containerPortRange: String? = nil, hostPort: Int? = nil, name: String? = nil, protocol: TransportProtocol? = nil) {
@@ -4976,7 +4987,9 @@ extension ECS {
         /// 			them. Use fargateTaskRetirementWaitPeriod to set the wait time to retire a
         /// 			Fargate task to the default. For information about the Fargate tasks maintenance,
         /// 			see Amazon Web Services Fargate task
-        /// 				maintenance in the Amazon ECS Developer Guide.
+        /// 				maintenance in the Amazon ECS Developer Guide. The guardDutyActivate parameter is read-only in Amazon ECS and indicates whether
+        /// 			Amazon ECS Runtime Monitoring is enabled or disabled by your security administrator in your
+        /// 			Amazon ECS account. Amazon GuardDuty controls this account setting on your behalf. For more information, see Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring.
         public let name: SettingName
         /// The account setting value for the specified principal ARN. Accepted values are
         /// 				enabled, disabled, on, and
@@ -5021,7 +5034,9 @@ extension ECS {
         /// 			you specify tagResourceAuthorization, the opt-in option for tagging
         /// 			resources on creation is affected. For information about the opt-in timeline, see Tagging authorization timeline in the Amazon ECS Developer
         /// 				Guide. If you specify fargateTaskRetirementWaitPeriod, the
-        /// 			wait time to retire a Fargate task is affected.
+        /// 			wait time to retire a Fargate task is affected. The guardDutyActivate parameter is read-only in Amazon ECS and indicates whether
+        /// 			Amazon ECS Runtime Monitoring is enabled or disabled by your security administrator in your
+        /// 			Amazon ECS account. Amazon GuardDuty controls this account setting on your behalf. For more information, see Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring.
         public let name: SettingName
         /// The ARN of the principal, which can be a user, role, or the root user. If
         /// 			you specify the root user, it modifies the account setting for all users, roles,
@@ -5454,6 +5469,10 @@ extension ECS {
         /// 				defaultCapacityProviderStrategy for the cluster is used. When you use cluster auto scaling, you must specify
         /// 				capacityProviderStrategy and not launchType.  A capacity provider strategy may contain a maximum of 6 capacity providers.
         public let capacityProviderStrategy: [CapacityProviderStrategyItem]?
+        /// An identifier that you provide to ensure the idempotency of the request. It must be unique
+        /// 			and is case sensitive. Up to 64 characters are allowed. The valid characters are characters in the range of 33-126, inclusive. For more information, see
+        /// 				Ensuring idempotency.
+        public let clientToken: String?
         /// The short name or full Amazon Resource Name (ARN) of the cluster to run your task on.
         /// 			If you do not specify a cluster, the default cluster is assumed.
         public let cluster: String?
@@ -5517,12 +5536,12 @@ extension ECS {
         /// The reference ID to use for the task. The reference ID can have a maximum length of
         /// 			1024 characters.
         public let referenceId: String?
-        /// An optional tag specified when a task is started. For example, if you automatically
-        /// 			trigger a task to run a batch process job, you could apply a unique identifier for that
-        /// 			job to your task with the startedBy parameter. You can then identify which
-        /// 			tasks belong to that job by filtering the results of a ListTasks call
-        /// 			with the startedBy value. Up to 36 letters (uppercase and lowercase),
-        /// 			numbers, hyphens (-), and underscores (_) are allowed. If a task is started by an Amazon ECS service, then the startedBy parameter
+        /// An optional tag specified when a task is started. For example, if you automatically trigger
+        /// 			a task to run a batch process job, you could apply a unique identifier for that job to
+        /// 			your task with the startedBy parameter. You can then identify which tasks
+        /// 			belong to that job by filtering the results of a ListTasks call with
+        /// 			the startedBy value. Up to 128 letters (uppercase and lowercase), numbers,
+        /// 			hyphens (-), and underscores (_) are allowed. If a task is started by an Amazon ECS service, then the startedBy parameter
         /// 			contains the deployment ID of the service that starts it.
         public let startedBy: String?
         /// The metadata that you apply to the task to help you categorize and organize them. Each
@@ -5544,8 +5563,9 @@ extension ECS {
         /// 				arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1. For more information, see Policy Resources for Amazon ECS in the Amazon Elastic Container Service developer Guide.
         public let taskDefinition: String
 
-        public init(capacityProviderStrategy: [CapacityProviderStrategyItem]? = nil, cluster: String? = nil, count: Int? = nil, enableECSManagedTags: Bool? = nil, enableExecuteCommand: Bool? = nil, group: String? = nil, launchType: LaunchType? = nil, networkConfiguration: NetworkConfiguration? = nil, overrides: TaskOverride? = nil, placementConstraints: [PlacementConstraint]? = nil, placementStrategy: [PlacementStrategy]? = nil, platformVersion: String? = nil, propagateTags: PropagateTags? = nil, referenceId: String? = nil, startedBy: String? = nil, tags: [Tag]? = nil, taskDefinition: String) {
+        public init(capacityProviderStrategy: [CapacityProviderStrategyItem]? = nil, clientToken: String? = RunTaskRequest.idempotencyToken(), cluster: String? = nil, count: Int? = nil, enableECSManagedTags: Bool? = nil, enableExecuteCommand: Bool? = nil, group: String? = nil, launchType: LaunchType? = nil, networkConfiguration: NetworkConfiguration? = nil, overrides: TaskOverride? = nil, placementConstraints: [PlacementConstraint]? = nil, placementStrategy: [PlacementStrategy]? = nil, platformVersion: String? = nil, propagateTags: PropagateTags? = nil, referenceId: String? = nil, startedBy: String? = nil, tags: [Tag]? = nil, taskDefinition: String) {
             self.capacityProviderStrategy = capacityProviderStrategy
+            self.clientToken = clientToken
             self.cluster = cluster
             self.count = count
             self.enableECSManagedTags = enableECSManagedTags
@@ -5576,6 +5596,7 @@ extension ECS {
 
         private enum CodingKeys: String, CodingKey {
             case capacityProviderStrategy = "capacityProviderStrategy"
+            case clientToken = "clientToken"
             case cluster = "cluster"
             case count = "count"
             case enableECSManagedTags = "enableECSManagedTags"
@@ -6077,18 +6098,24 @@ extension ECS {
         /// The ARN of the principal. It can be a user, role, or the root user. If this
         /// 			field is omitted, the authenticated user is assumed.
         public let principalArn: String?
+        /// Indicates whether Amazon Web Services manages the account setting, or if the user manages it.  aws_managed account settings are read-only, as Amazon Web Services manages such on the
+        /// 			customer's behalf. Currently, the guardDutyActivate account setting is the
+        /// 			only one Amazon Web Services manages.
+        public let type: SettingType?
         /// Determines whether the account setting is on or off for the specified resource.
         public let value: String?
 
-        public init(name: SettingName? = nil, principalArn: String? = nil, value: String? = nil) {
+        public init(name: SettingName? = nil, principalArn: String? = nil, type: SettingType? = nil, value: String? = nil) {
             self.name = name
             self.principalArn = principalArn
+            self.type = type
             self.value = value
         }
 
         private enum CodingKeys: String, CodingKey {
             case name = "name"
             case principalArn = "principalArn"
+            case type = "type"
             case value = "value"
         }
     }
@@ -7692,6 +7719,7 @@ public struct ECSErrorType: AWSErrorType {
         case clusterContainsServicesException = "ClusterContainsServicesException"
         case clusterContainsTasksException = "ClusterContainsTasksException"
         case clusterNotFoundException = "ClusterNotFoundException"
+        case conflictException = "ConflictException"
         case invalidParameterException = "InvalidParameterException"
         case limitExceededException = "LimitExceededException"
         case missingVersionException = "MissingVersionException"
@@ -7740,7 +7768,7 @@ public struct ECSErrorType: AWSErrorType {
     public static var blockedException: Self { .init(.blockedException) }
     /// These errors are usually caused by a client action. This client action might be using
     /// 			an action or resource on behalf of a user that doesn't have permissions to use the
-    /// 			action or resource,. Or, it might be specifying an identifier that isn't valid.
+    /// 			action or resource. Or, it might be specifying an identifier that isn't valid.
     public static var clientException: Self { .init(.clientException) }
     /// You can't delete a cluster that has registered container instances. First, deregister
     /// 			the container instances before you can delete the cluster. For more information, see
@@ -7754,6 +7782,13 @@ public struct ECSErrorType: AWSErrorType {
     public static var clusterContainsTasksException: Self { .init(.clusterContainsTasksException) }
     /// The specified cluster wasn't found. You can view your available clusters with ListClusters. Amazon ECS clusters are Region specific.
     public static var clusterNotFoundException: Self { .init(.clusterNotFoundException) }
+    /// The RunTask request could not be processed due to conflicts. The provided
+    /// 				clientToken is already in use with a different RunTask
+    /// 			request. The resourceIds are the existing task ARNs which are already
+    /// 			associated with the clientToken.  To fix this issue:   Run RunTask with a unique
+    /// 				clientToken.   Run RunTask with the clientToken and the original set of
+    /// 					parameters
+    public static var conflictException: Self { .init(.conflictException) }
     /// The specified parameter isn't valid. Review the available parameters for the API
     /// 			request.
     public static var invalidParameterException: Self { .init(.invalidParameterException) }

@@ -23,7 +23,7 @@ extension Location {
 
     /// Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  You can associate up to five geofence collections to each tracker resource.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.
     public func associateTrackerConsumer(_ input: AssociateTrackerConsumerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateTrackerConsumerResponse {
-        return try await self.client.execute(operation: "AssociateTrackerConsumer", path: "/tracking/v0/trackers/{TrackerName}/consumers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "AssociateTrackerConsumer", path: "/tracking/v0/trackers/{TrackerName}/consumers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Deletes the position history of one or more devices from a tracker resource.
@@ -68,97 +68,97 @@ extension Location {
 
     /// Creates a geofence collection, which manages and stores geofences.
     public func createGeofenceCollection(_ input: CreateGeofenceCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateGeofenceCollectionResponse {
-        return try await self.client.execute(operation: "CreateGeofenceCollection", path: "/geofencing/v0/collections", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "geofencing.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreateGeofenceCollection", path: "/geofencing/v0/collections", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.geofencing.", logger: logger, on: eventLoop)
     }
 
     /// Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.  For more information, see Using API keys.
     public func createKey(_ input: CreateKeyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateKeyResponse {
-        return try await self.client.execute(operation: "CreateKey", path: "/metadata/v0/keys", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreateKey", path: "/metadata/v0/keys", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.  If your application is tracking or routing assets you use in your business, such  as delivery vehicles or employees, you must not use Esri as your geolocation  provider. See section 82 of the Amazon Web Services service terms for more details.
     public func createMap(_ input: CreateMapRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateMapResponse {
-        return try await self.client.execute(operation: "CreateMap", path: "/maps/v0/maps", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "maps.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreateMap", path: "/maps/v0/maps", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.maps.", logger: logger, on: eventLoop)
     }
 
     /// Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the SearchPlaceIndexForText operation, and reverse geocode coordinates by using the SearchPlaceIndexForPosition operation, and enable autosuggestions by using the SearchPlaceIndexForSuggestions operation.  If your application is tracking or routing assets you use in your business, such  as delivery vehicles or employees, you must not use Esri as your geolocation  provider. See section 82 of the Amazon Web Services service terms for more details.
     public func createPlaceIndex(_ input: CreatePlaceIndexRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreatePlaceIndexResponse {
-        return try await self.client.execute(operation: "CreatePlaceIndex", path: "/places/v0/indexes", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "places.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreatePlaceIndex", path: "/places/v0/indexes", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.places.", logger: logger, on: eventLoop)
     }
 
     /// Creates a route calculator resource in your Amazon Web Services account. You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.  If your application is tracking or routing assets you use in your business, such  as delivery vehicles or employees, you must not use Esri as your geolocation  provider. See section 82 of the Amazon Web Services service terms for more details.
     public func createRouteCalculator(_ input: CreateRouteCalculatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateRouteCalculatorResponse {
-        return try await self.client.execute(operation: "CreateRouteCalculator", path: "/routes/v0/calculators", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "routes.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreateRouteCalculator", path: "/routes/v0/calculators", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.routes.", logger: logger, on: eventLoop)
     }
 
     /// Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
     public func createTracker(_ input: CreateTrackerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateTrackerResponse {
-        return try await self.client.execute(operation: "CreateTracker", path: "/tracking/v0/trackers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "CreateTracker", path: "/tracking/v0/trackers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Deletes a geofence collection from your Amazon Web Services account.  This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored.
     public func deleteGeofenceCollection(_ input: DeleteGeofenceCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteGeofenceCollectionResponse {
-        return try await self.client.execute(operation: "DeleteGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "geofencing.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeleteGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.geofencing.", logger: logger, on: eventLoop)
     }
 
     /// Deletes the specified API key. The API key must have been deactivated more than 90 days previously.
     public func deleteKey(_ input: DeleteKeyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteKeyResponse {
-        return try await self.client.execute(operation: "DeleteKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeleteKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Deletes a map resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the map is being used in an application, the map may not render.
     public func deleteMap(_ input: DeleteMapRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteMapResponse {
-        return try await self.client.execute(operation: "DeleteMap", path: "/maps/v0/maps/{MapName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "maps.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeleteMap", path: "/maps/v0/maps/{MapName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.maps.", logger: logger, on: eventLoop)
     }
 
     /// Deletes a place index resource from your Amazon Web Services account.  This operation deletes the resource permanently.
     public func deletePlaceIndex(_ input: DeletePlaceIndexRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeletePlaceIndexResponse {
-        return try await self.client.execute(operation: "DeletePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "places.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeletePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.places.", logger: logger, on: eventLoop)
     }
 
     /// Deletes a route calculator resource from your Amazon Web Services account.  This operation deletes the resource permanently.
     public func deleteRouteCalculator(_ input: DeleteRouteCalculatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteRouteCalculatorResponse {
-        return try await self.client.execute(operation: "DeleteRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "routes.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeleteRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.routes.", logger: logger, on: eventLoop)
     }
 
     /// Deletes a tracker resource from your Amazon Web Services account.  This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications.
     public func deleteTracker(_ input: DeleteTrackerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteTrackerResponse {
-        return try await self.client.execute(operation: "DeleteTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DeleteTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the geofence collection details.
     public func describeGeofenceCollection(_ input: DescribeGeofenceCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeGeofenceCollectionResponse {
-        return try await self.client.execute(operation: "DescribeGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "geofencing.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribeGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.geofencing.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the API key resource details.
     public func describeKey(_ input: DescribeKeyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeKeyResponse {
-        return try await self.client.execute(operation: "DescribeKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribeKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the map resource details.
     public func describeMap(_ input: DescribeMapRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeMapResponse {
-        return try await self.client.execute(operation: "DescribeMap", path: "/maps/v0/maps/{MapName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "maps.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribeMap", path: "/maps/v0/maps/{MapName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.maps.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the place index resource details.
     public func describePlaceIndex(_ input: DescribePlaceIndexRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribePlaceIndexResponse {
-        return try await self.client.execute(operation: "DescribePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "places.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.places.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the route calculator resource details.
     public func describeRouteCalculator(_ input: DescribeRouteCalculatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeRouteCalculatorResponse {
-        return try await self.client.execute(operation: "DescribeRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "routes.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribeRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.routes.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves the tracker resource details.
     public func describeTracker(_ input: DescribeTrackerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeTrackerResponse {
-        return try await self.client.execute(operation: "DescribeTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DescribeTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Removes the association between a tracker resource and a geofence collection.  Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences.
     public func disassociateTrackerConsumer(_ input: DisassociateTrackerConsumerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisassociateTrackerConsumerResponse {
-        return try await self.client.execute(operation: "DisassociateTrackerConsumer", path: "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "DisassociateTrackerConsumer", path: "/tracking/v0/trackers/{TrackerName}/consumers/{ConsumerArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Retrieves a device's most recent position according to its sample time.  Device positions are deleted after 30 days.
@@ -208,7 +208,7 @@ extension Location {
 
     /// Lists geofence collections in your Amazon Web Services account.
     public func listGeofenceCollections(_ input: ListGeofenceCollectionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListGeofenceCollectionsResponse {
-        return try await self.client.execute(operation: "ListGeofenceCollections", path: "/geofencing/v0/list-collections", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "geofencing.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListGeofenceCollections", path: "/geofencing/v0/list-collections", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.geofencing.", logger: logger, on: eventLoop)
     }
 
     /// Lists geofences stored in a given geofence collection.
@@ -218,37 +218,37 @@ extension Location {
 
     /// Lists API key resources in your Amazon Web Services account.
     public func listKeys(_ input: ListKeysRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListKeysResponse {
-        return try await self.client.execute(operation: "ListKeys", path: "/metadata/v0/list-keys", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListKeys", path: "/metadata/v0/list-keys", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Lists map resources in your Amazon Web Services account.
     public func listMaps(_ input: ListMapsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListMapsResponse {
-        return try await self.client.execute(operation: "ListMaps", path: "/maps/v0/list-maps", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "maps.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListMaps", path: "/maps/v0/list-maps", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.maps.", logger: logger, on: eventLoop)
     }
 
     /// Lists place index resources in your Amazon Web Services account.
     public func listPlaceIndexes(_ input: ListPlaceIndexesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListPlaceIndexesResponse {
-        return try await self.client.execute(operation: "ListPlaceIndexes", path: "/places/v0/list-indexes", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "places.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListPlaceIndexes", path: "/places/v0/list-indexes", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.places.", logger: logger, on: eventLoop)
     }
 
     /// Lists route calculator resources in your Amazon Web Services account.
     public func listRouteCalculators(_ input: ListRouteCalculatorsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListRouteCalculatorsResponse {
-        return try await self.client.execute(operation: "ListRouteCalculators", path: "/routes/v0/list-calculators", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "routes.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListRouteCalculators", path: "/routes/v0/list-calculators", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.routes.", logger: logger, on: eventLoop)
     }
 
     /// Returns a list of tags that are applied to the specified Amazon Location resource.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTagsForResourceResponse {
-        return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Lists geofence collections currently associated to the given tracker resource.
     public func listTrackerConsumers(_ input: ListTrackerConsumersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTrackerConsumersResponse {
-        return try await self.client.execute(operation: "ListTrackerConsumers", path: "/tracking/v0/trackers/{TrackerName}/list-consumers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListTrackerConsumers", path: "/tracking/v0/trackers/{TrackerName}/list-consumers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Lists tracker resources in your Amazon Web Services account.
     public func listTrackers(_ input: ListTrackersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTrackersResponse {
-        return try await self.client.execute(operation: "ListTrackers", path: "/tracking/v0/list-trackers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListTrackers", path: "/tracking/v0/list-trackers", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 
     /// Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
@@ -273,42 +273,42 @@ extension Location {
 
     /// Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag.  You can associate up to 50 tags with a resource.
     public func tagResource(_ input: TagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> TagResourceResponse {
-        return try await self.client.execute(operation: "TagResource", path: "/tags/{ResourceArn}", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "TagResource", path: "/tags/{ResourceArn}", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Removes one or more tags from the specified Amazon Location resource.
     public func untagResource(_ input: UntagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UntagResourceResponse {
-        return try await self.client.execute(operation: "UntagResource", path: "/tags/{ResourceArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UntagResource", path: "/tags/{ResourceArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties of a given geofence collection.
     public func updateGeofenceCollection(_ input: UpdateGeofenceCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateGeofenceCollectionResponse {
-        return try await self.client.execute(operation: "UpdateGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "geofencing.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdateGeofenceCollection", path: "/geofencing/v0/collections/{CollectionName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.geofencing.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties of a given API key resource.
     public func updateKey(_ input: UpdateKeyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateKeyResponse {
-        return try await self.client.execute(operation: "UpdateKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "metadata.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdateKey", path: "/metadata/v0/keys/{KeyName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.metadata.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties of a given map resource.
     public func updateMap(_ input: UpdateMapRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateMapResponse {
-        return try await self.client.execute(operation: "UpdateMap", path: "/maps/v0/maps/{MapName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "maps.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdateMap", path: "/maps/v0/maps/{MapName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.maps.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties of a given place index resource.
     public func updatePlaceIndex(_ input: UpdatePlaceIndexRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdatePlaceIndexResponse {
-        return try await self.client.execute(operation: "UpdatePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "places.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdatePlaceIndex", path: "/places/v0/indexes/{IndexName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.places.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties for a given route calculator resource.
     public func updateRouteCalculator(_ input: UpdateRouteCalculatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateRouteCalculatorResponse {
-        return try await self.client.execute(operation: "UpdateRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "routes.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdateRouteCalculator", path: "/routes/v0/calculators/{CalculatorName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.routes.", logger: logger, on: eventLoop)
     }
 
     /// Updates the specified properties of a given tracker resource.
     public func updateTracker(_ input: UpdateTrackerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateTrackerResponse {
-        return try await self.client.execute(operation: "UpdateTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "tracking.", logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "UpdateTracker", path: "/tracking/v0/trackers/{TrackerName}", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "cp.tracking.", logger: logger, on: eventLoop)
     }
 }
 

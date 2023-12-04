@@ -26,70 +26,70 @@ import SotoCore
 extension PrivateNetworks {
     // MARK: Enums
 
-    public enum AcknowledgmentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AcknowledgmentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acknowledged = "ACKNOWLEDGED"
         case acknowledging = "ACKNOWLEDGING"
         case unacknowledged = "UNACKNOWLEDGED"
         public var description: String { return self.rawValue }
     }
 
-    public enum CommitmentLength: String, CustomStringConvertible, Codable, Sendable {
+    public enum CommitmentLength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneYear = "ONE_YEAR"
         case sixtyDays = "SIXTY_DAYS"
         case threeYears = "THREE_YEARS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceIdentifierFilterKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceIdentifierFilterKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case order = "ORDER"
         case status = "STATUS"
         case trafficGroup = "TRAFFIC_GROUP"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceIdentifierStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceIdentifierStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ElevationReference: String, CustomStringConvertible, Codable, Sendable {
+    public enum ElevationReference: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agl = "AGL"
         case amsl = "AMSL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ElevationUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum ElevationUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Feet.
         case feet = "FEET"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case initial = "INITIAL"
         case unhealthy = "UNHEALTHY"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkFilterKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkFilterKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkResourceDefinitionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkResourceDefinitionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deviceIdentifier = "DEVICE_IDENTIFIER"
         case radioUnit = "RADIO_UNIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkResourceFilterKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkResourceFilterKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case order = "ORDER"
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkResourceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkResourceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creatingShippingLabel = "CREATING_SHIPPING_LABEL"
         case deleted = "DELETED"
@@ -102,17 +102,17 @@ extension PrivateNetworks {
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case radioUnit = "RADIO_UNIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkSiteFilterKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkSiteFilterKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkSiteStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkSiteStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case created = "CREATED"
         case deleted = "DELETED"
@@ -121,7 +121,7 @@ extension PrivateNetworks {
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case created = "CREATED"
         case deleted = "DELETED"
@@ -130,13 +130,13 @@ extension PrivateNetworks {
         public var description: String { return self.rawValue }
     }
 
-    public enum OrderFilterKeys: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrderFilterKeys: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case networkSite = "NETWORK_SITE"
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case commitment = "COMMITMENT"
         case replace = "REPLACE"
         case `return` = "RETURN"

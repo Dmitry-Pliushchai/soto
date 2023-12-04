@@ -26,12 +26,12 @@ import SotoCore
 extension MachineLearning {
     // MARK: Enums
 
-    public enum Algorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum Algorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sgd = "sgd"
         public var description: String { return self.rawValue }
     }
 
-    public enum BatchPredictionFilterVariable: String, CustomStringConvertible, Codable, Sendable {
+    public enum BatchPredictionFilterVariable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdAt = "CreatedAt"
         case dataUri = "DataURI"
         case datasourceId = "DataSourceId"
@@ -43,7 +43,7 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceFilterVariable: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceFilterVariable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdAt = "CreatedAt"
         case dataUri = "DataLocationS3"
         case iamUser = "IAMUser"
@@ -53,13 +53,13 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum DetailsAttributes: String, CustomStringConvertible, Codable, Sendable {
+    public enum DetailsAttributes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case algorithm = "Algorithm"
         case predictiveModelType = "PredictiveModelType"
         public var description: String { return self.rawValue }
     }
 
-    public enum EntityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EntityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case deleted = "DELETED"
         case failed = "FAILED"
@@ -68,7 +68,7 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum EvaluationFilterVariable: String, CustomStringConvertible, Codable, Sendable {
+    public enum EvaluationFilterVariable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdAt = "CreatedAt"
         case dataUri = "DataURI"
         case datasourceId = "DataSourceId"
@@ -80,7 +80,7 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum MLModelFilterVariable: String, CustomStringConvertible, Codable, Sendable {
+    public enum MLModelFilterVariable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case algorithm = "Algorithm"
         case createdAt = "CreatedAt"
         case iamUser = "IAMUser"
@@ -94,14 +94,14 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum MLModelType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MLModelType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case binary = "BINARY"
         case multiclass = "MULTICLASS"
         case regression = "REGRESSION"
         public var description: String { return self.rawValue }
     }
 
-    public enum RealtimeEndpointStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RealtimeEndpointStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case none = "NONE"
         case ready = "READY"
@@ -109,13 +109,13 @@ extension MachineLearning {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "asc"
         case dsc = "dsc"
         public var description: String { return self.rawValue }
     }
 
-    public enum TaggableResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaggableResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case batchPrediction = "BatchPrediction"
         case datasource = "DataSource"
         case evaluation = "Evaluation"

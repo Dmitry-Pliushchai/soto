@@ -26,14 +26,14 @@ import SotoCore
 extension RAM {
     // MARK: Enums
 
-    public enum PermissionFeatureSet: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionFeatureSet: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdFromPolicy = "CREATED_FROM_POLICY"
         case promotingToStandard = "PROMOTING_TO_STANDARD"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachable = "ATTACHABLE"
         case deleted = "DELETED"
         case deleting = "DELETING"
@@ -41,46 +41,46 @@ extension RAM {
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsManaged = "AWS_MANAGED"
         case customerManaged = "CUSTOMER_MANAGED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionTypeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionTypeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case awsManaged = "AWS_MANAGED"
         case customerManaged = "CUSTOMER_MANAGED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplacePermissionAssociationsWorkStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplacePermissionAssociationsWorkStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case _self = "SELF"
         case otherAccounts = "OTHER-ACCOUNTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceRegionScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceRegionScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case global = "GLOBAL"
         case regional = "REGIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceRegionScopeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceRegionScopeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case global = "GLOBAL"
         case regional = "REGIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareAssociationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareAssociationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associated = "ASSOCIATED"
         case associating = "ASSOCIATING"
         case disassociated = "DISASSOCIATED"
@@ -89,20 +89,20 @@ extension RAM {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareAssociationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareAssociationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case principal = "PRINCIPAL"
         case resource = "RESOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareFeatureSet: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareFeatureSet: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdFromPolicy = "CREATED_FROM_POLICY"
         case promotingToStandard = "PROMOTING_TO_STANDARD"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareInvitationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareInvitationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accepted = "ACCEPTED"
         case expired = "EXPIRED"
         case pending = "PENDING"
@@ -110,7 +110,7 @@ extension RAM {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleted = "DELETED"
         case deleting = "DELETING"
@@ -119,7 +119,7 @@ extension RAM {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case limitExceeded = "LIMIT_EXCEEDED"
         case pending = "PENDING"
@@ -480,7 +480,7 @@ extension RAM {
         private enum CodingKeys: String, CodingKey {
             case clientToken = "clientToken"
             case permissionStatus = "permissionStatus"
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 
@@ -524,7 +524,7 @@ extension RAM {
         private enum CodingKeys: String, CodingKey {
             case clientToken = "clientToken"
             case permissionStatus = "permissionStatus"
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 
@@ -560,7 +560,7 @@ extension RAM {
 
         private enum CodingKeys: String, CodingKey {
             case clientToken = "clientToken"
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 
@@ -661,7 +661,7 @@ extension RAM {
         }
 
         private enum CodingKeys: String, CodingKey {
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 
@@ -1460,7 +1460,7 @@ extension RAM {
         }
 
         private enum CodingKeys: String, CodingKey {
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 
@@ -1955,7 +1955,7 @@ extension RAM {
 
         private enum CodingKeys: String, CodingKey {
             case clientToken = "clientToken"
-            case returnValue = "return"
+            case returnValue = "returnValue"
         }
     }
 

@@ -180,7 +180,7 @@ public struct MediaLive: AWSService {
         return self.client.execute(operation: "DeleteTags", path: "/prod/tags/{ResourceArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get account configuration
+    /// Describe account configuration
     public func describeAccountConfiguration(_ input: DescribeAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeAccountConfigurationResponse> {
         return self.client.execute(operation: "DescribeAccountConfiguration", path: "/prod/accountConfiguration", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

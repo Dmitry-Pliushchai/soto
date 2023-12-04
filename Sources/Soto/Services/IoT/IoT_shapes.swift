@@ -26,12 +26,12 @@ import SotoCore
 extension IoT {
     // MARK: Enums
 
-    public enum AbortAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum AbortAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancel = "CANCEL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connect = "CONNECT"
         case publish = "PUBLISH"
         case receive = "RECEIVE"
@@ -39,19 +39,19 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregationTypeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationTypeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cardinality = "Cardinality"
         case percentiles = "Percentiles"
         case statistics = "Statistics"
         public var description: String { return self.rawValue }
     }
 
-    public enum AlertTargetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AlertTargetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sns = "SNS"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditCheckRunStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditCheckRunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case completedCompliant = "COMPLETED_COMPLIANT"
         case completedNonCompliant = "COMPLETED_NON_COMPLIANT"
@@ -61,7 +61,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditFindingSeverity: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditFindingSeverity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case critical = "CRITICAL"
         case high = "HIGH"
         case low = "LOW"
@@ -69,7 +69,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case biweekly = "BIWEEKLY"
         case daily = "DAILY"
         case monthly = "MONTHLY"
@@ -77,7 +77,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditMitigationActionsExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditMitigationActionsExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -87,7 +87,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditMitigationActionsTaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditMitigationActionsTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -95,12 +95,12 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditNotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditNotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sns = "SNS"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditTaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -108,37 +108,37 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditTaskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditTaskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case onDemandAuditTask = "ON_DEMAND_AUDIT_TASK"
         case scheduledAuditTask = "SCHEDULED_AUDIT_TASK"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthDecision: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthDecision: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allowed = "ALLOWED"
         case explicitDeny = "EXPLICIT_DENY"
         case implicitDeny = "IMPLICIT_DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthorizerStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthorizerStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AutoRegistrationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoRegistrationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disable = "DISABLE"
         case enable = "ENABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AwsJobAbortCriteriaAbortAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum AwsJobAbortCriteriaAbortAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancel = "CANCEL"
         public var description: String { return self.rawValue }
     }
 
-    public enum AwsJobAbortCriteriaFailureType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AwsJobAbortCriteriaFailureType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case failed = "FAILED"
         case rejected = "REJECTED"
@@ -146,25 +146,25 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum BehaviorCriteriaType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BehaviorCriteriaType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case machineLearning = "MACHINE_LEARNING"
         case statistical = "STATISTICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum CACertificateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CACertificateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CACertificateUpdateAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum CACertificateUpdateAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deactivate = "DEACTIVATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CannedAccessControlList: String, CustomStringConvertible, Codable, Sendable {
+    public enum CannedAccessControlList: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "private"
         case authenticatedRead = "authenticated-read"
         case awsExecRead = "aws-exec-read"
@@ -176,13 +176,13 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case sniOnly = "SNI_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         case pendingActivation = "PENDING_ACTIVATION"
@@ -192,7 +192,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case greaterThan = "greater-than"
         case greaterThanEquals = "greater-than-equals"
         case inCidrSet = "in-cidr-set"
@@ -206,14 +206,14 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfidenceLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfidenceLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomMetricType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomMetricType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ipAddressList = "ip-address-list"
         case number = "number"
         case numberList = "number-list"
@@ -221,7 +221,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum DayOfWeek: String, CustomStringConvertible, Codable, Sendable {
+    public enum DayOfWeek: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fri = "FRI"
         case mon = "MON"
         case sat = "SAT"
@@ -232,7 +232,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum DetectMitigationActionExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DetectMitigationActionExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case skipped = "SKIPPED"
@@ -240,7 +240,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum DetectMitigationActionsTaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DetectMitigationActionsTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -248,55 +248,55 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceCertificateUpdateAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceCertificateUpdateAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deactivate = "DEACTIVATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceDefenderIndexingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceDefenderIndexingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case violations = "VIOLATIONS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DimensionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DimensionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case topicFilter = "TOPIC_FILTER"
         public var description: String { return self.rawValue }
     }
 
-    public enum DimensionValueOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum DimensionValueOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `in` = "IN"
         case notIn = "NOT_IN"
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainConfigurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainConfigurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsManaged = "AWS_MANAGED"
         case customerManaged = "CUSTOMER_MANAGED"
         case endpoint = "ENDPOINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DynamicGroupStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DynamicGroupStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case building = "BUILDING"
         case rebuilding = "REBUILDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum DynamoKeyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DynamoKeyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case number = "NUMBER"
         case string = "STRING"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case caCertificate = "CA_CERTIFICATE"
         case certificate = "CERTIFICATE"
         case job = "JOB"
@@ -311,14 +311,14 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FieldType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case boolean = "Boolean"
         case number = "Number"
         case string = "String"
         public var description: String { return self.rawValue }
     }
 
-    public enum FleetMetricUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum FleetMetricUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bits = "Bits"
         case bitsSecond = "Bits/Second"
         case bytes = "Bytes"
@@ -349,21 +349,21 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case building = "BUILDING"
         case rebuilding = "REBUILDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobEndBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobEndBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancel = "CANCEL"
         case forceCancel = "FORCE_CANCEL"
         case stopRollout = "STOP_ROLLOUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobExecutionFailureType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobExecutionFailureType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case failed = "FAILED"
         case rejected = "REJECTED"
@@ -371,7 +371,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -383,7 +383,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case completed = "COMPLETED"
         case deletionInProgress = "DELETION_IN_PROGRESS"
@@ -392,7 +392,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case debug = "DEBUG"
         case disabled = "DISABLED"
         case error = "ERROR"
@@ -401,7 +401,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogTargetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogTargetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case clientId = "CLIENT_ID"
         case deviceDefender = "DEVICE_DEFENDER"
@@ -412,13 +412,13 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum MessageFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessageFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case json = "JSON"
         case raw = "RAW"
         public var description: String { return self.rawValue }
     }
 
-    public enum MitigationActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MitigationActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addThingsToThingGroup = "ADD_THINGS_TO_THING_GROUP"
         case enableIotLogging = "ENABLE_IOT_LOGGING"
         case publishFindingToSns = "PUBLISH_FINDING_TO_SNS"
@@ -428,20 +428,20 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case expired = "EXPIRED"
         case pendingBuild = "PENDING_BUILD"
         public var description: String { return self.rawValue }
     }
 
-    public enum NamedShadowIndexingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamedShadowIndexingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case on = "ON"
         public var description: String { return self.rawValue }
     }
 
-    public enum OTAUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OTAUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createComplete = "CREATE_COMPLETE"
         case createFailed = "CREATE_FAILED"
         case createInProgress = "CREATE_IN_PROGRESS"
@@ -451,31 +451,31 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageVersionAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageVersionAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deprecate = "DEPRECATE"
         case publish = "PUBLISH"
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deprecated = "DEPRECATED"
         case draft = "DRAFT"
         case published = "PUBLISHED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PolicyTemplateName: String, CustomStringConvertible, Codable, Sendable {
+    public enum PolicyTemplateName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case blankPolicy = "BLANK_POLICY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case errors = "ERRORS"
         case results = "RESULTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountSettings = "ACCOUNT_SETTINGS"
         case caCertificate = "CA_CERTIFICATE"
         case clientId = "CLIENT_ID"
@@ -488,27 +488,27 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum RetryableFailureType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RetryableFailureType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case failed = "FAILED"
         case timedOut = "TIMED_OUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServerCertificateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServerCertificateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case invalid = "INVALID"
         case valid = "VALID"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case credentialProvider = "CREDENTIAL_PROVIDER"
         case data = "DATA"
         case jobs = "JOBS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "Cancelled"
         case cancelling = "Cancelling"
         case completed = "Completed"
@@ -517,38 +517,44 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetSelection: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetFieldOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case latLon = "LatLon"
+        case lonLat = "LonLat"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TargetSelection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case continuous = "CONTINUOUS"
         case snapshot = "SNAPSHOT"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fleetProvisioning = "FLEET_PROVISIONING"
         case jitp = "JITP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThingConnectivityIndexingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThingConnectivityIndexingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThingGroupIndexingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThingGroupIndexingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case on = "ON"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThingIndexingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThingIndexingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case registry = "REGISTRY"
         case registryAndShadow = "REGISTRY_AND_SHADOW"
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicRuleDestinationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicRuleDestinationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleting = "DELETING"
         case disabled = "DISABLED"
         case enabled = "ENABLED"
@@ -557,7 +563,7 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum VerificationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerificationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case benignPositive = "BENIGN_POSITIVE"
         case falsePositive = "FALSE_POSITIVE"
         case truePositive = "TRUE_POSITIVE"
@@ -565,14 +571,14 @@ extension IoT {
         public var description: String { return self.rawValue }
     }
 
-    public enum ViolationEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ViolationEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alarmCleared = "alarm-cleared"
         case alarmInvalidated = "alarm-invalidated"
         case inAlarm = "in-alarm"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         case mqtt = "MQTT"
         public var description: String { return self.rawValue }
@@ -1873,6 +1879,8 @@ extension IoT {
     public struct Behavior: AWSEncodableShape & AWSDecodableShape {
         /// The criteria that determine if a device is behaving normally in regard to the metric.  In the IoT console, you can choose to be sent an alert through Amazon SNS when IoT Device Defender detects that a device is behaving anomalously.
         public let criteria: BehaviorCriteria?
+        /// Value indicates exporting metrics related to the behavior when it is true.
+        public let exportMetric: Bool?
         /// What is measured by the behavior.
         public let metric: String?
         /// The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric to only MQTT topics where the name matches the pattern specified in the dimension. This can't be used with custom metrics.
@@ -1882,8 +1890,9 @@ extension IoT {
         ///  Suppresses alerts.
         public let suppressAlerts: Bool?
 
-        public init(criteria: BehaviorCriteria? = nil, metric: String? = nil, metricDimension: MetricDimension? = nil, name: String, suppressAlerts: Bool? = nil) {
+        public init(criteria: BehaviorCriteria? = nil, exportMetric: Bool? = nil, metric: String? = nil, metricDimension: MetricDimension? = nil, name: String, suppressAlerts: Bool? = nil) {
             self.criteria = criteria
+            self.exportMetric = exportMetric
             self.metric = metric
             self.metricDimension = metricDimension
             self.name = name
@@ -1900,6 +1909,7 @@ extension IoT {
 
         private enum CodingKeys: String, CodingKey {
             case criteria = "criteria"
+            case exportMetric = "exportMetric"
             case metric = "metric"
             case metricDimension = "metricDimension"
             case name = "name"
@@ -3251,7 +3261,7 @@ extension IoT {
         public let abortConfig: AbortConfig?
         /// A short text description of the job.
         public let description: String?
-        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the  job successfully completes.   Note:The following Length Constraints relates to a single string.  Up to five strings are allowed.
+        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the  job successfully completes.   Note:The following Length Constraints relates to a single ARN.  Up to 25  package version ARNs are allowed.
         public let destinationPackageVersions: [String]?
         /// The job document. Required if you don't specify a value for documentSource.
         public let document: String?
@@ -3391,7 +3401,7 @@ extension IoT {
         public let abortConfig: AbortConfig?
         /// A description of the job document.
         public let description: String
-        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string.  Up to five strings are allowed.
+        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the  job successfully completes.   Note:The following Length Constraints relates to a single ARN.  Up to 25  package version ARNs are allowed.
         public let destinationPackageVersions: [String]?
         /// The job document. Required if you don't specify a value for documentSource.
         public let document: String?
@@ -4298,6 +4308,8 @@ extension IoT {
         public let alertTargets: [AlertTargetType: AlertTarget]?
         /// Specifies the behaviors that, when violated by a device (thing), cause an alert.
         public let behaviors: [Behavior]?
+        /// Specifies the MQTT topic and role ARN required for metric export.
+        public let metricsExportConfig: MetricsExportConfig?
         /// A description of the security profile.
         public let securityProfileDescription: String?
         /// The name you are giving to the security profile.
@@ -4305,22 +4317,24 @@ extension IoT {
         /// Metadata that can be used to manage the security profile.
         public let tags: [Tag]?
 
-        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, securityProfileDescription: String? = nil, securityProfileName: String, tags: [Tag]? = nil) {
+        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileDescription: String? = nil, securityProfileName: String, tags: [Tag]? = nil) {
             self.additionalMetricsToRetain = nil
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
             self.tags = tags
         }
 
         @available(*, deprecated, message: "Members additionalMetricsToRetain have been deprecated")
-        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, securityProfileDescription: String? = nil, securityProfileName: String, tags: [Tag]? = nil) {
+        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileDescription: String? = nil, securityProfileName: String, tags: [Tag]? = nil) {
             self.additionalMetricsToRetain = additionalMetricsToRetain
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
             self.tags = tags
@@ -4337,6 +4351,7 @@ extension IoT {
                 try $0.validate(name: "\(name).behaviors[]")
             }
             try self.validate(self.behaviors, name: "behaviors", parent: name, max: 100)
+            try self.metricsExportConfig?.validate(name: "\(name).metricsExportConfig")
             try self.validate(self.securityProfileDescription, name: "securityProfileDescription", parent: name, max: 1000)
             try self.validate(self.securityProfileDescription, name: "securityProfileDescription", parent: name, pattern: "^[\\p{Graph}\\x20]*$")
             try self.validate(self.securityProfileName, name: "securityProfileName", parent: name, max: 128)
@@ -4352,6 +4367,7 @@ extension IoT {
             case additionalMetricsToRetainV2 = "additionalMetricsToRetainV2"
             case alertTargets = "alertTargets"
             case behaviors = "behaviors"
+            case metricsExportConfig = "metricsExportConfig"
             case securityProfileDescription = "securityProfileDescription"
             case tags = "tags"
         }
@@ -6521,7 +6537,7 @@ extension IoT {
         public let createdAt: Date?
         /// A description of the job template.
         public let description: String?
-        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string.  Up to five strings are allowed.
+        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the  job successfully completes.   Note:The following Length Constraints relates to a single ARN.  Up to 25  package version ARNs are allowed.
         public let destinationPackageVersions: [String]?
         /// The job document.
         public let document: String?
@@ -6941,6 +6957,8 @@ extension IoT {
         public let creationDate: Date?
         /// The time the security profile was last modified.
         public let lastModifiedDate: Date?
+        /// Specifies the MQTT topic and role ARN required for metric export.
+        public let metricsExportConfig: MetricsExportConfig?
         /// The ARN of the security profile.
         public let securityProfileArn: String?
         /// A description of the security profile (associated with the security profile when it was created or updated).
@@ -6950,13 +6968,14 @@ extension IoT {
         /// The version of the security profile. A new version is generated whenever the security profile is updated.
         public let version: Int64?
 
-        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
+        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
             self.additionalMetricsToRetain = nil
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
             self.creationDate = creationDate
             self.lastModifiedDate = lastModifiedDate
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileArn = securityProfileArn
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
@@ -6964,13 +6983,14 @@ extension IoT {
         }
 
         @available(*, deprecated, message: "Members additionalMetricsToRetain have been deprecated")
-        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
+        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
             self.additionalMetricsToRetain = additionalMetricsToRetain
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
             self.creationDate = creationDate
             self.lastModifiedDate = lastModifiedDate
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileArn = securityProfileArn
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
@@ -6984,6 +7004,7 @@ extension IoT {
             case behaviors = "behaviors"
             case creationDate = "creationDate"
             case lastModifiedDate = "lastModifiedDate"
+            case metricsExportConfig = "metricsExportConfig"
             case securityProfileArn = "securityProfileArn"
             case securityProfileDescription = "securityProfileDescription"
             case securityProfileName = "securityProfileName"
@@ -7948,6 +7969,23 @@ extension IoT {
         }
     }
 
+    public struct GeoLocationTarget: AWSEncodableShape & AWSDecodableShape {
+        /// The name of the geolocation target field. If the target field is part of a named shadow, you must select the named shadow using the namedShadow filter.
+        public let name: String?
+        /// The order of the geolocation target field. This field is optional. The default value is LatLon.
+        public let order: TargetFieldOrder?
+
+        public init(name: String? = nil, order: TargetFieldOrder? = nil) {
+            self.name = name
+            self.order = order
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case name = "name"
+            case order = "order"
+        }
+    }
+
     public struct GetBehaviorModelTrainingSummariesRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
@@ -8901,10 +8939,13 @@ extension IoT {
     }
 
     public struct IndexingFilter: AWSEncodableShape & AWSDecodableShape {
+        /// The list of geolocation targets that you select to index. The default maximum number of geolocation targets for indexing is 1. To increase the limit, see Amazon Web Services IoT Device Management Quotas in the Amazon Web Services General Reference.
+        public let geoLocations: [GeoLocationTarget]?
         /// The shadow names that you select to index. The default maximum number of shadow names for indexing is 10. To increase  the limit, see Amazon Web Services IoT Device Management  Quotas in the Amazon Web Services General Reference.
         public let namedShadowNames: [String]?
 
-        public init(namedShadowNames: [String]? = nil) {
+        public init(geoLocations: [GeoLocationTarget]? = nil, namedShadowNames: [String]? = nil) {
+            self.geoLocations = geoLocations
             self.namedShadowNames = namedShadowNames
         }
 
@@ -8912,11 +8953,12 @@ extension IoT {
             try self.namedShadowNames?.forEach {
                 try validate($0, name: "namedShadowNames[]", parent: name, max: 64)
                 try validate($0, name: "namedShadowNames[]", parent: name, min: 1)
-                try validate($0, name: "namedShadowNames[]", parent: name, pattern: "^[a-zA-Z0-9:_-]+$")
+                try validate($0, name: "namedShadowNames[]", parent: name, pattern: "^[$a-zA-Z0-9:_-]+$")
             }
         }
 
         private enum CodingKeys: String, CodingKey {
+            case geoLocations = "geoLocations"
             case namedShadowNames = "namedShadowNames"
         }
     }
@@ -9042,7 +9084,7 @@ extension IoT {
         public let createdAt: Date?
         /// A short text description of the job.
         public let description: String?
-        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string.  Up to five strings are allowed.
+        /// The package version Amazon Resource Names (ARNs) that are installed on the device when the  job successfully completes.   Note:The following Length Constraints relates to a single ARN.  Up to 25  package version ARNs are allowed.
         public let destinationPackageVersions: [String]?
         /// A key-value map that pairs the patterns that need to be replaced in a managed  template job document schema. You can use the description of each key as a guidance  to specify the inputs during runtime when creating a job.   documentParameters can only be used when creating jobs from Amazon Web Services  managed templates. This parameter can't be used with custom job templates or to  create jobs from them.
         public let documentParameters: [String: String]?
@@ -12766,12 +12808,15 @@ extension IoT {
     }
 
     public struct MetricToRetain: AWSEncodableShape & AWSDecodableShape {
+        /// Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if Device Defender Detect should export the corresponding metrics.
+        public let exportMetric: Bool?
         /// What is measured by the behavior.
         public let metric: String
         /// The dimension of a metric. This can't be used with custom metrics.
         public let metricDimension: MetricDimension?
 
-        public init(metric: String, metricDimension: MetricDimension? = nil) {
+        public init(exportMetric: Bool? = nil, metric: String, metricDimension: MetricDimension? = nil) {
+            self.exportMetric = exportMetric
             self.metric = metric
             self.metricDimension = metricDimension
         }
@@ -12781,6 +12826,7 @@ extension IoT {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case exportMetric = "exportMetric"
             case metric = "metric"
             case metricDimension = "metricDimension"
         }
@@ -12829,6 +12875,30 @@ extension IoT {
             case numbers = "numbers"
             case ports = "ports"
             case strings = "strings"
+        }
+    }
+
+    public struct MetricsExportConfig: AWSEncodableShape & AWSDecodableShape {
+        /// The MQTT topic that Device Defender Detect should publish messages to for metrics export.
+        public let mqttTopic: String
+        /// This role ARN has permission to publish MQTT messages, after which Device Defender Detect can assume the role and publish messages on your behalf.
+        public let roleArn: String
+
+        public init(mqttTopic: String, roleArn: String) {
+            self.mqttTopic = mqttTopic
+            self.roleArn = roleArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.mqttTopic, name: "mqttTopic", parent: name, max: 512)
+            try self.validate(self.mqttTopic, name: "mqttTopic", parent: name, min: 1)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, max: 2048)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, min: 20)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case mqttTopic = "mqttTopic"
+            case roleArn = "roleArn"
         }
     }
 
@@ -14331,7 +14401,7 @@ extension IoT {
     public struct SearchIndexRequest: AWSEncodableShape {
         /// The search index name.
         public let indexName: String?
-        /// The maximum number of results to return at one time.
+        /// The maximum number of results to return per page at one time. The response might contain fewer results but will never contain more.
         public let maxResults: Int?
         /// The token used to get the next set of results, or null if there are no additional results.
         public let nextToken: String?
@@ -15503,7 +15573,7 @@ extension IoT {
     public struct ThingGroupIndexingConfiguration: AWSEncodableShape & AWSDecodableShape {
         /// A list of thing group fields to index. This list cannot contain any managed fields. Use the GetIndexingConfiguration API to get a list of managed fields. Contains custom field names and their data type.
         public let customFields: [Field]?
-        /// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.
+        /// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.  You can't modify managed fields by updating fleet indexing configuration.
         public let managedFields: [Field]?
         /// Thing group indexing mode.
         public let thingGroupIndexingMode: ThingGroupIndexingMode
@@ -15570,9 +15640,9 @@ extension IoT {
         public let customFields: [Field]?
         /// Device Defender indexing mode. Valid values are:   VIOLATIONS – Your thing index contains Device Defender violations. To enable Device Defender indexing, deviceDefenderIndexingMode must not be set to OFF.   OFF - Device Defender indexing is disabled.   For more information about Device Defender violations, see Device Defender Detect.
         public let deviceDefenderIndexingMode: DeviceDefenderIndexingMode?
-        /// Provides additional filters for specific data sources. Named shadow is the only data source that currently supports and requires a filter. To add named shadows to your fleet indexing configuration, set namedShadowIndexingMode to be ON and  specify your shadow names in filter.
+        /// Provides additional selections for named shadows and geolocation data.  To add named shadows to your fleet indexing configuration, set namedShadowIndexingMode to be ON and specify your shadow names in namedShadowNames filter. To add geolocation data to your fleet indexing configuration:    If you store geolocation data in a class/unnamed shadow, set thingIndexingMode to be REGISTRY_AND_SHADOW and specify your geolocation data in geoLocations filter.    If you store geolocation data in a named shadow, set namedShadowIndexingMode to be ON, add the shadow name in namedShadowNames filter, and specify your geolocation data in geoLocations filter. For more information, see Managing fleet indexing.
         public let filter: IndexingFilter?
-        /// Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+        /// Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.  You can't modify managed fields by updating fleet indexing configuration.
         public let managedFields: [Field]?
         /// Named shadow indexing mode. Valid values are:   ON – Your thing index contains named shadow. To enable thing named shadow indexing, namedShadowIndexingMode must not be set to OFF.   OFF - Named shadow indexing is disabled.   For more information about Shadows, see IoT Device Shadow service.
         public let namedShadowIndexingMode: NamedShadowIndexingMode?
@@ -17170,14 +17240,18 @@ extension IoT {
         public let deleteAlertTargets: Bool?
         /// If true, delete all behaviors defined for this security profile.  If any behaviors are defined in the current invocation, an exception occurs.
         public let deleteBehaviors: Bool?
+        /// Set the value as true to delete metrics export related configurations.
+        public let deleteMetricsExportConfig: Bool?
         /// The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a VersionConflictException is thrown.
         public let expectedVersion: Int64?
+        /// Specifies the MQTT topic and role ARN required for metric export.
+        public let metricsExportConfig: MetricsExportConfig?
         /// A description of the security profile.
         public let securityProfileDescription: String?
         /// The name of the security profile you want to update.
         public let securityProfileName: String
 
-        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, deleteAdditionalMetricsToRetain: Bool? = nil, deleteAlertTargets: Bool? = nil, deleteBehaviors: Bool? = nil, expectedVersion: Int64? = nil, securityProfileDescription: String? = nil, securityProfileName: String) {
+        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, deleteAdditionalMetricsToRetain: Bool? = nil, deleteAlertTargets: Bool? = nil, deleteBehaviors: Bool? = nil, deleteMetricsExportConfig: Bool? = nil, expectedVersion: Int64? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileDescription: String? = nil, securityProfileName: String) {
             self.additionalMetricsToRetain = nil
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
@@ -17185,13 +17259,15 @@ extension IoT {
             self.deleteAdditionalMetricsToRetain = deleteAdditionalMetricsToRetain
             self.deleteAlertTargets = deleteAlertTargets
             self.deleteBehaviors = deleteBehaviors
+            self.deleteMetricsExportConfig = deleteMetricsExportConfig
             self.expectedVersion = expectedVersion
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
         }
 
         @available(*, deprecated, message: "Members additionalMetricsToRetain have been deprecated")
-        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, deleteAdditionalMetricsToRetain: Bool? = nil, deleteAlertTargets: Bool? = nil, deleteBehaviors: Bool? = nil, expectedVersion: Int64? = nil, securityProfileDescription: String? = nil, securityProfileName: String) {
+        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, deleteAdditionalMetricsToRetain: Bool? = nil, deleteAlertTargets: Bool? = nil, deleteBehaviors: Bool? = nil, deleteMetricsExportConfig: Bool? = nil, expectedVersion: Int64? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileDescription: String? = nil, securityProfileName: String) {
             self.additionalMetricsToRetain = additionalMetricsToRetain
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
@@ -17199,7 +17275,9 @@ extension IoT {
             self.deleteAdditionalMetricsToRetain = deleteAdditionalMetricsToRetain
             self.deleteAlertTargets = deleteAlertTargets
             self.deleteBehaviors = deleteBehaviors
+            self.deleteMetricsExportConfig = deleteMetricsExportConfig
             self.expectedVersion = expectedVersion
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
         }
@@ -17215,6 +17293,7 @@ extension IoT {
                 try $0.validate(name: "\(name).behaviors[]")
             }
             try self.validate(self.behaviors, name: "behaviors", parent: name, max: 100)
+            try self.metricsExportConfig?.validate(name: "\(name).metricsExportConfig")
             try self.validate(self.securityProfileDescription, name: "securityProfileDescription", parent: name, max: 1000)
             try self.validate(self.securityProfileDescription, name: "securityProfileDescription", parent: name, pattern: "^[\\p{Graph}\\x20]*$")
             try self.validate(self.securityProfileName, name: "securityProfileName", parent: name, max: 128)
@@ -17230,6 +17309,8 @@ extension IoT {
             case deleteAdditionalMetricsToRetain = "deleteAdditionalMetricsToRetain"
             case deleteAlertTargets = "deleteAlertTargets"
             case deleteBehaviors = "deleteBehaviors"
+            case deleteMetricsExportConfig = "deleteMetricsExportConfig"
+            case metricsExportConfig = "metricsExportConfig"
             case securityProfileDescription = "securityProfileDescription"
         }
     }
@@ -17247,6 +17328,8 @@ extension IoT {
         public let creationDate: Date?
         /// The time the security profile was last modified.
         public let lastModifiedDate: Date?
+        /// Specifies the MQTT topic and role ARN required for metric export.
+        public let metricsExportConfig: MetricsExportConfig?
         /// The ARN of the security profile that was updated.
         public let securityProfileArn: String?
         /// The description of the security profile.
@@ -17256,13 +17339,14 @@ extension IoT {
         /// The updated version of the security profile.
         public let version: Int64?
 
-        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
+        public init(additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
             self.additionalMetricsToRetain = nil
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
             self.creationDate = creationDate
             self.lastModifiedDate = lastModifiedDate
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileArn = securityProfileArn
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
@@ -17270,13 +17354,14 @@ extension IoT {
         }
 
         @available(*, deprecated, message: "Members additionalMetricsToRetain have been deprecated")
-        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
+        public init(additionalMetricsToRetain: [String]? = nil, additionalMetricsToRetainV2: [MetricToRetain]? = nil, alertTargets: [AlertTargetType: AlertTarget]? = nil, behaviors: [Behavior]? = nil, creationDate: Date? = nil, lastModifiedDate: Date? = nil, metricsExportConfig: MetricsExportConfig? = nil, securityProfileArn: String? = nil, securityProfileDescription: String? = nil, securityProfileName: String? = nil, version: Int64? = nil) {
             self.additionalMetricsToRetain = additionalMetricsToRetain
             self.additionalMetricsToRetainV2 = additionalMetricsToRetainV2
             self.alertTargets = alertTargets
             self.behaviors = behaviors
             self.creationDate = creationDate
             self.lastModifiedDate = lastModifiedDate
+            self.metricsExportConfig = metricsExportConfig
             self.securityProfileArn = securityProfileArn
             self.securityProfileDescription = securityProfileDescription
             self.securityProfileName = securityProfileName
@@ -17290,6 +17375,7 @@ extension IoT {
             case behaviors = "behaviors"
             case creationDate = "creationDate"
             case lastModifiedDate = "lastModifiedDate"
+            case metricsExportConfig = "metricsExportConfig"
             case securityProfileArn = "securityProfileArn"
             case securityProfileDescription = "securityProfileDescription"
             case securityProfileName = "securityProfileName"

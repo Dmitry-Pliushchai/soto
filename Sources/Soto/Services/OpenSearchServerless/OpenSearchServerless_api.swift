@@ -69,6 +69,16 @@ public struct OpenSearchServerless: AWSService {
         return self.client.execute(operation: "BatchGetCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more information, see Viewing data lifecycle policies.
+    public func batchGetEffectiveLifecyclePolicy(_ input: BatchGetEffectiveLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetEffectiveLifecyclePolicyResponse> {
+        return self.client.execute(operation: "BatchGetEffectiveLifecyclePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+    public func batchGetLifecyclePolicy(_ input: BatchGetLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetLifecyclePolicyResponse> {
+        return self.client.execute(operation: "BatchGetLifecyclePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns attributes for one or more VPC endpoints associated with the current account. For more information, see Access Amazon OpenSearch Serverless using an interface endpoint.
     public func batchGetVpcEndpoint(_ input: BatchGetVpcEndpointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetVpcEndpointResponse> {
         return self.client.execute(operation: "BatchGetVpcEndpoint", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -82,6 +92,11 @@ public struct OpenSearchServerless: AWSService {
     /// Creates a new OpenSearch Serverless collection. For more information, see Creating and managing Amazon OpenSearch Serverless collections.
     public func createCollection(_ input: CreateCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateCollectionResponse> {
         return self.client.execute(operation: "CreateCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define the number of days or hours to retain the data on an OpenSearch Serverless index. For more information, see Creating data lifecycle policies.
+    public func createLifecyclePolicy(_ input: CreateLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateLifecyclePolicyResponse> {
+        return self.client.execute(operation: "CreateLifecyclePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Specifies a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless.
@@ -107,6 +122,11 @@ public struct OpenSearchServerless: AWSService {
     /// Deletes an OpenSearch Serverless collection. For more information, see Creating and managing Amazon OpenSearch Serverless collections.
     public func deleteCollection(_ input: DeleteCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteCollectionResponse> {
         return self.client.execute(operation: "DeleteCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes an OpenSearch Serverless lifecycle policy. For more information, see Deleting data lifecycle policies.
+    public func deleteLifecyclePolicy(_ input: DeleteLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteLifecyclePolicyResponse> {
+        return self.client.execute(operation: "DeleteLifecyclePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless.
@@ -159,6 +179,11 @@ public struct OpenSearchServerless: AWSService {
         return self.client.execute(operation: "ListCollections", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns a list of OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+    public func listLifecyclePolicies(_ input: ListLifecyclePoliciesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListLifecyclePoliciesResponse> {
+        return self.client.execute(operation: "ListLifecyclePolicies", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns information about configured OpenSearch Serverless security configurations. For more information, see SAML authentication for Amazon OpenSearch Serverless.
     public func listSecurityConfigs(_ input: ListSecurityConfigsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListSecurityConfigsResponse> {
         return self.client.execute(operation: "ListSecurityConfigs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -202,6 +227,11 @@ public struct OpenSearchServerless: AWSService {
     /// Updates an OpenSearch Serverless collection.
     public func updateCollection(_ input: UpdateCollectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateCollectionResponse> {
         return self.client.execute(operation: "UpdateCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates an OpenSearch Serverless access policy. For more information, see Updating data lifecycle policies.
+    public func updateLifecyclePolicy(_ input: UpdateLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateLifecyclePolicyResponse> {
+        return self.client.execute(operation: "UpdateLifecyclePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless.
@@ -333,6 +363,59 @@ extension OpenSearchServerless {
             command: self.listCollections,
             inputKey: \ListCollectionsRequest.nextToken,
             outputKey: \ListCollectionsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listLifecyclePoliciesPaginator<Result>(
+        _ input: ListLifecyclePoliciesRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListLifecyclePoliciesResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listLifecyclePolicies,
+            inputKey: \ListLifecyclePoliciesRequest.nextToken,
+            outputKey: \ListLifecyclePoliciesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listLifecyclePoliciesPaginator(
+        _ input: ListLifecyclePoliciesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListLifecyclePoliciesResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listLifecyclePolicies,
+            inputKey: \ListLifecyclePoliciesRequest.nextToken,
+            outputKey: \ListLifecyclePoliciesResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -515,6 +598,17 @@ extension OpenSearchServerless.ListCollectionsRequest: AWSPaginateToken {
             collectionFilters: self.collectionFilters,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension OpenSearchServerless.ListLifecyclePoliciesRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> OpenSearchServerless.ListLifecyclePoliciesRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            resources: self.resources,
+            type: self.type
         )
     }
 }

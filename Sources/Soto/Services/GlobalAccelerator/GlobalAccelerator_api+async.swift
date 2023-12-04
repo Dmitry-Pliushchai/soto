@@ -73,6 +73,18 @@ extension GlobalAccelerator {
         return try await self.client.execute(operation: "CreateAccelerator", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to
+    /// 			specify the principals who have permission to add to accelerators in their own
+    /// 			account the resources in your account that you also list in the attachment. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an
+    /// 			accelerator. For account numbers that are listed as principals, to add a resource listed in the attachment to an accelerator,
+    /// 			you must sign in to an account specified as a principal. Then you can add the resources that are listed
+    /// 			to any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal,
+    /// 			anyone with permission to make updates to the accelerator can add as endpoints resources that are listed in the
+    /// 			attachment.
+    public func createCrossAccountAttachment(_ input: CreateCrossAccountAttachmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateCrossAccountAttachmentResponse {
+        return try await self.client.execute(operation: "CreateCrossAccountAttachment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands
     /// 	    of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive
     /// 			traffic. To enable all destinations to receive traffic, or to specify individual port
@@ -123,6 +135,19 @@ extension GlobalAccelerator {
     /// 		    the Global Accelerator Developer Guide.
     public func deleteAccelerator(_ input: DeleteAcceleratorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
         return try await self.client.execute(operation: "DeleteAccelerator", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission
+    /// 			to use the resources in the attachment from all principals in the list of principals. Global Accelerator
+    /// 			revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account
+    /// 			and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator
+    /// 			and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments,
+    /// 		Global Accelerator only removes endpoints if there are no current cross-account attachments that provide
+    /// 		access permission. For example, if you delete a cross-account attachment that lists an
+    /// 		accelerator as a principal, but another cross-account attachment includes the account ID
+    /// 		that owns that accelerator, endpoints will not be removed from the accelerator.
+    public func deleteCrossAccountAttachment(_ input: DeleteCrossAccountAttachmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
+        return try await self.client.execute(operation: "DeleteCrossAccountAttachment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources
@@ -188,6 +213,11 @@ extension GlobalAccelerator {
         return try await self.client.execute(operation: "DescribeAcceleratorAttributes", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets configuration information about a cross-account attachment.
+    public func describeCrossAccountAttachment(_ input: DescribeCrossAccountAttachmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeCrossAccountAttachmentResponse {
+        return try await self.client.execute(operation: "DescribeCrossAccountAttachment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describe a custom routing accelerator.
     public func describeCustomRoutingAccelerator(_ input: DescribeCustomRoutingAcceleratorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeCustomRoutingAcceleratorResponse {
         return try await self.client.execute(operation: "DescribeCustomRoutingAccelerator", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -227,6 +257,21 @@ extension GlobalAccelerator {
     /// 			the current state and a history of state changes.
     public func listByoipCidrs(_ input: ListByoipCidrsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListByoipCidrsResponse {
         return try await self.client.execute(operation: "ListByoipCidrs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List the cross-account attachments that have been created in Global Accelerator.
+    public func listCrossAccountAttachments(_ input: ListCrossAccountAttachmentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListCrossAccountAttachmentsResponse {
+        return try await self.client.execute(operation: "ListCrossAccountAttachments", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List the accounts that have cross-account endpoints.
+    public func listCrossAccountResourceAccounts(_ input: ListCrossAccountResourceAccountsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListCrossAccountResourceAccountsResponse {
+        return try await self.client.execute(operation: "ListCrossAccountResourceAccounts", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List the cross-account endpoints available to add to an accelerator.
+    public func listCrossAccountResources(_ input: ListCrossAccountResourcesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListCrossAccountResourcesResponse {
+        return try await self.client.execute(operation: "ListCrossAccountResources", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// List the custom routing accelerators for an Amazon Web Services account.
@@ -330,6 +375,19 @@ extension GlobalAccelerator {
         return try await self.client.execute(operation: "UpdateAcceleratorAttributes", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Update a cross-account attachment to add or remove principals or resources. When you update
+    /// 			an attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator
+    /// 			revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account
+    /// 				and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator
+    /// 				and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments,
+    /// 			Global Accelerator only removes endpoints if there are no current cross-account attachments that provide
+    /// 			access permission. For example, if you delete a cross-account attachment that lists an
+    /// 			accelerator as a principal, but another cross-account attachment includes the account ID
+    /// 			that owns that accelerator, endpoints will not be removed from the accelerator.
+    public func updateCrossAccountAttachment(_ input: UpdateCrossAccountAttachmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateCrossAccountAttachmentResponse {
+        return try await self.client.execute(operation: "UpdateCrossAccountAttachment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Update a custom routing accelerator.
     public func updateCustomRoutingAccelerator(_ input: UpdateCustomRoutingAcceleratorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateCustomRoutingAcceleratorResponse {
         return try await self.client.execute(operation: "UpdateCustomRoutingAccelerator", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -409,6 +467,50 @@ extension GlobalAccelerator {
             command: self.listByoipCidrs,
             inputKey: \ListByoipCidrsRequest.nextToken,
             outputKey: \ListByoipCidrsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// List the cross-account attachments that have been created in Global Accelerator.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listCrossAccountAttachmentsPaginator(
+        _ input: ListCrossAccountAttachmentsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListCrossAccountAttachmentsRequest, ListCrossAccountAttachmentsResponse> {
+        return .init(
+            input: input,
+            command: self.listCrossAccountAttachments,
+            inputKey: \ListCrossAccountAttachmentsRequest.nextToken,
+            outputKey: \ListCrossAccountAttachmentsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// List the cross-account endpoints available to add to an accelerator.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listCrossAccountResourcesPaginator(
+        _ input: ListCrossAccountResourcesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListCrossAccountResourcesRequest, ListCrossAccountResourcesResponse> {
+        return .init(
+            input: input,
+            command: self.listCrossAccountResources,
+            inputKey: \ListCrossAccountResourcesRequest.nextToken,
+            outputKey: \ListCrossAccountResourcesResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

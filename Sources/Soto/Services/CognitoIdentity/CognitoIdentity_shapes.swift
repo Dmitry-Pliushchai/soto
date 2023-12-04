@@ -26,19 +26,19 @@ import SotoCore
 extension CognitoIdentity {
     // MARK: Enums
 
-    public enum AmbiguousRoleResolutionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AmbiguousRoleResolutionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case authenticatedRole = "AuthenticatedRole"
         case deny = "Deny"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "AccessDenied"
         case internalServerError = "InternalServerError"
         public var description: String { return self.rawValue }
     }
 
-    public enum MappingRuleMatchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MappingRuleMatchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "Contains"
         case equals = "Equals"
         case notEqual = "NotEqual"
@@ -46,7 +46,7 @@ extension CognitoIdentity {
         public var description: String { return self.rawValue }
     }
 
-    public enum RoleMappingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RoleMappingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rules = "Rules"
         case token = "Token"
         public var description: String { return self.rawValue }
@@ -728,7 +728,7 @@ extension CognitoIdentity {
         /// A pagination token.
         public let nextToken: String?
 
-        public init(hideDisabled: Bool? = nil, identityPoolId: String, maxResults: Int = 0, nextToken: String? = nil) {
+        public init(hideDisabled: Bool? = nil, identityPoolId: String, maxResults: Int, nextToken: String? = nil) {
             self.hideDisabled = hideDisabled
             self.identityPoolId = identityPoolId
             self.maxResults = maxResults
@@ -781,7 +781,7 @@ extension CognitoIdentity {
         /// A pagination token.
         public let nextToken: String?
 
-        public init(maxResults: Int = 0, nextToken: String? = nil) {
+        public init(maxResults: Int, nextToken: String? = nil) {
             self.maxResults = maxResults
             self.nextToken = nextToken
         }

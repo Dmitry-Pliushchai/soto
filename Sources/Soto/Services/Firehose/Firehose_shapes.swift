@@ -26,13 +26,13 @@ import SotoCore
 extension Firehose {
     // MARK: Enums
 
-    public enum AmazonOpenSearchServerlessS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum AmazonOpenSearchServerlessS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allDocuments = "AllDocuments"
         case failedDocumentsOnly = "FailedDocumentsOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum AmazonopensearchserviceIndexRotationPeriod: String, CustomStringConvertible, Codable, Sendable {
+    public enum AmazonopensearchserviceIndexRotationPeriod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noRotation = "NoRotation"
         case oneDay = "OneDay"
         case oneHour = "OneHour"
@@ -41,13 +41,13 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum AmazonopensearchserviceS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum AmazonopensearchserviceS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allDocuments = "AllDocuments"
         case failedDocumentsOnly = "FailedDocumentsOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum CompressionFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum CompressionFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case hadoopSnappy = "HADOOP_SNAPPY"
         case snappy = "Snappy"
@@ -56,25 +56,25 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum Connectivity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Connectivity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "PRIVATE"
         case `public` = "PUBLIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentEncoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentEncoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DefaultDocumentIdFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum DefaultDocumentIdFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case firehoseDefault = "FIREHOSE_DEFAULT"
         case noDocumentId = "NO_DOCUMENT_ID"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryStreamEncryptionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryStreamEncryptionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case disablingFailed = "DISABLING_FAILED"
@@ -84,7 +84,7 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryStreamFailureType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryStreamFailureType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createEniFailed = "CREATE_ENI_FAILED"
         case createKmsGrantFailed = "CREATE_KMS_GRANT_FAILED"
         case deleteEniFailed = "DELETE_ENI_FAILED"
@@ -103,7 +103,7 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryStreamStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryStreamStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case creatingFailed = "CREATING_FAILED"
@@ -112,14 +112,14 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryStreamType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryStreamType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directPut = "DirectPut"
         case kinesisStreamAsSource = "KinesisStreamAsSource"
         case mskAsSource = "MSKAsSource"
         public var description: String { return self.rawValue }
     }
 
-    public enum ElasticsearchIndexRotationPeriod: String, CustomStringConvertible, Codable, Sendable {
+    public enum ElasticsearchIndexRotationPeriod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noRotation = "NoRotation"
         case oneDay = "OneDay"
         case oneHour = "OneHour"
@@ -128,62 +128,62 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum ElasticsearchS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ElasticsearchS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allDocuments = "AllDocuments"
         case failedDocumentsOnly = "FailedDocumentsOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum HECEndpointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HECEndpointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case event = "Event"
         case raw = "Raw"
         public var description: String { return self.rawValue }
     }
 
-    public enum HttpEndpointS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HttpEndpointS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allData = "AllData"
         case failedDataOnly = "FailedDataOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsOwnedCmk = "AWS_OWNED_CMK"
         case customerManagedCmk = "CUSTOMER_MANAGED_CMK"
         public var description: String { return self.rawValue }
     }
 
-    public enum NoEncryptionConfig: String, CustomStringConvertible, Codable, Sendable {
+    public enum NoEncryptionConfig: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noEncryption = "NoEncryption"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrcCompression: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrcCompression: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case snappy = "SNAPPY"
         case zlib = "ZLIB"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrcFormatVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrcFormatVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case v011 = "V0_11"
         case v012 = "V0_12"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParquetCompression: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParquetCompression: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case snappy = "SNAPPY"
         case uncompressed = "UNCOMPRESSED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParquetWriterVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParquetWriterVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case v1 = "V1"
         case v2 = "V2"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProcessorParameterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProcessorParameterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bufferIntervalInSeconds = "BufferIntervalInSeconds"
         case bufferSizeInMb = "BufferSizeInMBs"
         case compressionFormat = "CompressionFormat"
@@ -197,7 +197,7 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProcessorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProcessorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appendDelimiterToRecord = "AppendDelimiterToRecord"
         case decompression = "Decompression"
         case lambda = "Lambda"
@@ -206,19 +206,19 @@ extension Firehose {
         public var description: String { return self.rawValue }
     }
 
-    public enum RedshiftS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum RedshiftS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum SplunkS3BackupMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SplunkS3BackupMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allEvents = "AllEvents"
         case failedEventsOnly = "FailedEventsOnly"
         public var description: String { return self.rawValue }

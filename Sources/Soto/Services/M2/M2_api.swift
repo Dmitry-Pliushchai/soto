@@ -59,6 +59,8 @@ public struct M2: AWSService {
                     "ca-central-1": "m2-fips.ca-central-1.amazonaws.com",
                     "us-east-1": "m2-fips.us-east-1.amazonaws.com",
                     "us-east-2": "m2-fips.us-east-2.amazonaws.com",
+                    "us-gov-east-1": "m2-fips.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "m2-fips.us-gov-west-1.amazonaws.com",
                     "us-west-1": "m2-fips.us-west-1.amazonaws.com",
                     "us-west-2": "m2-fips.us-west-2.amazonaws.com"
                 ])
@@ -790,6 +792,7 @@ extension M2.ListDataSetsRequest: AWSPaginateToken {
         return .init(
             applicationId: self.applicationId,
             maxResults: self.maxResults,
+            nameFilter: self.nameFilter,
             nextToken: token,
             prefix: self.prefix
         )

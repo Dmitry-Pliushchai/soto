@@ -175,6 +175,20 @@ public struct InternetMonitor: AWSService {
         return self.client.execute(operation: "GetMonitor", path: "/v20210603/Monitors/{MonitorName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing
+    /// 			a QueryId and a monitor name. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 			in the Amazon CloudWatch Internet Monitor User Guide.
+    public func getQueryResults(_ input: GetQueryResultsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetQueryResultsOutput> {
+        return self.client.execute(operation: "GetQueryResults", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor.
+    /// 			When you run a query, check the status to make sure that the query has SUCCEEDED before you review the results.    QUEUED: The query is scheduled to run.    RUNNING: The query is in progress but not complete.    SUCCEEDED: The query completed sucessfully.    FAILED: The query failed due to an error.    CANCELED: The query was canceled.
+    public func getQueryStatus(_ input: GetQueryStatusInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetQueryStatusOutput> {
+        return self.client.execute(operation: "GetQueryStatus", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and
     /// 			the status.  Health events that have start times during the time frame that is requested are not included in the list of health events.
     public func listHealthEvents(_ input: ListHealthEventsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListHealthEventsOutput> {
@@ -189,6 +203,20 @@ public struct InternetMonitor: AWSService {
     /// Lists the tags for a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor.
     public func listTagsForResource(_ input: ListTagsForResourceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceOutput> {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface. Specify a time period
+    /// 			for the data that you want returned by using StartTime and EndTime. You filter the query
+    /// 			results to return by providing parameters that you specify with FilterParameters. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 		in the Amazon CloudWatch Internet Monitor User Guide.
+    public func startQuery(_ input: StartQueryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartQueryOutput> {
+        return self.client.execute(operation: "StartQuery", path: "/v20210603/Monitors/{MonitorName}/Queries", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Stop a query that is progress for a specific monitor.
+    public func stopQuery(_ input: StopQueryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StopQueryOutput> {
+        return self.client.execute(operation: "StopQuery", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Adds a tag to a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor. You can add a maximum of 50 tags in Internet Monitor. A minimum of one tag is required for this call. It returns an error if you use the TagResource request with 0 tags.
@@ -221,6 +249,62 @@ extension InternetMonitor {
 // MARK: Paginators
 
 extension InternetMonitor {
+    /// Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing
+    /// 			a QueryId and a monitor name. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 			in the Amazon CloudWatch Internet Monitor User Guide.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func getQueryResultsPaginator<Result>(
+        _ input: GetQueryResultsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, GetQueryResultsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.getQueryResults,
+            inputKey: \GetQueryResultsInput.nextToken,
+            outputKey: \GetQueryResultsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func getQueryResultsPaginator(
+        _ input: GetQueryResultsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (GetQueryResultsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.getQueryResults,
+            inputKey: \GetQueryResultsInput.nextToken,
+            outputKey: \GetQueryResultsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and
     /// 			the status.  Health events that have start times during the time frame that is requested are not included in the list of health events.
     ///
@@ -325,6 +409,17 @@ extension InternetMonitor {
             outputKey: \ListMonitorsOutput.nextToken,
             on: eventLoop,
             onPage: onPage
+        )
+    }
+}
+
+extension InternetMonitor.GetQueryResultsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> InternetMonitor.GetQueryResultsInput {
+        return .init(
+            maxResults: self.maxResults,
+            monitorName: self.monitorName,
+            nextToken: token,
+            queryId: self.queryId
         )
     }
 }

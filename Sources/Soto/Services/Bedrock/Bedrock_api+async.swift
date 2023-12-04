@@ -21,7 +21,7 @@ import SotoCore
 extension Bedrock {
     // MARK: Async API Calls
 
-    /// Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Bedrock returns validation loss metrics and output generations after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
+    /// Creates a fine-tuning job to customize a base model. You specify the base foundation model and the location of the training data. After the  model-customization job completes successfully, your custom model resource will be ready to use. Training data contains input and output text for each record in a JSONL format. Optionally, you can specify validation data in the same format as the training data. Amazon Bedrock returns validation loss metrics and output generations  after the job completes.   Model-customization jobs are asynchronous and the completion time depends on the base model and the training/validation data size. To monitor a job, use the GetModelCustomizationJob operation to retrieve the job status. For more information, see Custom models in the Bedrock User Guide.
     public func createModelCustomizationJob(_ input: CreateModelCustomizationJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateModelCustomizationJobResponse {
         return try await self.client.execute(operation: "CreateModelCustomizationJob", path: "/model-customization-jobs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -46,12 +46,12 @@ extension Bedrock {
         return try await self.client.execute(operation: "DeleteProvisionedModelThroughput", path: "/provisioned-model-throughput/{provisionedModelId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get the properties associated with a Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
+    /// Get the properties associated with a Amazon Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
     public func getCustomModel(_ input: GetCustomModelRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetCustomModelResponse {
         return try await self.client.execute(operation: "GetCustomModel", path: "/custom-models/{modelIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get details about a Bedrock foundation model.
+    /// Get details about a Amazon Bedrock foundation model.
     public func getFoundationModel(_ input: GetFoundationModelRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetFoundationModelResponse {
         return try await self.client.execute(operation: "GetFoundationModel", path: "/foundation-models/{modelIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -76,7 +76,7 @@ extension Bedrock {
         return try await self.client.execute(operation: "ListCustomModels", path: "/custom-models", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// List of Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
+    /// List of Amazon Bedrock foundation models that you can use. For more information, see Foundation models in the Bedrock User Guide.
     public func listFoundationModels(_ input: ListFoundationModelsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListFoundationModelsResponse {
         return try await self.client.execute(operation: "ListFoundationModels", path: "/foundation-models", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

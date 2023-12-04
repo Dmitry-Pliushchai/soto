@@ -56,6 +56,13 @@ public struct EMR: AWSService {
             apiVersion: "2009-03-31",
             endpoint: endpoint,
             variantEndpoints: [
+                [.dualstack]: .init(endpoints: [
+                    "cn-north-1": "elasticmapreduce.cn-north-1.api.amazonwebservices.com.cn",
+                    "cn-northwest-1": "elasticmapreduce.cn-northwest-1.api.amazonwebservices.com.cn",
+                    "us-east-2": "elasticmapreduce.us-east-2.api.aws",
+                    "us-gov-east-1": "elasticmapreduce.us-gov-east-1.api.aws",
+                    "us-gov-west-1": "elasticmapreduce.us-gov-west-1.api.aws"
+                ]),
                 [.fips]: .init(endpoints: [
                     "ca-central-1": "elasticmapreduce-fips.ca-central-1.amazonaws.com",
                     "us-east-1": "elasticmapreduce-fips.us-east-1.amazonaws.com",

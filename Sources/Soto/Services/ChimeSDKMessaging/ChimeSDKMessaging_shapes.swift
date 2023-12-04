@@ -26,26 +26,26 @@ import SotoCore
 extension ChimeSDKMessaging {
     // MARK: Enums
 
-    public enum AllowNotifications: String, CustomStringConvertible, Codable, Sendable {
+    public enum AllowNotifications: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case filtered = "FILTERED"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelMembershipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelMembershipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case hidden = "HIDDEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelMessagePersistenceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelMessagePersistenceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nonPersistent = "NON_PERSISTENT"
         case persistent = "PERSISTENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelMessageStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelMessageStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case denied = "DENIED"
         case failed = "FAILED"
         case pending = "PENDING"
@@ -53,25 +53,25 @@ extension ChimeSDKMessaging {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelMessageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelMessageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case control = "CONTROL"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case restricted = "RESTRICTED"
         case unrestricted = "UNRESTRICTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelPrivacy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelPrivacy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "PRIVATE"
         case `public` = "PUBLIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "AccessDenied"
         case badRequest = "BadRequest"
         case conflict = "Conflict"
@@ -90,47 +90,47 @@ extension ChimeSDKMessaging {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExpirationCriterion: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExpirationCriterion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdTimestamp = "CREATED_TIMESTAMP"
         case lastMessageTimestamp = "LAST_MESSAGE_TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum FallbackAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum FallbackAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `continue` = "CONTINUE"
         case abort = "ABORT"
         public var description: String { return self.rawValue }
     }
 
-    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `async` = "ASYNC"
         public var description: String { return self.rawValue }
     }
 
-    public enum MessagingDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessagingDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case channel = "Channel"
         case channelMessage = "ChannelMessage"
         public var description: String { return self.rawValue }
     }
 
-    public enum PushNotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PushNotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case voip = "VOIP"
         public var description: String { return self.rawValue }
     }
 
-    public enum SearchFieldKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum SearchFieldKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case members = "MEMBERS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SearchFieldOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SearchFieldOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         case includes = "INCLUDES"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }

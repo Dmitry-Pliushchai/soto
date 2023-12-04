@@ -26,7 +26,7 @@ import SotoCore
 extension WAFV2 {
     // MARK: Enums
 
-    public enum ActionValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case block = "BLOCK"
         case captcha = "CAPTCHA"
@@ -36,19 +36,19 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AssociatedResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssociatedResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudfront = "CLOUDFRONT"
         public var description: String { return self.rawValue }
     }
 
-    public enum BodyParsingFallbackBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum BodyParsingFallbackBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case evaluateAsString = "EVALUATE_AS_STRING"
         case match = "MATCH"
         case noMatch = "NO_MATCH"
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eq = "EQ"
         case ge = "GE"
         case gt = "GT"
@@ -58,7 +58,7 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum CountryCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CountryCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `as` = "AS"
         case `do` = "DO"
         case `in` = "IN"
@@ -312,7 +312,7 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum FailureReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailureReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tokenDomainMismatch = "TOKEN_DOMAIN_MISMATCH"
         case tokenExpired = "TOKEN_EXPIRED"
         case tokenInvalid = "TOKEN_INVALID"
@@ -320,83 +320,83 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum FallbackBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum FallbackBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case match = "MATCH"
         case noMatch = "NO_MATCH"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case drop = "DROP"
         case keep = "KEEP"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterRequirement: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterRequirement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case meetsAll = "MEETS_ALL"
         case meetsAny = "MEETS_ANY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ForwardedIPPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ForwardedIPPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case any = "ANY"
         case first = "FIRST"
         case last = "LAST"
         public var description: String { return self.rawValue }
     }
 
-    public enum IPAddressVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum IPAddressVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ipv4 = "IPV4"
         case ipv6 = "IPV6"
         public var description: String { return self.rawValue }
     }
 
-    public enum InspectionLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum InspectionLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case common = "COMMON"
         case targeted = "TARGETED"
         public var description: String { return self.rawValue }
     }
 
-    public enum JsonMatchScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum JsonMatchScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case key = "KEY"
         case value = "VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelMatchScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelMatchScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case label = "LABEL"
         case namespace = "NAMESPACE"
         public var description: String { return self.rawValue }
     }
 
-    public enum MapMatchScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum MapMatchScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case key = "KEY"
         case value = "VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OversizeHandling: String, CustomStringConvertible, Codable, Sendable {
+    public enum OversizeHandling: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `continue` = "CONTINUE"
         case match = "MATCH"
         case noMatch = "NO_MATCH"
         public var description: String { return self.rawValue }
     }
 
-    public enum PayloadType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PayloadType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case formEncoded = "FORM_ENCODED"
         case json = "JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum Platform: String, CustomStringConvertible, Codable, Sendable {
+    public enum Platform: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case android = "ANDROID"
         case ios = "IOS"
         public var description: String { return self.rawValue }
     }
 
-    public enum PositionalConstraint: String, CustomStringConvertible, Codable, Sendable {
+    public enum PositionalConstraint: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CONTAINS"
         case containsWord = "CONTAINS_WORD"
         case endsWith = "ENDS_WITH"
@@ -405,7 +405,7 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum RateBasedStatementAggregateKeyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RateBasedStatementAggregateKeyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case constant = "CONSTANT"
         case customKeys = "CUSTOM_KEYS"
         case forwardedIp = "FORWARDED_IP"
@@ -413,7 +413,7 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case apiGateway = "API_GATEWAY"
         case appRunnerService = "APP_RUNNER_SERVICE"
         case applicationLoadBalancer = "APPLICATION_LOAD_BALANCER"
@@ -423,26 +423,26 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResponseContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResponseContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case applicationJson = "APPLICATION_JSON"
         case textHtml = "TEXT_HTML"
         case textPlain = "TEXT_PLAIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scope: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudfront = "CLOUDFRONT"
         case regional = "REGIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum SensitivityLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum SensitivityLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         public var description: String { return self.rawValue }
     }
 
-    public enum SizeInspectionLimit: String, CustomStringConvertible, Codable, Sendable {
+    public enum SizeInspectionLimit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kb16 = "KB_16"
         case kb32 = "KB_32"
         case kb48 = "KB_48"
@@ -450,7 +450,7 @@ extension WAFV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum TextTransformationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextTransformationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case base64Decode = "BASE64_DECODE"
         case base64DecodeExt = "BASE64_DECODE_EXT"
         case cmdLine = "CMD_LINE"
@@ -763,7 +763,7 @@ extension WAFV2 {
         /// A string value that you want WAF to search for. WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 200 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want WAF to search for in the URI path, for example, /images/daily-ad.jpg.     JA3Fingerprint: Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. You can use this choice only with a string match ByteMatchStatement with the PositionalConstraint set to  EXACTLY.  You can obtain the JA3 fingerprint for client requests from the web ACL logs.
         /// 						If WAF is able to calculate the fingerprint, it includes it in the logs.
         /// 						For information about the logging fields,
-        /// see Log fields in the WAF Developer Guide.     HeaderOrder: The comma-separated list of header names to match for. WAF creates a  string that contains the ordered list of header names, from the headers in the web request, and then matches against that string.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 200 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
+        /// see Log fields in the WAF Developer Guide.     HeaderOrder: The list of header names to match for. WAF creates a  string that contains the ordered list of header names, from the headers in the web request, and then matches against that string.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 200 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
         public let searchString: AWSBase64Data
         /// Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the FieldToMatch request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the transformed component contents.
         public let textTransformations: [TextTransformation]
@@ -999,7 +999,7 @@ extension WAFV2 {
     public struct Cookies: AWSEncodableShape & AWSDecodableShape {
         /// The filter to use to identify the subset of cookies to inspect in a web request.  You must specify exactly one setting: either All, IncludedCookies, or ExcludedCookies. Example JSON: "MatchPattern": { "IncludedCookies": [ "session-id-time", "session-id" ] }
         public let matchPattern: CookieMatchPattern
-        /// The parts of the cookies to inspect with the rule inspection criteria. If you specify All, WAF inspects both keys and values.
+        /// The parts of the cookies to inspect with the rule inspection criteria. If you specify ALL, WAF inspects both keys and values.   All does not require a match to be found in the keys and a match to be found in the values. It requires a match to be found in the keys  or the values or both. To require a match in the keys and in the values, use a logical AND statement to combine two match rules, one that inspects the keys and another that inspects the values.
         public let matchScope: MapMatchScope
         /// What WAF should do if the cookies of the request are more numerous or larger than WAF can inspect.  WAF does not support inspecting the entire contents of request cookies  when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the available cookies normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.
         public let oversizeHandling: OversizeHandling
@@ -1219,7 +1219,7 @@ extension WAFV2 {
         /// Defines and enables Amazon CloudWatch metrics and web request sample collection.
         public let visibilityConfig: VisibilityConfig
 
-        public init(capacity: Int64 = 0, customResponseBodies: [String: CustomResponseBody]? = nil, description: String? = nil, name: String, rules: [Rule]? = nil, scope: Scope, tags: [Tag]? = nil, visibilityConfig: VisibilityConfig) {
+        public init(capacity: Int64, customResponseBodies: [String: CustomResponseBody]? = nil, description: String? = nil, name: String, rules: [Rule]? = nil, scope: Scope, tags: [Tag]? = nil, visibilityConfig: VisibilityConfig) {
             self.capacity = capacity
             self.customResponseBodies = customResponseBodies
             self.description = description
@@ -2585,7 +2585,7 @@ extension WAFV2 {
         /// The Amazon resource name (ARN) of the WebACL for which you want a sample of requests.
         public let webAclArn: String
 
-        public init(maxItems: Int64 = 0, ruleMetricName: String, scope: Scope, timeWindow: TimeWindow, webAclArn: String) {
+        public init(maxItems: Int64, ruleMetricName: String, scope: Scope, timeWindow: TimeWindow, webAclArn: String) {
             self.maxItems = maxItems
             self.ruleMetricName = ruleMetricName
             self.scope = scope
@@ -2822,7 +2822,7 @@ extension WAFV2 {
     public struct Headers: AWSEncodableShape & AWSDecodableShape {
         /// The filter to use to identify the subset of headers to inspect in a web request.  You must specify exactly one setting: either All, IncludedHeaders, or ExcludedHeaders. Example JSON: "MatchPattern": { "ExcludedHeaders": [ "KeyToExclude1", "KeyToExclude2" ] }
         public let matchPattern: HeaderMatchPattern
-        /// The parts of the headers to match with the rule inspection criteria. If you specify All, WAF inspects both keys and values.
+        /// The parts of the headers to match with the rule inspection criteria. If you specify ALL, WAF inspects both keys and values.   All does not require a match to be found in the keys and a match to be found in the values. It requires a match to be found in the keys  or the values or both. To require a match in the keys and in the values, use a logical AND statement to combine two match rules, one that inspects the keys and another that inspects the values.
         public let matchScope: MapMatchScope
         /// What WAF should do if the headers of the request are more numerous or larger than WAF can inspect.  WAF does not support inspecting the entire contents of request headers  when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers and at most 8 KB of header contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the available headers normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.
         public let oversizeHandling: OversizeHandling
@@ -2993,7 +2993,7 @@ extension WAFV2 {
         public let invalidFallbackBehavior: BodyParsingFallbackBehavior?
         /// The patterns to look for in the JSON body. WAF inspects the results of these pattern matches against the rule inspection criteria.
         public let matchPattern: JsonMatchPattern
-        /// The parts of the JSON to match against using the MatchPattern. If you specify All, WAF matches against keys and values.
+        /// The parts of the JSON to match against using the MatchPattern. If you specify ALL, WAF matches against keys and values.   All does not require a match to be found in the keys and a match to be found in the values. It requires a match to be found in the keys  or the values or both. To require a match in the keys and in the values, use a logical AND statement to combine two match rules, one that inspects the keys and another that inspects the values.
         public let matchScope: JsonMatchScope
         /// What WAF should do if the body is larger than WAF can inspect.  WAF does not support inspecting the entire contents of the web request body if the body  exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service  only forwards the contents that are below the limit to WAF for inspection.  The default limit is 8 KB (8,192 bytes) for regional resources and 16 KB (16,384 bytes) for CloudFront distributions. For CloudFront distributions,  you can increase the limit in the web ACL AssociationConfig, for additional processing fees.  The options for oversize handling are the following:    CONTINUE - Inspect the available body contents normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit.  Default: CONTINUE
         public let oversizeHandling: OversizeHandling?

@@ -26,7 +26,8 @@ import SotoCore
 extension CodeCatalyst {
     // MARK: Enums
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case beginsWith = "BEGINS_WITH"
         case eq = "EQ"
         case ge = "GE"
         case gt = "GT"
@@ -35,13 +36,13 @@ extension CodeCatalyst {
         public var description: String { return self.rawValue }
     }
 
-    public enum DevEnvironmentSessionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DevEnvironmentSessionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ssh = "SSH"
         case ssm = "SSM"
         public var description: String { return self.rawValue }
     }
 
-    public enum DevEnvironmentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DevEnvironmentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case deleting = "DELETING"
         case failed = "FAILED"
@@ -53,12 +54,13 @@ extension CodeCatalyst {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hasAccessTo = "hasAccessTo"
+        case name = "name"
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case devStandard1Large = "dev.standard1.large"
         case devStandard1Medium = "dev.standard1.medium"
         case devStandard1Small = "dev.standard1.small"
@@ -66,16 +68,44 @@ extension CodeCatalyst {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mutation = "MUTATION"
         case readonly = "READONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsAccount = "AWS_ACCOUNT"
         case unknown = "UNKNOWN"
         case user = "USER"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum WorkflowRunMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case parallel = "PARALLEL"
+        case queued = "QUEUED"
+        case superseded = "SUPERSEDED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum WorkflowRunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case abandoned = "ABANDONED"
+        case cancelled = "CANCELLED"
+        case failed = "FAILED"
+        case inProgress = "IN_PROGRESS"
+        case notRun = "NOT_RUN"
+        case provisioning = "PROVISIONING"
+        case stopped = "STOPPED"
+        case stopping = "STOPPING"
+        case succeeded = "SUCCEEDED"
+        case superseded = "SUPERSEDED"
+        case validating = "VALIDATING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum WorkflowStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case active = "ACTIVE"
+        case invalid = "INVALID"
         public var description: String { return self.rawValue }
     }
 
@@ -176,8 +206,10 @@ extension CodeCatalyst {
         public let repositories: [RepositoryInput]?
         /// The name of the space.
         public let spaceName: String
+        /// The name of the connection to use connect to a Amazon VPC.
+        public let vpcConnectionName: String?
 
-        public init(alias: String? = nil, clientToken: String? = nil, ides: [IdeConfiguration]? = nil, inactivityTimeoutMinutes: Int? = nil, instanceType: InstanceType, persistentStorage: PersistentStorageConfiguration, projectName: String, repositories: [RepositoryInput]? = nil, spaceName: String) {
+        public init(alias: String? = nil, clientToken: String? = nil, ides: [IdeConfiguration]? = nil, inactivityTimeoutMinutes: Int? = nil, instanceType: InstanceType, persistentStorage: PersistentStorageConfiguration, projectName: String, repositories: [RepositoryInput]? = nil, spaceName: String, vpcConnectionName: String? = nil) {
             self.alias = alias
             self.clientToken = clientToken
             self.ides = ides
@@ -187,6 +219,7 @@ extension CodeCatalyst {
             self.projectName = projectName
             self.repositories = repositories
             self.spaceName = spaceName
+            self.vpcConnectionName = vpcConnectionName
         }
 
         public func validate(name: String) throws {
@@ -204,6 +237,9 @@ extension CodeCatalyst {
             try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
             try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
             try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.vpcConnectionName, name: "vpcConnectionName", parent: name, max: 63)
+            try self.validate(self.vpcConnectionName, name: "vpcConnectionName", parent: name, min: 3)
+            try self.validate(self.vpcConnectionName, name: "vpcConnectionName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -214,6 +250,7 @@ extension CodeCatalyst {
             case instanceType = "instanceType"
             case persistentStorage = "persistentStorage"
             case repositories = "repositories"
+            case vpcConnectionName = "vpcConnectionName"
         }
     }
 
@@ -224,17 +261,21 @@ extension CodeCatalyst {
         public let projectName: String
         /// The name of the space.
         public let spaceName: String
+        /// The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+        public let vpcConnectionName: String?
 
-        public init(id: String, projectName: String, spaceName: String) {
+        public init(id: String, projectName: String, spaceName: String, vpcConnectionName: String? = nil) {
             self.id = id
             self.projectName = projectName
             self.spaceName = spaceName
+            self.vpcConnectionName = vpcConnectionName
         }
 
         private enum CodingKeys: String, CodingKey {
             case id = "id"
             case projectName = "projectName"
             case spaceName = "spaceName"
+            case vpcConnectionName = "vpcConnectionName"
         }
     }
 
@@ -767,8 +808,10 @@ extension CodeCatalyst {
         public let status: DevEnvironmentStatus
         /// The reason for the status.
         public let statusReason: String?
+        /// The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+        public let vpcConnectionName: String?
 
-        public init(alias: String? = nil, creatorId: String, id: String, ides: [Ide]? = nil, inactivityTimeoutMinutes: Int, instanceType: InstanceType, lastUpdatedTime: Date, persistentStorage: PersistentStorage, projectName: String? = nil, repositories: [DevEnvironmentRepositorySummary], spaceName: String? = nil, status: DevEnvironmentStatus, statusReason: String? = nil) {
+        public init(alias: String? = nil, creatorId: String, id: String, ides: [Ide]? = nil, inactivityTimeoutMinutes: Int, instanceType: InstanceType, lastUpdatedTime: Date, persistentStorage: PersistentStorage, projectName: String? = nil, repositories: [DevEnvironmentRepositorySummary], spaceName: String? = nil, status: DevEnvironmentStatus, statusReason: String? = nil, vpcConnectionName: String? = nil) {
             self.alias = alias
             self.creatorId = creatorId
             self.id = id
@@ -782,6 +825,7 @@ extension CodeCatalyst {
             self.spaceName = spaceName
             self.status = status
             self.statusReason = statusReason
+            self.vpcConnectionName = vpcConnectionName
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -798,6 +842,7 @@ extension CodeCatalyst {
             case spaceName = "spaceName"
             case status = "status"
             case statusReason = "statusReason"
+            case vpcConnectionName = "vpcConnectionName"
         }
     }
 
@@ -1004,8 +1049,10 @@ extension CodeCatalyst {
         public let status: DevEnvironmentStatus
         /// The reason for the status.
         public let statusReason: String?
+        /// The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+        public let vpcConnectionName: String?
 
-        public init(alias: String? = nil, creatorId: String, id: String, ides: [Ide]? = nil, inactivityTimeoutMinutes: Int, instanceType: InstanceType, lastUpdatedTime: Date, persistentStorage: PersistentStorage, projectName: String, repositories: [DevEnvironmentRepositorySummary], spaceName: String, status: DevEnvironmentStatus, statusReason: String? = nil) {
+        public init(alias: String? = nil, creatorId: String, id: String, ides: [Ide]? = nil, inactivityTimeoutMinutes: Int, instanceType: InstanceType, lastUpdatedTime: Date, persistentStorage: PersistentStorage, projectName: String, repositories: [DevEnvironmentRepositorySummary], spaceName: String, status: DevEnvironmentStatus, statusReason: String? = nil, vpcConnectionName: String? = nil) {
             self.alias = alias
             self.creatorId = creatorId
             self.id = id
@@ -1019,6 +1066,7 @@ extension CodeCatalyst {
             self.spaceName = spaceName
             self.status = status
             self.statusReason = statusReason
+            self.vpcConnectionName = vpcConnectionName
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -1035,6 +1083,7 @@ extension CodeCatalyst {
             case spaceName = "spaceName"
             case status = "status"
             case statusReason = "statusReason"
+            case vpcConnectionName = "vpcConnectionName"
         }
     }
 
@@ -1340,6 +1389,175 @@ extension CodeCatalyst {
         }
     }
 
+    public struct GetWorkflowRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "id", location: .uri("id")),
+            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
+            AWSMemberEncoding(label: "spaceName", location: .uri("spaceName"))
+        ]
+
+        /// The ID of the workflow. To rerieve a list of workflow IDs, use ListWorkflows.
+        public let id: String
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The name of the space.
+        public let spaceName: String
+
+        public init(id: String, projectName: String, spaceName: String) {
+            self.id = id
+            self.projectName = projectName
+            self.spaceName = spaceName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.id, name: "id", parent: name, pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+            try self.validate(self.projectName, name: "projectName", parent: name, max: 63)
+            try self.validate(self.projectName, name: "projectName", parent: name, min: 3)
+            try self.validate(self.projectName, name: "projectName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetWorkflowResponse: AWSDecodableShape {
+        /// The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var createdTime: Date
+        /// Information about the workflow definition file for the workflow.
+        public let definition: WorkflowDefinition
+        /// The ID of the workflow.
+        public let id: String
+        /// The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var lastUpdatedTime: Date
+        /// The name of the workflow.
+        public let name: String
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The behavior to use when multiple workflows occur at the same time. For more information, see  https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html in the Amazon CodeCatalyst User Guide.
+        public let runMode: WorkflowRunMode
+        /// The name of the branch that contains the workflow YAML.
+        public let sourceBranchName: String?
+        /// The name of the source repository where the workflow YAML is stored.
+        public let sourceRepositoryName: String?
+        /// The name of the space.
+        public let spaceName: String
+        /// The status of the workflow.
+        public let status: WorkflowStatus
+
+        public init(createdTime: Date, definition: WorkflowDefinition, id: String, lastUpdatedTime: Date, name: String, projectName: String, runMode: WorkflowRunMode, sourceBranchName: String? = nil, sourceRepositoryName: String? = nil, spaceName: String, status: WorkflowStatus) {
+            self.createdTime = createdTime
+            self.definition = definition
+            self.id = id
+            self.lastUpdatedTime = lastUpdatedTime
+            self.name = name
+            self.projectName = projectName
+            self.runMode = runMode
+            self.sourceBranchName = sourceBranchName
+            self.sourceRepositoryName = sourceRepositoryName
+            self.spaceName = spaceName
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case createdTime = "createdTime"
+            case definition = "definition"
+            case id = "id"
+            case lastUpdatedTime = "lastUpdatedTime"
+            case name = "name"
+            case projectName = "projectName"
+            case runMode = "runMode"
+            case sourceBranchName = "sourceBranchName"
+            case sourceRepositoryName = "sourceRepositoryName"
+            case spaceName = "spaceName"
+            case status = "status"
+        }
+    }
+
+    public struct GetWorkflowRunRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "id", location: .uri("id")),
+            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
+            AWSMemberEncoding(label: "spaceName", location: .uri("spaceName"))
+        ]
+
+        /// The ID of the workflow run. To retrieve a list of workflow run IDs, use ListWorkflowRuns.
+        public let id: String
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The name of the space.
+        public let spaceName: String
+
+        public init(id: String, projectName: String, spaceName: String) {
+            self.id = id
+            self.projectName = projectName
+            self.spaceName = spaceName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.id, name: "id", parent: name, pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+            try self.validate(self.projectName, name: "projectName", parent: name, max: 63)
+            try self.validate(self.projectName, name: "projectName", parent: name, min: 3)
+            try self.validate(self.projectName, name: "projectName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetWorkflowRunResponse: AWSDecodableShape {
+        /// The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var endTime: Date?
+        /// The ID of the workflow run.
+        public let id: String
+        /// The date and time the workflow run status was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var lastUpdatedTime: Date
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The name of the space.
+        public let spaceName: String
+        /// The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var startTime: Date
+        /// The status of the workflow run.
+        public let status: WorkflowRunStatus
+        /// Information about the reasons for the status of the workflow run.
+        public let statusReasons: [WorkflowRunStatusReason]?
+        /// The ID of the workflow.
+        public let workflowId: String
+
+        public init(endTime: Date? = nil, id: String, lastUpdatedTime: Date, projectName: String, spaceName: String, startTime: Date, status: WorkflowRunStatus, statusReasons: [WorkflowRunStatusReason]? = nil, workflowId: String) {
+            self.endTime = endTime
+            self.id = id
+            self.lastUpdatedTime = lastUpdatedTime
+            self.projectName = projectName
+            self.spaceName = spaceName
+            self.startTime = startTime
+            self.status = status
+            self.statusReasons = statusReasons
+            self.workflowId = workflowId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case endTime = "endTime"
+            case id = "id"
+            case lastUpdatedTime = "lastUpdatedTime"
+            case projectName = "projectName"
+            case spaceName = "spaceName"
+            case startTime = "startTime"
+            case status = "status"
+            case statusReasons = "statusReasons"
+            case workflowId = "workflowId"
+        }
+    }
+
     public struct Ide: AWSDecodableShape {
         /// The name of the IDE.
         public let name: String?
@@ -1469,7 +1687,6 @@ extension CodeCatalyst {
 
     public struct ListDevEnvironmentsRequest: AWSEncodableShape {
         public static var _encoding = [
-            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
             AWSMemberEncoding(label: "spaceName", location: .uri("spaceName"))
         ]
 
@@ -1480,11 +1697,11 @@ extension CodeCatalyst {
         /// A token returned from a call to this API to indicate the next batch of results to return, if any.
         public let nextToken: String?
         /// The name of the project in the space.
-        public let projectName: String
+        public let projectName: String?
         /// The name of the space.
         public let spaceName: String
 
-        public init(filters: [Filter]? = nil, maxResults: Int? = nil, nextToken: String? = nil, projectName: String, spaceName: String) {
+        public init(filters: [Filter]? = nil, maxResults: Int? = nil, nextToken: String? = nil, projectName: String? = nil, spaceName: String) {
             self.filters = filters
             self.maxResults = maxResults
             self.nextToken = nextToken
@@ -1505,6 +1722,7 @@ extension CodeCatalyst {
             case filters = "filters"
             case maxResults = "maxResults"
             case nextToken = "nextToken"
+            case projectName = "projectName"
         }
     }
 
@@ -1839,6 +2057,129 @@ extension CodeCatalyst {
         }
     }
 
+    public struct ListWorkflowRunsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
+            AWSMemberEncoding(label: "spaceName", location: .uri("spaceName")),
+            AWSMemberEncoding(label: "workflowId", location: .querystring("workflowId"))
+        ]
+
+        /// The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
+        public let maxResults: Int?
+        /// A token returned from a call to this API to indicate the next batch of results to return, if any.
+        public let nextToken: String?
+        /// The name of the project in the space.
+        public let projectName: String
+        /// Information used to sort the items in the returned list.
+        public let sortBy: [WorkflowRunSortCriteria]?
+        /// The name of the space.
+        public let spaceName: String
+        /// The ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows.
+        public let workflowId: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil, projectName: String, sortBy: [WorkflowRunSortCriteria]? = nil, spaceName: String, workflowId: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.projectName = projectName
+            self.sortBy = sortBy
+            self.spaceName = spaceName
+            self.workflowId = workflowId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.projectName, name: "projectName", parent: name, max: 63)
+            try self.validate(self.projectName, name: "projectName", parent: name, min: 3)
+            try self.validate(self.projectName, name: "projectName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.sortBy, name: "sortBy", parent: name, max: 1)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.workflowId, name: "workflowId", parent: name, pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case sortBy = "sortBy"
+        }
+    }
+
+    public struct ListWorkflowRunsResponse: AWSDecodableShape {
+        /// Information about the runs of a workflow.
+        public let items: [WorkflowRunSummary]?
+        /// A token returned from a call to this API to indicate the next batch of results to return, if any.
+        public let nextToken: String?
+
+        public init(items: [WorkflowRunSummary]? = nil, nextToken: String? = nil) {
+            self.items = items
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case items = "items"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListWorkflowsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
+            AWSMemberEncoding(label: "spaceName", location: .uri("spaceName"))
+        ]
+
+        /// The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
+        public let maxResults: Int?
+        /// A token returned from a call to this API to indicate the next batch of results to return, if any.
+        public let nextToken: String?
+        /// The name of the project in the space.
+        public let projectName: String
+        /// Information used to sort the items in the returned list.
+        public let sortBy: [WorkflowSortCriteria]?
+        /// The name of the space.
+        public let spaceName: String
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil, projectName: String, sortBy: [WorkflowSortCriteria]? = nil, spaceName: String) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.projectName = projectName
+            self.sortBy = sortBy
+            self.spaceName = spaceName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.projectName, name: "projectName", parent: name, max: 63)
+            try self.validate(self.projectName, name: "projectName", parent: name, min: 3)
+            try self.validate(self.projectName, name: "projectName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.sortBy, name: "sortBy", parent: name, max: 1)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case sortBy = "sortBy"
+        }
+    }
+
+    public struct ListWorkflowsResponse: AWSDecodableShape {
+        /// Information about the workflows in a project.
+        public let items: [WorkflowSummary]?
+        /// A token returned from a call to this API to indicate the next batch of results to return, if any.
+        public let nextToken: String?
+
+        public init(items: [WorkflowSummary]? = nil, nextToken: String? = nil) {
+            self.items = items
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case items = "items"
+            case nextToken = "nextToken"
+        }
+    }
+
     public struct PersistentStorage: AWSDecodableShape {
         /// The size of the persistent storage in gigabytes (specifically GiB).  Valid values for storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.
         public let sizeInGiB: Int
@@ -2110,6 +2451,69 @@ extension CodeCatalyst {
             case projectName = "projectName"
             case sessionId = "sessionId"
             case spaceName = "spaceName"
+        }
+    }
+
+    public struct StartWorkflowRunRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "projectName", location: .uri("projectName")),
+            AWSMemberEncoding(label: "spaceName", location: .uri("spaceName")),
+            AWSMemberEncoding(label: "workflowId", location: .querystring("workflowId"))
+        ]
+
+        /// A user-specified idempotency token.  Idempotency ensures that an API request completes only once.  With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.
+        public let clientToken: String?
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The name of the space.
+        public let spaceName: String
+        /// The system-generated unique ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows.
+        public let workflowId: String
+
+        public init(clientToken: String? = StartWorkflowRunRequest.idempotencyToken(), projectName: String, spaceName: String, workflowId: String) {
+            self.clientToken = clientToken
+            self.projectName = projectName
+            self.spaceName = spaceName
+            self.workflowId = workflowId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.projectName, name: "projectName", parent: name, max: 63)
+            try self.validate(self.projectName, name: "projectName", parent: name, min: 3)
+            try self.validate(self.projectName, name: "projectName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.spaceName, name: "spaceName", parent: name, max: 63)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, min: 3)
+            try self.validate(self.spaceName, name: "spaceName", parent: name, pattern: "^[a-zA-Z0-9]+(?:[-_\\.][a-zA-Z0-9]+)*$")
+            try self.validate(self.workflowId, name: "workflowId", parent: name, pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case clientToken = "clientToken"
+        }
+    }
+
+    public struct StartWorkflowRunResponse: AWSDecodableShape {
+        /// The system-generated unique ID of the workflow run.
+        public let id: String
+        /// The name of the project in the space.
+        public let projectName: String
+        /// The name of the space.
+        public let spaceName: String
+        /// The system-generated unique ID of the workflow.
+        public let workflowId: String
+
+        public init(id: String, projectName: String, spaceName: String, workflowId: String) {
+            self.id = id
+            self.projectName = projectName
+            self.spaceName = spaceName
+            self.workflowId = workflowId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case id = "id"
+            case projectName = "projectName"
+            case spaceName = "spaceName"
+            case workflowId = "workflowId"
         }
     }
 
@@ -2477,6 +2881,135 @@ extension CodeCatalyst {
 
         private enum CodingKeys: String, CodingKey {
             case identity = "identity"
+        }
+    }
+
+    public struct WorkflowDefinition: AWSDecodableShape {
+        /// The path to the workflow definition file stored in the source repository for the project, including the file name.
+        public let path: String
+
+        public init(path: String) {
+            self.path = path
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case path = "path"
+        }
+    }
+
+    public struct WorkflowDefinitionSummary: AWSDecodableShape {
+        /// The path to the workflow definition file stored in the source repository for the project, including the file name.
+        public let path: String
+
+        public init(path: String) {
+            self.path = path
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case path = "path"
+        }
+    }
+
+    public struct WorkflowRunSortCriteria: AWSEncodableShape {
+        public init() {}
+    }
+
+    public struct WorkflowRunStatusReason: AWSDecodableShape {
+        public init() {}
+    }
+
+    public struct WorkflowRunSummary: AWSDecodableShape {
+        /// The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var endTime: Date?
+        /// The system-generated unique ID of the workflow run.
+        public let id: String
+        /// The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var lastUpdatedTime: Date
+        /// The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+        @CustomCoding<ISO8601DateCoder>
+        public var startTime: Date
+        /// The status of the workflow run.
+        public let status: WorkflowRunStatus
+        /// The reasons for the workflow run status.
+        public let statusReasons: [WorkflowRunStatusReason]?
+        /// The system-generated unique ID of the workflow.
+        public let workflowId: String
+        /// The name of the workflow.
+        public let workflowName: String
+
+        public init(endTime: Date? = nil, id: String, lastUpdatedTime: Date, startTime: Date, status: WorkflowRunStatus, statusReasons: [WorkflowRunStatusReason]? = nil, workflowId: String, workflowName: String) {
+            self.endTime = endTime
+            self.id = id
+            self.lastUpdatedTime = lastUpdatedTime
+            self.startTime = startTime
+            self.status = status
+            self.statusReasons = statusReasons
+            self.workflowId = workflowId
+            self.workflowName = workflowName
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case endTime = "endTime"
+            case id = "id"
+            case lastUpdatedTime = "lastUpdatedTime"
+            case startTime = "startTime"
+            case status = "status"
+            case statusReasons = "statusReasons"
+            case workflowId = "workflowId"
+            case workflowName = "workflowName"
+        }
+    }
+
+    public struct WorkflowSortCriteria: AWSEncodableShape {
+        public init() {}
+    }
+
+    public struct WorkflowSummary: AWSDecodableShape {
+        /// The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var createdTime: Date
+        /// Information about the workflow definition file.
+        public let definition: WorkflowDefinitionSummary
+        /// The system-generated unique ID of a workflow.
+        public let id: String
+        /// The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339
+        @CustomCoding<ISO8601DateCoder>
+        public var lastUpdatedTime: Date
+        /// The name of the workflow.
+        public let name: String
+        /// The run mode of the workflow.
+        public let runMode: WorkflowRunMode
+        /// The name of the branch of the source repository where the workflow definition file is stored.
+        public let sourceBranchName: String
+        /// The name of the source repository where the workflow definition file is stored.
+        public let sourceRepositoryName: String
+        /// The status of the workflow.
+        public let status: WorkflowStatus
+
+        public init(createdTime: Date, definition: WorkflowDefinitionSummary, id: String, lastUpdatedTime: Date, name: String, runMode: WorkflowRunMode, sourceBranchName: String, sourceRepositoryName: String, status: WorkflowStatus) {
+            self.createdTime = createdTime
+            self.definition = definition
+            self.id = id
+            self.lastUpdatedTime = lastUpdatedTime
+            self.name = name
+            self.runMode = runMode
+            self.sourceBranchName = sourceBranchName
+            self.sourceRepositoryName = sourceRepositoryName
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case createdTime = "createdTime"
+            case definition = "definition"
+            case id = "id"
+            case lastUpdatedTime = "lastUpdatedTime"
+            case name = "name"
+            case runMode = "runMode"
+            case sourceBranchName = "sourceBranchName"
+            case sourceRepositoryName = "sourceRepositoryName"
+            case status = "status"
         }
     }
 }

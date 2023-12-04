@@ -63,7 +63,7 @@ public struct ManagedBlockchain: AWSService {
 
     // MARK: API Calls
 
-    /// Creates a new accessor for use with Managed Blockchain Ethereum nodes. An accessor contains information  required for token based access to your Ethereum nodes.
+    /// Creates a new accessor for use with Amazon Managed Blockchain service that supports token based access.  The accessor contains information required for token based access.
     public func createAccessor(_ input: CreateAccessorInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessorOutput> {
         return self.client.execute(operation: "CreateAccessor", path: "/accessors", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -587,6 +587,7 @@ extension ManagedBlockchain.ListAccessorsInput: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> ManagedBlockchain.ListAccessorsInput {
         return .init(
             maxResults: self.maxResults,
+            networkType: self.networkType,
             nextToken: token
         )
     }

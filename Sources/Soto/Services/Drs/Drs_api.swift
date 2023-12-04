@@ -54,6 +54,12 @@ public struct Drs: AWSService {
             serviceProtocol: .restjson,
             apiVersion: "2020-02-26",
             endpoint: endpoint,
+            variantEndpoints: [
+                [.fips]: .init(endpoints: [
+                    "us-gov-east-1": "drs-fips.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "drs-fips.us-gov-west-1.amazonaws.com"
+                ])
+            ],
             errorType: DrsErrorType.self,
             timeout: timeout,
             byteBufferAllocator: byteBufferAllocator,

@@ -19,21 +19,26 @@
 
 /// Service object for interacting with AWS ARCZonalShift service.
 ///
-/// This is the API Reference Guide for the zonal shift feature of Amazon Route 53 Application Recovery Controller. This guide is for developers who need detailed information about
-/// 			zonal shift API actions, data types, and errors.
-/// 		       Zonal shift is in preview release for Amazon Route 53 Application Recovery Controller and is subject to change.
-/// 		       Zonal shift in Route 53 ARC enables you to move traffic for a load balancer resource away from an Availability Zone. Starting
-/// 			a zonal shift helps your application recover immediately, for example, from a developer's bad code deployment
-/// 			or from an AWS infrastructure failure in a single Availability Zone, reducing the impact and time lost from an issue
-/// 			in one zone.
-/// 		       Supported AWS resources are automatically registered with Route 53 ARC. Resources that are registered for zonal shifts
-/// 			in Route 53 ARC are managed resources in Route 53 ARC. You can start a zonal shift for any managed resource in your account in a Region.
-/// 			At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.
-/// 		       Zonal shifts are temporary. You must specify an expiration when you start a zonal shift, of up to three days initially.
-/// 			If you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration.
-/// 			You can also cancel a zonal shift, before it expires, for example, if you're ready to restore traffic to the Availability Zone.
-/// 		       For more information about using zonal shift, see the
-/// 			Amazon Route 53 Application Recovery Controller Developer Guide.
+/// Welcome to the Zonal Shift API Reference Guide for Amazon Route 53 Application Recovery Controller (Route 53 ARC). You can start a zonal shift to move traffic for a load balancer resource away from an Availability Zone to
+/// 			help your application recover quickly from an impairment in an Availability Zone. For example,
+/// 			you can recover your application from a developer's bad code deployment or from an
+/// 			Amazon Web Services infrastructure failure in a single Availability Zone. You can also configure zonal autoshift for a load balancer resource. Zonal autoshift
+/// 			is a capability in Route 53 ARC where Amazon Web Services shifts away application resource
+/// 			traffic from an Availability Zone, on your behalf, to help reduce your time to recovery during events.
+/// 			Amazon Web Services shifts away traffic for resources that are enabled for zonal autoshift whenever Amazon Web Services
+/// 			determines that there's an issue in the Availability Zone that could potentially affect
+/// 			customers. To ensure that zonal autoshift is safe for your application, you must
+/// 			also configure practice runs when you enable zonal autoshift for a resource. Practice runs start
+/// 			weekly zonal shifts for a resource, to shift
+/// 			traffic for the resource out of an Availability Zone. Practice runs make sure, on a regular basis,
+/// 			that you have enough capacity in all the Availability Zones in an Amazon Web Services Region
+/// 			for your application to continue to operate normally
+/// 			when traffic for a resource is shifted away from one Availability Zone.  You must prescale resource capacity in all Availability Zones in the Region
+/// 			where your application is deployed, before you configure practice runs or enable zonal autoshift
+/// 			for a resource. You should not rely on scaling on demand when an autoshift or practice run
+/// 			starts.   For more information about using zonal shift and zonal autoshift, see the
+/// 			Amazon Route 53 Application Recovery Controller
+/// 				Developer Guide.
 public struct ARCZonalShift: AWSService {
     // MARK: Member variables
 
@@ -77,32 +82,70 @@ public struct ARCZonalShift: AWSService {
 
     // MARK: API Calls
 
-    /// Cancel a zonal shift in Amazon Route 53 Application Recovery Controller that you've started for a resource in your AWS account in an AWS Region.
+    /// Cancel a zonal shift in Amazon Route 53 Application Recovery Controller. To cancel the zonal shift, specify the zonal shift ID. A zonal shift can be one that you've started for a resource in your Amazon Web Services account  		in an Amazon Web Services Region, or it can be a zonal shift started by a practice run with zonal  		autoshift.
     public func cancelZonalShift(_ input: CancelZonalShiftRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ZonalShift> {
         return self.client.execute(operation: "CancelZonalShift", path: "/zonalshifts/{zonalShiftId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Get information about a resource that's been registered for zonal shifts with Amazon Route 53 Application Recovery Controller in this AWS Region. Resources that are registered for 		zonal shifts are managed resources in Route 53 ARC. 	     At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.
+    /// A practice run configuration for zonal autoshift is required when you enable zonal autoshift.
+    /// 			A practice run configuration includes specifications for blocked dates and blocked time windows,
+    /// 		and for Amazon CloudWatch alarms that you create to use with practice runs. The alarms that you specify are an
+    /// 			outcome alarm, to monitor application health during practice runs and,
+    /// 			optionally, a blocking alarm, to block practice runs from starting. For more information, see
+    ///
+    /// 				Considerations when you configure zonal autoshift in the Amazon Route 53 Application Recovery Controller Developer Guide.
+    public func createPracticeRunConfiguration(_ input: CreatePracticeRunConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreatePracticeRunConfigurationResponse> {
+        return self.client.execute(operation: "CreatePracticeRunConfiguration", path: "/configuration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the practice run configuration for a resource. Before you can delete
+    /// 			a practice run configuration for a resource., you must disable zonal autoshift for
+    /// 			the resource. Practice runs must be configured for zonal autoshift to be enabled.
+    public func deletePracticeRunConfiguration(_ input: DeletePracticeRunConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeletePracticeRunConfigurationResponse> {
+        return self.client.execute(operation: "DeletePracticeRunConfiguration", path: "/configuration/{resourceIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get information about a resource that's been registered for zonal shifts with Amazon Route 53 Application Recovery Controller in this Amazon Web Services Region. Resources that are registered for 		zonal shifts are managed resources in Route 53 ARC. You can start zonal shifts and configure zonal autoshift for managed resources. At this time, you can only start a zonal shift or configure zonal autoshift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.
     public func getManagedResource(_ input: GetManagedResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetManagedResourceResponse> {
         return self.client.execute(operation: "GetManagedResource", path: "/managedresources/{resourceIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists all the resources in your AWS account in this AWS Region that are managed for zonal shifts in Amazon Route 53 Application Recovery Controller, and information  		about them. The information includes their Amazon Resource Names (ARNs), the Availability Zones the resources are deployed in, and  		the resource name.
+    /// Returns the active autoshifts for a specified resource.
+    public func listAutoshifts(_ input: ListAutoshiftsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAutoshiftsResponse> {
+        return self.client.execute(operation: "ListAutoshifts", path: "/autoshifts", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all the resources in your Amazon Web Services account in this Amazon Web Services Region that are managed for  		zonal shifts in Amazon Route 53 Application Recovery Controller, and information about them. The information includes the zonal autoshift status for the resource,  		as well as the Amazon Resource Name (ARN), the Availability Zones that each resource is deployed in, and  		the resource name.
     public func listManagedResources(_ input: ListManagedResourcesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListManagedResourcesResponse> {
         return self.client.execute(operation: "ListManagedResources", path: "/managedresources", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists all the active zonal shifts in Amazon Route 53 Application Recovery Controller in your AWS account in this AWS Region.
+    /// Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region. 		ListZonalShifts returns customer-started zonal shifts, as well as practice run zonal shifts that Route 53 ARC started on  		your behalf for zonal autoshift. The ListZonalShifts operation does not list autoshifts. For more information about listing 		autoshifts, see "&gt;ListAutoshifts.
     public func listZonalShifts(_ input: ListZonalShiftsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListZonalShiftsResponse> {
         return self.client.execute(operation: "ListZonalShifts", path: "/zonalshifts", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in a AWS Region, 		to help your application recover immediately, for example, from a developer's bad code deployment or from an AWS  		infrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed 		resources in your account in an AWS Region. Resources are automatically registered with Route 53 ARC by AWS services. 	     At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off. 	     When you start a zonal shift, traffic for the resource is no longer routed to the Availability Zone. The 		zonal shift is created immediately in Route 53 ARC. However, it can take a short time, typically up to a few minutes, 		for existing, in-progress connections in the Availability Zone to complete. 	     For more information, see Zonal shift 		in the Amazon Route 53 Application Recovery Controller Developer Guide.
+    /// You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in an Amazon Web Services Region, 		to help your application recover immediately, for example, from a developer's bad code deployment or from an Amazon Web Services  		infrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed 		resources in your Amazon Web Services account in an Amazon Web Services Region. Resources are automatically registered with Route 53 ARC  		by Amazon Web Services services. At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off. When you start a zonal shift, traffic for the resource is no longer routed to the Availability Zone. The 		zonal shift is created immediately in Route 53 ARC. However, it can take a short time, typically up to a few minutes, 		for existing, in-progress connections in the Availability Zone to complete. For more information, see Zonal shift 		in the Amazon Route 53 Application Recovery Controller Developer Guide.
     public func startZonalShift(_ input: StartZonalShiftRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ZonalShift> {
         return self.client.execute(operation: "StartZonalShift", path: "/zonalshifts", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Update an active zonal shift in Amazon Route 53 Application Recovery Controller in your AWS account. You can update a zonal shift to set a new expiration, or  	edit or replace the comment for the zonal shift.
+    /// Update a practice run configuration to change one or more of the following: add,
+    /// 			change, or remove the blocking alarm; change the outcome alarm; or add, change,
+    /// 			or remove blocking dates or time windows.
+    public func updatePracticeRunConfiguration(_ input: UpdatePracticeRunConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdatePracticeRunConfigurationResponse> {
+        return self.client.execute(operation: "UpdatePracticeRunConfiguration", path: "/configuration/{resourceIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// You can update the zonal autoshift status for a resource, to enable or disable zonal
+    /// 			autoshift. When zonal autoshift is ENABLED, Amazon Web Services shifts away
+    /// 			resource traffic from an Availability Zone, on your behalf, when Amazon Web Services
+    /// 			determines that there's an issue in the Availability Zone that could potentially affect customers.
+    public func updateZonalAutoshiftConfiguration(_ input: UpdateZonalAutoshiftConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateZonalAutoshiftConfigurationResponse> {
+        return self.client.execute(operation: "UpdateZonalAutoshiftConfiguration", path: "/managedresources/{resourceIdentifier}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Update an active zonal shift in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account. You can update a zonal shift to set a new expiration, or  	edit or replace the comment for the zonal shift.
     public func updateZonalShift(_ input: UpdateZonalShiftRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ZonalShift> {
         return self.client.execute(operation: "UpdateZonalShift", path: "/zonalshifts/{zonalShiftId}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -120,7 +163,60 @@ extension ARCZonalShift {
 // MARK: Paginators
 
 extension ARCZonalShift {
-    /// Lists all the resources in your AWS account in this AWS Region that are managed for zonal shifts in Amazon Route 53 Application Recovery Controller, and information  		about them. The information includes their Amazon Resource Names (ARNs), the Availability Zones the resources are deployed in, and  		the resource name.
+    /// Returns the active autoshifts for a specified resource.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listAutoshiftsPaginator<Result>(
+        _ input: ListAutoshiftsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListAutoshiftsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listAutoshifts,
+            inputKey: \ListAutoshiftsRequest.nextToken,
+            outputKey: \ListAutoshiftsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listAutoshiftsPaginator(
+        _ input: ListAutoshiftsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListAutoshiftsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listAutoshifts,
+            inputKey: \ListAutoshiftsRequest.nextToken,
+            outputKey: \ListAutoshiftsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists all the resources in your Amazon Web Services account in this Amazon Web Services Region that are managed for  		zonal shifts in Amazon Route 53 Application Recovery Controller, and information about them. The information includes the zonal autoshift status for the resource,  		as well as the Amazon Resource Name (ARN), the Availability Zones that each resource is deployed in, and  		the resource name.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -173,7 +269,7 @@ extension ARCZonalShift {
         )
     }
 
-    /// Lists all the active zonal shifts in Amazon Route 53 Application Recovery Controller in your AWS account in this AWS Region.
+    /// Lists all active and completed zonal shifts in Amazon Route 53 Application Recovery Controller in your Amazon Web Services account in this Amazon Web Services Region. 		ListZonalShifts returns customer-started zonal shifts, as well as practice run zonal shifts that Route 53 ARC started on  		your behalf for zonal autoshift. The ListZonalShifts operation does not list autoshifts. For more information about listing 		autoshifts, see "&gt;ListAutoshifts.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -227,6 +323,16 @@ extension ARCZonalShift {
     }
 }
 
+extension ARCZonalShift.ListAutoshiftsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ARCZonalShift.ListAutoshiftsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            status: self.status
+        )
+    }
+}
+
 extension ARCZonalShift.ListManagedResourcesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> ARCZonalShift.ListManagedResourcesRequest {
         return .init(
@@ -241,6 +347,7 @@ extension ARCZonalShift.ListZonalShiftsRequest: AWSPaginateToken {
         return .init(
             maxResults: self.maxResults,
             nextToken: token,
+            resourceIdentifier: self.resourceIdentifier,
             status: self.status
         )
     }

@@ -26,7 +26,7 @@ import SotoCore
 extension TranscribeStreaming {
     // MARK: Enums
 
-    public enum CallAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CallAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deDe = "de-DE"
         case enAu = "en-AU"
         case enGb = "en-GB"
@@ -39,29 +39,29 @@ extension TranscribeStreaming {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentIdentificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentIdentificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pii = "PII"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentRedactionOutput: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentRedactionOutput: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case redacted = "redacted"
         case redactedAndUnredacted = "redacted_and_unredacted"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentRedactionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentRedactionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pii = "PII"
         public var description: String { return self.rawValue }
     }
 
-    public enum ItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pronunciation = "pronunciation"
         case punctuation = "punctuation"
         public var description: String { return self.rawValue }
     }
 
-    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deDe = "de-DE"
         case enAu = "en-AU"
         case enGb = "en-GB"
@@ -79,32 +79,32 @@ extension TranscribeStreaming {
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaEncoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaEncoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case flac = "flac"
         case oggOpus = "ogg-opus"
         case pcm = "pcm"
         public var description: String { return self.rawValue }
     }
 
-    public enum MedicalContentIdentificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MedicalContentIdentificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case phi = "PHI"
         public var description: String { return self.rawValue }
     }
 
-    public enum PartialResultsStability: String, CustomStringConvertible, Codable, Sendable {
+    public enum PartialResultsStability: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "high"
         case low = "low"
         case medium = "medium"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agent = "AGENT"
         case customer = "CUSTOMER"
         public var description: String { return self.rawValue }
     }
 
-    public enum Sentiment: String, CustomStringConvertible, Codable, Sendable {
+    public enum Sentiment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mixed = "MIXED"
         case negative = "NEGATIVE"
         case neutral = "NEUTRAL"
@@ -112,7 +112,7 @@ extension TranscribeStreaming {
         public var description: String { return self.rawValue }
     }
 
-    public enum Specialty: String, CustomStringConvertible, Codable, Sendable {
+    public enum Specialty: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cardiology = "CARDIOLOGY"
         case neurology = "NEUROLOGY"
         case oncology = "ONCOLOGY"
@@ -122,14 +122,14 @@ extension TranscribeStreaming {
         public var description: String { return self.rawValue }
     }
 
-    public enum VocabularyFilterMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum VocabularyFilterMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mask = "mask"
         case remove = "remove"
         case tag = "tag"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Type`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Type`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conversation = "CONVERSATION"
         case dictation = "DICTATION"
         public var description: String { return self.rawValue }
@@ -1243,6 +1243,7 @@ extension TranscribeStreaming {
             AWSMemberEncoding(label: "enableChannelIdentification", location: .header("x-amzn-transcribe-enable-channel-identification")),
             AWSMemberEncoding(label: "enablePartialResultsStabilization", location: .header("x-amzn-transcribe-enable-partial-results-stabilization")),
             AWSMemberEncoding(label: "identifyLanguage", location: .header("x-amzn-transcribe-identify-language")),
+            AWSMemberEncoding(label: "identifyMultipleLanguages", location: .header("x-amzn-transcribe-identify-multiple-languages")),
             AWSMemberEncoding(label: "languageCode", location: .header("x-amzn-transcribe-language-code")),
             AWSMemberEncoding(label: "languageModelName", location: .header("x-amzn-transcribe-language-model-name")),
             AWSMemberEncoding(label: "languageOptions", location: .header("x-amzn-transcribe-language-options")),
@@ -1271,8 +1272,10 @@ extension TranscribeStreaming {
         public let enableChannelIdentification: Bool?
         /// Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy. For more information, see  Partial-result  stabilization.
         public let enablePartialResultsStabilization: Bool?
-        /// Enables automatic language identification for your transcription. If you include IdentifyLanguage, you can optionally include a list of  language codes, using LanguageOptions, that you think may be present in  your audio stream. Including language options can improve transcription accuracy. You can also include a preferred language using PreferredLanguage. Adding a  preferred language can help Amazon Transcribe identify the language faster than if you omit this  parameter. If you have multi-channel audio that contains different languages on each channel, and you've  enabled channel identification, automatic language identification identifies the dominant language on  each audio channel. Note that you must include either LanguageCode or  IdentifyLanguage in your request. If you include both parameters, your request fails. Streaming language identification can't be combined with custom language models or  redaction.
+        /// Enables automatic language identification for your transcription. If you include IdentifyLanguage, you can optionally include a list of  language codes, using LanguageOptions, that you think may be present in  your audio stream. Including language options can improve transcription accuracy. You can also include a preferred language using PreferredLanguage. Adding a  preferred language can help Amazon Transcribe identify the language faster than if you omit this  parameter. If you have multi-channel audio that contains different languages on each channel, and you've  enabled channel identification, automatic language identification identifies the dominant language on  each audio channel. Note that you must include either LanguageCode or  IdentifyLanguage or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails. Streaming language identification can't be combined with custom language models or  redaction.
         public let identifyLanguage: Bool?
+        /// Enables automatic multi-language identification in your transcription job request. Use this parameter if your stream contains more than one language. If your stream contains only one language, use IdentifyLanguage instead. If you include IdentifyMultipleLanguages, you can optionally include a list of language codes, using LanguageOptions, that you think may be present in your stream. Including LanguageOptions restricts IdentifyMultipleLanguages to only the language options that you specify, which can improve transcription accuracy. If you want to apply a custom vocabulary or a custom vocabulary filter to your automatic multiple language identification request, include VocabularyNames or VocabularyFilterNames. Note that you must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include more than one of these parameters, your transcription job fails.
+        public let identifyMultipleLanguages: Bool?
         /// Specify the language code that represents the language spoken in your audio. If you're unsure of the language spoken in your audio, consider using  IdentifyLanguage to enable automatic language identification. For a list of languages supported with Amazon Transcribe streaming, refer to the  Supported  languages table.
         public let languageCode: LanguageCode?
         /// Specify the name of the custom language model that you want to use when processing your transcription. Note that language model names are case sensitive. The language of the specified language model must match the language code you specify in your transcription request. If the languages don't match, the custom language model isn't applied.  There are no errors or warnings associated with a language mismatch. For more information, see Custom language models.
@@ -1306,13 +1309,14 @@ extension TranscribeStreaming {
         /// Specify the names of the custom vocabularies that you want to use when processing your transcription. Note that vocabulary names are case sensitive. If none of the languages of the specified custom vocabularies match the language identified in  your media, your job fails.  This parameter is only intended for use with the IdentifyLanguage parameter. If you're not including IdentifyLanguage in your request and want to use a custom vocabulary with your transcription, use the VocabularyName parameter instead.  For more information, see Custom vocabularies.
         public let vocabularyNames: String?
 
-        public init(audioStream: AudioStream, contentIdentificationType: ContentIdentificationType? = nil, contentRedactionType: ContentRedactionType? = nil, enableChannelIdentification: Bool? = nil, enablePartialResultsStabilization: Bool? = nil, identifyLanguage: Bool? = nil, languageCode: LanguageCode? = nil, languageModelName: String? = nil, languageOptions: String? = nil, mediaEncoding: MediaEncoding, mediaSampleRateHertz: Int, numberOfChannels: Int? = nil, partialResultsStability: PartialResultsStability? = nil, piiEntityTypes: String? = nil, preferredLanguage: LanguageCode? = nil, sessionId: String? = nil, showSpeakerLabel: Bool? = nil, vocabularyFilterMethod: VocabularyFilterMethod? = nil, vocabularyFilterName: String? = nil, vocabularyFilterNames: String? = nil, vocabularyName: String? = nil, vocabularyNames: String? = nil) {
+        public init(audioStream: AudioStream, contentIdentificationType: ContentIdentificationType? = nil, contentRedactionType: ContentRedactionType? = nil, enableChannelIdentification: Bool? = nil, enablePartialResultsStabilization: Bool? = nil, identifyLanguage: Bool? = nil, identifyMultipleLanguages: Bool? = nil, languageCode: LanguageCode? = nil, languageModelName: String? = nil, languageOptions: String? = nil, mediaEncoding: MediaEncoding, mediaSampleRateHertz: Int, numberOfChannels: Int? = nil, partialResultsStability: PartialResultsStability? = nil, piiEntityTypes: String? = nil, preferredLanguage: LanguageCode? = nil, sessionId: String? = nil, showSpeakerLabel: Bool? = nil, vocabularyFilterMethod: VocabularyFilterMethod? = nil, vocabularyFilterName: String? = nil, vocabularyFilterNames: String? = nil, vocabularyName: String? = nil, vocabularyNames: String? = nil) {
             self.audioStream = audioStream
             self.contentIdentificationType = contentIdentificationType
             self.contentRedactionType = contentRedactionType
             self.enableChannelIdentification = enableChannelIdentification
             self.enablePartialResultsStabilization = enablePartialResultsStabilization
             self.identifyLanguage = identifyLanguage
+            self.identifyMultipleLanguages = identifyMultipleLanguages
             self.languageCode = languageCode
             self.languageModelName = languageModelName
             self.languageOptions = languageOptions
@@ -1376,6 +1380,7 @@ extension TranscribeStreaming {
             AWSMemberEncoding(label: "enableChannelIdentification", location: .header("x-amzn-transcribe-enable-channel-identification")),
             AWSMemberEncoding(label: "enablePartialResultsStabilization", location: .header("x-amzn-transcribe-enable-partial-results-stabilization")),
             AWSMemberEncoding(label: "identifyLanguage", location: .header("x-amzn-transcribe-identify-language")),
+            AWSMemberEncoding(label: "identifyMultipleLanguages", location: .header("x-amzn-transcribe-identify-multiple-languages")),
             AWSMemberEncoding(label: "languageCode", location: .header("x-amzn-transcribe-language-code")),
             AWSMemberEncoding(label: "languageModelName", location: .header("x-amzn-transcribe-language-model-name")),
             AWSMemberEncoding(label: "languageOptions", location: .header("x-amzn-transcribe-language-options")),
@@ -1406,6 +1411,8 @@ extension TranscribeStreaming {
         public let enablePartialResultsStabilization: Bool?
         /// Shows whether automatic language identification was enabled for your  transcription.
         public let identifyLanguage: Bool?
+        /// Shows whether automatic multi-language identification was enabled for your transcription.
+        public let identifyMultipleLanguages: Bool?
         /// Provides the language code that you specified in your request.
         public let languageCode: LanguageCode?
         /// Provides the name of the custom language model that you specified in your request.
@@ -1443,12 +1450,13 @@ extension TranscribeStreaming {
         /// Provides the names of the custom vocabularies that you specified in your request.
         public let vocabularyNames: String?
 
-        public init(contentIdentificationType: ContentIdentificationType? = nil, contentRedactionType: ContentRedactionType? = nil, enableChannelIdentification: Bool? = nil, enablePartialResultsStabilization: Bool? = nil, identifyLanguage: Bool? = nil, languageCode: LanguageCode? = nil, languageModelName: String? = nil, languageOptions: String? = nil, mediaEncoding: MediaEncoding? = nil, mediaSampleRateHertz: Int? = nil, numberOfChannels: Int? = nil, partialResultsStability: PartialResultsStability? = nil, piiEntityTypes: String? = nil, preferredLanguage: LanguageCode? = nil, requestId: String? = nil, sessionId: String? = nil, showSpeakerLabel: Bool? = nil, transcriptResultStream: TranscriptResultStream? = nil, vocabularyFilterMethod: VocabularyFilterMethod? = nil, vocabularyFilterName: String? = nil, vocabularyFilterNames: String? = nil, vocabularyName: String? = nil, vocabularyNames: String? = nil) {
+        public init(contentIdentificationType: ContentIdentificationType? = nil, contentRedactionType: ContentRedactionType? = nil, enableChannelIdentification: Bool? = nil, enablePartialResultsStabilization: Bool? = nil, identifyLanguage: Bool? = nil, identifyMultipleLanguages: Bool? = nil, languageCode: LanguageCode? = nil, languageModelName: String? = nil, languageOptions: String? = nil, mediaEncoding: MediaEncoding? = nil, mediaSampleRateHertz: Int? = nil, numberOfChannels: Int? = nil, partialResultsStability: PartialResultsStability? = nil, piiEntityTypes: String? = nil, preferredLanguage: LanguageCode? = nil, requestId: String? = nil, sessionId: String? = nil, showSpeakerLabel: Bool? = nil, transcriptResultStream: TranscriptResultStream? = nil, vocabularyFilterMethod: VocabularyFilterMethod? = nil, vocabularyFilterName: String? = nil, vocabularyFilterNames: String? = nil, vocabularyName: String? = nil, vocabularyNames: String? = nil) {
             self.contentIdentificationType = contentIdentificationType
             self.contentRedactionType = contentRedactionType
             self.enableChannelIdentification = enableChannelIdentification
             self.enablePartialResultsStabilization = enablePartialResultsStabilization
             self.identifyLanguage = identifyLanguage
+            self.identifyMultipleLanguages = identifyMultipleLanguages
             self.languageCode = languageCode
             self.languageModelName = languageModelName
             self.languageOptions = languageOptions
@@ -1475,6 +1483,7 @@ extension TranscribeStreaming {
             case enableChannelIdentification = "x-amzn-transcribe-enable-channel-identification"
             case enablePartialResultsStabilization = "x-amzn-transcribe-enable-partial-results-stabilization"
             case identifyLanguage = "x-amzn-transcribe-identify-language"
+            case identifyMultipleLanguages = "x-amzn-transcribe-identify-multiple-languages"
             case languageCode = "x-amzn-transcribe-language-code"
             case languageModelName = "x-amzn-transcribe-language-model-name"
             case languageOptions = "x-amzn-transcribe-language-options"

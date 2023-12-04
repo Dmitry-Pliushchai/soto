@@ -26,7 +26,7 @@ import SotoCore
 extension ApplicationDiscoveryService {
     // MARK: Enums
 
-    public enum AgentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AgentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case blacklisted = "BLACKLISTED"
         case healthy = "HEALTHY"
         case running = "RUNNING"
@@ -36,14 +36,23 @@ extension ApplicationDiscoveryService {
         public var description: String { return self.rawValue }
     }
 
-    public enum BatchDeleteImportDataErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum BatchDeleteConfigurationTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case completed = "COMPLETED"
+        case deleting = "DELETING"
+        case failed = "FAILED"
+        case initializing = "INITIALIZING"
+        case validating = "VALIDATING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum BatchDeleteImportDataErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case internalServerError = "INTERNAL_SERVER_ERROR"
         case notFound = "NOT_FOUND"
         case overLimit = "OVER_LIMIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case application = "APPLICATION"
         case connections = "CONNECTION"
         case process = "PROCESS"
@@ -51,7 +60,7 @@ extension ApplicationDiscoveryService {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContinuousExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContinuousExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case error = "ERROR"
         case inactive = "INACTIVE"
@@ -62,24 +71,36 @@ extension ApplicationDiscoveryService {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agent = "AGENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportDataFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeleteAgentErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case agentInUse = "AGENT_IN_USE"
+        case internalServerError = "INTERNAL_SERVER_ERROR"
+        case notFound = "NOT_FOUND"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum DeletionConfigurationItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case server = "SERVER"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ExportDataFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleteComplete = "DELETE_COMPLETE"
         case deleteFailed = "DELETE_FAILED"
         case deleteFailedLimitExceeded = "DELETE_FAILED_LIMIT_EXCEEDED"
@@ -94,39 +115,39 @@ extension ApplicationDiscoveryService {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportTaskFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportTaskFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case importTaskId = "IMPORT_TASK_ID"
         case name = "NAME"
         case status = "STATUS"
         public var description: String { return self.rawValue }
     }
 
-    public enum OfferingClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum OfferingClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case convertible = "CONVERTIBLE"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrderString: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrderString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum PurchasingOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum PurchasingOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allUpfront = "ALL_UPFRONT"
         case noUpfront = "NO_UPFRONT"
         case partialUpfront = "PARTIAL_UPFRONT"
         public var description: String { return self.rawValue }
     }
 
-    public enum Tenancy: String, CustomStringConvertible, Codable, Sendable {
+    public enum Tenancy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dedicated = "DEDICATED"
         case shared = "SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TermLength: String, CustomStringConvertible, Codable, Sendable {
+    public enum TermLength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneYear = "ONE_YEAR"
         case threeYear = "THREE_YEAR"
         public var description: String { return self.rawValue }
@@ -251,6 +272,106 @@ extension ApplicationDiscoveryService {
         public init() {}
     }
 
+    public struct BatchDeleteAgentError: AWSDecodableShape {
+        ///  The ID of the agent or data collector to delete.
+        public let agentId: String
+        ///  The type of error that occurred for the delete failed agent.  Valid status are: AGENT_IN_USE | NOT_FOUND | INTERNAL_SERVER_ERROR.
+        public let errorCode: DeleteAgentErrorCode
+        ///  The description of the error that occurred for the delete failed agent.
+        public let errorMessage: String
+
+        public init(agentId: String, errorCode: DeleteAgentErrorCode, errorMessage: String) {
+            self.agentId = agentId
+            self.errorCode = errorCode
+            self.errorMessage = errorMessage
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case agentId = "agentId"
+            case errorCode = "errorCode"
+            case errorMessage = "errorMessage"
+        }
+    }
+
+    public struct BatchDeleteAgentsRequest: AWSEncodableShape {
+        ///  The list of agents to delete.
+        public let deleteAgents: [DeleteAgent]
+
+        public init(deleteAgents: [DeleteAgent]) {
+            self.deleteAgents = deleteAgents
+        }
+
+        public func validate(name: String) throws {
+            try self.deleteAgents.forEach {
+                try $0.validate(name: "\(name).deleteAgents[]")
+            }
+            try self.validate(self.deleteAgents, name: "deleteAgents", parent: name, max: 50)
+            try self.validate(self.deleteAgents, name: "deleteAgents", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case deleteAgents = "deleteAgents"
+        }
+    }
+
+    public struct BatchDeleteAgentsResponse: AWSDecodableShape {
+        ///  A list of agent IDs that failed to delete during the deletion task, each paired with an error message.
+        public let errors: [BatchDeleteAgentError]?
+
+        public init(errors: [BatchDeleteAgentError]? = nil) {
+            self.errors = errors
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case errors = "errors"
+        }
+    }
+
+    public struct BatchDeleteConfigurationTask: AWSDecodableShape {
+        ///  The type of configuration item to delete. Supported types are: SERVER.
+        public let configurationType: DeletionConfigurationItemType?
+        ///  The list of configuration IDs that were successfully deleted by the deletion task.
+        public let deletedConfigurations: [String]?
+        ///  A list of configuration IDs that produced warnings regarding their deletion,  paired with a warning message.
+        public let deletionWarnings: [DeletionWarning]?
+        ///  An epoch seconds timestamp (UTC) of when the deletion task was completed or failed.
+        public let endTime: Date?
+        ///  A list of configuration IDs that failed to delete during the deletion task,  each paired with an error message.
+        public let failedConfigurations: [FailedConfiguration]?
+        ///  The list of configuration IDs that were originally requested to be deleted by the deletion task.
+        public let requestedConfigurations: [String]?
+        ///  An epoch seconds timestamp (UTC) of when the deletion task was started.
+        public let startTime: Date?
+        ///  The current execution status of the deletion task.  Valid status are: INITIALIZING | VALIDATING | DELETING | COMPLETED | FAILED.
+        public let status: BatchDeleteConfigurationTaskStatus?
+        ///  The deletion task's unique identifier.
+        public let taskId: String?
+
+        public init(configurationType: DeletionConfigurationItemType? = nil, deletedConfigurations: [String]? = nil, deletionWarnings: [DeletionWarning]? = nil, endTime: Date? = nil, failedConfigurations: [FailedConfiguration]? = nil, requestedConfigurations: [String]? = nil, startTime: Date? = nil, status: BatchDeleteConfigurationTaskStatus? = nil, taskId: String? = nil) {
+            self.configurationType = configurationType
+            self.deletedConfigurations = deletedConfigurations
+            self.deletionWarnings = deletionWarnings
+            self.endTime = endTime
+            self.failedConfigurations = failedConfigurations
+            self.requestedConfigurations = requestedConfigurations
+            self.startTime = startTime
+            self.status = status
+            self.taskId = taskId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configurationType = "configurationType"
+            case deletedConfigurations = "deletedConfigurations"
+            case deletionWarnings = "deletionWarnings"
+            case endTime = "endTime"
+            case failedConfigurations = "failedConfigurations"
+            case requestedConfigurations = "requestedConfigurations"
+            case startTime = "startTime"
+            case status = "status"
+            case taskId = "taskId"
+        }
+    }
+
     public struct BatchDeleteImportDataError: AWSDecodableShape {
         /// The type of error that occurred for a specific import task.
         public let errorCode: BatchDeleteImportDataErrorCode?
@@ -273,23 +394,27 @@ extension ApplicationDiscoveryService {
     }
 
     public struct BatchDeleteImportDataRequest: AWSEncodableShape {
+        ///  Set to true to remove the deleted import task from  DescribeImportTasks.
+        public let deleteHistory: Bool?
         /// The IDs for the import tasks that you want to delete.
         public let importTaskIds: [String]
 
-        public init(importTaskIds: [String]) {
+        public init(deleteHistory: Bool? = nil, importTaskIds: [String]) {
+            self.deleteHistory = deleteHistory
             self.importTaskIds = importTaskIds
         }
 
         public func validate(name: String) throws {
             try self.importTaskIds.forEach {
                 try validate($0, name: "importTaskIds[]", parent: name, max: 200)
-                try validate($0, name: "importTaskIds[]", parent: name, pattern: "^\\S*$")
+                try validate($0, name: "importTaskIds[]", parent: name, pattern: "^import-task-[a-fA-F0-9]{32}$")
             }
             try self.validate(self.importTaskIds, name: "importTaskIds", parent: name, max: 10)
             try self.validate(self.importTaskIds, name: "importTaskIds", parent: name, min: 1)
         }
 
         private enum CodingKeys: String, CodingKey {
+            case deleteHistory = "deleteHistory"
             case importTaskIds = "importTaskIds"
         }
     }
@@ -590,6 +715,29 @@ extension ApplicationDiscoveryService {
         }
     }
 
+    public struct DeleteAgent: AWSEncodableShape {
+        ///  The ID of the agent or data collector to delete.
+        public let agentId: String
+        ///  Optional flag used to force delete an agent or data collector. It is needed to delete any agent in  HEALTHY/UNHEALTHY/RUNNING status. Note that deleting an agent that is actively reporting health causes it  to be re-registered with a different agent ID after data collector re-connects with Amazon Web Services.
+        public let force: Bool?
+
+        public init(agentId: String, force: Bool? = nil) {
+            self.agentId = agentId
+            self.force = force
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.agentId, name: "agentId", parent: name, max: 20)
+            try self.validate(self.agentId, name: "agentId", parent: name, min: 10)
+            try self.validate(self.agentId, name: "agentId", parent: name, pattern: "^\\S+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case agentId = "agentId"
+            case force = "force"
+        }
+    }
+
     public struct DeleteApplicationsRequest: AWSEncodableShape {
         /// Configuration ID of an application to be deleted.
         public let configurationIds: [String]
@@ -642,6 +790,27 @@ extension ApplicationDiscoveryService {
         public init() {}
     }
 
+    public struct DeletionWarning: AWSDecodableShape {
+        ///  The unique identifier of the configuration that produced a warning.
+        public let configurationId: String?
+        ///  The integer warning code associated with the warning message.
+        public let warningCode: Int?
+        ///  A descriptive message of the warning the associated configuration ID produced.
+        public let warningText: String?
+
+        public init(configurationId: String? = nil, warningCode: Int? = nil, warningText: String? = nil) {
+            self.configurationId = configurationId
+            self.warningCode = warningCode
+            self.warningText = warningText
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configurationId = "configurationId"
+            case warningCode = "warningCode"
+            case warningText = "warningText"
+        }
+    }
+
     public struct DescribeAgentsRequest: AWSEncodableShape {
         /// The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your user.
         public let agentIds: [String]?
@@ -692,6 +861,36 @@ extension ApplicationDiscoveryService {
         private enum CodingKeys: String, CodingKey {
             case agentsInfo = "agentsInfo"
             case nextToken = "nextToken"
+        }
+    }
+
+    public struct DescribeBatchDeleteConfigurationTaskRequest: AWSEncodableShape {
+        ///  The ID of the task to delete.
+        public let taskId: String
+
+        public init(taskId: String) {
+            self.taskId = taskId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.taskId, name: "taskId", parent: name, pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case taskId = "taskId"
+        }
+    }
+
+    public struct DescribeBatchDeleteConfigurationTaskResponse: AWSDecodableShape {
+        ///  The BatchDeleteConfigurationTask that represents the deletion task being executed.
+        public let task: BatchDeleteConfigurationTask?
+
+        public init(task: BatchDeleteConfigurationTask? = nil) {
+            self.task = task
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case task = "task"
         }
     }
 
@@ -1127,6 +1326,27 @@ extension ApplicationDiscoveryService {
         }
     }
 
+    public struct FailedConfiguration: AWSDecodableShape {
+        ///  The unique identifier of the configuration the failed to delete.
+        public let configurationId: String?
+        ///  A descriptive message indicating why the associated configuration failed to delete.
+        public let errorMessage: String?
+        ///  The integer error code associated with the error message.
+        public let errorStatusCode: Int?
+
+        public init(configurationId: String? = nil, errorMessage: String? = nil, errorStatusCode: Int? = nil) {
+            self.configurationId = configurationId
+            self.errorMessage = errorMessage
+            self.errorStatusCode = errorStatusCode
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configurationId = "configurationId"
+            case errorMessage = "errorMessage"
+            case errorStatusCode = "errorStatusCode"
+        }
+    }
+
     public struct Filter: AWSEncodableShape {
         /// A conditional operator. The following operators are valid: EQUALS, NOT_EQUALS, CONTAINS, NOT_CONTAINS. If you specify multiple filters, the system utilizes all filters as though concatenated by AND. If you specify multiple values for a particular filter, the system differentiates the values using OR. Calling either DescribeConfigurations or ListConfigurations returns attributes of matching configuration items.
         public let condition: String
@@ -1476,6 +1696,43 @@ extension ApplicationDiscoveryService {
             case offeringClass = "offeringClass"
             case purchasingOption = "purchasingOption"
             case termLength = "termLength"
+        }
+    }
+
+    public struct StartBatchDeleteConfigurationTaskRequest: AWSEncodableShape {
+        ///  The list of configuration IDs that will be deleted by the task.
+        public let configurationIds: [String]
+        ///  The type of configuration item to delete. Supported types are: SERVER.
+        public let configurationType: DeletionConfigurationItemType
+
+        public init(configurationIds: [String], configurationType: DeletionConfigurationItemType) {
+            self.configurationIds = configurationIds
+            self.configurationType = configurationType
+        }
+
+        public func validate(name: String) throws {
+            try self.configurationIds.forEach {
+                try validate($0, name: "configurationIds[]", parent: name, max: 200)
+                try validate($0, name: "configurationIds[]", parent: name, pattern: "^\\S*$")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case configurationIds = "configurationIds"
+            case configurationType = "configurationType"
+        }
+    }
+
+    public struct StartBatchDeleteConfigurationTaskResponse: AWSDecodableShape {
+        ///  The unique identifier associated with the newly started deletion task.
+        public let taskId: String?
+
+        public init(taskId: String? = nil) {
+            self.taskId = taskId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case taskId = "taskId"
         }
     }
 
@@ -1837,6 +2094,7 @@ public struct ApplicationDiscoveryServiceErrorType: AWSErrorType {
         case homeRegionNotSetException = "HomeRegionNotSetException"
         case invalidParameterException = "InvalidParameterException"
         case invalidParameterValueException = "InvalidParameterValueException"
+        case limitExceededException = "LimitExceededException"
         case operationNotPermittedException = "OperationNotPermittedException"
         case resourceInUseException = "ResourceInUseException"
         case resourceNotFoundException = "ResourceNotFoundException"
@@ -1863,6 +2121,7 @@ public struct ApplicationDiscoveryServiceErrorType: AWSErrorType {
 
     /// The user does not have permission to perform the action. Check the IAM policy associated with this user.
     public static var authorizationErrorException: Self { .init(.authorizationErrorException) }
+    /// Conflict error.
     public static var conflictErrorException: Self { .init(.conflictErrorException) }
     /// The home Region is not set. Set the home Region to continue.
     public static var homeRegionNotSetException: Self { .init(.homeRegionNotSetException) }
@@ -1870,6 +2129,8 @@ public struct ApplicationDiscoveryServiceErrorType: AWSErrorType {
     public static var invalidParameterException: Self { .init(.invalidParameterException) }
     /// The value of one or more parameters are either invalid or out of range. Verify the parameter values and try again.
     public static var invalidParameterValueException: Self { .init(.invalidParameterValueException) }
+    ///  The limit of 200 configuration IDs per request has been exceeded.
+    public static var limitExceededException: Self { .init(.limitExceededException) }
     /// This operation is not permitted.
     public static var operationNotPermittedException: Self { .init(.operationNotPermittedException) }
     /// This issue occurs when the same clientRequestToken is used with the StartImportTask action, but with different parameters. For example, you use the same request token but have two different import URLs, you can encounter this issue. If the import tasks are meant to be different, use a different clientRequestToken, and try again.

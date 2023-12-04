@@ -26,26 +26,26 @@ import SotoCore
 extension DatabaseMigrationService {
     // MARK: Enums
 
-    public enum AssessmentReportType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssessmentReportType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "csv"
         case pdf = "pdf"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthMechanismValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthMechanismValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "default"
         case mongodbCr = "mongodb_cr"
         case scramSha1 = "scram_sha_1"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case no = "no"
         case password = "password"
         public var description: String { return self.rawValue }
     }
 
-    public enum CannedAclForObjectsValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum CannedAclForObjectsValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "private"
         case authenticatedRead = "authenticated-read"
         case awsExecRead = "aws-exec-read"
@@ -57,38 +57,38 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum CharLengthSemantics: String, CustomStringConvertible, Codable, Sendable {
+    public enum CharLengthSemantics: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "default"
         case byte = "byte"
         case char = "char"
         public var description: String { return self.rawValue }
     }
 
-    public enum CollectorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CollectorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case unregistered = "UNREGISTERED"
         public var description: String { return self.rawValue }
     }
 
-    public enum CompressionTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum CompressionTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "gzip"
         case none = "none"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataFormatValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataFormatValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "csv"
         case parquet = "parquet"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatabaseMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatabaseMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "default"
         case babelfish = "babelfish"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatePartitionDelimiterValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatePartitionDelimiterValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dash = "DASH"
         case none = "NONE"
         case slash = "SLASH"
@@ -96,7 +96,7 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum DatePartitionSequenceValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatePartitionSequenceValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ddmmyyyy = "DDMMYYYY"
         case mmyyyydd = "MMYYYYDD"
         case yyyymm = "YYYYMM"
@@ -105,7 +105,7 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum DmsSslModeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum DmsSslModeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "none"
         case require = "require"
         case verifyCa = "verify-ca"
@@ -113,20 +113,20 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum EncodingTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncodingTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plain = "plain"
         case plainDictionary = "plain-dictionary"
         case rleDictionary = "rle-dictionary"
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionModeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionModeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sseKms = "sse-kms"
         case sseS3 = "sse-s3"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointSettingTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointSettingTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `enum` = "enum"
         case boolean = "boolean"
         case integer = "integer"
@@ -134,13 +134,13 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaSaslMechanism: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaSaslMechanism: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plain = "plain"
         case scramSha512 = "scram-sha-512"
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaSecurityProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaSecurityProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plaintext = "plaintext"
         case saslSsl = "sasl-ssl"
         case sslAuthentication = "ssl-authentication"
@@ -148,121 +148,121 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaSslEndpointIdentificationAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaSslEndpointIdentificationAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case https = "https"
         case none = "none"
         public var description: String { return self.rawValue }
     }
 
-    public enum LongVarcharMappingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LongVarcharMappingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case clob = "clob"
         case nclob = "nclob"
         case wstring = "wstring"
         public var description: String { return self.rawValue }
     }
 
-    public enum MessageFormatValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessageFormatValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case json = "json"
         case jsonUnformatted = "json-unformatted"
         public var description: String { return self.rawValue }
     }
 
-    public enum MigrationTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum MigrationTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cdc = "cdc"
         case fullLoad = "full-load"
         case fullLoadAndCdc = "full-load-and-cdc"
         public var description: String { return self.rawValue }
     }
 
-    public enum NestingLevelValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum NestingLevelValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "none"
         case one = "one"
         public var description: String { return self.rawValue }
     }
 
-    public enum OriginTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum OriginTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case source = "SOURCE"
         case target = "TARGET"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParquetVersionValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParquetVersionValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case parquet10 = "parquet-1-0"
         case parquet20 = "parquet-2-0"
         public var description: String { return self.rawValue }
     }
 
-    public enum PluginNameValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum PluginNameValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPreference = "no-preference"
         case pglogical = "pglogical"
         case testDecoding = "test-decoding"
         public var description: String { return self.rawValue }
     }
 
-    public enum RedisAuthTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum RedisAuthTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case authRole = "auth-role"
         case authToken = "auth-token"
         case none = "none"
         public var description: String { return self.rawValue }
     }
 
-    public enum RefreshSchemasStatusTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum RefreshSchemasStatusTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "failed"
         case refreshing = "refreshing"
         case successful = "successful"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReleaseStatusValues: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReleaseStatusValues: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case beta = "beta"
         case prod = "prod"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReloadOptionValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReloadOptionValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dataReload = "data-reload"
         case validateOnly = "validate-only"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationEndpointTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationEndpointTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case source = "source"
         case target = "target"
         public var description: String { return self.rawValue }
     }
 
-    public enum SafeguardPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SafeguardPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclusiveAutomaticTruncation = "exclusive-automatic-truncation"
         case relyOnSqlServerReplicationAgent = "rely-on-sql-server-replication-agent"
         case sharedAutomaticTruncation = "shared-automatic-truncation"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case replicationInstance = "replication-instance"
         public var description: String { return self.rawValue }
     }
 
-    public enum SslSecurityProtocolValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum SslSecurityProtocolValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plaintext = "plaintext"
         case sslEncryption = "ssl-encryption"
         public var description: String { return self.rawValue }
     }
 
-    public enum StartReplicationTaskTypeValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum StartReplicationTaskTypeValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case reloadTarget = "reload-target"
         case resumeProcessing = "resume-processing"
         case startReplication = "start-replication"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetDbType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetDbType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multipleDatabases = "multiple-databases"
         case specificDatabase = "specific-database"
         public var description: String { return self.rawValue }
     }
 
-    public enum TlogAccessMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TlogAccessMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backupOnly = "BackupOnly"
         case preferBackup = "PreferBackup"
         case preferTlog = "PreferTlog"
@@ -270,7 +270,7 @@ extension DatabaseMigrationService {
         public var description: String { return self.rawValue }
     }
 
-    public enum VersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case outdated = "OUTDATED"
         case unsupported = "UNSUPPORTED"
         case upToDate = "UP_TO_DATE"
@@ -757,7 +757,7 @@ extension DatabaseMigrationService {
         public let dataProviderName: String?
         /// A user-friendly description of the data provider.
         public let description: String?
-        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora_postgresql", "mysql", "oracle", "postgres",  and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora-postgresql", "mysql", "oracle", "postgres",  "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
         public let engine: String
         /// The settings in JSON format for a data provider.
         public let settings: DataProviderSettings
@@ -1323,7 +1323,7 @@ extension DatabaseMigrationService {
         public let replicationSubnetGroupDescription: String
         /// The name for the replication subnet group. This value is stored as a lowercase string. Constraints: Must contain no more than 255 alphanumeric characters, periods, spaces, underscores, or hyphens. Must not be "default". Example: mySubnetgroup
         public let replicationSubnetGroupIdentifier: String
-        /// One or more subnet IDs to be assigned to the subnet group.
+        /// Two or more subnet IDs to be assigned to the subnet group.
         public let subnetIds: [String]
         /// One or more tags to be assigned to the subnet group.
         public let tags: [Tag]?
@@ -1440,7 +1440,7 @@ extension DatabaseMigrationService {
         public let dataProviderName: String?
         /// A description of the data provider. Descriptions can have up to 31 characters.  A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't  end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.
         public let description: String?
-        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora_postgresql", "mysql", "oracle", "postgres",  and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora-postgresql", "mysql", "oracle", "postgres",  "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
         public let engine: String?
         /// The settings in JSON format for a data provider.
         public let settings: DataProviderSettings?
@@ -2150,7 +2150,7 @@ extension DatabaseMigrationService {
     }
 
     public struct DescribeDataProvidersMessage: AWSEncodableShape {
-        /// Filters applied to the data providers described in the form of key-value pairs.
+        /// Filters applied to the data providers described in the form of key-value pairs. Valid filter names: data-provider-identifier
         public let filters: [Filter]?
         /// Specifies the unique pagination token that makes it possible to display the next page of results.  If this parameter is specified, the response includes only records beyond the marker, up to the  value specified by MaxRecords. If Marker is returned by a previous response, there are more results available.  The value of Marker is a unique pagination token for each page. To retrieve the next page,  make the call again using the returned token and keeping all other arguments unchanged.
         public let marker: String?
@@ -3813,7 +3813,7 @@ extension DatabaseMigrationService {
         public let endpointType: ReplicationEndpointTypeValue?
         /// The expanded name for the engine name. For example, if the EngineName parameter is "aurora", this value would be "Amazon Aurora MySQL".
         public let engineDisplayName: String?
-        /// The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "db2-zos",  "azuredb", "sybase", "dynamodb",  "mongodb", "kinesis", "kafka",  "elasticsearch", "documentdb", "sqlserver",  "neptune", and "babelfish".
+        /// The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "redshift-serverless", "s3", "db2", "db2-zos",  "azuredb", "sybase", "dynamodb",  "mongodb", "kinesis", "kafka",  "elasticsearch", "documentdb", "sqlserver",  "neptune", and "babelfish".
         public let engineName: String?
         ///  Value returned by a call to CreateEndpoint that can be used for cross-account validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a cross-account.
         public let externalId: String?
@@ -4335,6 +4335,12 @@ extension DatabaseMigrationService {
         public let currentLsn: String?
         /// Database name for the endpoint.
         public let databaseName: String?
+        /// If true, DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these  files for analysis and troubleshooting. The default value is false.
+        public let keepCsvFiles: Bool?
+        /// The amount of time (in milliseconds) before DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).
+        public let loadTimeout: Int?
+        /// Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.
+        public let maxFileSize: Int?
         /// Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.
         public let maxKBytesPerRead: Int?
         /// Endpoint connection password.
@@ -4351,10 +4357,15 @@ extension DatabaseMigrationService {
         public let setDataCaptureChanges: Bool?
         /// Endpoint connection user name.
         public let username: String?
+        /// The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).
+        public let writeBufferSize: Int?
 
-        public init(currentLsn: String? = nil, databaseName: String? = nil, maxKBytesPerRead: Int? = nil, password: String? = nil, port: Int? = nil, secretsManagerAccessRoleArn: String? = nil, secretsManagerSecretId: String? = nil, serverName: String? = nil, setDataCaptureChanges: Bool? = nil, username: String? = nil) {
+        public init(currentLsn: String? = nil, databaseName: String? = nil, keepCsvFiles: Bool? = nil, loadTimeout: Int? = nil, maxFileSize: Int? = nil, maxKBytesPerRead: Int? = nil, password: String? = nil, port: Int? = nil, secretsManagerAccessRoleArn: String? = nil, secretsManagerSecretId: String? = nil, serverName: String? = nil, setDataCaptureChanges: Bool? = nil, username: String? = nil, writeBufferSize: Int? = nil) {
             self.currentLsn = currentLsn
             self.databaseName = databaseName
+            self.keepCsvFiles = keepCsvFiles
+            self.loadTimeout = loadTimeout
+            self.maxFileSize = maxFileSize
             self.maxKBytesPerRead = maxKBytesPerRead
             self.password = password
             self.port = port
@@ -4363,11 +4374,15 @@ extension DatabaseMigrationService {
             self.serverName = serverName
             self.setDataCaptureChanges = setDataCaptureChanges
             self.username = username
+            self.writeBufferSize = writeBufferSize
         }
 
         private enum CodingKeys: String, CodingKey {
             case currentLsn = "CurrentLsn"
             case databaseName = "DatabaseName"
+            case keepCsvFiles = "KeepCsvFiles"
+            case loadTimeout = "LoadTimeout"
+            case maxFileSize = "MaxFileSize"
             case maxKBytesPerRead = "MaxKBytesPerRead"
             case password = "Password"
             case port = "Port"
@@ -4376,6 +4391,7 @@ extension DatabaseMigrationService {
             case serverName = "ServerName"
             case setDataCaptureChanges = "SetDataCaptureChanges"
             case username = "Username"
+            case writeBufferSize = "WriteBufferSize"
         }
     }
 
@@ -4903,7 +4919,7 @@ extension DatabaseMigrationService {
         public let dataProviderName: String?
         /// A user-friendly description of the data provider.
         public let description: String?
-        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora_postgresql", "mysql", "oracle", "postgres",  and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+        /// The type of database engine for the data provider. Valid values include "aurora",  "aurora-postgresql", "mysql", "oracle", "postgres",  "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
         public let engine: String?
         /// If this attribute is Y, the current call to ModifyDataProvider replaces all existing data provider settings with the exact settings that you specify in this call. If this attribute is N, the current call to ModifyDataProvider does two things:    It replaces any data provider settings that already exist with new values,  for settings with the same names.   It creates new data provider settings that you specify in the call,  for settings with different names.
         public let exactSettings: Bool?
@@ -5626,6 +5642,8 @@ extension DatabaseMigrationService {
         public let databaseName: String?
         /// Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds. Example: eventsPollInterval=5;  In the example, DMS checks for changes in the binary logs every five seconds.
         public let eventsPollInterval: Int?
+        /// Sets the client statement timeout (in seconds) for a MySQL source endpoint.
+        public let executeTimeout: Int?
         /// Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database. Example: maxFileSize=512
         public let maxFileSize: Int?
         /// Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one. Example: parallelLoadThreads=1
@@ -5647,11 +5665,12 @@ extension DatabaseMigrationService {
         /// Endpoint connection user name.
         public let username: String?
 
-        public init(afterConnectScript: String? = nil, cleanSourceMetadataOnMismatch: Bool? = nil, databaseName: String? = nil, eventsPollInterval: Int? = nil, maxFileSize: Int? = nil, parallelLoadThreads: Int? = nil, password: String? = nil, port: Int? = nil, secretsManagerAccessRoleArn: String? = nil, secretsManagerSecretId: String? = nil, serverName: String? = nil, serverTimezone: String? = nil, targetDbType: TargetDbType? = nil, username: String? = nil) {
+        public init(afterConnectScript: String? = nil, cleanSourceMetadataOnMismatch: Bool? = nil, databaseName: String? = nil, eventsPollInterval: Int? = nil, executeTimeout: Int? = nil, maxFileSize: Int? = nil, parallelLoadThreads: Int? = nil, password: String? = nil, port: Int? = nil, secretsManagerAccessRoleArn: String? = nil, secretsManagerSecretId: String? = nil, serverName: String? = nil, serverTimezone: String? = nil, targetDbType: TargetDbType? = nil, username: String? = nil) {
             self.afterConnectScript = afterConnectScript
             self.cleanSourceMetadataOnMismatch = cleanSourceMetadataOnMismatch
             self.databaseName = databaseName
             self.eventsPollInterval = eventsPollInterval
+            self.executeTimeout = executeTimeout
             self.maxFileSize = maxFileSize
             self.parallelLoadThreads = parallelLoadThreads
             self.password = password
@@ -5669,6 +5688,7 @@ extension DatabaseMigrationService {
             case cleanSourceMetadataOnMismatch = "CleanSourceMetadataOnMismatch"
             case databaseName = "DatabaseName"
             case eventsPollInterval = "EventsPollInterval"
+            case executeTimeout = "ExecuteTimeout"
             case maxFileSize = "MaxFileSize"
             case parallelLoadThreads = "ParallelLoadThreads"
             case password = "Password"
@@ -6777,6 +6797,8 @@ extension DatabaseMigrationService {
         public let replicationConfigIdentifier: String?
         /// The time the serverless replication was created.
         public let replicationCreateTime: Date?
+        /// The timestamp when DMS will deprovision the replication.
+        public let replicationDeprovisionTime: Date?
         /// The timestamp when replication was last stopped.
         public let replicationLastStopTime: Date?
         /// This object provides a collection of statistics about a serverless replication.
@@ -6796,7 +6818,7 @@ extension DatabaseMigrationService {
         /// The Amazon Resource Name for an existing Endpoint the serverless replication uses for its data target.
         public let targetEndpointArn: String?
 
-        public init(cdcStartPosition: String? = nil, cdcStartTime: Date? = nil, cdcStopPosition: String? = nil, failureMessages: [String]? = nil, provisionData: ProvisionData? = nil, recoveryCheckpoint: String? = nil, replicationConfigArn: String? = nil, replicationConfigIdentifier: String? = nil, replicationCreateTime: Date? = nil, replicationLastStopTime: Date? = nil, replicationStats: ReplicationStats? = nil, replicationType: MigrationTypeValue? = nil, replicationUpdateTime: Date? = nil, sourceEndpointArn: String? = nil, startReplicationType: String? = nil, status: String? = nil, stopReason: String? = nil, targetEndpointArn: String? = nil) {
+        public init(cdcStartPosition: String? = nil, cdcStartTime: Date? = nil, cdcStopPosition: String? = nil, failureMessages: [String]? = nil, provisionData: ProvisionData? = nil, recoveryCheckpoint: String? = nil, replicationConfigArn: String? = nil, replicationConfigIdentifier: String? = nil, replicationCreateTime: Date? = nil, replicationDeprovisionTime: Date? = nil, replicationLastStopTime: Date? = nil, replicationStats: ReplicationStats? = nil, replicationType: MigrationTypeValue? = nil, replicationUpdateTime: Date? = nil, sourceEndpointArn: String? = nil, startReplicationType: String? = nil, status: String? = nil, stopReason: String? = nil, targetEndpointArn: String? = nil) {
             self.cdcStartPosition = cdcStartPosition
             self.cdcStartTime = cdcStartTime
             self.cdcStopPosition = cdcStopPosition
@@ -6806,6 +6828,7 @@ extension DatabaseMigrationService {
             self.replicationConfigArn = replicationConfigArn
             self.replicationConfigIdentifier = replicationConfigIdentifier
             self.replicationCreateTime = replicationCreateTime
+            self.replicationDeprovisionTime = replicationDeprovisionTime
             self.replicationLastStopTime = replicationLastStopTime
             self.replicationStats = replicationStats
             self.replicationType = replicationType
@@ -6827,6 +6850,7 @@ extension DatabaseMigrationService {
             case replicationConfigArn = "ReplicationConfigArn"
             case replicationConfigIdentifier = "ReplicationConfigIdentifier"
             case replicationCreateTime = "ReplicationCreateTime"
+            case replicationDeprovisionTime = "ReplicationDeprovisionTime"
             case replicationLastStopTime = "ReplicationLastStopTime"
             case replicationStats = "ReplicationStats"
             case replicationType = "ReplicationType"

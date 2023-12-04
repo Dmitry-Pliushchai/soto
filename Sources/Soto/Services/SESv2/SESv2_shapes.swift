@@ -26,20 +26,20 @@ import SotoCore
 extension SESv2 {
     // MARK: Enums
 
-    public enum BehaviorOnMxFailure: String, CustomStringConvertible, Codable, Sendable {
+    public enum BehaviorOnMxFailure: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rejectMessage = "REJECT_MESSAGE"
         case useDefaultValue = "USE_DEFAULT_VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum BounceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BounceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case permanent = "PERMANENT"
         case transient = "TRANSIENT"
         case undetermined = "UNDETERMINED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BulkEmailStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BulkEmailStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountDailyQuotaExceeded = "ACCOUNT_DAILY_QUOTA_EXCEEDED"
         case accountSendingPaused = "ACCOUNT_SENDING_PAUSED"
         case accountSuspended = "ACCOUNT_SUSPENDED"
@@ -57,38 +57,38 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContactLanguage: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContactLanguage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case en = "EN"
         case ja = "JA"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContactListImportAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContactListImportAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delete = "DELETE"
         case put = "PUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case json = "JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliverabilityDashboardAccountStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliverabilityDashboardAccountStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case disabled = "DISABLED"
         case pendingExpiration = "PENDING_EXPIRATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliverabilityTestStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliverabilityTestStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complaint = "COMPLAINT"
         case delivery = "DELIVERY"
         case permanentBounce = "PERMANENT_BOUNCE"
@@ -98,26 +98,26 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum DimensionValueSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum DimensionValueSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emailHeader = "EMAIL_HEADER"
         case linkTag = "LINK_TAG"
         case messageTag = "MESSAGE_TAG"
         public var description: String { return self.rawValue }
     }
 
-    public enum DkimSigningAttributesOrigin: String, CustomStringConvertible, Codable, Sendable {
+    public enum DkimSigningAttributesOrigin: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsSes = "AWS_SES"
         case external = "EXTERNAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum DkimSigningKeyLength: String, CustomStringConvertible, Codable, Sendable {
+    public enum DkimSigningKeyLength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rsa1024Bit = "RSA_1024_BIT"
         case rsa2048Bit = "RSA_2048_BIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DkimStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DkimStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case notStarted = "NOT_STARTED"
         case pending = "PENDING"
@@ -126,13 +126,13 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum EngagementEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EngagementEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case click = "CLICK"
         case open = "OPEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bounce = "BOUNCE"
         case click = "CLICK"
         case complaint = "COMPLAINT"
@@ -146,32 +146,32 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case messageInsights = "MESSAGE_INSIGHTS"
         case metricsData = "METRICS_DATA"
         public var description: String { return self.rawValue }
     }
 
-    public enum FeatureStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeatureStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case domain = "DOMAIN"
         case emailAddress = "EMAIL_ADDRESS"
         case managedDomain = "MANAGED_DOMAIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportDestinationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportDestinationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contactList = "CONTACT_LIST"
         case suppressionList = "SUPPRESSION_LIST"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case created = "CREATED"
@@ -180,7 +180,7 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ListRecommendationsFilterKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListRecommendationsFilterKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case impact = "IMPACT"
         case resourceArn = "RESOURCE_ARN"
         case status = "STATUS"
@@ -188,7 +188,7 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum MailFromDomainStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MailFromDomainStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case success = "SUCCESS"
@@ -196,13 +196,13 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum MailType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MailType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case marketing = "MARKETING"
         case transactional = "TRANSACTIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum Metric: String, CustomStringConvertible, Codable, Sendable {
+    public enum Metric: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case click = "CLICK"
         case complaint = "COMPLAINT"
         case delivery = "DELIVERY"
@@ -216,43 +216,43 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum MetricAggregation: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetricAggregation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rate = "RATE"
         case volume = "VOLUME"
         public var description: String { return self.rawValue }
     }
 
-    public enum MetricDimensionName: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetricDimensionName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case configurationSet = "CONFIGURATION_SET"
         case emailIdentity = "EMAIL_IDENTITY"
         case isp = "ISP"
         public var description: String { return self.rawValue }
     }
 
-    public enum MetricNamespace: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetricNamespace: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case vdm = "VDM"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case internalFailure = "INTERNAL_FAILURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationImpact: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationImpact: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fixed = "FIXED"
         case open = "OPEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bimi = "BIMI"
         case dkim = "DKIM"
         case dmarc = "DMARC"
@@ -260,7 +260,7 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReviewStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReviewStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case denied = "DENIED"
         case failed = "FAILED"
         case granted = "GRANTED"
@@ -268,37 +268,46 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ScalingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScalingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case managed = "MANAGED"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum SubscriptionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SubscriptionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case optIn = "OPT_IN"
         case optOut = "OPT_OUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SuppressionListImportAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum SuppressionListImportAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delete = "DELETE"
         case put = "PUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SuppressionListReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum SuppressionListReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bounce = "BOUNCE"
         case complaint = "COMPLAINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum TlsPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum TlsPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case optional = "OPTIONAL"
         case require = "REQUIRE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VerificationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerificationError: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case dnsServerError = "DNS_SERVER_ERROR"
+        case hostNotFound = "HOST_NOT_FOUND"
+        case invalidValue = "INVALID_VALUE"
+        case serviceError = "SERVICE_ERROR"
+        case typeNotFound = "TYPE_NOT_FOUND"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum VerificationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case notStarted = "NOT_STARTED"
         case pending = "PENDING"
@@ -307,7 +316,7 @@ extension SESv2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum WarmupStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WarmupStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case done = "DONE"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
@@ -1723,7 +1732,7 @@ extension SESv2 {
     }
 
     public struct EmailContent: AWSEncodableShape {
-        /// The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.
+        /// The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.
         public let raw: RawMessage?
         /// The simple email message. The message consists of a subject and a message body.
         public let simple: Message?
@@ -2640,12 +2649,14 @@ extension SESv2 {
         public let policies: [String: String]?
         /// An array of objects that define the tags (keys and values) that are associated with the email identity.
         public let tags: [Tag]?
+        /// An object that contains additional information about the verification status for the identity.
+        public let verificationInfo: VerificationInfo?
         /// The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.
         public let verificationStatus: VerificationStatus?
         /// Specifies whether or not the identity is verified. You can only send email from verified email addresses or domains. For more information about verifying identities, see the Amazon Pinpoint User Guide.
         public let verifiedForSendingStatus: Bool?
 
-        public init(configurationSetName: String? = nil, dkimAttributes: DkimAttributes? = nil, feedbackForwardingStatus: Bool? = nil, identityType: IdentityType? = nil, mailFromAttributes: MailFromAttributes? = nil, policies: [String: String]? = nil, tags: [Tag]? = nil, verificationStatus: VerificationStatus? = nil, verifiedForSendingStatus: Bool? = nil) {
+        public init(configurationSetName: String? = nil, dkimAttributes: DkimAttributes? = nil, feedbackForwardingStatus: Bool? = nil, identityType: IdentityType? = nil, mailFromAttributes: MailFromAttributes? = nil, policies: [String: String]? = nil, tags: [Tag]? = nil, verificationInfo: VerificationInfo? = nil, verificationStatus: VerificationStatus? = nil, verifiedForSendingStatus: Bool? = nil) {
             self.configurationSetName = configurationSetName
             self.dkimAttributes = dkimAttributes
             self.feedbackForwardingStatus = feedbackForwardingStatus
@@ -2653,6 +2664,7 @@ extension SESv2 {
             self.mailFromAttributes = mailFromAttributes
             self.policies = policies
             self.tags = tags
+            self.verificationInfo = verificationInfo
             self.verificationStatus = verificationStatus
             self.verifiedForSendingStatus = verifiedForSendingStatus
         }
@@ -2665,6 +2677,7 @@ extension SESv2 {
             case mailFromAttributes = "MailFromAttributes"
             case policies = "Policies"
             case tags = "Tags"
+            case verificationInfo = "VerificationInfo"
             case verificationStatus = "VerificationStatus"
             case verifiedForSendingStatus = "VerifiedForSendingStatus"
         }
@@ -3431,7 +3444,7 @@ extension SESv2 {
 
         /// A token returned from a previous call to ListEmailTemplates to indicate the position in the list of email templates.
         public let nextToken: String?
-        /// The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 10.
+        /// The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 100.
         public let pageSize: Int?
 
         public init(nextToken: String? = nil, pageSize: Int? = nil) {
@@ -4517,7 +4530,7 @@ extension SESv2 {
     }
 
     public struct RawMessage: AWSEncodableShape {
-        /// The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.
+        /// The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.
         public let data: AWSBase64Data
 
         public init(data: AWSBase64Data) {
@@ -4631,6 +4644,27 @@ extension SESv2 {
         private enum CodingKeys: String, CodingKey {
             case caseId = "CaseId"
             case status = "Status"
+        }
+    }
+
+    public struct SOARecord: AWSDecodableShape {
+        /// Administrative contact email from the SOA record.
+        public let adminEmail: String?
+        /// Primary name server specified in the SOA record.
+        public let primaryNameServer: String?
+        /// Serial number from the SOA record.
+        public let serialNumber: Int64?
+
+        public init(adminEmail: String? = nil, primaryNameServer: String? = nil, serialNumber: Int64? = nil) {
+            self.adminEmail = adminEmail
+            self.primaryNameServer = primaryNameServer
+            self.serialNumber = serialNumber
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case adminEmail = "AdminEmail"
+            case primaryNameServer = "PrimaryNameServer"
+            case serialNumber = "SerialNumber"
         }
     }
 
@@ -5383,6 +5417,31 @@ extension SESv2 {
         private enum CodingKeys: String, CodingKey {
             case dashboardOptions = "DashboardOptions"
             case guardianOptions = "GuardianOptions"
+        }
+    }
+
+    public struct VerificationInfo: AWSDecodableShape {
+        /// Provides the reason for the failure describing why Amazon SES was not able to successfully verify the identity. Below are the possible values:     INVALID_VALUE – Amazon SES was able to find the record, but the value contained within the record was invalid. Ensure you have published the correct values for the record.    TYPE_NOT_FOUND – The queried hostname exists but does not have the requested type of DNS record. Ensure that you have published the correct type of DNS record.    HOST_NOT_FOUND – The queried hostname does not exist or was not reachable at the time of the request. Ensure that you have published the required DNS record(s).     SERVICE_ERROR – A temporary issue is preventing Amazon SES from determining the verification status of the domain.    DNS_SERVER_ERROR – The DNS server encountered an issue and was unable to complete the request.
+        public let errorType: VerificationError?
+        /// The last time a verification attempt was made for this identity.
+        public let lastCheckedTimestamp: Date?
+        /// The last time a successful verification was made for this identity.
+        public let lastSuccessTimestamp: Date?
+        /// An object that contains information about the start of authority (SOA) record associated with the identity.
+        public let soaRecord: SOARecord?
+
+        public init(errorType: VerificationError? = nil, lastCheckedTimestamp: Date? = nil, lastSuccessTimestamp: Date? = nil, soaRecord: SOARecord? = nil) {
+            self.errorType = errorType
+            self.lastCheckedTimestamp = lastCheckedTimestamp
+            self.lastSuccessTimestamp = lastSuccessTimestamp
+            self.soaRecord = soaRecord
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case errorType = "ErrorType"
+            case lastCheckedTimestamp = "LastCheckedTimestamp"
+            case lastSuccessTimestamp = "LastSuccessTimestamp"
+            case soaRecord = "SOARecord"
         }
     }
 

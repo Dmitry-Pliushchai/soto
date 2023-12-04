@@ -26,7 +26,7 @@ import SotoCore
 extension AmplifyBackend {
     // MARK: Enums
 
-    public enum AdditionalConstraintsElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum AdditionalConstraintsElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case requireDigit = "REQUIRE_DIGIT"
         case requireLowercase = "REQUIRE_LOWERCASE"
         case requireSymbol = "REQUIRE_SYMBOL"
@@ -34,39 +34,39 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthResources: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthResources: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case identityPoolAndUserPool = "IDENTITY_POOL_AND_USER_POOL"
         case userPoolOnly = "USER_POOL_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthenticatedElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthenticatedElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createAndUpdate = "CREATE_AND_UPDATE"
         case delete = "DELETE"
         case read = "READ"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeliveryMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeliveryMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case email = "EMAIL"
         case sms = "SMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MFAMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum MFAMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case on = "ON"
         case optional = "OPTIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum MfaTypesElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum MfaTypesElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sms = "SMS"
         case totp = "TOTP"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case amazonCognitoUserPools = "AMAZON_COGNITO_USER_POOLS"
         case apiKey = "API_KEY"
         case awsIam = "AWS_IAM"
@@ -74,13 +74,13 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum OAuthGrantType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OAuthGrantType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case code = "CODE"
         case implicit = "IMPLICIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum OAuthScopesElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum OAuthScopesElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsCognitoSigninUserAdmin = "AWS_COGNITO_SIGNIN_USER_ADMIN"
         case email = "EMAIL"
         case openid = "OPENID"
@@ -89,7 +89,7 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum RequiredSignUpAttributesElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum RequiredSignUpAttributesElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case address = "ADDRESS"
         case birthdate = "BIRTHDATE"
         case email = "EMAIL"
@@ -110,7 +110,7 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResolutionStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResolutionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automerge = "AUTOMERGE"
         case lambda = "LAMBDA"
         case none = "NONE"
@@ -118,17 +118,17 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum Service: String, CustomStringConvertible, Codable, Sendable {
+    public enum Service: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cognito = "COGNITO"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum SignInMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum SignInMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case email = "EMAIL"
         case emailAndPhoneNumber = "EMAIL_AND_PHONE_NUMBER"
         case phoneNumber = "PHONE_NUMBER"
@@ -136,13 +136,13 @@ extension AmplifyBackend {
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case latest = "LATEST"
         case stale = "STALE"
         public var description: String { return self.rawValue }
     }
 
-    public enum UnAuthenticatedElement: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnAuthenticatedElement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createAndUpdate = "CREATE_AND_UPDATE"
         case delete = "DELETE"
         case read = "READ"
@@ -299,9 +299,9 @@ extension AmplifyBackend {
 
     public struct BackendJobRespObj: AWSDecodableShape {
         /// The app ID.
-        public let appId: String
+        public let appId: String?
         /// The name of the backend environment.
-        public let backendEnvironmentName: String
+        public let backendEnvironmentName: String?
         /// The time when the job was created.
         public let createTime: String?
         /// If the request fails, this error is returned.
@@ -315,7 +315,7 @@ extension AmplifyBackend {
         /// The time when the job was last updated.
         public let updateTime: String?
 
-        public init(appId: String, backendEnvironmentName: String, createTime: String? = nil, error: String? = nil, jobId: String? = nil, operation: String? = nil, status: String? = nil, updateTime: String? = nil) {
+        public init(appId: String? = nil, backendEnvironmentName: String? = nil, createTime: String? = nil, error: String? = nil, jobId: String? = nil, operation: String? = nil, status: String? = nil, updateTime: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.createTime = createTime
@@ -340,11 +340,11 @@ extension AmplifyBackend {
 
     public struct BackendStoragePermissions: AWSEncodableShape & AWSDecodableShape {
         /// Lists all authenticated user read, write, and delete permissions for your S3 bucket.
-        public let authenticated: [AuthenticatedElement]
+        public let authenticated: [AuthenticatedElement]?
         /// Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.
         public let unAuthenticated: [UnAuthenticatedElement]?
 
-        public init(authenticated: [AuthenticatedElement], unAuthenticated: [UnAuthenticatedElement]? = nil) {
+        public init(authenticated: [AuthenticatedElement]? = nil, unAuthenticated: [UnAuthenticatedElement]? = nil) {
             self.authenticated = authenticated
             self.unAuthenticated = unAuthenticated
         }
@@ -366,9 +366,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of the destination backend environment to be created.
-        public let targetEnvironmentName: String
+        public let targetEnvironmentName: String?
 
-        public init(appId: String, backendEnvironmentName: String, targetEnvironmentName: String) {
+        public init(appId: String, backendEnvironmentName: String, targetEnvironmentName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.targetEnvironmentName = targetEnvironmentName
@@ -420,13 +420,13 @@ extension AmplifyBackend {
         /// The app ID.
         public let appId: String
         /// The name of the backend environment.
-        public let backendEnvironmentName: String
+        public let backendEnvironmentName: String?
         /// The resource configuration for this request.
-        public let resourceConfig: BackendAPIResourceConfig
+        public let resourceConfig: BackendAPIResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String? = nil, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -475,13 +475,13 @@ extension AmplifyBackend {
 
     public struct CreateBackendAuthForgotPasswordConfig: AWSEncodableShape & AWSDecodableShape {
         /// (DEPRECATED) Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.
-        public let deliveryMethod: DeliveryMethod
+        public let deliveryMethod: DeliveryMethod?
         /// (DEPRECATED) The configuration for the email sent when an app user forgets their password.
         public let emailSettings: EmailSettings?
         /// (DEPRECATED) The configuration for the SMS message sent when an app user forgets their password.
         public let smsSettings: SmsSettings?
 
-        public init(deliveryMethod: DeliveryMethod, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
+        public init(deliveryMethod: DeliveryMethod? = nil, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
             self.deliveryMethod = deliveryMethod
             self.emailSettings = emailSettings
             self.smsSettings = smsSettings
@@ -496,11 +496,11 @@ extension AmplifyBackend {
 
     public struct CreateBackendAuthIdentityPoolConfig: AWSEncodableShape & AWSDecodableShape {
         /// Name of the Amazon Cognito identity pool used for authorization.
-        public let identityPoolName: String
+        public let identityPoolName: String?
         /// Set to true or false based on whether you want to enable guest authorization to your Amplify app.
-        public let unauthenticatedLogin: Bool
+        public let unauthenticatedLogin: Bool?
 
-        public init(identityPoolName: String, unauthenticatedLogin: Bool) {
+        public init(identityPoolName: String? = nil, unauthenticatedLogin: Bool? = nil) {
             self.identityPoolName = identityPoolName
             self.unauthenticatedLogin = unauthenticatedLogin
         }
@@ -513,11 +513,11 @@ extension AmplifyBackend {
 
     public struct CreateBackendAuthMFAConfig: AWSEncodableShape & AWSDecodableShape {
         /// Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.
-        public let mfaMode: MFAMode
+        public let mfaMode: MFAMode?
         /// Describes the configuration settings and methods for your Amplify app users to use MFA.
         public let settings: Settings?
 
-        public init(mfaMode: MFAMode, settings: Settings? = nil) {
+        public init(mfaMode: MFAMode? = nil, settings: Settings? = nil) {
             self.mfaMode = mfaMode
             self.settings = settings
         }
@@ -532,17 +532,17 @@ extension AmplifyBackend {
         /// The domain prefix for your Amplify app.
         public let domainPrefix: String?
         /// The OAuth grant type that you use to allow app users to authenticate from your Amplify app.
-        public let oAuthGrantType: OAuthGrantType
+        public let oAuthGrantType: OAuthGrantType?
         /// List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.
-        public let oAuthScopes: [OAuthScopesElement]
+        public let oAuthScopes: [OAuthScopesElement]?
         /// The redirected URI for signing in to your Amplify app.
-        public let redirectSignInURIs: [String]
+        public let redirectSignInURIs: [String]?
         /// Redirect URLs that OAuth uses when a user signs out of an Amplify app.
-        public let redirectSignOutURIs: [String]
+        public let redirectSignOutURIs: [String]?
         /// The settings for using social providers to access your Amplify app.
         public let socialProviderSettings: SocialProviderSettings?
 
-        public init(domainPrefix: String? = nil, oAuthGrantType: OAuthGrantType, oAuthScopes: [OAuthScopesElement], redirectSignInURIs: [String], redirectSignOutURIs: [String], socialProviderSettings: SocialProviderSettings? = nil) {
+        public init(domainPrefix: String? = nil, oAuthGrantType: OAuthGrantType? = nil, oAuthScopes: [OAuthScopesElement]? = nil, redirectSignInURIs: [String]? = nil, redirectSignOutURIs: [String]? = nil, socialProviderSettings: SocialProviderSettings? = nil) {
             self.domainPrefix = domainPrefix
             self.oAuthGrantType = oAuthGrantType
             self.oAuthScopes = oAuthScopes
@@ -565,9 +565,9 @@ extension AmplifyBackend {
         /// Additional constraints for the password used to access the backend of your Amplify project.
         public let additionalConstraints: [AdditionalConstraintsElement]?
         /// The minimum length of the password used to access the backend of your Amplify project.
-        public let minimumLength: Double
+        public let minimumLength: Double?
 
-        public init(additionalConstraints: [AdditionalConstraintsElement]? = nil, minimumLength: Double) {
+        public init(additionalConstraints: [AdditionalConstraintsElement]? = nil, minimumLength: Double? = nil) {
             self.additionalConstraints = additionalConstraints
             self.minimumLength = minimumLength
         }
@@ -586,13 +586,13 @@ extension AmplifyBackend {
         /// The app ID.
         public let appId: String
         /// The name of the backend environment.
-        public let backendEnvironmentName: String
+        public let backendEnvironmentName: String?
         /// The resource configuration for this request object.
-        public let resourceConfig: CreateBackendAuthResourceConfig
+        public let resourceConfig: CreateBackendAuthResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: CreateBackendAuthResourceConfig, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String? = nil, resourceConfig: CreateBackendAuthResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -608,15 +608,15 @@ extension AmplifyBackend {
 
     public struct CreateBackendAuthResourceConfig: AWSEncodableShape & AWSDecodableShape {
         /// Defines whether you want to configure only authentication or both authentication and authorization settings.
-        public let authResources: AuthResources
+        public let authResources: AuthResources?
         /// Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
         public let identityPoolConfigs: CreateBackendAuthIdentityPoolConfig?
         /// Defines the service name to use when configuring an authentication resource in your Amplify project.
-        public let service: Service
+        public let service: Service?
         /// Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
-        public let userPoolConfigs: CreateBackendAuthUserPoolConfig
+        public let userPoolConfigs: CreateBackendAuthUserPoolConfig?
 
-        public init(authResources: AuthResources, identityPoolConfigs: CreateBackendAuthIdentityPoolConfig? = nil, service: Service, userPoolConfigs: CreateBackendAuthUserPoolConfig) {
+        public init(authResources: AuthResources? = nil, identityPoolConfigs: CreateBackendAuthIdentityPoolConfig? = nil, service: Service? = nil, userPoolConfigs: CreateBackendAuthUserPoolConfig? = nil) {
             self.authResources = authResources
             self.identityPoolConfigs = identityPoolConfigs
             self.service = service
@@ -674,15 +674,15 @@ extension AmplifyBackend {
         /// Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.
         public let passwordPolicy: CreateBackendAuthPasswordPolicyConfig?
         /// The required attributes to sign up new users in the user pool.
-        public let requiredSignUpAttributes: [RequiredSignUpAttributesElement]
+        public let requiredSignUpAttributes: [RequiredSignUpAttributesElement]?
         /// Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.
-        public let signInMethod: SignInMethod
+        public let signInMethod: SignInMethod?
         /// The Amazon Cognito user pool name.
-        public let userPoolName: String
+        public let userPoolName: String?
         /// Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.
         public let verificationMessage: CreateBackendAuthVerificationMessageConfig?
 
-        public init(forgotPassword: CreateBackendAuthForgotPasswordConfig? = nil, mfa: CreateBackendAuthMFAConfig? = nil, oAuth: CreateBackendAuthOAuthConfig? = nil, passwordPolicy: CreateBackendAuthPasswordPolicyConfig? = nil, requiredSignUpAttributes: [RequiredSignUpAttributesElement], signInMethod: SignInMethod, userPoolName: String, verificationMessage: CreateBackendAuthVerificationMessageConfig? = nil) {
+        public init(forgotPassword: CreateBackendAuthForgotPasswordConfig? = nil, mfa: CreateBackendAuthMFAConfig? = nil, oAuth: CreateBackendAuthOAuthConfig? = nil, passwordPolicy: CreateBackendAuthPasswordPolicyConfig? = nil, requiredSignUpAttributes: [RequiredSignUpAttributesElement]? = nil, signInMethod: SignInMethod? = nil, userPoolName: String? = nil, verificationMessage: CreateBackendAuthVerificationMessageConfig? = nil) {
             self.forgotPassword = forgotPassword
             self.mfa = mfa
             self.oAuth = oAuth
@@ -707,13 +707,13 @@ extension AmplifyBackend {
 
     public struct CreateBackendAuthVerificationMessageConfig: AWSEncodableShape & AWSDecodableShape {
         /// The type of verification message to send.
-        public let deliveryMethod: DeliveryMethod
+        public let deliveryMethod: DeliveryMethod?
         /// The settings for the email message.
         public let emailSettings: EmailSettings?
         /// The settings for the SMS message.
         public let smsSettings: SmsSettings?
 
-        public init(deliveryMethod: DeliveryMethod, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
+        public init(deliveryMethod: DeliveryMethod? = nil, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
             self.deliveryMethod = deliveryMethod
             self.emailSettings = emailSettings
             self.smsSettings = smsSettings
@@ -773,17 +773,17 @@ extension AmplifyBackend {
 
     public struct CreateBackendRequest: AWSEncodableShape {
         /// The app ID.
-        public let appId: String
+        public let appId: String?
         /// The name of the app.
-        public let appName: String
+        public let appName: String?
         /// The name of the backend environment.
-        public let backendEnvironmentName: String
+        public let backendEnvironmentName: String?
         /// The resource configuration for creating a backend.
         public let resourceConfig: ResourceConfig?
         /// The name of the resource.
         public let resourceName: String?
 
-        public init(appId: String, appName: String, backendEnvironmentName: String, resourceConfig: ResourceConfig? = nil, resourceName: String? = nil) {
+        public init(appId: String? = nil, appName: String? = nil, backendEnvironmentName: String? = nil, resourceConfig: ResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.appName = appName
             self.backendEnvironmentName = backendEnvironmentName
@@ -841,13 +841,13 @@ extension AmplifyBackend {
         /// The app ID.
         public let appId: String
         /// The name of the backend environment.
-        public let backendEnvironmentName: String
+        public let backendEnvironmentName: String?
         /// The resource configuration for creating backend storage.
-        public let resourceConfig: CreateBackendStorageResourceConfig
+        public let resourceConfig: CreateBackendStorageResourceConfig?
         /// The name of the storage resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: CreateBackendStorageResourceConfig, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String? = nil, resourceConfig: CreateBackendStorageResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -865,11 +865,11 @@ extension AmplifyBackend {
         /// The name of the S3 bucket.
         public let bucketName: String?
         /// The authorization configuration for the storage S3 bucket.
-        public let permissions: BackendStoragePermissions
+        public let permissions: BackendStoragePermissions?
         /// The name of the storage service.
-        public let serviceName: ServiceName
+        public let serviceName: ServiceName?
 
-        public init(bucketName: String? = nil, permissions: BackendStoragePermissions, serviceName: ServiceName) {
+        public init(bucketName: String? = nil, permissions: BackendStoragePermissions? = nil, serviceName: ServiceName? = nil) {
             self.bucketName = bucketName
             self.permissions = permissions
             self.serviceName = serviceName
@@ -960,9 +960,9 @@ extension AmplifyBackend {
         /// Defines the resource configuration for the data model in your Amplify project.
         public let resourceConfig: BackendAPIResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -1019,9 +1019,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1128,11 +1128,11 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of the storage resource.
-        public let resourceName: String
+        public let resourceName: String?
         /// The name of the storage service.
-        public let serviceName: ServiceName
+        public let serviceName: ServiceName?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String, serviceName: ServiceName) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil, serviceName: ServiceName? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1230,9 +1230,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1287,9 +1287,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1334,9 +1334,9 @@ extension AmplifyBackend {
         /// Defines the resource configuration for the data model in your Amplify project.
         public let resourceConfig: BackendAPIResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -1389,9 +1389,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1563,9 +1563,9 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The name of the storage resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceName = resourceName
@@ -1580,13 +1580,13 @@ extension AmplifyBackend {
         /// The name of the S3 bucket.
         public let bucketName: String?
         /// Returns True if the storage resource has been imported.
-        public let imported: Bool
+        public let imported: Bool?
         /// The authorization configuration for the storage S3 bucket.
         public let permissions: BackendStoragePermissions?
         /// The name of the storage service.
-        public let serviceName: ServiceName
+        public let serviceName: ServiceName?
 
-        public init(bucketName: String? = nil, imported: Bool, permissions: BackendStoragePermissions? = nil, serviceName: ServiceName) {
+        public init(bucketName: String? = nil, imported: Bool? = nil, permissions: BackendStoragePermissions? = nil, serviceName: ServiceName? = nil) {
             self.bucketName = bucketName
             self.imported = imported
             self.permissions = permissions
@@ -1683,13 +1683,13 @@ extension AmplifyBackend {
         /// The ID of the Amazon Cognito identity pool.
         public let identityPoolId: String?
         /// The ID of the Amazon Cognito native client.
-        public let nativeClientId: String
+        public let nativeClientId: String?
         /// The ID of the Amazon Cognito user pool.
-        public let userPoolId: String
+        public let userPoolId: String?
         /// The ID of the Amazon Cognito web client.
-        public let webClientId: String
+        public let webClientId: String?
 
-        public init(appId: String, backendEnvironmentName: String, identityPoolId: String? = nil, nativeClientId: String, userPoolId: String, webClientId: String) {
+        public init(appId: String, backendEnvironmentName: String, identityPoolId: String? = nil, nativeClientId: String? = nil, userPoolId: String? = nil, webClientId: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.identityPoolId = identityPoolId
@@ -1752,9 +1752,9 @@ extension AmplifyBackend {
         /// The name of the S3 bucket.
         public let bucketName: String?
         /// The name of the storage service.
-        public let serviceName: ServiceName
+        public let serviceName: ServiceName?
 
-        public init(appId: String, backendEnvironmentName: String, bucketName: String? = nil, serviceName: ServiceName) {
+        public init(appId: String, backendEnvironmentName: String, bucketName: String? = nil, serviceName: ServiceName? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.bucketName = bucketName
@@ -2071,9 +2071,9 @@ extension AmplifyBackend {
         /// Defines the resource configuration for the data model in your Amplify project.
         public let resourceConfig: BackendAPIResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceConfig: BackendAPIResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -2231,11 +2231,11 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The resource configuration for this request object.
-        public let resourceConfig: UpdateBackendAuthResourceConfig
+        public let resourceConfig: UpdateBackendAuthResourceConfig?
         /// The name of this resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: UpdateBackendAuthResourceConfig, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceConfig: UpdateBackendAuthResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -2250,15 +2250,15 @@ extension AmplifyBackend {
 
     public struct UpdateBackendAuthResourceConfig: AWSEncodableShape {
         /// Defines the service name to use when configuring an authentication resource in your Amplify project.
-        public let authResources: AuthResources
+        public let authResources: AuthResources?
         /// Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.
         public let identityPoolConfigs: UpdateBackendAuthIdentityPoolConfig?
         /// Defines the service name to use when configuring an authentication resource in your Amplify project.
-        public let service: Service
+        public let service: Service?
         /// Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.
-        public let userPoolConfigs: UpdateBackendAuthUserPoolConfig
+        public let userPoolConfigs: UpdateBackendAuthUserPoolConfig?
 
-        public init(authResources: AuthResources, identityPoolConfigs: UpdateBackendAuthIdentityPoolConfig? = nil, service: Service, userPoolConfigs: UpdateBackendAuthUserPoolConfig) {
+        public init(authResources: AuthResources? = nil, identityPoolConfigs: UpdateBackendAuthIdentityPoolConfig? = nil, service: Service? = nil, userPoolConfigs: UpdateBackendAuthUserPoolConfig? = nil) {
             self.authResources = authResources
             self.identityPoolConfigs = identityPoolConfigs
             self.service = service
@@ -2337,13 +2337,13 @@ extension AmplifyBackend {
 
     public struct UpdateBackendAuthVerificationMessageConfig: AWSEncodableShape {
         /// The type of verification message to send.
-        public let deliveryMethod: DeliveryMethod
+        public let deliveryMethod: DeliveryMethod?
         /// The settings for the email message.
         public let emailSettings: EmailSettings?
         /// The settings for the SMS message.
         public let smsSettings: SmsSettings?
 
-        public init(deliveryMethod: DeliveryMethod, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
+        public init(deliveryMethod: DeliveryMethod? = nil, emailSettings: EmailSettings? = nil, smsSettings: SmsSettings? = nil) {
             self.deliveryMethod = deliveryMethod
             self.emailSettings = emailSettings
             self.smsSettings = smsSettings
@@ -2485,11 +2485,11 @@ extension AmplifyBackend {
         /// The name of the backend environment.
         public let backendEnvironmentName: String
         /// The resource configuration for updating backend storage.
-        public let resourceConfig: UpdateBackendStorageResourceConfig
+        public let resourceConfig: UpdateBackendStorageResourceConfig?
         /// The name of the storage resource.
-        public let resourceName: String
+        public let resourceName: String?
 
-        public init(appId: String, backendEnvironmentName: String, resourceConfig: UpdateBackendStorageResourceConfig, resourceName: String) {
+        public init(appId: String, backendEnvironmentName: String, resourceConfig: UpdateBackendStorageResourceConfig? = nil, resourceName: String? = nil) {
             self.appId = appId
             self.backendEnvironmentName = backendEnvironmentName
             self.resourceConfig = resourceConfig
@@ -2504,11 +2504,11 @@ extension AmplifyBackend {
 
     public struct UpdateBackendStorageResourceConfig: AWSEncodableShape {
         /// The authorization configuration for the storage S3 bucket.
-        public let permissions: BackendStoragePermissions
+        public let permissions: BackendStoragePermissions?
         /// The name of the storage service.
-        public let serviceName: ServiceName
+        public let serviceName: ServiceName?
 
-        public init(permissions: BackendStoragePermissions, serviceName: ServiceName) {
+        public init(permissions: BackendStoragePermissions? = nil, serviceName: ServiceName? = nil) {
             self.permissions = permissions
             self.serviceName = serviceName
         }

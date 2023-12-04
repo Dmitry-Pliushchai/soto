@@ -52,6 +52,11 @@ extension SecurityHub {
         return try await self.client.execute(operation: "BatchGetAutomationRules", path: "/automationrules/get", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Returns associations between an Security Hub configuration and a batch of target accounts, organizational units, or the root.  Only the Security Hub delegated administrator can invoke this operation from the home Region. A configuration  can refer to a configuration policy or to a self-managed configuration.
+    public func batchGetConfigurationPolicyAssociations(_ input: BatchGetConfigurationPolicyAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchGetConfigurationPolicyAssociationsResponse {
+        return try await self.client.execute(operation: "BatchGetConfigurationPolicyAssociations", path: "/configurationPolicyAssociation/batchget", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     ///  Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region.
     public func batchGetSecurityControls(_ input: BatchGetSecurityControlsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchGetSecurityControlsResponse {
         return try await self.client.execute(operation: "BatchGetSecurityControls", path: "/securityControls/batchGet", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -92,6 +97,11 @@ extension SecurityHub {
         return try await self.client.execute(operation: "CreateAutomationRule", path: "/automationrules/create", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Creates a configuration policy with the defined configuration. Only the Security Hub delegated administrator  can invoke this operation from the home Region.
+    public func createConfigurationPolicy(_ input: CreateConfigurationPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateConfigurationPolicyResponse {
+        return try await self.client.execute(operation: "CreateConfigurationPolicy", path: "/configurationPolicy/create", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Used to enable finding aggregation. Must be called from the aggregation Region. For more details about cross-Region replication, see Configuring finding aggregation in the Security Hub User Guide.
     public func createFindingAggregator(_ input: CreateFindingAggregatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateFindingAggregatorResponse {
         return try await self.client.execute(operation: "CreateFindingAggregator", path: "/findingAggregator/create", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -115,6 +125,11 @@ extension SecurityHub {
     /// Deletes a custom action target from Security Hub. Deleting a custom action target does not affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
     public func deleteActionTarget(_ input: DeleteActionTargetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteActionTargetResponse {
         return try await self.client.execute(operation: "DeleteActionTarget", path: "/actionTargets/{ActionTargetArn+}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Deletes a configuration policy. Only the Security Hub delegated administrator can invoke this operation  from the home Region. For the deletion to succeed, you must first disassociate a configuration policy from target accounts,  organizational units, or the root by invoking the StartConfigurationPolicyDisassociation operation.
+    public func deleteConfigurationPolicy(_ input: DeleteConfigurationPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteConfigurationPolicyResponse {
+        return try await self.client.execute(operation: "DeleteConfigurationPolicy", path: "/configurationPolicy/{Identifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a finding aggregator. When you delete the finding aggregator, you stop finding aggregation. When you stop finding aggregation, findings that were already aggregated to the aggregation Region are still visible from the aggregation Region. New findings and finding updates are not aggregated.
@@ -147,7 +162,7 @@ extension SecurityHub {
         return try await self.client.execute(operation: "DescribeHub", path: "/accounts", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Returns information about the Organizations configuration for Security Hub. Can only be called from a Security Hub administrator account.
+    /// Returns information about the way your organization is configured in Security Hub. Only the  Security Hub administrator account can invoke this operation.
     public func describeOrganizationConfiguration(_ input: DescribeOrganizationConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeOrganizationConfigurationResponse {
         return try await self.client.execute(operation: "DescribeOrganizationConfiguration", path: "/organization/configuration", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -218,6 +233,16 @@ extension SecurityHub {
         return try await self.client.execute(operation: "GetAdministratorAccount", path: "/administrator", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Provides information about a configuration policy. Only the Security Hub delegated administrator can invoke  this operation from the home Region.
+    public func getConfigurationPolicy(_ input: GetConfigurationPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetConfigurationPolicyResponse {
+        return try await self.client.execute(operation: "GetConfigurationPolicy", path: "/configurationPolicy/get/{Identifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Returns the association between a configuration and a target account, organizational unit, or the root. The  configuration can be a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can  invoke this operation from the home Region.
+    public func getConfigurationPolicyAssociation(_ input: GetConfigurationPolicyAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetConfigurationPolicyAssociationResponse {
+        return try await self.client.execute(operation: "GetConfigurationPolicyAssociation", path: "/configurationPolicyAssociation/get", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a list of the standards that are currently enabled.
     public func getEnabledStandards(_ input: GetEnabledStandardsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetEnabledStandardsResponse {
         return try await self.client.execute(operation: "GetEnabledStandards", path: "/standards/get", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -264,6 +289,11 @@ extension SecurityHub {
         return try await self.client.execute(operation: "GetMembers", path: "/members/get", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Retrieves the definition of a security control. The definition includes the control title, description, Region availability, parameter definitions, and other details.
+    public func getSecurityControlDefinition(_ input: GetSecurityControlDefinitionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSecurityControlDefinitionResponse {
+        return try await self.client.execute(operation: "GetSecurityControlDefinition", path: "/securityControl/definition", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
     public func inviteMembers(_ input: InviteMembersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> InviteMembersResponse {
         return try await self.client.execute(operation: "InviteMembers", path: "/members/invite", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -272,6 +302,16 @@ extension SecurityHub {
     ///  A list of automation rules and their metadata for the calling account.
     public func listAutomationRules(_ input: ListAutomationRulesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListAutomationRulesResponse {
         return try await self.client.execute(operation: "ListAutomationRules", path: "/automationrules/list", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Lists the configuration policies that the Security Hub delegated administrator has created for your  organization. Only the delegated administrator can invoke this operation from the home Region.
+    public func listConfigurationPolicies(_ input: ListConfigurationPoliciesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListConfigurationPoliciesResponse {
+        return try await self.client.execute(operation: "ListConfigurationPolicies", path: "/configurationPolicy/list", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Provides information about the associations for your configuration policies and self-managed behavior. Only the  Security Hub delegated administrator can invoke this operation from the home Region.
+    public func listConfigurationPolicyAssociations(_ input: ListConfigurationPolicyAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListConfigurationPolicyAssociationsResponse {
+        return try await self.client.execute(operation: "ListConfigurationPolicyAssociations", path: "/configurationPolicyAssociation/list", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.
@@ -314,6 +354,16 @@ extension SecurityHub {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Associates a target account, organizational unit, or the root with a specified configuration. The target can be  associated with a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can  invoke this operation from the home Region.
+    public func startConfigurationPolicyAssociation(_ input: StartConfigurationPolicyAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartConfigurationPolicyAssociationResponse {
+        return try await self.client.execute(operation: "StartConfigurationPolicyAssociation", path: "/configurationPolicyAssociation/associate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Disassociates a target account, organizational unit, or the root from a specified configuration. When you  disassociate a configuration from its target, the target inherits the configuration of the closest parent. If there’s no  configuration to inherit, the target retains its settings but becomes a self-managed account. A target can be disassociated from  a configuration policy or self-managed behavior. Only the Security Hub delegated administrator can invoke this  operation from the home Region.
+    public func startConfigurationPolicyDisassociation(_ input: StartConfigurationPolicyDisassociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartConfigurationPolicyDisassociationResponse {
+        return try await self.client.execute(operation: "StartConfigurationPolicyDisassociation", path: "/configurationPolicyAssociation/disassociate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Adds one or more tags to a resource.
     public func tagResource(_ input: TagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> TagResourceResponse {
         return try await self.client.execute(operation: "TagResource", path: "/tags/{ResourceArn}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -327,6 +377,11 @@ extension SecurityHub {
     /// Updates the name and description of a custom action target in Security Hub.
     public func updateActionTarget(_ input: UpdateActionTargetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateActionTargetResponse {
         return try await self.client.execute(operation: "UpdateActionTarget", path: "/actionTargets/{ActionTargetArn+}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Updates a configuration policy. Only the Security Hub delegated  administrator can invoke this operation from the home Region.
+    public func updateConfigurationPolicy(_ input: UpdateConfigurationPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateConfigurationPolicyResponse {
+        return try await self.client.execute(operation: "UpdateConfigurationPolicy", path: "/configurationPolicy/{Identifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the finding aggregation configuration. Used to update the Region linking mode and the list of included or excluded Regions. You cannot use UpdateFindingAggregator to change the aggregation Region. You must run UpdateFindingAggregator from the current aggregation Region.
@@ -344,9 +399,14 @@ extension SecurityHub {
         return try await self.client.execute(operation: "UpdateInsight", path: "/insights/{InsightArn+}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Used to update the configuration related to Organizations. Can only be called from a Security Hub administrator account.
+    /// Updates the configuration of your organization in Security Hub. Only the Security Hub administrator account can invoke this operation.
     public func updateOrganizationConfiguration(_ input: UpdateOrganizationConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateOrganizationConfigurationResponse {
         return try await self.client.execute(operation: "UpdateOrganizationConfiguration", path: "/organization/configuration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Updates the properties of a security control.
+    public func updateSecurityControl(_ input: UpdateSecurityControlRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateSecurityControlResponse {
+        return try await self.client.execute(operation: "UpdateSecurityControl", path: "/securityControl/update", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates configuration options for Security Hub.
@@ -535,6 +595,50 @@ extension SecurityHub {
             command: self.getInsights,
             inputKey: \GetInsightsRequest.nextToken,
             outputKey: \GetInsightsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    ///  Lists the configuration policies that the Security Hub delegated administrator has created for your  organization. Only the delegated administrator can invoke this operation from the home Region.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listConfigurationPoliciesPaginator(
+        _ input: ListConfigurationPoliciesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListConfigurationPoliciesRequest, ListConfigurationPoliciesResponse> {
+        return .init(
+            input: input,
+            command: self.listConfigurationPolicies,
+            inputKey: \ListConfigurationPoliciesRequest.nextToken,
+            outputKey: \ListConfigurationPoliciesResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    ///  Provides information about the associations for your configuration policies and self-managed behavior. Only the  Security Hub delegated administrator can invoke this operation from the home Region.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listConfigurationPolicyAssociationsPaginator(
+        _ input: ListConfigurationPolicyAssociationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListConfigurationPolicyAssociationsRequest, ListConfigurationPolicyAssociationsResponse> {
+        return .init(
+            input: input,
+            command: self.listConfigurationPolicyAssociations,
+            inputKey: \ListConfigurationPolicyAssociationsRequest.nextToken,
+            outputKey: \ListConfigurationPolicyAssociationsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

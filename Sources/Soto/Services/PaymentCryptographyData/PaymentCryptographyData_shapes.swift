@@ -26,7 +26,7 @@ import SotoCore
 extension PaymentCryptographyData {
     // MARK: Enums
 
-    public enum DukptDerivationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DukptDerivationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aes128 = "AES_128"
         case aes192 = "AES_192"
         case aes256 = "AES_256"
@@ -35,20 +35,20 @@ extension PaymentCryptographyData {
         public var description: String { return self.rawValue }
     }
 
-    public enum DukptEncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DukptEncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbc = "CBC"
         case ecb = "ECB"
         public var description: String { return self.rawValue }
     }
 
-    public enum DukptKeyVariant: String, CustomStringConvertible, Codable, Sendable {
+    public enum DukptKeyVariant: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bidirectional = "BIDIRECTIONAL"
         case request = "REQUEST"
         case response = "RESPONSE"
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbc = "CBC"
         case cfb = "CFB"
         case cfb1 = "CFB1"
@@ -60,7 +60,7 @@ extension PaymentCryptographyData {
         public var description: String { return self.rawValue }
     }
 
-    public enum MacAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum MacAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cmac = "CMAC"
         case hmacSha224 = "HMAC_SHA224"
         case hmacSha256 = "HMAC_SHA256"
@@ -71,13 +71,13 @@ extension PaymentCryptographyData {
         public var description: String { return self.rawValue }
     }
 
-    public enum MajorKeyDerivationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum MajorKeyDerivationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emvOptionA = "EMV_OPTION_A"
         case emvOptionB = "EMV_OPTION_B"
         public var description: String { return self.rawValue }
     }
 
-    public enum PaddingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PaddingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oaepSha1 = "OAEP_SHA1"
         case oaepSha256 = "OAEP_SHA256"
         case oaepSha512 = "OAEP_SHA512"
@@ -85,13 +85,13 @@ extension PaymentCryptographyData {
         public var description: String { return self.rawValue }
     }
 
-    public enum PinBlockFormatForPinData: String, CustomStringConvertible, Codable, Sendable {
+    public enum PinBlockFormatForPinData: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case isoFormat0 = "ISO_FORMAT_0"
         case isoFormat3 = "ISO_FORMAT_3"
         public var description: String { return self.rawValue }
     }
 
-    public enum SessionKeyDerivationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SessionKeyDerivationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case amex = "AMEX"
         case emv2000 = "EMV2000"
         case emvCommonSessionKey = "EMV_COMMON_SESSION_KEY"

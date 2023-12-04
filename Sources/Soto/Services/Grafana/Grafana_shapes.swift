@@ -26,7 +26,7 @@ import SotoCore
 extension Grafana {
     // MARK: Enums
 
-    public enum AccountAccessType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountAccessType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates that the customer is using Grafana to monitor resources in their current account.
         case currentAccount = "CURRENT_ACCOUNT"
         /// Indicates that the customer is using Grafana to monitor resources in organizational units.
@@ -34,7 +34,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthenticationProviderTypes: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthenticationProviderTypes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates that AMG workspace has AWS SSO enabled as its authentication provider.
         case awsSso = "AWS_SSO"
         /// Indicates that the AMG workspace has SAML enabled as its authentication provider.
@@ -42,7 +42,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Amazon OpenSearch Service
         case amazonOpensearchService = "AMAZON_OPENSEARCH_SERVICE"
         /// Amazon Athena
@@ -64,7 +64,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum LicenseType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LicenseType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Grafana Enterprise License.
         case enterprise = "ENTERPRISE"
         /// Grafana Enterprise Free Trial License.
@@ -72,13 +72,13 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationDestinationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationDestinationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// AWS Simple Notification Service
         case sns = "SNS"
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Customer Managed
         case customerManaged = "CUSTOMER_MANAGED"
         /// Service Managed
@@ -86,7 +86,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum Role: String, CustomStringConvertible, Codable, Sendable {
+    public enum Role: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Role Admin.
         case admin = "ADMIN"
         /// Role Editor.
@@ -96,7 +96,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum SamlConfigurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SamlConfigurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates that SAML on an AMG workspace is enabled and has been configured.
         case configured = "CONFIGURED"
         /// Indicates that SAML on an AMG workspace is enabled but has not been configured.
@@ -104,7 +104,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Add permissions.
         case add = "ADD"
         /// Revoke permissions.
@@ -112,7 +112,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum UserType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// SSO group.
         case ssoGroup = "SSO_GROUP"
         /// SSO user.
@@ -120,7 +120,7 @@ extension Grafana {
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkspaceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkspaceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Workspace is active.
         case active = "ACTIVE"
         /// Workspace is being created.

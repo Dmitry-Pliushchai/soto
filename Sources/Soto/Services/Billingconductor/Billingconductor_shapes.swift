@@ -26,7 +26,7 @@ import SotoCore
 extension Billingconductor {
     // MARK: Enums
 
-    public enum AssociateResourceErrorReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssociateResourceErrorReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case illegalCustomlineitem = "ILLEGAL_CUSTOMLINEITEM"
         case internalServerException = "INTERNAL_SERVER_EXCEPTION"
         case invalidArn = "INVALID_ARN"
@@ -35,46 +35,46 @@ extension Billingconductor {
         public var description: String { return self.rawValue }
     }
 
-    public enum BillingGroupStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BillingGroupStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case primaryAccountMissing = "PRIMARY_ACCOUNT_MISSING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CurrencyCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CurrencyCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cny = "CNY"
         case usd = "USD"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomLineItemRelationship: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomLineItemRelationship: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case child = "CHILD"
         case parent = "PARENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomLineItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomLineItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case credit = "CREDIT"
         case fee = "FEE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LineItemFilterAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineItemFilterAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lineItemType = "LINE_ITEM_TYPE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LineItemFilterValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineItemFilterValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case savingsPlanNegation = "SAVINGS_PLAN_NEGATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum MatchOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum MatchOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notEqual = "NOT_EQUAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum PricingRuleScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum PricingRuleScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case billingEntity = "BILLING_ENTITY"
         case global = "GLOBAL"
         case service = "SERVICE"
@@ -82,7 +82,7 @@ extension Billingconductor {
         public var description: String { return self.rawValue }
     }
 
-    public enum PricingRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PricingRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case discount = "DISCOUNT"
         case markup = "MARKUP"
         case tiering = "TIERING"

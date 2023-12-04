@@ -26,7 +26,13 @@ import SotoCore
 extension LakeFormation {
     // MARK: Enums
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case disabled = "DISABLED"
+        case enabled = "ENABLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `in` = "IN"
         case beginsWith = "BEGINS_WITH"
         case between = "BETWEEN"
@@ -41,7 +47,7 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataLakeResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataLakeResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case catalog = "CATALOG"
         case dataLocation = "DATA_LOCATION"
         case database = "DATABASE"
@@ -53,21 +59,27 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldNameString: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnableStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case disabled = "DISABLED"
+        case enabled = "ENABLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum FieldNameString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastModified = "LAST_MODIFIED"
         case resourceArn = "RESOURCE_ARN"
         case roleArn = "ROLE_ARN"
         public var description: String { return self.rawValue }
     }
 
-    public enum OptimizerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OptimizerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case compaction = "COMPACTION"
         case garbageCollection = "GARBAGE_COLLECTION"
         case generic = "ALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum Permission: String, CustomStringConvertible, Codable, Sendable {
+    public enum Permission: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case alter = "ALTER"
         case associate = "ASSOCIATE"
@@ -84,7 +96,7 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cellFilterPermission = "CELL_FILTER_PERMISSION"
         case columnPermission = "COLUMN_PERMISSION"
         case nestedCellPermission = "NESTED_CELL_PERMISSION"
@@ -92,7 +104,7 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryStateString: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryStateString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case expired = "EXPIRED"
         case finished = "FINISHED"
@@ -101,19 +113,19 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceShareType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceShareType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case foreign = "FOREIGN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case database = "DATABASE"
         case table = "TABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TransactionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransactionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case active = "ACTIVE"
         case commitInProgress = "COMMIT_IN_PROGRESS"
@@ -121,7 +133,7 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransactionStatusFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransactionStatusFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case active = "ACTIVE"
         case all = "ALL"
@@ -130,7 +142,7 @@ extension LakeFormation {
         public var description: String { return self.rawValue }
     }
 
-    public enum TransactionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TransactionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case readAndWrite = "READ_AND_WRITE"
         case readOnly = "READ_ONLY"
         public var description: String { return self.rawValue }
@@ -593,6 +605,46 @@ extension LakeFormation {
         public init() {}
     }
 
+    public struct CreateLakeFormationIdentityCenterConfigurationRequest: AWSEncodableShape {
+        /// The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.
+        public let catalogId: String?
+        /// A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to to access data managed by Lake Formation.
+        public let externalFiltering: ExternalFilteringConfiguration?
+        /// The ARN of the IAM Identity Center instance for which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General Reference.
+        public let instanceArn: String?
+
+        public init(catalogId: String? = nil, externalFiltering: ExternalFilteringConfiguration? = nil, instanceArn: String? = nil) {
+            self.catalogId = catalogId
+            self.externalFiltering = externalFiltering
+            self.instanceArn = instanceArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+            case externalFiltering = "ExternalFiltering"
+            case instanceArn = "InstanceArn"
+        }
+    }
+
+    public struct CreateLakeFormationIdentityCenterConfigurationResponse: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the integrated application.
+        public let applicationArn: String?
+
+        public init(applicationArn: String? = nil) {
+            self.applicationArn = applicationArn
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case applicationArn = "ApplicationArn"
+        }
+    }
+
     public struct CreateLakeFormationOptInRequest: AWSEncodableShape {
         public let principal: DataLakePrincipal
         public let resource: Resource
@@ -756,7 +808,7 @@ extension LakeFormation {
         public let dataLakeAdmins: [DataLakePrincipal]?
         /// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.>
         public let externalDataFilteringAllowList: [DataLakePrincipal]?
-        /// A key-value map that provides an additional configuration on your data lake. CrossAccountVersion is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, and 3.
+        /// A key-value map that provides an additional configuration on your data lake. CROSS_ACCOUNT_VERSION is the key you can configure in the Parameters field. Accepted values for the CrossAccountVersion key are 1, 2, 3, and 4.
         public let parameters: [String: String]?
         /// A list of Lake Formation principals with only view access to the resources, without the ability to make changes. Supported principals are IAM users or IAM roles.
         public let readOnlyAdmins: [DataLakePrincipal]?
@@ -950,6 +1002,29 @@ extension LakeFormation {
         public init() {}
     }
 
+    public struct DeleteLakeFormationIdentityCenterConfigurationRequest: AWSEncodableShape {
+        /// The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definition, and other control information to manage your Lake Formation environment.
+        public let catalogId: String?
+
+        public init(catalogId: String? = nil) {
+            self.catalogId = catalogId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+        }
+    }
+
+    public struct DeleteLakeFormationIdentityCenterConfigurationResponse: AWSDecodableShape {
+        public init() {}
+    }
+
     public struct DeleteLakeFormationOptInRequest: AWSEncodableShape {
         public let principal: DataLakePrincipal
         public let resource: Resource
@@ -1077,6 +1152,50 @@ extension LakeFormation {
 
     public struct DeregisterResourceResponse: AWSDecodableShape {
         public init() {}
+    }
+
+    public struct DescribeLakeFormationIdentityCenterConfigurationRequest: AWSEncodableShape {
+        /// The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+        public let catalogId: String?
+
+        public init(catalogId: String? = nil) {
+            self.catalogId = catalogId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalogId = "CatalogId"
+        }
+    }
+
+    public struct DescribeLakeFormationIdentityCenterConfigurationResponse: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the integrated application.
+        public let applicationArn: String?
+        /// The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.
+        public let catalogId: String?
+        /// Indicates if external filtering is enabled.
+        public let externalFiltering: ExternalFilteringConfiguration?
+        /// The Amazon Resource Name (ARN) of the connection.
+        public let instanceArn: String?
+
+        public init(applicationArn: String? = nil, catalogId: String? = nil, externalFiltering: ExternalFilteringConfiguration? = nil, instanceArn: String? = nil) {
+            self.applicationArn = applicationArn
+            self.catalogId = catalogId
+            self.externalFiltering = externalFiltering
+            self.instanceArn = instanceArn
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case applicationArn = "ApplicationArn"
+            case catalogId = "CatalogId"
+            case externalFiltering = "ExternalFiltering"
+            case instanceArn = "InstanceArn"
+        }
     }
 
     public struct DescribeResourceRequest: AWSEncodableShape {
@@ -1209,6 +1328,23 @@ extension LakeFormation {
 
     public struct ExtendTransactionResponse: AWSDecodableShape {
         public init() {}
+    }
+
+    public struct ExternalFilteringConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// List of third-party application ARNs integrated with Lake Formation.
+        public let authorizedTargets: [String]
+        /// Allows to enable or disable the third-party applications that are allowed to access data managed by Lake Formation.
+        public let status: EnableStatus
+
+        public init(authorizedTargets: [String], status: EnableStatus) {
+            self.authorizedTargets = authorizedTargets
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case authorizedTargets = "AuthorizedTargets"
+            case status = "Status"
+        }
     }
 
     public struct FilterCondition: AWSEncodableShape {
@@ -2922,7 +3058,7 @@ extension LakeFormation {
     }
 
     public struct SearchTablesByLFTagsResponse: AWSDecodableShape {
-        /// A continuation token, present if the current list segment is not the last.
+        /// A continuation token, present if the current list segment is not the last. On the first run, if you include a not null (a value) token you can get empty pages.
         public let nextToken: String?
         /// A list of tables that meet the LF-tag conditions.
         public let tableList: [TaggedTable]?
@@ -3272,6 +3408,37 @@ extension LakeFormation {
     }
 
     public struct UpdateLFTagResponse: AWSDecodableShape {
+        public init() {}
+    }
+
+    public struct UpdateLakeFormationIdentityCenterConfigurationRequest: AWSEncodableShape {
+        /// Allows to enable or disable the IAM Identity Center connection.
+        public let applicationStatus: ApplicationStatus?
+        /// The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, view definitions, and other control information to manage your Lake Formation environment.
+        public let catalogId: String?
+        /// A list of the account IDs of Amazon Web Services accounts of third-party applications that are allowed to access data managed by Lake Formation.
+        public let externalFiltering: ExternalFilteringConfiguration?
+
+        public init(applicationStatus: ApplicationStatus? = nil, catalogId: String? = nil, externalFiltering: ExternalFilteringConfiguration? = nil) {
+            self.applicationStatus = applicationStatus
+            self.catalogId = catalogId
+            self.externalFiltering = externalFiltering
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalogId, name: "catalogId", parent: name, max: 255)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, min: 1)
+            try self.validate(self.catalogId, name: "catalogId", parent: name, pattern: "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case applicationStatus = "ApplicationStatus"
+            case catalogId = "CatalogId"
+            case externalFiltering = "ExternalFiltering"
+        }
+    }
+
+    public struct UpdateLakeFormationIdentityCenterConfigurationResponse: AWSDecodableShape {
         public init() {}
     }
 

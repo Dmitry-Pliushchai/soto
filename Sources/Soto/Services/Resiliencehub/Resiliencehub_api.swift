@@ -54,6 +54,12 @@ public struct Resiliencehub: AWSService {
             serviceProtocol: .restjson,
             apiVersion: "2020-04-30",
             endpoint: endpoint,
+            variantEndpoints: [
+                [.fips]: .init(endpoints: [
+                    "us-gov-east-1": "resiliencehub-fips.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "resiliencehub-fips.us-gov-west-1.amazonaws.com"
+                ])
+            ],
             errorType: ResiliencehubErrorType.self,
             timeout: timeout,
             byteBufferAllocator: byteBufferAllocator,
@@ -63,7 +69,7 @@ public struct Resiliencehub: AWSService {
 
     // MARK: API Calls
 
-    /// Adds the resource mapping for the draft application version. You can also update an existing resource mapping to a new physical resource.
+    /// Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources suported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
     public func addDraftAppVersionResourceMappings(_ input: AddDraftAppVersionResourceMappingsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<AddDraftAppVersionResourceMappingsResponse> {
         return self.client.execute(operation: "AddDraftAppVersionResourceMappings", path: "/add-draft-app-version-resource-mappings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -93,7 +99,7 @@ public struct Resiliencehub: AWSService {
         return self.client.execute(operation: "CreateRecommendationTemplate", path: "/create-recommendation-template", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a resiliency policy for an application.
+    /// Creates a resiliency policy for an application.  Resilience Hub allows you to provide a value of zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while assessing your application, the lowest possible assessment result is near zero. Hence, if you provide value zero for rtoInSecs and rpoInSecs, the estimated workload RTO and estimated workload RPO result will be near zero and the Compliance status for your application will be set to Policy breached.
     public func createResiliencyPolicy(_ input: CreateResiliencyPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateResiliencyPolicyResponse> {
         return self.client.execute(operation: "CreateResiliencyPolicy", path: "/create-resiliency-policy", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -328,7 +334,7 @@ public struct Resiliencehub: AWSService {
         return self.client.execute(operation: "UpdateAppVersionResource", path: "/update-app-version-resource", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates a resiliency policy.
+    /// Updates a resiliency policy.  Resilience Hub allows you to provide a value of zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while assessing your application, the lowest possible assessment result is near zero. Hence, if you provide value zero for rtoInSecs and rpoInSecs, the estimated workload RTO and estimated workload RPO result will be near zero and the Compliance status for your application will be set to Policy breached.
     public func updateResiliencyPolicy(_ input: UpdateResiliencyPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateResiliencyPolicyResponse> {
         return self.client.execute(operation: "UpdateResiliencyPolicy", path: "/update-resiliency-policy", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1364,9 +1370,12 @@ extension Resiliencehub.ListAppsRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Resiliencehub.ListAppsRequest {
         return .init(
             appArn: self.appArn,
+            fromLastAssessmentTime: self.fromLastAssessmentTime,
             maxResults: self.maxResults,
             name: self.name,
-            nextToken: token
+            nextToken: token,
+            reverseOrder: self.reverseOrder,
+            toLastAssessmentTime: self.toLastAssessmentTime
         )
     }
 }

@@ -26,7 +26,7 @@ import SotoCore
 extension ComprehendMedical {
     // MARK: Enums
 
-    public enum AttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case diagnosis = "DIAGNOSIS"
         case future = "FUTURE"
         case hypothetical = "HYPOTHETICAL"
@@ -39,7 +39,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum EntitySubType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EntitySubType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acuity = "ACUITY"
         case address = "ADDRESS"
         case age = "AGE"
@@ -88,7 +88,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum EntityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EntityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case anatomy = "ANATOMY"
         case behavioralEnvironmentalSocial = "BEHAVIORAL_ENVIRONMENTAL_SOCIAL"
         case medicalCondition = "MEDICAL_CONDITION"
@@ -99,7 +99,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum ICD10CMAttributeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ICD10CMAttributeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acuity = "ACUITY"
         case direction = "DIRECTION"
         case quality = "QUALITY"
@@ -110,25 +110,25 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum ICD10CMEntityCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum ICD10CMEntityCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case medicalCondition = "MEDICAL_CONDITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ICD10CMEntityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ICD10CMEntityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dxName = "DX_NAME"
         case timeExpression = "TIME_EXPRESSION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ICD10CMRelationshipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ICD10CMRelationshipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case overlap = "OVERLAP"
         case quality = "QUALITY"
         case systemOrganSite = "SYSTEM_ORGAN_SITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ICD10CMTraitName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ICD10CMTraitName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case diagnosis = "DIAGNOSIS"
         case hypothetical = "HYPOTHETICAL"
         case lowConfidence = "LOW_CONFIDENCE"
@@ -139,7 +139,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -150,12 +150,12 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum LanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case en = "en"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelationshipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelationshipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `for` = "FOR"
         case acuity = "ACUITY"
         case administeredVia = "ADMINISTERED_VIA"
@@ -181,7 +181,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum RxNormAttributeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RxNormAttributeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dosage = "DOSAGE"
         case duration = "DURATION"
         case form = "FORM"
@@ -192,24 +192,24 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum RxNormEntityCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum RxNormEntityCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case medication = "MEDICATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum RxNormEntityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RxNormEntityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case brandName = "BRAND_NAME"
         case genericName = "GENERIC_NAME"
         public var description: String { return self.rawValue }
     }
 
-    public enum RxNormTraitName: String, CustomStringConvertible, Codable, Sendable {
+    public enum RxNormTraitName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case negation = "NEGATION"
         case pastHistory = "PAST_HISTORY"
         public var description: String { return self.rawValue }
     }
 
-    public enum SNOMEDCTAttributeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNOMEDCTAttributeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acuity = "ACUITY"
         case direction = "DIRECTION"
         case quality = "QUALITY"
@@ -219,14 +219,14 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum SNOMEDCTEntityCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNOMEDCTEntityCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case anatomy = "ANATOMY"
         case medicalCondition = "MEDICAL_CONDITION"
         case testTreatmentProcedure = "TEST_TREATMENT_PROCEDURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SNOMEDCTEntityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNOMEDCTEntityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dxName = "DX_NAME"
         case procedureName = "PROCEDURE_NAME"
         case testName = "TEST_NAME"
@@ -234,7 +234,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum SNOMEDCTRelationshipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNOMEDCTRelationshipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acuity = "ACUITY"
         case direction = "DIRECTION"
         case quality = "QUALITY"
@@ -245,7 +245,7 @@ extension ComprehendMedical {
         public var description: String { return self.rawValue }
     }
 
-    public enum SNOMEDCTTraitName: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNOMEDCTTraitName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case diagnosis = "DIAGNOSIS"
         case future = "FUTURE"
         case hypothetical = "HYPOTHETICAL"

@@ -26,34 +26,34 @@ import SotoCore
 extension ACMPCA {
     // MARK: Enums
 
-    public enum AccessMethodType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessMethodType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case caRepository = "CA_REPOSITORY"
         case resourcePkiManifest = "RESOURCE_PKI_MANIFEST"
         case resourcePkiNotify = "RESOURCE_PKI_NOTIFY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case getCertificate = "GetCertificate"
         case issueCertificate = "IssueCertificate"
         case listPermissions = "ListPermissions"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditReportResponseFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditReportResponseFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case json = "JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuditReportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuditReportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "CREATING"
         case failed = "FAILED"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateAuthorityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateAuthorityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -64,19 +64,19 @@ extension ACMPCA {
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateAuthorityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateAuthorityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case root = "ROOT"
         case subordinate = "SUBORDINATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateAuthorityUsageMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateAuthorityUsageMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case generalPurpose = "GENERAL_PURPOSE"
         case shortLivedCertificate = "SHORT_LIVED_CERTIFICATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExtendedKeyUsageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExtendedKeyUsageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case certificateTransparency = "CERTIFICATE_TRANSPARENCY"
         case clientAuth = "CLIENT_AUTH"
         case codeSigning = "CODE_SIGNING"
@@ -89,14 +89,14 @@ extension ACMPCA {
         public var description: String { return self.rawValue }
     }
 
-    public enum FailureReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailureReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case other = "OTHER"
         case requestTimedOut = "REQUEST_TIMED_OUT"
         case unsupportedAlgorithm = "UNSUPPORTED_ALGORITHM"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ecPrime256V1 = "EC_prime256v1"
         case ecSecp384R1 = "EC_secp384r1"
         case rsa2048 = "RSA_2048"
@@ -104,24 +104,24 @@ extension ACMPCA {
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyStorageSecurityStandard: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyStorageSecurityStandard: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fips1402Level2OrHigher = "FIPS_140_2_LEVEL_2_OR_HIGHER"
         case fips1402Level3OrHigher = "FIPS_140_2_LEVEL_3_OR_HIGHER"
         public var description: String { return self.rawValue }
     }
 
-    public enum PolicyQualifierId: String, CustomStringConvertible, Codable, Sendable {
+    public enum PolicyQualifierId: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cps = "CPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case _self = "SELF"
         case otherAccounts = "OTHER_ACCOUNTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum RevocationReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum RevocationReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aACompromise = "A_A_COMPROMISE"
         case affiliationChanged = "AFFILIATION_CHANGED"
         case certificateAuthorityCompromise = "CERTIFICATE_AUTHORITY_COMPROMISE"
@@ -133,13 +133,13 @@ extension ACMPCA {
         public var description: String { return self.rawValue }
     }
 
-    public enum S3ObjectAcl: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3ObjectAcl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bucketOwnerFullControl = "BUCKET_OWNER_FULL_CONTROL"
         case publicRead = "PUBLIC_READ"
         public var description: String { return self.rawValue }
     }
 
-    public enum SigningAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum SigningAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sha256withecdsa = "SHA256WITHECDSA"
         case sha256withrsa = "SHA256WITHRSA"
         case sha384withecdsa = "SHA384WITHECDSA"
@@ -149,7 +149,7 @@ extension ACMPCA {
         public var description: String { return self.rawValue }
     }
 
-    public enum ValidityPeriodType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ValidityPeriodType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absolute = "ABSOLUTE"
         case days = "DAYS"
         case endDate = "END_DATE"

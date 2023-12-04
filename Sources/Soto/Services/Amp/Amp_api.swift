@@ -78,6 +78,11 @@ public struct Amp: AWSService {
         return self.client.execute(operation: "CreateRuleGroupsNamespace", path: "/workspaces/{workspaceId}/rulegroupsnamespaces", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Create a scraper.
+    public func createScraper(_ input: CreateScraperRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateScraperResponse> {
+        return self.client.execute(operation: "CreateScraper", path: "/scrapers", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new AMP workspace.
     public func createWorkspace(_ input: CreateWorkspaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateWorkspaceResponse> {
         return self.client.execute(operation: "CreateWorkspace", path: "/workspaces", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -96,6 +101,11 @@ public struct Amp: AWSService {
     /// Delete a rule groups namespace.
     @discardableResult public func deleteRuleGroupsNamespace(_ input: DeleteRuleGroupsNamespaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteRuleGroupsNamespace", path: "/workspaces/{workspaceId}/rulegroupsnamespaces/{name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a scraper.
+    public func deleteScraper(_ input: DeleteScraperRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteScraperResponse> {
+        return self.client.execute(operation: "DeleteScraper", path: "/scrapers/{scraperId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes an AMP workspace.
@@ -118,14 +128,29 @@ public struct Amp: AWSService {
         return self.client.execute(operation: "DescribeRuleGroupsNamespace", path: "/workspaces/{workspaceId}/rulegroupsnamespaces/{name}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describe an existing scraper.
+    public func describeScraper(_ input: DescribeScraperRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeScraperResponse> {
+        return self.client.execute(operation: "DescribeScraper", path: "/scrapers/{scraperId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes an existing AMP workspace.
     public func describeWorkspace(_ input: DescribeWorkspaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeWorkspaceResponse> {
         return self.client.execute(operation: "DescribeWorkspace", path: "/workspaces/{workspaceId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets a default configuration.
+    public func getDefaultScraperConfiguration(_ input: GetDefaultScraperConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDefaultScraperConfigurationResponse> {
+        return self.client.execute(operation: "GetDefaultScraperConfiguration", path: "/scraperconfiguration", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists rule groups namespaces.
     public func listRuleGroupsNamespaces(_ input: ListRuleGroupsNamespacesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRuleGroupsNamespacesResponse> {
         return self.client.execute(operation: "ListRuleGroupsNamespaces", path: "/workspaces/{workspaceId}/rulegroupsnamespaces", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+    public func listScrapers(_ input: ListScrapersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListScrapersResponse> {
+        return self.client.execute(operation: "ListScrapers", path: "/scrapers", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the tags you have assigned to the resource.
@@ -234,6 +259,59 @@ extension Amp {
         )
     }
 
+    /// Lists all scrapers in a customer account, including scrapers being created or deleted. You may provide filters to return a more specific list of results.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listScrapersPaginator<Result>(
+        _ input: ListScrapersRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListScrapersResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listScrapers,
+            inputKey: \ListScrapersRequest.nextToken,
+            outputKey: \ListScrapersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listScrapersPaginator(
+        _ input: ListScrapersRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListScrapersResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listScrapers,
+            inputKey: \ListScrapersRequest.nextToken,
+            outputKey: \ListScrapersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists all AMP workspaces, including workspaces being created or deleted.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -299,6 +377,16 @@ extension Amp.ListRuleGroupsNamespacesRequest: AWSPaginateToken {
     }
 }
 
+extension Amp.ListScrapersRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Amp.ListScrapersRequest {
+        return .init(
+            filters: self.filters,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
 extension Amp.ListWorkspacesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Amp.ListWorkspacesRequest {
         return .init(
@@ -312,6 +400,40 @@ extension Amp.ListWorkspacesRequest: AWSPaginateToken {
 // MARK: Waiters
 
 extension Amp {
+    /// Wait until a scraper reaches ACTIVE status
+    public func waitUntilScraperActive(
+        _ input: DescribeScraperRequest,
+        maxWaitTime: TimeAmount? = nil,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> EventLoopFuture<Void> {
+        let waiter = AWSClient.Waiter(
+            acceptors: [
+                .init(state: .success, matcher: try! JMESPathMatcher("scraper.status.statusCode", expected: "ACTIVE")),
+                .init(state: .failure, matcher: try! JMESPathMatcher("scraper.status.statusCode", expected: "CREATION_FAILED")),
+            ],
+            command: self.describeScraper
+        )
+        return self.client.waitUntil(input, waiter: waiter, maxWaitTime: maxWaitTime, logger: logger, on: eventLoop)
+    }
+
+    /// Wait until a scraper reaches DELETED status
+    public func waitUntilScraperDeleted(
+        _ input: DescribeScraperRequest,
+        maxWaitTime: TimeAmount? = nil,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> EventLoopFuture<Void> {
+        let waiter = AWSClient.Waiter(
+            acceptors: [
+                .init(state: .success, matcher: AWSErrorCodeMatcher("ResourceNotFoundException")),
+                .init(state: .failure, matcher: try! JMESPathMatcher("scraper.status.statusCode", expected: "DELETION_FAILED")),
+            ],
+            command: self.describeScraper
+        )
+        return self.client.waitUntil(input, waiter: waiter, maxWaitTime: maxWaitTime, logger: logger, on: eventLoop)
+    }
+
     /// Wait until a workspace reaches ACTIVE status
     public func waitUntilWorkspaceActive(
         _ input: DescribeWorkspaceRequest,

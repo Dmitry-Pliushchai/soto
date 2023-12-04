@@ -63,14 +63,24 @@ public struct FIS: AWSService {
 
     // MARK: API Calls
 
-    /// Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in  your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
+    /// Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in  your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
     public func createExperimentTemplate(_ input: CreateExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateExperimentTemplateResponse> {
         return self.client.execute(operation: "CreateExperimentTemplate", path: "/experimentTemplates", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide.
+    public func createTargetAccountConfiguration(_ input: CreateTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateTargetAccountConfigurationResponse> {
+        return self.client.execute(operation: "CreateTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes the specified experiment template.
     public func deleteExperimentTemplate(_ input: DeleteExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteExperimentTemplateResponse> {
         return self.client.execute(operation: "DeleteExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the specified target account configuration of the experiment template.
+    public func deleteTargetAccountConfiguration(_ input: DeleteTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteTargetAccountConfigurationResponse> {
+        return self.client.execute(operation: "DeleteTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about the specified FIS action.
@@ -83,9 +93,19 @@ public struct FIS: AWSService {
         return self.client.execute(operation: "GetExperiment", path: "/experiments/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets information about the specified target account configuration of the experiment.
+    public func getExperimentTargetAccountConfiguration(_ input: GetExperimentTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetExperimentTargetAccountConfigurationResponse> {
+        return self.client.execute(operation: "GetExperimentTargetAccountConfiguration", path: "/experiments/{experimentId}/targetAccountConfigurations/{accountId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Gets information about the specified experiment template.
     public func getExperimentTemplate(_ input: GetExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetExperimentTemplateResponse> {
         return self.client.execute(operation: "GetExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets information about the specified target account configuration of the experiment template.
+    public func getTargetAccountConfiguration(_ input: GetTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetTargetAccountConfigurationResponse> {
+        return self.client.execute(operation: "GetTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about the specified resource type.
@@ -96,6 +116,16 @@ public struct FIS: AWSService {
     /// Lists the available FIS actions.
     public func listActions(_ input: ListActionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListActionsResponse> {
         return self.client.execute(operation: "ListActions", path: "/actions", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the resolved targets information of the specified experiment.
+    public func listExperimentResolvedTargets(_ input: ListExperimentResolvedTargetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListExperimentResolvedTargetsResponse> {
+        return self.client.execute(operation: "ListExperimentResolvedTargets", path: "/experiments/{experimentId}/resolvedTargets", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the target account configurations of the specified experiment.
+    public func listExperimentTargetAccountConfigurations(_ input: ListExperimentTargetAccountConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListExperimentTargetAccountConfigurationsResponse> {
+        return self.client.execute(operation: "ListExperimentTargetAccountConfigurations", path: "/experiments/{experimentId}/targetAccountConfigurations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists your experiment templates.
@@ -111,6 +141,11 @@ public struct FIS: AWSService {
     /// Lists the tags for the specified resource.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceResponse> {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the target account configurations of the specified experiment template.
+    public func listTargetAccountConfigurations(_ input: ListTargetAccountConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTargetAccountConfigurationsResponse> {
+        return self.client.execute(operation: "ListTargetAccountConfigurations", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the target resource types.
@@ -141,6 +176,11 @@ public struct FIS: AWSService {
     /// Updates the specified experiment template.
     public func updateExperimentTemplate(_ input: UpdateExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateExperimentTemplateResponse> {
         return self.client.execute(operation: "UpdateExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the target account configuration for the specified experiment template.
+    public func updateTargetAccountConfiguration(_ input: UpdateTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateTargetAccountConfigurationResponse> {
+        return self.client.execute(operation: "UpdateTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -204,6 +244,59 @@ extension FIS {
             command: self.listActions,
             inputKey: \ListActionsRequest.nextToken,
             outputKey: \ListActionsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the resolved targets information of the specified experiment.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listExperimentResolvedTargetsPaginator<Result>(
+        _ input: ListExperimentResolvedTargetsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListExperimentResolvedTargetsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listExperimentResolvedTargets,
+            inputKey: \ListExperimentResolvedTargetsRequest.nextToken,
+            outputKey: \ListExperimentResolvedTargetsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listExperimentResolvedTargetsPaginator(
+        _ input: ListExperimentResolvedTargetsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListExperimentResolvedTargetsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listExperimentResolvedTargets,
+            inputKey: \ListExperimentResolvedTargetsRequest.nextToken,
+            outputKey: \ListExperimentResolvedTargetsResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -315,6 +408,59 @@ extension FIS {
         )
     }
 
+    /// Lists the target account configurations of the specified experiment template.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listTargetAccountConfigurationsPaginator<Result>(
+        _ input: ListTargetAccountConfigurationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListTargetAccountConfigurationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listTargetAccountConfigurations,
+            inputKey: \ListTargetAccountConfigurationsRequest.nextToken,
+            outputKey: \ListTargetAccountConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listTargetAccountConfigurationsPaginator(
+        _ input: ListTargetAccountConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListTargetAccountConfigurationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listTargetAccountConfigurations,
+            inputKey: \ListTargetAccountConfigurationsRequest.nextToken,
+            outputKey: \ListTargetAccountConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists the target resource types.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -378,6 +524,17 @@ extension FIS.ListActionsRequest: AWSPaginateToken {
     }
 }
 
+extension FIS.ListExperimentResolvedTargetsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> FIS.ListExperimentResolvedTargetsRequest {
+        return .init(
+            experimentId: self.experimentId,
+            maxResults: self.maxResults,
+            nextToken: token,
+            targetName: self.targetName
+        )
+    }
+}
+
 extension FIS.ListExperimentTemplatesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> FIS.ListExperimentTemplatesRequest {
         return .init(
@@ -390,6 +547,16 @@ extension FIS.ListExperimentTemplatesRequest: AWSPaginateToken {
 extension FIS.ListExperimentsRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> FIS.ListExperimentsRequest {
         return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension FIS.ListTargetAccountConfigurationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> FIS.ListTargetAccountConfigurationsRequest {
+        return .init(
+            experimentTemplateId: self.experimentTemplateId,
             maxResults: self.maxResults,
             nextToken: token
         )

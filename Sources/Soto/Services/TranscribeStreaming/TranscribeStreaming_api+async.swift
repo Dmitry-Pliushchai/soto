@@ -31,7 +31,7 @@ extension TranscribeStreaming {
         return try await self.client.execute(operation: "StartMedicalStreamTranscription", path: "/medical-stream-transcription", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to  Amazon Transcribe and the transcription results are streamed to your application. The following parameters are required:    language-code or identify-language     media-encoding     sample-rate    For more information on streaming with Amazon Transcribe, see Transcribing streaming audio.
+    /// Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to  Amazon Transcribe and the transcription results are streamed to your application. The following parameters are required:    language-code or identify-language or identify-multiple-language     media-encoding     sample-rate    For more information on streaming with Amazon Transcribe, see Transcribing streaming audio.
     public func startStreamTranscription(_ input: StartStreamTranscriptionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartStreamTranscriptionResponse {
         return try await self.client.execute(operation: "StartStreamTranscription", path: "/stream-transcription", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

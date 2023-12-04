@@ -26,37 +26,37 @@ import SotoCore
 extension Braket {
     // MARK: Enums
 
-    public enum CancellationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CancellationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CompressionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case offline = "OFFLINE"
         case online = "ONLINE"
         case retired = "RETIRED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case qpu = "QPU"
         case simulator = "SIMULATOR"
         public var description: String { return self.rawValue }
     }
 
-    public enum HybridJobAdditionalAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum HybridJobAdditionalAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case queueInfo = "QueueInfo"
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mlC42Xlarge = "ml.c4.2xlarge"
         case mlC44Xlarge = "ml.c4.4xlarge"
         case mlC48Xlarge = "ml.c4.8xlarge"
@@ -99,7 +99,7 @@ extension Braket {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case deprioritizedDueToInactivity = "DEPRIORITIZED_DUE_TO_INACTIVITY"
@@ -114,7 +114,7 @@ extension Braket {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobPrimaryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobPrimaryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -124,12 +124,12 @@ extension Braket {
         public var description: String { return self.rawValue }
     }
 
-    public enum QuantumTaskAdditionalAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuantumTaskAdditionalAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case queueInfo = "QueueInfo"
         public var description: String { return self.rawValue }
     }
 
-    public enum QuantumTaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuantumTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -140,19 +140,19 @@ extension Braket {
         public var description: String { return self.rawValue }
     }
 
-    public enum QueueName: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueueName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case jobsQueue = "JOBS_QUEUE"
         case quantumTasksQueue = "QUANTUM_TASKS_QUEUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueuePriority: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueuePriority: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case normal = "Normal"
         case priority = "Priority"
         public var description: String { return self.rawValue }
     }
 
-    public enum SearchJobsFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SearchJobsFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case between = "BETWEEN"
         case contains = "CONTAINS"
         case equal = "EQUAL"
@@ -163,7 +163,7 @@ extension Braket {
         public var description: String { return self.rawValue }
     }
 
-    public enum SearchQuantumTasksFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SearchQuantumTasksFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case between = "BETWEEN"
         case equal = "EQUAL"
         case gt = "GT"

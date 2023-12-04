@@ -55,6 +55,8 @@ public struct ResourceExplorer2: AWSService {
             apiVersion: "2022-07-28",
             endpoint: endpoint,
             serviceEndpoints: [
+                "af-south-1": "resource-explorer-2.af-south-1.api.aws",
+                "ap-east-1": "resource-explorer-2.ap-east-1.api.aws",
                 "ap-northeast-1": "resource-explorer-2.ap-northeast-1.api.aws",
                 "ap-northeast-2": "resource-explorer-2.ap-northeast-2.api.aws",
                 "ap-northeast-3": "resource-explorer-2.ap-northeast-3.api.aws",
@@ -70,10 +72,12 @@ public struct ResourceExplorer2: AWSService {
                 "eu-central-1": "resource-explorer-2.eu-central-1.api.aws",
                 "eu-central-2": "resource-explorer-2.eu-central-2.api.aws",
                 "eu-north-1": "resource-explorer-2.eu-north-1.api.aws",
+                "eu-south-1": "resource-explorer-2.eu-south-1.api.aws",
                 "eu-west-1": "resource-explorer-2.eu-west-1.api.aws",
                 "eu-west-2": "resource-explorer-2.eu-west-2.api.aws",
                 "eu-west-3": "resource-explorer-2.eu-west-3.api.aws",
                 "il-central-1": "resource-explorer-2.il-central-1.api.aws",
+                "me-central-1": "resource-explorer-2.me-central-1.api.aws",
                 "me-south-1": "resource-explorer-2.me-south-1.api.aws",
                 "sa-east-1": "resource-explorer-2.sa-east-1.api.aws",
                 "us-east-1": "resource-explorer-2.us-east-1.api.aws",
@@ -85,6 +89,8 @@ public struct ResourceExplorer2: AWSService {
             ],
             variantEndpoints: [
                 [.fips]: .init(endpoints: [
+                    "af-south-1": "resource-explorer-2-fips.af-south-1.api.aws",
+                    "ap-east-1": "resource-explorer-2-fips.ap-east-1.api.aws",
                     "ap-northeast-1": "resource-explorer-2-fips.ap-northeast-1.api.aws",
                     "ap-northeast-2": "resource-explorer-2-fips.ap-northeast-2.api.aws",
                     "ap-northeast-3": "resource-explorer-2-fips.ap-northeast-3.api.aws",
@@ -100,10 +106,12 @@ public struct ResourceExplorer2: AWSService {
                     "eu-central-1": "resource-explorer-2-fips.eu-central-1.api.aws",
                     "eu-central-2": "resource-explorer-2-fips.eu-central-2.api.aws",
                     "eu-north-1": "resource-explorer-2-fips.eu-north-1.api.aws",
+                    "eu-south-1": "resource-explorer-2-fips.eu-south-1.api.aws",
                     "eu-west-1": "resource-explorer-2-fips.eu-west-1.api.aws",
                     "eu-west-2": "resource-explorer-2-fips.eu-west-2.api.aws",
                     "eu-west-3": "resource-explorer-2-fips.eu-west-3.api.aws",
                     "il-central-1": "resource-explorer-2-fips.il-central-1.api.aws",
+                    "me-central-1": "resource-explorer-2-fips.me-central-1.api.aws",
                     "me-south-1": "resource-explorer-2-fips.me-south-1.api.aws",
                     "sa-east-1": "resource-explorer-2-fips.sa-east-1.api.aws",
                     "us-east-1": "resource-explorer-2-fips.us-east-1.api.aws",
@@ -158,6 +166,11 @@ public struct ResourceExplorer2: AWSService {
         return self.client.execute(operation: "DisassociateDefaultView", path: "/DisassociateDefaultView", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    public func getAccountLevelServiceConfiguration(logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccountLevelServiceConfigurationOutput> {
+        return self.client.execute(operation: "GetAccountLevelServiceConfiguration", path: "/GetAccountLevelServiceConfiguration", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation. You can then call GetView to retrieve the details of that view.
     public func getDefaultView(logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDefaultViewOutput> {
         return self.client.execute(operation: "GetDefaultView", path: "/GetDefaultView", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
@@ -176,6 +189,11 @@ public struct ResourceExplorer2: AWSService {
     /// Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer.
     public func listIndexes(_ input: ListIndexesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIndexesOutput> {
         return self.client.execute(operation: "ListIndexes", path: "/ListIndexes", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    public func listIndexesForMembers(_ input: ListIndexesForMembersInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIndexesForMembersOutput> {
+        return self.client.execute(operation: "ListIndexesForMembers", path: "/ListIndexesForMembers", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves a list of all resource types currently supported by Amazon Web Services Resource Explorer.
@@ -283,6 +301,59 @@ extension ResourceExplorer2 {
             command: self.listIndexes,
             inputKey: \ListIndexesInput.nextToken,
             outputKey: \ListIndexesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listIndexesForMembersPaginator<Result>(
+        _ input: ListIndexesForMembersInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListIndexesForMembersOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listIndexesForMembers,
+            inputKey: \ListIndexesForMembersInput.nextToken,
+            outputKey: \ListIndexesForMembersOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listIndexesForMembersPaginator(
+        _ input: ListIndexesForMembersInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListIndexesForMembersOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listIndexesForMembers,
+            inputKey: \ListIndexesForMembersInput.nextToken,
+            outputKey: \ListIndexesForMembersOutput.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -448,6 +519,16 @@ extension ResourceExplorer2 {
             outputKey: \SearchOutput.nextToken,
             on: eventLoop,
             onPage: onPage
+        )
+    }
+}
+
+extension ResourceExplorer2.ListIndexesForMembersInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ResourceExplorer2.ListIndexesForMembersInput {
+        return .init(
+            accountIdList: self.accountIdList,
+            maxResults: self.maxResults,
+            nextToken: token
         )
     }
 }

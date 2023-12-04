@@ -26,7 +26,7 @@ import SotoCore
 extension Health {
     // MARK: Enums
 
-    public enum EntityStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum EntityStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case impaired = "IMPAIRED"
         case pending = "PENDING"
         case resolved = "RESOLVED"
@@ -35,26 +35,26 @@ extension Health {
         public var description: String { return self.rawValue }
     }
 
-    public enum EventAggregateField: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventAggregateField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eventTypeCategory = "eventTypeCategory"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventScopeCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventScopeCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `public` = "PUBLIC"
         case accountSpecific = "ACCOUNT_SPECIFIC"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case closed = "closed"
         case open = "open"
         case upcoming = "upcoming"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventTypeCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventTypeCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountNotification = "accountNotification"
         case investigation = "investigation"
         case issue = "issue"

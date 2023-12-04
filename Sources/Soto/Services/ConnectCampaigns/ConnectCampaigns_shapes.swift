@@ -26,7 +26,7 @@ import SotoCore
 extension ConnectCampaigns {
     // MARK: Enums
 
-    public enum CampaignState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CampaignState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Campaign is in failed state
         case failed = "Failed"
         /// Campaign is in initialized state
@@ -40,12 +40,12 @@ extension ConnectCampaigns {
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kms = "KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum FailureCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FailureCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The request failed to satisfy the constraints specified by the service
         case invalidInput = "InvalidInput"
         /// Request throttled due to large number of pending dial requests
@@ -55,7 +55,7 @@ extension ConnectCampaigns {
         public var description: String { return self.rawValue }
     }
 
-    public enum GetCampaignStateBatchFailureCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum GetCampaignStateBatchFailureCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The specified resource was not found
         case resourceNotFound = "ResourceNotFound"
         /// Unexpected error during processing of request
@@ -63,13 +63,13 @@ extension ConnectCampaigns {
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceIdFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceIdFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Equals operator
         case eq = "Eq"
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceOnboardingJobFailureCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceOnboardingJobFailureCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case eventBridgeAccessDenied = "EVENT_BRIDGE_ACCESS_DENIED"
         case eventBridgeManagedRuleLimitExceeded = "EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED"
         case iamAccessDenied = "IAM_ACCESS_DENIED"
@@ -79,7 +79,7 @@ extension ConnectCampaigns {
         public var description: String { return self.rawValue }
     }
 
-    public enum InstanceOnboardingJobStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum InstanceOnboardingJobStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"

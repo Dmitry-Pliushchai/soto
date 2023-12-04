@@ -26,28 +26,28 @@ import SotoCore
 extension Inspector2 {
     // MARK: Enums
 
-    public enum AccountSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregationFindingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationFindingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeVulnerability = "CODE_VULNERABILITY"
         case networkReachability = "NETWORK_REACHABILITY"
         case packageVulnerability = "PACKAGE_VULNERABILITY"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregationResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsEc2Instance = "AWS_EC2_INSTANCE"
         case awsEcrContainerImage = "AWS_ECR_CONTAINER_IMAGE"
         case awsLambdaFunction = "AWS_LAMBDA_FUNCTION"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case ami = "AMI"
         case awsEc2Instance = "AWS_EC2_INSTANCE"
@@ -62,7 +62,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AmiSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AmiSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case affectedInstances = "AFFECTED_INSTANCES"
         case all = "ALL"
         case critical = "CRITICAL"
@@ -70,20 +70,20 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum Architecture: String, CustomStringConvertible, Codable, Sendable {
+    public enum Architecture: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arm64 = "ARM64"
         case x8664 = "X86_64"
         public var description: String { return self.rawValue }
     }
 
-    public enum AwsEcrContainerSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AwsEcrContainerSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum CodeSnippetErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CodeSnippetErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case codeSnippetNotFound = "CODE_SNIPPET_NOT_FOUND"
         case internalError = "INTERNAL_ERROR"
@@ -91,12 +91,12 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum CoverageMapComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum CoverageMapComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CoverageResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CoverageResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsEc2Instance = "AWS_EC2_INSTANCE"
         case awsEcrContainerImage = "AWS_ECR_CONTAINER_IMAGE"
         case awsEcrRepository = "AWS_ECR_REPOSITORY"
@@ -104,24 +104,24 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum CoverageStringComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum CoverageStringComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         case notEquals = "NOT_EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Currency: String, CustomStringConvertible, Codable, Sendable {
+    public enum Currency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case usd = "USD"
         public var description: String { return self.rawValue }
     }
 
-    public enum DelegatedAdminStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DelegatedAdminStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableInProgress = "DISABLE_IN_PROGRESS"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Ec2DeepInspectionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ec2DeepInspectionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activated = "ACTIVATED"
         case deactivated = "DEACTIVATED"
         case failed = "FAILED"
@@ -129,7 +129,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum Ec2InstanceSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ec2InstanceSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
@@ -137,35 +137,36 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum Ec2Platform: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ec2Platform: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linux = "LINUX"
+        case macos = "MACOS"
         case unknown = "UNKNOWN"
         case windows = "WINDOWS"
         public var description: String { return self.rawValue }
     }
 
-    public enum EcrRescanDuration: String, CustomStringConvertible, Codable, Sendable {
+    public enum EcrRescanDuration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case days180 = "DAYS_180"
         case days30 = "DAYS_30"
         case lifetime = "LIFETIME"
         public var description: String { return self.rawValue }
     }
 
-    public enum EcrRescanDurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EcrRescanDurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum EcrScanFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum EcrScanFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case continuousScan = "CONTINUOUS_SCAN"
         case manual = "MANUAL"
         case scanOnPush = "SCAN_ON_PUSH"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case accountIsIsolated = "ACCOUNT_IS_ISOLATED"
         case alreadyEnabled = "ALREADY_ENABLED"
@@ -183,13 +184,13 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExploitAvailable: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExploitAvailable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case no = "NO"
         case yes = "YES"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExternalReportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExternalReportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -197,13 +198,13 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case suppress = "SUPPRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum FindingDetailsErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FindingDetailsErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case findingDetailsNotFound = "FINDING_DETAILS_NOT_FOUND"
         case internalError = "INTERNAL_ERROR"
@@ -211,47 +212,47 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum FindingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FindingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case closed = "CLOSED"
         case suppressed = "SUPPRESSED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FindingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FindingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeVulnerability = "CODE_VULNERABILITY"
         case networkReachability = "NETWORK_REACHABILITY"
         case packageVulnerability = "PACKAGE_VULNERABILITY"
         public var description: String { return self.rawValue }
     }
 
-    public enum FindingTypeSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum FindingTypeSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum FixAvailable: String, CustomStringConvertible, Codable, Sendable {
+    public enum FixAvailable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case no = "NO"
         case partial = "PARTIAL"
         case yes = "YES"
         public var description: String { return self.rawValue }
     }
 
-    public enum FreeTrialInfoErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FreeTrialInfoErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case internalError = "INTERNAL_ERROR"
         public var description: String { return self.rawValue }
     }
 
-    public enum FreeTrialStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FreeTrialStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FreeTrialType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FreeTrialType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case ecr = "ECR"
         case lambda = "LAMBDA"
@@ -259,7 +260,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum GroupKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum GroupKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountId = "ACCOUNT_ID"
         case ecrRepositoryName = "ECR_REPOSITORY_NAME"
         case resourceType = "RESOURCE_TYPE"
@@ -268,39 +269,39 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImageLayerSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImageLayerSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum LambdaFunctionSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum LambdaFunctionSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum LambdaLayerSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum LambdaLayerSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum MapComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum MapComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tcp = "TCP"
         case udp = "UDP"
         public var description: String { return self.rawValue }
     }
 
-    public enum Operation: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableRepository = "DISABLE_REPOSITORY"
         case disableScanning = "DISABLE_SCANNING"
         case enableRepository = "ENABLE_REPOSITORY"
@@ -308,7 +309,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageManager: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageManager: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bundler = "BUNDLER"
         case cargo = "CARGO"
         case composer = "COMPOSER"
@@ -329,20 +330,20 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case image = "IMAGE"
         case zip = "ZIP"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelationshipStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelationshipStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountSuspended = "ACCOUNT_SUSPENDED"
         case cannotCreateDetectorInOrgMaster = "CANNOT_CREATE_DETECTOR_IN_ORG_MASTER"
         case created = "CREATED"
@@ -358,13 +359,13 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case json = "JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportingErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportingErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bucketNotFound = "BUCKET_NOT_FOUND"
         case incompatibleBucketRegion = "INCOMPATIBLE_BUCKET_REGION"
         case internalError = "INTERNAL_ERROR"
@@ -374,7 +375,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum RepositorySortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum RepositorySortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case affectedImages = "AFFECTED_IMAGES"
         case all = "ALL"
         case critical = "CRITICAL"
@@ -382,12 +383,12 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceMapComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceMapComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case ecr = "ECR"
         case lambda = "LAMBDA"
@@ -395,13 +396,13 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceStringComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceStringComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         case notEquals = "NOT_EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsEc2Instance = "AWS_EC2_INSTANCE"
         case awsEcrContainerImage = "AWS_ECR_CONTAINER_IMAGE"
         case awsEcrRepository = "AWS_ECR_REPOSITORY"
@@ -409,7 +410,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum Runtime: String, CustomStringConvertible, Codable, Sendable {
+    public enum Runtime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case go1X = "GO_1_X"
         case java11 = "JAVA_11"
         case java17 = "JAVA_17"
@@ -428,19 +429,19 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum SbomReportFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum SbomReportFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cyclonedx14 = "CYCLONEDX_1_4"
         case spdx23 = "SPDX_2_3"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanStatusReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanStatusReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case deepInspectionCollectionTimeLimitExceeded = "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"
         case deepInspectionDailySsmInventoryLimitExceeded = "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"
@@ -468,21 +469,21 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case code = "CODE"
         case network = "NETWORK"
         case package = "PACKAGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Service: String, CustomStringConvertible, Codable, Sendable {
+    public enum Service: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case ecr = "ECR"
         case lambda = "LAMBDA"
         public var description: String { return self.rawValue }
     }
 
-    public enum Severity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Severity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case critical = "CRITICAL"
         case high = "HIGH"
         case informational = "INFORMATIONAL"
@@ -492,7 +493,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortField: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsAccountId = "AWS_ACCOUNT_ID"
         case componentType = "COMPONENT_TYPE"
         case ecrImagePushedAt = "ECR_IMAGE_PUSHED_AT"
@@ -513,13 +514,13 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabling = "DISABLING"
         case enabled = "ENABLED"
@@ -529,21 +530,21 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum StringComparison: String, CustomStringConvertible, Codable, Sendable {
+    public enum StringComparison: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         case notEquals = "NOT_EQUALS"
         case prefix = "PREFIX"
         public var description: String { return self.rawValue }
     }
 
-    public enum TitleSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum TitleSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case critical = "CRITICAL"
         case high = "HIGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum UsageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UsageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2InstanceHours = "EC2_INSTANCE_HOURS"
         case ecrInitialScan = "ECR_INITIAL_SCAN"
         case ecrRescan = "ECR_RESCAN"
@@ -552,7 +553,7 @@ extension Inspector2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum VulnerabilitySource: String, CustomStringConvertible, Codable, Sendable {
+    public enum VulnerabilitySource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nvd = "NVD"
         public var description: String { return self.rawValue }
     }
@@ -1695,7 +1696,7 @@ extension Inspector2 {
         public let resourceId: [CoverageStringFilter]?
         /// An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE, AWS_LAMBDA_FUNCTION or AWS_ECR_REPOSITORY.
         public let resourceType: [CoverageStringFilter]?
-        /// The scan status code to filter on.
+        /// The scan status code to filter on. Valid values are: ValidationException, InternalServerException, ResourceNotFoundException, BadRequestException, and ThrottlingException.
         public let scanStatusCode: [CoverageStringFilter]?
         /// The scan status reason to filter on.
         public let scanStatusReason: [CoverageStringFilter]?
@@ -3218,15 +3219,15 @@ extension Inspector2 {
         public let packageVulnerabilityDetails: PackageVulnerabilityDetails?
         /// An object that contains the details about how to remediate a finding.
         public let remediation: Remediation
-        /// Contains information on the resources involved in a finding.
+        /// Contains information on the resources involved in a finding. The resource value determines the valid values for type in your request. For more information, see Finding types in the Amazon Inspector user guide.
         public let resources: [Resource]
-        /// The severity of the finding.
+        /// The severity of the finding. UNTRIAGED applies to PACKAGE_VULNERABILITY type findings that the vendor has not assigned a severity yet. For more information, see Severity levels for findings in the Amazon Inspector user guide.
         public let severity: Severity
         /// The status of the finding.
         public let status: FindingStatus
         /// The title of the finding.
         public let title: String?
-        /// The type of the finding.
+        /// The type of the finding. The type value determines the valid values for resource in your request. For more information, see Finding types in the Amazon Inspector user guide.
         public let type: FindingType
         /// The date and time the finding was last updated at.
         public let updatedAt: Date?
@@ -3986,9 +3987,9 @@ extension Inspector2 {
     }
 
     public struct ListAccountPermissionsRequest: AWSEncodableShape {
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
         /// The service scan type to check permissions for.
         public let service: Service?
@@ -4032,9 +4033,9 @@ extension Inspector2 {
     public struct ListCoverageRequest: AWSEncodableShape {
         /// An object that contains details on the filters to apply to the coverage data for your environment.
         public let filterCriteria: CoverageFilterCriteria?
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
 
         public init(filterCriteria: CoverageFilterCriteria? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -4122,9 +4123,9 @@ extension Inspector2 {
     }
 
     public struct ListDelegatedAdminAccountsRequest: AWSEncodableShape {
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
 
         public init(maxResults: Int? = nil, nextToken: String? = nil) {
@@ -4166,9 +4167,9 @@ extension Inspector2 {
         public let action: FilterAction?
         /// The Amazon resource number (ARN) of the filter.
         public let arns: [String]?
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
 
         public init(action: FilterAction? = nil, arns: [String]? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -4220,9 +4221,9 @@ extension Inspector2 {
         public let aggregationRequest: AggregationRequest?
         /// The type of the aggregation request.
         public let aggregationType: AggregationType
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
 
         public init(accountIds: [StringFilter]? = nil, aggregationRequest: AggregationRequest? = nil, aggregationType: AggregationType, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -4278,9 +4279,9 @@ extension Inspector2 {
     public struct ListFindingsRequest: AWSEncodableShape {
         /// Details on the filters to apply to your finding results.
         public let filterCriteria: FilterCriteria?
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
         /// Details on the sort criteria to apply to your finding results.
         public let sortCriteria: SortCriteria?
@@ -4325,9 +4326,9 @@ extension Inspector2 {
     }
 
     public struct ListMembersRequest: AWSEncodableShape {
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
         /// Specifies whether to list only currently associated members if True or to list all members within the organization if False.
         public let onlyAssociated: Bool?
@@ -4404,9 +4405,9 @@ extension Inspector2 {
     public struct ListUsageTotalsRequest: AWSEncodableShape {
         /// The Amazon Web Services account IDs to retrieve usage totals for.
         public let accountIds: [String]?
-        /// The maximum number of results to return in the response.
+        /// The maximum number of results the response can return. If your request would return more than the maximum the response will return a nextToken value, use this value when you call the action again to get the remaining results.
         public let maxResults: Int?
-        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+        /// A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. If your response returns more than the maxResults maximum value it will also return a nextToken value. For subsequent calls, use the nextToken value returned from the previous request to continue listing results after the first page.
         public let nextToken: String?
 
         public init(accountIds: [String]? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -5164,7 +5165,7 @@ extension Inspector2 {
     }
 
     public struct ScanStatus: AWSDecodableShape {
-        /// The reason for the scan.
+        /// The scan status. Possible return values and descriptions are:   PENDING_INITIAL_SCAN - This resource has been identified for scanning, results will be available soon.  ACCESS_DENIED - Resource access policy restricting Amazon Inspector access. Please update the IAM policy.  INTERNAL_ERROR - Amazon Inspector has encountered an internal error for this resource. Amazon Inspector service will automatically resolve the issue and resume the scanning. No action required from the user.  UNMANAGED_EC2_INSTANCE - The EC2 instance is not managed by SSM, please use the following SSM automation to remediate the issue: https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-awssupport-troubleshoot-managed-instance.html. Once the instance becomes managed by SSM, Inspector will automatically begin scanning this instance.   UNSUPPORTED_OS - Amazon Inspector does not support this OS, architecture, or image manifest type at this time. To see a complete list of supported operating systems see: https://docs.aws.amazon.com/inspector/latest/user/supported.html.  SCAN_ELIGIBILITY_EXPIRED - The configured scan duration has lapsed for this image.  RESOURCE_TERMINATED - This resource has been terminated. The findings and coverage associated with this resource are in the process of being cleaned up.  SUCCESSFUL - The scan was successful.  NO_RESOURCES_FOUND - Reserved for future use.  IMAGE_SIZE_EXCEEDED - Reserved for future use.  SCAN_FREQUENCY_MANUAL - This image will not be covered by Amazon Inspector due to the repository scan frequency configuration.  SCAN_FREQUENCY_SCAN_ON_PUSH - This image will be scanned one time and will not new findings because of the scan frequency configuration.  EC2_INSTANCE_STOPPED - This EC2 instance is in a stopped state, therefore, Amazon Inspector will pause scanning. The existing findings will continue to exist until the instance is terminated. Once the instance is re-started, Inspector will automatically start scanning the instance again. Please note that you will not be charged for this instance while it’s in a stopped state.  PENDING_DISABLE - This resource is pending cleanup during disablement. The customer will not be billed while a resource is in the pending disable status.  NO INVENTORY - Amazon Inspector couldn’t find software application inventory to scan for vulnerabilities. This might be caused due to required Amazon Inspector associations being deleted or failing to run on your resource. Please verify the status of InspectorInventoryCollection-do-not-delete  association in the SSM console for the resource. Additionally, you can verify the instance’s inventory in the SSM Fleet Manager console.  STALE_INVENTORY - Amazon Inspector wasn’t able to collect an updated software application inventory in the last 7 days. Please confirm the required Amazon Inspector associations still exist and you can still see an updated inventory in the SSM console.  EXCLUDED_BY_TAG - This resource was not scanned because it has been excluded by a tag.  UNSUPPORTED_RUNTIME - The function was not scanned because it has an unsupported runtime. To see a complete list of supported runtimes see: https://docs.aws.amazon.com/inspector/latest/user/supported.html.  UNSUPPORTED_MEDIA_TYPE - The ECR image has an unsupported media type.  UNSUPPORTED_CONFIG_FILE - Reserved for future use.  DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED - The instance has exceeded the 5000 package limit for Amazon Inspector Deep inspection. To resume Deep inspection for this instance you can try to adjust the custom paths associated with the account.  DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED - The SSM agent couldn't send inventory to Amazon Inspector because the SSM quota for Inventory data collected per instance per day has already been reached for this instance.  DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED - Amazon Inspector failed to extract the package inventory because the package collection time exceeding the maximum threshold of 15 minutes.  DEEP_INSPECTION_NO_INVENTORY  The Amazon Inspector plugin hasn't yet been able to collect an inventory of packages for this instance. This is usually the result of a pending scan, however, if this status persists after 6 hours, use SSM to ensure that the required Amazon Inspector associations exist and are running for the instance.
         public let reason: ScanStatusReason
         /// The status code of the scan.
         public let statusCode: ScanStatusCode
@@ -5772,7 +5773,7 @@ extension Inspector2 {
         public let referenceUrls: [String]?
         /// A list of related vulnerabilities.
         public let relatedVulnerabilities: [String]?
-        /// The source of the vulnerability information.
+        /// The source of the vulnerability information.  Possible results are RHEL, AMAZON_CVE, DEBIAN or NVD.
         public let source: VulnerabilitySource?
         /// A link to the official source material for this vulnerability.
         public let sourceUrl: String?

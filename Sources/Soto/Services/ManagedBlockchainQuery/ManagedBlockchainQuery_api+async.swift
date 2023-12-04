@@ -21,9 +21,14 @@ import SotoCore
 extension ManagedBlockchainQuery {
     // MARK: Async API Calls
 
-    /// Gets the token balance for a batch of tokens by using the GetTokenBalance  action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20,  ERC-721, and ERC 1155 token standards are supported.
+    /// Gets the token balance for a batch of tokens by using the BatchGetTokenBalance  action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20,  ERC-721, and ERC 1155 token standards are supported.
     public func batchGetTokenBalance(_ input: BatchGetTokenBalanceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchGetTokenBalanceOutput {
         return try await self.client.execute(operation: "BatchGetTokenBalance", path: "/batch-get-token-balance", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets the information about a specific contract deployed on the blockchain.    The Bitcoin blockchain networks do not support this  operation.   Metadata is currently only available for some ERC-20 contracts.  Metadata will be available for additional contracts in the future.
+    public func getAssetContract(_ input: GetAssetContractInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetAssetContractOutput {
+        return try await self.client.execute(operation: "GetAssetContract", path: "/get-asset-contract", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC,ETH, and the ERC-20,  ERC-721, and ERC 1155 token standards are supported.
@@ -36,7 +41,12 @@ extension ManagedBlockchainQuery {
         return try await self.client.execute(operation: "GetTransaction", path: "/get-transaction", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// This action returns the following for a given a blockchain network:   Lists all token balances owned by an address (either a contact  address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of  the tokenFilter when using this operation.
+    /// Lists all the contracts for a given contract type deployed by an address  (either a contract address or a wallet address). The Bitcoin blockchain networks do not support this  operation.
+    public func listAssetContracts(_ input: ListAssetContractsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListAssetContractsOutput {
+        return try await self.client.execute(operation: "ListAssetContracts", path: "/list-asset-contracts", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This action returns the following for a given blockchain network:   Lists all token balances owned by an address (either a contract  address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of  the tokenFilter when using this operation.
     public func listTokenBalances(_ input: ListTokenBalancesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTokenBalancesOutput {
         return try await self.client.execute(operation: "ListTokenBalances", path: "/list-token-balances", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -56,7 +66,29 @@ extension ManagedBlockchainQuery {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension ManagedBlockchainQuery {
-    /// This action returns the following for a given a blockchain network:   Lists all token balances owned by an address (either a contact  address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of  the tokenFilter when using this operation.
+    /// Lists all the contracts for a given contract type deployed by an address  (either a contract address or a wallet address). The Bitcoin blockchain networks do not support this  operation.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listAssetContractsPaginator(
+        _ input: ListAssetContractsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListAssetContractsInput, ListAssetContractsOutput> {
+        return .init(
+            input: input,
+            command: self.listAssetContracts,
+            inputKey: \ListAssetContractsInput.nextToken,
+            outputKey: \ListAssetContractsOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// This action returns the following for a given blockchain network:   Lists all token balances owned by an address (either a contract  address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of  the tokenFilter when using this operation.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:

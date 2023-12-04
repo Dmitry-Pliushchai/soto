@@ -83,6 +83,11 @@ public struct WorkSpaces: AWSService {
         return self.client.execute(operation: "AssociateIpGroups", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Associates the specified application to the specified WorkSpace.
+    public func associateWorkspaceApplication(_ input: AssociateWorkspaceApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<AssociateWorkspaceApplicationResult> {
+        return self.client.execute(operation: "AssociateWorkspaceApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
     public func authorizeIpRules(_ input: AuthorizeIpRulesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<AuthorizeIpRulesResult> {
         return self.client.execute(operation: "AuthorizeIpRules", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -133,7 +138,7 @@ public struct WorkSpaces: AWSService {
         return self.client.execute(operation: "CreateWorkspaceImage", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.  The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.
+    /// Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   You don't need to specify the PCOIP protocol for Linux bundles because WSP is the default protocol for those bundles.
     public func createWorkspaces(_ input: CreateWorkspacesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateWorkspacesResult> {
         return self.client.execute(operation: "CreateWorkspaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -173,6 +178,11 @@ public struct WorkSpaces: AWSService {
         return self.client.execute(operation: "DeleteWorkspaceImage", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deploys associated applications to the specified WorkSpace
+    public func deployWorkspaceApplications(_ input: DeployWorkspaceApplicationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeployWorkspaceApplicationsResult> {
+        return self.client.execute(operation: "DeployWorkspaceApplications", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again.
     public func deregisterWorkspaceDirectory(_ input: DeregisterWorkspaceDirectoryRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeregisterWorkspaceDirectoryResult> {
         return self.client.execute(operation: "DeregisterWorkspaceDirectory", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -186,6 +196,21 @@ public struct WorkSpaces: AWSService {
     /// Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
     public func describeAccountModifications(_ input: DescribeAccountModificationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeAccountModificationsResult> {
         return self.client.execute(operation: "DescribeAccountModifications", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes the associations between the application and the specified associated resources.
+    public func describeApplicationAssociations(_ input: DescribeApplicationAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeApplicationAssociationsResult> {
+        return self.client.execute(operation: "DescribeApplicationAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+    public func describeApplications(_ input: DescribeApplicationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeApplicationsResult> {
+        return self.client.execute(operation: "DescribeApplications", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes the associations between the applications and the specified bundle.
+    public func describeBundleAssociations(_ input: DescribeBundleAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeBundleAssociationsResult> {
+        return self.client.execute(operation: "DescribeBundleAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response.
@@ -213,6 +238,11 @@ public struct WorkSpaces: AWSService {
         return self.client.execute(operation: "DescribeConnectionAliases", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes the associations between the applications and the specified image.
+    public func describeImageAssociations(_ input: DescribeImageAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeImageAssociationsResult> {
+        return self.client.execute(operation: "DescribeImageAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes one or more of your IP access control groups.
     public func describeIpGroups(_ input: DescribeIpGroupsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeIpGroupsResult> {
         return self.client.execute(operation: "DescribeIpGroups", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -221,6 +251,11 @@ public struct WorkSpaces: AWSService {
     /// Describes the specified tags for the specified WorkSpaces resource.
     public func describeTags(_ input: DescribeTagsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeTagsResult> {
         return self.client.execute(operation: "DescribeTags", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes the associations betweens applications and the specified WorkSpace.
+    public func describeWorkspaceAssociations(_ input: DescribeWorkspaceAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeWorkspaceAssociationsResult> {
+        return self.client.execute(operation: "DescribeWorkspaceAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
@@ -266,6 +301,11 @@ public struct WorkSpaces: AWSService {
     /// Disassociates the specified IP access control group from the specified directory.
     public func disassociateIpGroups(_ input: DisassociateIpGroupsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DisassociateIpGroupsResult> {
         return self.client.execute(operation: "DisassociateIpGroups", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Disassociates the specified application from a WorkSpace.
+    public func disassociateWorkspaceApplication(_ input: DisassociateWorkspaceApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DisassociateWorkspaceApplicationResult> {
+        return self.client.execute(operation: "DisassociateWorkspaceApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.
@@ -411,6 +451,112 @@ extension WorkSpaces {
 // MARK: Paginators
 
 extension WorkSpaces {
+    /// Describes the associations between the application and the specified associated resources.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeApplicationAssociationsPaginator<Result>(
+        _ input: DescribeApplicationAssociationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeApplicationAssociationsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeApplicationAssociations,
+            inputKey: \DescribeApplicationAssociationsRequest.nextToken,
+            outputKey: \DescribeApplicationAssociationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeApplicationAssociationsPaginator(
+        _ input: DescribeApplicationAssociationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeApplicationAssociationsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeApplicationAssociations,
+            inputKey: \DescribeApplicationAssociationsRequest.nextToken,
+            outputKey: \DescribeApplicationAssociationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeApplicationsPaginator<Result>(
+        _ input: DescribeApplicationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeApplicationsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeApplications,
+            inputKey: \DescribeApplicationsRequest.nextToken,
+            outputKey: \DescribeApplicationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeApplicationsPaginator(
+        _ input: DescribeApplicationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeApplicationsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeApplications,
+            inputKey: \DescribeApplicationsRequest.nextToken,
+            outputKey: \DescribeApplicationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -567,6 +713,31 @@ extension WorkSpaces {
             outputKey: \DescribeWorkspacesResult.nextToken,
             on: eventLoop,
             onPage: onPage
+        )
+    }
+}
+
+extension WorkSpaces.DescribeApplicationAssociationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> WorkSpaces.DescribeApplicationAssociationsRequest {
+        return .init(
+            applicationId: self.applicationId,
+            associatedResourceTypes: self.associatedResourceTypes,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension WorkSpaces.DescribeApplicationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> WorkSpaces.DescribeApplicationsRequest {
+        return .init(
+            applicationIds: self.applicationIds,
+            computeTypeNames: self.computeTypeNames,
+            licenseType: self.licenseType,
+            maxResults: self.maxResults,
+            nextToken: token,
+            operatingSystemNames: self.operatingSystemNames,
+            owner: self.owner
         )
     }
 }

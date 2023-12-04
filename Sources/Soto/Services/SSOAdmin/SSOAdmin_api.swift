@@ -59,6 +59,12 @@ public struct SSOAdmin: AWSService {
                 "us-gov-east-1": "sso.us-gov-east-1.amazonaws.com",
                 "us-gov-west-1": "sso.us-gov-west-1.amazonaws.com"
             ],
+            variantEndpoints: [
+                [.fips]: .init(endpoints: [
+                    "us-gov-east-1": "sso.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "sso.us-gov-west-1.amazonaws.com"
+                ])
+            ],
             errorType: SSOAdminErrorType.self,
             timeout: timeout,
             byteBufferAllocator: byteBufferAllocator,
@@ -78,9 +84,24 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "AttachManagedPolicyToPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.  The term principal here refers to a user or group that is defined in IAM Identity Center.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet to make these updates.    After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment creation request.
+    /// Assigns access to a principal for a specified Amazon Web Services account using a specified permission set.  The term principal here refers to a user or group that is defined in IAM Identity Center.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy. That policy is attached to the IAM role created in IAM Identity Center. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you must call  ProvisionPermissionSet to make these updates.   After a successful response, call DescribeAccountAssignmentCreationStatus to describe the status of an assignment creation request.
     public func createAccountAssignment(_ input: CreateAccountAssignmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccountAssignmentResponse> {
         return self.client.execute(operation: "CreateAccountAssignment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates an application in IAM Identity Center for the given application provider.
+    public func createApplication(_ input: CreateApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateApplicationResponse> {
+        return self.client.execute(operation: "CreateApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Grant application access to a user or group.
+    public func createApplicationAssignment(_ input: CreateApplicationAssignmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateApplicationAssignmentResponse> {
+        return self.client.execute(operation: "CreateApplicationAssignment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates an instance of IAM Identity Center for a standalone Amazon Web Services account that is not managed by Organizations or a member Amazon Web Services account in an organization. You can create only one instance per account and across all Amazon Web Services Regions. The CreateInstance request is rejected if the following apply:    The instance is created within the organization management account.   An instance already exists in the same account.
+    public func createInstance(_ input: CreateInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateInstanceResponse> {
+        return self.client.execute(operation: "CreateInstance", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Enables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.  After a successful response, call DescribeInstanceAccessControlAttributeConfiguration to validate that InstanceAccessControlAttributeConfiguration was created.
@@ -93,14 +114,49 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "CreatePermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a connection to a trusted token issuer in an instance of IAM Identity Center. A trusted token issuer enables trusted identity propagation to be used with applications that authenticate outside of Amazon Web Services. This trusted token issuer describes an external identity provider (IdP) that can generate claims or assertions in the form of access tokens for a user. Applications enabled for IAM Identity Center can use these tokens for authentication.
+    public func createTrustedTokenIssuer(_ input: CreateTrustedTokenIssuerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateTrustedTokenIssuerResponse> {
+        return self.client.execute(operation: "CreateTrustedTokenIssuer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a principal's access from a specified Amazon Web Services account using a specified permission set.  After a successful response, call DescribeAccountAssignmentDeletionStatus to describe the status of an assignment deletion request.
     public func deleteAccountAssignment(_ input: DeleteAccountAssignmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteAccountAssignmentResponse> {
         return self.client.execute(operation: "DeleteAccountAssignment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes the association with the application. The connected service resource still exists.
+    public func deleteApplication(_ input: DeleteApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteApplicationResponse> {
+        return self.client.execute(operation: "DeleteApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes an IAM Identity Center access scope from an application.
+    @discardableResult public func deleteApplicationAccessScope(_ input: DeleteApplicationAccessScopeRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteApplicationAccessScope", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Revoke application access to an application by deleting application assignments for a user or group.
+    public func deleteApplicationAssignment(_ input: DeleteApplicationAssignmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteApplicationAssignmentResponse> {
+        return self.client.execute(operation: "DeleteApplicationAssignment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes an authentication method from an application.
+    @discardableResult public func deleteApplicationAuthenticationMethod(_ input: DeleteApplicationAuthenticationMethodRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteApplicationAuthenticationMethod", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a grant from an application.
+    @discardableResult public func deleteApplicationGrant(_ input: DeleteApplicationGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteApplicationGrant", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes the inline policy from a specified permission set.
     public func deleteInlinePolicyFromPermissionSet(_ input: DeleteInlinePolicyFromPermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteInlinePolicyFromPermissionSetResponse> {
         return self.client.execute(operation: "DeleteInlinePolicyFromPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the instance of IAM Identity Center. Only the account that owns the instance can call this API. Neither the delegated administrator nor member account can delete the organization instance, but those roles can delete their own instance.
+    public func deleteInstance(_ input: DeleteInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteInstanceResponse> {
+        return self.client.execute(operation: "DeleteInstance", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Disables the attributes-based access control (ABAC) feature for the specified IAM Identity Center instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
@@ -118,6 +174,11 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "DeletePermissionsBoundaryFromPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes a trusted token issuer configuration from an instance of IAM Identity Center.  Deleting this trusted token issuer configuration will cause users to lose access to any applications that are configured to use the trusted token issuer.
+    public func deleteTrustedTokenIssuer(_ input: DeleteTrustedTokenIssuerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteTrustedTokenIssuerResponse> {
+        return self.client.execute(operation: "DeleteTrustedTokenIssuer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes the status of the assignment creation request.
     public func describeAccountAssignmentCreationStatus(_ input: DescribeAccountAssignmentCreationStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeAccountAssignmentCreationStatusResponse> {
         return self.client.execute(operation: "DescribeAccountAssignmentCreationStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -126,6 +187,26 @@ public struct SSOAdmin: AWSService {
     /// Describes the status of the assignment deletion request.
     public func describeAccountAssignmentDeletionStatus(_ input: DescribeAccountAssignmentDeletionStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeAccountAssignmentDeletionStatusResponse> {
         return self.client.execute(operation: "DescribeAccountAssignmentDeletionStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the details of an application associated with an instance of IAM Identity Center.
+    public func describeApplication(_ input: DescribeApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeApplicationResponse> {
+        return self.client.execute(operation: "DescribeApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a direct assignment of a user or group to an application. If the user doesn’t have a direct assignment to the application,  the user may still have access to the application through a group. Therefore, don’t use this API to test access to an application for a user.  Instead use ListApplicationAssignmentsForPrincipal.
+    public func describeApplicationAssignment(_ input: DescribeApplicationAssignmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeApplicationAssignmentResponse> {
+        return self.client.execute(operation: "DescribeApplicationAssignment", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves details about a provider that can be used to connect an Amazon Web Services managed application or customer managed application to IAM Identity Center.
+    public func describeApplicationProvider(_ input: DescribeApplicationProviderRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeApplicationProviderResponse> {
+        return self.client.execute(operation: "DescribeApplicationProvider", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the details of an instance of IAM Identity Center. The status can be one of the following:    CREATE_IN_PROGRESS - The instance is in the process of being created. When the instance is ready for use, DescribeInstance returns the status of ACTIVE. While the instance is in the CREATE_IN_PROGRESS state, you can call only DescribeInstance and DeleteInstance operations.    DELETE_IN_PROGRESS - The instance is being deleted. Returns AccessDeniedException after the delete operation completes.     ACTIVE - The instance is active.
+    public func describeInstance(_ input: DescribeInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeInstanceResponse> {
+        return self.client.execute(operation: "DescribeInstance", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns the list of IAM Identity Center identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified IAM Identity Center instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
@@ -143,6 +224,11 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "DescribePermissionSetProvisioningStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves details about a trusted token issuer configuration stored in an instance of IAM Identity Center. Details include the  name of the trusted token issuer, the issuer URL, and the path of the source attribute and the destination attribute for a trusted token issuer configuration.
+    public func describeTrustedTokenIssuer(_ input: DescribeTrustedTokenIssuerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeTrustedTokenIssuerResponse> {
+        return self.client.execute(operation: "DescribeTrustedTokenIssuer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Detaches the specified customer managed policy from the specified PermissionSet.
     public func detachCustomerManagedPolicyReferenceFromPermissionSet(_ input: DetachCustomerManagedPolicyReferenceFromPermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DetachCustomerManagedPolicyReferenceFromPermissionSetResponse> {
         return self.client.execute(operation: "DetachCustomerManagedPolicyReferenceFromPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -151,6 +237,26 @@ public struct SSOAdmin: AWSService {
     /// Detaches the attached Amazon Web Services managed policy ARN from the specified permission set.
     public func detachManagedPolicyFromPermissionSet(_ input: DetachManagedPolicyFromPermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DetachManagedPolicyFromPermissionSetResponse> {
         return self.client.execute(operation: "DetachManagedPolicyFromPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the authorized targets for an IAM Identity Center access scope for an application.
+    public func getApplicationAccessScope(_ input: GetApplicationAccessScopeRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetApplicationAccessScopeResponse> {
+        return self.client.execute(operation: "GetApplicationAccessScope", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the configuration of PutApplicationAssignmentConfiguration.
+    public func getApplicationAssignmentConfiguration(_ input: GetApplicationAssignmentConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetApplicationAssignmentConfigurationResponse> {
+        return self.client.execute(operation: "GetApplicationAssignmentConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves details about an authentication method used by an application.
+    public func getApplicationAuthenticationMethod(_ input: GetApplicationAuthenticationMethodRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetApplicationAuthenticationMethodResponse> {
+        return self.client.execute(operation: "GetApplicationAuthenticationMethod", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves details about an application grant.
+    public func getApplicationGrant(_ input: GetApplicationGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetApplicationGrantResponse> {
+        return self.client.execute(operation: "GetApplicationGrant", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Obtains the inline policy assigned to the permission set.
@@ -178,9 +284,49 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "ListAccountAssignments", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access to.
+    public func listAccountAssignmentsForPrincipal(_ input: ListAccountAssignmentsForPrincipalRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccountAssignmentsForPrincipalResponse> {
+        return self.client.execute(operation: "ListAccountAssignmentsForPrincipal", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
     public func listAccountsForProvisionedPermissionSet(_ input: ListAccountsForProvisionedPermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccountsForProvisionedPermissionSetResponse> {
         return self.client.execute(operation: "ListAccountsForProvisionedPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the access scopes and authorized targets associated with an application.
+    public func listApplicationAccessScopes(_ input: ListApplicationAccessScopesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationAccessScopesResponse> {
+        return self.client.execute(operation: "ListApplicationAccessScopes", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists Amazon Web Services account users that are assigned to an application.
+    public func listApplicationAssignments(_ input: ListApplicationAssignmentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationAssignmentsResponse> {
+        return self.client.execute(operation: "ListApplicationAssignments", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the applications to which a specified principal is assigned.
+    public func listApplicationAssignmentsForPrincipal(_ input: ListApplicationAssignmentsForPrincipalRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationAssignmentsForPrincipalResponse> {
+        return self.client.execute(operation: "ListApplicationAssignmentsForPrincipal", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all of the authentication methods supported by the specified application.
+    public func listApplicationAuthenticationMethods(_ input: ListApplicationAuthenticationMethodsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationAuthenticationMethodsResponse> {
+        return self.client.execute(operation: "ListApplicationAuthenticationMethods", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List the grants associated with an application.
+    public func listApplicationGrants(_ input: ListApplicationGrantsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationGrantsResponse> {
+        return self.client.execute(operation: "ListApplicationGrants", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the application providers configured in the IAM Identity Center identity store.
+    public func listApplicationProviders(_ input: ListApplicationProvidersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationProvidersResponse> {
+        return self.client.execute(operation: "ListApplicationProviders", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists all applications associated with the instance of IAM Identity Center. When listing applications for an instance in the management account, member accounts must use the applicationAccount parameter to filter the list to only applications created from that account.
+    public func listApplications(_ input: ListApplicationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListApplicationsResponse> {
+        return self.client.execute(operation: "ListApplications", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all customer managed policies attached to a specified PermissionSet.
@@ -188,7 +334,7 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "ListCustomerManagedPolicyReferencesInPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists the IAM Identity Center instances that the caller has access to.
+    /// Lists the details of the organization and account instances of IAM Identity Center that were created in or visible to the account calling this API.
     public func listInstances(_ input: ListInstancesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListInstancesResponse> {
         return self.client.execute(operation: "ListInstances", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -218,9 +364,34 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "ListTagsForResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Lists all the trusted token issuers configured in an instance of IAM Identity Center.
+    public func listTrustedTokenIssuers(_ input: ListTrustedTokenIssuersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTrustedTokenIssuersResponse> {
+        return self.client.execute(operation: "ListTrustedTokenIssuers", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// The process by which a specified permission set is provisioned to the specified target.
     public func provisionPermissionSet(_ input: ProvisionPermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ProvisionPermissionSetResponse> {
         return self.client.execute(operation: "ProvisionPermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Adds or updates the list of authorized targets for an IAM Identity Center access scope for an application.
+    @discardableResult public func putApplicationAccessScope(_ input: PutApplicationAccessScopeRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "PutApplicationAccessScope", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Configure how users gain access to an application. If AssignmentsRequired is true (default value), users don’t have access to the application unless an assignment is created using the  CreateApplicationAssignment API. If false, all users have access to the application.  If an assignment is created using CreateApplicationAssignment., the user retains access if AssignmentsRequired is set to true.
+    public func putApplicationAssignmentConfiguration(_ input: PutApplicationAssignmentConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutApplicationAssignmentConfigurationResponse> {
+        return self.client.execute(operation: "PutApplicationAssignmentConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Adds or updates an authentication method for an application.
+    @discardableResult public func putApplicationAuthenticationMethod(_ input: PutApplicationAuthenticationMethodRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "PutApplicationAuthenticationMethod", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Adds a grant to an application.
+    @discardableResult public func putApplicationGrant(_ input: PutApplicationGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "PutApplicationGrant", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Attaches an inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet after this action to apply the corresponding IAM policy updates to all assigned accounts.
@@ -243,6 +414,16 @@ public struct SSOAdmin: AWSService {
         return self.client.execute(operation: "UntagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Updates application properties.
+    public func updateApplication(_ input: UpdateApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateApplicationResponse> {
+        return self.client.execute(operation: "UpdateApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.
+    public func updateInstance(_ input: UpdateInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateInstanceResponse> {
+        return self.client.execute(operation: "UpdateInstance", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates the IAM Identity Center identity store attributes that you can use with the IAM Identity Center instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the IAM Identity Center identity store. If a SAML assertion passes any of these attributes, IAM Identity Center replaces the attribute value with the value from the IAM Identity Center identity store. For more information about ABAC, see Attribute-Based Access Control in the IAM Identity Center User Guide.
     public func updateInstanceAccessControlAttributeConfiguration(_ input: UpdateInstanceAccessControlAttributeConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateInstanceAccessControlAttributeConfigurationResponse> {
         return self.client.execute(operation: "UpdateInstanceAccessControlAttributeConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -251,6 +432,11 @@ public struct SSOAdmin: AWSService {
     /// Updates an existing permission set.
     public func updatePermissionSet(_ input: UpdatePermissionSetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdatePermissionSetResponse> {
         return self.client.execute(operation: "UpdatePermissionSet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the name of the trusted token issuer, or the path of a source attribute or destination attribute for a trusted token issuer configuration.  Updating this trusted token issuer configuration might cause users to lose access to any applications that are configured to use the trusted token issuer.
+    public func updateTrustedTokenIssuer(_ input: UpdateTrustedTokenIssuerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateTrustedTokenIssuerResponse> {
+        return self.client.execute(operation: "UpdateTrustedTokenIssuer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -425,6 +611,59 @@ extension SSOAdmin {
         )
     }
 
+    /// Retrieves a list of the IAM Identity Center associated Amazon Web Services accounts that the principal has access to.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listAccountAssignmentsForPrincipalPaginator<Result>(
+        _ input: ListAccountAssignmentsForPrincipalRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListAccountAssignmentsForPrincipalResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listAccountAssignmentsForPrincipal,
+            inputKey: \ListAccountAssignmentsForPrincipalRequest.nextToken,
+            outputKey: \ListAccountAssignmentsForPrincipalResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listAccountAssignmentsForPrincipalPaginator(
+        _ input: ListAccountAssignmentsForPrincipalRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListAccountAssignmentsForPrincipalResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listAccountAssignmentsForPrincipal,
+            inputKey: \ListAccountAssignmentsForPrincipalRequest.nextToken,
+            outputKey: \ListAccountAssignmentsForPrincipalResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists all the Amazon Web Services accounts where the specified permission set is provisioned.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -473,6 +712,377 @@ extension SSOAdmin {
             command: self.listAccountsForProvisionedPermissionSet,
             inputKey: \ListAccountsForProvisionedPermissionSetRequest.nextToken,
             outputKey: \ListAccountsForProvisionedPermissionSetResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the access scopes and authorized targets associated with an application.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationAccessScopesPaginator<Result>(
+        _ input: ListApplicationAccessScopesRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationAccessScopesResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationAccessScopes,
+            inputKey: \ListApplicationAccessScopesRequest.nextToken,
+            outputKey: \ListApplicationAccessScopesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationAccessScopesPaginator(
+        _ input: ListApplicationAccessScopesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationAccessScopesResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationAccessScopes,
+            inputKey: \ListApplicationAccessScopesRequest.nextToken,
+            outputKey: \ListApplicationAccessScopesResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists Amazon Web Services account users that are assigned to an application.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationAssignmentsPaginator<Result>(
+        _ input: ListApplicationAssignmentsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationAssignmentsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationAssignments,
+            inputKey: \ListApplicationAssignmentsRequest.nextToken,
+            outputKey: \ListApplicationAssignmentsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationAssignmentsPaginator(
+        _ input: ListApplicationAssignmentsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationAssignmentsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationAssignments,
+            inputKey: \ListApplicationAssignmentsRequest.nextToken,
+            outputKey: \ListApplicationAssignmentsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the applications to which a specified principal is assigned.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationAssignmentsForPrincipalPaginator<Result>(
+        _ input: ListApplicationAssignmentsForPrincipalRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationAssignmentsForPrincipalResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationAssignmentsForPrincipal,
+            inputKey: \ListApplicationAssignmentsForPrincipalRequest.nextToken,
+            outputKey: \ListApplicationAssignmentsForPrincipalResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationAssignmentsForPrincipalPaginator(
+        _ input: ListApplicationAssignmentsForPrincipalRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationAssignmentsForPrincipalResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationAssignmentsForPrincipal,
+            inputKey: \ListApplicationAssignmentsForPrincipalRequest.nextToken,
+            outputKey: \ListApplicationAssignmentsForPrincipalResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists all of the authentication methods supported by the specified application.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationAuthenticationMethodsPaginator<Result>(
+        _ input: ListApplicationAuthenticationMethodsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationAuthenticationMethodsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationAuthenticationMethods,
+            inputKey: \ListApplicationAuthenticationMethodsRequest.nextToken,
+            outputKey: \ListApplicationAuthenticationMethodsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationAuthenticationMethodsPaginator(
+        _ input: ListApplicationAuthenticationMethodsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationAuthenticationMethodsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationAuthenticationMethods,
+            inputKey: \ListApplicationAuthenticationMethodsRequest.nextToken,
+            outputKey: \ListApplicationAuthenticationMethodsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// List the grants associated with an application.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationGrantsPaginator<Result>(
+        _ input: ListApplicationGrantsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationGrantsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationGrants,
+            inputKey: \ListApplicationGrantsRequest.nextToken,
+            outputKey: \ListApplicationGrantsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationGrantsPaginator(
+        _ input: ListApplicationGrantsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationGrantsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationGrants,
+            inputKey: \ListApplicationGrantsRequest.nextToken,
+            outputKey: \ListApplicationGrantsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the application providers configured in the IAM Identity Center identity store.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationProvidersPaginator<Result>(
+        _ input: ListApplicationProvidersRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationProvidersResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplicationProviders,
+            inputKey: \ListApplicationProvidersRequest.nextToken,
+            outputKey: \ListApplicationProvidersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationProvidersPaginator(
+        _ input: ListApplicationProvidersRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationProvidersResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplicationProviders,
+            inputKey: \ListApplicationProvidersRequest.nextToken,
+            outputKey: \ListApplicationProvidersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists all applications associated with the instance of IAM Identity Center. When listing applications for an instance in the management account, member accounts must use the applicationAccount parameter to filter the list to only applications created from that account.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listApplicationsPaginator<Result>(
+        _ input: ListApplicationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListApplicationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listApplications,
+            inputKey: \ListApplicationsRequest.nextToken,
+            outputKey: \ListApplicationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listApplicationsPaginator(
+        _ input: ListApplicationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListApplicationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listApplications,
+            inputKey: \ListApplicationsRequest.nextToken,
+            outputKey: \ListApplicationsResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -531,7 +1141,7 @@ extension SSOAdmin {
         )
     }
 
-    /// Lists the IAM Identity Center instances that the caller has access to.
+    /// Lists the details of the organization and account instances of IAM Identity Center that were created in or visible to the account calling this API.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -848,6 +1458,59 @@ extension SSOAdmin {
             onPage: onPage
         )
     }
+
+    /// Lists all the trusted token issuers configured in an instance of IAM Identity Center.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listTrustedTokenIssuersPaginator<Result>(
+        _ input: ListTrustedTokenIssuersRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListTrustedTokenIssuersResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listTrustedTokenIssuers,
+            inputKey: \ListTrustedTokenIssuersRequest.nextToken,
+            outputKey: \ListTrustedTokenIssuersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listTrustedTokenIssuersPaginator(
+        _ input: ListTrustedTokenIssuersRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListTrustedTokenIssuersResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listTrustedTokenIssuers,
+            inputKey: \ListTrustedTokenIssuersRequest.nextToken,
+            outputKey: \ListTrustedTokenIssuersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
 }
 
 extension SSOAdmin.ListAccountAssignmentCreationStatusRequest: AWSPaginateToken {
@@ -872,6 +1535,19 @@ extension SSOAdmin.ListAccountAssignmentDeletionStatusRequest: AWSPaginateToken 
     }
 }
 
+extension SSOAdmin.ListAccountAssignmentsForPrincipalRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListAccountAssignmentsForPrincipalRequest {
+        return .init(
+            filter: self.filter,
+            instanceArn: self.instanceArn,
+            maxResults: self.maxResults,
+            nextToken: token,
+            principalId: self.principalId,
+            principalType: self.principalType
+        )
+    }
+}
+
 extension SSOAdmin.ListAccountAssignmentsRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> SSOAdmin.ListAccountAssignmentsRequest {
         return .init(
@@ -892,6 +1568,77 @@ extension SSOAdmin.ListAccountsForProvisionedPermissionSetRequest: AWSPaginateTo
             nextToken: token,
             permissionSetArn: self.permissionSetArn,
             provisioningStatus: self.provisioningStatus
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationAccessScopesRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationAccessScopesRequest {
+        return .init(
+            applicationArn: self.applicationArn,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationAssignmentsForPrincipalRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationAssignmentsForPrincipalRequest {
+        return .init(
+            filter: self.filter,
+            instanceArn: self.instanceArn,
+            maxResults: self.maxResults,
+            nextToken: token,
+            principalId: self.principalId,
+            principalType: self.principalType
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationAssignmentsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationAssignmentsRequest {
+        return .init(
+            applicationArn: self.applicationArn,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationAuthenticationMethodsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationAuthenticationMethodsRequest {
+        return .init(
+            applicationArn: self.applicationArn,
+            nextToken: token
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationGrantsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationGrantsRequest {
+        return .init(
+            applicationArn: self.applicationArn,
+            nextToken: token
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationProvidersRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationProvidersRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension SSOAdmin.ListApplicationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListApplicationsRequest {
+        return .init(
+            filter: self.filter,
+            instanceArn: self.instanceArn,
+            maxResults: self.maxResults,
+            nextToken: token
         )
     }
 }
@@ -966,6 +1713,16 @@ extension SSOAdmin.ListTagsForResourceRequest: AWSPaginateToken {
             instanceArn: self.instanceArn,
             nextToken: token,
             resourceArn: self.resourceArn
+        )
+    }
+}
+
+extension SSOAdmin.ListTrustedTokenIssuersRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSOAdmin.ListTrustedTokenIssuersRequest {
+        return .init(
+            instanceArn: self.instanceArn,
+            maxResults: self.maxResults,
+            nextToken: token
         )
     }
 }

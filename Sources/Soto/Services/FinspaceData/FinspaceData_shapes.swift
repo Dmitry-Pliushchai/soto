@@ -26,13 +26,13 @@ import SotoCore
 extension FinspaceData {
     // MARK: Enums
 
-    public enum ApiAccess: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApiAccess: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ApplicationPermission: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationPermission: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessNotebooks = "AccessNotebooks"
         case createDataset = "CreateDataset"
         case getTemporaryCredentials = "GetTemporaryCredentials"
@@ -43,14 +43,14 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case append = "APPEND"
         case modify = "MODIFY"
         case replace = "REPLACE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bigint = "BIGINT"
         case binary = "BINARY"
         case boolean = "BOOLEAN"
@@ -66,7 +66,7 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataViewStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataViewStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case failed = "FAILED"
         case failedCleanupFailed = "FAILED_CLEANUP_FAILED"
@@ -78,13 +78,13 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetKind: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetKind: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nonTabular = "NON_TABULAR"
         case tabular = "TABULAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case running = "RUNNING"
@@ -92,7 +92,7 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case cancelled = "CANCELLED"
         case internalServiceException = "INTERNAL_SERVICE_EXCEPTION"
@@ -104,13 +104,13 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportFileFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportFileFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delimitedText = "DELIMITED_TEXT"
         case parquet = "PARQUET"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case running = "RUNNING"
@@ -119,27 +119,27 @@ extension FinspaceData {
         public var description: String { return self.rawValue }
     }
 
-    public enum LocationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LocationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ingestion = "INGESTION"
         case sagemaker = "SAGEMAKER"
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionGroupMembershipStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionGroupMembershipStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case additionInProgress = "ADDITION_IN_PROGRESS"
         case additionSuccess = "ADDITION_SUCCESS"
         case removalInProgress = "REMOVAL_IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "CREATING"
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appUser = "APP_USER"
         case superUser = "SUPER_USER"
         public var description: String { return self.rawValue }
@@ -1713,7 +1713,7 @@ extension FinspaceData {
         /// The unique identifier for the user.
         public let userId: String
 
-        public init(maxResults: Int = 0, nextToken: String? = nil, userId: String) {
+        public init(maxResults: Int, nextToken: String? = nil, userId: String) {
             self.maxResults = maxResults
             self.nextToken = nextToken
             self.userId = userId
@@ -1758,7 +1758,7 @@ extension FinspaceData {
         /// A token that indicates where a results page should begin.
         public let nextToken: String?
 
-        public init(maxResults: Int = 0, nextToken: String? = nil) {
+        public init(maxResults: Int, nextToken: String? = nil) {
             self.maxResults = maxResults
             self.nextToken = nextToken
         }
@@ -1802,7 +1802,7 @@ extension FinspaceData {
         /// The unique identifier for the permission group.
         public let permissionGroupId: String
 
-        public init(maxResults: Int = 0, nextToken: String? = nil, permissionGroupId: String) {
+        public init(maxResults: Int, nextToken: String? = nil, permissionGroupId: String) {
             self.maxResults = maxResults
             self.nextToken = nextToken
             self.permissionGroupId = permissionGroupId
@@ -1847,7 +1847,7 @@ extension FinspaceData {
         /// A token that indicates where a results page should begin.
         public let nextToken: String?
 
-        public init(maxResults: Int = 0, nextToken: String? = nil) {
+        public init(maxResults: Int, nextToken: String? = nil) {
             self.maxResults = maxResults
             self.nextToken = nextToken
         }

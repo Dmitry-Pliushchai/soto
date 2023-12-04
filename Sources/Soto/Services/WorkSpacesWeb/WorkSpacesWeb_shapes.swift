@@ -26,24 +26,24 @@ import SotoCore
 extension WorkSpacesWeb {
     // MARK: Enums
 
-    public enum AuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iamIdentityCenter = "IAM_Identity_Center"
         case standard = "Standard"
         public var description: String { return self.rawValue }
     }
 
-    public enum BrowserType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BrowserType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chrome = "Chrome"
         public var description: String { return self.rawValue }
     }
 
-    public enum EnabledType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnabledType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityProviderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityProviderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case facebook = "Facebook"
         case google = "Google"
         case loginWithAmazon = "LoginWithAmazon"
@@ -53,14 +53,14 @@ extension WorkSpacesWeb {
         public var description: String { return self.rawValue }
     }
 
-    public enum PortalStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PortalStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case incomplete = "Incomplete"
         case pending = "Pending"
         public var description: String { return self.rawValue }
     }
 
-    public enum RendererType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RendererType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appStream = "AppStream"
         public var description: String { return self.rawValue }
     }

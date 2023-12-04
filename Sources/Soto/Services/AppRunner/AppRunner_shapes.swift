@@ -26,26 +26,26 @@ import SotoCore
 extension AppRunner {
     // MARK: Enums
 
-    public enum AutoScalingConfigurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoScalingConfigurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateValidationRecordStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateValidationRecordStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pendingValidation = "PENDING_VALIDATION"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case api = "API"
         case repository = "REPOSITORY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case deleted = "DELETED"
         case error = "ERROR"
@@ -53,7 +53,7 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomDomainAssociationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomDomainAssociationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case bindingCertificate = "BINDING_CERTIFICATE"
         case createFailed = "CREATE_FAILED"
@@ -64,31 +64,37 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum EgressType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EgressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case vpc = "VPC"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthCheckProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthCheckProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         case tcp = "TCP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImageRepositoryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImageRepositoryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ecr = "ECR"
         case ecrPublic = "ECR_PUBLIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObservabilityConfigurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IpAddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case dualStack = "DUAL_STACK"
+        case ipv4 = "IPV4"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ObservabilityConfigurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case pending = "PENDING"
@@ -99,7 +105,7 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createService = "CREATE_SERVICE"
         case deleteService = "DELETE_SERVICE"
         case pauseService = "PAUSE_SERVICE"
@@ -109,13 +115,13 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProviderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProviderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bitbucket = "BITBUCKET"
         case github = "GITHUB"
         public var description: String { return self.rawValue }
     }
 
-    public enum Runtime: String, CustomStringConvertible, Codable, Sendable {
+    public enum Runtime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case corretto11 = "CORRETTO_11"
         case corretto8 = "CORRETTO_8"
         case dotnet6 = "DOTNET_6"
@@ -129,7 +135,7 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createFailed = "CREATE_FAILED"
         case deleteFailed = "DELETE_FAILED"
         case deleted = "DELETED"
@@ -139,23 +145,23 @@ extension AppRunner {
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceCodeVersionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceCodeVersionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case branch = "BRANCH"
         public var description: String { return self.rawValue }
     }
 
-    public enum TracingVendor: String, CustomStringConvertible, Codable, Sendable {
+    public enum TracingVendor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsxray = "AWSXRAY"
         public var description: String { return self.rawValue }
     }
 
-    public enum VpcConnectorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VpcConnectorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VpcIngressConnectionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VpcIngressConnectionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case deleted = "DELETED"
         case failedCreation = "FAILED_CREATION"
@@ -2032,10 +2038,13 @@ extension AppRunner {
         public let egressConfiguration: EgressConfiguration?
         /// Network configuration settings for inbound message traffic.
         public let ingressConfiguration: IngressConfiguration?
+        /// App Runner provides you with the option to choose between Internet Protocol version 4 (IPv4) and dual-stack (IPv4 and IPv6)  for your incoming public network configuration. This is an optional parameter.  If you do not specify an IpAddressType, it defaults to select IPv4.   Currently, App Runner supports dual-stack for only Public endpoint. Only IPv4 is supported for Private endpoint.  If you update a service that's using dual-stack Public endpoint to a Private endpoint, your App Runner service will default to support only IPv4 for Private endpoint and fail to receive traffic originating from IPv6 endpoint.
+        public let ipAddressType: IpAddressType?
 
-        public init(egressConfiguration: EgressConfiguration? = nil, ingressConfiguration: IngressConfiguration? = nil) {
+        public init(egressConfiguration: EgressConfiguration? = nil, ingressConfiguration: IngressConfiguration? = nil, ipAddressType: IpAddressType? = nil) {
             self.egressConfiguration = egressConfiguration
             self.ingressConfiguration = ingressConfiguration
+            self.ipAddressType = ipAddressType
         }
 
         public func validate(name: String) throws {
@@ -2045,6 +2054,7 @@ extension AppRunner {
         private enum CodingKeys: String, CodingKey {
             case egressConfiguration = "EgressConfiguration"
             case ingressConfiguration = "IngressConfiguration"
+            case ipAddressType = "IpAddressType"
         }
     }
 

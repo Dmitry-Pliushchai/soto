@@ -83,6 +83,11 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "CreateCollaboration", path: "/collaborations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Provides the details necessary to create a configured audience model association.
+    public func createConfiguredAudienceModelAssociation(_ input: CreateConfiguredAudienceModelAssociationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateConfiguredAudienceModelAssociationOutput> {
+        return self.client.execute(operation: "CreateConfiguredAudienceModelAssociation", path: "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new configured table resource.
     public func createConfiguredTable(_ input: CreateConfiguredTableInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateConfiguredTableOutput> {
         return self.client.execute(operation: "CreateConfiguredTable", path: "/configuredTables", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -103,6 +108,11 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "CreateMembership", path: "/memberships", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a privacy budget template for a specified membership. Each membership can have only one privacy budget template, but it can be deleted and recreated. If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate operation.
+    public func createPrivacyBudgetTemplate(_ input: CreatePrivacyBudgetTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreatePrivacyBudgetTemplateOutput> {
+        return self.client.execute(operation: "CreatePrivacyBudgetTemplate", path: "/memberships/{membershipIdentifier}/privacybudgettemplates", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes an analysis template.
     public func deleteAnalysisTemplate(_ input: DeleteAnalysisTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteAnalysisTemplateOutput> {
         return self.client.execute(operation: "DeleteAnalysisTemplate", path: "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -111,6 +121,11 @@ public struct CleanRooms: AWSService {
     /// Deletes a collaboration. It can only be called by the collaboration owner.
     public func deleteCollaboration(_ input: DeleteCollaborationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteCollaborationOutput> {
         return self.client.execute(operation: "DeleteCollaboration", path: "/collaborations/{collaborationIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Provides the information necessary to delete a configured audience model association.
+    public func deleteConfiguredAudienceModelAssociation(_ input: DeleteConfiguredAudienceModelAssociationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteConfiguredAudienceModelAssociationOutput> {
+        return self.client.execute(operation: "DeleteConfiguredAudienceModelAssociation", path: "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a configured table.
@@ -138,6 +153,11 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "DeleteMembership", path: "/memberships/{membershipIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes a privacy budget template for a specified membership.
+    public func deletePrivacyBudgetTemplate(_ input: DeletePrivacyBudgetTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeletePrivacyBudgetTemplateOutput> {
+        return self.client.execute(operation: "DeletePrivacyBudgetTemplate", path: "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves an analysis template.
     public func getAnalysisTemplate(_ input: GetAnalysisTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAnalysisTemplateOutput> {
         return self.client.execute(operation: "GetAnalysisTemplate", path: "/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -151,6 +171,21 @@ public struct CleanRooms: AWSService {
     /// Retrieves an analysis template within a collaboration.
     public func getCollaborationAnalysisTemplate(_ input: GetCollaborationAnalysisTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetCollaborationAnalysisTemplateOutput> {
         return self.client.execute(operation: "GetCollaborationAnalysisTemplate", path: "/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a configured audience model association within a collaboration.
+    public func getCollaborationConfiguredAudienceModelAssociation(_ input: GetCollaborationConfiguredAudienceModelAssociationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetCollaborationConfiguredAudienceModelAssociationOutput> {
+        return self.client.execute(operation: "GetCollaborationConfiguredAudienceModelAssociation", path: "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns details about a specified privacy budget template.
+    public func getCollaborationPrivacyBudgetTemplate(_ input: GetCollaborationPrivacyBudgetTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetCollaborationPrivacyBudgetTemplateOutput> {
+        return self.client.execute(operation: "GetCollaborationPrivacyBudgetTemplate", path: "/collaborations/{collaborationIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns information about a configured audience model association.
+    public func getConfiguredAudienceModelAssociation(_ input: GetConfiguredAudienceModelAssociationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetConfiguredAudienceModelAssociationOutput> {
+        return self.client.execute(operation: "GetConfiguredAudienceModelAssociation", path: "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves a configured table.
@@ -171,6 +206,11 @@ public struct CleanRooms: AWSService {
     /// Retrieves a specified membership for an identifier.
     public func getMembership(_ input: GetMembershipInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMembershipOutput> {
         return self.client.execute(operation: "GetMembership", path: "/memberships/{membershipIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns details for a specified privacy budget template.
+    public func getPrivacyBudgetTemplate(_ input: GetPrivacyBudgetTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetPrivacyBudgetTemplateOutput> {
+        return self.client.execute(operation: "GetPrivacyBudgetTemplate", path: "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns query processing metadata.
@@ -198,9 +238,29 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "ListCollaborationAnalysisTemplates", path: "/collaborations/{collaborationIdentifier}/analysistemplates", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Lists configured audience model associations within a collaboration.
+    public func listCollaborationConfiguredAudienceModelAssociations(_ input: ListCollaborationConfiguredAudienceModelAssociationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCollaborationConfiguredAudienceModelAssociationsOutput> {
+        return self.client.execute(operation: "ListCollaborationConfiguredAudienceModelAssociations", path: "/collaborations/{collaborationIdentifier}/configuredaudiencemodelassociations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns an array that summarizes each privacy budget template in a specified collaboration.
+    public func listCollaborationPrivacyBudgetTemplates(_ input: ListCollaborationPrivacyBudgetTemplatesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCollaborationPrivacyBudgetTemplatesOutput> {
+        return self.client.execute(operation: "ListCollaborationPrivacyBudgetTemplates", path: "/collaborations/{collaborationIdentifier}/privacybudgettemplates", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns an array that summarizes each privacy budget in a specified collaboration. The summary includes the collaboration ARN, creation time, creating account, and privacy budget details.
+    public func listCollaborationPrivacyBudgets(_ input: ListCollaborationPrivacyBudgetsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCollaborationPrivacyBudgetsOutput> {
+        return self.client.execute(operation: "ListCollaborationPrivacyBudgets", path: "/collaborations/{collaborationIdentifier}/privacybudgets", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists collaborations the caller owns, is active in, or has been invited to.
     public func listCollaborations(_ input: ListCollaborationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCollaborationsOutput> {
         return self.client.execute(operation: "ListCollaborations", path: "/collaborations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists information about requested configured audience model associations.
+    public func listConfiguredAudienceModelAssociations(_ input: ListConfiguredAudienceModelAssociationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListConfiguredAudienceModelAssociationsOutput> {
+        return self.client.execute(operation: "ListConfiguredAudienceModelAssociations", path: "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists configured table associations for a membership.
@@ -223,6 +283,16 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "ListMemberships", path: "/memberships", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns detailed information about the privacy budget templates in a specified membership.
+    public func listPrivacyBudgetTemplates(_ input: ListPrivacyBudgetTemplatesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListPrivacyBudgetTemplatesOutput> {
+        return self.client.execute(operation: "ListPrivacyBudgetTemplates", path: "/memberships/{membershipIdentifier}/privacybudgettemplates", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns detailed information about the privacy budgets in a specified membership.
+    public func listPrivacyBudgets(_ input: ListPrivacyBudgetsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListPrivacyBudgetsOutput> {
+        return self.client.execute(operation: "ListPrivacyBudgets", path: "/memberships/{membershipIdentifier}/privacybudgets", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists protected queries, sorted by the most recent query.
     public func listProtectedQueries(_ input: ListProtectedQueriesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListProtectedQueriesOutput> {
         return self.client.execute(operation: "ListProtectedQueries", path: "/memberships/{membershipIdentifier}/protectedQueries", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -236,6 +306,11 @@ public struct CleanRooms: AWSService {
     /// Lists all of the tags that have been added to a resource.
     public func listTagsForResource(_ input: ListTagsForResourceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceOutput> {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
+    public func previewPrivacyImpact(_ input: PreviewPrivacyImpactInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PreviewPrivacyImpactOutput> {
+        return self.client.execute(operation: "PreviewPrivacyImpact", path: "/memberships/{membershipIdentifier}/previewprivacyimpact", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a protected query that is started by Clean Rooms.
@@ -263,6 +338,11 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "UpdateCollaboration", path: "/collaborations/{collaborationIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Provides the details necessary to update a configured audience model association.
+    public func updateConfiguredAudienceModelAssociation(_ input: UpdateConfiguredAudienceModelAssociationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateConfiguredAudienceModelAssociationOutput> {
+        return self.client.execute(operation: "UpdateConfiguredAudienceModelAssociation", path: "/memberships/{membershipIdentifier}/configuredaudiencemodelassociations/{configuredAudienceModelAssociationIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates a configured table.
     public func updateConfiguredTable(_ input: UpdateConfiguredTableInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateConfiguredTableOutput> {
         return self.client.execute(operation: "UpdateConfiguredTable", path: "/configuredTables/{configuredTableIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -283,6 +363,11 @@ public struct CleanRooms: AWSService {
         return self.client.execute(operation: "UpdateMembership", path: "/memberships/{membershipIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Updates the privacy budget template for the specified membership.
+    public func updatePrivacyBudgetTemplate(_ input: UpdatePrivacyBudgetTemplateInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdatePrivacyBudgetTemplateOutput> {
+        return self.client.execute(operation: "UpdatePrivacyBudgetTemplate", path: "/memberships/{membershipIdentifier}/privacybudgettemplates/{privacyBudgetTemplateIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates the processing of a currently running query.
     public func updateProtectedQuery(_ input: UpdateProtectedQueryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateProtectedQueryOutput> {
         return self.client.execute(operation: "UpdateProtectedQuery", path: "/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -301,6 +386,324 @@ extension CleanRooms {
 // MARK: Paginators
 
 extension CleanRooms {
+    /// Lists configured audience model associations within a collaboration.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listCollaborationConfiguredAudienceModelAssociationsPaginator<Result>(
+        _ input: ListCollaborationConfiguredAudienceModelAssociationsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListCollaborationConfiguredAudienceModelAssociationsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listCollaborationConfiguredAudienceModelAssociations,
+            inputKey: \ListCollaborationConfiguredAudienceModelAssociationsInput.nextToken,
+            outputKey: \ListCollaborationConfiguredAudienceModelAssociationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listCollaborationConfiguredAudienceModelAssociationsPaginator(
+        _ input: ListCollaborationConfiguredAudienceModelAssociationsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListCollaborationConfiguredAudienceModelAssociationsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listCollaborationConfiguredAudienceModelAssociations,
+            inputKey: \ListCollaborationConfiguredAudienceModelAssociationsInput.nextToken,
+            outputKey: \ListCollaborationConfiguredAudienceModelAssociationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns an array that summarizes each privacy budget template in a specified collaboration.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listCollaborationPrivacyBudgetTemplatesPaginator<Result>(
+        _ input: ListCollaborationPrivacyBudgetTemplatesInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListCollaborationPrivacyBudgetTemplatesOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listCollaborationPrivacyBudgetTemplates,
+            inputKey: \ListCollaborationPrivacyBudgetTemplatesInput.nextToken,
+            outputKey: \ListCollaborationPrivacyBudgetTemplatesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listCollaborationPrivacyBudgetTemplatesPaginator(
+        _ input: ListCollaborationPrivacyBudgetTemplatesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListCollaborationPrivacyBudgetTemplatesOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listCollaborationPrivacyBudgetTemplates,
+            inputKey: \ListCollaborationPrivacyBudgetTemplatesInput.nextToken,
+            outputKey: \ListCollaborationPrivacyBudgetTemplatesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns an array that summarizes each privacy budget in a specified collaboration. The summary includes the collaboration ARN, creation time, creating account, and privacy budget details.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listCollaborationPrivacyBudgetsPaginator<Result>(
+        _ input: ListCollaborationPrivacyBudgetsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListCollaborationPrivacyBudgetsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listCollaborationPrivacyBudgets,
+            inputKey: \ListCollaborationPrivacyBudgetsInput.nextToken,
+            outputKey: \ListCollaborationPrivacyBudgetsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listCollaborationPrivacyBudgetsPaginator(
+        _ input: ListCollaborationPrivacyBudgetsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListCollaborationPrivacyBudgetsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listCollaborationPrivacyBudgets,
+            inputKey: \ListCollaborationPrivacyBudgetsInput.nextToken,
+            outputKey: \ListCollaborationPrivacyBudgetsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists information about requested configured audience model associations.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listConfiguredAudienceModelAssociationsPaginator<Result>(
+        _ input: ListConfiguredAudienceModelAssociationsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListConfiguredAudienceModelAssociationsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listConfiguredAudienceModelAssociations,
+            inputKey: \ListConfiguredAudienceModelAssociationsInput.nextToken,
+            outputKey: \ListConfiguredAudienceModelAssociationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listConfiguredAudienceModelAssociationsPaginator(
+        _ input: ListConfiguredAudienceModelAssociationsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListConfiguredAudienceModelAssociationsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listConfiguredAudienceModelAssociations,
+            inputKey: \ListConfiguredAudienceModelAssociationsInput.nextToken,
+            outputKey: \ListConfiguredAudienceModelAssociationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns detailed information about the privacy budget templates in a specified membership.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listPrivacyBudgetTemplatesPaginator<Result>(
+        _ input: ListPrivacyBudgetTemplatesInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListPrivacyBudgetTemplatesOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listPrivacyBudgetTemplates,
+            inputKey: \ListPrivacyBudgetTemplatesInput.nextToken,
+            outputKey: \ListPrivacyBudgetTemplatesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listPrivacyBudgetTemplatesPaginator(
+        _ input: ListPrivacyBudgetTemplatesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListPrivacyBudgetTemplatesOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listPrivacyBudgetTemplates,
+            inputKey: \ListPrivacyBudgetTemplatesInput.nextToken,
+            outputKey: \ListPrivacyBudgetTemplatesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns detailed information about the privacy budgets in a specified membership.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listPrivacyBudgetsPaginator<Result>(
+        _ input: ListPrivacyBudgetsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListPrivacyBudgetsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listPrivacyBudgets,
+            inputKey: \ListPrivacyBudgetsInput.nextToken,
+            outputKey: \ListPrivacyBudgetsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listPrivacyBudgetsPaginator(
+        _ input: ListPrivacyBudgetsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListPrivacyBudgetsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listPrivacyBudgets,
+            inputKey: \ListPrivacyBudgetsInput.nextToken,
+            outputKey: \ListPrivacyBudgetsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists protected queries, sorted by the most recent query.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -351,6 +754,68 @@ extension CleanRooms {
             outputKey: \ListProtectedQueriesOutput.nextToken,
             on: eventLoop,
             onPage: onPage
+        )
+    }
+}
+
+extension CleanRooms.ListCollaborationConfiguredAudienceModelAssociationsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListCollaborationConfiguredAudienceModelAssociationsInput {
+        return .init(
+            collaborationIdentifier: self.collaborationIdentifier,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension CleanRooms.ListCollaborationPrivacyBudgetTemplatesInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListCollaborationPrivacyBudgetTemplatesInput {
+        return .init(
+            collaborationIdentifier: self.collaborationIdentifier,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension CleanRooms.ListCollaborationPrivacyBudgetsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListCollaborationPrivacyBudgetsInput {
+        return .init(
+            collaborationIdentifier: self.collaborationIdentifier,
+            maxResults: self.maxResults,
+            nextToken: token,
+            privacyBudgetType: self.privacyBudgetType
+        )
+    }
+}
+
+extension CleanRooms.ListConfiguredAudienceModelAssociationsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListConfiguredAudienceModelAssociationsInput {
+        return .init(
+            maxResults: self.maxResults,
+            membershipIdentifier: self.membershipIdentifier,
+            nextToken: token
+        )
+    }
+}
+
+extension CleanRooms.ListPrivacyBudgetTemplatesInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListPrivacyBudgetTemplatesInput {
+        return .init(
+            maxResults: self.maxResults,
+            membershipIdentifier: self.membershipIdentifier,
+            nextToken: token
+        )
+    }
+}
+
+extension CleanRooms.ListPrivacyBudgetsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CleanRooms.ListPrivacyBudgetsInput {
+        return .init(
+            maxResults: self.maxResults,
+            membershipIdentifier: self.membershipIdentifier,
+            nextToken: token,
+            privacyBudgetType: self.privacyBudgetType
         )
     }
 }

@@ -21,14 +21,24 @@ import SotoCore
 extension FIS {
     // MARK: Async API Calls
 
-    /// Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in  your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see Experiment templates in the Fault Injection Simulator User Guide.
+    /// Creates an experiment template.  An experiment template includes the following components:    Targets: A target can be a specific resource in  your Amazon Web Services environment, or one or more resources that match criteria that you specify, for example, resources that have specific tags.    Actions: The actions to carry out on the target. You can specify multiple actions, the duration of each action, and when to start each action during an experiment.    Stop conditions: If a stop condition is triggered while an experiment is running, the experiment is automatically stopped. You can define a stop condition as a CloudWatch alarm.   For more information, see experiment templates in the Fault Injection Simulator User Guide.
     public func createExperimentTemplate(_ input: CreateExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateExperimentTemplateResponse {
         return try await self.client.execute(operation: "CreateExperimentTemplate", path: "/experimentTemplates", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a target account configuration for the experiment template. A target account configuration is required when accountTargeting of experimentOptions is set to multi-account. For more information, see experiment options in the Fault Injection Simulator User Guide.
+    public func createTargetAccountConfiguration(_ input: CreateTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateTargetAccountConfigurationResponse {
+        return try await self.client.execute(operation: "CreateTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes the specified experiment template.
     public func deleteExperimentTemplate(_ input: DeleteExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteExperimentTemplateResponse {
         return try await self.client.execute(operation: "DeleteExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the specified target account configuration of the experiment template.
+    public func deleteTargetAccountConfiguration(_ input: DeleteTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteTargetAccountConfigurationResponse {
+        return try await self.client.execute(operation: "DeleteTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about the specified FIS action.
@@ -41,9 +51,19 @@ extension FIS {
         return try await self.client.execute(operation: "GetExperiment", path: "/experiments/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets information about the specified target account configuration of the experiment.
+    public func getExperimentTargetAccountConfiguration(_ input: GetExperimentTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetExperimentTargetAccountConfigurationResponse {
+        return try await self.client.execute(operation: "GetExperimentTargetAccountConfiguration", path: "/experiments/{experimentId}/targetAccountConfigurations/{accountId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Gets information about the specified experiment template.
     public func getExperimentTemplate(_ input: GetExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetExperimentTemplateResponse {
         return try await self.client.execute(operation: "GetExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets information about the specified target account configuration of the experiment template.
+    public func getTargetAccountConfiguration(_ input: GetTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetTargetAccountConfigurationResponse {
+        return try await self.client.execute(operation: "GetTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about the specified resource type.
@@ -54,6 +74,16 @@ extension FIS {
     /// Lists the available FIS actions.
     public func listActions(_ input: ListActionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListActionsResponse {
         return try await self.client.execute(operation: "ListActions", path: "/actions", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the resolved targets information of the specified experiment.
+    public func listExperimentResolvedTargets(_ input: ListExperimentResolvedTargetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListExperimentResolvedTargetsResponse {
+        return try await self.client.execute(operation: "ListExperimentResolvedTargets", path: "/experiments/{experimentId}/resolvedTargets", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the target account configurations of the specified experiment.
+    public func listExperimentTargetAccountConfigurations(_ input: ListExperimentTargetAccountConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListExperimentTargetAccountConfigurationsResponse {
+        return try await self.client.execute(operation: "ListExperimentTargetAccountConfigurations", path: "/experiments/{experimentId}/targetAccountConfigurations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists your experiment templates.
@@ -69,6 +99,11 @@ extension FIS {
     /// Lists the tags for the specified resource.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTagsForResourceResponse {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the target account configurations of the specified experiment template.
+    public func listTargetAccountConfigurations(_ input: ListTargetAccountConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTargetAccountConfigurationsResponse {
+        return try await self.client.execute(operation: "ListTargetAccountConfigurations", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the target resource types.
@@ -100,6 +135,11 @@ extension FIS {
     public func updateExperimentTemplate(_ input: UpdateExperimentTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateExperimentTemplateResponse {
         return try await self.client.execute(operation: "UpdateExperimentTemplate", path: "/experimentTemplates/{id}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
+
+    /// Updates the target account configuration for the specified experiment template.
+    public func updateTargetAccountConfiguration(_ input: UpdateTargetAccountConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateTargetAccountConfigurationResponse {
+        return try await self.client.execute(operation: "UpdateTargetAccountConfiguration", path: "/experimentTemplates/{experimentTemplateId}/targetAccountConfigurations/{accountId}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
 }
 
 // MARK: Paginators
@@ -123,6 +163,28 @@ extension FIS {
             command: self.listActions,
             inputKey: \ListActionsRequest.nextToken,
             outputKey: \ListActionsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Lists the resolved targets information of the specified experiment.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listExperimentResolvedTargetsPaginator(
+        _ input: ListExperimentResolvedTargetsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListExperimentResolvedTargetsRequest, ListExperimentResolvedTargetsResponse> {
+        return .init(
+            input: input,
+            command: self.listExperimentResolvedTargets,
+            inputKey: \ListExperimentResolvedTargetsRequest.nextToken,
+            outputKey: \ListExperimentResolvedTargetsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )
@@ -167,6 +229,28 @@ extension FIS {
             command: self.listExperiments,
             inputKey: \ListExperimentsRequest.nextToken,
             outputKey: \ListExperimentsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Lists the target account configurations of the specified experiment template.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listTargetAccountConfigurationsPaginator(
+        _ input: ListTargetAccountConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListTargetAccountConfigurationsRequest, ListTargetAccountConfigurationsResponse> {
+        return .init(
+            input: input,
+            command: self.listTargetAccountConfigurations,
+            inputKey: \ListTargetAccountConfigurationsRequest.nextToken,
+            outputKey: \ListTargetAccountConfigurationsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

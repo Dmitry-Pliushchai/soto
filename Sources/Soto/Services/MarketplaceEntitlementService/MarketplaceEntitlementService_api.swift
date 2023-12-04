@@ -79,3 +79,71 @@ extension MarketplaceEntitlementService {
         self.config = from.config.with(patch: patch)
     }
 }
+
+// MARK: Paginators
+
+extension MarketplaceEntitlementService {
+    /// GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func getEntitlementsPaginator<Result>(
+        _ input: GetEntitlementsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, GetEntitlementsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.getEntitlements,
+            inputKey: \GetEntitlementsRequest.nextToken,
+            outputKey: \GetEntitlementsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func getEntitlementsPaginator(
+        _ input: GetEntitlementsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (GetEntitlementsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.getEntitlements,
+            inputKey: \GetEntitlementsRequest.nextToken,
+            outputKey: \GetEntitlementsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+}
+
+extension MarketplaceEntitlementService.GetEntitlementsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> MarketplaceEntitlementService.GetEntitlementsRequest {
+        return .init(
+            filter: self.filter,
+            maxResults: self.maxResults,
+            nextToken: token,
+            productCode: self.productCode
+        )
+    }
+}

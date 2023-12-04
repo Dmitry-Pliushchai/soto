@@ -26,3 +26,30 @@ extension MarketplaceEntitlementService {
         return try await self.client.execute(operation: "GetEntitlements", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
+
+// MARK: Paginators
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension MarketplaceEntitlementService {
+    /// GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func getEntitlementsPaginator(
+        _ input: GetEntitlementsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<GetEntitlementsRequest, GetEntitlementsResult> {
+        return .init(
+            input: input,
+            command: self.getEntitlements,
+            inputKey: \GetEntitlementsRequest.nextToken,
+            outputKey: \GetEntitlementsResult.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+}

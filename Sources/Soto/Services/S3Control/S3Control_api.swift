@@ -131,12 +131,32 @@ public struct S3Control: AWSService {
 
     // MARK: API Calls
 
-    /// Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon S3 User Guide.   S3 on Outposts only supports VPC-style access points.  For more information, see  Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points in the Amazon S3 User Guide.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints
+    /// Associate your S3 Access Grants instance with an Amazon Web Services IAM Identity Center instance. Use this action if you want to create access grants for users or groups from your corporate identity directory. First, you must add your corporate identity directory to Amazon Web Services IAM Identity Center. Then, you can associate this IAM Identity Center instance with your S3 Access Grants instance.  Permissions  You must have the s3:AssociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must also have the following permissions: sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod.
+    @discardableResult public func associateAccessGrantsIdentityCenter(_ input: AssociateAccessGrantsIdentityCenterRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "AssociateAccessGrantsIdentityCenter", path: "/v20180820/accessgrantsinstance/identitycenter", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Creates an access grant that gives a grantee access to your S3 data. The grantee can be an IAM user or role or a directory user, or group. Before you can create a grant, you must have an S3 Access Grants instance in the same Region as the S3 data. You can create an S3 Access Grants instance using the CreateAccessGrantsInstance. You must also have registered at least one S3 data location in your S3 Access Grants instance using CreateAccessGrantsLocation.    Permissions  You must have the s3:CreateAccessGrant permission to use this operation.   Additional Permissions  For any directory identity - sso:DescribeInstance and sso:DescribeApplication  For directory users - identitystore:DescribeUser  For directory groups - identitystore:DescribeGroup
+    public func createAccessGrant(_ input: CreateAccessGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessGrantResult> {
+        return self.client.execute(operation: "CreateAccessGrant", path: "/v20180820/accessgrantsinstance/grant", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Creates an S3 Access Grants instance, which serves as a logical grouping for access grants. You can create one S3 Access Grants instance per Region per account.   Permissions  You must have the s3:CreateAccessGrantsInstance permission to use this operation.   Additional Permissions  To associate an IAM Identity Center instance with your S3 Access Grants instance, you must also have the sso:DescribeInstance, sso:CreateApplication, sso:PutApplicationGrant, and sso:PutApplicationAuthenticationMethod permissions.
+    public func createAccessGrantsInstance(_ input: CreateAccessGrantsInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessGrantsInstanceResult> {
+        return self.client.execute(operation: "CreateAccessGrantsInstance", path: "/v20180820/accessgrantsinstance", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// The S3 data location that you would like to register in your S3 Access Grants instance. Your S3 data must be in the same Region as your S3 Access Grants instance. The location can be one of the following:    The default S3 location s3://    A bucket - S3://    A bucket and prefix - S3:///    When you register a location, you must include the IAM role that has permission to manage the S3 location that you are registering. Give S3 Access Grants permission to assume this role using a policy. S3 Access Grants assumes this role to manage access to the location and to vend temporary credentials to grantees or client applications.   Permissions  You must have the s3:CreateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission for the specified IAM role: iam:PassRole
+    public func createAccessGrantsLocation(_ input: CreateAccessGrantsLocationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessGrantsLocationResult> {
+        return self.client.execute(operation: "CreateAccessGrantsLocation", path: "/v20180820/accessgrantsinstance/location", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation is not supported by directory buckets.  Creates an access point and associates it with the specified bucket. For more information, see Managing Data Access with Amazon S3 Access Points in the Amazon S3 User Guide.   S3 on Outposts only supports VPC-style access points.  For more information, see  Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points in the Amazon S3 User Guide.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section.  The following actions are related to CreateAccessPoint:    GetAccessPoint     DeleteAccessPoint     ListAccessPoints
     public func createAccessPoint(_ input: CreateAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessPointResult> {
         return self.client.execute(operation: "CreateAccessPoint", path: "/v20180820/accesspoint/{Name}", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Creates an Object Lambda Access Point. For more information, see Transforming objects with Object Lambda Access Points in the Amazon S3 User Guide. The following actions are related to CreateAccessPointForObjectLambda:    DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda
+    ///  This operation is not supported by directory buckets.  Creates an Object Lambda Access Point. For more information, see Transforming objects with Object Lambda Access Points in the Amazon S3 User Guide. The following actions are related to CreateAccessPointForObjectLambda:    DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda
     public func createAccessPointForObjectLambda(_ input: CreateAccessPointForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateAccessPointForObjectLambdaResult> {
         return self.client.execute(operation: "CreateAccessPointForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -146,32 +166,57 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "CreateBucket", path: "/v20180820/bucket/{Bucket}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// You can use S3 Batch Operations to perform large-scale batch actions on Amazon S3 objects. Batch Operations can run a single action on lists of Amazon S3 objects that you specify. For more information, see S3 Batch Operations in the Amazon S3 User Guide. This action creates a S3 Batch Operations job.  Related actions include:    DescribeJob     ListJobs     UpdateJobPriority     UpdateJobStatus     JobOperation
+    /// This operation creates an S3 Batch Operations job. You can use S3 Batch Operations to perform large-scale batch actions on Amazon S3 objects. Batch Operations can run a single action on lists of Amazon S3 objects that you specify. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  For information about permissions required to use the Batch Operations, see Granting permissions for S3 Batch Operations in the Amazon S3 User Guide.    Related actions include:    DescribeJob     ListJobs     UpdateJobPriority     UpdateJobStatus     JobOperation
     public func createJob(_ input: CreateJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateJobResult> {
         return self.client.execute(operation: "CreateJob", path: "/v20180820/jobs", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see Creating Multi-Region Access Points in the Amazon S3 User Guide. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to CreateMultiRegionAccessPoint:    DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
+    ///  This operation is not supported by directory buckets.  Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see Creating Multi-Region Access Points in the Amazon S3 User Guide. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to CreateMultiRegionAccessPoint:    DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
     public func createMultiRegionAccessPoint(_ input: CreateMultiRegionAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateMultiRegionAccessPointResult> {
         return self.client.execute(operation: "CreateMultiRegionAccessPoint", path: "/v20180820/async-requests/mrap/create", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPoint:    CreateAccessPoint     GetAccessPoint     ListAccessPoints
+    ///  Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID. An S3 Storage Lens group is a custom grouping of objects based on prefix, suffix, object tags, object size, object age, or a combination of these filters. For each Storage Lens group that you’ve created, you can also optionally add Amazon Web Services resource tags. For more information about S3 Storage Lens groups, see Working with S3 Storage Lens groups. To use this operation, you must have the permission to perform the s3:CreateStorageLensGroup action. If you’re trying to create a Storage Lens group with Amazon Web Services resource tags, you must also have permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    @discardableResult public func createStorageLensGroup(_ input: CreateStorageLensGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "CreateStorageLensGroup", path: "/v20180820/storagelensgroup", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the access grant from the S3 Access Grants instance. You cannot undo an access grant deletion and the grantee will no longer have access to the S3 data.  Permissions  You must have the s3:DeleteAccessGrant permission to use this operation.
+    @discardableResult public func deleteAccessGrant(_ input: DeleteAccessGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteAccessGrant", path: "/v20180820/accessgrantsinstance/grant/{AccessGrantId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Deletes your S3 Access Grants instance. You must first delete the access grants and locations before S3 Access Grants can delete the instance. See DeleteAccessGrant and DeleteAccessGrantsLocation. If you have associated an IAM Identity Center instance with your S3 Access Grants instance, you must first dissassociate the Identity Center instance from the S3 Access Grants instance before you can delete the S3 Access Grants instance. See AssociateAccessGrantsIdentityCenter and DissociateAccessGrantsIdentityCenter.  Permissions  You must have the s3:DeleteAccessGrantsInstance permission to use this operation.
+    @discardableResult public func deleteAccessGrantsInstance(_ input: DeleteAccessGrantsInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteAccessGrantsInstance", path: "/v20180820/accessgrantsinstance", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the resource policy of the S3 Access Grants instance. The resource policy is used to manage cross-account access to your S3 Access Grants instance. By deleting the resource policy, you delete any cross-account permissions to your S3 Access Grants instance.   Permissions  You must have the s3:DeleteAccessGrantsInstanceResourcePolicy permission to use this operation.
+    @discardableResult public func deleteAccessGrantsInstanceResourcePolicy(_ input: DeleteAccessGrantsInstanceResourcePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteAccessGrantsInstanceResourcePolicy", path: "/v20180820/accessgrantsinstance/resourcepolicy", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Deregisters a location from your S3 Access Grants instance. You can only delete a location registration from an S3 Access Grants instance if there are no grants associated with this location. See Delete a grant for information on how to delete grants. You need to have at least one registered location in your S3 Access Grants instance in order to create access grants.   Permissions  You must have the s3:DeleteAccessGrantsLocation permission to use this operation.
+    @discardableResult public func deleteAccessGrantsLocation(_ input: DeleteAccessGrantsLocationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteAccessGrantsLocation", path: "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation is not supported by directory buckets.  Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPoint:    CreateAccessPoint     GetAccessPoint     ListAccessPoints
     @discardableResult public func deleteAccessPoint(_ input: DeleteAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteAccessPoint", path: "/v20180820/accesspoint/{Name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes the specified Object Lambda Access Point. The following actions are related to DeleteAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda
+    ///  This operation is not supported by directory buckets.  Deletes the specified Object Lambda Access Point. The following actions are related to DeleteAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     GetAccessPointForObjectLambda     ListAccessPointsForObjectLambda
     @discardableResult public func deleteAccessPointForObjectLambda(_ input: DeleteAccessPointForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteAccessPointForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes the access point policy for the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPointPolicy:    PutAccessPointPolicy     GetAccessPointPolicy
+    ///  This operation is not supported by directory buckets.  Deletes the access point policy for the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPointPolicy:    PutAccessPointPolicy     GetAccessPointPolicy
     @discardableResult public func deleteAccessPointPolicy(_ input: DeleteAccessPointPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteAccessPointPolicy", path: "/v20180820/accesspoint/{Name}/policy", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Removes the resource policy for an Object Lambda Access Point. The following actions are related to DeleteAccessPointPolicyForObjectLambda:    GetAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda
+    ///  This operation is not supported by directory buckets.  Removes the resource policy for an Object Lambda Access Point. The following actions are related to DeleteAccessPointPolicyForObjectLambda:    GetAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda
     @discardableResult public func deleteAccessPointPolicyForObjectLambda(_ input: DeleteAccessPointPolicyForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteAccessPointPolicyForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/policy", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -181,7 +226,7 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "DeleteBucket", path: "/v20180820/bucket/{Bucket}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    ///  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this action, you must have permission to perform the s3-outposts:DeleteLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration
+    ///  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this operation, you must have permission to perform the s3-outposts:PutLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration
     @discardableResult public func deleteBucketLifecycleConfiguration(_ input: DeleteBucketLifecycleConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteBucketLifecycleConfiguration", path: "/v20180820/bucket/{Bucket}/lifecycleconfiguration", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -201,77 +246,112 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "DeleteBucketTagging", path: "/v20180820/bucket/{Bucket}/tagging", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Removes the entire tag set from the specified S3 Batch Operations job. To use the DeleteJobTagging operation, you must have permission to perform the s3:DeleteJobTagging action. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.  Related actions include:    CreateJob     GetJobTagging     PutJobTagging
+    /// Removes the entire tag set from the specified S3 Batch Operations job.  Permissions  To use the DeleteJobTagging operation, you must have permission to perform the s3:DeleteJobTagging action. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.   Related actions include:    CreateJob     GetJobTagging     PutJobTagging
     public func deleteJobTagging(_ input: DeleteJobTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteJobTaggingResult> {
         return self.client.execute(operation: "DeleteJobTagging", path: "/v20180820/jobs/{JobId}/tagging", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to DeleteMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
+    ///  This operation is not supported by directory buckets.  Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to DeleteMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
     public func deleteMultiRegionAccessPoint(_ input: DeleteMultiRegionAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteMultiRegionAccessPointResult> {
         return self.client.execute(operation: "DeleteMultiRegionAccessPoint", path: "/v20180820/async-requests/mrap/delete", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Removes the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock
+    ///  This operation is not supported by directory buckets.  Removes the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock
     @discardableResult public func deletePublicAccessBlock(_ input: DeletePublicAccessBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeletePublicAccessBlock", path: "/v20180820/configuration/publicAccessBlock", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes the Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Deletes the Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:DeleteStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     @discardableResult public func deleteStorageLensConfiguration(_ input: DeleteStorageLensConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteStorageLensConfiguration", path: "/v20180820/storagelens/{ConfigId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:DeleteStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:DeleteStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     public func deleteStorageLensConfigurationTagging(_ input: DeleteStorageLensConfigurationTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteStorageLensConfigurationTaggingResult> {
         return self.client.execute(operation: "DeleteStorageLensConfigurationTagging", path: "/v20180820/storagelens/{ConfigId}/tagging", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus
+    /// Deletes an existing S3 Storage Lens group. To use this operation, you must have the permission to perform the s3:DeleteStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    @discardableResult public func deleteStorageLensGroup(_ input: DeleteStorageLensGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteStorageLensGroup", path: "/v20180820/storagelensgroup/{Name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  To use the DescribeJob operation, you must have permission to perform the s3:DescribeJob action.   Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus
     public func describeJob(_ input: DescribeJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeJobResult> {
         return self.client.execute(operation: "DescribeJob", path: "/v20180820/jobs/{JobId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
+    ///  This operation is not supported by directory buckets.  Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints
     public func describeMultiRegionAccessPointOperation(_ input: DescribeMultiRegionAccessPointOperationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeMultiRegionAccessPointOperationResult> {
         return self.client.execute(operation: "DescribeMultiRegionAccessPointOperation", path: "/v20180820/async-requests/mrap/{RequestTokenARN+}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns configuration information about the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to GetAccessPoint:    CreateAccessPoint     DeleteAccessPoint     ListAccessPoints
+    /// Dissociates the Amazon Web Services IAM Identity Center instance from the S3 Access Grants instance.   Permissions  You must have the s3:DissociateAccessGrantsIdentityCenter permission to use this operation.   Additional Permissions  You must have the sso:DeleteApplication permission to use this operation.
+    @discardableResult public func dissociateAccessGrantsIdentityCenter(_ input: DissociateAccessGrantsIdentityCenterRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DissociateAccessGrantsIdentityCenter", path: "/v20180820/accessgrantsinstance/identitycenter", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Get the details of an access grant from your S3 Access Grants instance.  Permissions  You must have the s3:GetAccessGrant permission to use this operation.
+    public func getAccessGrant(_ input: GetAccessGrantRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessGrantResult> {
+        return self.client.execute(operation: "GetAccessGrant", path: "/v20180820/accessgrantsinstance/grant/{AccessGrantId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the S3 Access Grants instance for a Region in your account.   Permissions  You must have the s3:GetAccessGrantsInstance permission to use this operation.
+    public func getAccessGrantsInstance(_ input: GetAccessGrantsInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessGrantsInstanceResult> {
+        return self.client.execute(operation: "GetAccessGrantsInstance", path: "/v20180820/accessgrantsinstance", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Retrieve the S3 Access Grants instance that contains a particular prefix.    Permissions  You must have the s3:GetAccessGrantsInstanceForPrefix permission for the caller account to use this operation.   Additional Permissions  The prefix owner account must grant you the following permissions to their S3 Access Grants instance: s3:GetAccessGrantsInstanceForPrefix.
+    public func getAccessGrantsInstanceForPrefix(_ input: GetAccessGrantsInstanceForPrefixRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessGrantsInstanceForPrefixResult> {
+        return self.client.execute(operation: "GetAccessGrantsInstanceForPrefix", path: "/v20180820/accessgrantsinstance/prefix", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Returns the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsInstanceResourcePolicy permission to use this operation.
+    public func getAccessGrantsInstanceResourcePolicy(_ input: GetAccessGrantsInstanceResourcePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessGrantsInstanceResourcePolicyResult> {
+        return self.client.execute(operation: "GetAccessGrantsInstanceResourcePolicy", path: "/v20180820/accessgrantsinstance/resourcepolicy", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the details of a particular location registered in your S3 Access Grants instance.   Permissions  You must have the s3:GetAccessGrantsLocation permission to use this operation.
+    public func getAccessGrantsLocation(_ input: GetAccessGrantsLocationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessGrantsLocationResult> {
+        return self.client.execute(operation: "GetAccessGrantsLocation", path: "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation is not supported by directory buckets.  Returns configuration information about the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to GetAccessPoint:    CreateAccessPoint     DeleteAccessPoint     ListAccessPoints
     public func getAccessPoint(_ input: GetAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointResult> {
         return self.client.execute(operation: "GetAccessPoint", path: "/v20180820/accesspoint/{Name}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns configuration for an Object Lambda Access Point. The following actions are related to GetAccessPointConfigurationForObjectLambda:    PutAccessPointConfigurationForObjectLambda
+    ///  This operation is not supported by directory buckets.  Returns configuration for an Object Lambda Access Point. The following actions are related to GetAccessPointConfigurationForObjectLambda:    PutAccessPointConfigurationForObjectLambda
     public func getAccessPointConfigurationForObjectLambda(_ input: GetAccessPointConfigurationForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointConfigurationForObjectLambdaResult> {
         return self.client.execute(operation: "GetAccessPointConfigurationForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/configuration", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns configuration information about the specified Object Lambda Access Point The following actions are related to GetAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     ListAccessPointsForObjectLambda
+    ///  This operation is not supported by directory buckets.  Returns configuration information about the specified Object Lambda Access Point The following actions are related to GetAccessPointForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     ListAccessPointsForObjectLambda
     public func getAccessPointForObjectLambda(_ input: GetAccessPointForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointForObjectLambdaResult> {
         return self.client.execute(operation: "GetAccessPointForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the access point policy associated with the specified access point. The following actions are related to GetAccessPointPolicy:    PutAccessPointPolicy     DeleteAccessPointPolicy
+    ///  This operation is not supported by directory buckets.  Returns the access point policy associated with the specified access point. The following actions are related to GetAccessPointPolicy:    PutAccessPointPolicy     DeleteAccessPointPolicy
     public func getAccessPointPolicy(_ input: GetAccessPointPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointPolicyResult> {
         return self.client.execute(operation: "GetAccessPointPolicy", path: "/v20180820/accesspoint/{Name}/policy", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the resource policy for an Object Lambda Access Point. The following actions are related to GetAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda
+    ///  This operation is not supported by directory buckets.  Returns the resource policy for an Object Lambda Access Point. The following actions are related to GetAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     PutAccessPointPolicyForObjectLambda
     public func getAccessPointPolicyForObjectLambda(_ input: GetAccessPointPolicyForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointPolicyForObjectLambdaResult> {
         return self.client.execute(operation: "GetAccessPointPolicyForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/policy", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see Managing Data Access with Amazon S3 access points in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Indicates whether the specified access point currently has a policy that allows public access. For more information about public access through access points, see Managing Data Access with Amazon S3 access points in the Amazon S3 User Guide.
     public func getAccessPointPolicyStatus(_ input: GetAccessPointPolicyStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointPolicyStatusResult> {
         return self.client.execute(operation: "GetAccessPointPolicyStatus", path: "/v20180820/accesspoint/{Name}/policyStatus", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the status of the resource policy associated with an Object Lambda Access Point.
+    ///  This operation is not supported by directory buckets.  Returns the status of the resource policy associated with an Object Lambda Access Point.
     public func getAccessPointPolicyStatusForObjectLambda(_ input: GetAccessPointPolicyStatusForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetAccessPointPolicyStatusForObjectLambdaResult> {
         return self.client.execute(operation: "GetAccessPointPolicyStatusForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/policyStatus", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.  If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket
+    ///  Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide.  If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.  If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket
     public func getBucket(_ input: GetBucketRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetBucketResult> {
         return self.client.execute(operation: "GetBucket", path: "/v20180820/bucket/{Bucket}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -301,87 +381,128 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "GetBucketVersioning", path: "/v20180820/bucket/{Bucket}/versioning", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the tags on an S3 Batch Operations job. To use the GetJobTagging operation, you must have permission to perform the s3:GetJobTagging action. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.  Related actions include:    CreateJob     PutJobTagging     DeleteJobTagging
+    /// Returns a temporary access credential from S3 Access Grants to the grantee or client application. The temporary credential is an Amazon Web Services STS token that grants them access to the S3 data.   Permissions  You must have the s3:GetDataAccess permission to use this operation.   Additional Permissions  The IAM role that S3 Access Grants assumes must have the following permissions specified in the trust policy when registering the location: sts:AssumeRole, for directory users or groups sts:SetContext, and for IAM users or roles sts:SourceIdentity.
+    public func getDataAccess(_ input: GetDataAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDataAccessResult> {
+        return self.client.execute(operation: "GetDataAccess", path: "/v20180820/accessgrantsinstance/dataaccess", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Returns the tags on an S3 Batch Operations job.   Permissions  To use the GetJobTagging operation, you must have permission to perform the s3:GetJobTagging action. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.   Related actions include:    CreateJob     PutJobTagging     DeleteJobTagging
     public func getJobTagging(_ input: GetJobTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetJobTaggingResult> {
         return self.client.execute(operation: "GetJobTagging", path: "/v20180820/jobs/{JobId}/tagging", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns configuration information about the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     ListMultiRegionAccessPoints
+    ///  This operation is not supported by directory buckets.  Returns configuration information about the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     ListMultiRegionAccessPoints
     public func getMultiRegionAccessPoint(_ input: GetMultiRegionAccessPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMultiRegionAccessPointResult> {
         return self.client.execute(operation: "GetMultiRegionAccessPoint", path: "/v20180820/mrap/instances/{Name+}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the access control policy of the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicyStatus     PutMultiRegionAccessPointPolicy
+    ///  This operation is not supported by directory buckets.  Returns the access control policy of the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicyStatus     PutMultiRegionAccessPointPolicy
     public func getMultiRegionAccessPointPolicy(_ input: GetMultiRegionAccessPointPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMultiRegionAccessPointPolicyResult> {
         return self.client.execute(operation: "GetMultiRegionAccessPointPolicy", path: "/v20180820/mrap/instances/{Name+}/policy", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicyStatus:    GetMultiRegionAccessPointPolicy     PutMultiRegionAccessPointPolicy
+    ///  This operation is not supported by directory buckets.  Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicyStatus:    GetMultiRegionAccessPointPolicy     PutMultiRegionAccessPointPolicy
     public func getMultiRegionAccessPointPolicyStatus(_ input: GetMultiRegionAccessPointPolicyStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMultiRegionAccessPointPolicyStatusResult> {
         return self.client.execute(operation: "GetMultiRegionAccessPointPolicyStatus", path: "/v20180820/mrap/instances/{Name+}/policystatus", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns the routing configuration for a Multi-Region Access Point, indicating which Regions are active or passive. To obtain routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions.
+    ///  This operation is not supported by directory buckets.  Returns the routing configuration for a Multi-Region Access Point, indicating which Regions are active or passive. To obtain routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions.
     public func getMultiRegionAccessPointRoutes(_ input: GetMultiRegionAccessPointRoutesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMultiRegionAccessPointRoutesResult> {
         return self.client.execute(operation: "GetMultiRegionAccessPointRoutes", path: "/v20180820/mrap/instances/{Mrap+}/routes", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Retrieves the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock
+    ///  This operation is not supported by directory buckets.  Retrieves the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock
     public func getPublicAccessBlock(_ input: GetPublicAccessBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetPublicAccessBlockOutput> {
         return self.client.execute(operation: "GetPublicAccessBlock", path: "/v20180820/configuration/publicAccessBlock", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Gets the Amazon S3 Storage Lens configuration. For more information, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     public func getStorageLensConfiguration(_ input: GetStorageLensConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetStorageLensConfigurationResult> {
         return self.client.execute(operation: "GetStorageLensConfiguration", path: "/v20180820/storagelens/{ConfigId}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Gets the tags of Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Gets the tags of Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:GetStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     public func getStorageLensConfigurationTagging(_ input: GetStorageLensConfigurationTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetStorageLensConfigurationTaggingResult> {
         return self.client.execute(operation: "GetStorageLensConfigurationTagging", path: "/v20180820/storagelens/{ConfigId}/tagging", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint
+    /// Retrieves the Storage Lens group configuration details. To use this operation, you must have the permission to perform the s3:GetStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    public func getStorageLensGroup(_ input: GetStorageLensGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetStorageLensGroupResult> {
+        return self.client.execute(operation: "GetStorageLensGroup", path: "/v20180820/storagelensgroup/{Name}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Returns the list of access grants in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrants permission to use this operation.
+    public func listAccessGrants(_ input: ListAccessGrantsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessGrantsResult> {
+        return self.client.execute(operation: "ListAccessGrants", path: "/v20180820/accessgrantsinstance/grants", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.  Permissions  You must have the s3:ListAccessGrantsInstances permission to use this operation.
+    public func listAccessGrantsInstances(_ input: ListAccessGrantsInstancesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessGrantsInstancesResult> {
+        return self.client.execute(operation: "ListAccessGrantsInstances", path: "/v20180820/accessgrantsinstances", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of the locations registered in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrantsLocations permission to use this operation.
+    public func listAccessGrantsLocations(_ input: ListAccessGrantsLocationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessGrantsLocationsResult> {
+        return self.client.execute(operation: "ListAccessGrantsLocations", path: "/v20180820/accessgrantsinstance/locations", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation is not supported by directory buckets.  Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint
     public func listAccessPoints(_ input: ListAccessPointsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessPointsResult> {
         return self.client.execute(operation: "ListAccessPoints", path: "/v20180820/accesspoint", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda
+    ///  This operation is not supported by directory buckets.  Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda
     public func listAccessPointsForObjectLambda(_ input: ListAccessPointsForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessPointsForObjectLambdaResult> {
         return self.client.execute(operation: "ListAccessPointsForObjectLambda", path: "/v20180820/accesspointforobjectlambda", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus
+    /// Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  To use the ListJobs operation, you must have permission to perform the s3:ListJobs action.   Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus
     public func listJobs(_ input: ListJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListJobsResult> {
         return self.client.execute(operation: "ListJobs", path: "/v20180820/jobs", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint
+    ///  This operation is not supported by directory buckets.  Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint
     public func listMultiRegionAccessPoints(_ input: ListMultiRegionAccessPointsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListMultiRegionAccessPointsResult> {
         return self.client.execute(operation: "ListMultiRegionAccessPoints", path: "/v20180820/mrap/instances", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see the Examples section.
+    ///  This operation is not supported by directory buckets.  Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see the Examples section.
     public func listRegionalBuckets(_ input: ListRegionalBucketsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRegionalBucketsResult> {
         return self.client.execute(operation: "ListRegionalBuckets", path: "/v20180820/bucket", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     public func listStorageLensConfigurations(_ input: ListStorageLensConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListStorageLensConfigurationsResult> {
         return self.client.execute(operation: "ListStorageLensConfigurations", path: "/v20180820/storagelens", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda
+    /// Lists all the Storage Lens groups in the specified home Region.
+    ///  To use this operation, you must have the permission to perform the s3:ListStorageLensGroups action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    public func listStorageLensGroups(_ input: ListStorageLensGroupsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListStorageLensGroupsResult> {
+        return self.client.execute(operation: "ListStorageLensGroups", path: "/v20180820/storagelensgroup", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// This operation allows you to list all the Amazon Web Services resource tags for a specified resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   Permissions  You must have the s3:ListTagsForResource permission to use this operation.     This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.   For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
+    public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceResult> {
+        return self.client.execute(operation: "ListTagsForResource", path: "/v20180820/tags/{ResourceArn+}", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Updates the resource policy of the S3 Access Grants instance.   Permissions  You must have the s3:PutAccessGrantsInstanceResourcePolicy permission to use this operation.
+    public func putAccessGrantsInstanceResourcePolicy(_ input: PutAccessGrantsInstanceResourcePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutAccessGrantsInstanceResourcePolicyResult> {
+        return self.client.execute(operation: "PutAccessGrantsInstanceResourcePolicy", path: "/v20180820/accessgrantsinstance/resourcepolicy", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation is not supported by directory buckets.  Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda
     @discardableResult public func putAccessPointConfigurationForObjectLambda(_ input: PutAccessPointConfigurationForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutAccessPointConfigurationForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/configuration", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to PutAccessPointPolicy:    GetAccessPointPolicy     DeleteAccessPointPolicy
+    ///  This operation is not supported by directory buckets.  Associates an access policy with the specified access point. Each access point can have only one policy, so a request made to this API replaces any existing policy associated with the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to PutAccessPointPolicy:    GetAccessPointPolicy     DeleteAccessPointPolicy
     @discardableResult public func putAccessPointPolicy(_ input: PutAccessPointPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutAccessPointPolicy", path: "/v20180820/accesspoint/{Name}/policy", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Creates or replaces resource policy for an Object Lambda Access Point. For an example policy, see Creating Object Lambda Access Points in the Amazon S3 User Guide. The following actions are related to PutAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     GetAccessPointPolicyForObjectLambda
+    ///  This operation is not supported by directory buckets.  Creates or replaces resource policy for an Object Lambda Access Point. For an example policy, see Creating Object Lambda Access Points in the Amazon S3 User Guide. The following actions are related to PutAccessPointPolicyForObjectLambda:    DeleteAccessPointPolicyForObjectLambda     GetAccessPointPolicyForObjectLambda
     @discardableResult public func putAccessPointPolicyForObjectLambda(_ input: PutAccessPointPolicyForObjectLambdaRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutAccessPointPolicyForObjectLambda", path: "/v20180820/accesspointforobjectlambda/{Name}/policy", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -396,7 +517,7 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "PutBucketPolicy", path: "/v20180820/bucket/{Bucket}/policy", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    ///  This action creates an Amazon S3 on Outposts bucket's replication configuration. To create an S3 bucket's replication configuration, see PutBucketReplication in the Amazon S3 API Reference.   Creates a replication configuration or replaces an existing one. For information about S3 replication on Outposts configuration, see Replicating objects for S3 on Outposts in the Amazon S3 User Guide.  It can take a while to propagate PUT or DELETE requests for a replication configuration to all S3 on Outposts systems. Therefore, the replication configuration that's returned by a GET request soon after a PUT or DELETE request might return a more recent result than what's on the Outpost. If an Outpost is offline, the delay in updating the replication configuration on that Outpost can be significant.  Specify the replication configuration in the request body. In the replication configuration, you provide the following information:   The name of the destination bucket or buckets where you want S3 on Outposts to replicate objects   The Identity and Access Management (IAM) role that S3 on Outposts can assume to replicate objects on your behalf   Other relevant information, such as replication rules   A replication configuration must include at least one rule and can contain a maximum of 100. Each rule identifies a subset of objects to replicate by filtering the objects in the source Outposts bucket. To choose additional subsets of objects to replicate, add a rule for each subset. To specify a subset of the objects in the source Outposts bucket to apply a replication rule to, add the Filter element as a child of the Rule element. You can filter objects based on an object key prefix, one or more object tags, or both. When you add the Filter element in the configuration, you must also add the following elements: DeleteMarkerReplication, Status, and Priority. Using PutBucketReplication on Outposts requires that both the source and destination buckets must have versioning enabled. For information about enabling versioning on a bucket, see Managing S3 Versioning for your S3 on Outposts bucket. For information about S3 on Outposts replication failure reasons, see Replication failure reasons in the Amazon S3 User Guide.  Handling Replication of Encrypted Objects  Outposts buckets are encrypted at all times. All the objects in the source Outposts bucket are encrypted and can be replicated. Also, all the replicas in the destination Outposts bucket are encrypted with the same encryption key as the objects in the source Outposts bucket.  Permissions  To create a PutBucketReplication request, you must have s3-outposts:PutReplicationConfiguration permissions for the bucket. The Outposts bucket owner has this permission by default and can grant it to others. For more information about permissions, see Setting up IAM with S3 on Outposts and Managing access to S3 on Outposts buckets.   To perform this operation, the user or role must also have the iam:CreateRole and iam:PassRole permissions.  For more information, see Granting a user permissions to pass a role to an Amazon Web Services service.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following operations are related to PutBucketReplication:    GetBucketReplication     DeleteBucketReplication
+    ///  This action creates an Amazon S3 on Outposts bucket's replication configuration. To create an S3 bucket's replication configuration, see PutBucketReplication in the Amazon S3 API Reference.   Creates a replication configuration or replaces an existing one. For information about S3 replication on Outposts configuration, see Replicating objects for S3 on Outposts in the Amazon S3 User Guide.  It can take a while to propagate PUT or DELETE requests for a replication configuration to all S3 on Outposts systems. Therefore, the replication configuration that's returned by a GET request soon after a PUT or DELETE request might return a more recent result than what's on the Outpost. If an Outpost is offline, the delay in updating the replication configuration on that Outpost can be significant.  Specify the replication configuration in the request body. In the replication configuration, you provide the following information:   The name of the destination bucket or buckets where you want S3 on Outposts to replicate objects   The Identity and Access Management (IAM) role that S3 on Outposts can assume to replicate objects on your behalf   Other relevant information, such as replication rules   A replication configuration must include at least one rule and can contain a maximum of 100. Each rule identifies a subset of objects to replicate by filtering the objects in the source Outposts bucket. To choose additional subsets of objects to replicate, add a rule for each subset. To specify a subset of the objects in the source Outposts bucket to apply a replication rule to, add the Filter element as a child of the Rule element. You can filter objects based on an object key prefix, one or more object tags, or both. When you add the Filter element in the configuration, you must also add the following elements: DeleteMarkerReplication, Status, and Priority. Using PutBucketReplication on Outposts requires that both the source and destination buckets must have versioning enabled. For information about enabling versioning on a bucket, see Managing S3 Versioning for your S3 on Outposts bucket. For information about S3 on Outposts replication failure reasons, see Replication failure reasons in the Amazon S3 User Guide.  Handling Replication of Encrypted Objects  Outposts buckets are encrypted at all times. All the objects in the source Outposts bucket are encrypted and can be replicated. Also, all the replicas in the destination Outposts bucket are encrypted with the same encryption key as the objects in the source Outposts bucket.  Permissions  To create a PutBucketReplication request, you must have s3-outposts:PutReplicationConfiguration permissions for the bucket. The Outposts bucket owner has this permission by default and can grant it to others. For more information about permissions, see Setting up IAM with S3 on Outposts and Managing access to S3 on Outposts buckets.   To perform this operation, the user or role must also have the iam:CreateRole and iam:PassRole permissions. For more information, see Granting a user permissions to pass a role to an Amazon Web Services service.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following operations are related to PutBucketReplication:    GetBucketReplication     DeleteBucketReplication
     @discardableResult public func putBucketReplication(_ input: PutBucketReplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutBucketReplication", path: "/v20180820/bucket/{Bucket}/replication", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
@@ -411,44 +532,64 @@ public struct S3Control: AWSService {
         return self.client.execute(operation: "PutBucketVersioning", path: "/v20180820/bucket/{Bucket}/versioning", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this action to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       To use the PutJobTagging operation, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging
+    /// Sets the supplied tag-set on an S3 Batch Operations job. A tag is a key-value pair. You can associate S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this operation to replace the tag set with the one you modified. For more information, see Controlling access and labeling jobs using tags in the Amazon S3 User Guide.     If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you are charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your Batch Operations job, a DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions in the Billing and Cost Management User Guide.       Permissions  To use the PutJobTagging operation, you must have permission to perform the s3:PutJobTagging action.   Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging
     public func putJobTagging(_ input: PutJobTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutJobTaggingResult> {
         return self.client.execute(operation: "PutJobTagging", path: "/v20180820/jobs/{JobId}/tagging", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to PutMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicy     GetMultiRegionAccessPointPolicyStatus
+    ///  This operation is not supported by directory buckets.  Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to PutMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicy     GetMultiRegionAccessPointPolicyStatus
     public func putMultiRegionAccessPointPolicy(_ input: PutMultiRegionAccessPointPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutMultiRegionAccessPointPolicyResult> {
         return self.client.execute(operation: "PutMultiRegionAccessPointPolicy", path: "/v20180820/async-requests/mrap/put-policy", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutAccountPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock
+    ///  This operation is not supported by directory buckets.  Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For this operation, users must have the s3:PutAccountPublicAccessBlock permission. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock
     @discardableResult public func putPublicAccessBlock(_ input: PutPublicAccessBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutPublicAccessBlock", path: "/v20180820/configuration/publicAccessBlock", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Working with Amazon S3 Storage Lens in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see S3 Storage Lens metrics glossary in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfiguration action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     @discardableResult public func putStorageLensConfiguration(_ input: PutStorageLensConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutStorageLensConfiguration", path: "/v20180820/storagelens/{ConfigId}", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Put or replace tags on an existing Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:PutStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     public func putStorageLensConfigurationTagging(_ input: PutStorageLensConfigurationTaggingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutStorageLensConfigurationTaggingResult> {
         return self.client.execute(operation: "PutStorageLensConfigurationTagging", path: "/v20180820/storagelens/{ConfigId}/tagging", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the routing status for the specified Regions from active to passive, or from passive to active. A value of 0 indicates a passive status, which means that traffic won't be routed to the specified Region. A value of 100 indicates an active status, which means that traffic will be routed to the specified Region. At least one Region must be active at all times. When the routing configuration is changed, any in-progress operations (uploads, copies, deletes, and so on) to formerly active Regions will continue to run to their final completion state (success or failure). The routing configurations of any Regions that aren’t specified remain unchanged.  Updated routing configurations might not be immediately applied. It can take up to 2 minutes for your changes to take effect.  To submit routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions.
+    ///  This operation is not supported by directory buckets.  Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the routing status for the specified Regions from active to passive, or from passive to active. A value of 0 indicates a passive status, which means that traffic won't be routed to the specified Region. A value of 100 indicates an active status, which means that traffic will be routed to the specified Region. At least one Region must be active at all times. When the routing configuration is changed, any in-progress operations (uploads, copies, deletes, and so on) to formerly active Regions will continue to run to their final completion state (success or failure). The routing configurations of any Regions that aren’t specified remain unchanged.  Updated routing configurations might not be immediately applied. It can take up to 2 minutes for your changes to take effect.  To submit routing control changes and failover requests, use the Amazon S3 failover control infrastructure endpoints in these five Amazon Web Services Regions:    us-east-1     us-west-2     ap-southeast-2     ap-northeast-1     eu-west-1     Your Amazon S3 bucket does not need to be in these five Regions.
     public func submitMultiRegionAccessPointRoutes(_ input: SubmitMultiRegionAccessPointRoutesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<SubmitMultiRegionAccessPointRoutesResult> {
         return self.client.execute(operation: "SubmitMultiRegionAccessPointRoutes", path: "/v20180820/mrap/instances/{Mrap+}/routes", httpMethod: .PATCH, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Updates an existing S3 Batch Operations job's priority. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus
+    ///  Creates a new Amazon Web Services resource tag or updates an existing resource tag. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources. You can add up to 50 Amazon Web Services resource tags for each S3 resource.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:TagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
+    public func tagResource(_ input: TagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<TagResourceResult> {
+        return self.client.execute(operation: "TagResource", path: "/v20180820/tags/{ResourceArn+}", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    ///  This operation removes the specified Amazon Web Services resource tags from an S3 resource. Each tag is a label consisting of a user-defined key and value. Tags can help you manage, identify, organize, search for, and filter resources.   This operation is only supported for S3 Storage Lens groups and for S3 Access Grants. The tagged resource can be an S3 Storage Lens group or S3 Access Grants instance, registered location, or grant.    Permissions  You must have the s3:UntagResource permission to use this operation.    For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.
+    public func untagResource(_ input: UntagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UntagResourceResult> {
+        return self.client.execute(operation: "UntagResource", path: "/v20180820/tags/{ResourceArn+}", httpMethod: .DELETE, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Updates the IAM role of a registered location in your S3 Access Grants instance.  Permissions  You must have the s3:UpdateAccessGrantsLocation permission to use this operation.   Additional Permissions  You must also have the following permission: iam:PassRole
+    public func updateAccessGrantsLocation(_ input: UpdateAccessGrantsLocationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateAccessGrantsLocationResult> {
+        return self.client.execute(operation: "UpdateAccessGrantsLocation", path: "/v20180820/accessgrantsinstance/location/{AccessGrantsLocationId}", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Updates an existing S3 Batch Operations job's priority. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  To use the UpdateJobPriority operation, you must have permission to perform the s3:UpdateJobPriority action.   Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus
     public func updateJobPriority(_ input: UpdateJobPriorityRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateJobPriorityResult> {
         return self.client.execute(operation: "UpdateJobPriority", path: "/v20180820/jobs/{JobId}/priority", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 
-    /// Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus
+    /// Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  To use the UpdateJobStatus operation, you must have permission to perform the s3:UpdateJobStatus action.   Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus
     public func updateJobStatus(_ input: UpdateJobStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateJobStatusResult> {
         return self.client.execute(operation: "UpdateJobStatus", path: "/v20180820/jobs/{JobId}/status", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
+    }
+
+    /// Updates the existing Storage Lens group. To use this operation, you must have the permission to perform the s3:UpdateStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    @discardableResult public func updateStorageLensGroup(_ input: UpdateStorageLensGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "UpdateStorageLensGroup", path: "/v20180820/storagelensgroup/{Name}", httpMethod: .PUT, serviceConfig: self.config, input: input, hostPrefix: "{AccountId}.", logger: logger, on: eventLoop)
     }
 }
 
@@ -464,7 +605,166 @@ extension S3Control {
 // MARK: Paginators
 
 extension S3Control {
-    /// Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint
+    /// Returns the list of access grants in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrants permission to use this operation.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listAccessGrantsPaginator<Result>(
+        _ input: ListAccessGrantsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListAccessGrantsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listAccessGrants,
+            inputKey: \ListAccessGrantsRequest.nextToken,
+            outputKey: \ListAccessGrantsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listAccessGrantsPaginator(
+        _ input: ListAccessGrantsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListAccessGrantsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listAccessGrants,
+            inputKey: \ListAccessGrantsRequest.nextToken,
+            outputKey: \ListAccessGrantsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of S3 Access Grants instances. An S3 Access Grants instance serves as a logical grouping for your individual access grants. You can only have one S3 Access Grants instance per Region per account.  Permissions  You must have the s3:ListAccessGrantsInstances permission to use this operation.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listAccessGrantsInstancesPaginator<Result>(
+        _ input: ListAccessGrantsInstancesRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListAccessGrantsInstancesResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listAccessGrantsInstances,
+            inputKey: \ListAccessGrantsInstancesRequest.nextToken,
+            outputKey: \ListAccessGrantsInstancesResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listAccessGrantsInstancesPaginator(
+        _ input: ListAccessGrantsInstancesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListAccessGrantsInstancesResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listAccessGrantsInstances,
+            inputKey: \ListAccessGrantsInstancesRequest.nextToken,
+            outputKey: \ListAccessGrantsInstancesResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of the locations registered in your S3 Access Grants instance.  Permissions  You must have the s3:ListAccessGrantsLocations permission to use this operation.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listAccessGrantsLocationsPaginator<Result>(
+        _ input: ListAccessGrantsLocationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListAccessGrantsLocationsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listAccessGrantsLocations,
+            inputKey: \ListAccessGrantsLocationsRequest.nextToken,
+            outputKey: \ListAccessGrantsLocationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listAccessGrantsLocationsPaginator(
+        _ input: ListAccessGrantsLocationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListAccessGrantsLocationsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listAccessGrantsLocations,
+            inputKey: \ListAccessGrantsLocationsRequest.nextToken,
+            outputKey: \ListAccessGrantsLocationsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    ///  This operation is not supported by directory buckets.  Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -517,7 +817,7 @@ extension S3Control {
         )
     }
 
-    /// Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda
+    ///  This operation is not supported by directory buckets.  Returns some or all (up to 1,000) access points associated with the Object Lambda Access Point per call. If there are more access points than what can be returned in one call, the response will include a continuation token that you can use to list the additional access points. The following actions are related to ListAccessPointsForObjectLambda:    CreateAccessPointForObjectLambda     DeleteAccessPointForObjectLambda     GetAccessPointForObjectLambda
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -570,7 +870,7 @@ extension S3Control {
         )
     }
 
-    /// Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus
+    /// Lists current S3 Batch Operations jobs as well as the jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Permissions  To use the ListJobs operation, you must have permission to perform the s3:ListJobs action.   Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -623,7 +923,7 @@ extension S3Control {
         )
     }
 
-    /// Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint
+    ///  This operation is not supported by directory buckets.  Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -676,7 +976,7 @@ extension S3Control {
         )
     }
 
-    /// Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see the Examples section.
+    ///  This operation is not supported by directory buckets.  Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see the Examples section.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -729,7 +1029,7 @@ extension S3Control {
         )
     }
 
-    /// Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
+    ///  This operation is not supported by directory buckets.  Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -779,6 +1079,96 @@ extension S3Control {
             outputKey: \ListStorageLensConfigurationsResult.nextToken,
             on: eventLoop,
             onPage: onPage
+        )
+    }
+
+    /// Lists all the Storage Lens groups in the specified home Region.
+    ///  To use this operation, you must have the permission to perform the s3:ListStorageLensGroups action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listStorageLensGroupsPaginator<Result>(
+        _ input: ListStorageLensGroupsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListStorageLensGroupsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listStorageLensGroups,
+            inputKey: \ListStorageLensGroupsRequest.nextToken,
+            outputKey: \ListStorageLensGroupsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listStorageLensGroupsPaginator(
+        _ input: ListStorageLensGroupsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListStorageLensGroupsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listStorageLensGroups,
+            inputKey: \ListStorageLensGroupsRequest.nextToken,
+            outputKey: \ListStorageLensGroupsResult.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+}
+
+extension S3Control.ListAccessGrantsInstancesRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> S3Control.ListAccessGrantsInstancesRequest {
+        return .init(
+            accountId: self.accountId,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension S3Control.ListAccessGrantsLocationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> S3Control.ListAccessGrantsLocationsRequest {
+        return .init(
+            accountId: self.accountId,
+            locationScope: self.locationScope,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension S3Control.ListAccessGrantsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> S3Control.ListAccessGrantsRequest {
+        return .init(
+            accountId: self.accountId,
+            applicationArn: self.applicationArn,
+            granteeIdentifier: self.granteeIdentifier,
+            granteeType: self.granteeType,
+            grantScope: self.grantScope,
+            maxResults: self.maxResults,
+            nextToken: token,
+            permission: self.permission
         )
     }
 }
@@ -838,6 +1228,15 @@ extension S3Control.ListRegionalBucketsRequest: AWSPaginateToken {
 
 extension S3Control.ListStorageLensConfigurationsRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> S3Control.ListStorageLensConfigurationsRequest {
+        return .init(
+            accountId: self.accountId,
+            nextToken: token
+        )
+    }
+}
+
+extension S3Control.ListStorageLensGroupsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> S3Control.ListStorageLensGroupsRequest {
         return .init(
             accountId: self.accountId,
             nextToken: token

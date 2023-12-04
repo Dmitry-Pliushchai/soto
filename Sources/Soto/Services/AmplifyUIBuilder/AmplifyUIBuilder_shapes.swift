@@ -26,7 +26,7 @@ import SotoCore
 extension AmplifyUIBuilder {
     // MARK: Enums
 
-    public enum CodegenGenericDataFieldDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CodegenGenericDataFieldDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `enum` = "Enum"
         case awsDate = "AWSDate"
         case awsDateTime = "AWSDateTime"
@@ -47,37 +47,37 @@ extension AmplifyUIBuilder {
         public var description: String { return self.rawValue }
     }
 
-    public enum CodegenJobGenericDataSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CodegenJobGenericDataSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dataStore = "DataStore"
         public var description: String { return self.rawValue }
     }
 
-    public enum CodegenJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CodegenJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "failed"
         case inProgress = "in_progress"
         case succeeded = "succeeded"
         public var description: String { return self.rawValue }
     }
 
-    public enum FixedPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum FixedPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case first = "first"
         public var description: String { return self.rawValue }
     }
 
-    public enum FormActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FormActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case create = "create"
         case update = "update"
         public var description: String { return self.rawValue }
     }
 
-    public enum FormButtonsPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum FormButtonsPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottom = "bottom"
         case top = "top"
         case topAndBottom = "top_and_bottom"
         public var description: String { return self.rawValue }
     }
 
-    public enum FormDataSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FormDataSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Will use passed in hooks to use when creating a form from scratch
         case custom = "Custom"
         /// Will use a provided Amplify DataStore enabled API
@@ -85,53 +85,53 @@ extension AmplifyUIBuilder {
         public var description: String { return self.rawValue }
     }
 
-    public enum GenericDataRelationshipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GenericDataRelationshipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case belongsTo = "BELONGS_TO"
         case hasMany = "HAS_MANY"
         case hasOne = "HAS_ONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum JSModule: String, CustomStringConvertible, Codable, Sendable {
+    public enum JSModule: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case es2020 = "es2020"
         case esnext = "esnext"
         public var description: String { return self.rawValue }
     }
 
-    public enum JSScript: String, CustomStringConvertible, Codable, Sendable {
+    public enum JSScript: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case js = "js"
         case jsx = "jsx"
         case tsx = "tsx"
         public var description: String { return self.rawValue }
     }
 
-    public enum JSTarget: String, CustomStringConvertible, Codable, Sendable {
+    public enum JSTarget: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case es2015 = "es2015"
         case es2020 = "es2020"
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelDecorator: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelDecorator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "none"
         case optional = "optional"
         case required = "required"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortDirection: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortDirection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageAccessLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum StorageAccessLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "private"
         case protected = "protected"
         case `public` = "public"
         public var description: String { return self.rawValue }
     }
 
-    public enum TokenProviders: String, CustomStringConvertible, Codable, Sendable {
+    public enum TokenProviders: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The figma token provider.
         case figma = "figma"
         public var description: String { return self.rawValue }

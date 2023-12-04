@@ -26,13 +26,13 @@ import SotoCore
 extension SES {
     // MARK: Enums
 
-    public enum BehaviorOnMXFailure: String, CustomStringConvertible, Codable, Sendable {
+    public enum BehaviorOnMXFailure: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rejectMessage = "RejectMessage"
         case useDefaultValue = "UseDefaultValue"
         public var description: String { return self.rawValue }
     }
 
-    public enum BounceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BounceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contentRejected = "ContentRejected"
         case doesNotExist = "DoesNotExist"
         case exceededQuota = "ExceededQuota"
@@ -42,7 +42,7 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum BulkEmailStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BulkEmailStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountDailyQuotaExceeded = "AccountDailyQuotaExceeded"
         case accountSendingPaused = "AccountSendingPaused"
         case accountSuspended = "AccountSuspended"
@@ -60,7 +60,7 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationSetAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationSetAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deliveryOptions = "deliveryOptions"
         case eventDestinations = "eventDestinations"
         case reputationOptions = "reputationOptions"
@@ -68,7 +68,7 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomMailFromStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomMailFromStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case pending = "Pending"
         case success = "Success"
@@ -76,14 +76,14 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum DimensionValueSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum DimensionValueSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emailHeader = "emailHeader"
         case linkTag = "linkTag"
         case messageTag = "messageTag"
         public var description: String { return self.rawValue }
     }
 
-    public enum DsnAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum DsnAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delayed = "delayed"
         case delivered = "delivered"
         case expanded = "expanded"
@@ -92,7 +92,7 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum EventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bounce = "bounce"
         case click = "click"
         case complaint = "complaint"
@@ -104,49 +104,49 @@ extension SES {
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case domain = "Domain"
         case emailAddress = "EmailAddress"
         public var description: String { return self.rawValue }
     }
 
-    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case event = "Event"
         case requestResponse = "RequestResponse"
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bounce = "Bounce"
         case complaint = "Complaint"
         case delivery = "Delivery"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReceiptFilterPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReceiptFilterPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "Allow"
         case block = "Block"
         public var description: String { return self.rawValue }
     }
 
-    public enum SNSActionEncoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum SNSActionEncoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case base64 = "Base64"
         case utf8 = "UTF-8"
         public var description: String { return self.rawValue }
     }
 
-    public enum StopScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum StopScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ruleSet = "RuleSet"
         public var description: String { return self.rawValue }
     }
 
-    public enum TlsPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum TlsPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case optional = "Optional"
         case require = "Require"
         public var description: String { return self.rawValue }
     }
 
-    public enum VerificationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerificationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case notStarted = "NotStarted"
         case pending = "Pending"

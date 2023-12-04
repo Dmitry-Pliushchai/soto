@@ -26,19 +26,19 @@ import SotoCore
 extension Kafka {
     // MARK: Enums
 
-    public enum BrokerAZDistribution: String, CustomStringConvertible, Codable, Sendable {
+    public enum BrokerAZDistribution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ClientBroker: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClientBroker: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plaintext = "PLAINTEXT"
         case tls = "TLS"
         case tlsPlaintext = "TLS_PLAINTEXT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ClusterState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClusterState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -50,20 +50,27 @@ extension Kafka {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClusterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClusterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case provisioned = "PROVISIONED"
         case serverless = "SERVERLESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleteFailed = "DELETE_FAILED"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum EnhancedMonitoring: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomerActionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case actionRecommended = "ACTION_RECOMMENDED"
+        case criticalActionRequired = "CRITICAL_ACTION_REQUIRED"
+        case none = "NONE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum EnhancedMonitoring: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case perBroker = "PER_BROKER"
         case perTopicPerBroker = "PER_TOPIC_PER_BROKER"
@@ -71,30 +78,48 @@ extension Kafka {
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deprecated = "DEPRECATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum NodeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NodeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case broker = "BROKER"
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicatorState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case creating = "CREATING"
+        case deleting = "DELETING"
+        case failed = "FAILED"
+        case running = "RUNNING"
+        case updating = "UPDATING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum StorageMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case local = "LOCAL"
         case tiered = "TIERED"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserIdentityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetCompressionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case gzip = "GZIP"
+        case lz4 = "LZ4"
+        case none = "NONE"
+        case snappy = "SNAPPY"
+        case zstd = "ZSTD"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum UserIdentityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsaccount = "AWSACCOUNT"
         case awsservice = "AWSSERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VpcConnectionState: String, CustomStringConvertible, Codable, Sendable {
+    public enum VpcConnectionState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creating = "CREATING"
         case deactivating = "DEACTIVATING"
@@ -108,6 +133,19 @@ extension Kafka {
 
     // MARK: Shapes
 
+    public struct AmazonMskCluster: AWSEncodableShape & AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of an Amazon MSK cluster.
+        public let mskClusterArn: String?
+
+        public init(mskClusterArn: String? = nil) {
+            self.mskClusterArn = mskClusterArn
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case mskClusterArn = "mskClusterArn"
+        }
+    }
+
     public struct BatchAssociateScramSecretRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "clusterArn", location: .uri("ClusterArn"))
@@ -116,9 +154,9 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) of the cluster to be updated.
         public let clusterArn: String
         /// List of AWS Secrets Manager secret ARNs.
-        public let secretArnList: [String]
+        public let secretArnList: [String]?
 
-        public init(clusterArn: String, secretArnList: [String]) {
+        public init(clusterArn: String, secretArnList: [String]? = nil) {
             self.clusterArn = clusterArn
             self.secretArnList = secretArnList
         }
@@ -153,9 +191,9 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) of the cluster to be updated.
         public let clusterArn: String
         /// List of AWS Secrets Manager secret ARNs.
-        public let secretArnList: [String]
+        public let secretArnList: [String]?
 
-        public init(clusterArn: String, secretArnList: [String]) {
+        public init(clusterArn: String, secretArnList: [String]? = nil) {
             self.clusterArn = clusterArn
             self.secretArnList = secretArnList
         }
@@ -184,13 +222,13 @@ extension Kafka {
 
     public struct BrokerEBSVolumeInfo: AWSEncodableShape & AWSDecodableShape {
         /// The ID of the broker to update.
-        public let kafkaBrokerNodeId: String
+        public let kafkaBrokerNodeId: String?
         /// EBS volume provisioned throughput information.
         public let provisionedThroughput: ProvisionedThroughput?
         /// Size of the EBS volume to update.
         public let volumeSizeGB: Int?
 
-        public init(kafkaBrokerNodeId: String, provisionedThroughput: ProvisionedThroughput? = nil, volumeSizeGB: Int? = nil) {
+        public init(kafkaBrokerNodeId: String? = nil, provisionedThroughput: ProvisionedThroughput? = nil, volumeSizeGB: Int? = nil) {
             self.kafkaBrokerNodeId = kafkaBrokerNodeId
             self.provisionedThroughput = provisionedThroughput
             self.volumeSizeGB = volumeSizeGB
@@ -225,12 +263,12 @@ extension Kafka {
         /// The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed. Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.
         public let brokerAZDistribution: BrokerAZDistribution?
         /// The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't occupy the Availability Zone with ID use use1-az3.
-        public let clientSubnets: [String]
+        public let clientSubnets: [String]?
         /// Information about the broker access configuration.
         public let connectivityInfo: ConnectivityInfo?
         /// The type of Amazon EC2 instances to use for Apache Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
         /// kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
-        public let instanceType: String
+        public let instanceType: String?
         /// The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.
         public let securityGroups: [String]?
         /// Contains information about storage volumes attached to MSK broker nodes.
@@ -238,7 +276,7 @@ extension Kafka {
         /// The list of zoneIds for the cluster in the virtual private cloud (VPC).
         public let zoneIds: [String]?
 
-        public init(brokerAZDistribution: BrokerAZDistribution? = nil, clientSubnets: [String], connectivityInfo: ConnectivityInfo? = nil, instanceType: String, securityGroups: [String]? = nil, storageInfo: StorageInfo? = nil, zoneIds: [String]? = nil) {
+        public init(brokerAZDistribution: BrokerAZDistribution? = nil, clientSubnets: [String]? = nil, connectivityInfo: ConnectivityInfo? = nil, instanceType: String? = nil, securityGroups: [String]? = nil, storageInfo: StorageInfo? = nil, zoneIds: [String]? = nil) {
             self.brokerAZDistribution = brokerAZDistribution
             self.clientSubnets = clientSubnets
             self.connectivityInfo = connectivityInfo
@@ -351,9 +389,9 @@ extension Kafka {
         /// State of the Vpc Connection.
         public let state: VpcConnectionState?
         /// The ARN that identifies the Vpc Connection.
-        public let vpcConnectionArn: String
+        public let vpcConnectionArn: String?
 
-        public init(authentication: String? = nil, creationTime: Date? = nil, owner: String? = nil, state: VpcConnectionState? = nil, vpcConnectionArn: String) {
+        public init(authentication: String? = nil, creationTime: Date? = nil, owner: String? = nil, state: VpcConnectionState? = nil, vpcConnectionArn: String? = nil) {
             self.authentication = authentication
             self.creationTime = creationTime
             self.owner = owner
@@ -371,10 +409,10 @@ extension Kafka {
     }
 
     public struct CloudWatchLogs: AWSEncodableShape & AWSDecodableShape {
-        public let enabled: Bool
+        public let enabled: Bool?
         public let logGroup: String?
 
-        public init(enabled: Bool, logGroup: String? = nil) {
+        public init(enabled: Bool? = nil, logGroup: String? = nil) {
             self.enabled = enabled
             self.logGroup = logGroup
         }
@@ -457,6 +495,8 @@ extension Kafka {
         public let currentBrokerSoftwareInfo: BrokerSoftwareInfo?
         /// The current version of the MSK cluster.
         public let currentVersion: String?
+        /// Determines if there is an action required from the customer.
+        public let customerActionStatus: CustomerActionStatus?
         /// Includes all encryption-related information.
         public let encryptionInfo: EncryptionInfo?
         /// Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see Monitoring.
@@ -478,7 +518,7 @@ extension Kafka {
         /// The connection string to use to connect to zookeeper cluster on Tls port.
         public let zookeeperConnectStringTls: String?
 
-        public init(activeOperationArn: String? = nil, brokerNodeGroupInfo: BrokerNodeGroupInfo? = nil, clientAuthentication: ClientAuthentication? = nil, clusterArn: String? = nil, clusterName: String? = nil, creationTime: Date? = nil, currentBrokerSoftwareInfo: BrokerSoftwareInfo? = nil, currentVersion: String? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int? = nil, openMonitoring: OpenMonitoring? = nil, state: ClusterState? = nil, stateInfo: StateInfo? = nil, storageMode: StorageMode? = nil, tags: [String: String]? = nil, zookeeperConnectString: String? = nil, zookeeperConnectStringTls: String? = nil) {
+        public init(activeOperationArn: String? = nil, brokerNodeGroupInfo: BrokerNodeGroupInfo? = nil, clientAuthentication: ClientAuthentication? = nil, clusterArn: String? = nil, clusterName: String? = nil, creationTime: Date? = nil, currentBrokerSoftwareInfo: BrokerSoftwareInfo? = nil, currentVersion: String? = nil, customerActionStatus: CustomerActionStatus? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int? = nil, openMonitoring: OpenMonitoring? = nil, state: ClusterState? = nil, stateInfo: StateInfo? = nil, storageMode: StorageMode? = nil, tags: [String: String]? = nil, zookeeperConnectString: String? = nil, zookeeperConnectStringTls: String? = nil) {
             self.activeOperationArn = activeOperationArn
             self.brokerNodeGroupInfo = brokerNodeGroupInfo
             self.clientAuthentication = clientAuthentication
@@ -487,6 +527,7 @@ extension Kafka {
             self.creationTime = creationTime
             self.currentBrokerSoftwareInfo = currentBrokerSoftwareInfo
             self.currentVersion = currentVersion
+            self.customerActionStatus = customerActionStatus
             self.encryptionInfo = encryptionInfo
             self.enhancedMonitoring = enhancedMonitoring
             self.loggingInfo = loggingInfo
@@ -509,6 +550,7 @@ extension Kafka {
             case creationTime = "creationTime"
             case currentBrokerSoftwareInfo = "currentBrokerSoftwareInfo"
             case currentVersion = "currentVersion"
+            case customerActionStatus = "customerActionStatus"
             case encryptionInfo = "encryptionInfo"
             case enhancedMonitoring = "enhancedMonitoring"
             case loggingInfo = "loggingInfo"
@@ -759,22 +801,22 @@ extension Kafka {
 
     public struct Configuration: AWSDecodableShape {
         /// The Amazon Resource Name (ARN) of the configuration.
-        public let arn: String
+        public let arn: String?
         /// The time when the configuration was created.
-        @CustomCoding<ISO8601DateCoder>
-        public var creationTime: Date
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var creationTime: Date?
         /// The description of the configuration.
-        public let description: String
+        public let description: String?
         /// An array of the versions of Apache Kafka with which you can use this MSK configuration. You can use this configuration for an MSK cluster only if the Apache Kafka version specified for the cluster appears in this array.
-        public let kafkaVersions: [String]
+        public let kafkaVersions: [String]?
         /// Latest revision of the configuration.
-        public let latestRevision: ConfigurationRevision
+        public let latestRevision: ConfigurationRevision?
         /// The name of the configuration.
-        public let name: String
+        public let name: String?
         /// The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED.
-        public let state: ConfigurationState
+        public let state: ConfigurationState?
 
-        public init(arn: String, creationTime: Date, description: String, kafkaVersions: [String], latestRevision: ConfigurationRevision, name: String, state: ConfigurationState) {
+        public init(arn: String? = nil, creationTime: Date? = nil, description: String? = nil, kafkaVersions: [String]? = nil, latestRevision: ConfigurationRevision? = nil, name: String? = nil, state: ConfigurationState? = nil) {
             self.arn = arn
             self.creationTime = creationTime
             self.description = description
@@ -797,11 +839,11 @@ extension Kafka {
 
     public struct ConfigurationInfo: AWSEncodableShape & AWSDecodableShape {
         /// ARN of the configuration to use.
-        public let arn: String
+        public let arn: String?
         /// The revision of the configuration to use.
-        public let revision: Int64
+        public let revision: Int64?
 
-        public init(arn: String, revision: Int64) {
+        public init(arn: String? = nil, revision: Int64? = nil) {
             self.arn = arn
             self.revision = revision
         }
@@ -814,14 +856,14 @@ extension Kafka {
 
     public struct ConfigurationRevision: AWSDecodableShape {
         /// The time when the configuration revision was created.
-        @CustomCoding<ISO8601DateCoder>
-        public var creationTime: Date
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var creationTime: Date?
         /// The description of the configuration revision.
         public let description: String?
         /// The revision number.
-        public let revision: Int64
+        public let revision: Int64?
 
-        public init(creationTime: Date, description: String? = nil, revision: Int64) {
+        public init(creationTime: Date? = nil, description: String? = nil, revision: Int64? = nil) {
             self.creationTime = creationTime
             self.description = description
             self.revision = revision
@@ -851,13 +893,81 @@ extension Kafka {
         }
     }
 
+    public struct ConsumerGroupReplication: AWSEncodableShape & AWSDecodableShape {
+        /// List of regular expression patterns indicating the consumer groups that should not be replicated.
+        public let consumerGroupsToExclude: [String]?
+        /// List of regular expression patterns indicating the consumer groups to copy.
+        public let consumerGroupsToReplicate: [String]?
+        /// Enables synchronization of consumer groups to target cluster.
+        public let detectAndCopyNewConsumerGroups: Bool?
+        /// Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.
+        public let synchroniseConsumerGroupOffsets: Bool?
+
+        public init(consumerGroupsToExclude: [String]? = nil, consumerGroupsToReplicate: [String]? = nil, detectAndCopyNewConsumerGroups: Bool? = nil, synchroniseConsumerGroupOffsets: Bool? = nil) {
+            self.consumerGroupsToExclude = consumerGroupsToExclude
+            self.consumerGroupsToReplicate = consumerGroupsToReplicate
+            self.detectAndCopyNewConsumerGroups = detectAndCopyNewConsumerGroups
+            self.synchroniseConsumerGroupOffsets = synchroniseConsumerGroupOffsets
+        }
+
+        public func validate(name: String) throws {
+            try self.consumerGroupsToExclude?.forEach {
+                try validate($0, name: "consumerGroupsToExclude[]", parent: name, max: 256)
+            }
+            try self.consumerGroupsToReplicate?.forEach {
+                try validate($0, name: "consumerGroupsToReplicate[]", parent: name, max: 256)
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case consumerGroupsToExclude = "consumerGroupsToExclude"
+            case consumerGroupsToReplicate = "consumerGroupsToReplicate"
+            case detectAndCopyNewConsumerGroups = "detectAndCopyNewConsumerGroups"
+            case synchroniseConsumerGroupOffsets = "synchroniseConsumerGroupOffsets"
+        }
+    }
+
+    public struct ConsumerGroupReplicationUpdate: AWSEncodableShape {
+        /// List of regular expression patterns indicating the consumer groups that should not be replicated.
+        public let consumerGroupsToExclude: [String]?
+        /// List of regular expression patterns indicating the consumer groups to copy.
+        public let consumerGroupsToReplicate: [String]?
+        /// Enables synchronization of consumer groups to target cluster.
+        public let detectAndCopyNewConsumerGroups: Bool?
+        /// Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.
+        public let synchroniseConsumerGroupOffsets: Bool?
+
+        public init(consumerGroupsToExclude: [String]? = nil, consumerGroupsToReplicate: [String]? = nil, detectAndCopyNewConsumerGroups: Bool? = nil, synchroniseConsumerGroupOffsets: Bool? = nil) {
+            self.consumerGroupsToExclude = consumerGroupsToExclude
+            self.consumerGroupsToReplicate = consumerGroupsToReplicate
+            self.detectAndCopyNewConsumerGroups = detectAndCopyNewConsumerGroups
+            self.synchroniseConsumerGroupOffsets = synchroniseConsumerGroupOffsets
+        }
+
+        public func validate(name: String) throws {
+            try self.consumerGroupsToExclude?.forEach {
+                try validate($0, name: "consumerGroupsToExclude[]", parent: name, max: 256)
+            }
+            try self.consumerGroupsToReplicate?.forEach {
+                try validate($0, name: "consumerGroupsToReplicate[]", parent: name, max: 256)
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case consumerGroupsToExclude = "consumerGroupsToExclude"
+            case consumerGroupsToReplicate = "consumerGroupsToReplicate"
+            case detectAndCopyNewConsumerGroups = "detectAndCopyNewConsumerGroups"
+            case synchroniseConsumerGroupOffsets = "synchroniseConsumerGroupOffsets"
+        }
+    }
+
     public struct CreateClusterRequest: AWSEncodableShape {
         /// Information about the broker nodes in the cluster.
-        public let brokerNodeGroupInfo: BrokerNodeGroupInfo
+        public let brokerNodeGroupInfo: BrokerNodeGroupInfo?
         /// Includes all client authentication related information.
         public let clientAuthentication: ClientAuthentication?
         /// The name of the cluster.
-        public let clusterName: String
+        public let clusterName: String?
         /// Represents the configuration that you want MSK to use for the brokers in a cluster.
         public let configurationInfo: ConfigurationInfo?
         /// Includes all encryption-related information.
@@ -865,10 +975,10 @@ extension Kafka {
         /// Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
         public let enhancedMonitoring: EnhancedMonitoring?
         /// The version of Apache Kafka.
-        public let kafkaVersion: String
+        public let kafkaVersion: String?
         public let loggingInfo: LoggingInfo?
         /// The number of broker nodes in the cluster.
-        public let numberOfBrokerNodes: Int
+        public let numberOfBrokerNodes: Int?
         /// The settings for open monitoring.
         public let openMonitoring: OpenMonitoringInfo?
         /// This controls storage mode for supported storage tiers.
@@ -876,7 +986,7 @@ extension Kafka {
         /// Create tags when creating the cluster.
         public let tags: [String: String]?
 
-        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo, clientAuthentication: ClientAuthentication? = nil, clusterName: String, configurationInfo: ConfigurationInfo? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, kafkaVersion: String, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil, tags: [String: String]? = nil) {
+        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo? = nil, clientAuthentication: ClientAuthentication? = nil, clusterName: String? = nil, configurationInfo: ConfigurationInfo? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, kafkaVersion: String? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int? = nil, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil, tags: [String: String]? = nil) {
             self.brokerNodeGroupInfo = brokerNodeGroupInfo
             self.clientAuthentication = clientAuthentication
             self.clusterName = clusterName
@@ -892,7 +1002,7 @@ extension Kafka {
         }
 
         public func validate(name: String) throws {
-            try self.brokerNodeGroupInfo.validate(name: "\(name).brokerNodeGroupInfo")
+            try self.brokerNodeGroupInfo?.validate(name: "\(name).brokerNodeGroupInfo")
             try self.validate(self.clusterName, name: "clusterName", parent: name, max: 64)
             try self.validate(self.clusterName, name: "clusterName", parent: name, min: 1)
             try self.validate(self.kafkaVersion, name: "kafkaVersion", parent: name, max: 128)
@@ -940,7 +1050,7 @@ extension Kafka {
 
     public struct CreateClusterV2Request: AWSEncodableShape {
         /// The name of the cluster.
-        public let clusterName: String
+        public let clusterName: String?
         /// Information about the provisioned cluster.
         public let provisioned: ProvisionedRequest?
         /// Information about the serverless cluster.
@@ -948,7 +1058,7 @@ extension Kafka {
         /// A map of tags that you want the cluster to have.
         public let tags: [String: String]?
 
-        public init(clusterName: String, provisioned: ProvisionedRequest? = nil, serverless: ServerlessRequest? = nil, tags: [String: String]? = nil) {
+        public init(clusterName: String? = nil, provisioned: ProvisionedRequest? = nil, serverless: ServerlessRequest? = nil, tags: [String: String]? = nil) {
             self.clusterName = clusterName
             self.provisioned = provisioned
             self.serverless = serverless
@@ -1000,11 +1110,11 @@ extension Kafka {
         /// The versions of Apache Kafka with which you can use this MSK configuration.
         public let kafkaVersions: [String]?
         /// The name of the configuration.
-        public let name: String
+        public let name: String?
         /// Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded.  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.
-        public let serverProperties: AWSBase64Data
+        public let serverProperties: AWSBase64Data?
 
-        public init(description: String? = nil, kafkaVersions: [String]? = nil, name: String, serverProperties: AWSBase64Data) {
+        public init(description: String? = nil, kafkaVersions: [String]? = nil, name: String? = nil, serverProperties: AWSBase64Data? = nil) {
             self.description = description
             self.kafkaVersions = kafkaVersions
             self.name = name
@@ -1049,21 +1159,85 @@ extension Kafka {
         }
     }
 
+    public struct CreateReplicatorRequest: AWSEncodableShape {
+        /// A summary description of the replicator.
+        public let description: String?
+        /// Kafka Clusters to use in setting up sources / targets for replication.
+        public let kafkaClusters: [KafkaCluster]?
+        /// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
+        public let replicationInfoList: [ReplicationInfo]?
+        /// The name of the replicator. Alpha-numeric characters with '-' are allowed.
+        public let replicatorName: String?
+        /// The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)
+        public let serviceExecutionRoleArn: String?
+        /// List of tags to attach to created Replicator.
+        public let tags: [String: String]?
+
+        public init(description: String? = nil, kafkaClusters: [KafkaCluster]? = nil, replicationInfoList: [ReplicationInfo]? = nil, replicatorName: String? = nil, serviceExecutionRoleArn: String? = nil, tags: [String: String]? = nil) {
+            self.description = description
+            self.kafkaClusters = kafkaClusters
+            self.replicationInfoList = replicationInfoList
+            self.replicatorName = replicatorName
+            self.serviceExecutionRoleArn = serviceExecutionRoleArn
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.description, name: "description", parent: name, max: 1024)
+            try self.replicationInfoList?.forEach {
+                try $0.validate(name: "\(name).replicationInfoList[]")
+            }
+            try self.validate(self.replicatorName, name: "replicatorName", parent: name, max: 128)
+            try self.validate(self.replicatorName, name: "replicatorName", parent: name, min: 1)
+            try self.validate(self.replicatorName, name: "replicatorName", parent: name, pattern: "^[0-9A-Za-z][0-9A-Za-z-]{0,}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case description = "description"
+            case kafkaClusters = "kafkaClusters"
+            case replicationInfoList = "replicationInfoList"
+            case replicatorName = "replicatorName"
+            case serviceExecutionRoleArn = "serviceExecutionRoleArn"
+            case tags = "tags"
+        }
+    }
+
+    public struct CreateReplicatorResponse: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the replicator.
+        public let replicatorArn: String?
+        /// Name of the replicator provided by the customer.
+        public let replicatorName: String?
+        /// State of the replicator.
+        public let replicatorState: ReplicatorState?
+
+        public init(replicatorArn: String? = nil, replicatorName: String? = nil, replicatorState: ReplicatorState? = nil) {
+            self.replicatorArn = replicatorArn
+            self.replicatorName = replicatorName
+            self.replicatorState = replicatorState
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case replicatorArn = "replicatorArn"
+            case replicatorName = "replicatorName"
+            case replicatorState = "replicatorState"
+        }
+    }
+
     public struct CreateVpcConnectionRequest: AWSEncodableShape {
         /// The authentication type of VPC connection.
-        public let authentication: String
+        public let authentication: String?
         /// The list of client subnets.
-        public let clientSubnets: [String]
+        public let clientSubnets: [String]?
         /// The list of security groups.
-        public let securityGroups: [String]
+        public let securityGroups: [String]?
         /// A map of tags for the VPC connection.
         public let tags: [String: String]?
         /// The cluster Amazon Resource Name (ARN) for the VPC connection.
-        public let targetClusterArn: String
+        public let targetClusterArn: String?
         /// The VPC ID of VPC connection.
-        public let vpcId: String
+        public let vpcId: String?
 
-        public init(authentication: String, clientSubnets: [String], securityGroups: [String], tags: [String: String]? = nil, targetClusterArn: String, vpcId: String) {
+        public init(authentication: String? = nil, clientSubnets: [String]? = nil, securityGroups: [String]? = nil, tags: [String: String]? = nil, targetClusterArn: String? = nil, vpcId: String? = nil) {
             self.authentication = authentication
             self.clientSubnets = clientSubnets
             self.securityGroups = securityGroups
@@ -1208,6 +1382,42 @@ extension Kafka {
         private enum CodingKeys: String, CodingKey {
             case arn = "arn"
             case state = "state"
+        }
+    }
+
+    public struct DeleteReplicatorRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "currentVersion", location: .querystring("currentVersion")),
+            AWSMemberEncoding(label: "replicatorArn", location: .uri("ReplicatorArn"))
+        ]
+
+        /// The current version of the replicator.
+        public let currentVersion: String?
+        /// The Amazon Resource Name (ARN) of the replicator to be deleted.
+        public let replicatorArn: String
+
+        public init(currentVersion: String? = nil, replicatorArn: String) {
+            self.currentVersion = currentVersion
+            self.replicatorArn = replicatorArn
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteReplicatorResponse: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the replicator.
+        public let replicatorArn: String?
+        /// The state of the replicator.
+        public let replicatorState: ReplicatorState?
+
+        public init(replicatorArn: String? = nil, replicatorState: ReplicatorState? = nil) {
+            self.replicatorArn = replicatorArn
+            self.replicatorState = replicatorState
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case replicatorArn = "replicatorArn"
+            case replicatorState = "replicatorState"
         }
     }
 
@@ -1457,6 +1667,83 @@ extension Kafka {
         }
     }
 
+    public struct DescribeReplicatorRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "replicatorArn", location: .uri("ReplicatorArn"))
+        ]
+
+        /// The Amazon Resource Name (ARN) of the replicator to be described.
+        public let replicatorArn: String
+
+        public init(replicatorArn: String) {
+            self.replicatorArn = replicatorArn
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DescribeReplicatorResponse: AWSDecodableShape {
+        /// The time when the replicator was created.
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var creationTime: Date?
+        /// The current version number of the replicator.
+        public let currentVersion: String?
+        /// Whether this resource is a replicator reference.
+        public let isReplicatorReference: Bool?
+        /// Kafka Clusters used in setting up sources / targets for replication.
+        public let kafkaClusters: [KafkaClusterDescription]?
+        /// A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
+        public let replicationInfoList: [ReplicationInfoDescription]?
+        /// The Amazon Resource Name (ARN) of the replicator.
+        public let replicatorArn: String?
+        /// The description of the replicator.
+        public let replicatorDescription: String?
+        /// The name of the replicator.
+        public let replicatorName: String?
+        /// The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.
+        public let replicatorResourceArn: String?
+        /// State of the replicator.
+        public let replicatorState: ReplicatorState?
+        /// The Amazon Resource Name (ARN) of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)
+        public let serviceExecutionRoleArn: String?
+        /// Details about the state of the replicator.
+        public let stateInfo: ReplicationStateInfo?
+        /// List of tags attached to the Replicator.
+        public let tags: [String: String]?
+
+        public init(creationTime: Date? = nil, currentVersion: String? = nil, isReplicatorReference: Bool? = nil, kafkaClusters: [KafkaClusterDescription]? = nil, replicationInfoList: [ReplicationInfoDescription]? = nil, replicatorArn: String? = nil, replicatorDescription: String? = nil, replicatorName: String? = nil, replicatorResourceArn: String? = nil, replicatorState: ReplicatorState? = nil, serviceExecutionRoleArn: String? = nil, stateInfo: ReplicationStateInfo? = nil, tags: [String: String]? = nil) {
+            self.creationTime = creationTime
+            self.currentVersion = currentVersion
+            self.isReplicatorReference = isReplicatorReference
+            self.kafkaClusters = kafkaClusters
+            self.replicationInfoList = replicationInfoList
+            self.replicatorArn = replicatorArn
+            self.replicatorDescription = replicatorDescription
+            self.replicatorName = replicatorName
+            self.replicatorResourceArn = replicatorResourceArn
+            self.replicatorState = replicatorState
+            self.serviceExecutionRoleArn = serviceExecutionRoleArn
+            self.stateInfo = stateInfo
+            self.tags = tags
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "creationTime"
+            case currentVersion = "currentVersion"
+            case isReplicatorReference = "isReplicatorReference"
+            case kafkaClusters = "kafkaClusters"
+            case replicationInfoList = "replicationInfoList"
+            case replicatorArn = "replicatorArn"
+            case replicatorDescription = "replicatorDescription"
+            case replicatorName = "replicatorName"
+            case replicatorResourceArn = "replicatorResourceArn"
+            case replicatorState = "replicatorState"
+            case serviceExecutionRoleArn = "serviceExecutionRoleArn"
+            case stateInfo = "stateInfo"
+            case tags = "tags"
+        }
+    }
+
     public struct DescribeVpcConnectionRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "arn", location: .uri("Arn"))
@@ -1542,9 +1829,9 @@ extension Kafka {
 
     public struct EncryptionAtRest: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the AWS KMS key for encrypting data at rest. If you don't specify a KMS key, MSK creates one for you and uses it.
-        public let dataVolumeKMSKeyId: String
+        public let dataVolumeKMSKeyId: String?
 
-        public init(dataVolumeKMSKeyId: String) {
+        public init(dataVolumeKMSKeyId: String? = nil) {
             self.dataVolumeKMSKeyId = dataVolumeKMSKeyId
         }
 
@@ -1606,9 +1893,9 @@ extension Kafka {
 
     public struct Firehose: AWSEncodableShape & AWSDecodableShape {
         public let deliveryStream: String?
-        public let enabled: Bool
+        public let enabled: Bool?
 
-        public init(deliveryStream: String? = nil, enabled: Bool) {
+        public init(deliveryStream: String? = nil, enabled: Bool? = nil) {
             self.deliveryStream = deliveryStream
             self.enabled = enabled
         }
@@ -1758,9 +2045,9 @@ extension Kafka {
 
     public struct JmxExporter: AWSDecodableShape {
         /// Indicates whether you want to turn on or turn off the JMX Exporter.
-        public let enabledInBroker: Bool
+        public let enabledInBroker: Bool?
 
-        public init(enabledInBroker: Bool) {
+        public init(enabledInBroker: Bool? = nil) {
             self.enabledInBroker = enabledInBroker
         }
 
@@ -1771,14 +2058,86 @@ extension Kafka {
 
     public struct JmxExporterInfo: AWSEncodableShape & AWSDecodableShape {
         /// Indicates whether you want to turn on or turn off the JMX Exporter.
-        public let enabledInBroker: Bool
+        public let enabledInBroker: Bool?
 
-        public init(enabledInBroker: Bool) {
+        public init(enabledInBroker: Bool? = nil) {
             self.enabledInBroker = enabledInBroker
         }
 
         private enum CodingKeys: String, CodingKey {
             case enabledInBroker = "enabledInBroker"
+        }
+    }
+
+    public struct KafkaCluster: AWSEncodableShape {
+        /// Details of an Amazon MSK Cluster.
+        public let amazonMskCluster: AmazonMskCluster?
+        /// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+        public let vpcConfig: KafkaClusterClientVpcConfig?
+
+        public init(amazonMskCluster: AmazonMskCluster? = nil, vpcConfig: KafkaClusterClientVpcConfig? = nil) {
+            self.amazonMskCluster = amazonMskCluster
+            self.vpcConfig = vpcConfig
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case amazonMskCluster = "amazonMskCluster"
+            case vpcConfig = "vpcConfig"
+        }
+    }
+
+    public struct KafkaClusterClientVpcConfig: AWSEncodableShape & AWSDecodableShape {
+        /// The security groups to attach to the ENIs for the broker nodes.
+        public let securityGroupIds: [String]?
+        /// The list of subnets in the client VPC to connect to.
+        public let subnetIds: [String]?
+
+        public init(securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
+            self.securityGroupIds = securityGroupIds
+            self.subnetIds = subnetIds
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case securityGroupIds = "securityGroupIds"
+            case subnetIds = "subnetIds"
+        }
+    }
+
+    public struct KafkaClusterDescription: AWSDecodableShape {
+        /// Details of an Amazon MSK Cluster.
+        public let amazonMskCluster: AmazonMskCluster?
+        /// The alias of the Kafka cluster. Used to prefix names of replicated topics.
+        public let kafkaClusterAlias: String?
+        /// Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+        public let vpcConfig: KafkaClusterClientVpcConfig?
+
+        public init(amazonMskCluster: AmazonMskCluster? = nil, kafkaClusterAlias: String? = nil, vpcConfig: KafkaClusterClientVpcConfig? = nil) {
+            self.amazonMskCluster = amazonMskCluster
+            self.kafkaClusterAlias = kafkaClusterAlias
+            self.vpcConfig = vpcConfig
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case amazonMskCluster = "amazonMskCluster"
+            case kafkaClusterAlias = "kafkaClusterAlias"
+            case vpcConfig = "vpcConfig"
+        }
+    }
+
+    public struct KafkaClusterSummary: AWSDecodableShape {
+        /// Details of an Amazon MSK Cluster.
+        public let amazonMskCluster: AmazonMskCluster?
+        /// The alias of the Kafka cluster. Used to prefix names of replicated topics.
+        public let kafkaClusterAlias: String?
+
+        public init(amazonMskCluster: AmazonMskCluster? = nil, kafkaClusterAlias: String? = nil) {
+            self.amazonMskCluster = amazonMskCluster
+            self.kafkaClusterAlias = kafkaClusterAlias
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case amazonMskCluster = "amazonMskCluster"
+            case kafkaClusterAlias = "kafkaClusterAlias"
         }
     }
 
@@ -2196,6 +2555,51 @@ extension Kafka {
         }
     }
 
+    public struct ListReplicatorsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "replicatorNameFilter", location: .querystring("replicatorNameFilter"))
+        ]
+
+        /// The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+        public let maxResults: Int?
+        /// If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.
+        public let nextToken: String?
+        /// Returns replicators starting with given name.
+        public let replicatorNameFilter: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil, replicatorNameFilter: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.replicatorNameFilter = replicatorNameFilter
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListReplicatorsResponse: AWSDecodableShape {
+        /// If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.
+        public let nextToken: String?
+        /// List containing information of each of the replicators in the account.
+        public let replicators: [ReplicatorSummary]?
+
+        public init(nextToken: String? = nil, replicators: [ReplicatorSummary]? = nil) {
+            self.nextToken = nextToken
+            self.replicators = replicators
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "nextToken"
+            case replicators = "replicators"
+        }
+    }
+
     public struct ListScramSecretsRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "clusterArn", location: .uri("ClusterArn")),
@@ -2311,9 +2715,9 @@ extension Kafka {
     }
 
     public struct LoggingInfo: AWSEncodableShape & AWSDecodableShape {
-        public let brokerLogs: BrokerLogs
+        public let brokerLogs: BrokerLogs?
 
-        public init(brokerLogs: BrokerLogs) {
+        public init(brokerLogs: BrokerLogs? = nil) {
             self.brokerLogs = brokerLogs
         }
 
@@ -2381,9 +2785,9 @@ extension Kafka {
 
     public struct NodeExporter: AWSDecodableShape {
         /// Indicates whether you want to turn on or turn off the Node Exporter.
-        public let enabledInBroker: Bool
+        public let enabledInBroker: Bool?
 
-        public init(enabledInBroker: Bool) {
+        public init(enabledInBroker: Bool? = nil) {
             self.enabledInBroker = enabledInBroker
         }
 
@@ -2394,9 +2798,9 @@ extension Kafka {
 
     public struct NodeExporterInfo: AWSEncodableShape & AWSDecodableShape {
         /// Indicates whether you want to turn on or turn off the Node Exporter.
-        public let enabledInBroker: Bool
+        public let enabledInBroker: Bool?
 
-        public init(enabledInBroker: Bool) {
+        public init(enabledInBroker: Bool? = nil) {
             self.enabledInBroker = enabledInBroker
         }
 
@@ -2440,9 +2844,9 @@ extension Kafka {
 
     public struct OpenMonitoring: AWSDecodableShape {
         /// Prometheus settings.
-        public let prometheus: Prometheus
+        public let prometheus: Prometheus?
 
-        public init(prometheus: Prometheus) {
+        public init(prometheus: Prometheus? = nil) {
             self.prometheus = prometheus
         }
 
@@ -2453,9 +2857,9 @@ extension Kafka {
 
     public struct OpenMonitoringInfo: AWSEncodableShape & AWSDecodableShape {
         /// Prometheus settings.
-        public let prometheus: PrometheusInfo
+        public let prometheus: PrometheusInfo?
 
-        public init(prometheus: PrometheusInfo) {
+        public init(prometheus: PrometheusInfo? = nil) {
             self.prometheus = prometheus
         }
 
@@ -2500,11 +2904,13 @@ extension Kafka {
 
     public struct Provisioned: AWSDecodableShape {
         /// Information about the brokers.
-        public let brokerNodeGroupInfo: BrokerNodeGroupInfo
+        public let brokerNodeGroupInfo: BrokerNodeGroupInfo?
         /// Includes all client authentication information.
         public let clientAuthentication: ClientAuthentication?
         /// Information about the Apache Kafka version deployed on the brokers.
         public let currentBrokerSoftwareInfo: BrokerSoftwareInfo?
+        /// Determines if there is an action required from the customer.
+        public let customerActionStatus: CustomerActionStatus?
         /// Includes all encryption-related information.
         public let encryptionInfo: EncryptionInfo?
         /// Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
@@ -2512,7 +2918,7 @@ extension Kafka {
         /// Log delivery information for the cluster.
         public let loggingInfo: LoggingInfo?
         /// The number of broker nodes in the cluster.
-        public let numberOfBrokerNodes: Int
+        public let numberOfBrokerNodes: Int?
         /// The settings for open monitoring.
         public let openMonitoring: OpenMonitoringInfo?
         /// This controls storage mode for supported storage tiers.
@@ -2522,10 +2928,11 @@ extension Kafka {
         /// The connection string to use to connect to the Apache ZooKeeper cluster on a TLS port.
         public let zookeeperConnectStringTls: String?
 
-        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo, clientAuthentication: ClientAuthentication? = nil, currentBrokerSoftwareInfo: BrokerSoftwareInfo? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil, zookeeperConnectString: String? = nil, zookeeperConnectStringTls: String? = nil) {
+        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo? = nil, clientAuthentication: ClientAuthentication? = nil, currentBrokerSoftwareInfo: BrokerSoftwareInfo? = nil, customerActionStatus: CustomerActionStatus? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int? = nil, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil, zookeeperConnectString: String? = nil, zookeeperConnectStringTls: String? = nil) {
             self.brokerNodeGroupInfo = brokerNodeGroupInfo
             self.clientAuthentication = clientAuthentication
             self.currentBrokerSoftwareInfo = currentBrokerSoftwareInfo
+            self.customerActionStatus = customerActionStatus
             self.encryptionInfo = encryptionInfo
             self.enhancedMonitoring = enhancedMonitoring
             self.loggingInfo = loggingInfo
@@ -2540,6 +2947,7 @@ extension Kafka {
             case brokerNodeGroupInfo = "brokerNodeGroupInfo"
             case clientAuthentication = "clientAuthentication"
             case currentBrokerSoftwareInfo = "currentBrokerSoftwareInfo"
+            case customerActionStatus = "customerActionStatus"
             case encryptionInfo = "encryptionInfo"
             case enhancedMonitoring = "enhancedMonitoring"
             case loggingInfo = "loggingInfo"
@@ -2553,7 +2961,7 @@ extension Kafka {
 
     public struct ProvisionedRequest: AWSEncodableShape {
         /// Information about the brokers.
-        public let brokerNodeGroupInfo: BrokerNodeGroupInfo
+        public let brokerNodeGroupInfo: BrokerNodeGroupInfo?
         /// Includes all client authentication information.
         public let clientAuthentication: ClientAuthentication?
         /// Represents the configuration that you want Amazon MSK to use for the brokers in a cluster.
@@ -2563,17 +2971,17 @@ extension Kafka {
         /// Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
         public let enhancedMonitoring: EnhancedMonitoring?
         /// The Apache Kafka version that you want for the cluster.
-        public let kafkaVersion: String
+        public let kafkaVersion: String?
         /// Log delivery information for the cluster.
         public let loggingInfo: LoggingInfo?
         /// The number of broker nodes in the cluster.
-        public let numberOfBrokerNodes: Int
+        public let numberOfBrokerNodes: Int?
         /// The settings for open monitoring.
         public let openMonitoring: OpenMonitoringInfo?
         /// This controls storage mode for supported storage tiers.
         public let storageMode: StorageMode?
 
-        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo, clientAuthentication: ClientAuthentication? = nil, configurationInfo: ConfigurationInfo? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, kafkaVersion: String, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil) {
+        public init(brokerNodeGroupInfo: BrokerNodeGroupInfo? = nil, clientAuthentication: ClientAuthentication? = nil, configurationInfo: ConfigurationInfo? = nil, encryptionInfo: EncryptionInfo? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, kafkaVersion: String? = nil, loggingInfo: LoggingInfo? = nil, numberOfBrokerNodes: Int? = nil, openMonitoring: OpenMonitoringInfo? = nil, storageMode: StorageMode? = nil) {
             self.brokerNodeGroupInfo = brokerNodeGroupInfo
             self.clientAuthentication = clientAuthentication
             self.configurationInfo = configurationInfo
@@ -2587,7 +2995,7 @@ extension Kafka {
         }
 
         public func validate(name: String) throws {
-            try self.brokerNodeGroupInfo.validate(name: "\(name).brokerNodeGroupInfo")
+            try self.brokerNodeGroupInfo?.validate(name: "\(name).brokerNodeGroupInfo")
             try self.validate(self.kafkaVersion, name: "kafkaVersion", parent: name, max: 128)
             try self.validate(self.kafkaVersion, name: "kafkaVersion", parent: name, min: 1)
             try self.validate(self.numberOfBrokerNodes, name: "numberOfBrokerNodes", parent: name, max: 15)
@@ -2648,9 +3056,9 @@ extension Kafka {
         /// The policy version.
         public let currentVersion: String?
         /// The policy.
-        public let policy: String
+        public let policy: String?
 
-        public init(clusterArn: String, currentVersion: String? = nil, policy: String) {
+        public init(clusterArn: String, currentVersion: String? = nil, policy: String? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.policy = policy
@@ -2681,11 +3089,11 @@ extension Kafka {
         ]
 
         /// The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.
-        public let brokerIds: [String]
+        public let brokerIds: [String]?
         /// The Amazon Resource Name (ARN) of the cluster to be updated.
         public let clusterArn: String
 
-        public init(brokerIds: [String], clusterArn: String) {
+        public init(brokerIds: [String]? = nil, clusterArn: String) {
             self.brokerIds = brokerIds
             self.clusterArn = clusterArn
         }
@@ -2720,9 +3128,9 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) of the cluster.
         public let clusterArn: String
         /// The VPC connection ARN.
-        public let vpcConnectionArn: String
+        public let vpcConnectionArn: String?
 
-        public init(clusterArn: String, vpcConnectionArn: String) {
+        public init(clusterArn: String, vpcConnectionArn: String? = nil) {
             self.clusterArn = clusterArn
             self.vpcConnectionArn = vpcConnectionArn
         }
@@ -2736,12 +3144,155 @@ extension Kafka {
         public init() {}
     }
 
+    public struct ReplicationInfo: AWSEncodableShape {
+        /// Configuration relating to consumer group replication.
+        public let consumerGroupReplication: ConsumerGroupReplication?
+        /// The ARN of the source Kafka cluster.
+        public let sourceKafkaClusterArn: String?
+        /// The compression type to use when producing records to target cluster.
+        public let targetCompressionType: TargetCompressionType?
+        /// The ARN of the target Kafka cluster.
+        public let targetKafkaClusterArn: String?
+        /// Configuration relating to topic replication.
+        public let topicReplication: TopicReplication?
+
+        public init(consumerGroupReplication: ConsumerGroupReplication? = nil, sourceKafkaClusterArn: String? = nil, targetCompressionType: TargetCompressionType? = nil, targetKafkaClusterArn: String? = nil, topicReplication: TopicReplication? = nil) {
+            self.consumerGroupReplication = consumerGroupReplication
+            self.sourceKafkaClusterArn = sourceKafkaClusterArn
+            self.targetCompressionType = targetCompressionType
+            self.targetKafkaClusterArn = targetKafkaClusterArn
+            self.topicReplication = topicReplication
+        }
+
+        public func validate(name: String) throws {
+            try self.consumerGroupReplication?.validate(name: "\(name).consumerGroupReplication")
+            try self.topicReplication?.validate(name: "\(name).topicReplication")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case consumerGroupReplication = "consumerGroupReplication"
+            case sourceKafkaClusterArn = "sourceKafkaClusterArn"
+            case targetCompressionType = "targetCompressionType"
+            case targetKafkaClusterArn = "targetKafkaClusterArn"
+            case topicReplication = "topicReplication"
+        }
+    }
+
+    public struct ReplicationInfoDescription: AWSDecodableShape {
+        /// Configuration relating to consumer group replication.
+        public let consumerGroupReplication: ConsumerGroupReplication?
+        /// The alias of the source Kafka cluster.
+        public let sourceKafkaClusterAlias: String?
+        /// The compression type to use when producing records to target cluster.
+        public let targetCompressionType: TargetCompressionType?
+        /// The alias of the target Kafka cluster.
+        public let targetKafkaClusterAlias: String?
+        /// Configuration relating to topic replication.
+        public let topicReplication: TopicReplication?
+
+        public init(consumerGroupReplication: ConsumerGroupReplication? = nil, sourceKafkaClusterAlias: String? = nil, targetCompressionType: TargetCompressionType? = nil, targetKafkaClusterAlias: String? = nil, topicReplication: TopicReplication? = nil) {
+            self.consumerGroupReplication = consumerGroupReplication
+            self.sourceKafkaClusterAlias = sourceKafkaClusterAlias
+            self.targetCompressionType = targetCompressionType
+            self.targetKafkaClusterAlias = targetKafkaClusterAlias
+            self.topicReplication = topicReplication
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case consumerGroupReplication = "consumerGroupReplication"
+            case sourceKafkaClusterAlias = "sourceKafkaClusterAlias"
+            case targetCompressionType = "targetCompressionType"
+            case targetKafkaClusterAlias = "targetKafkaClusterAlias"
+            case topicReplication = "topicReplication"
+        }
+    }
+
+    public struct ReplicationInfoSummary: AWSDecodableShape {
+        /// The alias of the source Kafka cluster.
+        public let sourceKafkaClusterAlias: String?
+        /// The alias of the target Kafka cluster.
+        public let targetKafkaClusterAlias: String?
+
+        public init(sourceKafkaClusterAlias: String? = nil, targetKafkaClusterAlias: String? = nil) {
+            self.sourceKafkaClusterAlias = sourceKafkaClusterAlias
+            self.targetKafkaClusterAlias = targetKafkaClusterAlias
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case sourceKafkaClusterAlias = "sourceKafkaClusterAlias"
+            case targetKafkaClusterAlias = "targetKafkaClusterAlias"
+        }
+    }
+
+    public struct ReplicationStateInfo: AWSDecodableShape {
+        /// Code that describes the current state of the replicator.
+        public let code: String?
+        /// Message that describes the state of the replicator.
+        public let message: String?
+
+        public init(code: String? = nil, message: String? = nil) {
+            self.code = code
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case code = "code"
+            case message = "message"
+        }
+    }
+
+    public struct ReplicatorSummary: AWSDecodableShape {
+        /// The time the replicator was created.
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var creationTime: Date?
+        /// The current version of the replicator.
+        public let currentVersion: String?
+        /// Whether this resource is a replicator reference.
+        public let isReplicatorReference: Bool?
+        /// Kafka Clusters used in setting up sources / targets for replication.
+        public let kafkaClustersSummary: [KafkaClusterSummary]?
+        /// A list of summarized information of replications between clusters.
+        public let replicationInfoSummaryList: [ReplicationInfoSummary]?
+        /// The Amazon Resource Name (ARN) of the replicator.
+        public let replicatorArn: String?
+        /// The name of the replicator.
+        public let replicatorName: String?
+        /// The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.
+        public let replicatorResourceArn: String?
+        /// State of the replicator.
+        public let replicatorState: ReplicatorState?
+
+        public init(creationTime: Date? = nil, currentVersion: String? = nil, isReplicatorReference: Bool? = nil, kafkaClustersSummary: [KafkaClusterSummary]? = nil, replicationInfoSummaryList: [ReplicationInfoSummary]? = nil, replicatorArn: String? = nil, replicatorName: String? = nil, replicatorResourceArn: String? = nil, replicatorState: ReplicatorState? = nil) {
+            self.creationTime = creationTime
+            self.currentVersion = currentVersion
+            self.isReplicatorReference = isReplicatorReference
+            self.kafkaClustersSummary = kafkaClustersSummary
+            self.replicationInfoSummaryList = replicationInfoSummaryList
+            self.replicatorArn = replicatorArn
+            self.replicatorName = replicatorName
+            self.replicatorResourceArn = replicatorResourceArn
+            self.replicatorState = replicatorState
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "creationTime"
+            case currentVersion = "currentVersion"
+            case isReplicatorReference = "isReplicatorReference"
+            case kafkaClustersSummary = "kafkaClustersSummary"
+            case replicationInfoSummaryList = "replicationInfoSummaryList"
+            case replicatorArn = "replicatorArn"
+            case replicatorName = "replicatorName"
+            case replicatorResourceArn = "replicatorResourceArn"
+            case replicatorState = "replicatorState"
+        }
+    }
+
     public struct S3: AWSEncodableShape & AWSDecodableShape {
         public let bucket: String?
-        public let enabled: Bool
+        public let enabled: Bool?
         public let prefix: String?
 
-        public init(bucket: String? = nil, enabled: Bool, prefix: String? = nil) {
+        public init(bucket: String? = nil, enabled: Bool? = nil, prefix: String? = nil) {
             self.bucket = bucket
             self.enabled = enabled
             self.prefix = prefix
@@ -2788,9 +3339,9 @@ extension Kafka {
         /// Includes all client authentication information.
         public let clientAuthentication: ServerlessClientAuthentication?
         /// The configuration of the Amazon VPCs for the cluster.
-        public let vpcConfigs: [VpcConfig]
+        public let vpcConfigs: [VpcConfig]?
 
-        public init(clientAuthentication: ServerlessClientAuthentication? = nil, vpcConfigs: [VpcConfig]) {
+        public init(clientAuthentication: ServerlessClientAuthentication? = nil, vpcConfigs: [VpcConfig]? = nil) {
             self.clientAuthentication = clientAuthentication
             self.vpcConfigs = vpcConfigs
         }
@@ -2818,9 +3369,9 @@ extension Kafka {
         /// Includes all client authentication information.
         public let clientAuthentication: ServerlessClientAuthentication?
         /// The configuration of the Amazon VPCs for the cluster.
-        public let vpcConfigs: [VpcConfig]
+        public let vpcConfigs: [VpcConfig]?
 
-        public init(clientAuthentication: ServerlessClientAuthentication? = nil, vpcConfigs: [VpcConfig]) {
+        public init(clientAuthentication: ServerlessClientAuthentication? = nil, vpcConfigs: [VpcConfig]? = nil) {
             self.clientAuthentication = clientAuthentication
             self.vpcConfigs = vpcConfigs
         }
@@ -2884,9 +3435,9 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
         public let resourceArn: String
         /// The key-value pair for the resource tag.
-        public let tags: [String: String]
+        public let tags: [String: String]?
 
-        public init(resourceArn: String, tags: [String: String]) {
+        public init(resourceArn: String, tags: [String: String]? = nil) {
             self.resourceArn = resourceArn
             self.tags = tags
         }
@@ -2910,6 +3461,82 @@ extension Kafka {
         private enum CodingKeys: String, CodingKey {
             case certificateAuthorityArnList = "certificateAuthorityArnList"
             case enabled = "enabled"
+        }
+    }
+
+    public struct TopicReplication: AWSEncodableShape & AWSDecodableShape {
+        /// Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.
+        public let copyAccessControlListsForTopics: Bool?
+        /// Whether to periodically configure remote topics to match their corresponding upstream topics.
+        public let copyTopicConfigurations: Bool?
+        /// Whether to periodically check for new topics and partitions.
+        public let detectAndCopyNewTopics: Bool?
+        /// List of regular expression patterns indicating the topics that should not be replicated.
+        public let topicsToExclude: [String]?
+        /// List of regular expression patterns indicating the topics to copy.
+        public let topicsToReplicate: [String]?
+
+        public init(copyAccessControlListsForTopics: Bool? = nil, copyTopicConfigurations: Bool? = nil, detectAndCopyNewTopics: Bool? = nil, topicsToExclude: [String]? = nil, topicsToReplicate: [String]? = nil) {
+            self.copyAccessControlListsForTopics = copyAccessControlListsForTopics
+            self.copyTopicConfigurations = copyTopicConfigurations
+            self.detectAndCopyNewTopics = detectAndCopyNewTopics
+            self.topicsToExclude = topicsToExclude
+            self.topicsToReplicate = topicsToReplicate
+        }
+
+        public func validate(name: String) throws {
+            try self.topicsToExclude?.forEach {
+                try validate($0, name: "topicsToExclude[]", parent: name, max: 249)
+            }
+            try self.topicsToReplicate?.forEach {
+                try validate($0, name: "topicsToReplicate[]", parent: name, max: 249)
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case copyAccessControlListsForTopics = "copyAccessControlListsForTopics"
+            case copyTopicConfigurations = "copyTopicConfigurations"
+            case detectAndCopyNewTopics = "detectAndCopyNewTopics"
+            case topicsToExclude = "topicsToExclude"
+            case topicsToReplicate = "topicsToReplicate"
+        }
+    }
+
+    public struct TopicReplicationUpdate: AWSEncodableShape {
+        /// Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.
+        public let copyAccessControlListsForTopics: Bool?
+        /// Whether to periodically configure remote topics to match their corresponding upstream topics.
+        public let copyTopicConfigurations: Bool?
+        /// Whether to periodically check for new topics and partitions.
+        public let detectAndCopyNewTopics: Bool?
+        /// List of regular expression patterns indicating the topics that should not be replicated.
+        public let topicsToExclude: [String]?
+        /// List of regular expression patterns indicating the topics to copy.
+        public let topicsToReplicate: [String]?
+
+        public init(copyAccessControlListsForTopics: Bool? = nil, copyTopicConfigurations: Bool? = nil, detectAndCopyNewTopics: Bool? = nil, topicsToExclude: [String]? = nil, topicsToReplicate: [String]? = nil) {
+            self.copyAccessControlListsForTopics = copyAccessControlListsForTopics
+            self.copyTopicConfigurations = copyTopicConfigurations
+            self.detectAndCopyNewTopics = detectAndCopyNewTopics
+            self.topicsToExclude = topicsToExclude
+            self.topicsToReplicate = topicsToReplicate
+        }
+
+        public func validate(name: String) throws {
+            try self.topicsToExclude?.forEach {
+                try validate($0, name: "topicsToExclude[]", parent: name, max: 249)
+            }
+            try self.topicsToReplicate?.forEach {
+                try validate($0, name: "topicsToReplicate[]", parent: name, max: 249)
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case copyAccessControlListsForTopics = "copyAccessControlListsForTopics"
+            case copyTopicConfigurations = "copyTopicConfigurations"
+            case detectAndCopyNewTopics = "detectAndCopyNewTopics"
+            case topicsToExclude = "topicsToExclude"
+            case topicsToReplicate = "topicsToReplicate"
         }
     }
 
@@ -2956,9 +3583,9 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the resource that's associated with the tags.
         public let resourceArn: String
         /// Tag keys must be unique for a given cluster. In addition, the following restrictions apply:   Each tag key must be unique. If you add a tag with a key that's already in use, your new tag overwrites the existing key-value pair.    You can't start a tag key with aws: because this prefix is reserved for use by  AWS.  AWS creates tags that begin with this prefix on your behalf, but you can't edit or delete them.   Tag keys must be between 1 and 128 Unicode characters in length.   Tag keys must consist of the following characters: Unicode letters, digits, white space, and the following special characters: _ . / = + - @.
-        public let tagKeys: [String]
+        public let tagKeys: [String]?
 
-        public init(resourceArn: String, tagKeys: [String]) {
+        public init(resourceArn: String, tagKeys: [String]? = nil) {
             self.resourceArn = resourceArn
             self.tagKeys = tagKeys
         }
@@ -2974,11 +3601,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// The version of cluster to update from. A successful operation will then generate a new version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// The number of broker nodes that you want the cluster to have after this operation completes successfully.
-        public let targetNumberOfBrokerNodes: Int
+        public let targetNumberOfBrokerNodes: Int?
 
-        public init(clusterArn: String, currentVersion: String, targetNumberOfBrokerNodes: Int) {
+        public init(clusterArn: String, currentVersion: String? = nil, targetNumberOfBrokerNodes: Int? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.targetNumberOfBrokerNodes = targetNumberOfBrokerNodes
@@ -3020,11 +3647,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// The version of cluster to update from. A successful operation will then generate a new version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// Describes the target volume size and the ID of the broker to apply the update to.
-        public let targetBrokerEBSVolumeInfo: [BrokerEBSVolumeInfo]
+        public let targetBrokerEBSVolumeInfo: [BrokerEBSVolumeInfo]?
 
-        public init(clusterArn: String, currentVersion: String, targetBrokerEBSVolumeInfo: [BrokerEBSVolumeInfo]) {
+        public init(clusterArn: String, currentVersion: String? = nil, targetBrokerEBSVolumeInfo: [BrokerEBSVolumeInfo]? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.targetBrokerEBSVolumeInfo = targetBrokerEBSVolumeInfo
@@ -3061,11 +3688,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// The Amazon MSK broker type that you want all of the brokers in this cluster to be.
-        public let targetInstanceType: String
+        public let targetInstanceType: String?
 
-        public init(clusterArn: String, currentVersion: String, targetInstanceType: String) {
+        public init(clusterArn: String, currentVersion: String? = nil, targetInstanceType: String? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.targetInstanceType = targetInstanceType
@@ -3102,11 +3729,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// Represents the configuration that you want MSK to use for the brokers in a cluster.
-        public let configurationInfo: ConfigurationInfo
+        public let configurationInfo: ConfigurationInfo?
         /// The version of the cluster that needs to be updated.
-        public let currentVersion: String
+        public let currentVersion: String?
 
-        public init(clusterArn: String, configurationInfo: ConfigurationInfo, currentVersion: String) {
+        public init(clusterArn: String, configurationInfo: ConfigurationInfo? = nil, currentVersion: String? = nil) {
             self.clusterArn = clusterArn
             self.configurationInfo = configurationInfo
             self.currentVersion = currentVersion
@@ -3145,11 +3772,11 @@ extension Kafka {
         /// The custom configuration that should be applied on the new version of cluster.
         public let configurationInfo: ConfigurationInfo?
         /// Current cluster version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// Target Kafka version.
-        public let targetKafkaVersion: String
+        public let targetKafkaVersion: String?
 
-        public init(clusterArn: String, configurationInfo: ConfigurationInfo? = nil, currentVersion: String, targetKafkaVersion: String) {
+        public init(clusterArn: String, configurationInfo: ConfigurationInfo? = nil, currentVersion: String? = nil, targetKafkaVersion: String? = nil) {
             self.clusterArn = clusterArn
             self.configurationInfo = configurationInfo
             self.currentVersion = currentVersion
@@ -3190,9 +3817,9 @@ extension Kafka {
         /// The description of the configuration revision.
         public let description: String?
         /// Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded.  When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.
-        public let serverProperties: AWSBase64Data
+        public let serverProperties: AWSBase64Data?
 
-        public init(arn: String, description: String? = nil, serverProperties: AWSBase64Data) {
+        public init(arn: String, description: String? = nil, serverProperties: AWSBase64Data? = nil) {
             self.arn = arn
             self.description = description
             self.serverProperties = serverProperties
@@ -3229,11 +3856,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) of the configuration.
         public let clusterArn: String
         /// Information about the broker access configuration.
-        public let connectivityInfo: ConnectivityInfo
+        public let connectivityInfo: ConnectivityInfo?
         /// The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
-        public let currentVersion: String
+        public let currentVersion: String?
 
-        public init(clusterArn: String, connectivityInfo: ConnectivityInfo, currentVersion: String) {
+        public init(clusterArn: String, connectivityInfo: ConnectivityInfo? = nil, currentVersion: String? = nil) {
             self.clusterArn = clusterArn
             self.connectivityInfo = connectivityInfo
             self.currentVersion = currentVersion
@@ -3270,14 +3897,14 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon CloudWatch for this cluster.
         public let enhancedMonitoring: EnhancedMonitoring?
         public let loggingInfo: LoggingInfo?
         /// The settings for open monitoring.
         public let openMonitoring: OpenMonitoringInfo?
 
-        public init(clusterArn: String, currentVersion: String, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, openMonitoring: OpenMonitoringInfo? = nil) {
+        public init(clusterArn: String, currentVersion: String? = nil, enhancedMonitoring: EnhancedMonitoring? = nil, loggingInfo: LoggingInfo? = nil, openMonitoring: OpenMonitoringInfo? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.enhancedMonitoring = enhancedMonitoring
@@ -3310,6 +3937,64 @@ extension Kafka {
         }
     }
 
+    public struct UpdateReplicationInfoRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "replicatorArn", location: .uri("ReplicatorArn"))
+        ]
+
+        /// Updated consumer group replication information.
+        public let consumerGroupReplication: ConsumerGroupReplicationUpdate?
+        /// Current replicator version.
+        public let currentVersion: String?
+        /// The Amazon Resource Name (ARN) of the replicator to be updated.
+        public let replicatorArn: String
+        /// The ARN of the source Kafka cluster.
+        public let sourceKafkaClusterArn: String?
+        /// The ARN of the target Kafka cluster.
+        public let targetKafkaClusterArn: String?
+        /// Updated topic replication information.
+        public let topicReplication: TopicReplicationUpdate?
+
+        public init(consumerGroupReplication: ConsumerGroupReplicationUpdate? = nil, currentVersion: String? = nil, replicatorArn: String, sourceKafkaClusterArn: String? = nil, targetKafkaClusterArn: String? = nil, topicReplication: TopicReplicationUpdate? = nil) {
+            self.consumerGroupReplication = consumerGroupReplication
+            self.currentVersion = currentVersion
+            self.replicatorArn = replicatorArn
+            self.sourceKafkaClusterArn = sourceKafkaClusterArn
+            self.targetKafkaClusterArn = targetKafkaClusterArn
+            self.topicReplication = topicReplication
+        }
+
+        public func validate(name: String) throws {
+            try self.consumerGroupReplication?.validate(name: "\(name).consumerGroupReplication")
+            try self.topicReplication?.validate(name: "\(name).topicReplication")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case consumerGroupReplication = "consumerGroupReplication"
+            case currentVersion = "currentVersion"
+            case sourceKafkaClusterArn = "sourceKafkaClusterArn"
+            case targetKafkaClusterArn = "targetKafkaClusterArn"
+            case topicReplication = "topicReplication"
+        }
+    }
+
+    public struct UpdateReplicationInfoResponse: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the replicator.
+        public let replicatorArn: String?
+        /// State of the replicator.
+        public let replicatorState: ReplicatorState?
+
+        public init(replicatorArn: String? = nil, replicatorState: ReplicatorState? = nil) {
+            self.replicatorArn = replicatorArn
+            self.replicatorState = replicatorState
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case replicatorArn = "replicatorArn"
+            case replicatorState = "replicatorState"
+        }
+    }
+
     public struct UpdateSecurityRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "clusterArn", location: .uri("ClusterArn"))
@@ -3320,11 +4005,11 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         public let clusterArn: String
         /// The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// Includes all encryption-related information.
         public let encryptionInfo: EncryptionInfo?
 
-        public init(clientAuthentication: ClientAuthentication? = nil, clusterArn: String, currentVersion: String, encryptionInfo: EncryptionInfo? = nil) {
+        public init(clientAuthentication: ClientAuthentication? = nil, clusterArn: String, currentVersion: String? = nil, encryptionInfo: EncryptionInfo? = nil) {
             self.clientAuthentication = clientAuthentication
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
@@ -3363,7 +4048,7 @@ extension Kafka {
         /// The Amazon Resource Name (ARN) of the cluster to be updated.
         public let clusterArn: String
         /// The version of cluster to update from. A successful operation will then generate a new version.
-        public let currentVersion: String
+        public let currentVersion: String?
         /// EBS volume provisioned throughput information.
         public let provisionedThroughput: ProvisionedThroughput?
         /// Controls storage mode for supported storage tiers.
@@ -3371,7 +4056,7 @@ extension Kafka {
         /// size of the EBS volume to update.
         public let volumeSizeGB: Int?
 
-        public init(clusterArn: String, currentVersion: String, provisionedThroughput: ProvisionedThroughput? = nil, storageMode: StorageMode? = nil, volumeSizeGB: Int? = nil) {
+        public init(clusterArn: String, currentVersion: String? = nil, provisionedThroughput: ProvisionedThroughput? = nil, storageMode: StorageMode? = nil, volumeSizeGB: Int? = nil) {
             self.clusterArn = clusterArn
             self.currentVersion = currentVersion
             self.provisionedThroughput = provisionedThroughput
@@ -3425,9 +4110,9 @@ extension Kafka {
         /// The IDs of the security groups associated with the cluster.
         public let securityGroupIds: [String]?
         /// The IDs of the subnets associated with the cluster.
-        public let subnetIds: [String]
+        public let subnetIds: [String]?
 
-        public init(securityGroupIds: [String]? = nil, subnetIds: [String]) {
+        public init(securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
             self.securityGroupIds = securityGroupIds
             self.subnetIds = subnetIds
         }
@@ -3447,13 +4132,13 @@ extension Kafka {
         /// State of the Vpc Connection.
         public let state: VpcConnectionState?
         /// The ARN that identifies the Cluster which the Vpc Connection belongs to.
-        public let targetClusterArn: String
+        public let targetClusterArn: String?
         /// The ARN that identifies the Vpc Connection.
-        public let vpcConnectionArn: String
+        public let vpcConnectionArn: String?
         /// The vpcId that belongs to the Vpc Connection.
         public let vpcId: String?
 
-        public init(authentication: String? = nil, creationTime: Date? = nil, state: VpcConnectionState? = nil, targetClusterArn: String, vpcConnectionArn: String, vpcId: String? = nil) {
+        public init(authentication: String? = nil, creationTime: Date? = nil, state: VpcConnectionState? = nil, targetClusterArn: String? = nil, vpcConnectionArn: String? = nil, vpcId: String? = nil) {
             self.authentication = authentication
             self.creationTime = creationTime
             self.state = state

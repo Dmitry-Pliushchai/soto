@@ -26,19 +26,19 @@ import SotoCore
 extension HealthLake {
     // MARK: Enums
 
-    public enum AuthorizationStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthorizationStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsAuth = "AWS_AUTH"
         case smartv1 = "SMART_ON_FHIR_V1"
         public var description: String { return self.rawValue }
     }
 
-    public enum CmkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CmkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aoCmk = "AWS_OWNED_KMS_KEY"
         case cmCmk = "CUSTOMER_MANAGED_KMS_KEY"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatastoreStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatastoreStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -46,12 +46,12 @@ extension HealthLake {
         public var description: String { return self.rawValue }
     }
 
-    public enum FHIRVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum FHIRVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case r4 = "R4"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelCompleted = "CANCEL_COMPLETED"
         case cancelFailed = "CANCEL_FAILED"
         case cancelInProgress = "CANCEL_IN_PROGRESS"
@@ -64,7 +64,7 @@ extension HealthLake {
         public var description: String { return self.rawValue }
     }
 
-    public enum PreloadDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PreloadDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case synthea = "SYNTHEA"
         public var description: String { return self.rawValue }
     }

@@ -26,73 +26,83 @@ import SotoCore
 extension Lambda {
     // MARK: Enums
 
-    public enum Architecture: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationLogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case debug = "DEBUG"
+        case error = "ERROR"
+        case fatal = "FATAL"
+        case info = "INFO"
+        case trace = "TRACE"
+        case warn = "WARN"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum Architecture: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arm64 = "arm64"
         case x8664 = "x86_64"
         public var description: String { return self.rawValue }
     }
 
-    public enum CodeSigningPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum CodeSigningPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enforce = "Enforce"
         case warn = "Warn"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndPointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndPointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kafkaBootstrapServers = "KAFKA_BOOTSTRAP_SERVERS"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventSourcePosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventSourcePosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case atTimestamp = "AT_TIMESTAMP"
         case latest = "LATEST"
         case trimHorizon = "TRIM_HORIZON"
         public var description: String { return self.rawValue }
     }
 
-    public enum FullDocument: String, CustomStringConvertible, Codable, Sendable {
+    public enum FullDocument: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "Default"
         case updateLookup = "UpdateLookup"
         public var description: String { return self.rawValue }
     }
 
-    public enum FunctionResponseType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FunctionResponseType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case reportBatchItemFailures = "ReportBatchItemFailures"
         public var description: String { return self.rawValue }
     }
 
-    public enum FunctionUrlAuthType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FunctionUrlAuthType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsIam = "AWS_IAM"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FunctionVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum FunctionVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InvocationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dryRun = "DryRun"
         case event = "Event"
         case requestResponse = "RequestResponse"
         public var description: String { return self.rawValue }
     }
 
-    public enum InvokeMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum InvokeMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case buffered = "BUFFERED"
         case responseStream = "RESPONSE_STREAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum LastUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case successful = "Successful"
         public var description: String { return self.rawValue }
     }
 
-    public enum LastUpdateStatusReasonCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastUpdateStatusReasonCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabledKMSKey = "DisabledKMSKey"
         case efsMountConnectivityError = "EFSMountConnectivityError"
         case efsMountFailure = "EFSMountFailure"
@@ -117,32 +127,38 @@ extension Lambda {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case json = "JSON"
+        case text = "Text"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum LogType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "None"
         case tail = "Tail"
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case image = "Image"
         case zip = "Zip"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedConcurrencyStatusEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedConcurrencyStatusEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case ready = "READY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResponseStreamingInvocationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResponseStreamingInvocationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dryRun = "DryRun"
         case requestResponse = "RequestResponse"
         public var description: String { return self.rawValue }
     }
 
-    public enum Runtime: String, CustomStringConvertible, Codable, Sendable {
+    public enum Runtime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dotnet6 = "dotnet6"
         case dotnetcore10 = "dotnetcore1.0"
         case dotnetcore20 = "dotnetcore2.0"
@@ -151,6 +167,7 @@ extension Lambda {
         case go1x = "go1.x"
         case java11 = "java11"
         case java17 = "java17"
+        case java21 = "java21"
         case java8 = "java8"
         case java8al2 = "java8.al2"
         case nodejs = "nodejs"
@@ -159,15 +176,18 @@ extension Lambda {
         case nodejs14x = "nodejs14.x"
         case nodejs16x = "nodejs16.x"
         case nodejs18x = "nodejs18.x"
+        case nodejs20x = "nodejs20.x"
         case nodejs43 = "nodejs4.3"
         case nodejs43edge = "nodejs4.3-edge"
         case nodejs610 = "nodejs6.10"
         case nodejs810 = "nodejs8.10"
         case provided = "provided"
         case providedal2 = "provided.al2"
+        case providedal2023 = "provided.al2023"
         case python27 = "python2.7"
         case python310 = "python3.10"
         case python311 = "python3.11"
+        case python312 = "python3.12"
         case python36 = "python3.6"
         case python37 = "python3.7"
         case python38 = "python3.8"
@@ -178,19 +198,19 @@ extension Lambda {
         public var description: String { return self.rawValue }
     }
 
-    public enum SnapStartApplyOn: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnapStartApplyOn: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "None"
         case publishedVersions = "PublishedVersions"
         public var description: String { return self.rawValue }
     }
 
-    public enum SnapStartOptimizationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnapStartOptimizationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "Off"
         case on = "On"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceAccessType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceAccessType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basicAuth = "BASIC_AUTH"
         case clientCertificateTlsAuth = "CLIENT_CERTIFICATE_TLS_AUTH"
         case saslScram256Auth = "SASL_SCRAM_256_AUTH"
@@ -202,7 +222,7 @@ extension Lambda {
         public var description: String { return self.rawValue }
     }
 
-    public enum State: String, CustomStringConvertible, Codable, Sendable {
+    public enum State: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case failed = "Failed"
         case inactive = "Inactive"
@@ -210,7 +230,7 @@ extension Lambda {
         public var description: String { return self.rawValue }
     }
 
-    public enum StateReasonCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum StateReasonCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "Creating"
         case disabledKMSKey = "DisabledKMSKey"
         case efsMountConnectivityError = "EFSMountConnectivityError"
@@ -238,13 +258,20 @@ extension Lambda {
         public var description: String { return self.rawValue }
     }
 
-    public enum TracingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SystemLogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case debug = "DEBUG"
+        case info = "INFO"
+        case warn = "WARN"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TracingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case passThrough = "PassThrough"
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateRuntimeOn: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateRuntimeOn: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "Auto"
         case functionUpdate = "FunctionUpdate"
         case manual = "Manual"
@@ -352,7 +379,7 @@ extension Lambda {
         /// The version number.
         public let versionNumber: Int64
 
-        public init(action: String, layerName: String, organizationId: String? = nil, principal: String, revisionId: String? = nil, statementId: String, versionNumber: Int64 = 0) {
+        public init(action: String, layerName: String, organizationId: String? = nil, principal: String, revisionId: String? = nil, statementId: String, versionNumber: Int64) {
             self.action = action
             self.layerName = layerName
             self.organizationId = organizationId
@@ -971,6 +998,8 @@ extension Lambda {
         public let kmsKeyArn: String?
         /// A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
         public let layers: [String]?
+        /// The function's Amazon CloudWatch Logs configuration settings.
+        public let loggingConfig: LoggingConfig?
         /// The amount of memory available to the function at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
         public let memorySize: Int?
         /// The type of deployment package. Set to Image for container image and set to Zip for .zip file archive.
@@ -993,7 +1022,7 @@ extension Lambda {
         /// For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can access resources and the internet only through that VPC. For more information, see Configuring a Lambda function to access resources in a VPC.
         public let vpcConfig: VpcConfig?
 
-        public init(architectures: [Architecture]? = nil, code: FunctionCode, codeSigningConfigArn: String? = nil, deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: Environment? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionName: String, handler: String? = nil, imageConfig: ImageConfig? = nil, kmsKeyArn: String? = nil, layers: [String]? = nil, memorySize: Int? = nil, packageType: PackageType? = nil, publish: Bool? = nil, role: String, runtime: Runtime? = nil, snapStart: SnapStart? = nil, tags: [String: String]? = nil, timeout: Int? = nil, tracingConfig: TracingConfig? = nil, vpcConfig: VpcConfig? = nil) {
+        public init(architectures: [Architecture]? = nil, code: FunctionCode, codeSigningConfigArn: String? = nil, deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: Environment? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionName: String, handler: String? = nil, imageConfig: ImageConfig? = nil, kmsKeyArn: String? = nil, layers: [String]? = nil, loggingConfig: LoggingConfig? = nil, memorySize: Int? = nil, packageType: PackageType? = nil, publish: Bool? = nil, role: String, runtime: Runtime? = nil, snapStart: SnapStart? = nil, tags: [String: String]? = nil, timeout: Int? = nil, tracingConfig: TracingConfig? = nil, vpcConfig: VpcConfig? = nil) {
             self.architectures = architectures
             self.code = code
             self.codeSigningConfigArn = codeSigningConfigArn
@@ -1007,6 +1036,7 @@ extension Lambda {
             self.imageConfig = imageConfig
             self.kmsKeyArn = kmsKeyArn
             self.layers = layers
+            self.loggingConfig = loggingConfig
             self.memorySize = memorySize
             self.packageType = packageType
             self.publish = publish
@@ -1045,6 +1075,7 @@ extension Lambda {
                 try validate($0, name: "layers[]", parent: name, min: 1)
                 try validate($0, name: "layers[]", parent: name, pattern: "^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$")
             }
+            try self.loggingConfig?.validate(name: "\(name).loggingConfig")
             try self.validate(self.memorySize, name: "memorySize", parent: name, max: 10240)
             try self.validate(self.memorySize, name: "memorySize", parent: name, min: 128)
             try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$")
@@ -1066,6 +1097,7 @@ extension Lambda {
             case imageConfig = "ImageConfig"
             case kmsKeyArn = "KMSKeyArn"
             case layers = "Layers"
+            case loggingConfig = "LoggingConfig"
             case memorySize = "MemorySize"
             case packageType = "PackageType"
             case publish = "Publish"
@@ -1375,7 +1407,7 @@ extension Lambda {
         /// The version number.
         public let versionNumber: Int64
 
-        public init(layerName: String, versionNumber: Int64 = 0) {
+        public init(layerName: String, versionNumber: Int64) {
             self.layerName = layerName
             self.versionNumber = versionNumber
         }
@@ -1821,6 +1853,8 @@ extension Lambda {
         public let lastUpdateStatusReasonCode: LastUpdateStatusReasonCode?
         /// The function's layers.
         public let layers: [Layer]?
+        /// The function's Amazon CloudWatch Logs configuration settings.
+        public let loggingConfig: LoggingConfig?
         /// For Lambda@Edge functions, the ARN of the main function.
         public let masterArn: String?
         /// The amount of memory available to the function at runtime.
@@ -1856,7 +1890,7 @@ extension Lambda {
         /// The function's networking configuration.
         public let vpcConfig: VpcConfigResponse?
 
-        public init(architectures: [Architecture]? = nil, codeSha256: String? = nil, codeSize: Int64? = nil, deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: EnvironmentResponse? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionArn: String? = nil, functionName: String? = nil, handler: String? = nil, imageConfigResponse: ImageConfigResponse? = nil, kmsKeyArn: String? = nil, lastModified: String? = nil, lastUpdateStatus: LastUpdateStatus? = nil, lastUpdateStatusReason: String? = nil, lastUpdateStatusReasonCode: LastUpdateStatusReasonCode? = nil, layers: [Layer]? = nil, masterArn: String? = nil, memorySize: Int? = nil, packageType: PackageType? = nil, revisionId: String? = nil, role: String? = nil, runtime: Runtime? = nil, runtimeVersionConfig: RuntimeVersionConfig? = nil, signingJobArn: String? = nil, signingProfileVersionArn: String? = nil, snapStart: SnapStartResponse? = nil, state: State? = nil, stateReason: String? = nil, stateReasonCode: StateReasonCode? = nil, timeout: Int? = nil, tracingConfig: TracingConfigResponse? = nil, version: String? = nil, vpcConfig: VpcConfigResponse? = nil) {
+        public init(architectures: [Architecture]? = nil, codeSha256: String? = nil, codeSize: Int64? = nil, deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: EnvironmentResponse? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionArn: String? = nil, functionName: String? = nil, handler: String? = nil, imageConfigResponse: ImageConfigResponse? = nil, kmsKeyArn: String? = nil, lastModified: String? = nil, lastUpdateStatus: LastUpdateStatus? = nil, lastUpdateStatusReason: String? = nil, lastUpdateStatusReasonCode: LastUpdateStatusReasonCode? = nil, layers: [Layer]? = nil, loggingConfig: LoggingConfig? = nil, masterArn: String? = nil, memorySize: Int? = nil, packageType: PackageType? = nil, revisionId: String? = nil, role: String? = nil, runtime: Runtime? = nil, runtimeVersionConfig: RuntimeVersionConfig? = nil, signingJobArn: String? = nil, signingProfileVersionArn: String? = nil, snapStart: SnapStartResponse? = nil, state: State? = nil, stateReason: String? = nil, stateReasonCode: StateReasonCode? = nil, timeout: Int? = nil, tracingConfig: TracingConfigResponse? = nil, version: String? = nil, vpcConfig: VpcConfigResponse? = nil) {
             self.architectures = architectures
             self.codeSha256 = codeSha256
             self.codeSize = codeSize
@@ -1875,6 +1909,7 @@ extension Lambda {
             self.lastUpdateStatusReason = lastUpdateStatusReason
             self.lastUpdateStatusReasonCode = lastUpdateStatusReasonCode
             self.layers = layers
+            self.loggingConfig = loggingConfig
             self.masterArn = masterArn
             self.memorySize = memorySize
             self.packageType = packageType
@@ -1913,6 +1948,7 @@ extension Lambda {
             case lastUpdateStatusReason = "LastUpdateStatusReason"
             case lastUpdateStatusReasonCode = "LastUpdateStatusReasonCode"
             case layers = "Layers"
+            case loggingConfig = "LoggingConfig"
             case masterArn = "MasterArn"
             case memorySize = "MemorySize"
             case packageType = "PackageType"
@@ -2374,7 +2410,7 @@ extension Lambda {
         /// The version number.
         public let versionNumber: Int64
 
-        public init(layerName: String, versionNumber: Int64 = 0) {
+        public init(layerName: String, versionNumber: Int64) {
             self.layerName = layerName
             self.versionNumber = versionNumber
         }
@@ -2416,7 +2452,7 @@ extension Lambda {
         /// The version number.
         public let versionNumber: Int64
 
-        public init(layerName: String, versionNumber: Int64 = 0) {
+        public init(layerName: String, versionNumber: Int64) {
             self.layerName = layerName
             self.versionNumber = versionNumber
         }
@@ -3659,6 +3695,37 @@ extension Lambda {
         }
     }
 
+    public struct LoggingConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the  selected level and lower.
+        public let applicationLogLevel: ApplicationLogLevel?
+        /// The format in which Lambda sends your function's application and system logs to CloudWatch. Select between  plain text and structured JSON.
+        public let logFormat: LogFormat?
+        /// The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default  log group named /aws/lambda/. To use a different log group, enter an existing log group or enter a new log group name.
+        public let logGroup: String?
+        /// Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the  selected level and lower.
+        public let systemLogLevel: SystemLogLevel?
+
+        public init(applicationLogLevel: ApplicationLogLevel? = nil, logFormat: LogFormat? = nil, logGroup: String? = nil, systemLogLevel: SystemLogLevel? = nil) {
+            self.applicationLogLevel = applicationLogLevel
+            self.logFormat = logFormat
+            self.logGroup = logGroup
+            self.systemLogLevel = systemLogLevel
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.logGroup, name: "logGroup", parent: name, max: 512)
+            try self.validate(self.logGroup, name: "logGroup", parent: name, min: 1)
+            try self.validate(self.logGroup, name: "logGroup", parent: name, pattern: "^[\\.\\-_/#A-Za-z0-9]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case applicationLogLevel = "ApplicationLogLevel"
+            case logFormat = "LogFormat"
+            case logGroup = "LogGroup"
+            case systemLogLevel = "SystemLogLevel"
+        }
+    }
+
     public struct OnFailure: AWSEncodableShape & AWSDecodableShape {
         /// The Amazon Resource Name (ARN) of the destination resource.
         public let destination: String?
@@ -4124,7 +4191,7 @@ extension Lambda {
         /// The version number.
         public let versionNumber: Int64
 
-        public init(layerName: String, revisionId: String? = nil, statementId: String, versionNumber: Int64 = 0) {
+        public init(layerName: String, revisionId: String? = nil, statementId: String, versionNumber: Int64) {
             self.layerName = layerName
             self.revisionId = revisionId
             self.statementId = statementId
@@ -4702,6 +4769,8 @@ extension Lambda {
         public let kmsKeyArn: String?
         /// A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
         public let layers: [String]?
+        /// The function's Amazon CloudWatch Logs configuration settings.
+        public let loggingConfig: LoggingConfig?
         /// The amount of memory available to the function at runtime. Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.
         public let memorySize: Int?
         /// Update the function only if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
@@ -4720,7 +4789,7 @@ extension Lambda {
         /// For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can access resources and the internet only through that VPC. For more information, see Configuring a Lambda function to access resources in a VPC.
         public let vpcConfig: VpcConfig?
 
-        public init(deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: Environment? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionName: String, handler: String? = nil, imageConfig: ImageConfig? = nil, kmsKeyArn: String? = nil, layers: [String]? = nil, memorySize: Int? = nil, revisionId: String? = nil, role: String? = nil, runtime: Runtime? = nil, snapStart: SnapStart? = nil, timeout: Int? = nil, tracingConfig: TracingConfig? = nil, vpcConfig: VpcConfig? = nil) {
+        public init(deadLetterConfig: DeadLetterConfig? = nil, description: String? = nil, environment: Environment? = nil, ephemeralStorage: EphemeralStorage? = nil, fileSystemConfigs: [FileSystemConfig]? = nil, functionName: String, handler: String? = nil, imageConfig: ImageConfig? = nil, kmsKeyArn: String? = nil, layers: [String]? = nil, loggingConfig: LoggingConfig? = nil, memorySize: Int? = nil, revisionId: String? = nil, role: String? = nil, runtime: Runtime? = nil, snapStart: SnapStart? = nil, timeout: Int? = nil, tracingConfig: TracingConfig? = nil, vpcConfig: VpcConfig? = nil) {
             self.deadLetterConfig = deadLetterConfig
             self.description = description
             self.environment = environment
@@ -4731,6 +4800,7 @@ extension Lambda {
             self.imageConfig = imageConfig
             self.kmsKeyArn = kmsKeyArn
             self.layers = layers
+            self.loggingConfig = loggingConfig
             self.memorySize = memorySize
             self.revisionId = revisionId
             self.role = role
@@ -4762,6 +4832,7 @@ extension Lambda {
                 try validate($0, name: "layers[]", parent: name, min: 1)
                 try validate($0, name: "layers[]", parent: name, pattern: "^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$")
             }
+            try self.loggingConfig?.validate(name: "\(name).loggingConfig")
             try self.validate(self.memorySize, name: "memorySize", parent: name, max: 10240)
             try self.validate(self.memorySize, name: "memorySize", parent: name, min: 128)
             try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$")
@@ -4779,6 +4850,7 @@ extension Lambda {
             case imageConfig = "ImageConfig"
             case kmsKeyArn = "KMSKeyArn"
             case layers = "Layers"
+            case loggingConfig = "LoggingConfig"
             case memorySize = "MemorySize"
             case revisionId = "RevisionId"
             case role = "Role"
@@ -4916,12 +4988,15 @@ extension Lambda {
     }
 
     public struct VpcConfig: AWSEncodableShape {
+        /// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+        public let ipv6AllowedForDualStack: Bool?
         /// A list of VPC security group IDs.
         public let securityGroupIds: [String]?
         /// A list of VPC subnet IDs.
         public let subnetIds: [String]?
 
-        public init(securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
+        public init(ipv6AllowedForDualStack: Bool? = nil, securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
+            self.ipv6AllowedForDualStack = ipv6AllowedForDualStack
             self.securityGroupIds = securityGroupIds
             self.subnetIds = subnetIds
         }
@@ -4932,12 +5007,15 @@ extension Lambda {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case ipv6AllowedForDualStack = "Ipv6AllowedForDualStack"
             case securityGroupIds = "SecurityGroupIds"
             case subnetIds = "SubnetIds"
         }
     }
 
     public struct VpcConfigResponse: AWSDecodableShape {
+        /// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+        public let ipv6AllowedForDualStack: Bool?
         /// A list of VPC security group IDs.
         public let securityGroupIds: [String]?
         /// A list of VPC subnet IDs.
@@ -4945,13 +5023,15 @@ extension Lambda {
         /// The ID of the VPC.
         public let vpcId: String?
 
-        public init(securityGroupIds: [String]? = nil, subnetIds: [String]? = nil, vpcId: String? = nil) {
+        public init(ipv6AllowedForDualStack: Bool? = nil, securityGroupIds: [String]? = nil, subnetIds: [String]? = nil, vpcId: String? = nil) {
+            self.ipv6AllowedForDualStack = ipv6AllowedForDualStack
             self.securityGroupIds = securityGroupIds
             self.subnetIds = subnetIds
             self.vpcId = vpcId
         }
 
         private enum CodingKeys: String, CodingKey {
+            case ipv6AllowedForDualStack = "Ipv6AllowedForDualStack"
             case securityGroupIds = "SecurityGroupIds"
             case subnetIds = "SubnetIds"
             case vpcId = "VpcId"

@@ -26,6 +26,11 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "ConvertRecoveryPointToSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a custom domain association for Amazon Redshift Serverless.
+    public func createCustomDomainAssociation(_ input: CreateCustomDomainAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateCustomDomainAssociationResponse {
+        return try await self.client.execute(operation: "CreateCustomDomainAssociation", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates an Amazon Redshift Serverless managed VPC endpoint.
     public func createEndpointAccess(_ input: CreateEndpointAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateEndpointAccessResponse {
         return try await self.client.execute(operation: "CreateEndpointAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -36,9 +41,19 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "CreateNamespace", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action.  For example, you can create a schedule of when to run the CreateSnapshot API operation.
+    public func createScheduledAction(_ input: CreateScheduledActionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateScheduledActionResponse {
+        return try await self.client.execute(operation: "CreateScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a snapshot of all databases in a namespace. For more information about snapshots, see   Working with snapshots and recovery points.
     public func createSnapshot(_ input: CreateSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateSnapshotResponse {
         return try await self.client.execute(operation: "CreateSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
+    public func createSnapshotCopyConfiguration(_ input: CreateSnapshotCopyConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateSnapshotCopyConfigurationResponse {
+        return try await self.client.execute(operation: "CreateSnapshotCopyConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a usage limit for a specified Amazon Redshift Serverless usage type. The usage limit is identified by the returned usage limit identifier.
@@ -49,6 +64,11 @@ extension RedshiftServerless {
     /// Creates an workgroup in Amazon Redshift Serverless.
     public func createWorkgroup(_ input: CreateWorkgroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateWorkgroupResponse {
         return try await self.client.execute(operation: "CreateWorkgroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a custom domain association for Amazon Redshift Serverless.
+    public func deleteCustomDomainAssociation(_ input: DeleteCustomDomainAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteCustomDomainAssociationResponse {
+        return try await self.client.execute(operation: "DeleteCustomDomainAssociation", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes an Amazon Redshift Serverless managed VPC endpoint.
@@ -66,9 +86,19 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "DeleteResourcePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes a scheduled action.
+    public func deleteScheduledAction(_ input: DeleteScheduledActionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteScheduledActionResponse {
+        return try await self.client.execute(operation: "DeleteScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a snapshot from Amazon Redshift Serverless.
     public func deleteSnapshot(_ input: DeleteSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteSnapshotResponse {
         return try await self.client.execute(operation: "DeleteSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a snapshot copy configuration
+    public func deleteSnapshotCopyConfiguration(_ input: DeleteSnapshotCopyConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteSnapshotCopyConfigurationResponse {
+        return try await self.client.execute(operation: "DeleteSnapshotCopyConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a usage limit from Amazon Redshift Serverless.
@@ -84,6 +114,11 @@ extension RedshiftServerless {
     /// Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds.  You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  The Identity and Access Management (IAM) user or role that runs  GetCredentials must have an IAM policy attached that allows access to all  necessary actions and resources.  If the DbName parameter is specified, the IAM policy must  allow access to the resource dbname for the specified database name.
     public func getCredentials(_ input: GetCredentialsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetCredentialsResponse {
         return try await self.client.execute(operation: "GetCredentials", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets information about a specific custom domain association.
+    public func getCustomDomainAssociation(_ input: GetCustomDomainAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetCustomDomainAssociationResponse {
+        return try await self.client.execute(operation: "GetCustomDomainAssociation", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns information, such as the name, about a VPC endpoint.
@@ -106,6 +141,11 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "GetResourcePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns information about a scheduled action.
+    public func getScheduledAction(_ input: GetScheduledActionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetScheduledActionResponse {
+        return try await self.client.execute(operation: "GetScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns information about a specific snapshot.
     public func getSnapshot(_ input: GetSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSnapshotResponse {
         return try await self.client.execute(operation: "GetSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -126,6 +166,11 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "GetWorkgroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Lists custom domain associations for Amazon Redshift Serverless.
+    public func listCustomDomainAssociations(_ input: ListCustomDomainAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListCustomDomainAssociationsResponse {
+        return try await self.client.execute(operation: "ListCustomDomainAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns an array of EndpointAccess objects and relevant information.
     public func listEndpointAccess(_ input: ListEndpointAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListEndpointAccessResponse {
         return try await self.client.execute(operation: "ListEndpointAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -139,6 +184,16 @@ extension RedshiftServerless {
     /// Returns an array of recovery points.
     public func listRecoveryPoints(_ input: ListRecoveryPointsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListRecoveryPointsResponse {
         return try await self.client.execute(operation: "ListRecoveryPoints", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.
+    public func listScheduledActions(_ input: ListScheduledActionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListScheduledActionsResponse {
+        return try await self.client.execute(operation: "ListScheduledActions", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of snapshot copy configurations.
+    public func listSnapshotCopyConfigurations(_ input: ListSnapshotCopyConfigurationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSnapshotCopyConfigurationsResponse {
+        return try await self.client.execute(operation: "ListSnapshotCopyConfigurations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of snapshots.
@@ -181,6 +236,11 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "RestoreFromSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Restores a table from a recovery point to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
+    public func restoreTableFromRecoveryPoint(_ input: RestoreTableFromRecoveryPointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> RestoreTableFromRecoveryPointResponse {
+        return try await self.client.execute(operation: "RestoreTableFromRecoveryPoint", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Restores a table from a snapshot to your Amazon Redshift Serverless instance. You can't use this operation to restore tables with interleaved sort keys.
     public func restoreTableFromSnapshot(_ input: RestoreTableFromSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> RestoreTableFromSnapshotResponse {
         return try await self.client.execute(operation: "RestoreTableFromSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -196,6 +256,11 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "UntagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Updates an Amazon Redshift Serverless certificate associated with a custom domain.
+    public func updateCustomDomainAssociation(_ input: UpdateCustomDomainAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateCustomDomainAssociationResponse {
+        return try await self.client.execute(operation: "UpdateCustomDomainAssociation", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates an Amazon Redshift Serverless managed endpoint.
     public func updateEndpointAccess(_ input: UpdateEndpointAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateEndpointAccessResponse {
         return try await self.client.execute(operation: "UpdateEndpointAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -206,9 +271,19 @@ extension RedshiftServerless {
         return try await self.client.execute(operation: "UpdateNamespace", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Updates a scheduled action.
+    public func updateScheduledAction(_ input: UpdateScheduledActionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateScheduledActionResponse {
+        return try await self.client.execute(operation: "UpdateScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates a snapshot.
     public func updateSnapshot(_ input: UpdateSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateSnapshotResponse {
         return try await self.client.execute(operation: "UpdateSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates a snapshot copy configuration.
+    public func updateSnapshotCopyConfiguration(_ input: UpdateSnapshotCopyConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateSnapshotCopyConfigurationResponse {
+        return try await self.client.execute(operation: "UpdateSnapshotCopyConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Update a usage limit in Amazon Redshift Serverless. You can't update the usage type or period of a usage limit.
@@ -226,6 +301,28 @@ extension RedshiftServerless {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension RedshiftServerless {
+    ///  Lists custom domain associations for Amazon Redshift Serverless.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listCustomDomainAssociationsPaginator(
+        _ input: ListCustomDomainAssociationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListCustomDomainAssociationsRequest, ListCustomDomainAssociationsResponse> {
+        return .init(
+            input: input,
+            command: self.listCustomDomainAssociations,
+            inputKey: \ListCustomDomainAssociationsRequest.nextToken,
+            outputKey: \ListCustomDomainAssociationsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Returns an array of EndpointAccess objects and relevant information.
     /// Return PaginatorSequence for operation.
     ///
@@ -287,6 +384,50 @@ extension RedshiftServerless {
             command: self.listRecoveryPoints,
             inputKey: \ListRecoveryPointsRequest.nextToken,
             outputKey: \ListRecoveryPointsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns a list of scheduled actions. You can use the flags to filter the list of returned scheduled actions.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listScheduledActionsPaginator(
+        _ input: ListScheduledActionsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListScheduledActionsRequest, ListScheduledActionsResponse> {
+        return .init(
+            input: input,
+            command: self.listScheduledActions,
+            inputKey: \ListScheduledActionsRequest.nextToken,
+            outputKey: \ListScheduledActionsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns a list of snapshot copy configurations.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listSnapshotCopyConfigurationsPaginator(
+        _ input: ListSnapshotCopyConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListSnapshotCopyConfigurationsRequest, ListSnapshotCopyConfigurationsResponse> {
+        return .init(
+            input: input,
+            command: self.listSnapshotCopyConfigurations,
+            inputKey: \ListSnapshotCopyConfigurationsRequest.nextToken,
+            outputKey: \ListSnapshotCopyConfigurationsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

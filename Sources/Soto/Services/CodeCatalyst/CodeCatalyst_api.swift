@@ -19,7 +19,7 @@
 
 /// Service object for interacting with AWS CodeCatalyst service.
 ///
-/// Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst  API to work with the following objects.  Spaces, by calling the following:    DeleteSpace, which deletes a space.    GetSpace, which returns information about a space.    GetSubscription, which returns information about the Amazon Web Services account used for billing purposes  and the billing plan for the space.    ListSpaces, which retrieves a list of spaces.    UpdateSpace, which hanges one or more values for a space.   Projects, by calling the following:    CreateProject which creates a project in a specified space.    GetProject, which returns information about a project.    ListProjects, which retrieves a list of projects in a space.   Users, by calling the following:    GetUserDetails, which returns information about a user in Amazon CodeCatalyst.   Source repositories, by calling the following:    CreateSourceRepository, which creates an empty Git-based source repository in a specified project.    CreateSourceRepositoryBranch, which creates a branch in a specified repository where you can work on code.    DeleteSourceRepository, which deletes a source repository.    GetSourceRepository, which returns information about a source repository.    GetSourceRepositoryCloneUrls, which returns information about the URLs that can be used with a Git client to clone a source repository.    ListSourceRepositories, which retrieves a list of source repositories in a project.    ListSourceRepositoryBranches, which retrieves a list of branches in a source repository.   Dev Environments and the Amazon Web Services Toolkits, by calling the following:    CreateDevEnvironment, which creates a Dev Environment,  where you can quickly work on the code stored in the source repositories of your project.    DeleteDevEnvironment, which deletes a Dev Environment.    GetDevEnvironment, which returns information about a Dev Environment.    ListDevEnvironments, which retrieves a list of Dev Environments in a project.    ListDevEnvironmentSessions, which retrieves a list of active Dev Environment sessions in a project.    StartDevEnvironment, which starts a specified Dev Environment and puts it into an active state.    StartDevEnvironmentSession, which starts a session to a specified Dev Environment.    StopDevEnvironment, which stops a specified Dev Environment and puts it into an stopped state.    StopDevEnvironmentSession, which stops a session for a specified Dev Environment.    UpdateDevEnvironment, which changes one or more values for a Dev Environment.   Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:    CreateAccessToken, which creates a personal access token (PAT) for the current user.    DeleteAccessToken, which deletes a specified personal access token (PAT).    ListAccessTokens, which lists all personal access tokens (PATs) associated with a user.    ListEventLogs, which retrieves a list of events that occurred during a specified time period in a space.    VerifySession, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.    If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO). For more information, see Setting up to use the CLI with Amazon CodeCatalyst and the SSO documentation for your SDK.
+/// Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst  API to work with the following objects.  Spaces, by calling the following:    DeleteSpace, which deletes a space.    GetSpace, which returns information about a space.    GetSubscription, which returns information about the Amazon Web Services account used for billing purposes  and the billing plan for the space.    ListSpaces, which retrieves a list of spaces.    UpdateSpace, which changes one or more values for a space.   Projects, by calling the following:    CreateProject which creates a project in a specified space.    GetProject, which returns information about a project.    ListProjects, which retrieves a list of projects in a space.   Users, by calling the following:    GetUserDetails, which returns information about a user in Amazon CodeCatalyst.   Source repositories, by calling the following:    CreateSourceRepository, which creates an empty Git-based source repository in a specified project.    CreateSourceRepositoryBranch, which creates a branch in a specified repository where you can work on code.    DeleteSourceRepository, which deletes a source repository.    GetSourceRepository, which returns information about a source repository.    GetSourceRepositoryCloneUrls, which returns information about the URLs that can be used with a Git client to clone a source repository.    ListSourceRepositories, which retrieves a list of source repositories in a project.    ListSourceRepositoryBranches, which retrieves a list of branches in a source repository.   Dev Environments and the Amazon Web Services Toolkits, by calling the following:    CreateDevEnvironment, which creates a Dev Environment,  where you can quickly work on the code stored in the source repositories of your project.    DeleteDevEnvironment, which deletes a Dev Environment.    GetDevEnvironment, which returns information about a Dev Environment.    ListDevEnvironments, which retrieves a list of Dev Environments in a project.    ListDevEnvironmentSessions, which retrieves a list of active Dev Environment sessions in a project.    StartDevEnvironment, which starts a specified Dev Environment and puts it into an active state.    StartDevEnvironmentSession, which starts a session to a specified Dev Environment.    StopDevEnvironment, which stops a specified Dev Environment and puts it into an stopped state.    StopDevEnvironmentSession, which stops a session for a specified Dev Environment.    UpdateDevEnvironment, which changes one or more values for a Dev Environment.   Workflows, by calling the following:    GetWorkflow, which returns information about a workflow.    GetWorkflowRun, which returns information about a specified run of a workflow.    ListWorkflowRuns, which retrieves a list of runs of a specified workflow.    ListWorkflows, which retrieves a list of workflows in a specified project.    StartWorkflowRun, which starts a run of a specified workflow.   Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:    CreateAccessToken, which creates a personal access token (PAT) for the current user.    DeleteAccessToken, which deletes a specified personal access token (PAT).    ListAccessTokens, which lists all personal access tokens (PATs) associated with a user.    ListEventLogs, which retrieves a list of events that occurred during a specified time period in a space.    VerifySession, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.    If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO). For more information, see Setting up to use the CLI with Amazon CodeCatalyst and the SSO documentation for your SDK.
 public struct CodeCatalyst: AWSService {
     // MARK: Member variables
 
@@ -149,6 +149,16 @@ public struct CodeCatalyst: AWSService {
         return self.client.execute(operation: "GetUserDetails", path: "/userDetails", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns information about a workflow.
+    public func getWorkflow(_ input: GetWorkflowRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetWorkflowResponse> {
+        return self.client.execute(operation: "GetWorkflow", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns information about a specified run of a workflow.
+    public func getWorkflowRun(_ input: GetWorkflowRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetWorkflowRunResponse> {
+        return self.client.execute(operation: "GetWorkflowRun", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your Amazon Web Services Builder ID.
     public func listAccessTokens(_ input: ListAccessTokensRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListAccessTokensResponse> {
         return self.client.execute(operation: "ListAccessTokens", path: "/v1/accessTokens", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -161,10 +171,10 @@ public struct CodeCatalyst: AWSService {
 
     /// Retrieves a list of Dev Environments in a project.
     public func listDevEnvironments(_ input: ListDevEnvironmentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDevEnvironmentsResponse> {
-        return self.client.execute(operation: "ListDevEnvironments", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+        return self.client.execute(operation: "ListDevEnvironments", path: "/v1/spaces/{spaceName}/devEnvironments", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+    /// Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails.
     public func listEventLogs(_ input: ListEventLogsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListEventLogsResponse> {
         return self.client.execute(operation: "ListEventLogs", path: "/v1/spaces/{spaceName}/eventLogs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -189,6 +199,16 @@ public struct CodeCatalyst: AWSService {
         return self.client.execute(operation: "ListSpaces", path: "/v1/spaces", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of workflow runs of a specified workflow.
+    public func listWorkflowRuns(_ input: ListWorkflowRunsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListWorkflowRunsResponse> {
+        return self.client.execute(operation: "ListWorkflowRuns", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a list of workflows in a specified project.
+    public func listWorkflows(_ input: ListWorkflowsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListWorkflowsResponse> {
+        return self.client.execute(operation: "ListWorkflows", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflows", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Starts a specified Dev Environment and puts it into an active state.
     public func startDevEnvironment(_ input: StartDevEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartDevEnvironmentResponse> {
         return self.client.execute(operation: "StartDevEnvironment", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/start", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -197,6 +217,11 @@ public struct CodeCatalyst: AWSService {
     /// Starts a session for a specified Dev Environment.
     public func startDevEnvironmentSession(_ input: StartDevEnvironmentSessionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartDevEnvironmentSessionResponse> {
         return self.client.execute(operation: "StartDevEnvironmentSession", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Begins a run of a specified workflow.
+    public func startWorkflowRun(_ input: StartWorkflowRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartWorkflowRunResponse> {
+        return self.client.execute(operation: "StartWorkflowRun", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Pauses a specified Dev Environment and places it in a non-running state. Stopped Dev Environments do not consume compute minutes.
@@ -401,7 +426,7 @@ extension CodeCatalyst {
         )
     }
 
-    /// Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+    /// Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -665,6 +690,112 @@ extension CodeCatalyst {
             onPage: onPage
         )
     }
+
+    /// Retrieves a list of workflow runs of a specified workflow.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listWorkflowRunsPaginator<Result>(
+        _ input: ListWorkflowRunsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListWorkflowRunsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listWorkflowRuns,
+            inputKey: \ListWorkflowRunsRequest.nextToken,
+            outputKey: \ListWorkflowRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listWorkflowRunsPaginator(
+        _ input: ListWorkflowRunsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListWorkflowRunsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listWorkflowRuns,
+            inputKey: \ListWorkflowRunsRequest.nextToken,
+            outputKey: \ListWorkflowRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieves a list of workflows in a specified project.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listWorkflowsPaginator<Result>(
+        _ input: ListWorkflowsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListWorkflowsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listWorkflows,
+            inputKey: \ListWorkflowsRequest.nextToken,
+            outputKey: \ListWorkflowsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listWorkflowsPaginator(
+        _ input: ListWorkflowsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListWorkflowsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listWorkflows,
+            inputKey: \ListWorkflowsRequest.nextToken,
+            outputKey: \ListWorkflowsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
 }
 
 extension CodeCatalyst.ListAccessTokensRequest: AWSPaginateToken {
@@ -751,6 +882,31 @@ extension CodeCatalyst.ListSpacesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> CodeCatalyst.ListSpacesRequest {
         return .init(
             nextToken: token
+        )
+    }
+}
+
+extension CodeCatalyst.ListWorkflowRunsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CodeCatalyst.ListWorkflowRunsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            projectName: self.projectName,
+            sortBy: self.sortBy,
+            spaceName: self.spaceName,
+            workflowId: self.workflowId
+        )
+    }
+}
+
+extension CodeCatalyst.ListWorkflowsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CodeCatalyst.ListWorkflowsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            projectName: self.projectName,
+            sortBy: self.sortBy,
+            spaceName: self.spaceName
         )
     }
 }

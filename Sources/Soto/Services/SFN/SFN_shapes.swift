@@ -26,16 +26,30 @@ import SotoCore
 extension SFN {
     // MARK: Enums
 
-    public enum ExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecutionRedriveFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case notRedriven = "NOT_REDRIVEN"
+        case redriven = "REDRIVEN"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ExecutionRedriveStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case notRedrivable = "NOT_REDRIVABLE"
+        case redrivable = "REDRIVABLE"
+        case redrivableByMapRun = "REDRIVABLE_BY_MAP_RUN"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case failed = "FAILED"
+        case pendingRedrive = "PENDING_REDRIVE"
         case running = "RUNNING"
         case succeeded = "SUCCEEDED"
         case timedOut = "TIMED_OUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum HistoryEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HistoryEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activityFailed = "ActivityFailed"
         case activityScheduleFailed = "ActivityScheduleFailed"
         case activityScheduled = "ActivityScheduled"
@@ -46,6 +60,7 @@ extension SFN {
         case choiceStateExited = "ChoiceStateExited"
         case executionAborted = "ExecutionAborted"
         case executionFailed = "ExecutionFailed"
+        case executionRedriven = "ExecutionRedriven"
         case executionStarted = "ExecutionStarted"
         case executionSucceeded = "ExecutionSucceeded"
         case executionTimedOut = "ExecutionTimedOut"
@@ -63,6 +78,7 @@ extension SFN {
         case mapIterationSucceeded = "MapIterationSucceeded"
         case mapRunAborted = "MapRunAborted"
         case mapRunFailed = "MapRunFailed"
+        case mapRunRedriven = "MapRunRedriven"
         case mapRunStarted = "MapRunStarted"
         case mapRunSucceeded = "MapRunSucceeded"
         case mapStateAborted = "MapStateAborted"
@@ -98,7 +114,14 @@ extension SFN {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum InspectionLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case debug = "DEBUG"
+        case info = "INFO"
+        case trace = "TRACE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case error = "ERROR"
         case fatal = "FATAL"
@@ -106,7 +129,7 @@ extension SFN {
         public var description: String { return self.rawValue }
     }
 
-    public enum MapRunStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MapRunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case failed = "FAILED"
         case running = "RUNNING"
@@ -114,22 +137,30 @@ extension SFN {
         public var description: String { return self.rawValue }
     }
 
-    public enum StateMachineStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StateMachineStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum StateMachineType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StateMachineType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case express = "EXPRESS"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum SyncExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SyncExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case succeeded = "SUCCEEDED"
         case timedOut = "TIMED_OUT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TestExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case caughtError = "CAUGHT_ERROR"
+        case failed = "FAILED"
+        case retriable = "RETRIABLE"
+        case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
@@ -648,6 +679,14 @@ extension SFN {
         /// The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.  This field is set only if the execution succeeds. If the execution fails, this field is null.
         public let output: String?
         public let outputDetails: CloudWatchEventsExecutionDataDetails?
+        /// The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is only updated if you successfully redrive an execution.
+        public let redriveCount: Int?
+        /// The date the execution was last redriven. If you have not yet redriven an execution, the redriveDate is null. The redriveDate is unavailable if you redrive a Map Run that starts child workflow executions of type EXPRESS.
+        public let redriveDate: Date?
+        /// Indicates whether or not an execution can be redriven at a given point in time.   For executions of type STANDARD, redriveStatus is NOT_REDRIVABLE if calling the RedriveExecution API action would return the ExecutionNotRedrivable error.   For a Distributed Map that includes child workflows of type STANDARD, redriveStatus indicates whether or not the Map Run can redrive child workflow executions.   For a Distributed Map that includes child workflows of type EXPRESS, redriveStatus indicates whether or not the Map Run can redrive child workflow executions. You can redrive failed or timed out EXPRESS workflows only if they're a part of a Map Run. When you redrive the Map Run, these workflows are restarted using the StartExecution API action.
+        public let redriveStatus: ExecutionRedriveStatus?
+        /// When redriveStatus is NOT_REDRIVABLE, redriveStatusReason specifies the reason why an execution cannot be redriven.   For executions of type STANDARD, or for a Distributed Map that includes child workflows of type STANDARD, redriveStatusReason can include one of the following reasons:    State machine is in DELETING status.    Execution is RUNNING and cannot be redriven.    Execution is SUCCEEDED and cannot be redriven.    Execution was started before the launch of RedriveExecution.    Execution history event limit exceeded.    Execution has exceeded the max execution time.    Execution redrivable period exceeded.     For a Distributed Map that includes child workflows of type EXPRESS, redriveStatusReason is only returned if the child workflows are not redrivable. This happens when the child workflow executions have completed successfully.
+        public let redriveStatusReason: String?
         /// The date the execution is started.
         public let startDate: Date
         /// The Amazon Resource Name (ARN) of the state machine alias associated with the execution. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, stateMachineARN:PROD. If you start an execution from a StartExecution request with a state machine version ARN, this field will be null.
@@ -663,7 +702,7 @@ extension SFN {
         /// The X-Ray trace header that was passed to the execution.
         public let traceHeader: String?
 
-        public init(cause: String? = nil, error: String? = nil, executionArn: String, input: String? = nil, inputDetails: CloudWatchEventsExecutionDataDetails? = nil, mapRunArn: String? = nil, name: String? = nil, output: String? = nil, outputDetails: CloudWatchEventsExecutionDataDetails? = nil, startDate: Date, stateMachineAliasArn: String? = nil, stateMachineArn: String, stateMachineVersionArn: String? = nil, status: ExecutionStatus, stopDate: Date? = nil, traceHeader: String? = nil) {
+        public init(cause: String? = nil, error: String? = nil, executionArn: String, input: String? = nil, inputDetails: CloudWatchEventsExecutionDataDetails? = nil, mapRunArn: String? = nil, name: String? = nil, output: String? = nil, outputDetails: CloudWatchEventsExecutionDataDetails? = nil, redriveCount: Int? = nil, redriveDate: Date? = nil, redriveStatus: ExecutionRedriveStatus? = nil, redriveStatusReason: String? = nil, startDate: Date, stateMachineAliasArn: String? = nil, stateMachineArn: String, stateMachineVersionArn: String? = nil, status: ExecutionStatus, stopDate: Date? = nil, traceHeader: String? = nil) {
             self.cause = cause
             self.error = error
             self.executionArn = executionArn
@@ -673,6 +712,10 @@ extension SFN {
             self.name = name
             self.output = output
             self.outputDetails = outputDetails
+            self.redriveCount = redriveCount
+            self.redriveDate = redriveDate
+            self.redriveStatus = redriveStatus
+            self.redriveStatusReason = redriveStatusReason
             self.startDate = startDate
             self.stateMachineAliasArn = stateMachineAliasArn
             self.stateMachineArn = stateMachineArn
@@ -692,6 +735,10 @@ extension SFN {
             case name = "name"
             case output = "output"
             case outputDetails = "outputDetails"
+            case redriveCount = "redriveCount"
+            case redriveDate = "redriveDate"
+            case redriveStatus = "redriveStatus"
+            case redriveStatusReason = "redriveStatusReason"
             case startDate = "startDate"
             case stateMachineAliasArn = "stateMachineAliasArn"
             case stateMachineArn = "stateMachineArn"
@@ -731,6 +778,10 @@ extension SFN {
         public let mapRunArn: String
         /// The maximum number of child workflow executions configured to run in parallel for the Map Run at the same time.
         public let maxConcurrency: Int
+        /// The number of times you've redriven a Map Run. If you have not yet redriven a Map Run, the redriveCount is 0. This count is only updated if you successfully redrive a Map Run.
+        public let redriveCount: Int?
+        /// The date a Map Run was last redriven. If you have not yet redriven a Map Run, the redriveDate is null.
+        public let redriveDate: Date?
         /// The date when the Map Run was started.
         public let startDate: Date
         /// The current status of the Map Run.
@@ -742,12 +793,14 @@ extension SFN {
         /// The maximum percentage of failed child workflow executions before the Map Run fails.
         public let toleratedFailurePercentage: Float
 
-        public init(executionArn: String, executionCounts: MapRunExecutionCounts, itemCounts: MapRunItemCounts, mapRunArn: String, maxConcurrency: Int, startDate: Date, status: MapRunStatus, stopDate: Date? = nil, toleratedFailureCount: Int64, toleratedFailurePercentage: Float) {
+        public init(executionArn: String, executionCounts: MapRunExecutionCounts, itemCounts: MapRunItemCounts, mapRunArn: String, maxConcurrency: Int, redriveCount: Int? = nil, redriveDate: Date? = nil, startDate: Date, status: MapRunStatus, stopDate: Date? = nil, toleratedFailureCount: Int64, toleratedFailurePercentage: Float) {
             self.executionArn = executionArn
             self.executionCounts = executionCounts
             self.itemCounts = itemCounts
             self.mapRunArn = mapRunArn
             self.maxConcurrency = maxConcurrency
+            self.redriveCount = redriveCount
+            self.redriveDate = redriveDate
             self.startDate = startDate
             self.status = status
             self.stopDate = stopDate
@@ -761,6 +814,8 @@ extension SFN {
             case itemCounts = "itemCounts"
             case mapRunArn = "mapRunArn"
             case maxConcurrency = "maxConcurrency"
+            case redriveCount = "redriveCount"
+            case redriveDate = "redriveDate"
             case startDate = "startDate"
             case status = "status"
             case stopDate = "stopDate"
@@ -1003,6 +1058,10 @@ extension SFN {
         public let mapRunArn: String?
         /// The name of the execution. A name must not contain:   white space   brackets  { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ & , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.
         public let name: String
+        /// The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is only updated when you successfully redrive an execution.
+        public let redriveCount: Int?
+        /// The date the execution was last redriven.
+        public let redriveDate: Date?
         /// The date the execution started.
         public let startDate: Date
         /// The Amazon Resource Name (ARN) of the state machine alias used to start an execution. If the state machine execution was started with an unqualified ARN or a version ARN, it returns null.
@@ -1016,11 +1075,13 @@ extension SFN {
         /// If the execution already ended, the date the execution stopped.
         public let stopDate: Date?
 
-        public init(executionArn: String, itemCount: Int? = nil, mapRunArn: String? = nil, name: String, startDate: Date, stateMachineAliasArn: String? = nil, stateMachineArn: String, stateMachineVersionArn: String? = nil, status: ExecutionStatus, stopDate: Date? = nil) {
+        public init(executionArn: String, itemCount: Int? = nil, mapRunArn: String? = nil, name: String, redriveCount: Int? = nil, redriveDate: Date? = nil, startDate: Date, stateMachineAliasArn: String? = nil, stateMachineArn: String, stateMachineVersionArn: String? = nil, status: ExecutionStatus, stopDate: Date? = nil) {
             self.executionArn = executionArn
             self.itemCount = itemCount
             self.mapRunArn = mapRunArn
             self.name = name
+            self.redriveCount = redriveCount
+            self.redriveDate = redriveDate
             self.startDate = startDate
             self.stateMachineAliasArn = stateMachineAliasArn
             self.stateMachineArn = stateMachineArn
@@ -1034,12 +1095,27 @@ extension SFN {
             case itemCount = "itemCount"
             case mapRunArn = "mapRunArn"
             case name = "name"
+            case redriveCount = "redriveCount"
+            case redriveDate = "redriveDate"
             case startDate = "startDate"
             case stateMachineAliasArn = "stateMachineAliasArn"
             case stateMachineArn = "stateMachineArn"
             case stateMachineVersionArn = "stateMachineVersionArn"
             case status = "status"
             case stopDate = "stopDate"
+        }
+    }
+
+    public struct ExecutionRedrivenEventDetails: AWSDecodableShape {
+        /// The number of times you've redriven an execution. If you have not yet redriven an execution, the redriveCount is 0. This count is not updated for redrives that failed to start or are pending to be redriven.
+        public let redriveCount: Int?
+
+        public init(redriveCount: Int? = nil) {
+            self.redriveCount = redriveCount
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case redriveCount = "redriveCount"
         }
     }
 
@@ -1212,6 +1288,8 @@ extension SFN {
         public let activityTimedOutEventDetails: ActivityTimedOutEventDetails?
         public let executionAbortedEventDetails: ExecutionAbortedEventDetails?
         public let executionFailedEventDetails: ExecutionFailedEventDetails?
+        /// Contains details about the redrive attempt of an execution.
+        public let executionRedrivenEventDetails: ExecutionRedrivenEventDetails?
         public let executionStartedEventDetails: ExecutionStartedEventDetails?
         public let executionSucceededEventDetails: ExecutionSucceededEventDetails?
         public let executionTimedOutEventDetails: ExecutionTimedOutEventDetails?
@@ -1235,6 +1313,8 @@ extension SFN {
         public let mapIterationSucceededEventDetails: MapIterationEventDetails?
         /// Contains error and cause details about a Map Run that failed.
         public let mapRunFailedEventDetails: MapRunFailedEventDetails?
+        /// Contains details about the redrive attempt of a Map Run.
+        public let mapRunRedrivenEventDetails: MapRunRedrivenEventDetails?
         /// Contains details, such as mapRunArn, and the start date and time of a Map Run. mapRunArn is the Amazon Resource Name (ARN) of the Map Run that was started.
         public let mapRunStartedEventDetails: MapRunStartedEventDetails?
         /// Contains details about Map state that was started.
@@ -1264,7 +1344,7 @@ extension SFN {
         /// The type of the event.
         public let type: HistoryEventType
 
-        public init(activityFailedEventDetails: ActivityFailedEventDetails? = nil, activityScheduledEventDetails: ActivityScheduledEventDetails? = nil, activityScheduleFailedEventDetails: ActivityScheduleFailedEventDetails? = nil, activityStartedEventDetails: ActivityStartedEventDetails? = nil, activitySucceededEventDetails: ActivitySucceededEventDetails? = nil, activityTimedOutEventDetails: ActivityTimedOutEventDetails? = nil, executionAbortedEventDetails: ExecutionAbortedEventDetails? = nil, executionFailedEventDetails: ExecutionFailedEventDetails? = nil, executionStartedEventDetails: ExecutionStartedEventDetails? = nil, executionSucceededEventDetails: ExecutionSucceededEventDetails? = nil, executionTimedOutEventDetails: ExecutionTimedOutEventDetails? = nil, id: Int64, lambdaFunctionFailedEventDetails: LambdaFunctionFailedEventDetails? = nil, lambdaFunctionScheduledEventDetails: LambdaFunctionScheduledEventDetails? = nil, lambdaFunctionScheduleFailedEventDetails: LambdaFunctionScheduleFailedEventDetails? = nil, lambdaFunctionStartFailedEventDetails: LambdaFunctionStartFailedEventDetails? = nil, lambdaFunctionSucceededEventDetails: LambdaFunctionSucceededEventDetails? = nil, lambdaFunctionTimedOutEventDetails: LambdaFunctionTimedOutEventDetails? = nil, mapIterationAbortedEventDetails: MapIterationEventDetails? = nil, mapIterationFailedEventDetails: MapIterationEventDetails? = nil, mapIterationStartedEventDetails: MapIterationEventDetails? = nil, mapIterationSucceededEventDetails: MapIterationEventDetails? = nil, mapRunFailedEventDetails: MapRunFailedEventDetails? = nil, mapRunStartedEventDetails: MapRunStartedEventDetails? = nil, mapStateStartedEventDetails: MapStateStartedEventDetails? = nil, previousEventId: Int64? = nil, stateEnteredEventDetails: StateEnteredEventDetails? = nil, stateExitedEventDetails: StateExitedEventDetails? = nil, taskFailedEventDetails: TaskFailedEventDetails? = nil, taskScheduledEventDetails: TaskScheduledEventDetails? = nil, taskStartedEventDetails: TaskStartedEventDetails? = nil, taskStartFailedEventDetails: TaskStartFailedEventDetails? = nil, taskSubmitFailedEventDetails: TaskSubmitFailedEventDetails? = nil, taskSubmittedEventDetails: TaskSubmittedEventDetails? = nil, taskSucceededEventDetails: TaskSucceededEventDetails? = nil, taskTimedOutEventDetails: TaskTimedOutEventDetails? = nil, timestamp: Date, type: HistoryEventType) {
+        public init(activityFailedEventDetails: ActivityFailedEventDetails? = nil, activityScheduledEventDetails: ActivityScheduledEventDetails? = nil, activityScheduleFailedEventDetails: ActivityScheduleFailedEventDetails? = nil, activityStartedEventDetails: ActivityStartedEventDetails? = nil, activitySucceededEventDetails: ActivitySucceededEventDetails? = nil, activityTimedOutEventDetails: ActivityTimedOutEventDetails? = nil, executionAbortedEventDetails: ExecutionAbortedEventDetails? = nil, executionFailedEventDetails: ExecutionFailedEventDetails? = nil, executionRedrivenEventDetails: ExecutionRedrivenEventDetails? = nil, executionStartedEventDetails: ExecutionStartedEventDetails? = nil, executionSucceededEventDetails: ExecutionSucceededEventDetails? = nil, executionTimedOutEventDetails: ExecutionTimedOutEventDetails? = nil, id: Int64, lambdaFunctionFailedEventDetails: LambdaFunctionFailedEventDetails? = nil, lambdaFunctionScheduledEventDetails: LambdaFunctionScheduledEventDetails? = nil, lambdaFunctionScheduleFailedEventDetails: LambdaFunctionScheduleFailedEventDetails? = nil, lambdaFunctionStartFailedEventDetails: LambdaFunctionStartFailedEventDetails? = nil, lambdaFunctionSucceededEventDetails: LambdaFunctionSucceededEventDetails? = nil, lambdaFunctionTimedOutEventDetails: LambdaFunctionTimedOutEventDetails? = nil, mapIterationAbortedEventDetails: MapIterationEventDetails? = nil, mapIterationFailedEventDetails: MapIterationEventDetails? = nil, mapIterationStartedEventDetails: MapIterationEventDetails? = nil, mapIterationSucceededEventDetails: MapIterationEventDetails? = nil, mapRunFailedEventDetails: MapRunFailedEventDetails? = nil, mapRunRedrivenEventDetails: MapRunRedrivenEventDetails? = nil, mapRunStartedEventDetails: MapRunStartedEventDetails? = nil, mapStateStartedEventDetails: MapStateStartedEventDetails? = nil, previousEventId: Int64? = nil, stateEnteredEventDetails: StateEnteredEventDetails? = nil, stateExitedEventDetails: StateExitedEventDetails? = nil, taskFailedEventDetails: TaskFailedEventDetails? = nil, taskScheduledEventDetails: TaskScheduledEventDetails? = nil, taskStartedEventDetails: TaskStartedEventDetails? = nil, taskStartFailedEventDetails: TaskStartFailedEventDetails? = nil, taskSubmitFailedEventDetails: TaskSubmitFailedEventDetails? = nil, taskSubmittedEventDetails: TaskSubmittedEventDetails? = nil, taskSucceededEventDetails: TaskSucceededEventDetails? = nil, taskTimedOutEventDetails: TaskTimedOutEventDetails? = nil, timestamp: Date, type: HistoryEventType) {
             self.activityFailedEventDetails = activityFailedEventDetails
             self.activityScheduledEventDetails = activityScheduledEventDetails
             self.activityScheduleFailedEventDetails = activityScheduleFailedEventDetails
@@ -1273,6 +1353,7 @@ extension SFN {
             self.activityTimedOutEventDetails = activityTimedOutEventDetails
             self.executionAbortedEventDetails = executionAbortedEventDetails
             self.executionFailedEventDetails = executionFailedEventDetails
+            self.executionRedrivenEventDetails = executionRedrivenEventDetails
             self.executionStartedEventDetails = executionStartedEventDetails
             self.executionSucceededEventDetails = executionSucceededEventDetails
             self.executionTimedOutEventDetails = executionTimedOutEventDetails
@@ -1288,6 +1369,7 @@ extension SFN {
             self.mapIterationStartedEventDetails = mapIterationStartedEventDetails
             self.mapIterationSucceededEventDetails = mapIterationSucceededEventDetails
             self.mapRunFailedEventDetails = mapRunFailedEventDetails
+            self.mapRunRedrivenEventDetails = mapRunRedrivenEventDetails
             self.mapRunStartedEventDetails = mapRunStartedEventDetails
             self.mapStateStartedEventDetails = mapStateStartedEventDetails
             self.previousEventId = previousEventId
@@ -1314,6 +1396,7 @@ extension SFN {
             case activityTimedOutEventDetails = "activityTimedOutEventDetails"
             case executionAbortedEventDetails = "executionAbortedEventDetails"
             case executionFailedEventDetails = "executionFailedEventDetails"
+            case executionRedrivenEventDetails = "executionRedrivenEventDetails"
             case executionStartedEventDetails = "executionStartedEventDetails"
             case executionSucceededEventDetails = "executionSucceededEventDetails"
             case executionTimedOutEventDetails = "executionTimedOutEventDetails"
@@ -1329,6 +1412,7 @@ extension SFN {
             case mapIterationStartedEventDetails = "mapIterationStartedEventDetails"
             case mapIterationSucceededEventDetails = "mapIterationSucceededEventDetails"
             case mapRunFailedEventDetails = "mapRunFailedEventDetails"
+            case mapRunRedrivenEventDetails = "mapRunRedrivenEventDetails"
             case mapRunStartedEventDetails = "mapRunStartedEventDetails"
             case mapStateStartedEventDetails = "mapStateStartedEventDetails"
             case previousEventId = "previousEventId"
@@ -1357,6 +1441,105 @@ extension SFN {
 
         private enum CodingKeys: String, CodingKey {
             case truncated = "truncated"
+        }
+    }
+
+    public struct InspectionData: AWSDecodableShape {
+        /// The input after Step Functions applies the InputPath filter.
+        public let afterInputPath: String?
+        /// The effective input after Step Functions applies the Parameters filter.
+        public let afterParameters: String?
+        /// The effective result combined with the raw state input after Step Functions applies the ResultPath filter.
+        public let afterResultPath: String?
+        /// The effective result after Step Functions applies the ResultSelector filter.
+        public let afterResultSelector: String?
+        /// The raw state input.
+        public let input: String?
+        /// The raw HTTP request that is sent when you test an HTTP Task.
+        public let request: InspectionDataRequest?
+        /// The raw HTTP response that is returned when you test an HTTP Task.
+        public let response: InspectionDataResponse?
+        /// The state's raw result.
+        public let result: String?
+
+        public init(afterInputPath: String? = nil, afterParameters: String? = nil, afterResultPath: String? = nil, afterResultSelector: String? = nil, input: String? = nil, request: InspectionDataRequest? = nil, response: InspectionDataResponse? = nil, result: String? = nil) {
+            self.afterInputPath = afterInputPath
+            self.afterParameters = afterParameters
+            self.afterResultPath = afterResultPath
+            self.afterResultSelector = afterResultSelector
+            self.input = input
+            self.request = request
+            self.response = response
+            self.result = result
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case afterInputPath = "afterInputPath"
+            case afterParameters = "afterParameters"
+            case afterResultPath = "afterResultPath"
+            case afterResultSelector = "afterResultSelector"
+            case input = "input"
+            case request = "request"
+            case response = "response"
+            case result = "result"
+        }
+    }
+
+    public struct InspectionDataRequest: AWSDecodableShape {
+        /// The request body for the HTTP request.
+        public let body: String?
+        /// The request headers associated with the HTTP request.
+        public let headers: String?
+        /// The HTTP method used for the HTTP request.
+        public let method: String?
+        /// The protocol used to make the HTTP request.
+        public let `protocol`: String?
+        /// The API endpoint used for the HTTP request.
+        public let url: String?
+
+        public init(body: String? = nil, headers: String? = nil, method: String? = nil, protocol: String? = nil, url: String? = nil) {
+            self.body = body
+            self.headers = headers
+            self.method = method
+            self.`protocol` = `protocol`
+            self.url = url
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case body = "body"
+            case headers = "headers"
+            case method = "method"
+            case `protocol` = "protocol"
+            case url = "url"
+        }
+    }
+
+    public struct InspectionDataResponse: AWSDecodableShape {
+        /// The HTTP response returned.
+        public let body: String?
+        /// The response headers associated with the HTTP response.
+        public let headers: String?
+        /// The protocol used to return the HTTP response.
+        public let `protocol`: String?
+        /// The HTTP response status code for the HTTP response.
+        public let statusCode: String?
+        /// The message associated with the HTTP status code.
+        public let statusMessage: String?
+
+        public init(body: String? = nil, headers: String? = nil, protocol: String? = nil, statusCode: String? = nil, statusMessage: String? = nil) {
+            self.body = body
+            self.headers = headers
+            self.`protocol` = `protocol`
+            self.statusCode = statusCode
+            self.statusMessage = statusMessage
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case body = "body"
+            case headers = "headers"
+            case `protocol` = "protocol"
+            case statusCode = "statusCode"
+            case statusMessage = "statusMessage"
         }
     }
 
@@ -1522,15 +1705,18 @@ extension SFN {
         public let maxResults: Int?
         /// If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
         public let nextToken: String?
+        /// Sets a filter to list executions based on whether or not they have been redriven. For a Distributed Map, redriveFilter sets a filter to list child workflow executions based on whether or not they have been redriven. If you do not provide a redriveFilter, Step Functions returns a list of both redriven and non-redriven executions. If you provide a state machine ARN in redriveFilter, the API returns a validation exception.
+        public let redriveFilter: ExecutionRedriveFilter?
         /// The Amazon Resource Name (ARN) of the state machine whose executions is listed. You can specify either a mapRunArn or a stateMachineArn, but not both. You can also return a list of executions associated with a specific alias or version, by specifying an alias ARN or a version ARN in the stateMachineArn parameter.
         public let stateMachineArn: String?
         /// If specified, only list the executions whose current execution status matches the given filter.
         public let statusFilter: ExecutionStatus?
 
-        public init(mapRunArn: String? = nil, maxResults: Int? = nil, nextToken: String? = nil, stateMachineArn: String? = nil, statusFilter: ExecutionStatus? = nil) {
+        public init(mapRunArn: String? = nil, maxResults: Int? = nil, nextToken: String? = nil, redriveFilter: ExecutionRedriveFilter? = nil, stateMachineArn: String? = nil, statusFilter: ExecutionStatus? = nil) {
             self.mapRunArn = mapRunArn
             self.maxResults = maxResults
             self.nextToken = nextToken
+            self.redriveFilter = redriveFilter
             self.stateMachineArn = stateMachineArn
             self.statusFilter = statusFilter
         }
@@ -1550,6 +1736,7 @@ extension SFN {
             case mapRunArn = "mapRunArn"
             case maxResults = "maxResults"
             case nextToken = "nextToken"
+            case redriveFilter = "redriveFilter"
             case stateMachineArn = "stateMachineArn"
             case statusFilter = "statusFilter"
         }
@@ -1850,8 +2037,12 @@ extension SFN {
         public let aborted: Int64
         /// The total number of child workflow executions that were started by a Map Run, but have failed.
         public let failed: Int64
+        /// The number of FAILED, ABORTED, or TIMED_OUT child workflow executions that cannot be redriven because their execution status is terminal. For example, child workflows with an execution status of FAILED, ABORTED, or TIMED_OUT and a redriveStatus of NOT_REDRIVABLE.
+        public let failuresNotRedrivable: Int64?
         /// The total number of child workflow executions that were started by a Map Run, but haven't started executing yet.
         public let pending: Int64
+        /// The number of unsuccessful child workflow executions currently waiting to be redriven. The status of these child workflow executions could be FAILED, ABORTED, or TIMED_OUT in the original execution attempt or a previous redrive attempt.
+        public let pendingRedrive: Int64?
         /// Returns the count of child workflow executions whose results were written by ResultWriter. For more information, see ResultWriter in the Step Functions Developer Guide.
         public let resultsWritten: Int64
         /// The total number of child workflow executions that were started by a Map Run and are currently in-progress.
@@ -1863,10 +2054,12 @@ extension SFN {
         /// The total number of child workflow executions that were started by a Map Run.
         public let total: Int64
 
-        public init(aborted: Int64, failed: Int64, pending: Int64, resultsWritten: Int64, running: Int64, succeeded: Int64, timedOut: Int64, total: Int64) {
+        public init(aborted: Int64, failed: Int64, failuresNotRedrivable: Int64? = nil, pending: Int64, pendingRedrive: Int64? = nil, resultsWritten: Int64, running: Int64, succeeded: Int64, timedOut: Int64, total: Int64) {
             self.aborted = aborted
             self.failed = failed
+            self.failuresNotRedrivable = failuresNotRedrivable
             self.pending = pending
+            self.pendingRedrive = pendingRedrive
             self.resultsWritten = resultsWritten
             self.running = running
             self.succeeded = succeeded
@@ -1877,7 +2070,9 @@ extension SFN {
         private enum CodingKeys: String, CodingKey {
             case aborted = "aborted"
             case failed = "failed"
+            case failuresNotRedrivable = "failuresNotRedrivable"
             case pending = "pending"
+            case pendingRedrive = "pendingRedrive"
             case resultsWritten = "resultsWritten"
             case running = "running"
             case succeeded = "succeeded"
@@ -1908,8 +2103,12 @@ extension SFN {
         public let aborted: Int64
         /// The total number of items processed in child workflow executions that have failed.
         public let failed: Int64
+        /// The number of FAILED, ABORTED, or TIMED_OUT items in child workflow executions that cannot be redriven because the execution status of those child workflows is terminal. For example, child workflows with an execution status of FAILED, ABORTED, or TIMED_OUT and a redriveStatus of NOT_REDRIVABLE.
+        public let failuresNotRedrivable: Int64?
         /// The total number of items to process in child workflow executions that haven't started running yet.
         public let pending: Int64
+        /// The number of unsuccessful items in child workflow executions currently waiting to be redriven.
+        public let pendingRedrive: Int64?
         /// Returns the count of items whose results were written by ResultWriter. For more information, see ResultWriter in the Step Functions Developer Guide.
         public let resultsWritten: Int64
         /// The total number of items being processed in child workflow executions that are currently in-progress.
@@ -1921,10 +2120,12 @@ extension SFN {
         /// The total number of items processed in all the child workflow executions started by a Map Run.
         public let total: Int64
 
-        public init(aborted: Int64, failed: Int64, pending: Int64, resultsWritten: Int64, running: Int64, succeeded: Int64, timedOut: Int64, total: Int64) {
+        public init(aborted: Int64, failed: Int64, failuresNotRedrivable: Int64? = nil, pending: Int64, pendingRedrive: Int64? = nil, resultsWritten: Int64, running: Int64, succeeded: Int64, timedOut: Int64, total: Int64) {
             self.aborted = aborted
             self.failed = failed
+            self.failuresNotRedrivable = failuresNotRedrivable
             self.pending = pending
+            self.pendingRedrive = pendingRedrive
             self.resultsWritten = resultsWritten
             self.running = running
             self.succeeded = succeeded
@@ -1935,7 +2136,9 @@ extension SFN {
         private enum CodingKeys: String, CodingKey {
             case aborted = "aborted"
             case failed = "failed"
+            case failuresNotRedrivable = "failuresNotRedrivable"
             case pending = "pending"
+            case pendingRedrive = "pendingRedrive"
             case resultsWritten = "resultsWritten"
             case running = "running"
             case succeeded = "succeeded"
@@ -1970,6 +2173,23 @@ extension SFN {
             case startDate = "startDate"
             case stateMachineArn = "stateMachineArn"
             case stopDate = "stopDate"
+        }
+    }
+
+    public struct MapRunRedrivenEventDetails: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of a Map Run that was redriven.
+        public let mapRunArn: String?
+        /// The number of times the Map Run has been redriven at this point in the execution's history including this event. The redrive count for a redriven Map Run is always greater than 0.
+        public let redriveCount: Int?
+
+        public init(mapRunArn: String? = nil, redriveCount: Int? = nil) {
+            self.mapRunArn = mapRunArn
+            self.redriveCount = redriveCount
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case mapRunArn = "mapRunArn"
+            case redriveCount = "redriveCount"
         }
     }
 
@@ -2043,10 +2263,48 @@ extension SFN {
         }
     }
 
+    public struct RedriveExecutionInput: AWSEncodableShape {
+        /// A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API will return idempotent responses for the last 10 client tokens used to successfully redrive the execution. These client tokens are valid for up to 15 minutes after they are first used.
+        public let clientToken: String?
+        /// The Amazon Resource Name (ARN) of the execution to be redriven.
+        public let executionArn: String
+
+        public init(clientToken: String? = RedriveExecutionInput.idempotencyToken(), executionArn: String) {
+            self.clientToken = clientToken
+            self.executionArn = executionArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.clientToken, name: "clientToken", parent: name, max: 64)
+            try self.validate(self.clientToken, name: "clientToken", parent: name, min: 1)
+            try self.validate(self.clientToken, name: "clientToken", parent: name, pattern: "^[!-~]+$")
+            try self.validate(self.executionArn, name: "executionArn", parent: name, max: 256)
+            try self.validate(self.executionArn, name: "executionArn", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case clientToken = "clientToken"
+            case executionArn = "executionArn"
+        }
+    }
+
+    public struct RedriveExecutionOutput: AWSDecodableShape {
+        /// The date the execution was last redriven.
+        public let redriveDate: Date
+
+        public init(redriveDate: Date) {
+            self.redriveDate = redriveDate
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case redriveDate = "redriveDate"
+        }
+    }
+
     public struct RoutingConfigurationListItem: AWSEncodableShape & AWSDecodableShape {
         /// The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration. If you specify the ARN of a second version, it must belong to the same state machine as the first version.
         public let stateMachineVersionArn: String
-        /// The percentage of traffic you want to route to the second state machine version. The sum of the weights in the routing configuration must be equal to 100.
+        /// The percentage of traffic you want to route to a state machine version. The sum of the weights in the routing configuration must be equal to 100.
         public let weight: Int
 
         public init(stateMachineVersionArn: String, weight: Int) {
@@ -2151,7 +2409,7 @@ extension SFN {
     public struct StartExecutionInput: AWSEncodableShape {
         /// The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"   Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
         public let input: String?
-        /// Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. A name must not contain:   white space   brackets  { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ & , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.
+        /// Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name. A name must not contain:   white space   brackets  { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ & , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.
         public let name: String?
         /// The Amazon Resource Name (ARN) of the state machine to execute. The stateMachineArn parameter accepts one of the following inputs:    An unqualified state machine ARN – Refers to a state machine ARN that isn't qualified with a version or alias ARN. The following is an example of an unqualified state machine ARN.  arn::states:::stateMachine:  Step Functions doesn't associate state machine executions that you start with an unqualified ARN with a version. This is true even if that version uses the same revision that the execution used.    A state machine version ARN – Refers to a version ARN, which is a combination of state machine ARN and the version number separated by a colon (:). The following is an example of the ARN for version 10.   arn::states:::stateMachine::10  Step Functions doesn't associate executions that you start with a version ARN with any aliases that point to that version.    A state machine alias ARN – Refers to an alias ARN, which is a combination of state machine ARN and the alias name separated by a colon (:). The following is an example of the ARN for an alias named PROD.  arn::states:::stateMachine:  Step Functions associates executions that you start with an alias ARN with that alias and the state machine version used for that execution.
         public let stateMachineArn: String
@@ -2708,6 +2966,76 @@ extension SFN {
         }
     }
 
+    public struct TestStateInput: AWSEncodableShape {
+        /// The Amazon States Language (ASL) definition of the state.
+        public let definition: String
+        /// A string that contains the JSON input data for the state.
+        public let input: String?
+        /// Determines the values to return when a state is tested. You can specify one of the following types:    INFO: Shows the final state output. By default, Step Functions sets inspectionLevel to INFO if you don't specify a level.    DEBUG: Shows the final state output along with the input and output data processing result.    TRACE: Shows the HTTP request and response for an HTTP Task. This level also shows the final state output along with the input and output data processing result.   Each of these levels also provide information about the status of the state execution and the next state to transition to.
+        public let inspectionLevel: InspectionLevel?
+        /// Specifies whether or not to include secret information in the test result. For HTTP Tasks, a secret includes the data that an EventBridge connection adds to modify the HTTP request headers, query parameters, and body. Step Functions doesn't omit any information included in the state definition or the HTTP response. If you set revealSecrets to true, you must make sure that the IAM user that calls the TestState API has permission for the states:RevealSecrets action. For an example of IAM policy that sets the states:RevealSecrets permission, see IAM permissions to test a state. Without this permission, Step Functions throws an access denied error. By default, revealSecrets is set to false.
+        public let revealSecrets: Bool?
+        /// The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.
+        public let roleArn: String
+
+        public init(definition: String, input: String? = nil, inspectionLevel: InspectionLevel? = nil, revealSecrets: Bool? = nil, roleArn: String) {
+            self.definition = definition
+            self.input = input
+            self.inspectionLevel = inspectionLevel
+            self.revealSecrets = revealSecrets
+            self.roleArn = roleArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.definition, name: "definition", parent: name, max: 1048576)
+            try self.validate(self.definition, name: "definition", parent: name, min: 1)
+            try self.validate(self.input, name: "input", parent: name, max: 262144)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, max: 256)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case definition = "definition"
+            case input = "input"
+            case inspectionLevel = "inspectionLevel"
+            case revealSecrets = "revealSecrets"
+            case roleArn = "roleArn"
+        }
+    }
+
+    public struct TestStateOutput: AWSDecodableShape {
+        /// A detailed explanation of the cause for the error when the execution of a state fails.
+        public let cause: String?
+        /// The error returned when the execution of a state fails.
+        public let error: String?
+        /// Returns additional details about the state's execution, including its input and output data processing flow, and HTTP request and response information. The inspectionLevel request parameter specifies which details are returned.
+        public let inspectionData: InspectionData?
+        /// The name of the next state to transition to. If you haven't defined a next state in your definition or if the execution of the state fails, this ﬁeld doesn't contain a value.
+        public let nextState: String?
+        /// The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+        public let output: String?
+        /// The execution status of the state.
+        public let status: TestExecutionStatus?
+
+        public init(cause: String? = nil, error: String? = nil, inspectionData: InspectionData? = nil, nextState: String? = nil, output: String? = nil, status: TestExecutionStatus? = nil) {
+            self.cause = cause
+            self.error = error
+            self.inspectionData = inspectionData
+            self.nextState = nextState
+            self.output = output
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case cause = "cause"
+            case error = "error"
+            case inspectionData = "inspectionData"
+            case nextState = "nextState"
+            case output = "output"
+            case status = "status"
+        }
+    }
+
     public struct TracingConfiguration: AWSEncodableShape & AWSDecodableShape {
         /// When set to true, X-Ray tracing is enabled.
         public let enabled: Bool?
@@ -2916,6 +3244,7 @@ public struct SFNErrorType: AWSErrorType {
         case executionAlreadyExists = "ExecutionAlreadyExists"
         case executionDoesNotExist = "ExecutionDoesNotExist"
         case executionLimitExceeded = "ExecutionLimitExceeded"
+        case executionNotRedrivable = "ExecutionNotRedrivable"
         case invalidArn = "InvalidArn"
         case invalidDefinition = "InvalidDefinition"
         case invalidExecutionInput = "InvalidExecutionInput"
@@ -2970,6 +3299,8 @@ public struct SFNErrorType: AWSErrorType {
     public static var executionDoesNotExist: Self { .init(.executionDoesNotExist) }
     /// The maximum number of running executions has been reached. Running executions must end or be stopped before a new execution can be started.
     public static var executionLimitExceeded: Self { .init(.executionLimitExceeded) }
+    /// The execution Amazon Resource Name (ARN) that you specified for executionArn cannot be redriven.
+    public static var executionNotRedrivable: Self { .init(.executionNotRedrivable) }
     /// The provided Amazon Resource Name (ARN) is not valid.
     public static var invalidArn: Self { .init(.invalidArn) }
     /// The provided Amazon States Language definition is not valid.
@@ -3000,7 +3331,9 @@ public struct SFNErrorType: AWSErrorType {
     /// The maximum number of state machines has been reached. Existing state machines must be deleted before a new state machine can be created.
     public static var stateMachineLimitExceeded: Self { .init(.stateMachineLimitExceeded) }
     public static var stateMachineTypeNotSupported: Self { .init(.stateMachineTypeNotSupported) }
+    /// The activity does not exist.
     public static var taskDoesNotExist: Self { .init(.taskDoesNotExist) }
+    /// The task token has either expired or the task associated with the token has already been closed.
     public static var taskTimedOut: Self { .init(.taskTimedOut) }
     /// You've exceeded the number of tags allowed for a resource. See the  Limits Topic in the Step Functions Developer Guide.
     public static var tooManyTags: Self { .init(.tooManyTags) }

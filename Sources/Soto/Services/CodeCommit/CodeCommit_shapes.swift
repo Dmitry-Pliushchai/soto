@@ -26,26 +26,26 @@ import SotoCore
 extension CodeCommit {
     // MARK: Enums
 
-    public enum ApprovalState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApprovalState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case approve = "APPROVE"
         case revoke = "REVOKE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case added = "A"
         case deleted = "D"
         case modified = "M"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConflictDetailLevelTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConflictDetailLevelTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fileLevel = "FILE_LEVEL"
         case lineLevel = "LINE_LEVEL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConflictResolutionStrategyTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConflictResolutionStrategyTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case acceptDestination = "ACCEPT_DESTINATION"
         case acceptSource = "ACCEPT_SOURCE"
         case automerge = "AUTOMERGE"
@@ -53,21 +53,21 @@ extension CodeCommit {
         public var description: String { return self.rawValue }
     }
 
-    public enum FileModeTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum FileModeTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case executable = "EXECUTABLE"
         case normal = "NORMAL"
         case symlink = "SYMLINK"
         public var description: String { return self.rawValue }
     }
 
-    public enum MergeOptionTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum MergeOptionTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fastForwardMerge = "FAST_FORWARD_MERGE"
         case squashMerge = "SQUASH_MERGE"
         case threeWayMerge = "THREE_WAY_MERGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directory = "DIRECTORY"
         case file = "FILE"
         case gitLink = "GIT_LINK"
@@ -75,19 +75,19 @@ extension CodeCommit {
         public var description: String { return self.rawValue }
     }
 
-    public enum OrderEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrderEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ascending"
         case descending = "descending"
         public var description: String { return self.rawValue }
     }
 
-    public enum OverrideStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OverrideStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case override = "OVERRIDE"
         case revoke = "REVOKE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PullRequestEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PullRequestEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pullRequestApprovalRuleCreated = "PULL_REQUEST_APPROVAL_RULE_CREATED"
         case pullRequestApprovalRuleDeleted = "PULL_REQUEST_APPROVAL_RULE_DELETED"
         case pullRequestApprovalRuleOverridden = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
@@ -100,19 +100,19 @@ extension CodeCommit {
         public var description: String { return self.rawValue }
     }
 
-    public enum PullRequestStatusEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum PullRequestStatusEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case closed = "CLOSED"
         case open = "OPEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelativeFileVersionEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelativeFileVersionEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case after = "AFTER"
         case before = "BEFORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplacementTypeEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplacementTypeEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case keepBase = "KEEP_BASE"
         case keepDestination = "KEEP_DESTINATION"
         case keepSource = "KEEP_SOURCE"
@@ -120,7 +120,7 @@ extension CodeCommit {
         public var description: String { return self.rawValue }
     }
 
-    public enum RepositoryTriggerEventEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum RepositoryTriggerEventEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "all"
         case createReference = "createReference"
         case deleteReference = "deleteReference"
@@ -128,7 +128,7 @@ extension CodeCommit {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortByEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortByEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case modifiedDate = "lastModifiedDate"
         case repositoryName = "repositoryName"
         public var description: String { return self.rawValue }

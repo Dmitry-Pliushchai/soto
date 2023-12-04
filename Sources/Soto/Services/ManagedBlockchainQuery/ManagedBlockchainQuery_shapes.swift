@@ -26,7 +26,7 @@ import SotoCore
 extension ManagedBlockchainQuery {
     // MARK: Enums
 
-    public enum ErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// An API request retrieving an item that can't be found
         case resourceNotFoundException = "RESOURCE_NOT_FOUND_EXCEPTION"
         /// An API request validation exception
@@ -34,21 +34,32 @@ extension ManagedBlockchainQuery {
         public var description: String { return self.rawValue }
     }
 
-    public enum ListTransactionsSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListTransactionsSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Timestamp of a transaction
         case transactionTimestamp = "TRANSACTION_TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryNetwork: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryNetwork: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Bitcoin main network
         case bitcoinMainnet = "BITCOIN_MAINNET"
+        /// Bitcoin test network
+        case bitcoinTestnet = "BITCOIN_TESTNET"
         /// Ethereum main network
         case ethereumMainnet = "ETHEREUM_MAINNET"
+        /// SEPOLIA network (ethereum testnet)
+        case ethereumSepoliaTestnet = "ETHEREUM_SEPOLIA_TESTNET"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryTransactionEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryTokenStandard: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case erc1155 = "ERC1155"
+        case erc20 = "ERC20"
+        case erc721 = "ERC721"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum QueryTransactionEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// A Bitcoin Vin transfer type
         case bitcoinVin = "BITCOIN_VIN"
         /// A Bitcoin Vout transfer type
@@ -74,7 +85,7 @@ extension ManagedBlockchainQuery {
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryTransactionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryTransactionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The transaction completed on the blockchain, but failed
         case failed = "FAILED"
         /// The transaction has been confirmed and is final in the blockchain
@@ -82,7 +93,7 @@ extension ManagedBlockchainQuery {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Result sorted in ascending order
         case ascending = "ASCENDING"
         /// Result sorted in descending order
@@ -91,6 +102,27 @@ extension ManagedBlockchainQuery {
     }
 
     // MARK: Shapes
+
+    public struct AssetContract: AWSDecodableShape {
+        /// The container for the contract identifier containing its blockchain network  and address.
+        public let contractIdentifier: ContractIdentifier
+        /// The address of the contract deployer.
+        public let deployerAddress: String
+        /// The token standard of the contract.
+        public let tokenStandard: QueryTokenStandard
+
+        public init(contractIdentifier: ContractIdentifier, deployerAddress: String, tokenStandard: QueryTokenStandard) {
+            self.contractIdentifier = contractIdentifier
+            self.deployerAddress = deployerAddress
+            self.tokenStandard = tokenStandard
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contractIdentifier = "contractIdentifier"
+            case deployerAddress = "deployerAddress"
+            case tokenStandard = "tokenStandard"
+        }
+    }
 
     public struct BatchGetTokenBalanceErrorItem: AWSDecodableShape {
         public let atBlockchainInstant: BlockchainInstant?
@@ -123,7 +155,7 @@ extension ManagedBlockchainQuery {
     }
 
     public struct BatchGetTokenBalanceInput: AWSEncodableShape {
-        /// An array of GetTokenBalanceInput objects whose balance is being requested.
+        /// An array of BatchGetTokenBalanceInputItem objects whose balance is being requested.
         public let getTokenBalanceInputs: [BatchGetTokenBalanceInputItem]?
 
         public init(getTokenBalanceInputs: [BatchGetTokenBalanceInputItem]? = nil) {
@@ -221,6 +253,114 @@ extension ManagedBlockchainQuery {
         }
     }
 
+    public struct ContractFilter: AWSEncodableShape {
+        /// The network address of the deployer.
+        public let deployerAddress: String
+        /// The blockchain network of the contract.
+        public let network: QueryNetwork
+        /// The container for the token standard.
+        public let tokenStandard: QueryTokenStandard
+
+        public init(deployerAddress: String, network: QueryNetwork, tokenStandard: QueryTokenStandard) {
+            self.deployerAddress = deployerAddress
+            self.network = network
+            self.tokenStandard = tokenStandard
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.deployerAddress, name: "deployerAddress", parent: name, pattern: "^[-A-Za-z0-9]{13,74}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case deployerAddress = "deployerAddress"
+            case network = "network"
+            case tokenStandard = "tokenStandard"
+        }
+    }
+
+    public struct ContractIdentifier: AWSEncodableShape & AWSDecodableShape {
+        /// Container for the blockchain address about a contract.
+        public let contractAddress: String
+        /// The blockchain network of the contract.
+        public let network: QueryNetwork
+
+        public init(contractAddress: String, network: QueryNetwork) {
+            self.contractAddress = contractAddress
+            self.network = network
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.contractAddress, name: "contractAddress", parent: name, pattern: "^[-A-Za-z0-9]{13,74}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contractAddress = "contractAddress"
+            case network = "network"
+        }
+    }
+
+    public struct ContractMetadata: AWSDecodableShape {
+        /// The decimals used by the token contract.
+        public let decimals: Int?
+        /// The name of the token contract.
+        public let name: String?
+        /// The symbol of the token contract.
+        public let symbol: String?
+
+        public init(decimals: Int? = nil, name: String? = nil, symbol: String? = nil) {
+            self.decimals = decimals
+            self.name = name
+            self.symbol = symbol
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case decimals = "decimals"
+            case name = "name"
+            case symbol = "symbol"
+        }
+    }
+
+    public struct GetAssetContractInput: AWSEncodableShape {
+        /// Contains the blockchain address and network information about the contract.
+        public let contractIdentifier: ContractIdentifier
+
+        public init(contractIdentifier: ContractIdentifier) {
+            self.contractIdentifier = contractIdentifier
+        }
+
+        public func validate(name: String) throws {
+            try self.contractIdentifier.validate(name: "\(name).contractIdentifier")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contractIdentifier = "contractIdentifier"
+        }
+    }
+
+    public struct GetAssetContractOutput: AWSDecodableShape {
+        /// Contains the blockchain address and network information about the contract.
+        public let contractIdentifier: ContractIdentifier
+        /// The address of the deployer of contract.
+        public let deployerAddress: String
+        public let metadata: ContractMetadata?
+        /// The token standard of the contract requested.
+        public let tokenStandard: QueryTokenStandard
+
+        public init(contractIdentifier: ContractIdentifier, deployerAddress: String, metadata: ContractMetadata? = nil, tokenStandard: QueryTokenStandard) {
+            self.contractIdentifier = contractIdentifier
+            self.deployerAddress = deployerAddress
+            self.metadata = metadata
+            self.tokenStandard = tokenStandard
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contractIdentifier = "contractIdentifier"
+            case deployerAddress = "deployerAddress"
+            case metadata = "metadata"
+            case tokenStandard = "tokenStandard"
+        }
+    }
+
     public struct GetTokenBalanceInput: AWSEncodableShape {
         /// The time for when the TokenBalance is requested or  the current time if a time is not provided in the request.  This time will only be recorded up to the second.
         public let atBlockchainInstant: BlockchainInstant?
@@ -303,6 +443,49 @@ extension ManagedBlockchainQuery {
 
         private enum CodingKeys: String, CodingKey {
             case transaction = "transaction"
+        }
+    }
+
+    public struct ListAssetContractsInput: AWSEncodableShape {
+        /// Contains the filter parameter for the request.
+        public let contractFilter: ContractFilter
+        /// The maximum number of contracts to list.
+        public let maxResults: Int?
+        ///  The pagination token that indicates the next set of results to retrieve.
+        public let nextToken: String?
+
+        public init(contractFilter: ContractFilter, maxResults: Int? = nil, nextToken: String? = nil) {
+            self.contractFilter = contractFilter
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.contractFilter.validate(name: "\(name).contractFilter")
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 131070)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contractFilter = "contractFilter"
+            case maxResults = "maxResults"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListAssetContractsOutput: AWSDecodableShape {
+        /// An array of contract objects that contain the properties for each contract.
+        public let contracts: [AssetContract]
+        /// The pagination token that indicates the next set of results to retrieve.
+        public let nextToken: String?
+
+        public init(contracts: [AssetContract], nextToken: String? = nil) {
+            self.contracts = contracts
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contracts = "contracts"
+            case nextToken = "nextToken"
         }
     }
 
@@ -514,7 +697,7 @@ extension ManagedBlockchainQuery {
         public let atBlockchainInstant: BlockchainInstant
         /// The container of the token balance.
         public let balance: String
-        /// The timestamp of the last transaction at which the balance for the token in the wallet was updated.
+        /// The Timestamp of the last transaction at which the balance for the token in the wallet was updated.
         public let lastUpdatedTime: BlockchainInstant?
         /// The container for the identifier of the owner.
         public let ownerIdentifier: OwnerIdentifier?
@@ -569,7 +752,7 @@ extension ManagedBlockchainQuery {
         public let contractAddress: String?
         /// The blockchain network of the token.
         public let network: QueryNetwork
-        /// The unique identifier of the token.
+        /// The unique identifier of the token.  You must specify this container with btc for the native BTC token, and  eth for the native ETH token. For all other token types you must  specify the tokenId in the 64 character hexadecimal tokenid format.
         public let tokenId: String?
 
         public init(contractAddress: String? = nil, network: QueryNetwork, tokenId: String? = nil) {
@@ -605,7 +788,7 @@ extension ManagedBlockchainQuery {
         public let from: String?
         /// The amount of gas used for the transaction.
         public let gasUsed: String?
-        /// The blockchain network where the transaction occured.
+        /// The blockchain network where the transaction occurred.
         public let network: QueryNetwork
         /// The number of transactions in the block.
         public let numberOfTransactions: Int64

@@ -26,12 +26,12 @@ import SotoCore
 extension Omics {
     // MARK: Enums
 
-    public enum Accelerators: String, CustomStringConvertible, Codable, Sendable {
+    public enum Accelerators: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gpu = "GPU"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnnotationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnnotationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Contains contig and 1-base position
         case chrPos = "CHR_POS"
         /// Contains contig, 1-base position, ref and alt allele information
@@ -49,26 +49,34 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum CreationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CreationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `import` = "IMPORT"
         case upload = "UPLOAD"
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ETagAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case bamMd5Up = "BAM_MD5up"
+        case cramMd5Up = "CRAM_MD5up"
+        case fastqMd5Up = "FASTQ_MD5up"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// KMS
         case kms = "KMS"
         public var description: String { return self.rawValue }
     }
 
-    public enum FileType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FileType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bam = "BAM"
         case cram = "CRAM"
         case fastq = "FASTQ"
+        case ubam = "UBAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum FormatToHeaderKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum FormatToHeaderKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alt = "ALT"
         case chr = "CHR"
         case end = "END"
@@ -78,7 +86,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The Job was cancelled
         case cancelled = "CANCELLED"
         /// The Job has completed
@@ -94,7 +102,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetActivationJobItemStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetActivationJobItemStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case finished = "FINISHED"
         case inProgress = "IN_PROGRESS"
@@ -102,7 +110,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetActivationJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetActivationJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -113,7 +121,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetExportJobItemStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetExportJobItemStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case finished = "FINISHED"
         case inProgress = "IN_PROGRESS"
@@ -121,7 +129,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetExportJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetExportJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -132,14 +140,14 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetFile: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetFile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case index = "INDEX"
         case source1 = "SOURCE1"
         case source2 = "SOURCE2"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetImportJobItemStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetImportJobItemStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case finished = "FINISHED"
         case inProgress = "IN_PROGRESS"
@@ -147,7 +155,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetImportJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetImportJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -158,13 +166,13 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetPartSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetPartSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case source1 = "SOURCE1"
         case source2 = "SOURCE2"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadSetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadSetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activating = "ACTIVATING"
         case active = "ACTIVE"
         case archived = "ARCHIVED"
@@ -175,13 +183,13 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceFile: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceFile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case index = "INDEX"
         case source = "SOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceImportJobItemStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceImportJobItemStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case finished = "FINISHED"
         case inProgress = "IN_PROGRESS"
@@ -189,7 +197,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceImportJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceImportJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case completed = "COMPLETED"
@@ -200,14 +208,14 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleted = "DELETED"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceOwner: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The resource owner is an account other than the caller
         case other = "OTHER"
         /// The resource owner is the calling account
@@ -215,12 +223,12 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum RunExport: String, CustomStringConvertible, Codable, Sendable {
+    public enum RunExport: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case definition = "DEFINITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum RunLogLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum RunLogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case error = "ERROR"
         case fatal = "FATAL"
@@ -228,13 +236,13 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum RunRetentionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum RunRetentionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case remove = "REMOVE"
         case retain = "RETAIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum RunStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RunStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case deleted = "DELETED"
@@ -246,7 +254,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum SchemaValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SchemaValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// BOOLEAN type
         case boolean = "BOOLEAN"
         /// DOUBLE type
@@ -262,7 +270,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The share is activated
         case activating = "ACTIVATING"
         /// The share is active and can be used
@@ -278,7 +286,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum StoreFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum StoreFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// GFF3 Format
         case gff = "GFF"
         /// TSV Format
@@ -288,7 +296,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum StoreStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StoreStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The Store is active
         case active = "ACTIVE"
         /// The Store is being created
@@ -302,7 +310,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum TaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -313,7 +321,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum VersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The Version is active
         case active = "ACTIVE"
         /// The Version is being created
@@ -327,19 +335,19 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowEngine: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowEngine: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cwl = "CWL"
         case nextflow = "NEXTFLOW"
         case wdl = "WDL"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowExport: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowExport: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case definition = "DEFINITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -349,7 +357,7 @@ extension Omics {
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "PRIVATE"
         case ready2run = "READY2RUN"
         public var description: String { return self.rawValue }
@@ -1118,7 +1126,7 @@ extension Omics {
         ///  The name of the read set.
         public let name: String
         ///  The ARN of the reference.
-        public let referenceArn: String
+        public let referenceArn: String?
         ///  The source's sample ID.
         public let sampleId: String
         ///  The sequence store ID for the store that is the destination of the multipart uploads.
@@ -1130,7 +1138,7 @@ extension Omics {
         ///  Any tags to add to the read set.
         public let tags: [String: String]?
 
-        public init(clientToken: String? = nil, description: String? = nil, generatedFrom: String? = nil, name: String, referenceArn: String, sampleId: String, sequenceStoreId: String, sourceFileType: FileType, subjectId: String, tags: [String: String]? = nil) {
+        public init(clientToken: String? = nil, description: String? = nil, generatedFrom: String? = nil, name: String, referenceArn: String? = nil, sampleId: String, sequenceStoreId: String, sourceFileType: FileType, subjectId: String, tags: [String: String]? = nil) {
             self.clientToken = clientToken
             self.description = description
             self.generatedFrom = generatedFrom
@@ -1993,6 +2001,27 @@ extension Omics {
         private enum CodingKeys: CodingKey {}
     }
 
+    public struct ETag: AWSDecodableShape {
+        ///  The algorithm used to calculate the read set’s ETag(s).
+        public let algorithm: ETagAlgorithm?
+        ///  The ETag hash calculated on Source1 of the read set.
+        public let source1: String?
+        ///  The ETag hash calculated on Source2 of the read set.
+        public let source2: String?
+
+        public init(algorithm: ETagAlgorithm? = nil, source1: String? = nil, source2: String? = nil) {
+            self.algorithm = algorithm
+            self.source1 = source1
+            self.source2 = source2
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case algorithm = "algorithm"
+            case source1 = "source1"
+            case source2 = "source2"
+        }
+    }
+
     public struct ExportReadSet: AWSEncodableShape {
         /// The set's ID.
         public let readSetId: String
@@ -2620,6 +2649,8 @@ extension Omics {
         public let creationType: CreationType?
         /// The read set's description.
         public let description: String?
+        ///  The entity tag (ETag) is a hash of the object meant to represent its semantic content.
+        public let etag: ETag?
         /// The read set's files.
         public let files: ReadSetFiles?
         /// The read set's file type.
@@ -2643,11 +2674,12 @@ extension Omics {
         /// The read set's subject ID.
         public let subjectId: String?
 
-        public init(arn: String, creationTime: Date, creationType: CreationType? = nil, description: String? = nil, files: ReadSetFiles? = nil, fileType: FileType, id: String, name: String? = nil, referenceArn: String? = nil, sampleId: String? = nil, sequenceInformation: SequenceInformation? = nil, sequenceStoreId: String, status: ReadSetStatus, statusMessage: String? = nil, subjectId: String? = nil) {
+        public init(arn: String, creationTime: Date, creationType: CreationType? = nil, description: String? = nil, etag: ETag? = nil, files: ReadSetFiles? = nil, fileType: FileType, id: String, name: String? = nil, referenceArn: String? = nil, sampleId: String? = nil, sequenceInformation: SequenceInformation? = nil, sequenceStoreId: String, status: ReadSetStatus, statusMessage: String? = nil, subjectId: String? = nil) {
             self.arn = arn
             self.creationTime = creationTime
             self.creationType = creationType
             self.description = description
+            self.etag = etag
             self.files = files
             self.fileType = fileType
             self.id = id
@@ -2666,6 +2698,7 @@ extension Omics {
             case creationTime = "creationTime"
             case creationType = "creationType"
             case description = "description"
+            case etag = "etag"
             case files = "files"
             case fileType = "fileType"
             case id = "id"
@@ -3096,10 +3129,14 @@ extension Omics {
         public let definition: String?
         /// The run's digest.
         public let digest: String?
+        ///  The reason a run has failed.
+        public let failureReason: String?
         /// The run's ID.
         public let id: String?
         /// The run's log level.
         public let logLevel: RunLogLevel?
+        ///  The location of the run log.
+        public let logLocation: RunLogLocation?
         /// The run's name.
         public let name: String?
         /// The run's output URI.
@@ -3118,6 +3155,8 @@ extension Omics {
         public let runGroupId: String?
         /// The run's ID.
         public let runId: String?
+        ///  The destination for workflow outputs.
+        public let runOutputUri: String?
         /// Who started the run.
         public let startedBy: String?
         /// When the run started.
@@ -3134,19 +3173,23 @@ extension Omics {
         public let storageCapacity: Int?
         /// The run's tags.
         public let tags: [String: String]?
+        ///  The universally unique identifier for a run.
+        public let uuid: String?
         /// The run's workflow ID.
         public let workflowId: String?
         /// The run's workflow type.
         public let workflowType: WorkflowType?
 
-        public init(accelerators: Accelerators? = nil, arn: String? = nil, creationTime: Date? = nil, definition: String? = nil, digest: String? = nil, id: String? = nil, logLevel: RunLogLevel? = nil, name: String? = nil, outputUri: String? = nil, parameters: String? = nil, priority: Int? = nil, resourceDigests: [String: String]? = nil, retentionMode: RunRetentionMode? = nil, roleArn: String? = nil, runGroupId: String? = nil, runId: String? = nil, startedBy: String? = nil, startTime: Date? = nil, status: RunStatus? = nil, statusMessage: String? = nil, stopTime: Date? = nil, storageCapacity: Int? = nil, tags: [String: String]? = nil, workflowId: String? = nil, workflowType: WorkflowType? = nil) {
+        public init(accelerators: Accelerators? = nil, arn: String? = nil, creationTime: Date? = nil, definition: String? = nil, digest: String? = nil, failureReason: String? = nil, id: String? = nil, logLevel: RunLogLevel? = nil, logLocation: RunLogLocation? = nil, name: String? = nil, outputUri: String? = nil, parameters: String? = nil, priority: Int? = nil, resourceDigests: [String: String]? = nil, retentionMode: RunRetentionMode? = nil, roleArn: String? = nil, runGroupId: String? = nil, runId: String? = nil, runOutputUri: String? = nil, startedBy: String? = nil, startTime: Date? = nil, status: RunStatus? = nil, statusMessage: String? = nil, stopTime: Date? = nil, storageCapacity: Int? = nil, tags: [String: String]? = nil, uuid: String? = nil, workflowId: String? = nil, workflowType: WorkflowType? = nil) {
             self.accelerators = accelerators
             self.arn = arn
             self.creationTime = creationTime
             self.definition = definition
             self.digest = digest
+            self.failureReason = failureReason
             self.id = id
             self.logLevel = logLevel
+            self.logLocation = logLocation
             self.name = name
             self.outputUri = outputUri
             self.parameters = parameters
@@ -3156,6 +3199,7 @@ extension Omics {
             self.roleArn = roleArn
             self.runGroupId = runGroupId
             self.runId = runId
+            self.runOutputUri = runOutputUri
             self.startedBy = startedBy
             self.startTime = startTime
             self.status = status
@@ -3163,6 +3207,7 @@ extension Omics {
             self.stopTime = stopTime
             self.storageCapacity = storageCapacity
             self.tags = tags
+            self.uuid = uuid
             self.workflowId = workflowId
             self.workflowType = workflowType
         }
@@ -3173,8 +3218,10 @@ extension Omics {
             case creationTime = "creationTime"
             case definition = "definition"
             case digest = "digest"
+            case failureReason = "failureReason"
             case id = "id"
             case logLevel = "logLevel"
+            case logLocation = "logLocation"
             case name = "name"
             case outputUri = "outputUri"
             case parameters = "parameters"
@@ -3184,6 +3231,7 @@ extension Omics {
             case roleArn = "roleArn"
             case runGroupId = "runGroupId"
             case runId = "runId"
+            case runOutputUri = "runOutputUri"
             case startedBy = "startedBy"
             case startTime = "startTime"
             case status = "status"
@@ -3191,6 +3239,7 @@ extension Omics {
             case stopTime = "stopTime"
             case storageCapacity = "storageCapacity"
             case tags = "tags"
+            case uuid = "uuid"
             case workflowId = "workflowId"
             case workflowType = "workflowType"
         }
@@ -3202,7 +3251,7 @@ extension Omics {
             AWSMemberEncoding(label: "taskId", location: .uri("taskId"))
         ]
 
-        /// The task's ID.
+        /// The workflow run ID.
         public let id: String
         /// The task's ID.
         public let taskId: String
@@ -3230,6 +3279,8 @@ extension Omics {
         /// When the task was created.
         @OptionalCustomCoding<ISO8601DateCoder>
         public var creationTime: Date?
+        ///  The reason a task has failed.
+        public let failureReason: String?
         ///  The number of Graphics Processing Units (GPU) specified in the task.
         public let gpus: Int?
         ///  The instance type for a task.
@@ -3253,9 +3304,10 @@ extension Omics {
         /// The task's ID.
         public let taskId: String?
 
-        public init(cpus: Int? = nil, creationTime: Date? = nil, gpus: Int? = nil, instanceType: String? = nil, logStream: String? = nil, memory: Int? = nil, name: String? = nil, startTime: Date? = nil, status: TaskStatus? = nil, statusMessage: String? = nil, stopTime: Date? = nil, taskId: String? = nil) {
+        public init(cpus: Int? = nil, creationTime: Date? = nil, failureReason: String? = nil, gpus: Int? = nil, instanceType: String? = nil, logStream: String? = nil, memory: Int? = nil, name: String? = nil, startTime: Date? = nil, status: TaskStatus? = nil, statusMessage: String? = nil, stopTime: Date? = nil, taskId: String? = nil) {
             self.cpus = cpus
             self.creationTime = creationTime
+            self.failureReason = failureReason
             self.gpus = gpus
             self.instanceType = instanceType
             self.logStream = logStream
@@ -3271,6 +3323,7 @@ extension Omics {
         private enum CodingKeys: String, CodingKey {
             case cpus = "cpus"
             case creationTime = "creationTime"
+            case failureReason = "failureReason"
             case gpus = "gpus"
             case instanceType = "instanceType"
             case logStream = "logStream"
@@ -5176,8 +5229,7 @@ extension Omics {
             try self.validate(self.name, name: "name", parent: name, min: 1)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$")
             try self.validate(self.referenceArn, name: "referenceArn", parent: name, max: 127)
-            try self.validate(self.referenceArn, name: "referenceArn", parent: name, min: 1)
-            try self.validate(self.referenceArn, name: "referenceArn", parent: name, pattern: "^arn:.+$")
+            try self.validate(self.referenceArn, name: "referenceArn", parent: name, pattern: "^$|^arn:.+$")
             try self.validate(self.sampleId, name: "sampleId", parent: name, max: 127)
             try self.validate(self.sampleId, name: "sampleId", parent: name, min: 1)
             try self.validate(self.sampleId, name: "sampleId", parent: name, pattern: "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$")
@@ -5208,6 +5260,8 @@ extension Omics {
         public let creationType: CreationType?
         /// The read set's description.
         public let description: String?
+        ///  The entity tag (ETag) is a hash of the object representing  its semantic content.
+        public let etag: ETag?
         /// The read set's file type.
         public let fileType: FileType
         /// The read set's ID.
@@ -5228,11 +5282,12 @@ extension Omics {
         /// The read set's subject ID.
         public let subjectId: String?
 
-        public init(arn: String, creationTime: Date, creationType: CreationType? = nil, description: String? = nil, fileType: FileType, id: String, name: String? = nil, referenceArn: String? = nil, sampleId: String? = nil, sequenceInformation: SequenceInformation? = nil, sequenceStoreId: String, status: ReadSetStatus, statusMessage: String? = nil, subjectId: String? = nil) {
+        public init(arn: String, creationTime: Date, creationType: CreationType? = nil, description: String? = nil, etag: ETag? = nil, fileType: FileType, id: String, name: String? = nil, referenceArn: String? = nil, sampleId: String? = nil, sequenceInformation: SequenceInformation? = nil, sequenceStoreId: String, status: ReadSetStatus, statusMessage: String? = nil, subjectId: String? = nil) {
             self.arn = arn
             self.creationTime = creationTime
             self.creationType = creationType
             self.description = description
+            self.etag = etag
             self.fileType = fileType
             self.id = id
             self.name = name
@@ -5250,6 +5305,7 @@ extension Omics {
             case creationTime = "creationTime"
             case creationType = "creationType"
             case description = "description"
+            case etag = "etag"
             case fileType = "fileType"
             case id = "id"
             case name = "name"
@@ -5560,6 +5616,23 @@ extension Omics {
             case stopTime = "stopTime"
             case storageCapacity = "storageCapacity"
             case workflowId = "workflowId"
+        }
+    }
+
+    public struct RunLogLocation: AWSDecodableShape {
+        ///  The log stream ARN for the engine log.
+        public let engineLogStream: String?
+        ///  The log stream ARN for the run log.
+        public let runLogStream: String?
+
+        public init(engineLogStream: String? = nil, runLogStream: String? = nil) {
+            self.engineLogStream = engineLogStream
+            self.runLogStream = runLogStream
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case engineLogStream = "engineLogStream"
+            case runLogStream = "runLogStream"
         }
     }
 
@@ -6042,7 +6115,7 @@ extension Omics {
         /// The source's name.
         public let name: String?
         /// The source's reference ARN.
-        public let referenceArn: String
+        public let referenceArn: String?
         /// The source's sample ID.
         public let sampleId: String
         /// The source files' location in Amazon S3.
@@ -6054,7 +6127,7 @@ extension Omics {
         /// The source's tags.
         public let tags: [String: String]?
 
-        public init(description: String? = nil, generatedFrom: String? = nil, name: String? = nil, referenceArn: String, sampleId: String, sourceFiles: SourceFiles, sourceFileType: FileType, subjectId: String, tags: [String: String]? = nil) {
+        public init(description: String? = nil, generatedFrom: String? = nil, name: String? = nil, referenceArn: String? = nil, sampleId: String, sourceFiles: SourceFiles, sourceFileType: FileType, subjectId: String, tags: [String: String]? = nil) {
             self.description = description
             self.generatedFrom = generatedFrom
             self.name = name
@@ -6269,7 +6342,7 @@ extension Omics {
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, min: 1)
             try self.validate(self.name, name: "name", parent: name, pattern: "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$")
-            try self.validate(self.outputUri, name: "outputUri", parent: name, max: 128)
+            try self.validate(self.outputUri, name: "outputUri", parent: name, max: 750)
             try self.validate(self.outputUri, name: "outputUri", parent: name, min: 1)
             try self.validate(self.outputUri, name: "outputUri", parent: name, pattern: "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$")
             try self.validate(self.requestId, name: "requestId", parent: name, max: 128)
@@ -6317,23 +6390,31 @@ extension Omics {
         public let arn: String?
         /// The run's ID.
         public let id: String?
+        ///  The destination for workflow outputs.
+        public let runOutputUri: String?
         /// The run's status.
         public let status: RunStatus?
         /// The run's tags.
         public let tags: [String: String]?
+        ///  The universally unique identifier for a run.
+        public let uuid: String?
 
-        public init(arn: String? = nil, id: String? = nil, status: RunStatus? = nil, tags: [String: String]? = nil) {
+        public init(arn: String? = nil, id: String? = nil, runOutputUri: String? = nil, status: RunStatus? = nil, tags: [String: String]? = nil, uuid: String? = nil) {
             self.arn = arn
             self.id = id
+            self.runOutputUri = runOutputUri
             self.status = status
             self.tags = tags
+            self.uuid = uuid
         }
 
         private enum CodingKeys: String, CodingKey {
             case arn = "arn"
             case id = "id"
+            case runOutputUri = "runOutputUri"
             case status = "status"
             case tags = "tags"
+            case uuid = "uuid"
         }
     }
 

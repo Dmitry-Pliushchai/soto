@@ -22,6 +22,7 @@ extension Finspace {
     // MARK: Async API Calls
 
     /// Create a new FinSpace environment.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createEnvironment(_ input: CreateEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateEnvironmentResponse {
         return try await self.client.execute(operation: "CreateEnvironment", path: "/environment", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -52,6 +53,7 @@ extension Finspace {
     }
 
     /// Delete an FinSpace environment.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func deleteEnvironment(_ input: DeleteEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteEnvironmentResponse {
         return try await self.client.execute(operation: "DeleteEnvironment", path: "/environment/{environmentId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -77,6 +79,7 @@ extension Finspace {
     }
 
     /// Returns the FinSpace environment object.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getEnvironment(_ input: GetEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetEnvironmentResponse {
         return try await self.client.execute(operation: "GetEnvironment", path: "/environment/{environmentId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -112,6 +115,7 @@ extension Finspace {
     }
 
     /// A list of all of your FinSpace environments.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listEnvironments(_ input: ListEnvironmentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListEnvironmentsResponse {
         return try await self.client.execute(operation: "ListEnvironments", path: "/environment", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -162,8 +166,14 @@ extension Finspace {
     }
 
     /// Update your FinSpace environment.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func updateEnvironment(_ input: UpdateEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateEnvironmentResponse {
         return try await self.client.execute(operation: "UpdateEnvironment", path: "/environment/{environmentId}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Allows you to update code configuration on a running cluster. By using this API you can update the code, the initialization script path, and the command line arguments for a specific cluster.  The configuration that you want to update will override any existing configurations on the cluster.
+    public func updateKxClusterCodeConfiguration(_ input: UpdateKxClusterCodeConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateKxClusterCodeConfigurationResponse {
+        return try await self.client.execute(operation: "UpdateKxClusterCodeConfiguration", path: "/kx/environments/{environmentId}/clusters/{clusterName}/configuration/code", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the databases mounted on a kdb cluster, which includes the changesetId and all the dbPaths to be cached. This API does not allow you to change a database name or add a database if you created a cluster without one.  Using this API you can point a cluster to a different changeset and modify a list of partitions being cached.

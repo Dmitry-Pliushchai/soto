@@ -19,8 +19,7 @@
 
 /// Service object for interacting with AWS CostAndUsageReportService service.
 ///
-/// The AWS Cost and Usage Report API enables you to programmatically create, query, and delete  AWS Cost and Usage report definitions. AWS Cost and Usage reports track the monthly AWS costs and usage  associated with your AWS account.  The report contains line items for each unique combination of AWS product, usage type, and operation that your AWS account uses.   You can configure the AWS Cost and Usage report to show only the data that you want, using the AWS Cost and Usage API.
-///  Service Endpoint The AWS Cost and Usage Report API provides the following endpoint:   cur.us-east-1.amazonaws.com
+/// You can use the Amazon Web Services Cost and Usage Report API to programmatically create, query, and delete  Amazon Web Services Cost and Usage Report definitions. Amazon Web Services Cost and Usage Report track the monthly Amazon Web Services costs and usage  associated with your Amazon Web Services account.  The report contains line items for each unique combination of Amazon Web Services product, usage type, and operation that your Amazon Web Services account uses.   You can configure the Amazon Web Services Cost and Usage Report to show only the data that you want, using the Amazon Web Services Cost and Usage Report API. Service Endpoint The Amazon Web Services Cost and Usage Report API provides the following endpoint:   cur.us-east-1.amazonaws.com
 public struct CostAndUsageReportService: AWSService {
     // MARK: Member variables
 
@@ -65,17 +64,22 @@ public struct CostAndUsageReportService: AWSService {
 
     // MARK: API Calls
 
-    /// Deletes the specified report.
+    /// Deletes the specified report. Any tags associated with the report are also deleted.
     public func deleteReportDefinition(_ input: DeleteReportDefinitionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteReportDefinitionResponse> {
         return self.client.execute(operation: "DeleteReportDefinition", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists the AWS Cost and Usage reports available to this account.
+    /// Lists the Amazon Web Services Cost and Usage Report available to this account.
     public func describeReportDefinitions(_ input: DescribeReportDefinitionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeReportDefinitionsResponse> {
         return self.client.execute(operation: "DescribeReportDefinitions", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Allows you to programatically update your report preferences.
+    /// Lists the tags associated with the specified report definition.
+    public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceResponse> {
+        return self.client.execute(operation: "ListTagsForResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Allows you to programmatically update your report preferences.
     public func modifyReportDefinition(_ input: ModifyReportDefinitionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ModifyReportDefinitionResponse> {
         return self.client.execute(operation: "ModifyReportDefinition", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -83,6 +87,16 @@ public struct CostAndUsageReportService: AWSService {
     /// Creates a new report using the description that you provide.
     public func putReportDefinition(_ input: PutReportDefinitionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutReportDefinitionResponse> {
         return self.client.execute(operation: "PutReportDefinition", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Associates a set of tags with a report definition.
+    public func tagResource(_ input: TagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<TagResourceResponse> {
+        return self.client.execute(operation: "TagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Disassociates a set of tags from a report definition.
+    public func untagResource(_ input: UntagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UntagResourceResponse> {
+        return self.client.execute(operation: "UntagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -98,7 +112,7 @@ extension CostAndUsageReportService {
 // MARK: Paginators
 
 extension CostAndUsageReportService {
-    /// Lists the AWS Cost and Usage reports available to this account.
+    /// Lists the Amazon Web Services Cost and Usage Report available to this account.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.

@@ -26,7 +26,7 @@ import SotoCore
 extension Route53Domains {
     // MARK: Enums
 
-    public enum ContactType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContactType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case association = "ASSOCIATION"
         case company = "COMPANY"
         case person = "PERSON"
@@ -35,7 +35,7 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum CountryCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CountryCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `as` = "AS"
         case `do` = "DO"
         case `in` = "IN"
@@ -290,7 +290,7 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainAvailability: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainAvailability: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case availablePreorder = "AVAILABLE_PREORDER"
         case availableReserved = "AVAILABLE_RESERVED"
@@ -302,7 +302,7 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExtraParamName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExtraParamName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auIdNumber = "AU_ID_NUMBER"
         case auIdType = "AU_ID_TYPE"
         case auPriorityToken = "AU_PRIORITY_TOKEN"
@@ -337,18 +337,18 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum ListDomainsAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListDomainsAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case domainName = "DomainName"
         case expiry = "Expiry"
         public var description: String { return self.rawValue }
     }
 
-    public enum ListOperationsSortAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListOperationsSortAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case submittedDate = "SubmittedDate"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -357,7 +357,7 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addDnssec = "ADD_DNSSEC"
         case changeDomainOwner = "CHANGE_DOMAIN_OWNER"
         case changePrivacyProtection = "CHANGE_PRIVACY_PROTECTION"
@@ -379,27 +379,27 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum Operator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case beginsWith = "BEGINS_WITH"
         case ge = "GE"
         case le = "LE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReachabilityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReachabilityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case done = "DONE"
         case expired = "EXPIRED"
         case pending = "PENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum StatusFlag: String, CustomStringConvertible, Codable, Sendable {
+    public enum StatusFlag: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pendingAcceptance = "PENDING_ACCEPTANCE"
         case pendingAuthorization = "PENDING_AUTHORIZATION"
         case pendingCustomerAction = "PENDING_CUSTOMER_ACTION"
@@ -408,7 +408,7 @@ extension Route53Domains {
         public var description: String { return self.rawValue }
     }
 
-    public enum Transferable: String, CustomStringConvertible, Codable, Sendable {
+    public enum Transferable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case domainInAnotherAccount = "DOMAIN_IN_ANOTHER_ACCOUNT"
         case domainInOwnAccount = "DOMAIN_IN_OWN_ACCOUNT"
         case dontKnow = "DONT_KNOW"

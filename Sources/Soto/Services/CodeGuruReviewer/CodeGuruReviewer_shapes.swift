@@ -26,26 +26,26 @@ import SotoCore
 extension CodeGuruReviewer {
     // MARK: Enums
 
-    public enum AnalysisType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeQuality = "CodeQuality"
         case security = "Security"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigFileState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigFileState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absent = "Absent"
         case present = "Present"
         case presentWithErrors = "PresentWithErrors"
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aoCmk = "AWS_OWNED_CMK"
         case cmCmk = "CUSTOMER_MANAGED_CMK"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobState: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case deleting = "Deleting"
         case failed = "Failed"
@@ -53,7 +53,7 @@ extension CodeGuruReviewer {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProviderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProviderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bitbucket = "Bitbucket"
         case codeCommit = "CodeCommit"
         case gitHub = "GitHub"
@@ -62,13 +62,13 @@ extension CodeGuruReviewer {
         public var description: String { return self.rawValue }
     }
 
-    public enum Reaction: String, CustomStringConvertible, Codable, Sendable {
+    public enum Reaction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case thumbsDown = "ThumbsDown"
         case thumbsUp = "ThumbsUp"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsBestPractices = "AWSBestPractices"
         case awsCloudformationIssues = "AWSCloudFormationIssues"
         case codeInconsistencies = "CodeInconsistencies"
@@ -83,7 +83,7 @@ extension CodeGuruReviewer {
         public var description: String { return self.rawValue }
     }
 
-    public enum RepositoryAssociationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum RepositoryAssociationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associated = "Associated"
         case associating = "Associating"
         case disassociated = "Disassociated"
@@ -92,7 +92,7 @@ extension CodeGuruReviewer {
         public var description: String { return self.rawValue }
     }
 
-    public enum Severity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Severity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case critical = "Critical"
         case high = "High"
         case info = "Info"
@@ -101,14 +101,14 @@ extension CodeGuruReviewer {
         public var description: String { return self.rawValue }
     }
 
-    public enum VendorName: String, CustomStringConvertible, Codable, Sendable {
+    public enum VendorName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case github = "GitHub"
         case gitlab = "GitLab"
         case nativeS3 = "NativeS3"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Type`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Type`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pullRequest = "PullRequest"
         case repositoryAnalysis = "RepositoryAnalysis"
         public var description: String { return self.rawValue }

@@ -56,8 +56,13 @@ public struct AutoScaling: AWSService {
             endpoint: endpoint,
             variantEndpoints: [
                 [.fips]: .init(endpoints: [
+                    "ca-central-1": "autoscaling-fips.ca-central-1.amazonaws.com",
+                    "us-east-1": "autoscaling-fips.us-east-1.amazonaws.com",
+                    "us-east-2": "autoscaling-fips.us-east-2.amazonaws.com",
                     "us-gov-east-1": "autoscaling.us-gov-east-1.amazonaws.com",
-                    "us-gov-west-1": "autoscaling.us-gov-west-1.amazonaws.com"
+                    "us-gov-west-1": "autoscaling.us-gov-west-1.amazonaws.com",
+                    "us-west-1": "autoscaling-fips.us-west-1.amazonaws.com",
+                    "us-west-2": "autoscaling-fips.us-west-2.amazonaws.com"
                 ])
             ],
             errorType: AutoScalingErrorType.self,
@@ -375,7 +380,7 @@ public struct AutoScaling: AWSService {
         return self.client.execute(operation: "SetInstanceProtection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling performs a rolling update of instances in an Auto Scaling group. Instances are terminated first and then replaced, which temporarily reduces the capacity available within your Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API.
+    /// Starts an instance refresh. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API.
     public func startInstanceRefresh(_ input: StartInstanceRefreshType, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartInstanceRefreshAnswer> {
         return self.client.execute(operation: "StartInstanceRefresh", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -514,6 +519,59 @@ extension AutoScaling {
         )
     }
 
+    /// Gets information about the instance refreshes for the specified Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group after you make configuration changes. To help you determine the status of an instance refresh, Amazon EC2 Auto Scaling returns information about the instance refreshes you previously initiated, including their status, start time, end time, the percentage of the instance refresh that is complete, and the number of instances remaining to update before the instance refresh is complete. If a rollback is initiated while an instance refresh is in progress, Amazon EC2 Auto Scaling also returns information about the rollback of the instance refresh.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeInstanceRefreshesPaginator<Result>(
+        _ input: DescribeInstanceRefreshesType,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeInstanceRefreshesAnswer, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeInstanceRefreshes,
+            inputKey: \DescribeInstanceRefreshesType.nextToken,
+            outputKey: \DescribeInstanceRefreshesAnswer.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeInstanceRefreshesPaginator(
+        _ input: DescribeInstanceRefreshesType,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeInstanceRefreshesAnswer, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeInstanceRefreshes,
+            inputKey: \DescribeInstanceRefreshesType.nextToken,
+            outputKey: \DescribeInstanceRefreshesAnswer.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Gets information about the launch configurations in the account and Region.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -562,6 +620,112 @@ extension AutoScaling {
             command: self.describeLaunchConfigurations,
             inputKey: \LaunchConfigurationNamesType.nextToken,
             outputKey: \LaunchConfigurationsType.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    ///  This API operation is superseded by DescribeTrafficSources, which can describe multiple traffic sources types. We recommend using DetachTrafficSources to simplify how you manage traffic sources. However, we continue to support DescribeLoadBalancerTargetGroups. You can use both the original DescribeLoadBalancerTargetGroups API operation and DescribeTrafficSources on the same Auto Scaling group.  Gets information about the Elastic Load Balancing target groups for the specified Auto Scaling group. To determine the attachment status of the target group, use the State element in the response. When you attach a target group to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the target group. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the target group is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the target group doesn't enter the InService state.  Target groups also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your target group state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.   You can use this operation to describe target groups that were attached by using AttachLoadBalancerTargetGroups, but not for target groups that were attached by using AttachTrafficSources.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeLoadBalancerTargetGroupsPaginator<Result>(
+        _ input: DescribeLoadBalancerTargetGroupsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeLoadBalancerTargetGroupsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeLoadBalancerTargetGroups,
+            inputKey: \DescribeLoadBalancerTargetGroupsRequest.nextToken,
+            outputKey: \DescribeLoadBalancerTargetGroupsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeLoadBalancerTargetGroupsPaginator(
+        _ input: DescribeLoadBalancerTargetGroupsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeLoadBalancerTargetGroupsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeLoadBalancerTargetGroups,
+            inputKey: \DescribeLoadBalancerTargetGroupsRequest.nextToken,
+            outputKey: \DescribeLoadBalancerTargetGroupsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    ///  This API operation is superseded by DescribeTrafficSources, which can describe multiple traffic sources types. We recommend using DescribeTrafficSources to simplify how you manage traffic sources. However, we continue to support DescribeLoadBalancers. You can use both the original DescribeLoadBalancers API operation and DescribeTrafficSources on the same Auto Scaling group.  Gets information about the load balancers for the specified Auto Scaling group. This operation describes only Classic Load Balancers. If you have Application Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DescribeLoadBalancerTargetGroups API instead. To determine the attachment status of the load balancer, use the State element in the response. When you attach a load balancer to an Auto Scaling group, the initial State value is Adding. The state transitions to Added after all Auto Scaling instances are registered with the load balancer. If Elastic Load Balancing health checks are enabled for the Auto Scaling group, the state transitions to InService after at least one Auto Scaling instance passes the health check. When the load balancer is in the InService state, Amazon EC2 Auto Scaling can terminate and replace any instances that are reported as unhealthy. If no registered instances pass the health checks, the load balancer doesn't enter the InService state.  Load balancers also have an InService state if you attach them in the CreateAutoScalingGroup API call. If your load balancer state is InService, but it is not working properly, check the scaling activities by calling DescribeScalingActivities and take any corrective actions necessary. For help with failed health checks, see Troubleshooting Amazon EC2 Auto Scaling: Health checks in the Amazon EC2 Auto Scaling User Guide. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeLoadBalancersPaginator<Result>(
+        _ input: DescribeLoadBalancersRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeLoadBalancersResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeLoadBalancers,
+            inputKey: \DescribeLoadBalancersRequest.nextToken,
+            outputKey: \DescribeLoadBalancersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeLoadBalancersPaginator(
+        _ input: DescribeLoadBalancersRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeLoadBalancersResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeLoadBalancers,
+            inputKey: \DescribeLoadBalancersRequest.nextToken,
+            outputKey: \DescribeLoadBalancersResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -954,6 +1118,37 @@ extension AutoScaling.DescribeAutoScalingInstancesType: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> AutoScaling.DescribeAutoScalingInstancesType {
         return .init(
             instanceIds: self.instanceIds,
+            maxRecords: self.maxRecords,
+            nextToken: token
+        )
+    }
+}
+
+extension AutoScaling.DescribeInstanceRefreshesType: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> AutoScaling.DescribeInstanceRefreshesType {
+        return .init(
+            autoScalingGroupName: self.autoScalingGroupName,
+            instanceRefreshIds: self.instanceRefreshIds,
+            maxRecords: self.maxRecords,
+            nextToken: token
+        )
+    }
+}
+
+extension AutoScaling.DescribeLoadBalancerTargetGroupsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> AutoScaling.DescribeLoadBalancerTargetGroupsRequest {
+        return .init(
+            autoScalingGroupName: self.autoScalingGroupName,
+            maxRecords: self.maxRecords,
+            nextToken: token
+        )
+    }
+}
+
+extension AutoScaling.DescribeLoadBalancersRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> AutoScaling.DescribeLoadBalancersRequest {
+        return .init(
+            autoScalingGroupName: self.autoScalingGroupName,
             maxRecords: self.maxRecords,
             nextToken: token
         )

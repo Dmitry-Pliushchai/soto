@@ -26,7 +26,7 @@ import SotoCore
 extension ApplicationInsights {
     // MARK: Enums
 
-    public enum CloudWatchEventSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum CloudWatchEventSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeDeploy = "CODE_DEPLOY"
         case ec2 = "EC2"
         case health = "HEALTH"
@@ -34,7 +34,7 @@ extension ApplicationInsights {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationEventResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationEventResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudformation = "CLOUDFORMATION"
         case cloudwatchAlarm = "CLOUDWATCH_ALARM"
         case cloudwatchLog = "CLOUDWATCH_LOG"
@@ -42,64 +42,64 @@ extension ApplicationInsights {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfigurationEventStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfigurationEventStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case info = "INFO"
         case warn = "WARN"
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoveryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoveryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountBased = "ACCOUNT_BASED"
         case resourceGroupBased = "RESOURCE_GROUP_BASED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FeedbackKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeedbackKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insightsFeedback = "INSIGHTS_FEEDBACK"
         public var description: String { return self.rawValue }
     }
 
-    public enum FeedbackValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeedbackValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notSpecified = "NOT_SPECIFIED"
         case notUseful = "NOT_USEFUL"
         case useful = "USEFUL"
         public var description: String { return self.rawValue }
     }
 
-    public enum GroupingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GroupingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountBased = "ACCOUNT_BASED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case info = "INFO"
         case warn = "WARN"
         public var description: String { return self.rawValue }
     }
 
-    public enum OsType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OsType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linux = "LINUX"
         case windows = "WINDOWS"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case infraOnly = "INFRA_ONLY"
         case workloadOnly = "WORKLOAD_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResolutionMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResolutionMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automatic = "AUTOMATIC"
         case manual = "MANUAL"
         case unresolved = "UNRESOLVED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SeverityLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum SeverityLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "High"
         case informative = "Informative"
         case low = "Low"
@@ -107,7 +107,7 @@ extension ApplicationInsights {
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignore = "IGNORE"
         case pending = "PENDING"
         case recovering = "RECOVERING"
@@ -116,7 +116,7 @@ extension ApplicationInsights {
         public var description: String { return self.rawValue }
     }
 
-    public enum Tier: String, CustomStringConvertible, Codable, Sendable {
+    public enum Tier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case activeDirectory = "ACTIVE_DIRECTORY"
         case custom = "CUSTOM"
@@ -141,12 +141,12 @@ extension ApplicationInsights {
         public var description: String { return self.rawValue }
     }
 
-    public enum UpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case resolved = "RESOLVED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Visibility: String, CustomStringConvertible, Codable, Sendable {
+    public enum Visibility: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignored = "IGNORED"
         case visible = "VISIBLE"
         public var description: String { return self.rawValue }
@@ -242,6 +242,8 @@ extension ApplicationInsights {
     public struct ApplicationInfo: AWSDecodableShape {
         /// The AWS account ID for the owner of the application.
         public let accountId: String?
+        /// If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+        public let attachMissingPermission: Bool?
         ///  Indicates whether auto-configuration is turned on for this application.
         public let autoConfigEnabled: Bool?
         ///  Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
@@ -259,8 +261,9 @@ extension ApplicationInsights {
         /// The name of the resource group used for the application.
         public let resourceGroupName: String?
 
-        public init(accountId: String? = nil, autoConfigEnabled: Bool? = nil, cweMonitorEnabled: Bool? = nil, discoveryType: DiscoveryType? = nil, lifeCycle: String? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, remarks: String? = nil, resourceGroupName: String? = nil) {
+        public init(accountId: String? = nil, attachMissingPermission: Bool? = nil, autoConfigEnabled: Bool? = nil, cweMonitorEnabled: Bool? = nil, discoveryType: DiscoveryType? = nil, lifeCycle: String? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, remarks: String? = nil, resourceGroupName: String? = nil) {
             self.accountId = accountId
+            self.attachMissingPermission = attachMissingPermission
             self.autoConfigEnabled = autoConfigEnabled
             self.cweMonitorEnabled = cweMonitorEnabled
             self.discoveryType = discoveryType
@@ -273,6 +276,7 @@ extension ApplicationInsights {
 
         private enum CodingKeys: String, CodingKey {
             case accountId = "AccountId"
+            case attachMissingPermission = "AttachMissingPermission"
             case autoConfigEnabled = "AutoConfigEnabled"
             case cweMonitorEnabled = "CWEMonitorEnabled"
             case discoveryType = "DiscoveryType"
@@ -326,6 +330,8 @@ extension ApplicationInsights {
     }
 
     public struct CreateApplicationRequest: AWSEncodableShape {
+        /// If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+        public let attachMissingPermission: Bool?
         ///  Indicates whether Application Insights automatically configures unmonitored resources in the resource group.
         public let autoConfigEnabled: Bool?
         ///  Configures all of the resources in the resource group by applying the recommended configurations.
@@ -343,7 +349,8 @@ extension ApplicationInsights {
         /// List of tags to add to the application. tag key (Key) and an associated tag value (Value). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
         public let tags: [Tag]?
 
-        public init(autoConfigEnabled: Bool? = nil, autoCreate: Bool? = nil, cweMonitorEnabled: Bool? = nil, groupingType: GroupingType? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, resourceGroupName: String? = nil, tags: [Tag]? = nil) {
+        public init(attachMissingPermission: Bool? = nil, autoConfigEnabled: Bool? = nil, autoCreate: Bool? = nil, cweMonitorEnabled: Bool? = nil, groupingType: GroupingType? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, resourceGroupName: String? = nil, tags: [Tag]? = nil) {
+            self.attachMissingPermission = attachMissingPermission
             self.autoConfigEnabled = autoConfigEnabled
             self.autoCreate = autoCreate
             self.cweMonitorEnabled = cweMonitorEnabled
@@ -368,6 +375,7 @@ extension ApplicationInsights {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case attachMissingPermission = "AttachMissingPermission"
             case autoConfigEnabled = "AutoConfigEnabled"
             case autoCreate = "AutoCreate"
             case cweMonitorEnabled = "CWEMonitorEnabled"
@@ -630,12 +638,15 @@ extension ApplicationInsights {
         public let resourceGroupName: String
         /// The tier of the application component.
         public let tier: Tier
+        /// The name of the workload.
+        public let workloadName: String?
 
-        public init(componentName: String, recommendationType: RecommendationType? = nil, resourceGroupName: String, tier: Tier) {
+        public init(componentName: String, recommendationType: RecommendationType? = nil, resourceGroupName: String, tier: Tier, workloadName: String? = nil) {
             self.componentName = componentName
             self.recommendationType = recommendationType
             self.resourceGroupName = resourceGroupName
             self.tier = tier
+            self.workloadName = workloadName
         }
 
         public func validate(name: String) throws {
@@ -645,6 +656,9 @@ extension ApplicationInsights {
             try self.validate(self.resourceGroupName, name: "resourceGroupName", parent: name, max: 256)
             try self.validate(self.resourceGroupName, name: "resourceGroupName", parent: name, min: 1)
             try self.validate(self.resourceGroupName, name: "resourceGroupName", parent: name, pattern: "^[a-zA-Z0-9\\.\\-_]*$")
+            try self.validate(self.workloadName, name: "workloadName", parent: name, max: 8)
+            try self.validate(self.workloadName, name: "workloadName", parent: name, min: 1)
+            try self.validate(self.workloadName, name: "workloadName", parent: name, pattern: "^[a-zA-Z0-9\\.\\-_]*$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -652,6 +666,7 @@ extension ApplicationInsights {
             case recommendationType = "RecommendationType"
             case resourceGroupName = "ResourceGroupName"
             case tier = "Tier"
+            case workloadName = "WorkloadName"
         }
     }
 
@@ -1919,6 +1934,8 @@ extension ApplicationInsights {
     }
 
     public struct UpdateApplicationRequest: AWSEncodableShape {
+        /// If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+        public let attachMissingPermission: Bool?
         ///  Turns auto-configuration on or off.
         public let autoConfigEnabled: Bool?
         ///  Indicates whether Application Insights can listen to CloudWatch events for the application resources, such as instance terminated, failed deployment, and others.
@@ -1932,7 +1949,8 @@ extension ApplicationInsights {
         /// The name of the resource group.
         public let resourceGroupName: String
 
-        public init(autoConfigEnabled: Bool? = nil, cweMonitorEnabled: Bool? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, removeSNSTopic: Bool? = nil, resourceGroupName: String) {
+        public init(attachMissingPermission: Bool? = nil, autoConfigEnabled: Bool? = nil, cweMonitorEnabled: Bool? = nil, opsCenterEnabled: Bool? = nil, opsItemSNSTopicArn: String? = nil, removeSNSTopic: Bool? = nil, resourceGroupName: String) {
+            self.attachMissingPermission = attachMissingPermission
             self.autoConfigEnabled = autoConfigEnabled
             self.cweMonitorEnabled = cweMonitorEnabled
             self.opsCenterEnabled = opsCenterEnabled
@@ -1951,6 +1969,7 @@ extension ApplicationInsights {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case attachMissingPermission = "AttachMissingPermission"
             case autoConfigEnabled = "AutoConfigEnabled"
             case cweMonitorEnabled = "CWEMonitorEnabled"
             case opsCenterEnabled = "OpsCenterEnabled"

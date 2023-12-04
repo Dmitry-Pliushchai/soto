@@ -26,7 +26,7 @@ import SotoCore
 extension Mgn {
     // MARK: Enums
 
-    public enum ActionCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backup = "BACKUP"
         case configuration = "CONFIGURATION"
         case disasterRecovery = "DISASTER_RECOVERY"
@@ -40,34 +40,34 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum ApplicationHealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationHealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case healthy = "HEALTHY"
         case lagging = "LAGGING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ApplicationProgressStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationProgressStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BootMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum BootMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case legacyBios = "LEGACY_BIOS"
         case uefi = "UEFI"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeServerLifeCycleStateSourceServerLifecycleState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeServerLifeCycleStateSourceServerLifecycleState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cutover = "CUTOVER"
         case readyForCutover = "READY_FOR_CUTOVER"
         case readyForTest = "READY_FOR_TEST"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationErrorString: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationErrorString: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agentNotSeen = "AGENT_NOT_SEEN"
         case failedToAttachStagingDisks = "FAILED_TO_ATTACH_STAGING_DISKS"
         case failedToAuthenticateWithService = "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
@@ -87,7 +87,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationInitiationStepName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachStagingDisks = "ATTACH_STAGING_DISKS"
         case authenticateWithService = "AUTHENTICATE_WITH_SERVICE"
         case bootReplicationServer = "BOOT_REPLICATION_SERVER"
@@ -102,7 +102,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationInitiationStepStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
@@ -111,7 +111,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataReplicationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataReplicationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backlog = "BACKLOG"
         case continuous = "CONTINUOUS"
         case creatingSnapshot = "CREATING_SNAPSHOT"
@@ -127,7 +127,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case started = "STARTED"
@@ -135,7 +135,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum FirstBoot: String, CustomStringConvertible, Codable, Sendable {
+    public enum FirstBoot: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case stopped = "STOPPED"
         case succeeded = "SUCCEEDED"
         case unknown = "UNKNOWN"
@@ -143,13 +143,13 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case processingError = "PROCESSING_ERROR"
         case validationError = "VALIDATION_ERROR"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case pending = "PENDING"
         case started = "STARTED"
@@ -157,7 +157,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum InitiatedBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum InitiatedBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case diagnostic = "DIAGNOSTIC"
         case startCutover = "START_CUTOVER"
         case startTest = "START_TEST"
@@ -165,7 +165,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobLogEvent: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobLogEvent: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cleanupEnd = "CLEANUP_END"
         case cleanupFail = "CLEANUP_FAIL"
         case cleanupStart = "CLEANUP_START"
@@ -185,26 +185,26 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case pending = "PENDING"
         case started = "STARTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case launch = "LAUNCH"
         case terminate = "TERMINATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchDisposition: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchDisposition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case stopped = "STOPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case launched = "LAUNCHED"
@@ -213,7 +213,7 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum LifeCycleState: String, CustomStringConvertible, Codable, Sendable {
+    public enum LifeCycleState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cutover = "CUTOVER"
         case cuttingOver = "CUTTING_OVER"
         case disconnected = "DISCONNECTED"
@@ -227,40 +227,40 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum PostLaunchActionExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PostLaunchActionExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum PostLaunchActionsDeploymentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PostLaunchActionsDeploymentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cutoverOnly = "CUTOVER_ONLY"
         case testAndCutover = "TEST_AND_CUTOVER"
         case testOnly = "TEST_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationDataPlaneRouting: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationDataPlaneRouting: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case privateIp = "PRIVATE_IP"
         case publicIp = "PUBLIC_IP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationDefaultLargeStagingDiskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationDefaultLargeStagingDiskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gp2 = "GP2"
         case gp3 = "GP3"
         case st1 = "ST1"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationEbsEncryption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationEbsEncryption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "CUSTOM"
         case `default` = "DEFAULT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationConfigurationReplicatedDiskStagingDiskType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationConfigurationReplicatedDiskStagingDiskType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case gp2 = "GP2"
         case gp3 = "GP3"
@@ -272,30 +272,30 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReplicationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReplicationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agentBased = "AGENT_BASED"
         case snapshotShipping = "SNAPSHOT_SHIPPING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SsmDocumentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SsmDocumentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automation = "AUTOMATION"
         case command = "COMMAND"
         public var description: String { return self.rawValue }
     }
 
-    public enum SsmParameterStoreParameterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SsmParameterStoreParameterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case string = "STRING"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetInstanceTypeRightSizingMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetInstanceTypeRightSizingMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "BASIC"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VolumeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum VolumeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gp2 = "gp2"
         case gp3 = "gp3"
         case io1 = "io1"
@@ -306,14 +306,14 @@ extension Mgn {
         public var description: String { return self.rawValue }
     }
 
-    public enum WaveHealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WaveHealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case healthy = "HEALTHY"
         case lagging = "LAGGING"
         public var description: String { return self.rawValue }
     }
 
-    public enum WaveProgressStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WaveProgressStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
@@ -590,6 +590,71 @@ extension Mgn {
         }
     }
 
+    public struct Connector: AWSDecodableShape {
+        /// Connector arn.
+        public let arn: String?
+        /// Connector ID.
+        public let connectorID: String?
+        /// Connector name.
+        public let name: String?
+        /// Connector SSM command config.
+        public let ssmCommandConfig: ConnectorSsmCommandConfig?
+        /// Connector SSM instance ID.
+        public let ssmInstanceID: String?
+        /// Connector tags.
+        public let tags: [String: String]?
+
+        public init(arn: String? = nil, connectorID: String? = nil, name: String? = nil, ssmCommandConfig: ConnectorSsmCommandConfig? = nil, ssmInstanceID: String? = nil, tags: [String: String]? = nil) {
+            self.arn = arn
+            self.connectorID = connectorID
+            self.name = name
+            self.ssmCommandConfig = ssmCommandConfig
+            self.ssmInstanceID = ssmInstanceID
+            self.tags = tags
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "arn"
+            case connectorID = "connectorID"
+            case name = "name"
+            case ssmCommandConfig = "ssmCommandConfig"
+            case ssmInstanceID = "ssmInstanceID"
+            case tags = "tags"
+        }
+    }
+
+    public struct ConnectorSsmCommandConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Connector SSM command config CloudWatch log group name.
+        public let cloudWatchLogGroupName: String?
+        /// Connector SSM command config CloudWatch output enabled.
+        public let cloudWatchOutputEnabled: Bool
+        /// Connector SSM command config output S3 bucket name.
+        public let outputS3BucketName: String?
+        /// Connector SSM command config S3 output enabled.
+        public let s3OutputEnabled: Bool
+
+        public init(cloudWatchLogGroupName: String? = nil, cloudWatchOutputEnabled: Bool, outputS3BucketName: String? = nil, s3OutputEnabled: Bool) {
+            self.cloudWatchLogGroupName = cloudWatchLogGroupName
+            self.cloudWatchOutputEnabled = cloudWatchOutputEnabled
+            self.outputS3BucketName = outputS3BucketName
+            self.s3OutputEnabled = s3OutputEnabled
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.cloudWatchLogGroupName, name: "cloudWatchLogGroupName", parent: name, max: 512)
+            try self.validate(self.cloudWatchLogGroupName, name: "cloudWatchLogGroupName", parent: name, min: 1)
+            try self.validate(self.cloudWatchLogGroupName, name: "cloudWatchLogGroupName", parent: name, pattern: "^[\\.\\-_/#A-Za-z0-9]+$")
+            try self.validate(self.outputS3BucketName, name: "outputS3BucketName", parent: name, pattern: "^[a-zA-Z0-9.\\-_]{1,255}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case cloudWatchLogGroupName = "cloudWatchLogGroupName"
+            case cloudWatchOutputEnabled = "cloudWatchOutputEnabled"
+            case outputS3BucketName = "outputS3BucketName"
+            case s3OutputEnabled = "s3OutputEnabled"
+        }
+    }
+
     public struct CreateApplicationRequest: AWSEncodableShape {
         /// Account ID.
         public let accountID: String?
@@ -627,6 +692,46 @@ extension Mgn {
             case accountID = "accountID"
             case description = "description"
             case name = "name"
+            case tags = "tags"
+        }
+    }
+
+    public struct CreateConnectorRequest: AWSEncodableShape {
+        /// Create Connector request name.
+        public let name: String
+        /// Create Connector request SSM command config.
+        public let ssmCommandConfig: ConnectorSsmCommandConfig?
+        /// Create Connector request SSM instance ID.
+        public let ssmInstanceID: String
+        /// Create Connector request tags.
+        public let tags: [String: String]?
+
+        public init(name: String, ssmCommandConfig: ConnectorSsmCommandConfig? = nil, ssmInstanceID: String, tags: [String: String]? = nil) {
+            self.name = name
+            self.ssmCommandConfig = ssmCommandConfig
+            self.ssmInstanceID = ssmInstanceID
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.name, name: "name", parent: name, max: 256)
+            try self.validate(self.name, name: "name", parent: name, min: 1)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[A-Za-z0-9_-]+$")
+            try self.ssmCommandConfig?.validate(name: "\(name).ssmCommandConfig")
+            try self.validate(self.ssmInstanceID, name: "ssmInstanceID", parent: name, max: 20)
+            try self.validate(self.ssmInstanceID, name: "ssmInstanceID", parent: name, min: 19)
+            try self.validate(self.ssmInstanceID, name: "ssmInstanceID", parent: name, pattern: "(^i-[0-9a-zA-Z]{17}$)|(^mi-[0-9a-zA-Z]{17}$)")
+            try self.tags?.forEach {
+                try validate($0.key, name: "tags.key", parent: name, max: 256)
+                try validate($0.value, name: "tags[\"\($0.key)\"]", parent: name, max: 256)
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 50)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case name = "name"
+            case ssmCommandConfig = "ssmCommandConfig"
+            case ssmInstanceID = "ssmInstanceID"
             case tags = "tags"
         }
     }
@@ -988,6 +1093,25 @@ extension Mgn {
 
     public struct DeleteApplicationResponse: AWSDecodableShape {
         public init() {}
+    }
+
+    public struct DeleteConnectorRequest: AWSEncodableShape {
+        /// Delete Connector request connector ID.
+        public let connectorID: String
+
+        public init(connectorID: String) {
+            self.connectorID = connectorID
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.connectorID, name: "connectorID", parent: name, max: 27)
+            try self.validate(self.connectorID, name: "connectorID", parent: name, min: 27)
+            try self.validate(self.connectorID, name: "connectorID", parent: name, pattern: "^connector-[0-9a-zA-Z]{17}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectorID = "connectorID"
+        }
     }
 
     public struct DeleteJobRequest: AWSEncodableShape {
@@ -2596,6 +2720,73 @@ extension Mgn {
         }
     }
 
+    public struct ListConnectorsRequest: AWSEncodableShape {
+        /// List Connectors Request filters.
+        public let filters: ListConnectorsRequestFilters?
+        /// List Connectors Request max results.
+        public let maxResults: Int?
+        /// List Connectors Request next token.
+        public let nextToken: String?
+
+        public init(filters: ListConnectorsRequestFilters? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
+            self.filters = filters
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.filters?.validate(name: "\(name).filters")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 2048)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case filters = "filters"
+            case maxResults = "maxResults"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListConnectorsRequestFilters: AWSEncodableShape {
+        /// List Connectors Request Filters connector IDs.
+        public let connectorIDs: [String]?
+
+        public init(connectorIDs: [String]? = nil) {
+            self.connectorIDs = connectorIDs
+        }
+
+        public func validate(name: String) throws {
+            try self.connectorIDs?.forEach {
+                try validate($0, name: "connectorIDs[]", parent: name, max: 27)
+                try validate($0, name: "connectorIDs[]", parent: name, min: 27)
+                try validate($0, name: "connectorIDs[]", parent: name, pattern: "^connector-[0-9a-zA-Z]{17}$")
+            }
+            try self.validate(self.connectorIDs, name: "connectorIDs", parent: name, max: 20)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectorIDs = "connectorIDs"
+        }
+    }
+
+    public struct ListConnectorsResponse: AWSDecodableShape {
+        /// List connectors response items.
+        public let items: [Connector]?
+        /// List connectors response next token.
+        public let nextToken: String?
+
+        public init(items: [Connector]? = nil, nextToken: String? = nil) {
+            self.items = items
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case items = "items"
+            case nextToken = "nextToken"
+        }
+    }
+
     public struct ListExportErrorsRequest: AWSEncodableShape {
         /// List export errors request export id.
         public let exportID: String
@@ -3298,7 +3489,7 @@ extension Mgn {
         /// Source server post migration custom action timeout in seconds.
         public let timeoutSeconds: Int?
 
-        public init(accountID: String? = nil, actionID: String, actionName: String, active: Bool? = nil, category: ActionCategory? = nil, description: String? = nil, documentIdentifier: String, documentVersion: String? = nil, externalParameters: [String: SsmExternalParameter]? = nil, mustSucceedForCutover: Bool? = nil, order: Int = 0, parameters: [String: [SsmParameterStoreParameter]]? = nil, sourceServerID: String, timeoutSeconds: Int? = nil) {
+        public init(accountID: String? = nil, actionID: String, actionName: String, active: Bool? = nil, category: ActionCategory? = nil, description: String? = nil, documentIdentifier: String, documentVersion: String? = nil, externalParameters: [String: SsmExternalParameter]? = nil, mustSucceedForCutover: Bool? = nil, order: Int, parameters: [String: [SsmParameterStoreParameter]]? = nil, sourceServerID: String, timeoutSeconds: Int? = nil) {
             self.accountID = accountID
             self.actionID = actionID
             self.actionName = actionName
@@ -3399,7 +3590,7 @@ extension Mgn {
         /// Template post migration custom action timeout in seconds.
         public let timeoutSeconds: Int?
 
-        public init(actionID: String, actionName: String, active: Bool? = nil, category: ActionCategory? = nil, description: String? = nil, documentIdentifier: String, documentVersion: String? = nil, externalParameters: [String: SsmExternalParameter]? = nil, launchConfigurationTemplateID: String, mustSucceedForCutover: Bool? = nil, operatingSystem: String? = nil, order: Int = 0, parameters: [String: [SsmParameterStoreParameter]]? = nil, timeoutSeconds: Int? = nil) {
+        public init(actionID: String, actionName: String, active: Bool? = nil, category: ActionCategory? = nil, description: String? = nil, documentIdentifier: String, documentVersion: String? = nil, externalParameters: [String: SsmExternalParameter]? = nil, launchConfigurationTemplateID: String, mustSucceedForCutover: Bool? = nil, operatingSystem: String? = nil, order: Int, parameters: [String: [SsmParameterStoreParameter]]? = nil, timeoutSeconds: Int? = nil) {
             self.actionID = actionID
             self.actionName = actionName
             self.active = active
@@ -3841,6 +4032,8 @@ extension Mgn {
         public let applicationID: String?
         /// Source server ARN.
         public let arn: String?
+        /// Source Server connector action.
+        public let connectorAction: SourceServerConnectorAction?
         /// Source server data replication info.
         public let dataReplicationInfo: DataReplicationInfo?
         /// Source server fqdn for action framework.
@@ -3864,9 +4057,10 @@ extension Mgn {
         /// Source server vCenter client id.
         public let vcenterClientID: String?
 
-        public init(applicationID: String? = nil, arn: String? = nil, dataReplicationInfo: DataReplicationInfo? = nil, fqdnForActionFramework: String? = nil, isArchived: Bool? = nil, launchedInstance: LaunchedInstance? = nil, lifeCycle: LifeCycle? = nil, replicationType: ReplicationType? = nil, sourceProperties: SourceProperties? = nil, sourceServerID: String? = nil, tags: [String: String]? = nil, userProvidedID: String? = nil, vcenterClientID: String? = nil) {
+        public init(applicationID: String? = nil, arn: String? = nil, connectorAction: SourceServerConnectorAction? = nil, dataReplicationInfo: DataReplicationInfo? = nil, fqdnForActionFramework: String? = nil, isArchived: Bool? = nil, launchedInstance: LaunchedInstance? = nil, lifeCycle: LifeCycle? = nil, replicationType: ReplicationType? = nil, sourceProperties: SourceProperties? = nil, sourceServerID: String? = nil, tags: [String: String]? = nil, userProvidedID: String? = nil, vcenterClientID: String? = nil) {
             self.applicationID = applicationID
             self.arn = arn
+            self.connectorAction = connectorAction
             self.dataReplicationInfo = dataReplicationInfo
             self.fqdnForActionFramework = fqdnForActionFramework
             self.isArchived = isArchived
@@ -3883,6 +4077,7 @@ extension Mgn {
         private enum CodingKeys: String, CodingKey {
             case applicationID = "applicationID"
             case arn = "arn"
+            case connectorAction = "connectorAction"
             case dataReplicationInfo = "dataReplicationInfo"
             case fqdnForActionFramework = "fqdnForActionFramework"
             case isArchived = "isArchived"
@@ -3973,6 +4168,32 @@ extension Mgn {
 
         private enum CodingKeys: String, CodingKey {
             case actionIDs = "actionIDs"
+        }
+    }
+
+    public struct SourceServerConnectorAction: AWSEncodableShape & AWSDecodableShape {
+        /// Source Server connector action connector arn.
+        public let connectorArn: String?
+        /// Source Server connector action credentials secret arn.
+        public let credentialsSecretArn: String?
+
+        public init(connectorArn: String? = nil, credentialsSecretArn: String? = nil) {
+            self.connectorArn = connectorArn
+            self.credentialsSecretArn = credentialsSecretArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.connectorArn, name: "connectorArn", parent: name, max: 100)
+            try self.validate(self.connectorArn, name: "connectorArn", parent: name, min: 27)
+            try self.validate(self.connectorArn, name: "connectorArn", parent: name, pattern: "^arn:[\\w-]+:mgn:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:connector\\/(connector-[0-9a-zA-Z]{17})$")
+            try self.validate(self.credentialsSecretArn, name: "credentialsSecretArn", parent: name, max: 100)
+            try self.validate(self.credentialsSecretArn, name: "credentialsSecretArn", parent: name, min: 20)
+            try self.validate(self.credentialsSecretArn, name: "credentialsSecretArn", parent: name, pattern: "^arn:[\\w-]+:secretsmanager:([a-z]{2}-(gov-)?[a-z]+-\\d{1})?:(\\d{12})?:secret:(.+)$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectorArn = "connectorArn"
+            case credentialsSecretArn = "credentialsSecretArn"
         }
     }
 
@@ -4570,6 +4791,37 @@ extension Mgn {
         }
     }
 
+    public struct UpdateConnectorRequest: AWSEncodableShape {
+        /// Update Connector request connector ID.
+        public let connectorID: String
+        /// Update Connector request name.
+        public let name: String?
+        /// Update Connector request SSM command config.
+        public let ssmCommandConfig: ConnectorSsmCommandConfig?
+
+        public init(connectorID: String, name: String? = nil, ssmCommandConfig: ConnectorSsmCommandConfig? = nil) {
+            self.connectorID = connectorID
+            self.name = name
+            self.ssmCommandConfig = ssmCommandConfig
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.connectorID, name: "connectorID", parent: name, max: 27)
+            try self.validate(self.connectorID, name: "connectorID", parent: name, min: 27)
+            try self.validate(self.connectorID, name: "connectorID", parent: name, pattern: "^connector-[0-9a-zA-Z]{17}$")
+            try self.validate(self.name, name: "name", parent: name, max: 256)
+            try self.validate(self.name, name: "name", parent: name, min: 1)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[A-Za-z0-9_-]+$")
+            try self.ssmCommandConfig?.validate(name: "\(name).ssmCommandConfig")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case connectorID = "connectorID"
+            case name = "name"
+            case ssmCommandConfig = "ssmCommandConfig"
+        }
+    }
+
     public struct UpdateLaunchConfigurationRequest: AWSEncodableShape {
         /// Update Launch configuration Account ID.
         public let accountID: String?
@@ -4941,6 +5193,37 @@ extension Mgn {
         private enum CodingKeys: String, CodingKey {
             case accountID = "accountID"
             case replicationType = "replicationType"
+            case sourceServerID = "sourceServerID"
+        }
+    }
+
+    public struct UpdateSourceServerRequest: AWSEncodableShape {
+        /// Update Source Server request account ID.
+        public let accountID: String?
+        /// Update Source Server request connector action.
+        public let connectorAction: SourceServerConnectorAction?
+        /// Update Source Server request source server ID.
+        public let sourceServerID: String
+
+        public init(accountID: String? = nil, connectorAction: SourceServerConnectorAction? = nil, sourceServerID: String) {
+            self.accountID = accountID
+            self.connectorAction = connectorAction
+            self.sourceServerID = sourceServerID
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.accountID, name: "accountID", parent: name, max: 12)
+            try self.validate(self.accountID, name: "accountID", parent: name, min: 12)
+            try self.validate(self.accountID, name: "accountID", parent: name, pattern: "[0-9]{12,}")
+            try self.connectorAction?.validate(name: "\(name).connectorAction")
+            try self.validate(self.sourceServerID, name: "sourceServerID", parent: name, max: 19)
+            try self.validate(self.sourceServerID, name: "sourceServerID", parent: name, min: 19)
+            try self.validate(self.sourceServerID, name: "sourceServerID", parent: name, pattern: "^s-[0-9a-zA-Z]{17}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case accountID = "accountID"
+            case connectorAction = "connectorAction"
             case sourceServerID = "sourceServerID"
         }
     }

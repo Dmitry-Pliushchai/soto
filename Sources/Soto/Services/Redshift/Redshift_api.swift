@@ -208,6 +208,11 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "CreateHsmConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates an Amazon Redshift application for use with IAM Identity Center.
+    public func createRedshiftIdcApplication(_ input: CreateRedshiftIdcApplicationMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateRedshiftIdcApplicationResult> {
+        return self.client.execute(operation: "CreateRedshiftIdcApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation.
     public func createScheduledAction(_ input: CreateScheduledActionMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ScheduledAction> {
         return self.client.execute(operation: "CreateScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -310,6 +315,16 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "DeletePartner", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes an Amazon Redshift IAM Identity Center application.
+    @discardableResult public func deleteRedshiftIdcApplication(_ input: DeleteRedshiftIdcApplicationMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteRedshiftIdcApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the resource policy for a specified resource.
+    @discardableResult public func deleteResourcePolicy(_ input: DeleteResourcePolicyMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteResourcePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a scheduled action.
     @discardableResult public func deleteScheduledAction(_ input: DeleteScheduledActionMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -405,7 +420,7 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "DescribeClusters", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Contains information for custom domain associations for a cluster.
+    /// Contains information about custom domain associations for a cluster.
     public func describeCustomDomainAssociations(_ input: DescribeCustomDomainAssociationsMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CustomDomainAssociationsMessage> {
         return self.client.execute(operation: "DescribeCustomDomainAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -468,6 +483,11 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "DescribeHsmConfigurations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns a list of inbound integrations.
+    public func describeInboundIntegrations(_ input: DescribeInboundIntegrationsMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<InboundIntegrationsMessage> {
+        return self.client.execute(operation: "DescribeInboundIntegrations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.
     public func describeLoggingStatus(_ input: DescribeLoggingStatusMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<LoggingStatus> {
         return self.client.execute(operation: "DescribeLoggingStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -489,6 +509,11 @@ public struct Redshift: AWSService {
     /// Returns information about the partner integrations defined for a cluster.
     public func describePartners(_ input: DescribePartnersInputMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribePartnersOutputMessage> {
         return self.client.execute(operation: "DescribePartners", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the Amazon Redshift IAM Identity Center applications.
+    public func describeRedshiftIdcApplications(_ input: DescribeRedshiftIdcApplicationsMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeRedshiftIdcApplicationsResult> {
+        return self.client.execute(operation: "DescribeRedshiftIdcApplications", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
@@ -577,6 +602,11 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "EnableSnapshotCopy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Fails over the primary compute unit of the specified Multi-AZ cluster to another Availability Zone.
+    public func failoverPrimaryCompute(_ input: FailoverPrimaryComputeInputMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<FailoverPrimaryComputeResult> {
+        return self.client.execute(operation: "FailoverPrimaryCompute", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser permission. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.
     public func getClusterCredentials(_ input: GetClusterCredentialsMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ClusterCredentials> {
         return self.client.execute(operation: "GetClusterCredentials", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -595,6 +625,11 @@ public struct Redshift: AWSService {
     /// Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
     public func getReservedNodeExchangeOfferings(_ input: GetReservedNodeExchangeOfferingsInputMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetReservedNodeExchangeOfferingsOutputMessage> {
         return self.client.execute(operation: "GetReservedNodeExchangeOfferings", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get the resource policy for a specified resource.
+    public func getResourcePolicy(_ input: GetResourcePolicyMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetResourcePolicyResult> {
+        return self.client.execute(operation: "GetResourcePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator).
@@ -668,6 +703,11 @@ public struct Redshift: AWSService {
         return self.client.execute(operation: "ModifyEventSubscription", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Changes an existing Amazon Redshift IAM Identity Center application.
+    public func modifyRedshiftIdcApplication(_ input: ModifyRedshiftIdcApplicationMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ModifyRedshiftIdcApplicationResult> {
+        return self.client.execute(operation: "ModifyRedshiftIdcApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Modifies a scheduled action.
     public func modifyScheduledAction(_ input: ModifyScheduledActionMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ScheduledAction> {
         return self.client.execute(operation: "ModifyScheduledAction", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -699,6 +739,11 @@ public struct Redshift: AWSService {
     /// in the Amazon Redshift Cluster Management Guide.
     public func purchaseReservedNodeOffering(_ input: PurchaseReservedNodeOfferingMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PurchaseReservedNodeOfferingResult> {
         return self.client.execute(operation: "PurchaseReservedNodeOffering", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the resource policy for a specified resource.
+    public func putResourcePolicy(_ input: PutResourcePolicyMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutResourcePolicyResult> {
+        return self.client.execute(operation: "PutResourcePolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to rebooting. A cluster event is created when the reboot is completed. Any pending cluster modifications (see ModifyCluster) are applied at this reboot.
@@ -1278,7 +1323,7 @@ extension Redshift {
         )
     }
 
-    /// Contains information for custom domain associations for a cluster.
+    /// Contains information about custom domain associations for a cluster.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -1864,6 +1909,59 @@ extension Redshift {
         )
     }
 
+    /// Returns a list of inbound integrations.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeInboundIntegrationsPaginator<Result>(
+        _ input: DescribeInboundIntegrationsMessage,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, InboundIntegrationsMessage, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeInboundIntegrations,
+            inputKey: \DescribeInboundIntegrationsMessage.marker,
+            outputKey: \InboundIntegrationsMessage.marker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeInboundIntegrationsPaginator(
+        _ input: DescribeInboundIntegrationsMessage,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (InboundIntegrationsMessage, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeInboundIntegrations,
+            inputKey: \DescribeInboundIntegrationsMessage.marker,
+            outputKey: \InboundIntegrationsMessage.marker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Returns properties of possible node configurations such as node type, number of nodes, and  disk usage for the specified action type.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -1968,6 +2066,59 @@ extension Redshift {
             command: self.describeOrderableClusterOptions,
             inputKey: \DescribeOrderableClusterOptionsMessage.marker,
             outputKey: \OrderableClusterOptionsMessage.marker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the Amazon Redshift IAM Identity Center applications.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeRedshiftIdcApplicationsPaginator<Result>(
+        _ input: DescribeRedshiftIdcApplicationsMessage,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeRedshiftIdcApplicationsResult, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeRedshiftIdcApplications,
+            inputKey: \DescribeRedshiftIdcApplicationsMessage.marker,
+            outputKey: \DescribeRedshiftIdcApplicationsResult.marker,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeRedshiftIdcApplicationsPaginator(
+        _ input: DescribeRedshiftIdcApplicationsMessage,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeRedshiftIdcApplicationsResult, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeRedshiftIdcApplications,
+            inputKey: \DescribeRedshiftIdcApplicationsMessage.marker,
+            outputKey: \DescribeRedshiftIdcApplicationsResult.marker,
             on: eventLoop,
             onPage: onPage
         )
@@ -2801,6 +2952,17 @@ extension Redshift.DescribeHsmConfigurationsMessage: AWSPaginateToken {
     }
 }
 
+extension Redshift.DescribeInboundIntegrationsMessage: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Redshift.DescribeInboundIntegrationsMessage {
+        return .init(
+            integrationArn: self.integrationArn,
+            marker: token,
+            maxRecords: self.maxRecords,
+            targetArn: self.targetArn
+        )
+    }
+}
+
 extension Redshift.DescribeNodeConfigurationOptionsMessage: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Redshift.DescribeNodeConfigurationOptionsMessage {
         return .init(
@@ -2823,6 +2985,16 @@ extension Redshift.DescribeOrderableClusterOptionsMessage: AWSPaginateToken {
             marker: token,
             maxRecords: self.maxRecords,
             nodeType: self.nodeType
+        )
+    }
+}
+
+extension Redshift.DescribeRedshiftIdcApplicationsMessage: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Redshift.DescribeRedshiftIdcApplicationsMessage {
+        return .init(
+            marker: token,
+            maxRecords: self.maxRecords,
+            redshiftIdcApplicationArn: self.redshiftIdcApplicationArn
         )
     }
 }

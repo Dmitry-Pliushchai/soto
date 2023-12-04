@@ -26,20 +26,20 @@ import SotoCore
 extension ApplicationCostProfiler {
     // MARK: Enums
 
-    public enum Format: String, CustomStringConvertible, Codable, Sendable {
+    public enum Format: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case parquet = "PARQUET"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case daily = "DAILY"
         case monthly = "MONTHLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3BucketRegion: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3BucketRegion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afSouth1 = "af-south-1"
         case apEast1 = "ap-east-1"
         case euSouth1 = "eu-south-1"

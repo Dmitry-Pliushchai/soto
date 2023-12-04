@@ -26,56 +26,56 @@ import SotoCore
 extension Scheduler {
     // MARK: Enums
 
-    public enum ActionAfterCompletion: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionAfterCompletion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delete = "DELETE"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssignPublicIp: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssignPublicIp: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FlexibleTimeWindowMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FlexibleTimeWindowMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case flexible = "FLEXIBLE"
         case off = "OFF"
         public var description: String { return self.rawValue }
     }
 
-    public enum LaunchType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LaunchType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case external = "EXTERNAL"
         case fargate = "FARGATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlacementConstraintType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlacementConstraintType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case distinctInstance = "distinctInstance"
         case memberOf = "memberOf"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlacementStrategyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlacementStrategyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case binpack = "binpack"
         case random = "random"
         case spread = "spread"
         public var description: String { return self.rawValue }
     }
 
-    public enum PropagateTags: String, CustomStringConvertible, Codable, Sendable {
+    public enum PropagateTags: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case taskDefinition = "TASK_DEFINITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduleGroupState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduleGroupState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduleState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduleState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }

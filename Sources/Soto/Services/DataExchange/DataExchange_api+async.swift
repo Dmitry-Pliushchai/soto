@@ -131,6 +131,11 @@ extension DataExchange {
         return try await self.client.execute(operation: "SendApiAsset", path: "/v1", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "api-fulfill.", logger: logger, on: eventLoop)
     }
 
+    /// The type of event associated with the data set.
+    public func sendDataSetNotification(_ input: SendDataSetNotificationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> SendDataSetNotificationResponse {
+        return try await self.client.execute(operation: "SendDataSetNotification", path: "/v1/data-sets/{DataSetId}/notification", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// This operation starts a job.
     public func startJob(_ input: StartJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartJobResponse {
         return try await self.client.execute(operation: "StartJob", path: "/v1/jobs/{JobId}", httpMethod: .PATCH, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)

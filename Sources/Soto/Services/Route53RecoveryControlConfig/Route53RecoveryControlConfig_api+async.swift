@@ -81,6 +81,11 @@ extension Route53RecoveryControlConfig {
         return try await self.client.execute(operation: "DescribeSafetyRule", path: "/safetyrule/{SafetyRuleArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Get information about the resource policy for a cluster.
+    public func getResourcePolicy(_ input: GetResourcePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetResourcePolicyResponse {
+        return try await self.client.execute(operation: "GetResourcePolicy", path: "/resourcePolicy/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns an array of all Amazon Route 53 health checks associated with a specific routing control.
     public func listAssociatedRoute53HealthChecks(_ input: ListAssociatedRoute53HealthChecksRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListAssociatedRoute53HealthChecksResponse {
         return try await self.client.execute(operation: "ListAssociatedRoute53HealthChecks", path: "/routingcontrol/{RoutingControlArn}/associatedRoute53HealthChecks", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)

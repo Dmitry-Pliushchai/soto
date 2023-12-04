@@ -26,13 +26,13 @@ import SotoCore
 extension ServiceDiscovery {
     // MARK: Enums
 
-    public enum CustomHealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomHealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case unhealthy = "UNHEALTHY"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterCondition: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterCondition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `in` = "IN"
         case beginsWith = "BEGINS_WITH"
         case between = "BETWEEN"
@@ -40,21 +40,21 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthCheckType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthCheckType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         case https = "HTTPS"
         case tcp = "TCP"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case unhealthy = "UNHEALTHY"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthStatusFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthStatusFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case healthy = "HEALTHY"
         case healthyOrElseAll = "HEALTHY_OR_ELSE_ALL"
@@ -62,21 +62,21 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum NamespaceFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamespaceFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case httpName = "HTTP_NAME"
         case name = "NAME"
         case type = "TYPE"
         public var description: String { return self.rawValue }
     }
 
-    public enum NamespaceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamespaceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dnsPrivate = "DNS_PRIVATE"
         case dnsPublic = "DNS_PUBLIC"
         case http = "HTTP"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case namespaceId = "NAMESPACE_ID"
         case serviceId = "SERVICE_ID"
         case status = "STATUS"
@@ -85,7 +85,7 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fail = "FAIL"
         case pending = "PENDING"
         case submitted = "SUBMITTED"
@@ -93,14 +93,14 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationTargetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationTargetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case instance = "INSTANCE"
         case namespace = "NAMESPACE"
         case service = "SERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createNamespace = "CREATE_NAMESPACE"
         case deleteNamespace = "DELETE_NAMESPACE"
         case deregisterInstance = "DEREGISTER_INSTANCE"
@@ -110,7 +110,7 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case a = "A"
         case aaaa = "AAAA"
         case cname = "CNAME"
@@ -118,25 +118,25 @@ extension ServiceDiscovery {
         public var description: String { return self.rawValue }
     }
 
-    public enum RoutingPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum RoutingPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multivalue = "MULTIVALUE"
         case weighted = "WEIGHTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case namespaceId = "NAMESPACE_ID"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dns = "DNS"
         case dnsHttp = "DNS_HTTP"
         case http = "HTTP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceTypeOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceTypeOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         public var description: String { return self.rawValue }
     }

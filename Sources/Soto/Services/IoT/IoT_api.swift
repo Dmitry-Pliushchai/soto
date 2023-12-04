@@ -290,7 +290,9 @@ public struct IoT: AWSService {
     }
 
     /// Create a thing group.  This is a control plane operation. See Authorization for
-    /// 				information about authorizing control plane actions.  Requires permission to access the CreateThingGroup action.
+    /// 				information about authorizing control plane actions. If the ThingGroup that you create has the exact same attributes as an existing
+    /// 					ThingGroup, you will get a 200 success response.
+    /// 			  Requires permission to access the CreateThingGroup action.
     public func createThingGroup(_ input: CreateThingGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateThingGroupResponse> {
         return self.client.execute(operation: "CreateThingGroup", path: "/thing-groups/{thingGroupName}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

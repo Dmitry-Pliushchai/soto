@@ -26,18 +26,18 @@ import SotoCore
 extension Finspace {
     // MARK: Enums
 
-    public enum AutoScalingMetric: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoScalingMetric: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cpuUtilizationPercentage = "CPU_UTILIZATION_PERCENTAGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case delete = "DELETE"
         case put = "PUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangesetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangesetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case pending = "PENDING"
@@ -45,7 +45,7 @@ extension Finspace {
         public var description: String { return self.rawValue }
     }
 
-    public enum DnsStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DnsStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failedUpdate = "FAILED_UPDATE"
         case none = "NONE"
         case successfullyUpdated = "SUCCESSFULLY_UPDATED"
@@ -54,7 +54,7 @@ extension Finspace {
         public var description: String { return self.rawValue }
     }
 
-    public enum EnvironmentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnvironmentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createRequested = "CREATE_REQUESTED"
         case created = "CREATED"
         case creating = "CREATING"
@@ -71,7 +71,7 @@ extension Finspace {
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorDetails: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorDetails: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "Missing required permission to perform this request."
         case cancelled = "Cancelled"
         case internalServiceException = "An internal error has occurred."
@@ -83,24 +83,30 @@ extension Finspace {
         public var description: String { return self.rawValue }
     }
 
-    public enum FederationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FederationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case federated = "FEDERATED"
         case local = "LOCAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum IPAddressType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IPAddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ipV4 = "IP_V4"
         public var description: String { return self.rawValue }
     }
 
-    public enum KxAzMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum KxAzMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multi = "MULTI"
         case single = "SINGLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum KxClusterStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum KxClusterCodeDeploymentStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case force = "FORCE"
+        case rolling = "ROLLING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum KxClusterStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
         case deleteFailed = "DELETE_FAILED"
@@ -112,31 +118,31 @@ extension Finspace {
         public var description: String { return self.rawValue }
     }
 
-    public enum KxClusterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KxClusterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gateway = "GATEWAY"
         case hdb = "HDB"
         case rdb = "RDB"
         public var description: String { return self.rawValue }
     }
 
-    public enum KxDeploymentStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum KxDeploymentStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noRestart = "NO_RESTART"
         case rolling = "ROLLING"
         public var description: String { return self.rawValue }
     }
 
-    public enum KxSavedownStorageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KxSavedownStorageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sds01 = "SDS01"
         public var description: String { return self.rawValue }
     }
 
-    public enum RuleAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum RuleAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "allow"
         case deny = "deny"
         public var description: String { return self.rawValue }
     }
 
-    public enum TgwStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TgwStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failedUpdate = "FAILED_UPDATE"
         case none = "NONE"
         case successfullyUpdated = "SUCCESSFULLY_UPDATED"
@@ -1788,7 +1794,7 @@ extension Finspace {
     public struct KxCacheStorageConfiguration: AWSEncodableShape & AWSDecodableShape {
         /// The size of cache in Gigabytes.
         public let size: Int
-        /// The type of cache storage . The valid values are:    CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
+        /// The type of cache storage. The valid values are:    CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.    CACHE_250 – This type provides at least 250 MB/s disk access throughput.    CACHE_12 – This type provides at least 12 MB/s disk access throughput.    For cache type CACHE_1000 and CACHE_250 you can select cache size as 1200 GB or increments of 2400 GB. For cache type CACHE_12 you can select the cache size in increments of 6000 GB.
         public let type: String
 
         public init(size: Int, type: String) {
@@ -1892,6 +1898,19 @@ extension Finspace {
             case releaseLabel = "releaseLabel"
             case status = "status"
             case statusReason = "statusReason"
+        }
+    }
+
+    public struct KxClusterCodeDeploymentConfiguration: AWSEncodableShape {
+        ///  The type of deployment that you want on a cluster.     ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.   FORCE – This option updates the cluster by immediately stopping all the running processes before starting up new ones with the updated configuration.
+        public let deploymentStrategy: KxClusterCodeDeploymentStrategy
+
+        public init(deploymentStrategy: KxClusterCodeDeploymentStrategy) {
+            self.deploymentStrategy = deploymentStrategy
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case deploymentStrategy = "deploymentStrategy"
         }
     }
 
@@ -2002,7 +2021,7 @@ extension Finspace {
     }
 
     public struct KxDeploymentConfiguration: AWSEncodableShape {
-        ///  The type of deployment that you want on a cluster.     ROLLING – This options loads the updated database by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option loads the updated database on the running q process without stopping it. This option is quicker as it reduces the turn around time to update a kdb database changeset configuration on a cluster.
+        ///  The type of deployment that you want on a cluster.     ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option updates the cluster without stopping the running q process. It is only available for HDB type cluster. This option is quicker as it reduces the turn around time to update configuration on a cluster.  With this deployment mode, you cannot update the initializationScript and commandLineArguments parameters.
         public let deploymentStrategy: KxDeploymentStrategy
 
         public init(deploymentStrategy: KxDeploymentStrategy) {
@@ -2820,6 +2839,68 @@ extension Finspace {
         private enum CodingKeys: String, CodingKey {
             case environment = "environment"
         }
+    }
+
+    public struct UpdateKxClusterCodeConfigurationRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "clusterName", location: .uri("clusterName")),
+            AWSMemberEncoding(label: "environmentId", location: .uri("environmentId"))
+        ]
+
+        /// A token that ensures idempotency. This token expires in 10 minutes.
+        public let clientToken: String?
+        /// The name of the cluster.
+        public let clusterName: String
+        public let code: CodeConfiguration
+        /// Specifies the key-value pairs to make them available inside the cluster.
+        public let commandLineArguments: [KxCommandLineArgument]?
+        ///  The configuration that allows you to choose how you want to update the code on a cluster.
+        public let deploymentConfiguration: KxClusterCodeDeploymentConfiguration?
+        ///  A unique identifier of the kdb environment.
+        public let environmentId: String
+        /// Specifies a Q program that will be run at launch of a cluster. It is a relative path within .zip file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, somedir/init.q.
+        public let initializationScript: String?
+
+        public init(clientToken: String? = UpdateKxClusterCodeConfigurationRequest.idempotencyToken(), clusterName: String, code: CodeConfiguration, commandLineArguments: [KxCommandLineArgument]? = nil, deploymentConfiguration: KxClusterCodeDeploymentConfiguration? = nil, environmentId: String, initializationScript: String? = nil) {
+            self.clientToken = clientToken
+            self.clusterName = clusterName
+            self.code = code
+            self.commandLineArguments = commandLineArguments
+            self.deploymentConfiguration = deploymentConfiguration
+            self.environmentId = environmentId
+            self.initializationScript = initializationScript
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.clientToken, name: "clientToken", parent: name, max: 64)
+            try self.validate(self.clientToken, name: "clientToken", parent: name, min: 1)
+            try self.validate(self.clientToken, name: "clientToken", parent: name, pattern: "^[a-zA-Z0-9-]+$")
+            try self.validate(self.clusterName, name: "clusterName", parent: name, max: 63)
+            try self.validate(self.clusterName, name: "clusterName", parent: name, min: 3)
+            try self.validate(self.clusterName, name: "clusterName", parent: name, pattern: "^[a-zA-Z0-9][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
+            try self.code.validate(name: "\(name).code")
+            try self.commandLineArguments?.forEach {
+                try $0.validate(name: "\(name).commandLineArguments[]")
+            }
+            try self.validate(self.environmentId, name: "environmentId", parent: name, max: 32)
+            try self.validate(self.environmentId, name: "environmentId", parent: name, min: 1)
+            try self.validate(self.environmentId, name: "environmentId", parent: name, pattern: "^[a-z0-9]+$")
+            try self.validate(self.initializationScript, name: "initializationScript", parent: name, max: 255)
+            try self.validate(self.initializationScript, name: "initializationScript", parent: name, min: 1)
+            try self.validate(self.initializationScript, name: "initializationScript", parent: name, pattern: "^[a-zA-Z0-9\\_\\-\\.\\/\\\\]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case clientToken = "clientToken"
+            case code = "code"
+            case commandLineArguments = "commandLineArguments"
+            case deploymentConfiguration = "deploymentConfiguration"
+            case initializationScript = "initializationScript"
+        }
+    }
+
+    public struct UpdateKxClusterCodeConfigurationResponse: AWSDecodableShape {
+        public init() {}
     }
 
     public struct UpdateKxClusterDatabasesRequest: AWSEncodableShape {

@@ -70,6 +70,11 @@ public struct ApplicationDiscoveryService: AWSService {
         return self.client.execute(operation: "AssociateConfigurationItemsToApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not  delete the previously discovered data.  To delete the data collected, use StartBatchDeleteConfigurationTask.
+    public func batchDeleteAgents(_ input: BatchDeleteAgentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchDeleteAgentsResponse> {
+        return self.client.execute(operation: "BatchDeleteAgents", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  Amazon Web Services Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
     public func batchDeleteImportData(_ input: BatchDeleteImportDataRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchDeleteImportDataResponse> {
         return self.client.execute(operation: "BatchDeleteImportData", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -98,6 +103,11 @@ public struct ApplicationDiscoveryService: AWSService {
     /// Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
     public func describeAgents(_ input: DescribeAgentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeAgentsResponse> {
         return self.client.execute(operation: "DescribeAgents", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+    public func describeBatchDeleteConfigurationTask(_ input: DescribeBatchDeleteConfigurationTaskRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeBatchDeleteConfigurationTaskResponse> {
+        return self.client.execute(operation: "DescribeBatchDeleteConfigurationTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action in the Amazon Web Services Application Discovery Service User Guide.
@@ -155,6 +165,11 @@ public struct ApplicationDiscoveryService: AWSService {
         return self.client.execute(operation: "ListServerNeighbors", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Takes a list of configurationId as input and starts an asynchronous deletion  task to remove the configurationItems. Returns a unique deletion task identifier.
+    public func startBatchDeleteConfigurationTask(_ input: StartBatchDeleteConfigurationTaskRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartBatchDeleteConfigurationTaskResponse> {
+        return self.client.execute(operation: "StartBatchDeleteConfigurationTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Start the continuous flow of agent's discovered data into Amazon Athena.
     public func startContinuousExport(_ input: StartContinuousExportRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartContinuousExportResponse> {
         return self.client.execute(operation: "StartContinuousExport", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -203,6 +218,59 @@ extension ApplicationDiscoveryService {
 // MARK: Paginators
 
 extension ApplicationDiscoveryService {
+    /// Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeAgentsPaginator<Result>(
+        _ input: DescribeAgentsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeAgentsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeAgents,
+            inputKey: \DescribeAgentsRequest.nextToken,
+            outputKey: \DescribeAgentsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeAgentsPaginator(
+        _ input: DescribeAgentsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeAgentsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeAgents,
+            inputKey: \DescribeAgentsRequest.nextToken,
+            outputKey: \DescribeAgentsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -251,6 +319,112 @@ extension ApplicationDiscoveryService {
             command: self.describeContinuousExports,
             inputKey: \DescribeContinuousExportsRequest.nextToken,
             outputKey: \DescribeContinuousExportsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    ///  DescribeExportConfigurations is deprecated. Use DescribeExportTasks, instead.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeExportConfigurationsPaginator<Result>(
+        _ input: DescribeExportConfigurationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeExportConfigurationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeExportConfigurations,
+            inputKey: \DescribeExportConfigurationsRequest.nextToken,
+            outputKey: \DescribeExportConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeExportConfigurationsPaginator(
+        _ input: DescribeExportConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeExportConfigurationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeExportConfigurations,
+            inputKey: \DescribeExportConfigurationsRequest.nextToken,
+            outputKey: \DescribeExportConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeExportTasksPaginator<Result>(
+        _ input: DescribeExportTasksRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeExportTasksResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeExportTasks,
+            inputKey: \DescribeExportTasksRequest.nextToken,
+            outputKey: \DescribeExportTasksResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeExportTasksPaginator(
+        _ input: DescribeExportTasksRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeExportTasksResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeExportTasks,
+            inputKey: \DescribeExportTasksRequest.nextToken,
+            outputKey: \DescribeExportTasksResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -308,6 +482,123 @@ extension ApplicationDiscoveryService {
             onPage: onPage
         )
     }
+
+    /// Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user that have tags can be listed if you call DescribeTags as is without passing any parameters.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func describeTagsPaginator<Result>(
+        _ input: DescribeTagsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, DescribeTagsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.describeTags,
+            inputKey: \DescribeTagsRequest.nextToken,
+            outputKey: \DescribeTagsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func describeTagsPaginator(
+        _ input: DescribeTagsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (DescribeTagsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.describeTags,
+            inputKey: \DescribeTagsRequest.nextToken,
+            outputKey: \DescribeTagsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieves a list of configuration items as specified by the value passed to the required parameter configurationType. Optional filtering may be applied to refine search results.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listConfigurationsPaginator<Result>(
+        _ input: ListConfigurationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListConfigurationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listConfigurations,
+            inputKey: \ListConfigurationsRequest.nextToken,
+            outputKey: \ListConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listConfigurationsPaginator(
+        _ input: ListConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListConfigurationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listConfigurations,
+            inputKey: \ListConfigurationsRequest.nextToken,
+            outputKey: \ListConfigurationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+}
+
+extension ApplicationDiscoveryService.DescribeAgentsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.DescribeAgentsRequest {
+        return .init(
+            agentIds: self.agentIds,
+            filters: self.filters,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
 }
 
 extension ApplicationDiscoveryService.DescribeContinuousExportsRequest: AWSPaginateToken {
@@ -320,12 +611,55 @@ extension ApplicationDiscoveryService.DescribeContinuousExportsRequest: AWSPagin
     }
 }
 
+extension ApplicationDiscoveryService.DescribeExportConfigurationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.DescribeExportConfigurationsRequest {
+        return .init(
+            exportIds: self.exportIds,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension ApplicationDiscoveryService.DescribeExportTasksRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.DescribeExportTasksRequest {
+        return .init(
+            exportIds: self.exportIds,
+            filters: self.filters,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
 extension ApplicationDiscoveryService.DescribeImportTasksRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.DescribeImportTasksRequest {
         return .init(
             filters: self.filters,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension ApplicationDiscoveryService.DescribeTagsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.DescribeTagsRequest {
+        return .init(
+            filters: self.filters,
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension ApplicationDiscoveryService.ListConfigurationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> ApplicationDiscoveryService.ListConfigurationsRequest {
+        return .init(
+            configurationType: self.configurationType,
+            filters: self.filters,
+            maxResults: self.maxResults,
+            nextToken: token,
+            orderBy: self.orderBy
         )
     }
 }

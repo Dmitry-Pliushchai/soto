@@ -26,13 +26,13 @@ import SotoCore
 extension GlobalAccelerator {
     // MARK: Enums
 
-    public enum AcceleratorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AcceleratorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deployed = "DEPLOYED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ByoipCidrState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ByoipCidrState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case advertising = "ADVERTISING"
         case deprovisioned = "DEPROVISIONED"
         case failedAdvertising = "FAILED_ADVERTISING"
@@ -47,57 +47,57 @@ extension GlobalAccelerator {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClientAffinity: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClientAffinity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case sourceIp = "SOURCE_IP"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomRoutingAcceleratorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomRoutingAcceleratorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deployed = "DEPLOYED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomRoutingDestinationTrafficState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomRoutingDestinationTrafficState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case deny = "DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomRoutingProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomRoutingProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tcp = "TCP"
         case udp = "UDP"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthCheckProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthCheckProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         case https = "HTTPS"
         case tcp = "TCP"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthState: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case healthy = "HEALTHY"
         case initial = "INITIAL"
         case unhealthy = "UNHEALTHY"
         public var description: String { return self.rawValue }
     }
 
-    public enum IpAddressFamily: String, CustomStringConvertible, Codable, Sendable {
+    public enum IpAddressFamily: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iPv4 = "IPv4"
         case iPv6 = "IPv6"
         public var description: String { return self.rawValue }
     }
 
-    public enum IpAddressType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IpAddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dualStack = "DUAL_STACK"
         case ipv4 = "IPV4"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case tcp = "TCP"
         case udp = "UDP"
         public var description: String { return self.rawValue }
@@ -375,6 +375,39 @@ extension GlobalAccelerator {
         }
     }
 
+    public struct Attachment: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the cross-account attachment.
+        public let attachmentArn: String?
+        /// The date and time that the cross-account attachment was created.
+        public let createdTime: Date?
+        /// The date and time that the cross-account attachment was last modified.
+        public let lastModifiedTime: Date?
+        /// The name of the cross-account attachment.
+        public let name: String?
+        /// The principals included in the cross-account attachment.
+        public let principals: [String]?
+        /// The resources included in the cross-account attachment.
+        public let resources: [Resource]?
+
+        public init(attachmentArn: String? = nil, createdTime: Date? = nil, lastModifiedTime: Date? = nil, name: String? = nil, principals: [String]? = nil, resources: [Resource]? = nil) {
+            self.attachmentArn = attachmentArn
+            self.createdTime = createdTime
+            self.lastModifiedTime = lastModifiedTime
+            self.name = name
+            self.principals = principals
+            self.resources = resources
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
+            case createdTime = "CreatedTime"
+            case lastModifiedTime = "LastModifiedTime"
+            case name = "Name"
+            case principals = "Principals"
+            case resources = "Resources"
+        }
+    }
+
     public struct ByoipCidr: AWSDecodableShape {
         /// The address range, in CIDR notation.
         public let cidr: String?
@@ -503,6 +536,68 @@ extension GlobalAccelerator {
 
         private enum CodingKeys: String, CodingKey {
             case accelerator = "Accelerator"
+        }
+    }
+
+    public struct CreateCrossAccountAttachmentRequest: AWSEncodableShape {
+        /// A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the
+        /// 			uniqueness—of the request.
+        public let idempotencyToken: String
+        /// The name of the cross-account attachment.
+        public let name: String
+        /// The principals to list in the cross-account attachment. A principal can be an Amazon Web Services account
+        /// 			number or the Amazon Resource Name (ARN) for an accelerator.
+        public let principals: [String]?
+        /// The Amazon Resource Names (ARNs) for the resources to list in the cross-account attachment. A resource can
+        /// 			be any supported Amazon Web Services resource type for Global Accelerator.
+        public let resources: [Resource]?
+        /// Create tags for cross-account attachment. For more information, see Tagging
+        /// 			in Global Accelerator in the Global Accelerator Developer Guide.
+        public let tags: [Tag]?
+
+        public init(idempotencyToken: String = CreateCrossAccountAttachmentRequest.idempotencyToken(), name: String, principals: [String]? = nil, resources: [Resource]? = nil, tags: [Tag]? = nil) {
+            self.idempotencyToken = idempotencyToken
+            self.name = name
+            self.principals = principals
+            self.resources = resources
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.idempotencyToken, name: "idempotencyToken", parent: name, max: 255)
+            try self.validate(self.name, name: "name", parent: name, max: 64)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[\\S\\s]+$")
+            try self.principals?.forEach {
+                try validate($0, name: "principals[]", parent: name, max: 256)
+                try validate($0, name: "principals[]", parent: name, pattern: "^(^\\d{12}$|arn:.*)$")
+            }
+            try self.resources?.forEach {
+                try $0.validate(name: "\(name).resources[]")
+            }
+            try self.tags?.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case idempotencyToken = "IdempotencyToken"
+            case name = "Name"
+            case principals = "Principals"
+            case resources = "Resources"
+            case tags = "Tags"
+        }
+    }
+
+    public struct CreateCrossAccountAttachmentResponse: AWSDecodableShape {
+        /// Information about the cross-account attachment.
+        public let crossAccountAttachment: Attachment?
+
+        public init(crossAccountAttachment: Attachment? = nil) {
+            self.crossAccountAttachment = crossAccountAttachment
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case crossAccountAttachment = "CrossAccountAttachment"
         }
     }
 
@@ -836,6 +931,25 @@ extension GlobalAccelerator {
         }
     }
 
+    public struct CrossAccountResource: AWSDecodableShape {
+        /// The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)
+        /// 			that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+        public let attachmentArn: String?
+        /// The endpoint ID for the endpoint that is listed in a cross-account attachment and
+        /// 			can be added to an accelerator by specified principals.
+        public let endpointId: String?
+
+        public init(attachmentArn: String? = nil, endpointId: String? = nil) {
+            self.attachmentArn = attachmentArn
+            self.endpointId = endpointId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
+            case endpointId = "EndpointId"
+        }
+    }
+
     public struct CustomRoutingAccelerator: AWSDecodableShape {
         /// The Amazon Resource Name (ARN) of the custom routing accelerator.
         public let acceleratorArn: String?
@@ -965,19 +1079,25 @@ extension GlobalAccelerator {
     }
 
     public struct CustomRoutingEndpointConfiguration: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)
+        /// 			that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+        public let attachmentArn: String?
         /// An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC)
         /// 			subnet ID.
         public let endpointId: String?
 
-        public init(endpointId: String? = nil) {
+        public init(attachmentArn: String? = nil, endpointId: String? = nil) {
+            self.attachmentArn = attachmentArn
             self.endpointId = endpointId
         }
 
         public func validate(name: String) throws {
+            try self.validate(self.attachmentArn, name: "attachmentArn", parent: name, max: 255)
             try self.validate(self.endpointId, name: "endpointId", parent: name, max: 255)
         }
 
         private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
             case endpointId = "EndpointId"
         }
     }
@@ -1055,6 +1175,23 @@ extension GlobalAccelerator {
 
         private enum CodingKeys: String, CodingKey {
             case acceleratorArn = "AcceleratorArn"
+        }
+    }
+
+    public struct DeleteCrossAccountAttachmentRequest: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) for the cross-account attachment to delete.
+        public let attachmentArn: String
+
+        public init(attachmentArn: String) {
+            self.attachmentArn = attachmentArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.attachmentArn, name: "attachmentArn", parent: name, max: 255)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
         }
     }
 
@@ -1284,6 +1421,36 @@ extension GlobalAccelerator {
         }
     }
 
+    public struct DescribeCrossAccountAttachmentRequest: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) for the cross-account attachment to describe.
+        public let attachmentArn: String
+
+        public init(attachmentArn: String) {
+            self.attachmentArn = attachmentArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.attachmentArn, name: "attachmentArn", parent: name, max: 255)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
+        }
+    }
+
+    public struct DescribeCrossAccountAttachmentResponse: AWSDecodableShape {
+        /// Information about the cross-account attachment.
+        public let crossAccountAttachment: Attachment?
+
+        public init(crossAccountAttachment: Attachment? = nil) {
+            self.crossAccountAttachment = crossAccountAttachment
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case crossAccountAttachment = "CrossAccountAttachment"
+        }
+    }
+
     public struct DescribeCustomRoutingAcceleratorAttributesRequest: AWSEncodableShape {
         /// The Amazon Resource Name (ARN) of the custom routing accelerator to describe the attributes for.
         public let acceleratorArn: String
@@ -1509,10 +1676,13 @@ extension GlobalAccelerator {
     }
 
     public struct EndpointConfiguration: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources)
+        /// 			that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+        public let attachmentArn: String?
         /// Indicates whether client IP address preservation is enabled for an endpoint.
-        /// 			The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as
+        /// 			The value is true or false. The default value is true for Application Load Balancer endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as
         /// 			traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load
-        /// 			Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation
+        /// 			Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation
         /// 			with Network Load Balancers with TLS listeners. For more information, see
         /// 			Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
         public let clientIPPreservationEnabled: Bool?
@@ -1528,19 +1698,22 @@ extension GlobalAccelerator {
         /// 	        Global Accelerator Developer Guide.
         public let weight: Int?
 
-        public init(clientIPPreservationEnabled: Bool? = nil, endpointId: String? = nil, weight: Int? = nil) {
+        public init(attachmentArn: String? = nil, clientIPPreservationEnabled: Bool? = nil, endpointId: String? = nil, weight: Int? = nil) {
+            self.attachmentArn = attachmentArn
             self.clientIPPreservationEnabled = clientIPPreservationEnabled
             self.endpointId = endpointId
             self.weight = weight
         }
 
         public func validate(name: String) throws {
+            try self.validate(self.attachmentArn, name: "attachmentArn", parent: name, max: 255)
             try self.validate(self.endpointId, name: "endpointId", parent: name, max: 255)
             try self.validate(self.weight, name: "weight", parent: name, max: 255)
             try self.validate(self.weight, name: "weight", parent: name, min: 0)
         }
 
         private enum CodingKeys: String, CodingKey {
+            case attachmentArn = "AttachmentArn"
             case clientIPPreservationEnabled = "ClientIPPreservationEnabled"
             case endpointId = "EndpointId"
             case weight = "Weight"
@@ -1549,9 +1722,9 @@ extension GlobalAccelerator {
 
     public struct EndpointDescription: AWSDecodableShape {
         /// Indicates whether client IP address preservation is enabled for an endpoint.
-        /// 			The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as
+        /// 			The value is true or false. The default value is true for Application Load Balancers endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as
         /// 			traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load
-        /// 			Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation
+        /// 			Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation
         /// 			with Network Load Balancers with TLS listeners. For more information, see
         /// 			Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
         public let clientIPPreservationEnabled: Bool?
@@ -1774,6 +1947,116 @@ extension GlobalAccelerator {
 
         private enum CodingKeys: String, CodingKey {
             case byoipCidrs = "ByoipCidrs"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct ListCrossAccountAttachmentsRequest: AWSEncodableShape {
+        /// The number of cross-account attachment objects that you want to return with this call. The default value is 10.
+        public let maxResults: Int?
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 255)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct ListCrossAccountAttachmentsResponse: AWSDecodableShape {
+        /// Information about the cross-account attachments.
+        public let crossAccountAttachments: [Attachment]?
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+
+        public init(crossAccountAttachments: [Attachment]? = nil, nextToken: String? = nil) {
+            self.crossAccountAttachments = crossAccountAttachments
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case crossAccountAttachments = "CrossAccountAttachments"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct ListCrossAccountResourceAccountsRequest: AWSEncodableShape {
+        public init() {}
+    }
+
+    public struct ListCrossAccountResourceAccountsResponse: AWSDecodableShape {
+        /// The account IDs of principals (resource owners) in a cross-account attachment who can add endpoints (resources) listed
+        /// 			in the same attachment.
+        public let resourceOwnerAwsAccountIds: [String]?
+
+        public init(resourceOwnerAwsAccountIds: [String]? = nil) {
+            self.resourceOwnerAwsAccountIds = resourceOwnerAwsAccountIds
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case resourceOwnerAwsAccountIds = "ResourceOwnerAwsAccountIds"
+        }
+    }
+
+    public struct ListCrossAccountResourcesRequest: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) of an accelerator in a cross-account attachment.
+        public let acceleratorArn: String?
+        /// The number of cross-account endpoints objects that you want to return with this call. The default value is 10.
+        public let maxResults: Int?
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+        /// The account ID of a resource owner in a cross-account attachment.
+        public let resourceOwnerAwsAccountId: String
+
+        public init(acceleratorArn: String? = nil, maxResults: Int? = nil, nextToken: String? = nil, resourceOwnerAwsAccountId: String) {
+            self.acceleratorArn = acceleratorArn
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.resourceOwnerAwsAccountId = resourceOwnerAwsAccountId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.acceleratorArn, name: "acceleratorArn", parent: name, max: 255)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 255)
+            try self.validate(self.resourceOwnerAwsAccountId, name: "resourceOwnerAwsAccountId", parent: name, max: 12)
+            try self.validate(self.resourceOwnerAwsAccountId, name: "resourceOwnerAwsAccountId", parent: name, min: 12)
+            try self.validate(self.resourceOwnerAwsAccountId, name: "resourceOwnerAwsAccountId", parent: name, pattern: "^\\d{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case acceleratorArn = "AcceleratorArn"
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+            case resourceOwnerAwsAccountId = "ResourceOwnerAwsAccountId"
+        }
+    }
+
+    public struct ListCrossAccountResourcesResponse: AWSDecodableShape {
+        /// The endpoints attached to an accelerator in a cross-account attachment.
+        public let crossAccountResources: [CrossAccountResource]?
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+
+        public init(crossAccountResources: [CrossAccountResource]? = nil, nextToken: String? = nil) {
+            self.crossAccountResources = crossAccountResources
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case crossAccountResources = "CrossAccountResources"
             case nextToken = "NextToken"
         }
     }
@@ -2337,6 +2620,28 @@ extension GlobalAccelerator {
         }
     }
 
+    public struct Resource: AWSEncodableShape & AWSDecodableShape {
+        /// The endpoint ID for the endpoint (Amazon Web Services resource).
+        public let endpointId: String
+        /// The Amazon Web Services Region where a resource is located.
+        public let region: String?
+
+        public init(endpointId: String, region: String? = nil) {
+            self.endpointId = endpointId
+            self.region = region
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.endpointId, name: "endpointId", parent: name, max: 255)
+            try self.validate(self.region, name: "region", parent: name, max: 255)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case endpointId = "EndpointId"
+            case region = "Region"
+        }
+    }
+
     public struct SocketAddress: AWSDecodableShape {
         /// The IP address for the socket address.
         public let ipAddress: String?
@@ -2528,6 +2833,76 @@ extension GlobalAccelerator {
 
         private enum CodingKeys: String, CodingKey {
             case accelerator = "Accelerator"
+        }
+    }
+
+    public struct UpdateCrossAccountAttachmentRequest: AWSEncodableShape {
+        /// The principals to add to the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)
+        /// 			of an accelerator that the attachment gives permission to add the resources from another account, listed in the attachment. To add more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+        public let addPrincipals: [String]?
+        /// The resources to add to the cross-account attachment. A resource listed in a cross-account attachment can be added
+        /// 			to an accelerator by the principals that are listed in the attachment. To add more than one resource, separate the resource ARNs with commas.
+        public let addResources: [Resource]?
+        /// The Amazon Resource Name (ARN) of the cross-account attachment to update.
+        public let attachmentArn: String
+        /// The name of the cross-account attachment.
+        public let name: String?
+        /// The principals to remove from the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN)
+        /// 			of an accelerator that is given permission to add the resources from another account, listed in the cross-account attachment. To remove more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+        public let removePrincipals: [String]?
+        /// The resources to remove from the cross-account attachment. A resource listed in a cross-account attachment can be added
+        /// 			to an accelerator fy principals that are listed in the cross-account attachment. To remove more than one resource, separate the resource ARNs with commas.
+        public let removeResources: [Resource]?
+
+        public init(addPrincipals: [String]? = nil, addResources: [Resource]? = nil, attachmentArn: String, name: String? = nil, removePrincipals: [String]? = nil, removeResources: [Resource]? = nil) {
+            self.addPrincipals = addPrincipals
+            self.addResources = addResources
+            self.attachmentArn = attachmentArn
+            self.name = name
+            self.removePrincipals = removePrincipals
+            self.removeResources = removeResources
+        }
+
+        public func validate(name: String) throws {
+            try self.addPrincipals?.forEach {
+                try validate($0, name: "addPrincipals[]", parent: name, max: 256)
+                try validate($0, name: "addPrincipals[]", parent: name, pattern: "^(^\\d{12}$|arn:.*)$")
+            }
+            try self.addResources?.forEach {
+                try $0.validate(name: "\(name).addResources[]")
+            }
+            try self.validate(self.attachmentArn, name: "attachmentArn", parent: name, max: 255)
+            try self.validate(self.name, name: "name", parent: name, max: 64)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[\\S\\s]+$")
+            try self.removePrincipals?.forEach {
+                try validate($0, name: "removePrincipals[]", parent: name, max: 256)
+                try validate($0, name: "removePrincipals[]", parent: name, pattern: "^(^\\d{12}$|arn:.*)$")
+            }
+            try self.removeResources?.forEach {
+                try $0.validate(name: "\(name).removeResources[]")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case addPrincipals = "AddPrincipals"
+            case addResources = "AddResources"
+            case attachmentArn = "AttachmentArn"
+            case name = "Name"
+            case removePrincipals = "RemovePrincipals"
+            case removeResources = "RemoveResources"
+        }
+    }
+
+    public struct UpdateCrossAccountAttachmentResponse: AWSDecodableShape {
+        /// Information about the updated cross-account attachment.
+        public let crossAccountAttachment: Attachment?
+
+        public init(crossAccountAttachment: Attachment? = nil) {
+            self.crossAccountAttachment = crossAccountAttachment
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case crossAccountAttachment = "CrossAccountAttachment"
         }
     }
 
@@ -2853,6 +3228,7 @@ public struct GlobalAcceleratorErrorType: AWSErrorType {
         case accessDeniedException = "AccessDeniedException"
         case associatedEndpointGroupFoundException = "AssociatedEndpointGroupFoundException"
         case associatedListenerFoundException = "AssociatedListenerFoundException"
+        case attachmentNotFoundException = "AttachmentNotFoundException"
         case byoipCidrNotFoundException = "ByoipCidrNotFoundException"
         case conflictException = "ConflictException"
         case endpointAlreadyExistsException = "EndpointAlreadyExistsException"
@@ -2899,6 +3275,8 @@ public struct GlobalAcceleratorErrorType: AWSErrorType {
     /// The accelerator that you specified has a listener associated with it. You must remove all dependent resources from an
     /// 			accelerator before you can delete it.
     public static var associatedListenerFoundException: Self { .init(.associatedListenerFoundException) }
+    /// No cross-account attachment was found.
+    public static var attachmentNotFoundException: Self { .init(.attachmentNotFoundException) }
     /// The CIDR that you specified was not found or is incorrect.
     public static var byoipCidrNotFoundException: Self { .init(.byoipCidrNotFoundException) }
     /// You can't use both of those options.

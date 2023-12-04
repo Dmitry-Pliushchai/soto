@@ -46,6 +46,11 @@ extension ElastiCache {
         return try await self.client.execute(operation: "CompleteMigration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a copy of an existing serverless cache’s snapshot. Available for Redis only.
+    public func copyServerlessCacheSnapshot(_ input: CopyServerlessCacheSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CopyServerlessCacheSnapshotResponse {
+        return try await self.client.execute(operation: "CopyServerlessCacheSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Makes a copy of an existing snapshot.  This operation is valid for Redis only.   Users or groups that have permissions to use the CopySnapshot operation can create their own Amazon S3 buckets and copy snapshots to it. To control access to your snapshots, use an IAM policy to control who has the ability to use the CopySnapshot operation. For more information about using IAM to control the use of ElastiCache operations, see Exporting Snapshots and Authentication & Access Control.  You could receive the following error messages.  Error Messages     Error Message: The S3 bucket %s is outside of the region.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The S3 bucket %s does not exist.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The S3 bucket %s is not owned by the authenticated user.  Solution: Create an Amazon S3 bucket in the same region as your snapshot. For more information, see Step 1: Create an Amazon S3 Bucket in the ElastiCache User Guide.    Error Message: The authenticated user does not have sufficient permissions to perform the desired activity.  Solution: Contact your system administrator to get the needed permissions.    Error Message: The S3 bucket %s already contains an object with key %s.  Solution: Give the TargetSnapshotName a new and unique value. If exporting a snapshot, you could alternatively create a new Amazon S3 bucket and use this same value for TargetSnapshotName.    Error Message:  ElastiCache has not been granted READ permissions %s on the S3 Bucket.  Solution: Add List and Read permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.    Error Message:  ElastiCache has not been granted WRITE permissions %s on the S3 Bucket.  Solution: Add Upload/Delete permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.    Error Message:  ElastiCache has not been granted READ_ACP permissions %s on the S3 Bucket.  Solution: Add View Permissions on the bucket. For more information, see Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket in the ElastiCache User Guide.
     public func copySnapshot(_ input: CopySnapshotMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CopySnapshotResult {
         return try await self.client.execute(operation: "CopySnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -79,6 +84,16 @@ extension ElastiCache {
     /// Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group. This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore. A Redis (cluster mode disabled) replication group is a collection of clusters, where one of the clusters is a read/write primary and the others are read-only replicas. Writes to the primary are asynchronously propagated to the replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.  The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see Creating a Subnet Group. For versions below 5.0.6, the limit is 250 per cluster. To request a limit increase, see Amazon Service Limits and choose the limit type Nodes per cluster per instance type.  When a Redis (cluster mode disabled) replication group has been successfully created, you can add one or more read replicas to it, up to a total of 5 read replicas. If you need to increase or decrease the number of node groups (console: shards), you can avail yourself of ElastiCache for Redis' scaling. For more information, see Scaling ElastiCache for Redis Clusters in the ElastiCache User Guide.  This operation is valid for Redis only.
     public func createReplicationGroup(_ input: CreateReplicationGroupMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateReplicationGroupResult {
         return try await self.client.execute(operation: "CreateReplicationGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a serverless cache.
+    public func createServerlessCache(_ input: CreateServerlessCacheRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateServerlessCacheResponse {
+        return try await self.client.execute(operation: "CreateServerlessCache", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This API creates a copy of an entire ServerlessCache at a specific moment in time. Available for Redis only.
+    public func createServerlessCacheSnapshot(_ input: CreateServerlessCacheSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateServerlessCacheSnapshotResponse {
+        return try await self.client.execute(operation: "CreateServerlessCacheSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a copy of an entire cluster or replication group at a specific moment in time.  This operation is valid for Redis only.
@@ -134,6 +149,16 @@ extension ElastiCache {
     /// Deletes an existing replication group. By default, this operation deletes the entire replication group, including the primary/primaries and all of the read replicas. If the replication group has only one primary, you can optionally delete only the read replicas, while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.  This operation is valid for Redis only.
     public func deleteReplicationGroup(_ input: DeleteReplicationGroupMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteReplicationGroupResult {
         return try await self.client.execute(operation: "DeleteReplicationGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a specified existing serverless cache.
+    public func deleteServerlessCache(_ input: DeleteServerlessCacheRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteServerlessCacheResponse {
+        return try await self.client.execute(operation: "DeleteServerlessCache", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes an existing serverless cache snapshot. Available for Redis only.
+    public func deleteServerlessCacheSnapshot(_ input: DeleteServerlessCacheSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteServerlessCacheSnapshotResponse {
+        return try await self.client.execute(operation: "DeleteServerlessCacheSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.  This operation is valid for Redis only.
@@ -211,6 +236,16 @@ extension ElastiCache {
         return try await self.client.execute(operation: "DescribeReservedCacheNodesOfferings", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns information about serverless cache snapshots.  By default, this API lists all of the customer’s serverless cache snapshots.  It can also describe a single serverless cache snapshot, or the snapshots associated with  a particular serverless cache. Available for Redis only.
+    public func describeServerlessCacheSnapshots(_ input: DescribeServerlessCacheSnapshotsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeServerlessCacheSnapshotsResponse {
+        return try await self.client.execute(operation: "DescribeServerlessCacheSnapshots", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns information about a specific serverless cache.  If no identifier is specified, then the API returns information on all the serverless caches belonging to  this Amazon Web Services account.
+    public func describeServerlessCaches(_ input: DescribeServerlessCachesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeServerlessCachesResponse {
+        return try await self.client.execute(operation: "DescribeServerlessCaches", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns details of the service updates
     public func describeServiceUpdates(_ input: DescribeServiceUpdatesMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ServiceUpdatesMessage {
         return try await self.client.execute(operation: "DescribeServiceUpdates", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -239,6 +274,11 @@ extension ElastiCache {
     /// Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that Amazon region.
     public func disassociateGlobalReplicationGroup(_ input: DisassociateGlobalReplicationGroupMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisassociateGlobalReplicationGroupResult {
         return try await self.client.execute(operation: "DisassociateGlobalReplicationGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Provides the functionality to export the serverless cache snapshot data to Amazon S3. Available for Redis only.
+    public func exportServerlessCacheSnapshot(_ input: ExportServerlessCacheSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ExportServerlessCacheSnapshotResponse {
+        return try await self.client.execute(operation: "ExportServerlessCacheSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Used to failover the primary region to a secondary region. The secondary region will become primary, and all other clusters will become secondary.
@@ -286,7 +326,7 @@ extension ElastiCache {
         return try await self.client.execute(operation: "ModifyGlobalReplicationGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Modifies the settings for a replication group.    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only.
+    /// Modifies the settings for a replication group. This is limited to Redis 7 and newer.    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only.
     public func modifyReplicationGroup(_ input: ModifyReplicationGroupMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ModifyReplicationGroupResult {
         return try await self.client.execute(operation: "ModifyReplicationGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -294,6 +334,11 @@ extension ElastiCache {
     /// Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.
     public func modifyReplicationGroupShardConfiguration(_ input: ModifyReplicationGroupShardConfigurationMessage, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ModifyReplicationGroupShardConfigurationResult {
         return try await self.client.execute(operation: "ModifyReplicationGroupShardConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This API modifies the attributes of a serverless cache.
+    public func modifyServerlessCache(_ input: ModifyServerlessCacheRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ModifyServerlessCacheResponse {
+        return try await self.client.execute(operation: "ModifyServerlessCache", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Changes user password(s) and/or access string.
@@ -615,6 +660,50 @@ extension ElastiCache {
             command: self.describeReservedCacheNodesOfferings,
             inputKey: \DescribeReservedCacheNodesOfferingsMessage.marker,
             outputKey: \ReservedCacheNodesOfferingMessage.marker,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns information about serverless cache snapshots.  By default, this API lists all of the customer’s serverless cache snapshots.  It can also describe a single serverless cache snapshot, or the snapshots associated with  a particular serverless cache. Available for Redis only.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeServerlessCacheSnapshotsPaginator(
+        _ input: DescribeServerlessCacheSnapshotsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeServerlessCacheSnapshotsRequest, DescribeServerlessCacheSnapshotsResponse> {
+        return .init(
+            input: input,
+            command: self.describeServerlessCacheSnapshots,
+            inputKey: \DescribeServerlessCacheSnapshotsRequest.nextToken,
+            outputKey: \DescribeServerlessCacheSnapshotsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Returns information about a specific serverless cache.  If no identifier is specified, then the API returns information on all the serverless caches belonging to  this Amazon Web Services account.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeServerlessCachesPaginator(
+        _ input: DescribeServerlessCachesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeServerlessCachesRequest, DescribeServerlessCachesResponse> {
+        return .init(
+            input: input,
+            command: self.describeServerlessCaches,
+            inputKey: \DescribeServerlessCachesRequest.nextToken,
+            outputKey: \DescribeServerlessCachesResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

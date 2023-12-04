@@ -26,30 +26,30 @@ import SotoCore
 extension LexModelsV2 {
     // MARK: Enums
 
-    public enum AggregatedUtterancesFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregatedUtterancesFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case utterance = "Utterance"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregatedUtterancesFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregatedUtterancesFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum AggregatedUtterancesSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregatedUtterancesSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hitCount = "HitCount"
         case missedCount = "MissedCount"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsBinByName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsBinByName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conversationStartTime = "ConversationStartTime"
         case utteranceTimestamp = "UtteranceTimestamp"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsCommonFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsCommonFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botAliasId = "BotAliasId"
         case botVersion = "BotVersion"
         case channel = "Channel"
@@ -58,21 +58,21 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQ"
         case greaterThan = "GT"
         case lessThan = "LT"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentField: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentEndState = "IntentEndState"
         case intentLevel = "IntentLevel"
         case intentName = "IntentName"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botAliasId = "BotAliasId"
         case botVersion = "BotVersion"
         case channel = "Channel"
@@ -85,7 +85,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentMetricName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentMetricName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "Count"
         case dropped = "Dropped"
         case failure = "Failure"
@@ -94,13 +94,13 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentStageField: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentStageField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentStageName = "IntentStageName"
         case switchedToIntent = "SwitchedToIntent"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentStageFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentStageFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botAliasId = "BotAliasId"
         case botVersion = "BotVersion"
         case channel = "Channel"
@@ -113,7 +113,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsIntentStageMetricName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsIntentStageMetricName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "Count"
         case dropped = "Dropped"
         case failed = "Failed"
@@ -122,20 +122,20 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsInterval: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsInterval: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneDay = "OneDay"
         case oneHour = "OneHour"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsMetricStatistic: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsMetricStatistic: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avg = "Avg"
         case max = "Max"
         case sum = "Sum"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsModality: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsModality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dtmf = "DTMF"
         case multiMode = "MultiMode"
         case speech = "Speech"
@@ -143,19 +143,19 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsNodeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsNodeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exit = "Exit"
         case inner = "Inner"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsSessionField: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsSessionField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conversationEndState = "ConversationEndState"
         case localeId = "LocaleId"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsSessionFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsSessionFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botAliasId = "BotAliasId"
         case botVersion = "BotVersion"
         case channel = "Channel"
@@ -169,7 +169,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsSessionMetricName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsSessionMetricName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case concurrency = "Concurrency"
         case count = "Count"
         case dropped = "Dropped"
@@ -180,31 +180,31 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsSessionSortByName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsSessionSortByName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conversationStartTime = "ConversationStartTime"
         case duration = "Duration"
         case numberOfTurns = "NumberOfTurns"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsSortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsSortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "Ascending"
         case descending = "Descending"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsUtteranceAttributeName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsUtteranceAttributeName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUsedIntent = "LastUsedIntent"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsUtteranceField: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsUtteranceField: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case utteranceState = "UtteranceState"
         case utteranceText = "UtteranceText"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsUtteranceFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsUtteranceFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botAliasId = "BotAliasId"
         case botVersion = "BotVersion"
         case channel = "Channel"
@@ -217,7 +217,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsUtteranceMetricName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsUtteranceMetricName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "Count"
         case detected = "Detected"
         case missed = "Missed"
@@ -225,23 +225,23 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalyticsUtteranceSortByName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalyticsUtteranceSortByName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case utteranceTimestamp = "UtteranceTimestamp"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssociatedTranscriptFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssociatedTranscriptFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentId = "IntentId"
         case slotTypeId = "SlotTypeId"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioRecognitionStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioRecognitionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case useSlotValuesAsCustomVocabulary = "UseSlotValuesAsCustomVocabulary"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotAliasStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotAliasStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "Available"
         case creating = "Creating"
         case deleting = "Deleting"
@@ -249,36 +249,36 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum BotFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botName = "BotName"
         case botType = "BotType"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         case notEquals = "NE"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotLocaleFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotLocaleFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botLocaleName = "BotLocaleName"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotLocaleFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotLocaleFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotLocaleSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotLocaleSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botLocaleName = "BotLocaleName"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotLocaleStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotLocaleStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case building = "Building"
         case built = "Built"
         case creating = "Creating"
@@ -291,7 +291,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum BotRecommendationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotRecommendationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "Available"
         case deleted = "Deleted"
         case deleting = "Deleting"
@@ -304,12 +304,12 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum BotSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botName = "BotName"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "Available"
         case creating = "Creating"
         case deleting = "Deleting"
@@ -321,41 +321,41 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum BotType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bot = "Bot"
         case botNetwork = "BotNetwork"
         public var description: String { return self.rawValue }
     }
 
-    public enum BotVersionSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum BotVersionSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case botVersion = "BotVersion"
         public var description: String { return self.rawValue }
     }
 
-    public enum BuiltInIntentSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum BuiltInIntentSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentSignature = "IntentSignature"
         public var description: String { return self.rawValue }
     }
 
-    public enum BuiltInSlotTypeSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum BuiltInSlotTypeSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case slotTypeSignature = "SlotTypeSignature"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConversationEndState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConversationEndState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dropped = "Dropped"
         case failure = "Failure"
         case success = "Success"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConversationLogsInputModeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConversationLogsInputModeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case speech = "Speech"
         case text = "Text"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomVocabularyStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomVocabularyStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "Creating"
         case deleting = "Deleting"
         case exporting = "Exporting"
@@ -364,7 +364,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum DialogActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DialogActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case closeIntent = "CloseIntent"
         case confirmIntent = "ConfirmIntent"
         case elicitIntent = "ElicitIntent"
@@ -377,13 +377,13 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum Effect: String, CustomStringConvertible, Codable, Sendable {
+    public enum Effect: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "Allow"
         case deny = "Deny"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case duplicateInput = "DUPLICATE_INPUT"
         case internalServerFailure = "INTERNAL_SERVER_FAILURE"
         case resourceAlreadyExists = "RESOURCE_ALREADY_EXISTS"
@@ -391,23 +391,23 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exportResourceType = "ExportResourceType"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case deleting = "Deleting"
         case failed = "Failed"
@@ -415,25 +415,38 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportExportFileFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum GenerationSortByAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case creationStartTime = "creationStartTime"
+        case lastUpdatedTime = "lastUpdatedTime"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum GenerationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case complete = "Complete"
+        case failed = "Failed"
+        case inProgress = "InProgress"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ImportExportFileFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case lexJson = "LexJson"
         case tsv = "TSV"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case importResourceType = "ImportResourceType"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bot = "Bot"
         case botLocale = "BotLocale"
         case customVocabulary = "CustomVocabulary"
@@ -441,12 +454,12 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case deleting = "Deleting"
         case failed = "Failed"
@@ -454,24 +467,24 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum IntentFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum IntentFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentName = "IntentName"
         public var description: String { return self.rawValue }
     }
 
-    public enum IntentFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum IntentFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum IntentSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum IntentSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case intentName = "IntentName"
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum IntentState: String, CustomStringConvertible, Codable, Sendable {
+    public enum IntentState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case fulfilled = "Fulfilled"
         case fulfillmentInProgress = "FulfillmentInProgress"
@@ -481,26 +494,26 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum MergeStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum MergeStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case append = "Append"
         case failOnConflict = "FailOnConflict"
         case overwrite = "Overwrite"
         public var description: String { return self.rawValue }
     }
 
-    public enum MessageSelectionStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessageSelectionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ordered = "Ordered"
         case random = "Random"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObfuscationSettingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObfuscationSettingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case defaultObfuscation = "DefaultObfuscation"
         case none = "None"
         public var description: String { return self.rawValue }
     }
 
-    public enum PromptAttempt: String, CustomStringConvertible, Codable, Sendable {
+    public enum PromptAttempt: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case initial = "Initial"
         case retry1 = "Retry1"
         case retry2 = "Retry2"
@@ -510,42 +523,48 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum SearchOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SearchOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "Ascending"
         case descending = "Descending"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotConstraint: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotConstraint: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case optional = "Optional"
         case required = "Required"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case slotName = "SlotName"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotShape: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotResolutionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case `default` = "Default"
+        case enhancedFallback = "EnhancedFallback"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum SlotShape: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case list = "List"
         case scalar = "Scalar"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         case slotName = "SlotName"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotTypeCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotTypeCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case composite = "Composite"
         case custom = "Custom"
         case extended = "Extended"
@@ -553,56 +572,56 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotTypeFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotTypeFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case externalSourceType = "ExternalSourceType"
         case slotTypeName = "SlotTypeName"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotTypeFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotTypeFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CO"
         case equals = "EQ"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotTypeSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotTypeSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         case slotTypeName = "SlotTypeName"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotValueResolutionStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotValueResolutionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case concatenation = "Concatenation"
         case originalValue = "OriginalValue"
         case topResolution = "TopResolution"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "Ascending"
         case descending = "Descending"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestExecutionApiMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestExecutionApiMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nonStreaming = "NonStreaming"
         case streaming = "Streaming"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestExecutionModality: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestExecutionModality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audio = "Audio"
         case text = "Text"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestExecutionSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestExecutionSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationDateTime = "CreationDateTime"
         case testSetName = "TestSetName"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case failed = "Failed"
         case inProgress = "InProgress"
@@ -613,14 +632,14 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum TestResultMatchStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestResultMatchStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case executionError = "ExecutionError"
         case matched = "Matched"
         case mismatched = "Mismatched"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestResultTypeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestResultTypeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conversationLevelTestResults = "ConversationLevelTestResults"
         case intentClassificationTestResults = "IntentClassificationTestResults"
         case overallTestResults = "OverallTestResults"
@@ -629,14 +648,14 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum TestSetDiscrepancyReportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestSetDiscrepancyReportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case failed = "Failed"
         case inProgress = "InProgress"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestSetGenerationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestSetGenerationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case generating = "Generating"
         case pending = "Pending"
@@ -644,19 +663,19 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum TestSetModality: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestSetModality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audio = "Audio"
         case text = "Text"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestSetSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestSetSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastUpdatedDateTime = "LastUpdatedDateTime"
         case testSetName = "TestSetName"
         public var description: String { return self.rawValue }
     }
 
-    public enum TestSetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TestSetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleting = "Deleting"
         case importing = "Importing"
         case pendingAnnotation = "PendingAnnotation"
@@ -665,19 +684,19 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum TimeDimension: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimeDimension: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case days = "Days"
         case hours = "Hours"
         case weeks = "Weeks"
         public var description: String { return self.rawValue }
     }
 
-    public enum TranscriptFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum TranscriptFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lex = "Lex"
         public var description: String { return self.rawValue }
     }
 
-    public enum UtteranceContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UtteranceContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case customPayload = "CustomPayload"
         case imageResponseCard = "ImageResponseCard"
         case plainText = "PlainText"
@@ -685,7 +704,7 @@ extension LexModelsV2 {
         public var description: String { return self.rawValue }
     }
 
-    public enum VoiceEngine: String, CustomStringConvertible, Codable, Sendable {
+    public enum VoiceEngine: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case neural = "neural"
         case standard = "standard"
         public var description: String { return self.rawValue }
@@ -1545,10 +1564,13 @@ extension LexModelsV2 {
         public let destination: AudioLogDestination
         /// Determines whether audio logging in enabled for the bot.
         public let enabled: Bool
+        /// The option to enable selective conversation log capture for audio.
+        public let selectiveLoggingEnabled: Bool?
 
-        public init(destination: AudioLogDestination, enabled: Bool) {
+        public init(destination: AudioLogDestination, enabled: Bool, selectiveLoggingEnabled: Bool? = nil) {
             self.destination = destination
             self.enabled = enabled
+            self.selectiveLoggingEnabled = selectiveLoggingEnabled
         }
 
         public func validate(name: String) throws {
@@ -1558,6 +1580,7 @@ extension LexModelsV2 {
         private enum CodingKeys: String, CodingKey {
             case destination = "destination"
             case enabled = "enabled"
+            case selectiveLoggingEnabled = "selectiveLoggingEnabled"
         }
     }
 
@@ -1793,6 +1816,23 @@ extension LexModelsV2 {
             case errors = "errors"
             case localeId = "localeId"
             case resources = "resources"
+        }
+    }
+
+    public struct BedrockModelSpecification: AWSEncodableShape & AWSDecodableShape {
+        /// The ARN of the foundation model used in descriptive bot building.
+        public let modelArn: String
+
+        public init(modelArn: String) {
+            self.modelArn = modelArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.modelArn, name: "modelArn", parent: name, pattern: "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model\\/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case modelArn = "modelArn"
         }
     }
 
@@ -2474,6 +2514,27 @@ extension LexModelsV2 {
         }
     }
 
+    public struct BuildtimeSettings: AWSEncodableShape & AWSDecodableShape {
+        /// An object containing specifications for the descriptive bot building feature.
+        public let descriptiveBotBuilder: DescriptiveBotBuilderSpecification?
+        public let sampleUtteranceGeneration: SampleUtteranceGenerationSpecification?
+
+        public init(descriptiveBotBuilder: DescriptiveBotBuilderSpecification? = nil, sampleUtteranceGeneration: SampleUtteranceGenerationSpecification? = nil) {
+            self.descriptiveBotBuilder = descriptiveBotBuilder
+            self.sampleUtteranceGeneration = sampleUtteranceGeneration
+        }
+
+        public func validate(name: String) throws {
+            try self.descriptiveBotBuilder?.validate(name: "\(name).descriptiveBotBuilder")
+            try self.sampleUtteranceGeneration?.validate(name: "\(name).sampleUtteranceGeneration")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case descriptiveBotBuilder = "descriptiveBotBuilder"
+            case sampleUtteranceGeneration = "sampleUtteranceGeneration"
+        }
+    }
+
     public struct BuiltInIntentSortBy: AWSEncodableShape {
         /// The attribute to use to sort the list of built-in intents.
         public let attribute: BuiltInIntentSortAttribute
@@ -3033,6 +3094,7 @@ extension LexModelsV2 {
         public let botVersion: String
         /// A description of the bot locale. Use this to help identify the bot locale in lists.
         public let description: String?
+        public let generativeAISettings: GenerativeAISettings?
         /// The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see Supported languages.
         public let localeId: String
         /// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the RecognizeText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC
@@ -3040,10 +3102,11 @@ extension LexModelsV2 {
         /// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
         public let voiceSettings: VoiceSettings?
 
-        public init(botId: String, botVersion: String, description: String? = nil, localeId: String, nluIntentConfidenceThreshold: Double, voiceSettings: VoiceSettings? = nil) {
+        public init(botId: String, botVersion: String, description: String? = nil, generativeAISettings: GenerativeAISettings? = nil, localeId: String, nluIntentConfidenceThreshold: Double, voiceSettings: VoiceSettings? = nil) {
             self.botId = botId
             self.botVersion = botVersion
             self.description = description
+            self.generativeAISettings = generativeAISettings
             self.localeId = localeId
             self.nluIntentConfidenceThreshold = nluIntentConfidenceThreshold
             self.voiceSettings = voiceSettings
@@ -3057,12 +3120,14 @@ extension LexModelsV2 {
             try self.validate(self.botVersion, name: "botVersion", parent: name, min: 5)
             try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^DRAFT$")
             try self.validate(self.description, name: "description", parent: name, max: 200)
+            try self.generativeAISettings?.validate(name: "\(name).generativeAISettings")
             try self.validate(self.nluIntentConfidenceThreshold, name: "nluIntentConfidenceThreshold", parent: name, max: 1.0)
             try self.validate(self.nluIntentConfidenceThreshold, name: "nluIntentConfidenceThreshold", parent: name, min: 0.0)
         }
 
         private enum CodingKeys: String, CodingKey {
             case description = "description"
+            case generativeAISettings = "generativeAISettings"
             case localeId = "localeId"
             case nluIntentConfidenceThreshold = "nluIntentConfidenceThreshold"
             case voiceSettings = "voiceSettings"
@@ -3080,6 +3145,7 @@ extension LexModelsV2 {
         public let creationDateTime: Date?
         /// The specified description of the bot locale.
         public let description: String?
+        public let generativeAISettings: GenerativeAISettings?
         /// The specified locale identifier.
         public let localeId: String?
         /// The specified locale name.
@@ -3089,12 +3155,13 @@ extension LexModelsV2 {
         /// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.
         public let voiceSettings: VoiceSettings?
 
-        public init(botId: String? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, voiceSettings: VoiceSettings? = nil) {
+        public init(botId: String? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, generativeAISettings: GenerativeAISettings? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, voiceSettings: VoiceSettings? = nil) {
             self.botId = botId
             self.botLocaleStatus = botLocaleStatus
             self.botVersion = botVersion
             self.creationDateTime = creationDateTime
             self.description = description
+            self.generativeAISettings = generativeAISettings
             self.localeId = localeId
             self.localeName = localeName
             self.nluIntentConfidenceThreshold = nluIntentConfidenceThreshold
@@ -3107,6 +3174,7 @@ extension LexModelsV2 {
             case botVersion = "botVersion"
             case creationDateTime = "creationDateTime"
             case description = "description"
+            case generativeAISettings = "generativeAISettings"
             case localeId = "localeId"
             case localeName = "localeName"
             case nluIntentConfidenceThreshold = "nluIntentConfidenceThreshold"
@@ -4977,6 +5045,8 @@ extension LexModelsV2 {
         public let description: String?
         /// if botLocaleStatus is Failed, Amazon Lex explains why it failed to build the bot.
         public let failureReasons: [String]?
+        /// Contains settings for Amazon Bedrock's generative AI features for your bot locale.
+        public let generativeAISettings: GenerativeAISettings?
         /// The number of intents defined for the locale.
         public let intentsCount: Int?
         /// The date and time that the locale was last submitted for building.
@@ -4996,7 +5066,7 @@ extension LexModelsV2 {
         /// The Amazon Polly voice Amazon Lex uses for voice interaction with the user.
         public let voiceSettings: VoiceSettings?
 
-        public init(botId: String? = nil, botLocaleHistoryEvents: [BotLocaleHistoryEvent]? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, failureReasons: [String]? = nil, intentsCount: Int? = nil, lastBuildSubmittedDateTime: Date? = nil, lastUpdatedDateTime: Date? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, recommendedActions: [String]? = nil, slotTypesCount: Int? = nil, voiceSettings: VoiceSettings? = nil) {
+        public init(botId: String? = nil, botLocaleHistoryEvents: [BotLocaleHistoryEvent]? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, failureReasons: [String]? = nil, generativeAISettings: GenerativeAISettings? = nil, intentsCount: Int? = nil, lastBuildSubmittedDateTime: Date? = nil, lastUpdatedDateTime: Date? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, recommendedActions: [String]? = nil, slotTypesCount: Int? = nil, voiceSettings: VoiceSettings? = nil) {
             self.botId = botId
             self.botLocaleHistoryEvents = botLocaleHistoryEvents
             self.botLocaleStatus = botLocaleStatus
@@ -5004,6 +5074,7 @@ extension LexModelsV2 {
             self.creationDateTime = creationDateTime
             self.description = description
             self.failureReasons = failureReasons
+            self.generativeAISettings = generativeAISettings
             self.intentsCount = intentsCount
             self.lastBuildSubmittedDateTime = lastBuildSubmittedDateTime
             self.lastUpdatedDateTime = lastUpdatedDateTime
@@ -5023,6 +5094,7 @@ extension LexModelsV2 {
             case creationDateTime = "creationDateTime"
             case description = "description"
             case failureReasons = "failureReasons"
+            case generativeAISettings = "generativeAISettings"
             case intentsCount = "intentsCount"
             case lastBuildSubmittedDateTime = "lastBuildSubmittedDateTime"
             case lastUpdatedDateTime = "lastUpdatedDateTime"
@@ -5146,6 +5218,98 @@ extension LexModelsV2 {
         }
 
         private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DescribeBotResourceGenerationRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "botId", location: .uri("botId")),
+            AWSMemberEncoding(label: "botVersion", location: .uri("botVersion")),
+            AWSMemberEncoding(label: "generationId", location: .uri("generationId")),
+            AWSMemberEncoding(label: "localeId", location: .uri("localeId"))
+        ]
+
+        /// The unique identifier of the bot for which to return the generation details.
+        public let botId: String
+        /// The version of the bot for which to return the generation details.
+        public let botVersion: String
+        /// The unique identifier of the generation request for which to  return the generation details.
+        public let generationId: String
+        /// The locale of the bot for which to return the generation details.
+        public let localeId: String
+
+        public init(botId: String, botVersion: String, generationId: String, localeId: String) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.generationId = generationId
+            self.localeId = localeId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.botId, name: "botId", parent: name, max: 10)
+            try self.validate(self.botId, name: "botId", parent: name, min: 10)
+            try self.validate(self.botId, name: "botId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+            try self.validate(self.botVersion, name: "botVersion", parent: name, max: 5)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, min: 1)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^(DRAFT|[0-9]+)$")
+            try self.validate(self.generationId, name: "generationId", parent: name, max: 10)
+            try self.validate(self.generationId, name: "generationId", parent: name, min: 10)
+            try self.validate(self.generationId, name: "generationId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DescribeBotResourceGenerationResponse: AWSDecodableShape {
+        /// The unique identifier of the bot for which the generation request was  made.
+        public let botId: String?
+        /// The version of the bot for which the generation request was made.
+        public let botVersion: String?
+        /// The date and time at which the item was generated.
+        public let creationDateTime: Date?
+        /// A list of reasons why the generation of bot resources through natural language description failed.
+        public let failureReasons: [String]?
+        /// The Amazon S3 location of the generated bot locale configuration.
+        public let generatedBotLocaleUrl: String?
+        /// The generation ID for which to return the generation details.
+        public let generationId: String?
+        /// The prompt used in the generation request.
+        public let generationInputPrompt: String?
+        /// The status of the generation request.
+        public let generationStatus: GenerationStatus?
+        /// The date and time at which the generated item was updated.
+        public let lastUpdatedDateTime: Date?
+        /// The locale of the bot for which the generation request was made.
+        public let localeId: String?
+        /// The ARN of the model used to generate the bot resources.
+        public let modelArn: String?
+
+        public init(botId: String? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, failureReasons: [String]? = nil, generatedBotLocaleUrl: String? = nil, generationId: String? = nil, generationInputPrompt: String? = nil, generationStatus: GenerationStatus? = nil, lastUpdatedDateTime: Date? = nil, localeId: String? = nil, modelArn: String? = nil) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.creationDateTime = creationDateTime
+            self.failureReasons = failureReasons
+            self.generatedBotLocaleUrl = generatedBotLocaleUrl
+            self.generationId = generationId
+            self.generationInputPrompt = generationInputPrompt
+            self.generationStatus = generationStatus
+            self.lastUpdatedDateTime = lastUpdatedDateTime
+            self.localeId = localeId
+            self.modelArn = modelArn
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case botId = "botId"
+            case botVersion = "botVersion"
+            case creationDateTime = "creationDateTime"
+            case failureReasons = "failureReasons"
+            case generatedBotLocaleUrl = "generatedBotLocaleUrl"
+            case generationId = "generationId"
+            case generationInputPrompt = "generationInputPrompt"
+            case generationStatus = "generationStatus"
+            case lastUpdatedDateTime = "lastUpdatedDateTime"
+            case localeId = "localeId"
+            case modelArn = "modelArn"
+        }
     }
 
     public struct DescribeBotResponse: AWSDecodableShape {
@@ -6142,6 +6306,27 @@ extension LexModelsV2 {
         }
     }
 
+    public struct DescriptiveBotBuilderSpecification: AWSEncodableShape & AWSDecodableShape {
+        /// An object containing information about the Amazon Bedrock model used to interpret the prompt used in descriptive bot building.
+        public let bedrockModelSpecification: BedrockModelSpecification?
+        /// Specifies whether the descriptive bot building feature is activated or not.
+        public let enabled: Bool
+
+        public init(bedrockModelSpecification: BedrockModelSpecification? = nil, enabled: Bool) {
+            self.bedrockModelSpecification = bedrockModelSpecification
+            self.enabled = enabled
+        }
+
+        public func validate(name: String) throws {
+            try self.bedrockModelSpecification?.validate(name: "\(name).bedrockModelSpecification")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case bedrockModelSpecification = "bedrockModelSpecification"
+            case enabled = "enabled"
+        }
+    }
+
     public struct DialogAction: AWSEncodableShape & AWSDecodableShape {
         /// If the dialog action is ElicitSlot, defines the slot to elicit from the user.
         public let slotToElicit: String?
@@ -6582,6 +6767,137 @@ extension LexModelsV2 {
             case startResponse = "startResponse"
             case timeoutInSeconds = "timeoutInSeconds"
             case updateResponse = "updateResponse"
+        }
+    }
+
+    public struct GenerateBotElementRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "botId", location: .uri("botId")),
+            AWSMemberEncoding(label: "botVersion", location: .uri("botVersion")),
+            AWSMemberEncoding(label: "localeId", location: .uri("localeId"))
+        ]
+
+        /// The bot unique Id for the bot request to generate utterances.
+        public let botId: String
+        /// The bot version for the bot request to generate utterances.
+        public let botVersion: String
+        /// The intent unique Id for the bot request to generate utterances.
+        public let intentId: String
+        /// The unique locale Id for the bot request to generate utterances.
+        public let localeId: String
+
+        public init(botId: String, botVersion: String, intentId: String, localeId: String) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.intentId = intentId
+            self.localeId = localeId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.botId, name: "botId", parent: name, max: 10)
+            try self.validate(self.botId, name: "botId", parent: name, min: 10)
+            try self.validate(self.botId, name: "botId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+            try self.validate(self.botVersion, name: "botVersion", parent: name, max: 5)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, min: 1)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^(DRAFT|[0-9]+)$")
+            try self.validate(self.intentId, name: "intentId", parent: name, max: 10)
+            try self.validate(self.intentId, name: "intentId", parent: name, min: 10)
+            try self.validate(self.intentId, name: "intentId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case intentId = "intentId"
+        }
+    }
+
+    public struct GenerateBotElementResponse: AWSDecodableShape {
+        /// The unique bot Id for the bot which received the response.
+        public let botId: String?
+        /// The unique bot version for the bot which received the response.
+        public let botVersion: String?
+        /// The unique intent Id for the bot which received the response.
+        public let intentId: String?
+        /// The unique locale Id for the bot which received the response.
+        public let localeId: String?
+        /// The sample utterances for the bot which received the response.
+        public let sampleUtterances: [SampleUtterance]?
+
+        public init(botId: String? = nil, botVersion: String? = nil, intentId: String? = nil, localeId: String? = nil, sampleUtterances: [SampleUtterance]? = nil) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.intentId = intentId
+            self.localeId = localeId
+            self.sampleUtterances = sampleUtterances
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case botId = "botId"
+            case botVersion = "botVersion"
+            case intentId = "intentId"
+            case localeId = "localeId"
+            case sampleUtterances = "sampleUtterances"
+        }
+    }
+
+    public struct GenerationSortBy: AWSEncodableShape {
+        /// The attribute by which to sort the generation request information. You can sort by the following attributes.    creationStartTime – The time at which the generation request was created.    lastUpdatedTime – The time at which the generation request was last updated.
+        public let attribute: GenerationSortByAttribute
+        /// The order by which to sort the generation request information.
+        public let order: SortOrder
+
+        public init(attribute: GenerationSortByAttribute, order: SortOrder) {
+            self.attribute = attribute
+            self.order = order
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case attribute = "attribute"
+            case order = "order"
+        }
+    }
+
+    public struct GenerationSummary: AWSDecodableShape {
+        /// The date and time at which the generation request was made.
+        public let creationDateTime: Date?
+        /// The unique identifier of the generation request.
+        public let generationId: String?
+        /// The status of the generation request.
+        public let generationStatus: GenerationStatus?
+        /// The date and time at which the generation request was last updated.
+        public let lastUpdatedDateTime: Date?
+
+        public init(creationDateTime: Date? = nil, generationId: String? = nil, generationStatus: GenerationStatus? = nil, lastUpdatedDateTime: Date? = nil) {
+            self.creationDateTime = creationDateTime
+            self.generationId = generationId
+            self.generationStatus = generationStatus
+            self.lastUpdatedDateTime = lastUpdatedDateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationDateTime = "creationDateTime"
+            case generationId = "generationId"
+            case generationStatus = "generationStatus"
+            case lastUpdatedDateTime = "lastUpdatedDateTime"
+        }
+    }
+
+    public struct GenerativeAISettings: AWSEncodableShape & AWSDecodableShape {
+        public let buildtimeSettings: BuildtimeSettings?
+        public let runtimeSettings: RuntimeSettings?
+
+        public init(buildtimeSettings: BuildtimeSettings? = nil, runtimeSettings: RuntimeSettings? = nil) {
+            self.buildtimeSettings = buildtimeSettings
+            self.runtimeSettings = runtimeSettings
+        }
+
+        public func validate(name: String) throws {
+            try self.buildtimeSettings?.validate(name: "\(name).buildtimeSettings")
+            try self.runtimeSettings?.validate(name: "\(name).runtimeSettings")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case buildtimeSettings = "buildtimeSettings"
+            case runtimeSettings = "runtimeSettings"
         }
     }
 
@@ -7614,6 +7930,82 @@ extension LexModelsV2 {
             case botId = "botId"
             case botRecommendationSummaries = "botRecommendationSummaries"
             case botVersion = "botVersion"
+            case localeId = "localeId"
+            case nextToken = "nextToken"
+        }
+    }
+
+    public struct ListBotResourceGenerationsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "botId", location: .uri("botId")),
+            AWSMemberEncoding(label: "botVersion", location: .uri("botVersion")),
+            AWSMemberEncoding(label: "localeId", location: .uri("localeId"))
+        ]
+
+        /// The unique identifier of the bot whose generation  requests you want to view.
+        public let botId: String
+        /// The version of the bot whose generation  requests you want to view.
+        public let botVersion: String
+        /// The locale of the bot whose generation  requests you want to view.
+        public let localeId: String
+        /// The maximum number of results to return in the response.
+        public let maxResults: Int?
+        /// If the total number of results is greater than the number  specified in the maxResults, the response returns a token  in the nextToken field. Use this token when making a request to  return the next batch of results.
+        public let nextToken: String?
+        /// An object containing information about the attribute and the  method by which to sort the results
+        public let sortBy: GenerationSortBy?
+
+        public init(botId: String, botVersion: String, localeId: String, maxResults: Int? = nil, nextToken: String? = nil, sortBy: GenerationSortBy? = nil) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.localeId = localeId
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.sortBy = sortBy
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.botId, name: "botId", parent: name, max: 10)
+            try self.validate(self.botId, name: "botId", parent: name, min: 10)
+            try self.validate(self.botId, name: "botId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+            try self.validate(self.botVersion, name: "botVersion", parent: name, max: 5)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, min: 1)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^(DRAFT|[0-9]+)$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxResults = "maxResults"
+            case nextToken = "nextToken"
+            case sortBy = "sortBy"
+        }
+    }
+
+    public struct ListBotResourceGenerationsResponse: AWSDecodableShape {
+        /// The unique identifier of the bot for which the generation requests were made.
+        public let botId: String?
+        /// The version of the bot for which the generation requests were made.
+        public let botVersion: String?
+        /// A list of objects, each containing information about a generation request for the bot locale.
+        public let generationSummaries: [GenerationSummary]?
+        /// The locale of the bot for which the generation requests were made.
+        public let localeId: String?
+        /// If the total number of results is greater than the number  specified in the maxResults, the response returns a token  in the nextToken field. Use this token when making a request to  return the next batch of results.
+        public let nextToken: String?
+
+        public init(botId: String? = nil, botVersion: String? = nil, generationSummaries: [GenerationSummary]? = nil, localeId: String? = nil, nextToken: String? = nil) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.generationSummaries = generationSummaries
+            self.localeId = localeId
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case botId = "botId"
+            case botVersion = "botVersion"
+            case generationSummaries = "generationSummaries"
             case localeId = "localeId"
             case nextToken = "nextToken"
         }
@@ -9762,6 +10154,23 @@ extension LexModelsV2 {
         }
     }
 
+    public struct RuntimeSettings: AWSEncodableShape & AWSDecodableShape {
+        /// An object containing specifications for the assisted slot resolution feature.
+        public let slotResolutionImprovement: SlotResolutionImprovementSpecification?
+
+        public init(slotResolutionImprovement: SlotResolutionImprovementSpecification? = nil) {
+            self.slotResolutionImprovement = slotResolutionImprovement
+        }
+
+        public func validate(name: String) throws {
+            try self.slotResolutionImprovement?.validate(name: "\(name).slotResolutionImprovement")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case slotResolutionImprovement = "slotResolutionImprovement"
+        }
+    }
+
     public struct S3BucketLogDestination: AWSEncodableShape & AWSDecodableShape {
         /// The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
         public let kmsKeyArn: String?
@@ -9860,6 +10269,26 @@ extension LexModelsV2 {
 
         private enum CodingKeys: String, CodingKey {
             case utterance = "utterance"
+        }
+    }
+
+    public struct SampleUtteranceGenerationSpecification: AWSEncodableShape & AWSDecodableShape {
+        public let bedrockModelSpecification: BedrockModelSpecification?
+        /// Specifies whether to enable sample utterance generation or not.
+        public let enabled: Bool
+
+        public init(bedrockModelSpecification: BedrockModelSpecification? = nil, enabled: Bool) {
+            self.bedrockModelSpecification = bedrockModelSpecification
+            self.enabled = enabled
+        }
+
+        public func validate(name: String) throws {
+            try self.bedrockModelSpecification?.validate(name: "\(name).bedrockModelSpecification")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case bedrockModelSpecification = "bedrockModelSpecification"
+            case enabled = "enabled"
         }
     }
 
@@ -10218,6 +10647,40 @@ extension LexModelsV2 {
         }
     }
 
+    public struct SlotResolutionImprovementSpecification: AWSEncodableShape & AWSDecodableShape {
+        /// An object containing information about the Amazon Bedrock model used to assist slot resolution.
+        public let bedrockModelSpecification: BedrockModelSpecification?
+        /// Specifies whether assisted slot resolution is turned on or off.
+        public let enabled: Bool
+
+        public init(bedrockModelSpecification: BedrockModelSpecification? = nil, enabled: Bool) {
+            self.bedrockModelSpecification = bedrockModelSpecification
+            self.enabled = enabled
+        }
+
+        public func validate(name: String) throws {
+            try self.bedrockModelSpecification?.validate(name: "\(name).bedrockModelSpecification")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case bedrockModelSpecification = "bedrockModelSpecification"
+            case enabled = "enabled"
+        }
+    }
+
+    public struct SlotResolutionSetting: AWSEncodableShape & AWSDecodableShape {
+        /// Specifies whether assisted slot resolution is turned on for the slot or not. If the value is EnhancedFallback, assisted slot resolution is activated when Amazon Lex defaults to the AMAZON.FallbackIntent. If the value is Default, assisted slot resolution is turned off.
+        public let slotResolutionStrategy: SlotResolutionStrategy
+
+        public init(slotResolutionStrategy: SlotResolutionStrategy) {
+            self.slotResolutionStrategy = slotResolutionStrategy
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case slotResolutionStrategy = "slotResolutionStrategy"
+        }
+    }
+
     public struct SlotResolutionTestResultItem: AWSDecodableShape {
         /// A result for slot resolution in the results of a test execution.
         public let resultCounts: SlotResolutionTestResultItemCounts
@@ -10458,14 +10921,17 @@ extension LexModelsV2 {
         public let slotCaptureSetting: SlotCaptureSetting?
         /// Specifies whether the slot is required or optional.
         public let slotConstraint: SlotConstraint
+        /// An object containing information about whether assisted slot resolution is turned on for the slot or not.
+        public let slotResolutionSetting: SlotResolutionSetting?
         public let waitAndContinueSpecification: WaitAndContinueSpecification?
 
-        public init(defaultValueSpecification: SlotDefaultValueSpecification? = nil, promptSpecification: PromptSpecification? = nil, sampleUtterances: [SampleUtterance]? = nil, slotCaptureSetting: SlotCaptureSetting? = nil, slotConstraint: SlotConstraint, waitAndContinueSpecification: WaitAndContinueSpecification? = nil) {
+        public init(defaultValueSpecification: SlotDefaultValueSpecification? = nil, promptSpecification: PromptSpecification? = nil, sampleUtterances: [SampleUtterance]? = nil, slotCaptureSetting: SlotCaptureSetting? = nil, slotConstraint: SlotConstraint, slotResolutionSetting: SlotResolutionSetting? = nil, waitAndContinueSpecification: WaitAndContinueSpecification? = nil) {
             self.defaultValueSpecification = defaultValueSpecification
             self.promptSpecification = promptSpecification
             self.sampleUtterances = sampleUtterances
             self.slotCaptureSetting = slotCaptureSetting
             self.slotConstraint = slotConstraint
+            self.slotResolutionSetting = slotResolutionSetting
             self.waitAndContinueSpecification = waitAndContinueSpecification
         }
 
@@ -10482,6 +10948,7 @@ extension LexModelsV2 {
             case sampleUtterances = "sampleUtterances"
             case slotCaptureSetting = "slotCaptureSetting"
             case slotConstraint = "slotConstraint"
+            case slotResolutionSetting = "slotResolutionSetting"
             case waitAndContinueSpecification = "waitAndContinueSpecification"
         }
     }
@@ -10662,6 +11129,82 @@ extension LexModelsV2 {
             case encryptionSetting = "encryptionSetting"
             case localeId = "localeId"
             case transcriptSourceSetting = "transcriptSourceSetting"
+        }
+    }
+
+    public struct StartBotResourceGenerationRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "botId", location: .uri("botId")),
+            AWSMemberEncoding(label: "botVersion", location: .uri("botVersion")),
+            AWSMemberEncoding(label: "localeId", location: .uri("localeId"))
+        ]
+
+        /// The unique identifier of the bot for which to generate intents and slot types.
+        public let botId: String
+        /// The version of the bot for which to generate intents and slot types.
+        public let botVersion: String
+        /// The prompt to generate intents and slot types for the bot locale. Your description should be both detailed and precise to help generate appropriate and sufficient intents for your bot. Include a list of actions to improve the intent creation process.
+        public let generationInputPrompt: String
+        /// The locale of the bot for which to generate intents and slot types.
+        public let localeId: String
+
+        public init(botId: String, botVersion: String, generationInputPrompt: String, localeId: String) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.generationInputPrompt = generationInputPrompt
+            self.localeId = localeId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.botId, name: "botId", parent: name, max: 10)
+            try self.validate(self.botId, name: "botId", parent: name, min: 10)
+            try self.validate(self.botId, name: "botId", parent: name, pattern: "^[0-9a-zA-Z]+$")
+            try self.validate(self.botVersion, name: "botVersion", parent: name, max: 5)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, min: 1)
+            try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^(DRAFT|[0-9]+)$")
+            try self.validate(self.generationInputPrompt, name: "generationInputPrompt", parent: name, max: 2000)
+            try self.validate(self.generationInputPrompt, name: "generationInputPrompt", parent: name, min: 100)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case generationInputPrompt = "generationInputPrompt"
+        }
+    }
+
+    public struct StartBotResourceGenerationResponse: AWSDecodableShape {
+        /// The unique identifier of the bot for which the generation request was made.
+        public let botId: String?
+        /// The version of the bot for which the generation request was made.
+        public let botVersion: String?
+        /// The date and time at which the generation request was made.
+        public let creationDateTime: Date?
+        /// The unique identifier of the generation request.
+        public let generationId: String?
+        /// The prompt that was used generate intents and slot types for the bot locale.
+        public let generationInputPrompt: String?
+        /// The status of the generation request.
+        public let generationStatus: GenerationStatus?
+        /// The locale of the bot for which the generation request was made.
+        public let localeId: String?
+
+        public init(botId: String? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, generationId: String? = nil, generationInputPrompt: String? = nil, generationStatus: GenerationStatus? = nil, localeId: String? = nil) {
+            self.botId = botId
+            self.botVersion = botVersion
+            self.creationDateTime = creationDateTime
+            self.generationId = generationId
+            self.generationInputPrompt = generationInputPrompt
+            self.generationStatus = generationStatus
+            self.localeId = localeId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case botId = "botId"
+            case botVersion = "botVersion"
+            case creationDateTime = "creationDateTime"
+            case generationId = "generationId"
+            case generationInputPrompt = "generationInputPrompt"
+            case generationStatus = "generationStatus"
+            case localeId = "localeId"
         }
     }
 
@@ -11638,10 +12181,13 @@ extension LexModelsV2 {
         public let destination: TextLogDestination
         /// Determines whether conversation logs should be stored for an alias.
         public let enabled: Bool
+        /// The option to enable selective conversation log capture for text.
+        public let selectiveLoggingEnabled: Bool?
 
-        public init(destination: TextLogDestination, enabled: Bool) {
+        public init(destination: TextLogDestination, enabled: Bool, selectiveLoggingEnabled: Bool? = nil) {
             self.destination = destination
             self.enabled = enabled
+            self.selectiveLoggingEnabled = selectiveLoggingEnabled
         }
 
         public func validate(name: String) throws {
@@ -11651,6 +12197,7 @@ extension LexModelsV2 {
         private enum CodingKeys: String, CodingKey {
             case destination = "destination"
             case enabled = "enabled"
+            case selectiveLoggingEnabled = "selectiveLoggingEnabled"
         }
     }
 
@@ -11863,6 +12410,8 @@ extension LexModelsV2 {
         public let botVersion: String
         /// The new description of the locale.
         public let description: String?
+        /// Contains settings for generative AI features powered by Amazon Bedrock for your bot locale. Use this object to turn generative AI features on and off. Pricing  may differ if you turn a feature on. For more information, see LINK.
+        public let generativeAISettings: GenerativeAISettings?
         /// The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see Supported languages.
         public let localeId: String
         /// The new confidence threshold where Amazon Lex inserts the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents in the list of possible intents for an utterance.
@@ -11870,10 +12419,11 @@ extension LexModelsV2 {
         /// The new Amazon Polly voice Amazon Lex should use for voice interaction with the user.
         public let voiceSettings: VoiceSettings?
 
-        public init(botId: String, botVersion: String, description: String? = nil, localeId: String, nluIntentConfidenceThreshold: Double, voiceSettings: VoiceSettings? = nil) {
+        public init(botId: String, botVersion: String, description: String? = nil, generativeAISettings: GenerativeAISettings? = nil, localeId: String, nluIntentConfidenceThreshold: Double, voiceSettings: VoiceSettings? = nil) {
             self.botId = botId
             self.botVersion = botVersion
             self.description = description
+            self.generativeAISettings = generativeAISettings
             self.localeId = localeId
             self.nluIntentConfidenceThreshold = nluIntentConfidenceThreshold
             self.voiceSettings = voiceSettings
@@ -11887,12 +12437,14 @@ extension LexModelsV2 {
             try self.validate(self.botVersion, name: "botVersion", parent: name, min: 5)
             try self.validate(self.botVersion, name: "botVersion", parent: name, pattern: "^DRAFT$")
             try self.validate(self.description, name: "description", parent: name, max: 200)
+            try self.generativeAISettings?.validate(name: "\(name).generativeAISettings")
             try self.validate(self.nluIntentConfidenceThreshold, name: "nluIntentConfidenceThreshold", parent: name, max: 1.0)
             try self.validate(self.nluIntentConfidenceThreshold, name: "nluIntentConfidenceThreshold", parent: name, min: 0.0)
         }
 
         private enum CodingKeys: String, CodingKey {
             case description = "description"
+            case generativeAISettings = "generativeAISettings"
             case nluIntentConfidenceThreshold = "nluIntentConfidenceThreshold"
             case voiceSettings = "voiceSettings"
         }
@@ -11911,6 +12463,8 @@ extension LexModelsV2 {
         public let description: String?
         /// If the botLocaleStatus is Failed, the failureReasons field lists the errors that occurred while building the bot.
         public let failureReasons: [String]?
+        /// Contains settings for generative AI features powered by Amazon Bedrock for your bot locale.
+        public let generativeAISettings: GenerativeAISettings?
         /// A timestamp of the date and time that the locale was last updated.
         public let lastUpdatedDateTime: Date?
         /// The language and locale of the updated bot locale.
@@ -11924,13 +12478,14 @@ extension LexModelsV2 {
         /// The updated Amazon Polly voice to use for voice interaction with the user.
         public let voiceSettings: VoiceSettings?
 
-        public init(botId: String? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, failureReasons: [String]? = nil, lastUpdatedDateTime: Date? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, recommendedActions: [String]? = nil, voiceSettings: VoiceSettings? = nil) {
+        public init(botId: String? = nil, botLocaleStatus: BotLocaleStatus? = nil, botVersion: String? = nil, creationDateTime: Date? = nil, description: String? = nil, failureReasons: [String]? = nil, generativeAISettings: GenerativeAISettings? = nil, lastUpdatedDateTime: Date? = nil, localeId: String? = nil, localeName: String? = nil, nluIntentConfidenceThreshold: Double? = nil, recommendedActions: [String]? = nil, voiceSettings: VoiceSettings? = nil) {
             self.botId = botId
             self.botLocaleStatus = botLocaleStatus
             self.botVersion = botVersion
             self.creationDateTime = creationDateTime
             self.description = description
             self.failureReasons = failureReasons
+            self.generativeAISettings = generativeAISettings
             self.lastUpdatedDateTime = lastUpdatedDateTime
             self.localeId = localeId
             self.localeName = localeName
@@ -11946,6 +12501,7 @@ extension LexModelsV2 {
             case creationDateTime = "creationDateTime"
             case description = "description"
             case failureReasons = "failureReasons"
+            case generativeAISettings = "generativeAISettings"
             case lastUpdatedDateTime = "lastUpdatedDateTime"
             case localeId = "localeId"
             case localeName = "localeName"

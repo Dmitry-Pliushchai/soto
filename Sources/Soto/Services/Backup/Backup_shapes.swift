@@ -26,7 +26,14 @@ import SotoCore
 extension Backup {
     // MARK: Enums
 
-    public enum BackupJobState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AggregationPeriod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case fourteenDays = "FOURTEEN_DAYS"
+        case oneDay = "ONE_DAY"
+        case sevenDays = "SEVEN_DAYS"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum BackupJobState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case aborting = "ABORTING"
         case completed = "COMPLETED"
@@ -39,7 +46,22 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum BackupVaultEvent: String, CustomStringConvertible, Codable, Sendable {
+    public enum BackupJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case aborted = "ABORTED"
+        case aborting = "ABORTING"
+        case aggregateAll = "AGGREGATE_ALL"
+        case any = "ANY"
+        case completed = "COMPLETED"
+        case created = "CREATED"
+        case expired = "EXPIRED"
+        case failed = "FAILED"
+        case partial = "PARTIAL"
+        case pending = "PENDING"
+        case running = "RUNNING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum BackupVaultEvent: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backupJobCompleted = "BACKUP_JOB_COMPLETED"
         case backupJobExpired = "BACKUP_JOB_EXPIRED"
         case backupJobFailed = "BACKUP_JOB_FAILED"
@@ -60,12 +82,12 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConditionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConditionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case stringequals = "STRINGEQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CopyJobState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CopyJobState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case created = "CREATED"
         case failed = "FAILED"
@@ -74,7 +96,22 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum LegalHoldStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CopyJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case aborted = "ABORTED"
+        case aborting = "ABORTING"
+        case aggregateAll = "AGGREGATE_ALL"
+        case any = "ANY"
+        case completed = "COMPLETED"
+        case completing = "COMPLETING"
+        case created = "CREATED"
+        case failed = "FAILED"
+        case failing = "FAILING"
+        case partial = "PARTIAL"
+        case running = "RUNNING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum LegalHoldStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case canceled = "CANCELED"
         case canceling = "CANCELING"
@@ -82,7 +119,7 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecoveryPointStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecoveryPointStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case deleting = "DELETING"
         case expired = "EXPIRED"
@@ -90,7 +127,26 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum RestoreJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RestoreDeletionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case deleting = "DELETING"
+        case failed = "FAILED"
+        case successful = "SUCCESSFUL"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum RestoreJobState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case aborted = "ABORTED"
+        case aggregateAll = "AGGREGATE_ALL"
+        case any = "ANY"
+        case completed = "COMPLETED"
+        case created = "CREATED"
+        case failed = "FAILED"
+        case pending = "PENDING"
+        case running = "RUNNING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum RestoreJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -99,21 +155,41 @@ extension Backup {
         public var description: String { return self.rawValue }
     }
 
-    public enum StorageClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum RestoreTestingRecoveryPointSelectionAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case latestWithinWindow = "LATEST_WITHIN_WINDOW"
+        case randomWithinWindow = "RANDOM_WITHIN_WINDOW"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum RestoreTestingRecoveryPointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case continuous = "CONTINUOUS"
+        case snapshot = "SNAPSHOT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum RestoreValidationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case failed = "FAILED"
+        case successful = "SUCCESSFUL"
+        case timedOut = "TIMED_OUT"
+        case validating = "VALIDATING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum StorageClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cold = "COLD"
         case deleted = "DELETED"
         case warm = "WARM"
         public var description: String { return self.rawValue }
     }
 
-    public enum VaultState: String, CustomStringConvertible, Codable, Sendable {
+    public enum VaultState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creating = "CREATING"
         case failed = "FAILED"
         public var description: String { return self.rawValue }
     }
 
-    public enum VaultType: String, CustomStringConvertible, Codable, Sendable {
+    public enum VaultType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case backupVault = "BACKUP_VAULT"
         case logicallyAirGappedBackupVault = "LOGICALLY_AIR_GAPPED_BACKUP_VAULT"
         public var description: String { return self.rawValue }
@@ -173,8 +249,12 @@ extension Backup {
         public let expectedCompletionDate: Date?
         /// Specifies the IAM role ARN used to create the target recovery point. IAM roles other than the default role must include either AWSBackup or AwsBackup in the role name. For example, arn:aws:iam::123456789012:role/AWSBackupRDSAccess. Role names without those strings lack permissions to perform backup jobs.
         public let iamRoleArn: String?
+        /// This is the date on which the backup  job was initiated.
+        public let initiationDate: Date?
         /// This is a boolean value indicating this is  a parent (composite) backup job.
         public let isParent: Bool?
+        /// This parameter is the job count for the specified  message category. Example strings may include AccessDenied,  SUCCESS, AGGREGATE_ALL, and  INVALIDPARAMETERS. See  Monitoring  for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let messageCategory: String?
         /// This uniquely identifies a request to Backup  to back up a resource. The return will be the  parent (composite) job ID.
         public let parentJobId: String?
         /// Contains an estimated percentage complete of a job at the time the job status was queried.
@@ -194,7 +274,7 @@ extension Backup {
         /// A detailed message explaining the status of the job to back up a resource.
         public let statusMessage: String?
 
-        public init(accountId: String? = nil, backupJobId: String? = nil, backupOptions: [String: String]? = nil, backupSizeInBytes: Int64? = nil, backupType: String? = nil, backupVaultArn: String? = nil, backupVaultName: String? = nil, bytesTransferred: Int64? = nil, completionDate: Date? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, expectedCompletionDate: Date? = nil, iamRoleArn: String? = nil, isParent: Bool? = nil, parentJobId: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, startBy: Date? = nil, state: BackupJobState? = nil, statusMessage: String? = nil) {
+        public init(accountId: String? = nil, backupJobId: String? = nil, backupOptions: [String: String]? = nil, backupSizeInBytes: Int64? = nil, backupType: String? = nil, backupVaultArn: String? = nil, backupVaultName: String? = nil, bytesTransferred: Int64? = nil, completionDate: Date? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, expectedCompletionDate: Date? = nil, iamRoleArn: String? = nil, initiationDate: Date? = nil, isParent: Bool? = nil, messageCategory: String? = nil, parentJobId: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, startBy: Date? = nil, state: BackupJobState? = nil, statusMessage: String? = nil) {
             self.accountId = accountId
             self.backupJobId = backupJobId
             self.backupOptions = backupOptions
@@ -208,7 +288,9 @@ extension Backup {
             self.creationDate = creationDate
             self.expectedCompletionDate = expectedCompletionDate
             self.iamRoleArn = iamRoleArn
+            self.initiationDate = initiationDate
             self.isParent = isParent
+            self.messageCategory = messageCategory
             self.parentJobId = parentJobId
             self.percentDone = percentDone
             self.recoveryPointArn = recoveryPointArn
@@ -234,7 +316,9 @@ extension Backup {
             case creationDate = "CreationDate"
             case expectedCompletionDate = "ExpectedCompletionDate"
             case iamRoleArn = "IamRoleArn"
+            case initiationDate = "InitiationDate"
             case isParent = "IsParent"
+            case messageCategory = "MessageCategory"
             case parentJobId = "ParentJobId"
             case percentDone = "PercentDone"
             case recoveryPointArn = "RecoveryPointArn"
@@ -244,6 +328,47 @@ extension Backup {
             case startBy = "StartBy"
             case state = "State"
             case statusMessage = "StatusMessage"
+        }
+    }
+
+    public struct BackupJobSummary: AWSDecodableShape {
+        /// The account ID that owns the jobs within the summary.
+        public let accountId: String?
+        /// The value as a number of jobs in a job summary.
+        public let count: Int?
+        /// The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let endTime: Date?
+        /// This parameter is the job count for the specified  message category. Example strings include AccessDenied,  Success, and InvalidParameters. See  Monitoring  for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let messageCategory: String?
+        /// The Amazon Web Services Regions within the job summary.
+        public let region: String?
+        /// This value is the job count for the specified resource type.  The request GetSupportedResourceTypes returns  strings for supported resource types.
+        public let resourceType: String?
+        /// The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let startTime: Date?
+        /// This value is job count for jobs  with the specified state.
+        public let state: BackupJobStatus?
+
+        public init(accountId: String? = nil, count: Int? = nil, endTime: Date? = nil, messageCategory: String? = nil, region: String? = nil, resourceType: String? = nil, startTime: Date? = nil, state: BackupJobStatus? = nil) {
+            self.accountId = accountId
+            self.count = count
+            self.endTime = endTime
+            self.messageCategory = messageCategory
+            self.region = region
+            self.resourceType = resourceType
+            self.startTime = startTime
+            self.state = state
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case accountId = "AccountId"
+            case count = "Count"
+            case endTime = "EndTime"
+            case messageCategory = "MessageCategory"
+            case region = "Region"
+            case resourceType = "ResourceType"
+            case startTime = "StartTime"
+            case state = "State"
         }
     }
 
@@ -468,11 +593,11 @@ extension Backup {
     }
 
     public struct BackupSelection: AWSEncodableShape & AWSDecodableShape {
-        /// A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals":  { "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition operators are case sensitive.  Conditions differs from ListOfTags as follows:   When you specify more than one condition, you only assign the resources that match ALL conditions (using AND logic).    Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports StringEquals.
+        /// A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals":  { "Key": "aws:ResourceTag/CreatedByCryo", "Value": "true" },. Condition operators are case sensitive.  Conditions differs from ListOfTags as follows:   When you specify more than one condition, you only assign the resources that match ALL conditions (using AND logic).    Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike. ListOfTags only supports StringEquals.
         public let conditions: Conditions?
         /// The ARN of the IAM role that Backup uses to authenticate when backing up the target resource; for example, arn:aws:iam::123456789012:role/S3Access.
         public let iamRoleArn: String
-        /// A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals":  { "ConditionKey": "aws:ResourceTag/CreatedByCryo", "ConditionValue": "true" },. Condition operators are case sensitive.  ListOfTags differs from Conditions as follows:   When you specify more than one condition, you assign all resources that match AT LEAST ONE condition (using OR logic).    ListOfTags only supports StringEquals. Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike.
+        /// A list of conditions that you define to assign resources to your backup plans using tags. For example, "StringEquals":  { "Key": "aws:ResourceTag/CreatedByCryo", "Value": "true" },. Condition operators are case sensitive.  ListOfTags differs from Conditions as follows:   When you specify more than one condition, you assign all resources that match AT LEAST ONE condition (using OR logic).    ListOfTags only supports StringEquals. Conditions supports StringEquals, StringLike, StringNotEquals, and StringNotLike.
         public let listOfTags: [Condition]?
         /// A list of Amazon Resource Names (ARNs) to exclude from a backup plan. The maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If you need to exclude many resources from a backup plan, consider a different resource selection strategy, such as assigning only one or a few resource types or refining your resource selection using tags.
         public let notResources: [String]?
@@ -776,6 +901,8 @@ extension Backup {
         public let iamRoleArn: String?
         /// This is a boolean value indicating this is  a parent (composite) copy job.
         public let isParent: Bool?
+        /// This parameter is the job count for the specified  message category. Example strings may include AccessDenied,  SUCCESS, AGGREGATE_ALL, and  InvalidParameters. See  Monitoring  for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum
+        public let messageCategory: String?
         /// This is the number of child (nested) copy jobs.
         public let numberOfChildJobs: Int64?
         /// This uniquely identifies a request to Backup  to copy a resource. The return will be the  parent (composite) job ID.
@@ -795,7 +922,7 @@ extension Backup {
         /// A detailed message explaining the status of the job to copy a resource.
         public let statusMessage: String?
 
-        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, childJobsInState: [CopyJobState: Int64]? = nil, completionDate: Date? = nil, compositeMemberIdentifier: String? = nil, copyJobId: String? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, destinationBackupVaultArn: String? = nil, destinationRecoveryPointArn: String? = nil, iamRoleArn: String? = nil, isParent: Bool? = nil, numberOfChildJobs: Int64? = nil, parentJobId: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, sourceBackupVaultArn: String? = nil, sourceRecoveryPointArn: String? = nil, state: CopyJobState? = nil, statusMessage: String? = nil) {
+        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, childJobsInState: [CopyJobState: Int64]? = nil, completionDate: Date? = nil, compositeMemberIdentifier: String? = nil, copyJobId: String? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, destinationBackupVaultArn: String? = nil, destinationRecoveryPointArn: String? = nil, iamRoleArn: String? = nil, isParent: Bool? = nil, messageCategory: String? = nil, numberOfChildJobs: Int64? = nil, parentJobId: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, sourceBackupVaultArn: String? = nil, sourceRecoveryPointArn: String? = nil, state: CopyJobState? = nil, statusMessage: String? = nil) {
             self.accountId = accountId
             self.backupSizeInBytes = backupSizeInBytes
             self.childJobsInState = childJobsInState
@@ -808,6 +935,7 @@ extension Backup {
             self.destinationRecoveryPointArn = destinationRecoveryPointArn
             self.iamRoleArn = iamRoleArn
             self.isParent = isParent
+            self.messageCategory = messageCategory
             self.numberOfChildJobs = numberOfChildJobs
             self.parentJobId = parentJobId
             self.resourceArn = resourceArn
@@ -832,6 +960,7 @@ extension Backup {
             case destinationRecoveryPointArn = "DestinationRecoveryPointArn"
             case iamRoleArn = "IamRoleArn"
             case isParent = "IsParent"
+            case messageCategory = "MessageCategory"
             case numberOfChildJobs = "NumberOfChildJobs"
             case parentJobId = "ParentJobId"
             case resourceArn = "ResourceArn"
@@ -841,6 +970,47 @@ extension Backup {
             case sourceRecoveryPointArn = "SourceRecoveryPointArn"
             case state = "State"
             case statusMessage = "StatusMessage"
+        }
+    }
+
+    public struct CopyJobSummary: AWSDecodableShape {
+        /// The account ID that owns the jobs within the summary.
+        public let accountId: String?
+        /// The value as a number of jobs in a job summary.
+        public let count: Int?
+        /// The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let endTime: Date?
+        /// This parameter is the job count for the specified  message category. Example strings include AccessDenied,  Success, and InvalidParameters. See  Monitoring  for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let messageCategory: String?
+        /// This is the Amazon Web Services Regions within the job summary.
+        public let region: String?
+        /// This value is the job count for the specified resource type.  The request GetSupportedResourceTypes returns  strings for supported resource types
+        public let resourceType: String?
+        /// The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let startTime: Date?
+        /// This value is job count for jobs  with the specified state.
+        public let state: CopyJobStatus?
+
+        public init(accountId: String? = nil, count: Int? = nil, endTime: Date? = nil, messageCategory: String? = nil, region: String? = nil, resourceType: String? = nil, startTime: Date? = nil, state: CopyJobStatus? = nil) {
+            self.accountId = accountId
+            self.count = count
+            self.endTime = endTime
+            self.messageCategory = messageCategory
+            self.region = region
+            self.resourceType = resourceType
+            self.startTime = startTime
+            self.state = state
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case accountId = "AccountId"
+            case count = "Count"
+            case endTime = "EndTime"
+            case messageCategory = "MessageCategory"
+            case region = "Region"
+            case resourceType = "ResourceType"
+            case startTime = "StartTime"
+            case state = "State"
         }
     }
 
@@ -1132,7 +1302,7 @@ extension Backup {
         public let backupVaultName: String
         /// These are the tags that will be included in the newly-created vault.
         public let backupVaultTags: [String: String]?
-        /// This is the ID of the creation request.
+        /// This is the ID of the creation request. This parameter is optional. If used, this parameter must contain  1 to 50 alphanumeric or '-_.' characters.
         public let creatorRequestId: String?
         /// This is the setting that specifies the maximum retention period that the vault retains its recovery points. If this parameter is not specified, Backup  does not enforce a maximum retention period on the recovery points in the vault (allowing indefinite storage). If specified, any backup or copy job to the vault must have a lifecycle policy with a retention period equal to or shorter than the maximum retention period. If the job  retention period is longer than that maximum retention period, then the vault fails the backup or copy job, and you should either modify your lifecycle settings or use a different vault.
         public let maxRetentionDays: Int64
@@ -1243,6 +1413,97 @@ extension Backup {
             case creationTime = "CreationTime"
             case reportPlanArn = "ReportPlanArn"
             case reportPlanName = "ReportPlanName"
+        }
+    }
+
+    public struct CreateRestoreTestingPlanInput: AWSEncodableShape {
+        /// This is a unique string that identifies the request and  allows failed requests to be retriedwithout the risk of running  the operation twice. This parameter is optional. If used, this  parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+        public let creatorRequestId: String?
+        /// A restore testing plan must contain a unique RestoreTestingPlanName string you create and must contain a ScheduleExpression cron. You may optionally include a StartWindowHours integer and a CreatorRequestId string. The RestoreTestingPlanName is a unique string that is the name of the restore testing plan. This cannot be changed after creation, and it must consist of only alphanumeric characters and underscores.
+        public let restoreTestingPlan: RestoreTestingPlanForCreate
+        /// Optional tags to include. A tag is a key-value pair you can use to  manage, filter, and search for your resources. Allowed characters include  UTF-8 letters,numbers, spaces, and the following characters:  + - = . _ : /.
+        public let tags: [String: String]?
+
+        public init(creatorRequestId: String? = nil, restoreTestingPlan: RestoreTestingPlanForCreate, tags: [String: String]? = nil) {
+            self.creatorRequestId = creatorRequestId
+            self.restoreTestingPlan = restoreTestingPlan
+            self.tags = tags
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creatorRequestId = "CreatorRequestId"
+            case restoreTestingPlan = "RestoreTestingPlan"
+            case tags = "Tags"
+        }
+    }
+
+    public struct CreateRestoreTestingPlanOutput: AWSDecodableShape {
+        /// The date and time a restore testing plan was created, in Unix format  and Coordinated Universal Time (UTC). The value of CreationTime  is accurate to milliseconds. For example, the value 1516925490.087 represents  Friday, January 26, 2018 12:11:30.087AM.
+        public let creationTime: Date
+        /// An Amazon Resource Name (ARN) that uniquely identifies the created  restore testing plan.
+        public let restoreTestingPlanArn: String
+        /// This unique string is the name of the restore testing plan. The name cannot be changed after creation. The name consists of only  alphanumeric characters and underscores. Maximum length is 50.
+        public let restoreTestingPlanName: String
+
+        public init(creationTime: Date, restoreTestingPlanArn: String, restoreTestingPlanName: String) {
+            self.creationTime = creationTime
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+        }
+    }
+
+    public struct CreateRestoreTestingSelectionInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName"))
+        ]
+
+        /// This is an optional unique string that identifies the request and allows  failed requests to be retried without the risk of running the operation  twice. If used, this parameter must contain  1 to 50 alphanumeric or '-_.' characters.
+        public let creatorRequestId: String?
+        /// Input the restore testing plan name that was returned from the  related CreateRestoreTestingPlan request.
+        public let restoreTestingPlanName: String
+        /// This consists of RestoreTestingSelectionName, ProtectedResourceType, and one of the following:    ProtectedResourceArns     ProtectedResourceConditions    Each protected resource type can have one single value. A restore testing selection can include a wildcard value ("*") for ProtectedResourceArns along with ProtectedResourceConditions. Alternatively, you can include up to 30 specific protected resource ARNs in ProtectedResourceArns.
+        public let restoreTestingSelection: RestoreTestingSelectionForCreate
+
+        public init(creatorRequestId: String? = nil, restoreTestingPlanName: String, restoreTestingSelection: RestoreTestingSelectionForCreate) {
+            self.creatorRequestId = creatorRequestId
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelection = restoreTestingSelection
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creatorRequestId = "CreatorRequestId"
+            case restoreTestingSelection = "RestoreTestingSelection"
+        }
+    }
+
+    public struct CreateRestoreTestingSelectionOutput: AWSDecodableShape {
+        /// This is the time the resource testing selection was created successfully.
+        public let creationTime: Date
+        /// This is the ARN of the restore testing plan with which the restore  testing selection is associated.
+        public let restoreTestingPlanArn: String
+        /// Unique string that is the name of the restore testing plan. The name cannot be changed after creation. The name consists of only  alphanumeric characters and underscores. Maximum length is 50.
+        public let restoreTestingPlanName: String
+        /// This is the unique name of the restore testing selection that belongs to  the related restore testing plan.
+        public let restoreTestingSelectionName: String
+
+        public init(creationTime: Date, restoreTestingPlanArn: String, restoreTestingPlanName: String, restoreTestingSelectionName: String) {
+            self.creationTime = creationTime
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case restoreTestingSelectionName = "RestoreTestingSelectionName"
         }
     }
 
@@ -1459,6 +1720,40 @@ extension Backup {
         private enum CodingKeys: CodingKey {}
     }
 
+    public struct DeleteRestoreTestingPlanInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName"))
+        ]
+
+        /// Required unique name of the restore testing plan you wish  to delete.
+        public let restoreTestingPlanName: String
+
+        public init(restoreTestingPlanName: String) {
+            self.restoreTestingPlanName = restoreTestingPlanName
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteRestoreTestingSelectionInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName")),
+            AWSMemberEncoding(label: "restoreTestingSelectionName", location: .uri("RestoreTestingSelectionName"))
+        ]
+
+        /// Required unique name of the restore testing plan that contains the  restore testing selection you wish to delete.
+        public let restoreTestingPlanName: String
+        /// Required unique name of the restore testing selection you  wish to delete.
+        public let restoreTestingSelectionName: String
+
+        public init(restoreTestingPlanName: String, restoreTestingSelectionName: String) {
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
     public struct DescribeBackupJobInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "backupJobId", location: .uri("BackupJobId"))
@@ -1503,8 +1798,12 @@ extension Backup {
         public let expectedCompletionDate: Date?
         /// Specifies the IAM role ARN used to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
         public let iamRoleArn: String?
+        /// This is the date a backup job was initiated.
+        public let initiationDate: Date?
         /// This returns the boolean value that a backup job is a parent (composite) job.
         public let isParent: Bool?
+        /// This is the job count for the specified  message category. Example strings may include AccessDenied, SUCCESS, AGGREGATE_ALL, and INVALIDPARAMETERS. View Monitoring for a list of accepted MessageCategory strings.
+        public let messageCategory: String?
         /// This returns the number of child (nested) backup jobs.
         public let numberOfChildJobs: Int64?
         /// This returns the parent (composite) resource backup job ID.
@@ -1526,7 +1825,7 @@ extension Backup {
         /// A detailed message explaining the status of the job to back up a resource.
         public let statusMessage: String?
 
-        public init(accountId: String? = nil, backupJobId: String? = nil, backupOptions: [String: String]? = nil, backupSizeInBytes: Int64? = nil, backupType: String? = nil, backupVaultArn: String? = nil, backupVaultName: String? = nil, bytesTransferred: Int64? = nil, childJobsInState: [BackupJobState: Int64]? = nil, completionDate: Date? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, expectedCompletionDate: Date? = nil, iamRoleArn: String? = nil, isParent: Bool? = nil, numberOfChildJobs: Int64? = nil, parentJobId: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, startBy: Date? = nil, state: BackupJobState? = nil, statusMessage: String? = nil) {
+        public init(accountId: String? = nil, backupJobId: String? = nil, backupOptions: [String: String]? = nil, backupSizeInBytes: Int64? = nil, backupType: String? = nil, backupVaultArn: String? = nil, backupVaultName: String? = nil, bytesTransferred: Int64? = nil, childJobsInState: [BackupJobState: Int64]? = nil, completionDate: Date? = nil, createdBy: RecoveryPointCreator? = nil, creationDate: Date? = nil, expectedCompletionDate: Date? = nil, iamRoleArn: String? = nil, initiationDate: Date? = nil, isParent: Bool? = nil, messageCategory: String? = nil, numberOfChildJobs: Int64? = nil, parentJobId: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil, startBy: Date? = nil, state: BackupJobState? = nil, statusMessage: String? = nil) {
             self.accountId = accountId
             self.backupJobId = backupJobId
             self.backupOptions = backupOptions
@@ -1541,7 +1840,9 @@ extension Backup {
             self.creationDate = creationDate
             self.expectedCompletionDate = expectedCompletionDate
             self.iamRoleArn = iamRoleArn
+            self.initiationDate = initiationDate
             self.isParent = isParent
+            self.messageCategory = messageCategory
             self.numberOfChildJobs = numberOfChildJobs
             self.parentJobId = parentJobId
             self.percentDone = percentDone
@@ -1569,7 +1870,9 @@ extension Backup {
             case creationDate = "CreationDate"
             case expectedCompletionDate = "ExpectedCompletionDate"
             case iamRoleArn = "IamRoleArn"
+            case initiationDate = "InitiationDate"
             case isParent = "IsParent"
+            case messageCategory = "MessageCategory"
             case numberOfChildJobs = "NumberOfChildJobs"
             case parentJobId = "ParentJobId"
             case percentDone = "PercentDone"
@@ -1609,7 +1912,7 @@ extension Backup {
         public let backupVaultName: String?
         /// The date and time that a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let creationDate: Date?
-        /// A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
+        /// A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice. This parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
         public let creatorRequestId: String?
         /// The server-side encryption key that is used to protect your backups; for example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
         public let encryptionKeyArn: String?
@@ -1784,6 +2087,16 @@ extension Backup {
     public struct DescribeProtectedResourceOutput: AWSDecodableShape {
         /// The date and time that a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of LastBackupTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let lastBackupTime: Date?
+        /// This is the ARN (Amazon Resource Name) of the backup vault  that contains the most recent backup recovery point.
+        public let lastBackupVaultArn: String?
+        /// This is the ARN (Amazon Resource Name) of the most recent  recovery point.
+        public let lastRecoveryPointArn: String?
+        /// This is the time in minutes the most recent restore  job took to complete.
+        public let latestRestoreExecutionTimeMinutes: Int64?
+        /// This is the creation date of the most recent restore job.
+        public let latestRestoreJobCreationDate: Date?
+        /// This is the date the most recent recovery point was created.
+        public let latestRestoreRecoveryPointCreationDate: Date?
         /// An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
         public let resourceArn: String?
         /// This is the non-unique name of the resource that  belongs to the specified backup.
@@ -1791,8 +2104,13 @@ extension Backup {
         /// The type of Amazon Web Services resource saved as a recovery point; for example, an Amazon EBS volume or an Amazon RDS database.
         public let resourceType: String?
 
-        public init(lastBackupTime: Date? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil) {
+        public init(lastBackupTime: Date? = nil, lastBackupVaultArn: String? = nil, lastRecoveryPointArn: String? = nil, latestRestoreExecutionTimeMinutes: Int64? = nil, latestRestoreJobCreationDate: Date? = nil, latestRestoreRecoveryPointCreationDate: Date? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil) {
             self.lastBackupTime = lastBackupTime
+            self.lastBackupVaultArn = lastBackupVaultArn
+            self.lastRecoveryPointArn = lastRecoveryPointArn
+            self.latestRestoreExecutionTimeMinutes = latestRestoreExecutionTimeMinutes
+            self.latestRestoreJobCreationDate = latestRestoreJobCreationDate
+            self.latestRestoreRecoveryPointCreationDate = latestRestoreRecoveryPointCreationDate
             self.resourceArn = resourceArn
             self.resourceName = resourceName
             self.resourceType = resourceType
@@ -1800,6 +2118,11 @@ extension Backup {
 
         private enum CodingKeys: String, CodingKey {
             case lastBackupTime = "LastBackupTime"
+            case lastBackupVaultArn = "LastBackupVaultArn"
+            case lastRecoveryPointArn = "LastRecoveryPointArn"
+            case latestRestoreExecutionTimeMinutes = "LatestRestoreExecutionTimeMinutes"
+            case latestRestoreJobCreationDate = "LatestRestoreJobCreationDate"
+            case latestRestoreRecoveryPointCreationDate = "LatestRestoreRecoveryPointCreationDate"
             case resourceArn = "ResourceArn"
             case resourceName = "ResourceName"
             case resourceType = "ResourceType"
@@ -2040,10 +2363,16 @@ extension Backup {
         public let backupSizeInBytes: Int64?
         /// The date and time that a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let completionDate: Date?
+        /// Contains identifying information about the creation of a restore job.
+        public let createdBy: RestoreJobCreator?
         /// An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery point is being restored. The format of the ARN depends on the resource type of the backed-up resource.
         public let createdResourceArn: String?
         /// The date and time that a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let creationDate: Date?
+        /// This notes the status of the data generated by the restore test.  The status may be Deleting, Failed,   or Successful.
+        public let deletionStatus: RestoreDeletionStatus?
+        /// This describes the restore job deletion status.
+        public let deletionStatusMessage: String?
         /// The amount of time in minutes that a job restoring a recovery point is expected to take.
         public let expectedCompletionTimeMinutes: Int64?
         /// Specifies the IAM role ARN used to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
@@ -2052,6 +2381,8 @@ extension Backup {
         public let percentDone: String?
         /// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
         public let recoveryPointArn: String?
+        /// This is the creation date of the recovery point made by the specifed restore job.
+        public let recoveryPointCreationDate: Date?
         /// Returns metadata associated with a restore job listed by resource type.
         public let resourceType: String?
         /// Uniquely identifies the job that restores a recovery point.
@@ -2060,37 +2391,53 @@ extension Backup {
         public let status: RestoreJobStatus?
         /// A message showing the status of a job to restore a recovery point.
         public let statusMessage: String?
+        /// This is the status of validation run on the indicated  restore job.
+        public let validationStatus: RestoreValidationStatus?
+        /// This describes the status of validation run on the  indicated restore job.
+        public let validationStatusMessage: String?
 
-        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, completionDate: Date? = nil, createdResourceArn: String? = nil, creationDate: Date? = nil, expectedCompletionTimeMinutes: Int64? = nil, iamRoleArn: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceType: String? = nil, restoreJobId: String? = nil, status: RestoreJobStatus? = nil, statusMessage: String? = nil) {
+        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, completionDate: Date? = nil, createdBy: RestoreJobCreator? = nil, createdResourceArn: String? = nil, creationDate: Date? = nil, deletionStatus: RestoreDeletionStatus? = nil, deletionStatusMessage: String? = nil, expectedCompletionTimeMinutes: Int64? = nil, iamRoleArn: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, recoveryPointCreationDate: Date? = nil, resourceType: String? = nil, restoreJobId: String? = nil, status: RestoreJobStatus? = nil, statusMessage: String? = nil, validationStatus: RestoreValidationStatus? = nil, validationStatusMessage: String? = nil) {
             self.accountId = accountId
             self.backupSizeInBytes = backupSizeInBytes
             self.completionDate = completionDate
+            self.createdBy = createdBy
             self.createdResourceArn = createdResourceArn
             self.creationDate = creationDate
+            self.deletionStatus = deletionStatus
+            self.deletionStatusMessage = deletionStatusMessage
             self.expectedCompletionTimeMinutes = expectedCompletionTimeMinutes
             self.iamRoleArn = iamRoleArn
             self.percentDone = percentDone
             self.recoveryPointArn = recoveryPointArn
+            self.recoveryPointCreationDate = recoveryPointCreationDate
             self.resourceType = resourceType
             self.restoreJobId = restoreJobId
             self.status = status
             self.statusMessage = statusMessage
+            self.validationStatus = validationStatus
+            self.validationStatusMessage = validationStatusMessage
         }
 
         private enum CodingKeys: String, CodingKey {
             case accountId = "AccountId"
             case backupSizeInBytes = "BackupSizeInBytes"
             case completionDate = "CompletionDate"
+            case createdBy = "CreatedBy"
             case createdResourceArn = "CreatedResourceArn"
             case creationDate = "CreationDate"
+            case deletionStatus = "DeletionStatus"
+            case deletionStatusMessage = "DeletionStatusMessage"
             case expectedCompletionTimeMinutes = "ExpectedCompletionTimeMinutes"
             case iamRoleArn = "IamRoleArn"
             case percentDone = "PercentDone"
             case recoveryPointArn = "RecoveryPointArn"
+            case recoveryPointCreationDate = "RecoveryPointCreationDate"
             case resourceType = "ResourceType"
             case restoreJobId = "RestoreJobId"
             case status = "Status"
             case statusMessage = "StatusMessage"
+            case validationStatus = "ValidationStatus"
+            case validationStatusMessage = "ValidationStatusMessage"
         }
     }
 
@@ -2573,19 +2920,151 @@ extension Backup {
         public let backupVaultArn: String?
         /// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
         public let recoveryPointArn: String?
+        /// This is the resource type associated with the recovery point.
+        public let resourceType: String?
         /// The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
         public let restoreMetadata: [String: String]?
 
-        public init(backupVaultArn: String? = nil, recoveryPointArn: String? = nil, restoreMetadata: [String: String]? = nil) {
+        public init(backupVaultArn: String? = nil, recoveryPointArn: String? = nil, resourceType: String? = nil, restoreMetadata: [String: String]? = nil) {
             self.backupVaultArn = backupVaultArn
             self.recoveryPointArn = recoveryPointArn
+            self.resourceType = resourceType
             self.restoreMetadata = restoreMetadata
         }
 
         private enum CodingKeys: String, CodingKey {
             case backupVaultArn = "BackupVaultArn"
             case recoveryPointArn = "RecoveryPointArn"
+            case resourceType = "ResourceType"
             case restoreMetadata = "RestoreMetadata"
+        }
+    }
+
+    public struct GetRestoreJobMetadataInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreJobId", location: .uri("RestoreJobId"))
+        ]
+
+        /// This is a unique identifier of a restore job within Backup.
+        public let restoreJobId: String
+
+        public init(restoreJobId: String) {
+            self.restoreJobId = restoreJobId
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetRestoreJobMetadataOutput: AWSDecodableShape {
+        /// This contains the metadata of the specified backup job.
+        public let metadata: [String: String]?
+        /// This is a unique identifier of a restore job within Backup.
+        public let restoreJobId: String?
+
+        public init(metadata: [String: String]? = nil, restoreJobId: String? = nil) {
+            self.metadata = metadata
+            self.restoreJobId = restoreJobId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case metadata = "Metadata"
+            case restoreJobId = "RestoreJobId"
+        }
+    }
+
+    public struct GetRestoreTestingInferredMetadataInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "backupVaultAccountId", location: .querystring("BackupVaultAccountId")),
+            AWSMemberEncoding(label: "backupVaultName", location: .querystring("BackupVaultName")),
+            AWSMemberEncoding(label: "recoveryPointArn", location: .querystring("RecoveryPointArn"))
+        ]
+
+        /// This is the account ID of the specified backup vault.
+        public let backupVaultAccountId: String?
+        /// The name of a logical container where backups are stored. Backup  vaults are identified by names that are unique to the account used to  create them and the Amazon Web ServicesRegion where they are created.  They consist of letters, numbers, and hyphens.
+        public let backupVaultName: String
+        /// An Amazon Resource Name (ARN) that uniquely identifies a recovery  point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+        public let recoveryPointArn: String
+
+        public init(backupVaultAccountId: String? = nil, backupVaultName: String, recoveryPointArn: String) {
+            self.backupVaultAccountId = backupVaultAccountId
+            self.backupVaultName = backupVaultName
+            self.recoveryPointArn = recoveryPointArn
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetRestoreTestingInferredMetadataOutput: AWSDecodableShape {
+        /// This is a string map of the metadata inferred from the request.
+        public let inferredMetadata: [String: String]
+
+        public init(inferredMetadata: [String: String]) {
+            self.inferredMetadata = inferredMetadata
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case inferredMetadata = "InferredMetadata"
+        }
+    }
+
+    public struct GetRestoreTestingPlanInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName"))
+        ]
+
+        /// Required unique name of the restore testing plan.
+        public let restoreTestingPlanName: String
+
+        public init(restoreTestingPlanName: String) {
+            self.restoreTestingPlanName = restoreTestingPlanName
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetRestoreTestingPlanOutput: AWSDecodableShape {
+        /// Specifies the body of a restore testing plan. Includes  RestoreTestingPlanName.
+        public let restoreTestingPlan: RestoreTestingPlanForGet
+
+        public init(restoreTestingPlan: RestoreTestingPlanForGet) {
+            self.restoreTestingPlan = restoreTestingPlan
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case restoreTestingPlan = "RestoreTestingPlan"
+        }
+    }
+
+    public struct GetRestoreTestingSelectionInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName")),
+            AWSMemberEncoding(label: "restoreTestingSelectionName", location: .uri("RestoreTestingSelectionName"))
+        ]
+
+        /// Required unique name of the restore testing plan.
+        public let restoreTestingPlanName: String
+        /// Required unique name of the restore testing selection.
+        public let restoreTestingSelectionName: String
+
+        public init(restoreTestingPlanName: String, restoreTestingSelectionName: String) {
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetRestoreTestingSelectionOutput: AWSDecodableShape {
+        /// Unique name of the restore testing selection.
+        public let restoreTestingSelection: RestoreTestingSelectionForGet
+
+        public init(restoreTestingSelection: RestoreTestingSelectionForGet) {
+            self.restoreTestingSelection = restoreTestingSelection
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case restoreTestingSelection = "RestoreTestingSelection"
         }
     }
 
@@ -2599,6 +3078,23 @@ extension Backup {
 
         private enum CodingKeys: String, CodingKey {
             case resourceTypes = "ResourceTypes"
+        }
+    }
+
+    public struct KeyValue: AWSEncodableShape & AWSDecodableShape {
+        /// The tag key (String). The key can't start with  aws:. Length Constraints: Minimum length of 1. Maximum  length of 128. Pattern: ^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$
+        public let key: String
+        /// The value of the key. Length Constraints: Maximum length of 256. Pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+        public let value: String
+
+        public init(key: String, value: String) {
+            self.key = key
+            self.value = value
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case key = "Key"
+            case value = "Value"
         }
     }
 
@@ -2644,15 +3140,86 @@ extension Backup {
         public let deleteAfterDays: Int64?
         /// Specifies the number of days after creation that a recovery point is moved to cold storage.
         public let moveToColdStorageAfterDays: Int64?
+        /// Optional Boolean. If this is true, this setting will  instruct your backup plan to transition supported resources to  archive (cold) storage tier in accordance with your lifecycle settings.
+        public let optInToArchiveForSupportedResources: Bool?
 
-        public init(deleteAfterDays: Int64? = nil, moveToColdStorageAfterDays: Int64? = nil) {
+        public init(deleteAfterDays: Int64? = nil, moveToColdStorageAfterDays: Int64? = nil, optInToArchiveForSupportedResources: Bool? = nil) {
             self.deleteAfterDays = deleteAfterDays
             self.moveToColdStorageAfterDays = moveToColdStorageAfterDays
+            self.optInToArchiveForSupportedResources = optInToArchiveForSupportedResources
         }
 
         private enum CodingKeys: String, CodingKey {
             case deleteAfterDays = "DeleteAfterDays"
             case moveToColdStorageAfterDays = "MoveToColdStorageAfterDays"
+            case optInToArchiveForSupportedResources = "OptInToArchiveForSupportedResources"
+        }
+    }
+
+    public struct ListBackupJobSummariesInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "accountId", location: .querystring("AccountId")),
+            AWSMemberEncoding(label: "aggregationPeriod", location: .querystring("AggregationPeriod")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "messageCategory", location: .querystring("MessageCategory")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken")),
+            AWSMemberEncoding(label: "resourceType", location: .querystring("ResourceType")),
+            AWSMemberEncoding(label: "state", location: .querystring("State"))
+        ]
+
+        /// Returns the job count for the specified account. If the request is sent from a member account or an account  not part of Amazon Web Services Organizations, jobs within requestor's account  will be returned. Root, admin, and delegated administrator accounts can use  the value ANY to return job counts from every account in the  organization.  AGGREGATE_ALL aggregates job counts  from all accounts within the authenticated organization,  then returns the sum.
+        public let accountId: String?
+        /// This is the period that sets the boundaries for returned  results. Acceptable values include    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: AggregationPeriod?
+        /// This parameter sets the maximum number of items  to be returned. The value is an integer. Range of accepted values is from  1 to 500.
+        public let maxResults: Int?
+        /// This parameter returns the job count for the specified  message category. Example accepted strings include AccessDenied,  Success, and InvalidParameters. See  Monitoring  for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let messageCategory: String?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+        /// Returns the job count for the specified resource type.  Use request GetSupportedResourceTypes to obtain  strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts  for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+        public let resourceType: String?
+        /// This parameter returns the job count for jobs  with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts  for all states and returns the sum.
+        public let state: BackupJobStatus?
+
+        public init(accountId: String? = nil, aggregationPeriod: AggregationPeriod? = nil, maxResults: Int? = nil, messageCategory: String? = nil, nextToken: String? = nil, resourceType: String? = nil, state: BackupJobStatus? = nil) {
+            self.accountId = accountId
+            self.aggregationPeriod = aggregationPeriod
+            self.maxResults = maxResults
+            self.messageCategory = messageCategory
+            self.nextToken = nextToken
+            self.resourceType = resourceType
+            self.state = state
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.accountId, name: "accountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.resourceType, name: "resourceType", parent: name, pattern: "^[a-zA-Z0-9\\-\\_\\.]{1,50}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListBackupJobSummariesOutput: AWSDecodableShape {
+        /// This is the period that sets the boundaries for returned  results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: String?
+        /// This request returns a summary that contains  Region, Account, State, ResourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+        public let backupJobSummaries: [BackupJobSummary]?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+
+        public init(aggregationPeriod: String? = nil, backupJobSummaries: [BackupJobSummary]? = nil, nextToken: String? = nil) {
+            self.aggregationPeriod = aggregationPeriod
+            self.backupJobSummaries = backupJobSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregationPeriod = "AggregationPeriod"
+            case backupJobSummaries = "BackupJobSummaries"
+            case nextToken = "NextToken"
         }
     }
 
@@ -2664,6 +3231,7 @@ extension Backup {
             AWSMemberEncoding(label: "byCompleteBefore", location: .querystring("completeBefore")),
             AWSMemberEncoding(label: "byCreatedAfter", location: .querystring("createdAfter")),
             AWSMemberEncoding(label: "byCreatedBefore", location: .querystring("createdBefore")),
+            AWSMemberEncoding(label: "byMessageCategory", location: .querystring("messageCategory")),
             AWSMemberEncoding(label: "byParentJobId", location: .querystring("parentJobId")),
             AWSMemberEncoding(label: "byResourceArn", location: .querystring("resourceArn")),
             AWSMemberEncoding(label: "byResourceType", location: .querystring("resourceType")),
@@ -2684,6 +3252,8 @@ extension Backup {
         public let byCreatedAfter: Date?
         /// Returns only backup jobs that were created before the specified date.
         public let byCreatedBefore: Date?
+        /// This is an optional parameter that can be used to  filter out jobs with a MessageCategory which matches the  value you input. Example strings may include AccessDenied,  SUCCESS, AGGREGATE_ALL, and  InvalidParameters. View Monitoring  The wildcard () returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let byMessageCategory: String?
         /// This is a filter to list child (nested) jobs based on parent job ID.
         public let byParentJobId: String?
         /// Returns only backup jobs that match the specified resource Amazon Resource Name (ARN).
@@ -2694,16 +3264,17 @@ extension Backup {
         public let byState: BackupJobState?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is  made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
-        public init(byAccountId: String? = nil, byBackupVaultName: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byParentJobId: String? = nil, byResourceArn: String? = nil, byResourceType: String? = nil, byState: BackupJobState? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
+        public init(byAccountId: String? = nil, byBackupVaultName: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byMessageCategory: String? = nil, byParentJobId: String? = nil, byResourceArn: String? = nil, byResourceType: String? = nil, byState: BackupJobState? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
             self.byAccountId = byAccountId
             self.byBackupVaultName = byBackupVaultName
             self.byCompleteAfter = byCompleteAfter
             self.byCompleteBefore = byCompleteBefore
             self.byCreatedAfter = byCreatedAfter
             self.byCreatedBefore = byCreatedBefore
+            self.byMessageCategory = byMessageCategory
             self.byParentJobId = byParentJobId
             self.byResourceArn = byResourceArn
             self.byResourceType = byResourceType
@@ -2726,7 +3297,7 @@ extension Backup {
     public struct ListBackupJobsOutput: AWSDecodableShape {
         /// An array of structures containing metadata about your backup jobs returned in JSON format.
         public let backupJobs: [BackupJob]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is   made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupJobs: [BackupJob]? = nil, nextToken: String? = nil) {
@@ -2748,7 +3319,7 @@ extension Backup {
 
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(maxResults: Int? = nil, nextToken: String? = nil) {
@@ -2767,7 +3338,7 @@ extension Backup {
     public struct ListBackupPlanTemplatesOutput: AWSDecodableShape {
         /// An array of template list items containing metadata about your saved templates.
         public let backupPlanTemplatesList: [BackupPlanTemplatesListMember]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupPlanTemplatesList: [BackupPlanTemplatesListMember]? = nil, nextToken: String? = nil) {
@@ -2792,7 +3363,7 @@ extension Backup {
         public let backupPlanId: String
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupPlanId: String, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -2812,7 +3383,7 @@ extension Backup {
     public struct ListBackupPlanVersionsOutput: AWSDecodableShape {
         /// An array of version list items containing metadata about your backup plans.
         public let backupPlanVersionsList: [BackupPlansListMember]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupPlanVersionsList: [BackupPlansListMember]? = nil, nextToken: String? = nil) {
@@ -2837,7 +3408,7 @@ extension Backup {
         public let includeDeleted: Bool?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(includeDeleted: Bool? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -2857,7 +3428,7 @@ extension Backup {
     public struct ListBackupPlansOutput: AWSDecodableShape {
         /// An array of backup plan list items containing metadata about your saved backup plans.
         public let backupPlansList: [BackupPlansListMember]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupPlansList: [BackupPlansListMember]? = nil, nextToken: String? = nil) {
@@ -2882,7 +3453,7 @@ extension Backup {
         public let backupPlanId: String
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupPlanId: String, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -2902,7 +3473,7 @@ extension Backup {
     public struct ListBackupSelectionsOutput: AWSDecodableShape {
         /// An array of backup selection list items containing metadata about each resource in the list.
         public let backupSelectionsList: [BackupSelectionsListMember]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupSelectionsList: [BackupSelectionsListMember]? = nil, nextToken: String? = nil) {
@@ -2930,7 +3501,7 @@ extension Backup {
         public let byVaultType: VaultType?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(byShared: Bool? = nil, byVaultType: VaultType? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -2951,7 +3522,7 @@ extension Backup {
     public struct ListBackupVaultsOutput: AWSDecodableShape {
         /// An array of backup vault list members containing vault metadata, including Amazon Resource Name (ARN), display name, creation date, number of saved recovery points, and encryption information if the resources saved in the backup vault are encrypted.
         public let backupVaultList: [BackupVaultListMember]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupVaultList: [BackupVaultListMember]? = nil, nextToken: String? = nil) {
@@ -2965,6 +3536,73 @@ extension Backup {
         }
     }
 
+    public struct ListCopyJobSummariesInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "accountId", location: .querystring("AccountId")),
+            AWSMemberEncoding(label: "aggregationPeriod", location: .querystring("AggregationPeriod")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "messageCategory", location: .querystring("MessageCategory")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken")),
+            AWSMemberEncoding(label: "resourceType", location: .querystring("ResourceType")),
+            AWSMemberEncoding(label: "state", location: .querystring("State"))
+        ]
+
+        /// Returns the job count for the specified account. If the request is sent from a member account or an account  not part of Amazon Web Services Organizations, jobs within requestor's account  will be returned. Root, admin, and delegated administrator accounts can use  the value ANY to return job counts from every account in the  organization.  AGGREGATE_ALL aggregates job counts  from all accounts within the authenticated organization,  then returns the sum.
+        public let accountId: String?
+        /// This is the period that sets the boundaries for returned  results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: AggregationPeriod?
+        /// This parameter sets the maximum number of items  to be returned. The value is an integer. Range of accepted values is from  1 to 500.
+        public let maxResults: Int?
+        /// This parameter returns the job count for the specified  message category. Example accepted strings include AccessDenied,  Success, and InvalidParameters. See  Monitoring  for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let messageCategory: String?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+        /// Returns the job count for the specified resource type.  Use request GetSupportedResourceTypes to obtain  strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts  for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+        public let resourceType: String?
+        /// This parameter returns the job count for jobs  with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts  for all states and returns the sum.
+        public let state: CopyJobStatus?
+
+        public init(accountId: String? = nil, aggregationPeriod: AggregationPeriod? = nil, maxResults: Int? = nil, messageCategory: String? = nil, nextToken: String? = nil, resourceType: String? = nil, state: CopyJobStatus? = nil) {
+            self.accountId = accountId
+            self.aggregationPeriod = aggregationPeriod
+            self.maxResults = maxResults
+            self.messageCategory = messageCategory
+            self.nextToken = nextToken
+            self.resourceType = resourceType
+            self.state = state
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.accountId, name: "accountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.resourceType, name: "resourceType", parent: name, pattern: "^[a-zA-Z0-9\\-\\_\\.]{1,50}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListCopyJobSummariesOutput: AWSDecodableShape {
+        /// This is the period that sets the boundaries for returned  results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: String?
+        /// This return shows a summary that contains  Region, Account, State, ResourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+        public let copyJobSummaries: [CopyJobSummary]?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+
+        public init(aggregationPeriod: String? = nil, copyJobSummaries: [CopyJobSummary]? = nil, nextToken: String? = nil) {
+            self.aggregationPeriod = aggregationPeriod
+            self.copyJobSummaries = copyJobSummaries
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregationPeriod = "AggregationPeriod"
+            case copyJobSummaries = "CopyJobSummaries"
+            case nextToken = "NextToken"
+        }
+    }
+
     public struct ListCopyJobsInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "byAccountId", location: .querystring("accountId")),
@@ -2973,6 +3611,7 @@ extension Backup {
             AWSMemberEncoding(label: "byCreatedAfter", location: .querystring("createdAfter")),
             AWSMemberEncoding(label: "byCreatedBefore", location: .querystring("createdBefore")),
             AWSMemberEncoding(label: "byDestinationVaultArn", location: .querystring("destinationVaultArn")),
+            AWSMemberEncoding(label: "byMessageCategory", location: .querystring("messageCategory")),
             AWSMemberEncoding(label: "byParentJobId", location: .querystring("parentJobId")),
             AWSMemberEncoding(label: "byResourceArn", location: .querystring("resourceArn")),
             AWSMemberEncoding(label: "byResourceType", location: .querystring("resourceType")),
@@ -2993,6 +3632,8 @@ extension Backup {
         public let byCreatedBefore: Date?
         /// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
         public let byDestinationVaultArn: String?
+        /// This is an optional parameter that can be used to  filter out jobs with a MessageCategory which matches the  value you input. Example strings may include AccessDenied,  SUCCESS, AGGREGATE_ALL, and  INVALIDPARAMETERS. View  Monitoring for a list of accepted strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts  for all message categories and returns the sum.
+        public let byMessageCategory: String?
         /// This is a filter to list child (nested) jobs based on parent job ID.
         public let byParentJobId: String?
         /// Returns only copy jobs that match the specified resource Amazon Resource Name (ARN).
@@ -3003,16 +3644,17 @@ extension Backup {
         public let byState: CopyJobState?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
-        public init(byAccountId: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byDestinationVaultArn: String? = nil, byParentJobId: String? = nil, byResourceArn: String? = nil, byResourceType: String? = nil, byState: CopyJobState? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
+        public init(byAccountId: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byDestinationVaultArn: String? = nil, byMessageCategory: String? = nil, byParentJobId: String? = nil, byResourceArn: String? = nil, byResourceType: String? = nil, byState: CopyJobState? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
             self.byAccountId = byAccountId
             self.byCompleteAfter = byCompleteAfter
             self.byCompleteBefore = byCompleteBefore
             self.byCreatedAfter = byCreatedAfter
             self.byCreatedBefore = byCreatedBefore
             self.byDestinationVaultArn = byDestinationVaultArn
+            self.byMessageCategory = byMessageCategory
             self.byParentJobId = byParentJobId
             self.byResourceArn = byResourceArn
             self.byResourceType = byResourceType
@@ -3034,7 +3676,7 @@ extension Backup {
     public struct ListCopyJobsOutput: AWSDecodableShape {
         /// An array of structures containing metadata about your copy jobs returned in JSON format.
         public let copyJobs: [CopyJob]?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(copyJobs: [CopyJob]? = nil, nextToken: String? = nil) {
@@ -3097,7 +3739,7 @@ extension Backup {
 
         /// The maximum number of resource list items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(maxResults: Int? = nil, nextToken: String? = nil) {
@@ -3116,7 +3758,7 @@ extension Backup {
     public struct ListLegalHoldsOutput: AWSDecodableShape {
         /// This is an array of returned legal holds, both active and previous.
         public let legalHolds: [LegalHold]?
-        /// The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(legalHolds: [LegalHold]? = nil, nextToken: String? = nil) {
@@ -3144,7 +3786,7 @@ extension Backup {
         public let backupVaultName: String
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupVaultAccountId: String? = nil, backupVaultName: String, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -3165,7 +3807,7 @@ extension Backup {
     }
 
     public struct ListProtectedResourcesByBackupVaultOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// These are the results returned for the request ListProtectedResourcesByBackupVault.
         public let results: [ProtectedResource]?
@@ -3189,7 +3831,7 @@ extension Backup {
 
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(maxResults: Int? = nil, nextToken: String? = nil) {
@@ -3206,7 +3848,7 @@ extension Backup {
     }
 
     public struct ListProtectedResourcesOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An array of resources successfully backed up by Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
         public let results: [ProtectedResource]?
@@ -3254,7 +3896,7 @@ extension Backup {
         public let byResourceType: String?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(backupVaultAccountId: String? = nil, backupVaultName: String, byBackupPlanId: String? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byParentRecoveryPointArn: String? = nil, byResourceArn: String? = nil, byResourceType: String? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -3282,7 +3924,7 @@ extension Backup {
     }
 
     public struct ListRecoveryPointsByBackupVaultOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An array of objects that contain detailed information about recovery points saved in a backup vault.
         public let recoveryPoints: [RecoveryPointByBackupVault]?
@@ -3309,7 +3951,7 @@ extension Backup {
         public let legalHoldId: String
         /// This is the maximum number of resource list items to be returned.
         public let maxResults: Int?
-        /// This is the next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// This is the next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
         public init(legalHoldId: String, maxResults: Int? = nil, nextToken: String? = nil) {
@@ -3352,7 +3994,7 @@ extension Backup {
 
         /// The maximum number of items to be returned.  Amazon RDS requires a value of at least 20.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An ARN that uniquely identifies a resource. The format of the ARN depends on the resource type.
         public let resourceArn: String
@@ -3372,7 +4014,7 @@ extension Backup {
     }
 
     public struct ListRecoveryPointsByResourceOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An array of objects that contain detailed information about recovery points of the specified resource type.  Only Amazon EFS and Amazon EC2 recovery points return BackupVaultName.
         public let recoveryPoints: [RecoveryPointByResource]?
@@ -3489,6 +4131,126 @@ extension Backup {
         }
     }
 
+    public struct ListRestoreJobSummariesInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "accountId", location: .querystring("AccountId")),
+            AWSMemberEncoding(label: "aggregationPeriod", location: .querystring("AggregationPeriod")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken")),
+            AWSMemberEncoding(label: "resourceType", location: .querystring("ResourceType")),
+            AWSMemberEncoding(label: "state", location: .querystring("State"))
+        ]
+
+        /// Returns the job count for the specified account. If the request is sent from a member account or an account  not part of Amazon Web Services Organizations, jobs within requestor's account  will be returned. Root, admin, and delegated administrator accounts can use  the value ANY to return job counts from every account in the  organization.  AGGREGATE_ALL aggregates job counts  from all accounts within the authenticated organization,  then returns the sum.
+        public let accountId: String?
+        /// This is the period that sets the boundaries for returned  results. Acceptable values include    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: AggregationPeriod?
+        /// This parameter sets the maximum number of items  to be returned. The value is an integer. Range of accepted values is from  1 to 500.
+        public let maxResults: Int?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+        /// Returns the job count for the specified resource type.  Use request GetSupportedResourceTypes to obtain  strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts  for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+        public let resourceType: String?
+        /// This parameter returns the job count for jobs  with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts  for all states and returns the sum.
+        public let state: RestoreJobState?
+
+        public init(accountId: String? = nil, aggregationPeriod: AggregationPeriod? = nil, maxResults: Int? = nil, nextToken: String? = nil, resourceType: String? = nil, state: RestoreJobState? = nil) {
+            self.accountId = accountId
+            self.aggregationPeriod = aggregationPeriod
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.resourceType = resourceType
+            self.state = state
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.accountId, name: "accountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.resourceType, name: "resourceType", parent: name, pattern: "^[a-zA-Z0-9\\-\\_\\.]{1,50}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListRestoreJobSummariesOutput: AWSDecodableShape {
+        /// This is the period that sets the boundaries for returned  results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated  job count for the prior 7 days.    FOURTEEN_DAYS for aggregated  job count for prior 14 days.
+        public let aggregationPeriod: String?
+        /// The next item following a partial list of returned resources. For example, if a request is made to return MaxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        public let nextToken: String?
+        /// This return contains a summary that contains  Region, Account, State, ResourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+        public let restoreJobSummaries: [RestoreJobSummary]?
+
+        public init(aggregationPeriod: String? = nil, nextToken: String? = nil, restoreJobSummaries: [RestoreJobSummary]? = nil) {
+            self.aggregationPeriod = aggregationPeriod
+            self.nextToken = nextToken
+            self.restoreJobSummaries = restoreJobSummaries
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case aggregationPeriod = "AggregationPeriod"
+            case nextToken = "NextToken"
+            case restoreJobSummaries = "RestoreJobSummaries"
+        }
+    }
+
+    public struct ListRestoreJobsByProtectedResourceInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "byRecoveryPointCreationDateAfter", location: .querystring("recoveryPointCreationDateAfter")),
+            AWSMemberEncoding(label: "byRecoveryPointCreationDateBefore", location: .querystring("recoveryPointCreationDateBefore")),
+            AWSMemberEncoding(label: "byStatus", location: .querystring("status")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "resourceArn", location: .uri("ResourceArn"))
+        ]
+
+        /// Returns only restore jobs of recovery points that were created after the specified date.
+        public let byRecoveryPointCreationDateAfter: Date?
+        /// Returns only restore jobs of recovery points that were created before the specified date.
+        public let byRecoveryPointCreationDateBefore: Date?
+        /// Returns only restore jobs associated with the specified job status.
+        public let byStatus: RestoreJobStatus?
+        /// The maximum number of items to be returned.
+        public let maxResults: Int?
+        /// The next item following a partial list of returned items. For example,  if a request ismade to return MaxResults number of items,  NextToken allows you to return more items in your list  starting at the location pointed to by the next token.
+        public let nextToken: String?
+        /// Returns only restore jobs that match the specified resource  Amazon Resource Name (ARN).
+        public let resourceArn: String
+
+        public init(byRecoveryPointCreationDateAfter: Date? = nil, byRecoveryPointCreationDateBefore: Date? = nil, byStatus: RestoreJobStatus? = nil, maxResults: Int? = nil, nextToken: String? = nil, resourceArn: String) {
+            self.byRecoveryPointCreationDateAfter = byRecoveryPointCreationDateAfter
+            self.byRecoveryPointCreationDateBefore = byRecoveryPointCreationDateBefore
+            self.byStatus = byStatus
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.resourceArn = resourceArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListRestoreJobsByProtectedResourceOutput: AWSDecodableShape {
+        /// The next item following a partial list of returned items. For example,  if a request is made to return MaxResults number of items,  NextToken allows youto return more items in your list starting  at the location pointed to by the next token
+        public let nextToken: String?
+        /// An array of objects that contain detailed information about  jobs to restore saved resources.>
+        public let restoreJobs: [RestoreJobsListMember]?
+
+        public init(nextToken: String? = nil, restoreJobs: [RestoreJobsListMember]? = nil) {
+            self.nextToken = nextToken
+            self.restoreJobs = restoreJobs
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "NextToken"
+            case restoreJobs = "RestoreJobs"
+        }
+    }
+
     public struct ListRestoreJobsInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "byAccountId", location: .querystring("accountId")),
@@ -3496,6 +4258,7 @@ extension Backup {
             AWSMemberEncoding(label: "byCompleteBefore", location: .querystring("completeBefore")),
             AWSMemberEncoding(label: "byCreatedAfter", location: .querystring("createdAfter")),
             AWSMemberEncoding(label: "byCreatedBefore", location: .querystring("createdBefore")),
+            AWSMemberEncoding(label: "byRestoreTestingPlanArn", location: .querystring("restoreTestingPlanArn")),
             AWSMemberEncoding(label: "byStatus", location: .querystring("status")),
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
             AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken"))
@@ -3511,19 +4274,22 @@ extension Backup {
         public let byCreatedAfter: Date?
         /// Returns only restore jobs that were created before the specified date.
         public let byCreatedBefore: Date?
+        /// This returns only restore testing jobs that match the  specified resource Amazon Resource Name (ARN).
+        public let byRestoreTestingPlanArn: String?
         /// Returns only restore jobs associated with the specified job status.
         public let byStatus: RestoreJobStatus?
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
 
-        public init(byAccountId: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byStatus: RestoreJobStatus? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
+        public init(byAccountId: String? = nil, byCompleteAfter: Date? = nil, byCompleteBefore: Date? = nil, byCreatedAfter: Date? = nil, byCreatedBefore: Date? = nil, byRestoreTestingPlanArn: String? = nil, byStatus: RestoreJobStatus? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
             self.byAccountId = byAccountId
             self.byCompleteAfter = byCompleteAfter
             self.byCompleteBefore = byCompleteBefore
             self.byCreatedAfter = byCreatedAfter
             self.byCreatedBefore = byCreatedBefore
+            self.byRestoreTestingPlanArn = byRestoreTestingPlanArn
             self.byStatus = byStatus
             self.maxResults = maxResults
             self.nextToken = nextToken
@@ -3539,7 +4305,7 @@ extension Backup {
     }
 
     public struct ListRestoreJobsOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An array of objects that contain detailed information about jobs to restore saved resources.
         public let restoreJobs: [RestoreJobsListMember]?
@@ -3555,6 +4321,92 @@ extension Backup {
         }
     }
 
+    public struct ListRestoreTestingPlansInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken"))
+        ]
+
+        /// The maximum number of items to be returned.
+        public let maxResults: Int?
+        /// The next item following a partial list of returned items.  For example, if a request is made to return MaxResults  number of items, NextToken allows you to return more items  in your list starting at the location pointed to by the nexttoken.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListRestoreTestingPlansOutput: AWSDecodableShape {
+        /// The next item following a partial list of returned items.  For example, if a request is made to return MaxResults  number of items, NextToken allows you to return more items  in your list starting at the location pointed to by the nexttoken.
+        public let nextToken: String?
+        /// This is a returned list of restore testing plans.
+        public let restoreTestingPlans: [RestoreTestingPlanForList]
+
+        public init(nextToken: String? = nil, restoreTestingPlans: [RestoreTestingPlanForList]) {
+            self.nextToken = nextToken
+            self.restoreTestingPlans = restoreTestingPlans
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "NextToken"
+            case restoreTestingPlans = "RestoreTestingPlans"
+        }
+    }
+
+    public struct ListRestoreTestingSelectionsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken")),
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName"))
+        ]
+
+        /// The maximum number of items to be returned.
+        public let maxResults: Int?
+        /// The next item following a partial list of returned items.  For example, if a request is made to return MaxResults  number of items, NextToken allows you to return more items  in your list starting at the location pointed to by the nexttoken.
+        public let nextToken: String?
+        /// Returns restore testing selections by the specified restore testing  plan name.
+        public let restoreTestingPlanName: String
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil, restoreTestingPlanName: String) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.restoreTestingPlanName = restoreTestingPlanName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListRestoreTestingSelectionsOutput: AWSDecodableShape {
+        /// The next item following a partial list of returned items. For example,  if a request is made to return MaxResults number of items,  NextToken allows you to return more items in your list  starting at the location pointed to by the nexttoken.
+        public let nextToken: String?
+        /// The returned restore testing selections associated with the  restore testing plan.
+        public let restoreTestingSelections: [RestoreTestingSelectionForList]
+
+        public init(nextToken: String? = nil, restoreTestingSelections: [RestoreTestingSelectionForList]) {
+            self.nextToken = nextToken
+            self.restoreTestingSelections = restoreTestingSelections
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "NextToken"
+            case restoreTestingSelections = "RestoreTestingSelections"
+        }
+    }
+
     public struct ListTagsInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
@@ -3564,7 +4416,7 @@ extension Backup {
 
         /// The maximum number of items to be returned.
         public let maxResults: Int?
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the type of resource. Valid targets for ListTags are recovery points, backup plans, and backup vaults.
         public let resourceArn: String
@@ -3584,7 +4436,7 @@ extension Backup {
     }
 
     public struct ListTagsOutput: AWSDecodableShape {
-        /// The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+        /// The next item following a partial list of returned items. For example, if a request is made to return MaxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
         public let nextToken: String?
         /// To help organize your resources, you can assign your own metadata to the resources you create. Each tag is a key-value pair.
         public let tags: [String: String]?
@@ -3603,6 +4455,10 @@ extension Backup {
     public struct ProtectedResource: AWSDecodableShape {
         /// The date and time a resource was last backed up, in Unix format and Coordinated Universal Time (UTC). The value of LastBackupTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let lastBackupTime: Date?
+        /// This is the ARN (Amazon Resource Name) of the backup vault  that contains the most recent backup recovery point.
+        public let lastBackupVaultArn: String?
+        /// This is the ARN (Amazon Resource Name) of the most  recent recovery point.
+        public let lastRecoveryPointArn: String?
         /// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
         public let resourceArn: String?
         /// This is the non-unique name of the resource that  belongs to the specified backup.
@@ -3610,8 +4466,10 @@ extension Backup {
         /// The type of Amazon Web Services resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
         public let resourceType: String?
 
-        public init(lastBackupTime: Date? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil) {
+        public init(lastBackupTime: Date? = nil, lastBackupVaultArn: String? = nil, lastRecoveryPointArn: String? = nil, resourceArn: String? = nil, resourceName: String? = nil, resourceType: String? = nil) {
             self.lastBackupTime = lastBackupTime
+            self.lastBackupVaultArn = lastBackupVaultArn
+            self.lastRecoveryPointArn = lastRecoveryPointArn
             self.resourceArn = resourceArn
             self.resourceName = resourceName
             self.resourceType = resourceType
@@ -3619,9 +4477,28 @@ extension Backup {
 
         private enum CodingKeys: String, CodingKey {
             case lastBackupTime = "LastBackupTime"
+            case lastBackupVaultArn = "LastBackupVaultArn"
+            case lastRecoveryPointArn = "LastRecoveryPointArn"
             case resourceArn = "ResourceArn"
             case resourceName = "ResourceName"
             case resourceType = "ResourceType"
+        }
+    }
+
+    public struct ProtectedResourceConditions: AWSEncodableShape & AWSDecodableShape {
+        /// Filters the values of your tagged resources for only  those resources that you tagged  with the same value.  Also called "exact matching."
+        public let stringEquals: [KeyValue]?
+        /// Filters the values of your tagged resources for only  those resources that you tagged  that do not have the same value.  Also called "negated matching."
+        public let stringNotEquals: [KeyValue]?
+
+        public init(stringEquals: [KeyValue]? = nil, stringNotEquals: [KeyValue]? = nil) {
+            self.stringEquals = stringEquals
+            self.stringNotEquals = stringNotEquals
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case stringEquals = "StringEquals"
+            case stringNotEquals = "StringNotEquals"
         }
     }
 
@@ -3706,6 +4583,30 @@ extension Backup {
         private enum CodingKeys: String, CodingKey {
             case backupVaultEvents = "BackupVaultEvents"
             case snsTopicArn = "SNSTopicArn"
+        }
+    }
+
+    public struct PutRestoreValidationResultInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreJobId", location: .uri("RestoreJobId"))
+        ]
+
+        /// This is a unique identifier of a restore job within Backup.
+        public let restoreJobId: String
+        /// This is the status of your restore validation.
+        public let validationStatus: RestoreValidationStatus
+        /// This is an optional message string you can input to  describe the validation status for the restore test validation.
+        public let validationStatusMessage: String?
+
+        public init(restoreJobId: String, validationStatus: RestoreValidationStatus, validationStatusMessage: String? = nil) {
+            self.restoreJobId = restoreJobId
+            self.validationStatus = validationStatus
+            self.validationStatusMessage = validationStatusMessage
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case validationStatus = "ValidationStatus"
+            case validationStatusMessage = "ValidationStatusMessage"
         }
     }
 
@@ -4082,6 +4983,56 @@ extension Backup {
         }
     }
 
+    public struct RestoreJobCreator: AWSDecodableShape {
+        /// An Amazon Resource Name (ARN) that uniquely identifies  a restore testing plan.
+        public let restoreTestingPlanArn: String?
+
+        public init(restoreTestingPlanArn: String? = nil) {
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+        }
+    }
+
+    public struct RestoreJobSummary: AWSDecodableShape {
+        /// The account ID that owns the jobs within the summary.
+        public let accountId: String?
+        /// The value as a number of jobs in a job summary.
+        public let count: Int?
+        /// The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let endTime: Date?
+        /// The Amazon Web Services Regions within the job summary.
+        public let region: String?
+        /// This value is the job count for the specified resource type.  The request GetSupportedResourceTypes returns  strings for supported resource types.
+        public let resourceType: String?
+        /// The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+        public let startTime: Date?
+        /// This value is job count for jobs  with the specified state.
+        public let state: RestoreJobState?
+
+        public init(accountId: String? = nil, count: Int? = nil, endTime: Date? = nil, region: String? = nil, resourceType: String? = nil, startTime: Date? = nil, state: RestoreJobState? = nil) {
+            self.accountId = accountId
+            self.count = count
+            self.endTime = endTime
+            self.region = region
+            self.resourceType = resourceType
+            self.startTime = startTime
+            self.state = state
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case accountId = "AccountId"
+            case count = "Count"
+            case endTime = "EndTime"
+            case region = "Region"
+            case resourceType = "ResourceType"
+            case startTime = "StartTime"
+            case state = "State"
+        }
+    }
+
     public struct RestoreJobsListMember: AWSDecodableShape {
         /// The account ID that owns the restore job.
         public let accountId: String?
@@ -4089,10 +5040,16 @@ extension Backup {
         public let backupSizeInBytes: Int64?
         /// The date and time a job to restore a recovery point is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let completionDate: Date?
+        /// Contains identifying information about the creation  of a restore job.
+        public let createdBy: RestoreJobCreator?
         /// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
         public let createdResourceArn: String?
         /// The date and time a restore job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
         public let creationDate: Date?
+        /// This notes the status of the data generated by the restore  test. The status may be Deleting, Failed,  or Successful.
+        public let deletionStatus: RestoreDeletionStatus?
+        /// This describes the restore job deletion status.
+        public let deletionStatusMessage: String?
         /// The amount of time in minutes that a job restoring a recovery point is expected to take.
         public let expectedCompletionTimeMinutes: Int64?
         /// Specifies the IAM role ARN used to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
@@ -4101,6 +5058,8 @@ extension Backup {
         public let percentDone: String?
         /// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
         public let recoveryPointArn: String?
+        /// The date on which a recovery point was created.
+        public let recoveryPointCreationDate: Date?
         /// The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
         public let resourceType: String?
         /// Uniquely identifies the job that restores a recovery point.
@@ -4109,37 +5068,374 @@ extension Backup {
         public let status: RestoreJobStatus?
         /// A detailed message explaining the status of the job to restore a recovery point.
         public let statusMessage: String?
+        /// This is the status of validation run on the indicated  restore job.
+        public let validationStatus: RestoreValidationStatus?
+        /// This describes the status of validation run on the  indicated restore job.
+        public let validationStatusMessage: String?
 
-        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, completionDate: Date? = nil, createdResourceArn: String? = nil, creationDate: Date? = nil, expectedCompletionTimeMinutes: Int64? = nil, iamRoleArn: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, resourceType: String? = nil, restoreJobId: String? = nil, status: RestoreJobStatus? = nil, statusMessage: String? = nil) {
+        public init(accountId: String? = nil, backupSizeInBytes: Int64? = nil, completionDate: Date? = nil, createdBy: RestoreJobCreator? = nil, createdResourceArn: String? = nil, creationDate: Date? = nil, deletionStatus: RestoreDeletionStatus? = nil, deletionStatusMessage: String? = nil, expectedCompletionTimeMinutes: Int64? = nil, iamRoleArn: String? = nil, percentDone: String? = nil, recoveryPointArn: String? = nil, recoveryPointCreationDate: Date? = nil, resourceType: String? = nil, restoreJobId: String? = nil, status: RestoreJobStatus? = nil, statusMessage: String? = nil, validationStatus: RestoreValidationStatus? = nil, validationStatusMessage: String? = nil) {
             self.accountId = accountId
             self.backupSizeInBytes = backupSizeInBytes
             self.completionDate = completionDate
+            self.createdBy = createdBy
             self.createdResourceArn = createdResourceArn
             self.creationDate = creationDate
+            self.deletionStatus = deletionStatus
+            self.deletionStatusMessage = deletionStatusMessage
             self.expectedCompletionTimeMinutes = expectedCompletionTimeMinutes
             self.iamRoleArn = iamRoleArn
             self.percentDone = percentDone
             self.recoveryPointArn = recoveryPointArn
+            self.recoveryPointCreationDate = recoveryPointCreationDate
             self.resourceType = resourceType
             self.restoreJobId = restoreJobId
             self.status = status
             self.statusMessage = statusMessage
+            self.validationStatus = validationStatus
+            self.validationStatusMessage = validationStatusMessage
         }
 
         private enum CodingKeys: String, CodingKey {
             case accountId = "AccountId"
             case backupSizeInBytes = "BackupSizeInBytes"
             case completionDate = "CompletionDate"
+            case createdBy = "CreatedBy"
             case createdResourceArn = "CreatedResourceArn"
             case creationDate = "CreationDate"
+            case deletionStatus = "DeletionStatus"
+            case deletionStatusMessage = "DeletionStatusMessage"
             case expectedCompletionTimeMinutes = "ExpectedCompletionTimeMinutes"
             case iamRoleArn = "IamRoleArn"
             case percentDone = "PercentDone"
             case recoveryPointArn = "RecoveryPointArn"
+            case recoveryPointCreationDate = "RecoveryPointCreationDate"
             case resourceType = "ResourceType"
             case restoreJobId = "RestoreJobId"
             case status = "Status"
             case statusMessage = "StatusMessage"
+            case validationStatus = "ValidationStatus"
+            case validationStatusMessage = "ValidationStatusMessage"
+        }
+    }
+
+    public struct RestoreTestingPlanForCreate: AWSEncodableShape {
+        /// Required: Algorithm; Required: Recovery point types; IncludeVaults  (one or more). Optional: SelectionWindowDays ('30' if not specified);  ExcludeVaults (list of selectors), defaults to empty list if not listed.
+        public let recoveryPointSelection: RestoreTestingRecoveryPointSelection
+        /// The RestoreTestingPlanName is a unique string that is the name  of the restore testing plan. This cannot be changed after creation,  and it must consist of only alphanumeric characters and underscores.
+        public let restoreTestingPlanName: String
+        /// A CRON expression in specified timezone when a restore  testing plan is executed.
+        public let scheduleExpression: String
+        /// Optional. This is the timezone in which the schedule  expression is set. By default, ScheduleExpressions are in UTC.  You can modify this to a specified timezone.
+        public let scheduleExpressionTimezone: String?
+        /// Defaults to 24 hours. A value in hours after a  restore test is scheduled before a job will be canceled if it  doesn't start successfully. This value is optional. If this value  is included, this parameter has a maximum value of 168 hours  (one week).
+        public let startWindowHours: Int?
+
+        public init(recoveryPointSelection: RestoreTestingRecoveryPointSelection, restoreTestingPlanName: String, scheduleExpression: String, scheduleExpressionTimezone: String? = nil, startWindowHours: Int? = nil) {
+            self.recoveryPointSelection = recoveryPointSelection
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.scheduleExpression = scheduleExpression
+            self.scheduleExpressionTimezone = scheduleExpressionTimezone
+            self.startWindowHours = startWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case recoveryPointSelection = "RecoveryPointSelection"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case scheduleExpression = "ScheduleExpression"
+            case scheduleExpressionTimezone = "ScheduleExpressionTimezone"
+            case startWindowHours = "StartWindowHours"
+        }
+    }
+
+    public struct RestoreTestingPlanForGet: AWSDecodableShape {
+        /// The date and time that a restore testing plan was created,  in Unix format and Coordinated Universal Time (UTC). The value of  CreationTime is accurate to milliseconds. For example,  the value 1516925490.087 represents Friday, January 26, 2018  12:11:30.087  AM.
+        public let creationTime: Date
+        /// This identifies the request and allows failed requests to  be retried without the risk of running the operation twice.  If the request includes a CreatorRequestId that  matches an existing backup plan, that plan is returned. This  parameter is optional. If used, this parameter must  contain 1 to 50 alphanumeric or '-_.' characters.
+        public let creatorRequestId: String?
+        /// The last time a restore test was run with the specified  restore testing plan. A date and time, in Unix format and  Coordinated Universal Time (UTC). The value of  LastExecutionDate is accurate to milliseconds.  For example, the value  1516925490.087 represents Friday,  January 26, 2018 12:11:30.087 AM.
+        public let lastExecutionTime: Date?
+        /// The date and time that the restore testing plan was updated.  This update is in Unix format and Coordinated Universal Time (UTC).  The value of LastUpdateTime is accurate to milliseconds.  For example, the value  1516925490.087 represents Friday,  January 26, 2018 12:11:30.087 AM.
+        public let lastUpdateTime: Date?
+        /// The specified criteria to assign a set of resources, such as  recovery point types or backup vaults.
+        public let recoveryPointSelection: RestoreTestingRecoveryPointSelection
+        /// An Amazon Resource Name (ARN) that uniquely identifies  a restore testing plan.
+        public let restoreTestingPlanArn: String
+        /// This is the restore testing plan name.
+        public let restoreTestingPlanName: String
+        /// A CRON expression in specified timezone when a restore  testing plan is executed.
+        public let scheduleExpression: String
+        /// Optional. This is the timezone in which the schedule  expression is set. By default, ScheduleExpressions are in UTC.  You can modify this to a specified timezone.
+        public let scheduleExpressionTimezone: String?
+        /// Defaults to 24 hours. A value in hours after a  restore test is scheduled before a job will be canceled if it  doesn't start successfully. This value is optional. If this value  is included, this parameter has a maximum value of 168 hours  (one week).
+        public let startWindowHours: Int?
+
+        public init(creationTime: Date, creatorRequestId: String? = nil, lastExecutionTime: Date? = nil, lastUpdateTime: Date? = nil, recoveryPointSelection: RestoreTestingRecoveryPointSelection, restoreTestingPlanArn: String, restoreTestingPlanName: String, scheduleExpression: String, scheduleExpressionTimezone: String? = nil, startWindowHours: Int? = nil) {
+            self.creationTime = creationTime
+            self.creatorRequestId = creatorRequestId
+            self.lastExecutionTime = lastExecutionTime
+            self.lastUpdateTime = lastUpdateTime
+            self.recoveryPointSelection = recoveryPointSelection
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.scheduleExpression = scheduleExpression
+            self.scheduleExpressionTimezone = scheduleExpressionTimezone
+            self.startWindowHours = startWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case creatorRequestId = "CreatorRequestId"
+            case lastExecutionTime = "LastExecutionTime"
+            case lastUpdateTime = "LastUpdateTime"
+            case recoveryPointSelection = "RecoveryPointSelection"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case scheduleExpression = "ScheduleExpression"
+            case scheduleExpressionTimezone = "ScheduleExpressionTimezone"
+            case startWindowHours = "StartWindowHours"
+        }
+    }
+
+    public struct RestoreTestingPlanForList: AWSDecodableShape {
+        /// The date and time that a restore testing plan was created,  in Unix format and Coordinated Universal Time (UTC). The value  of CreationTime is accurate to milliseconds. For  example, the value 1516925490.087 represents Friday, January 26,  2018 12:11:30.087 AM.
+        public let creationTime: Date
+        /// The last time a restore test was run with the specified  restore testing plan. A date and time, in Unix format and  Coordinated Universal Time (UTC). The value of  LastExecutionDate is accurate to milliseconds.  For example, the value 1516925490.087 represents Friday,  January 26, 2018 12:11:30.087 AM.
+        public let lastExecutionTime: Date?
+        /// The date and time that the restore testing plan was updated.  This update is in Unix format and Coordinated Universal Time (UTC).  The value of LastUpdateTime is accurate to  milliseconds. For example, the value 1516925490.087 represents  Friday, January 26, 2018 12:11:30.087 AM.
+        public let lastUpdateTime: Date?
+        /// An Amazon Resource Name (ARN) that uniquely identifiesa  restore testing plan.
+        public let restoreTestingPlanArn: String
+        /// This is the restore testing plan name.
+        public let restoreTestingPlanName: String
+        /// A CRON expression in specified timezone when a restore  testing plan is executed.
+        public let scheduleExpression: String
+        /// Optional. This is the timezone in which the schedule  expression is set. By default, ScheduleExpressions are in UTC.  You can modify this to a specified timezone.
+        public let scheduleExpressionTimezone: String?
+        /// Defaults to 24 hours. A value in hours after a restore test is scheduled before  a job will be canceled if it doesn't start successfully. This  value is optional. If this value is included, this parameter  has a maximum value of 168 hours (one week).
+        public let startWindowHours: Int?
+
+        public init(creationTime: Date, lastExecutionTime: Date? = nil, lastUpdateTime: Date? = nil, restoreTestingPlanArn: String, restoreTestingPlanName: String, scheduleExpression: String, scheduleExpressionTimezone: String? = nil, startWindowHours: Int? = nil) {
+            self.creationTime = creationTime
+            self.lastExecutionTime = lastExecutionTime
+            self.lastUpdateTime = lastUpdateTime
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.scheduleExpression = scheduleExpression
+            self.scheduleExpressionTimezone = scheduleExpressionTimezone
+            self.startWindowHours = startWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case lastExecutionTime = "LastExecutionTime"
+            case lastUpdateTime = "LastUpdateTime"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case scheduleExpression = "ScheduleExpression"
+            case scheduleExpressionTimezone = "ScheduleExpressionTimezone"
+            case startWindowHours = "StartWindowHours"
+        }
+    }
+
+    public struct RestoreTestingPlanForUpdate: AWSEncodableShape {
+        /// Required: Algorithm; RecoveryPointTypes;  IncludeVaults (one or more). Optional: SelectionWindowDays ('30' if  not specified); ExcludeVaults (defaults to empty  list if not listed).
+        public let recoveryPointSelection: RestoreTestingRecoveryPointSelection?
+        /// A CRON expression in specified timezone when a restore  testing plan is executed.
+        public let scheduleExpression: String?
+        /// Optional. This is the timezone in which the schedule  expression is set. By default, ScheduleExpressions are in UTC.  You can modify this to a specified timezone.
+        public let scheduleExpressionTimezone: String?
+        /// Defaults to 24 hours. A value in hours after a restore test is scheduled before a  job will be canceled if it doesn't start successfully. This value  is optional. If this value is included, this parameter has a  maximum value of 168 hours (one week).
+        public let startWindowHours: Int?
+
+        public init(recoveryPointSelection: RestoreTestingRecoveryPointSelection? = nil, scheduleExpression: String? = nil, scheduleExpressionTimezone: String? = nil, startWindowHours: Int? = nil) {
+            self.recoveryPointSelection = recoveryPointSelection
+            self.scheduleExpression = scheduleExpression
+            self.scheduleExpressionTimezone = scheduleExpressionTimezone
+            self.startWindowHours = startWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case recoveryPointSelection = "RecoveryPointSelection"
+            case scheduleExpression = "ScheduleExpression"
+            case scheduleExpressionTimezone = "ScheduleExpressionTimezone"
+            case startWindowHours = "StartWindowHours"
+        }
+    }
+
+    public struct RestoreTestingRecoveryPointSelection: AWSEncodableShape & AWSDecodableShape {
+        /// Acceptable values include "LATEST_WITHIN_WINDOW" or  "RANDOM_WITHIN_WINDOW"
+        public let algorithm: RestoreTestingRecoveryPointSelectionAlgorithm?
+        /// Accepted values include specific ARNs or list of selectors.  Defaults to empty list if not listed.
+        public let excludeVaults: [String]?
+        /// Accepted values include wildcard ["*"] or by specific ARNs or  ARN wilcard replacement  ["arn:aws:backup:us-west-2:123456789012:backup-vault:asdf", ...]  ["arn:aws:backup:*:*:backup-vault:asdf-*", ...]
+        public let includeVaults: [String]?
+        /// These are the types of recovery points.
+        public let recoveryPointTypes: [RestoreTestingRecoveryPointType]?
+        /// Accepted values are integers from 1 to 365.
+        public let selectionWindowDays: Int?
+
+        public init(algorithm: RestoreTestingRecoveryPointSelectionAlgorithm? = nil, excludeVaults: [String]? = nil, includeVaults: [String]? = nil, recoveryPointTypes: [RestoreTestingRecoveryPointType]? = nil, selectionWindowDays: Int? = nil) {
+            self.algorithm = algorithm
+            self.excludeVaults = excludeVaults
+            self.includeVaults = includeVaults
+            self.recoveryPointTypes = recoveryPointTypes
+            self.selectionWindowDays = selectionWindowDays
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case algorithm = "Algorithm"
+            case excludeVaults = "ExcludeVaults"
+            case includeVaults = "IncludeVaults"
+            case recoveryPointTypes = "RecoveryPointTypes"
+            case selectionWindowDays = "SelectionWindowDays"
+        }
+    }
+
+    public struct RestoreTestingSelectionForCreate: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) of the IAM role that  Backup uses to create the target resource;  for example: arn:aws:iam::123456789012:role/S3Access.
+        public let iamRoleArn: String
+        /// Each protected resource can be filtered by its specific ARNs, such as  ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]  or by a wildcard: ProtectedResourceArns: ["*"],  but not both.
+        public let protectedResourceArns: [String]?
+        /// If you have included the wildcard in ProtectedResourceArns,  you can include resource conditions, such as  ProtectedResourceConditions: {    StringEquals: [{ key: "XXXX",  value: "YYYY" }].
+        public let protectedResourceConditions: ProtectedResourceConditions?
+        /// The type of Amazon Web Services resource included in a restore  testing selection; for  example, an Amazon EBS volume or  an Amazon RDS database. Supported resource types accepted include:    Aurora for Amazon Aurora    DocumentDB for Amazon DocumentDB (with MongoDB compatibility)    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    FSx for Amazon FSx    Neptune for Amazon Neptune    RDS for Amazon Relational Database Service    S3 for Amazon S3
+        public let protectedResourceType: String
+        /// You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+        public let restoreMetadataOverrides: [String: String]?
+        /// This is the unique name of the restore testing selection  that belongs to the related restore testing plan.
+        public let restoreTestingSelectionName: String
+        /// This is amount of hours (1 to 168) available to run a validation script on the data. The data will be deleted upon the completion of the validation script or the end of the specified retention period, whichever comes first.
+        public let validationWindowHours: Int?
+
+        public init(iamRoleArn: String, protectedResourceArns: [String]? = nil, protectedResourceConditions: ProtectedResourceConditions? = nil, protectedResourceType: String, restoreMetadataOverrides: [String: String]? = nil, restoreTestingSelectionName: String, validationWindowHours: Int? = nil) {
+            self.iamRoleArn = iamRoleArn
+            self.protectedResourceArns = protectedResourceArns
+            self.protectedResourceConditions = protectedResourceConditions
+            self.protectedResourceType = protectedResourceType
+            self.restoreMetadataOverrides = restoreMetadataOverrides
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+            self.validationWindowHours = validationWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case iamRoleArn = "IamRoleArn"
+            case protectedResourceArns = "ProtectedResourceArns"
+            case protectedResourceConditions = "ProtectedResourceConditions"
+            case protectedResourceType = "ProtectedResourceType"
+            case restoreMetadataOverrides = "RestoreMetadataOverrides"
+            case restoreTestingSelectionName = "RestoreTestingSelectionName"
+            case validationWindowHours = "ValidationWindowHours"
+        }
+    }
+
+    public struct RestoreTestingSelectionForGet: AWSDecodableShape {
+        /// The date and time that a restore testing selection was created,  in Unix format and Coordinated Universal Time (UTC). The value of  CreationTime is accurate to milliseconds. For example,  the value 1516925490.087 represents Friday, January 26,  201812:11:30.087  AM.
+        public let creationTime: Date
+        /// This identifies the request and allows failed requests to  be retried without the risk of running the operation twice.  If the request includes a CreatorRequestId that  matches an existing backup plan, that plan is returned. This  parameter is optional. If used, this parameter must contain 1 to 50 alphanumeric  or '-_.' characters.
+        public let creatorRequestId: String?
+        /// The Amazon Resource Name (ARN) of the IAM role that  Backup uses to create the target resource; for  example:arn:aws:iam::123456789012:role/S3Access.
+        public let iamRoleArn: String
+        /// You can include specific ARNs, such as  ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]  or you can include a wildcard: ProtectedResourceArns: ["*"],  but not both.
+        public let protectedResourceArns: [String]?
+        /// In a resource testing selection, this parameter filters by  specific conditions such as StringEquals or  StringNotEquals.
+        public let protectedResourceConditions: ProtectedResourceConditions?
+        /// The type of Amazon Web Services resource included in a resource  testing selection;  for example, an Amazon EBS volume  or an Amazon RDS database.
+        public let protectedResourceType: String
+        /// You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+        public let restoreMetadataOverrides: [String: String]?
+        /// The RestoreTestingPlanName is a unique string that is the name  of the restore testing plan.
+        public let restoreTestingPlanName: String
+        /// This is the unique name of the restore testing selection that  belongs to the related restore testing plan.
+        public let restoreTestingSelectionName: String
+        /// This is amount of hours (1 to 168) available to run a validation script on the data. The data will be deleted upon the completion of the validation script or the end of the specified retention period, whichever comes first.
+        public let validationWindowHours: Int?
+
+        public init(creationTime: Date, creatorRequestId: String? = nil, iamRoleArn: String, protectedResourceArns: [String]? = nil, protectedResourceConditions: ProtectedResourceConditions? = nil, protectedResourceType: String, restoreMetadataOverrides: [String: String]? = nil, restoreTestingPlanName: String, restoreTestingSelectionName: String, validationWindowHours: Int? = nil) {
+            self.creationTime = creationTime
+            self.creatorRequestId = creatorRequestId
+            self.iamRoleArn = iamRoleArn
+            self.protectedResourceArns = protectedResourceArns
+            self.protectedResourceConditions = protectedResourceConditions
+            self.protectedResourceType = protectedResourceType
+            self.restoreMetadataOverrides = restoreMetadataOverrides
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+            self.validationWindowHours = validationWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case creatorRequestId = "CreatorRequestId"
+            case iamRoleArn = "IamRoleArn"
+            case protectedResourceArns = "ProtectedResourceArns"
+            case protectedResourceConditions = "ProtectedResourceConditions"
+            case protectedResourceType = "ProtectedResourceType"
+            case restoreMetadataOverrides = "RestoreMetadataOverrides"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case restoreTestingSelectionName = "RestoreTestingSelectionName"
+            case validationWindowHours = "ValidationWindowHours"
+        }
+    }
+
+    public struct RestoreTestingSelectionForList: AWSDecodableShape {
+        /// This is the date and time that a restore testing selection  was created, in Unix format and Coordinated Universal Time (UTC).  The value of CreationTime is accurate to milliseconds.  For example, the value 1516925490.087 represents Friday,  January 26,2018 12:11:30.087 AM.
+        public let creationTime: Date
+        /// The Amazon Resource Name (ARN) of the IAM role that  Backup uses to create the target resource; for example:  arn:aws:iam::123456789012:role/S3Access.
+        public let iamRoleArn: String
+        /// The type of Amazon Web Services resource included in a restore  testing selection; for example, an  Amazon EBS volume or an Amazon RDS database.
+        public let protectedResourceType: String
+        /// Unique string that is the name of the restore testing plan. The name cannot be changed after creation. The name must  consist of only alphanumeric characters and underscores.  Maximum length is 50.
+        public let restoreTestingPlanName: String
+        /// Unique name of a restore testing selection.
+        public let restoreTestingSelectionName: String
+        /// This value represents the time, in hours, data is retained after  a restore test so that optional validation can be completed. Accepted value is an integer between  0 and 168 (the hourly equivalent of seven days).
+        public let validationWindowHours: Int?
+
+        public init(creationTime: Date, iamRoleArn: String, protectedResourceType: String, restoreTestingPlanName: String, restoreTestingSelectionName: String, validationWindowHours: Int? = nil) {
+            self.creationTime = creationTime
+            self.iamRoleArn = iamRoleArn
+            self.protectedResourceType = protectedResourceType
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+            self.validationWindowHours = validationWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case iamRoleArn = "IamRoleArn"
+            case protectedResourceType = "ProtectedResourceType"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case restoreTestingSelectionName = "RestoreTestingSelectionName"
+            case validationWindowHours = "ValidationWindowHours"
+        }
+    }
+
+    public struct RestoreTestingSelectionForUpdate: AWSEncodableShape {
+        /// The Amazon Resource Name (ARN) of the IAM role that  Backup uses to create the target resource; for example:  arn:aws:iam::123456789012:role/S3Access.
+        public let iamRoleArn: String?
+        /// You can include a list of specific ARNs, such as  ProtectedResourceArns: ["arn:aws:...", "arn:aws:..."]  or you can include a wildcard: ProtectedResourceArns: ["*"],  but not both.
+        public let protectedResourceArns: [String]?
+        /// A list of conditions that you define for resources in  your restore testing plan using  tags. For example,  "StringEquals": {  "Key": "aws:ResourceTag/CreatedByCryo",  "Value": "true"  },.  Condition operators are case sensitive.
+        public let protectedResourceConditions: ProtectedResourceConditions?
+        /// You can override certain restore metadata keys by including the parameter RestoreMetadataOverrides in the body of RestoreTestingSelection. Key values are not case sensitive. See the complete list of restore testing inferred metadata.
+        public let restoreMetadataOverrides: [String: String]?
+        /// This value represents the time, in hours, data is retained after  a restore test so that optional validation can be completed. Accepted value is an integer between  0 and 168 (the hourly equivalent of seven days).
+        public let validationWindowHours: Int?
+
+        public init(iamRoleArn: String? = nil, protectedResourceArns: [String]? = nil, protectedResourceConditions: ProtectedResourceConditions? = nil, restoreMetadataOverrides: [String: String]? = nil, validationWindowHours: Int? = nil) {
+            self.iamRoleArn = iamRoleArn
+            self.protectedResourceArns = protectedResourceArns
+            self.protectedResourceConditions = protectedResourceConditions
+            self.restoreMetadataOverrides = restoreMetadataOverrides
+            self.validationWindowHours = validationWindowHours
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case iamRoleArn = "IamRoleArn"
+            case protectedResourceArns = "ProtectedResourceArns"
+            case protectedResourceConditions = "ProtectedResourceConditions"
+            case restoreMetadataOverrides = "RestoreMetadataOverrides"
+            case validationWindowHours = "ValidationWindowHours"
         }
     }
 
@@ -4685,6 +5981,104 @@ extension Backup {
             case creationTime = "CreationTime"
             case reportPlanArn = "ReportPlanArn"
             case reportPlanName = "ReportPlanName"
+        }
+    }
+
+    public struct UpdateRestoreTestingPlanInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName"))
+        ]
+
+        /// Specifies the body of a restore testing plan.
+        public let restoreTestingPlan: RestoreTestingPlanForUpdate
+        /// This is the restore testing plan name you wish to update.
+        public let restoreTestingPlanName: String
+
+        public init(restoreTestingPlan: RestoreTestingPlanForUpdate, restoreTestingPlanName: String) {
+            self.restoreTestingPlan = restoreTestingPlan
+            self.restoreTestingPlanName = restoreTestingPlanName
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case restoreTestingPlan = "RestoreTestingPlan"
+        }
+    }
+
+    public struct UpdateRestoreTestingPlanOutput: AWSDecodableShape {
+        /// This is the time the resource testing plan was  created.
+        public let creationTime: Date
+        /// Unique ARN (Amazon Resource Name) of the restore testing plan.
+        public let restoreTestingPlanArn: String
+        /// The name cannot be changed after creation. The name consists of  only alphanumeric characters and underscores. Maximum length is 50.
+        public let restoreTestingPlanName: String
+        /// This is the time the update completed for the restore  testing plan.
+        public let updateTime: Date
+
+        public init(creationTime: Date, restoreTestingPlanArn: String, restoreTestingPlanName: String, updateTime: Date) {
+            self.creationTime = creationTime
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case updateTime = "UpdateTime"
+        }
+    }
+
+    public struct UpdateRestoreTestingSelectionInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "restoreTestingPlanName", location: .uri("RestoreTestingPlanName")),
+            AWSMemberEncoding(label: "restoreTestingSelectionName", location: .uri("RestoreTestingSelectionName"))
+        ]
+
+        /// The restore testing plan name is required to update the  indicated testing plan.
+        public let restoreTestingPlanName: String
+        /// To update your restore testing selection, you can use either  protected resource ARNs or conditions, but not both. That is, if your  selection has ProtectedResourceArns, requesting an update  with the parameter ProtectedResourceConditions will be  unsuccessful.
+        public let restoreTestingSelection: RestoreTestingSelectionForUpdate
+        /// This is the required restore testing selection name of the restore  testing selection you wish to update.
+        public let restoreTestingSelectionName: String
+
+        public init(restoreTestingPlanName: String, restoreTestingSelection: RestoreTestingSelectionForUpdate, restoreTestingSelectionName: String) {
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelection = restoreTestingSelection
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case restoreTestingSelection = "RestoreTestingSelection"
+        }
+    }
+
+    public struct UpdateRestoreTestingSelectionOutput: AWSDecodableShape {
+        /// This is the time the resource testing selection was  updated successfully.
+        public let creationTime: Date
+        /// Unique string that is the name of the restore testing plan.
+        public let restoreTestingPlanArn: String
+        /// This is the restore testing plan with which the updated restore  testing selection is associated.
+        public let restoreTestingPlanName: String
+        /// This is the returned restore testing selection name.
+        public let restoreTestingSelectionName: String
+        /// This is the time the update completed for the restore  testing selection.
+        public let updateTime: Date
+
+        public init(creationTime: Date, restoreTestingPlanArn: String, restoreTestingPlanName: String, restoreTestingSelectionName: String, updateTime: Date) {
+            self.creationTime = creationTime
+            self.restoreTestingPlanArn = restoreTestingPlanArn
+            self.restoreTestingPlanName = restoreTestingPlanName
+            self.restoreTestingSelectionName = restoreTestingSelectionName
+            self.updateTime = updateTime
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case creationTime = "CreationTime"
+            case restoreTestingPlanArn = "RestoreTestingPlanArn"
+            case restoreTestingPlanName = "RestoreTestingPlanName"
+            case restoreTestingSelectionName = "RestoreTestingSelectionName"
+            case updateTime = "UpdateTime"
         }
     }
 }

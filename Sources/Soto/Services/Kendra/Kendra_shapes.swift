@@ -26,25 +26,25 @@ import SotoCore
 extension Kendra {
     // MARK: Enums
 
-    public enum AdditionalResultAttributeValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AdditionalResultAttributeValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case textWithHighlightsValue = "TEXT_WITH_HIGHLIGHTS_VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AlfrescoEntity: String, CustomStringConvertible, Codable, Sendable {
+    public enum AlfrescoEntity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case blog = "blog"
         case documentLibrary = "documentLibrary"
         case wiki = "wiki"
         public var description: String { return self.rawValue }
     }
 
-    public enum AttributeSuggestionsMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum AttributeSuggestionsMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConditionOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConditionOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case beginsWith = "BeginsWith"
         case contains = "Contains"
         case equals = "Equals"
@@ -59,7 +59,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluenceAttachmentFieldName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluenceAttachmentFieldName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case author = "AUTHOR"
         case contentType = "CONTENT_TYPE"
         case createdDate = "CREATED_DATE"
@@ -74,13 +74,13 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluenceAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluenceAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case httpBasic = "HTTP_BASIC"
         case pat = "PAT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluenceBlogFieldName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluenceBlogFieldName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case author = "AUTHOR"
         case displayUrl = "DISPLAY_URL"
         case itemType = "ITEM_TYPE"
@@ -93,7 +93,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluencePageFieldName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluencePageFieldName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case author = "AUTHOR"
         case contentStatus = "CONTENT_STATUS"
         case createdDate = "CREATED_DATE"
@@ -109,7 +109,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluenceSpaceFieldName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluenceSpaceFieldName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case displayUrl = "DISPLAY_URL"
         case itemType = "ITEM_TYPE"
         case spaceKey = "SPACE_KEY"
@@ -117,13 +117,13 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConfluenceVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConfluenceVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloud = "CLOUD"
         case server = "SERVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case html = "HTML"
         case json = "JSON"
@@ -139,7 +139,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -148,7 +148,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceSyncJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceSyncJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aborted = "ABORTED"
         case failed = "FAILED"
         case incomplete = "INCOMPLETE"
@@ -159,7 +159,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alfresco = "ALFRESCO"
         case box = "BOX"
         case confluence = "CONFLUENCE"
@@ -182,7 +182,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DatabaseEngineType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatabaseEngineType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rdsAuroraMysql = "RDS_AURORA_MYSQL"
         case rdsAuroraPostgresql = "RDS_AURORA_POSTGRESQL"
         case rdsMysql = "RDS_MYSQL"
@@ -190,7 +190,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DocumentAttributeValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DocumentAttributeValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dateValue = "DATE_VALUE"
         case longValue = "LONG_VALUE"
         case stringListValue = "STRING_LIST_VALUE"
@@ -198,7 +198,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum DocumentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DocumentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case indexed = "INDEXED"
         case notFound = "NOT_FOUND"
@@ -208,24 +208,24 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case home = "HOME"
         public var description: String { return self.rawValue }
     }
 
-    public enum EntityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EntityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case group = "GROUP"
         case user = "USER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case internalError = "InternalError"
         case invalidRequest = "InvalidRequest"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExperienceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExperienceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -233,14 +233,14 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum FaqFileFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum FaqFileFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case csvWithHeader = "CSV_WITH_HEADER"
         case json = "JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum FaqStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FaqStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -249,30 +249,30 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum FeaturedResultsSetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeaturedResultsSetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FsxFileSystemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FsxFileSystemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case windows = "WINDOWS"
         public var description: String { return self.rawValue }
     }
 
-    public enum HighlightType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HighlightType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case standard = "STANDARD"
         case thesaurusSynonym = "THESAURUS_SYNONYM"
         public var description: String { return self.rawValue }
     }
 
-    public enum IndexEdition: String, CustomStringConvertible, Codable, Sendable {
+    public enum IndexEdition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case developerEdition = "DEVELOPER_EDITION"
         case enterpriseEdition = "ENTERPRISE_EDITION"
         public var description: String { return self.rawValue }
     }
 
-    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IndexStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -282,7 +282,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum Interval: String, CustomStringConvertible, Codable, Sendable {
+    public enum Interval: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneMonthAgo = "ONE_MONTH_AGO"
         case oneWeekAgo = "ONE_WEEK_AGO"
         case thisMonth = "THIS_MONTH"
@@ -292,20 +292,20 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum IssueSubEntity: String, CustomStringConvertible, Codable, Sendable {
+    public enum IssueSubEntity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachments = "ATTACHMENTS"
         case comments = "COMMENTS"
         case worklogs = "WORKLOGS"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyLocation: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyLocation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case secretManager = "SECRET_MANAGER"
         case url = "URL"
         public var description: String { return self.rawValue }
     }
 
-    public enum MetricType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetricType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aggQueryDocMetrics = "AGG_QUERY_DOC_METRICS"
         case docsByClickCount = "DOCS_BY_CLICK_COUNT"
         case queriesByCount = "QUERIES_BY_COUNT"
@@ -315,25 +315,32 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum Mode: String, CustomStringConvertible, Codable, Sendable {
+    public enum MissingAttributeKeyStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case collapse = "COLLAPSE"
+        case expand = "EXPAND"
+        case ignore = "IGNORE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum Mode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enabled = "ENABLED"
         case learnOnly = "LEARN_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum Order: String, CustomStringConvertible, Codable, Sendable {
+    public enum Order: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum Persona: String, CustomStringConvertible, Codable, Sendable {
+    public enum Persona: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case owner = "OWNER"
         case viewer = "VIEWER"
         public var description: String { return self.rawValue }
     }
 
-    public enum PrincipalMappingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrincipalMappingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case deleting = "DELETING"
         case failed = "FAILED"
@@ -342,32 +349,32 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case group = "GROUP"
         case user = "USER"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryIdentifiersEnclosingOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryIdentifiersEnclosingOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doubleQuotes = "DOUBLE_QUOTES"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryResultFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryResultFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case table = "TABLE"
         case text = "TEXT"
         public var description: String { return self.rawValue }
     }
 
-    public enum QueryResultType: String, CustomStringConvertible, Codable, Sendable {
+    public enum QueryResultType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case answer = "ANSWER"
         case document = "DOCUMENT"
         case questionAnswer = "QUESTION_ANSWER"
         public var description: String { return self.rawValue }
     }
 
-    public enum QuerySuggestionsBlockListStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuerySuggestionsBlockListStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case activeButUpdateFailed = "ACTIVE_BUT_UPDATE_FAILED"
         case creating = "CREATING"
@@ -377,38 +384,38 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum QuerySuggestionsStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuerySuggestionsStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case updating = "UPDATING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReadAccessType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReadAccessType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case deny = "DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelevanceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelevanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notRelevant = "NOT_RELEVANT"
         case relevant = "RELEVANT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SalesforceChatterFeedIncludeFilterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SalesforceChatterFeedIncludeFilterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activeUser = "ACTIVE_USER"
         case standardUser = "STANDARD_USER"
         public var description: String { return self.rawValue }
     }
 
-    public enum SalesforceKnowledgeArticleState: String, CustomStringConvertible, Codable, Sendable {
+    public enum SalesforceKnowledgeArticleState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case archived = "ARCHIVED"
         case draft = "DRAFT"
         case published = "PUBLISHED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SalesforceStandardObjectName: String, CustomStringConvertible, Codable, Sendable {
+    public enum SalesforceStandardObjectName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `case` = "CASE"
         case account = "ACCOUNT"
         case campaign = "CAMPAIGN"
@@ -429,7 +436,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ScoreConfidence: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScoreConfidence: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
@@ -438,25 +445,25 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceNowAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceNowAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case httpBasic = "HTTP_BASIC"
         case oauth2 = "OAUTH2"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceNowBuildVersionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceNowBuildVersionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case london = "LONDON"
         case others = "OTHERS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SharePointOnlineAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SharePointOnlineAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case httpBasic = "HTTP_BASIC"
         case oauth2 = "OAUTH2"
         public var description: String { return self.rawValue }
     }
 
-    public enum SharePointVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum SharePointVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sharepoint2013 = "SHAREPOINT_2013"
         case sharepoint2016 = "SHAREPOINT_2016"
         case sharepoint2019 = "SHAREPOINT_2019"
@@ -464,7 +471,7 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum SlackEntity: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlackEntity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directMessage = "DIRECT_MESSAGE"
         case groupMessage = "GROUP_MESSAGE"
         case privateChannel = "PRIVATE_CHANNEL"
@@ -472,19 +479,19 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum SuggestionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SuggestionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case documentAttributes = "DOCUMENT_ATTRIBUTES"
         case query = "QUERY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThesaurusStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThesaurusStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case activeButUpdateFailed = "ACTIVE_BUT_UPDATE_FAILED"
         case creating = "CREATING"
@@ -494,31 +501,31 @@ extension Kendra {
         public var description: String { return self.rawValue }
     }
 
-    public enum UserContextPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserContextPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attributeFilter = "ATTRIBUTE_FILTER"
         case userToken = "USER_TOKEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserGroupResolutionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserGroupResolutionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsSso = "AWS_SSO"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum WarningCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum WarningCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case queryLanguageInvalidSyntax = "QUERY_LANGUAGE_INVALID_SYNTAX"
         public var description: String { return self.rawValue }
     }
 
-    public enum WebCrawlerMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum WebCrawlerMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case everything = "EVERYTHING"
         case hostOnly = "HOST_ONLY"
         case subdomains = "SUBDOMAINS"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Type`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Type`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case onPremise = "ON_PREMISE"
         case saas = "SAAS"
         public var description: String { return self.rawValue }
@@ -1214,7 +1221,7 @@ extension Kendra {
         public let documents: [Document]
         /// The identifier of the index to add the documents to. You need to create the index first using the CreateIndex API.
         public let indexId: String
-        /// The Amazon Resource Name (ARN) of an IAM role with permission to access  your S3 bucket. For more information, see IAM access roles for Amazon Kendra.
+        /// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket. For more information, see IAM access roles for Amazon Kendra.
         public let roleArn: String?
 
         public init(customDocumentEnrichmentConfiguration: CustomDocumentEnrichmentConfiguration? = nil, documents: [Document], indexId: String, roleArn: String? = nil) {
@@ -1247,7 +1254,7 @@ extension Kendra {
     }
 
     public struct BatchPutDocumentResponse: AWSDecodableShape {
-        /// A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see Monitoring  Amazon Kendra with Amazon CloudWatch logs.
+        /// A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch logs.
         public let failedDocuments: [BatchPutDocumentResponseFailedDocument]?
 
         public init(failedDocuments: [BatchPutDocumentResponseFailedDocument]? = nil) {
@@ -1441,6 +1448,62 @@ extension Kendra {
         private enum CodingKeys: String, CodingKey {
             case clickTime = "ClickTime"
             case resultId = "ResultId"
+        }
+    }
+
+    public struct CollapseConfiguration: AWSEncodableShape {
+        /// The document attribute used to group search results. You can use any attribute that has the Sortable flag set to true. You can also sort by any of the following built-in attributes:"_category","_created_at", "_last_updated_at", "_version", "_view_count".
+        public let documentAttributeKey: String
+        /// Specifies whether to expand the collapsed results.
+        public let expand: Bool?
+        /// Provides configuration information to customize expansion options for a collapsed group.
+        public let expandConfiguration: ExpandConfiguration?
+        /// Specifies the behavior for documents without a value for the collapse attribute. Amazon Kendra offers three customization options:   Choose to COLLAPSE all documents with null or missing values in one group. This is the default configuration.   Choose to IGNORE documents with null or missing values. Ignored documents will not appear in query results.   Choose to EXPAND each document with a null or missing value into a group of its own.
+        public let missingAttributeKeyStrategy: MissingAttributeKeyStrategy?
+        /// A prioritized list of document attributes/fields that determine the primary document among those in a collapsed group.
+        public let sortingConfigurations: [SortingConfiguration]?
+
+        public init(documentAttributeKey: String, expand: Bool? = nil, expandConfiguration: ExpandConfiguration? = nil, missingAttributeKeyStrategy: MissingAttributeKeyStrategy? = nil, sortingConfigurations: [SortingConfiguration]? = nil) {
+            self.documentAttributeKey = documentAttributeKey
+            self.expand = expand
+            self.expandConfiguration = expandConfiguration
+            self.missingAttributeKeyStrategy = missingAttributeKeyStrategy
+            self.sortingConfigurations = sortingConfigurations
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.documentAttributeKey, name: "documentAttributeKey", parent: name, max: 200)
+            try self.validate(self.documentAttributeKey, name: "documentAttributeKey", parent: name, min: 1)
+            try self.validate(self.documentAttributeKey, name: "documentAttributeKey", parent: name, pattern: "^[a-zA-Z0-9_][a-zA-Z0-9_-]*$")
+            try self.sortingConfigurations?.forEach {
+                try $0.validate(name: "\(name).sortingConfigurations[]")
+            }
+            try self.validate(self.sortingConfigurations, name: "sortingConfigurations", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case documentAttributeKey = "DocumentAttributeKey"
+            case expand = "Expand"
+            case expandConfiguration = "ExpandConfiguration"
+            case missingAttributeKeyStrategy = "MissingAttributeKeyStrategy"
+            case sortingConfigurations = "SortingConfigurations"
+        }
+    }
+
+    public struct CollapsedResultDetail: AWSDecodableShape {
+        /// The value of the document attribute that results are collapsed on.
+        public let documentAttribute: DocumentAttribute
+        /// A list of results in the collapsed group.
+        public let expandedResults: [ExpandedResultItem]?
+
+        public init(documentAttribute: DocumentAttribute, expandedResults: [ExpandedResultItem]? = nil) {
+            self.documentAttribute = documentAttribute
+            self.expandedResults = expandedResults
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case documentAttribute = "DocumentAttribute"
+            case expandedResults = "ExpandedResults"
         }
     }
 
@@ -2096,7 +2159,7 @@ extension Kendra {
         public let indexId: String
         /// A name for your Amazon Kendra experience.
         public let name: String
-        /// The Amazon Resource Name (ARN) of an IAM role with permission to access  Query API, GetQuerySuggestions API, and other required APIs.  The role also must include permission to access IAM Identity Center (successor to Single Sign-On) that stores your  user and group information. For more information, see IAM access roles for Amazon Kendra.
+        /// The Amazon Resource Name (ARN) of an IAM role with permission to access  Query API, GetQuerySuggestions API, and other required APIs.  The role also must include permission to access IAM Identity Center that stores your  user and group information. For more information, see IAM access roles for Amazon Kendra.
         public let roleArn: String?
 
         public init(clientToken: String? = CreateExperienceRequest.idempotencyToken(), configuration: ExperienceConfiguration? = nil, description: String? = nil, indexId: String, name: String, roleArn: String? = nil) {
@@ -2320,7 +2383,7 @@ extension Kendra {
         public let tags: [Tag]?
         /// The user context policy.  ATTRIBUTE_FILTER  All indexed content is searchable and displayable for all users. If you want to filter search results on user context, you can use the attribute filters of _user_id and _group_ids or you can provide user and group information in UserContext.   USER_TOKEN  Enables token-based user access control to filter search results on user context. All documents with no access control and all documents accessible to the user will be searchable and displayable.
         public let userContextPolicy: UserContextPolicy?
-        /// Gets users and groups from IAM Identity Center (successor to Single Sign-On)  identity source. To configure this, see UserGroupResolutionConfiguration.
+        /// Gets users and groups from IAM Identity Center  identity source. To configure this, see UserGroupResolutionConfiguration.
         public let userGroupResolutionConfiguration: UserGroupResolutionConfiguration?
         /// The user token configuration.
         public let userTokenConfigurations: [UserTokenConfiguration]?
@@ -3601,7 +3664,7 @@ extension Kendra {
         public let updatedAt: Date?
         /// The user context policy for the Amazon Kendra index.
         public let userContextPolicy: UserContextPolicy?
-        /// Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source.
+        /// Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center identity source.
         public let userGroupResolutionConfiguration: UserGroupResolutionConfiguration?
         /// The user token configuration for the Amazon Kendra index.
         public let userTokenConfigurations: [UserTokenConfiguration]?
@@ -4047,7 +4110,7 @@ extension Kendra {
         public let attributes: [DocumentAttribute]?
         /// The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Kendra APIs. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
         public let blob: AWSBase64Data?
-        /// The file type of the document in the Blob field. If you want to index snippets or subsets of HTML documents instead of the entirety  of the HTML documents, you must add the HTML start and closing tags  (content) around the content.
+        /// The file type of the document in the Blob field. If you want to index snippets or subsets of HTML documents instead of the entirety of the HTML documents, you must add the HTML start and closing tags (content) around the content.
         public let contentType: ContentType?
         /// The list of principal lists that define the hierarchy for which documents users should have access to.
         public let hierarchicalAccessControlList: [HierarchicalPrincipal]?
@@ -4406,6 +4469,54 @@ extension Kendra {
         private enum CodingKeys: String, CodingKey {
             case entityId = "EntityId"
             case persona = "Persona"
+        }
+    }
+
+    public struct ExpandConfiguration: AWSEncodableShape {
+        /// The number of expanded results to show per collapsed primary document. For instance, if you set this value to 3, then at most 3 results per collapsed group will be displayed.
+        public let maxExpandedResultsPerItem: Int?
+        /// The number of collapsed search result groups to expand. If you set this value to 10, for example, only the first 10 out of 100 result groups will have expand functionality.
+        public let maxResultItemsToExpand: Int?
+
+        public init(maxExpandedResultsPerItem: Int? = nil, maxResultItemsToExpand: Int? = nil) {
+            self.maxExpandedResultsPerItem = maxExpandedResultsPerItem
+            self.maxResultItemsToExpand = maxResultItemsToExpand
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxExpandedResultsPerItem = "MaxExpandedResultsPerItem"
+            case maxResultItemsToExpand = "MaxResultItemsToExpand"
+        }
+    }
+
+    public struct ExpandedResultItem: AWSDecodableShape {
+        /// An array of document attributes assigned to a document in the search results. For example, the document author ("_author") or the source URI ("_source_uri") of the document.
+        public let documentAttributes: [DocumentAttribute]?
+        public let documentExcerpt: TextWithHighlights?
+        /// The idenitifier of the document.
+        public let documentId: String?
+        public let documentTitle: TextWithHighlights?
+        /// The URI of the original location of the document.
+        public let documentURI: String?
+        /// The identifier for the expanded result.
+        public let id: String?
+
+        public init(documentAttributes: [DocumentAttribute]? = nil, documentExcerpt: TextWithHighlights? = nil, documentId: String? = nil, documentTitle: TextWithHighlights? = nil, documentURI: String? = nil, id: String? = nil) {
+            self.documentAttributes = documentAttributes
+            self.documentExcerpt = documentExcerpt
+            self.documentId = documentId
+            self.documentTitle = documentTitle
+            self.documentURI = documentURI
+            self.id = id
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case documentAttributes = "DocumentAttributes"
+            case documentExcerpt = "DocumentExcerpt"
+            case documentId = "DocumentId"
+            case documentTitle = "DocumentTitle"
+            case documentURI = "DocumentURI"
+            case id = "Id"
         }
     }
 
@@ -6633,26 +6744,30 @@ extension Kendra {
     }
 
     public struct QueryRequest: AWSEncodableShape {
-        /// Filters search results by document fields/attributes. You can only provide  one attribute filter; however, the AndAllFilters, NotFilter,  and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of  filtering rules that a document must satisfy to be included in the query results.
+        /// Filters search results by document fields/attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of filtering rules that a document must satisfy to be included in the query results.
         public let attributeFilter: AttributeFilter?
-        /// Overrides relevance tuning configurations of fields/attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there  is no relevance tuning configured at the index level, then Amazon Kendra does not apply any  relevance tuning. If there is relevance tuning configured for fields at the index level, and you use this API to  override only some of these fields, then for the fields you did not override, the importance is  set to 1.
+        /// Provides configuration to determine how to group results by document attribute value, and how to display them (collapsed or expanded) under a designated primary document for each group.
+        public let collapseConfiguration: CollapseConfiguration?
+        /// Overrides relevance tuning configurations of fields/attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured for fields at the index level, and you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
         public let documentRelevanceOverrideConfigurations: [DocumentRelevanceConfiguration]?
-        /// An array of documents fields/attributes for faceted search. Amazon Kendra returns a  count for each field key specified. This helps your users narrow their search.
+        /// An array of documents fields/attributes for faceted search. Amazon Kendra returns a count for each field key specified. This helps your users narrow their search.
         public let facets: [Facet]?
         /// The identifier of the index for the search.
         public let indexId: String
-        /// Query results are returned in pages the size of the PageSize parameter.  By default, Amazon Kendra returns the first page of results. Use this parameter to  get result pages after the first one.
+        /// Query results are returned in pages the size of the PageSize parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.
         public let pageNumber: Int?
         /// Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.
         public let pageSize: Int?
-        /// Sets the type of query result or response. Only results for the specified type are  returned.
+        /// Sets the type of query result or response. Only results for the specified type are returned.
         public let queryResultTypeFilter: QueryResultType?
         /// The input query text for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries.
         public let queryText: String?
-        /// An array of document fields/attributes to include in the response. You can limit the  response to include certain document fields. By default, all document attributes are  included in the response.
+        /// An array of document fields/attributes to include in the response. You can limit the response to include certain document fields. By default, all document attributes are included in the response.
         public let requestedDocumentAttributes: [String]?
-        /// Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance. If you don't provide sorting configuration, the results are sorted by the relevance that  Amazon Kendra determines for the result.
+        /// Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance. If you don't provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.
         public let sortingConfiguration: SortingConfiguration?
+        /// Provides configuration information to determine how the results of a query are sorted. You can set upto 3 fields that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. The sort field quota can be increased. If you don't provide a sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result. In the case of ties in sorting the results, the results are sorted by relevance.
+        public let sortingConfigurations: [SortingConfiguration]?
         /// Enables suggested spell corrections for queries.
         public let spellCorrectionConfiguration: SpellCorrectionConfiguration?
         /// The user context token or user and group information.
@@ -6660,8 +6775,9 @@ extension Kendra {
         /// Provides an identifier for a specific user. The VisitorId should be a unique identifier, such as a GUID. Don't use personally identifiable information, such as the user's email address, as the VisitorId.
         public let visitorId: String?
 
-        public init(attributeFilter: AttributeFilter? = nil, documentRelevanceOverrideConfigurations: [DocumentRelevanceConfiguration]? = nil, facets: [Facet]? = nil, indexId: String, pageNumber: Int? = nil, pageSize: Int? = nil, queryResultTypeFilter: QueryResultType? = nil, queryText: String? = nil, requestedDocumentAttributes: [String]? = nil, sortingConfiguration: SortingConfiguration? = nil, spellCorrectionConfiguration: SpellCorrectionConfiguration? = nil, userContext: UserContext? = nil, visitorId: String? = nil) {
+        public init(attributeFilter: AttributeFilter? = nil, collapseConfiguration: CollapseConfiguration? = nil, documentRelevanceOverrideConfigurations: [DocumentRelevanceConfiguration]? = nil, facets: [Facet]? = nil, indexId: String, pageNumber: Int? = nil, pageSize: Int? = nil, queryResultTypeFilter: QueryResultType? = nil, queryText: String? = nil, requestedDocumentAttributes: [String]? = nil, sortingConfiguration: SortingConfiguration? = nil, sortingConfigurations: [SortingConfiguration]? = nil, spellCorrectionConfiguration: SpellCorrectionConfiguration? = nil, userContext: UserContext? = nil, visitorId: String? = nil) {
             self.attributeFilter = attributeFilter
+            self.collapseConfiguration = collapseConfiguration
             self.documentRelevanceOverrideConfigurations = documentRelevanceOverrideConfigurations
             self.facets = facets
             self.indexId = indexId
@@ -6671,6 +6787,7 @@ extension Kendra {
             self.queryText = queryText
             self.requestedDocumentAttributes = requestedDocumentAttributes
             self.sortingConfiguration = sortingConfiguration
+            self.sortingConfigurations = sortingConfigurations
             self.spellCorrectionConfiguration = spellCorrectionConfiguration
             self.userContext = userContext
             self.visitorId = visitorId
@@ -6678,6 +6795,7 @@ extension Kendra {
 
         public func validate(name: String) throws {
             try self.attributeFilter?.validate(name: "\(name).attributeFilter")
+            try self.collapseConfiguration?.validate(name: "\(name).collapseConfiguration")
             try self.documentRelevanceOverrideConfigurations?.forEach {
                 try $0.validate(name: "\(name).documentRelevanceOverrideConfigurations[]")
             }
@@ -6696,6 +6814,10 @@ extension Kendra {
             try self.validate(self.requestedDocumentAttributes, name: "requestedDocumentAttributes", parent: name, max: 100)
             try self.validate(self.requestedDocumentAttributes, name: "requestedDocumentAttributes", parent: name, min: 1)
             try self.sortingConfiguration?.validate(name: "\(name).sortingConfiguration")
+            try self.sortingConfigurations?.forEach {
+                try $0.validate(name: "\(name).sortingConfigurations[]")
+            }
+            try self.validate(self.sortingConfigurations, name: "sortingConfigurations", parent: name, min: 1)
             try self.userContext?.validate(name: "\(name).userContext")
             try self.validate(self.visitorId, name: "visitorId", parent: name, max: 256)
             try self.validate(self.visitorId, name: "visitorId", parent: name, min: 1)
@@ -6704,6 +6826,7 @@ extension Kendra {
 
         private enum CodingKeys: String, CodingKey {
             case attributeFilter = "AttributeFilter"
+            case collapseConfiguration = "CollapseConfiguration"
             case documentRelevanceOverrideConfigurations = "DocumentRelevanceOverrideConfigurations"
             case facets = "Facets"
             case indexId = "IndexId"
@@ -6713,6 +6836,7 @@ extension Kendra {
             case queryText = "QueryText"
             case requestedDocumentAttributes = "RequestedDocumentAttributes"
             case sortingConfiguration = "SortingConfiguration"
+            case sortingConfigurations = "SortingConfigurations"
             case spellCorrectionConfiguration = "SpellCorrectionConfiguration"
             case userContext = "UserContext"
             case visitorId = "VisitorId"
@@ -6722,7 +6846,7 @@ extension Kendra {
     public struct QueryResult: AWSDecodableShape {
         /// Contains the facet results. A FacetResult contains the counts for each field/attribute key that was specified in the Facets input parameter.
         public let facetResults: [FacetResult]?
-        /// The list of featured result items. Featured results are displayed at  the top of the search results page, placed above all other results for  certain queries. If there's an exact match of a query, then certain  documents are featured in the search results.
+        /// The list of featured result items. Featured results are displayed at the top of the search results page, placed above all other results for certain queries. If there's an exact match of a query, then certain documents are featured in the search results.
         public let featuredResultsItems: [FeaturedResultsItem]?
         /// The identifier for the search. You also use QueryId to identify the search when using the SubmitFeedback API.
         public let queryId: String?
@@ -6730,7 +6854,7 @@ extension Kendra {
         public let resultItems: [QueryResultItem]?
         /// A list of information related to suggested spell corrections for a query.
         public let spellCorrectedQueries: [SpellCorrectedQuery]?
-        /// The total number of items found by the search. However, you can only retrieve up to  100 items. For example, if the search found 192 items, you can only retrieve the first  100 of the items.
+        /// The total number of items found by the search. However, you can only retrieve up to 100 items. For example, if the search found 192 items, you can only retrieve the first 100 of the items.
         public let totalNumberOfResults: Int?
         /// A list of warning codes and their messages on problems with your query. Amazon Kendra currently only supports one type of warning, which is a warning on invalid syntax used in the query. For examples of invalid query syntax, see Searching with advanced query syntax.
         public let warnings: [Warning]?
@@ -6759,6 +6883,8 @@ extension Kendra {
     public struct QueryResultItem: AWSDecodableShape {
         /// One or more additional fields/attributes associated with the query result.
         public let additionalAttributes: [AdditionalResultAttribute]?
+        /// Provides details about a collapsed group of search results.
+        public let collapsedResultDetail: CollapsedResultDetail?
         /// An array of document fields/attributes assigned to a document in the search results.  For example, the document author (_author) or the source URI  (_source_uri) of the document.
         public let documentAttributes: [DocumentAttribute]?
         /// An extract of the text in the document. Contains information about highlighting the relevant terms in the excerpt.
@@ -6782,8 +6908,9 @@ extension Kendra {
         /// The type of document within the response. For example, a response could include a question-answer that's relevant to the query.
         public let type: QueryResultType?
 
-        public init(additionalAttributes: [AdditionalResultAttribute]? = nil, documentAttributes: [DocumentAttribute]? = nil, documentExcerpt: TextWithHighlights? = nil, documentId: String? = nil, documentTitle: TextWithHighlights? = nil, documentURI: String? = nil, feedbackToken: String? = nil, format: QueryResultFormat? = nil, id: String? = nil, scoreAttributes: ScoreAttributes? = nil, tableExcerpt: TableExcerpt? = nil, type: QueryResultType? = nil) {
+        public init(additionalAttributes: [AdditionalResultAttribute]? = nil, collapsedResultDetail: CollapsedResultDetail? = nil, documentAttributes: [DocumentAttribute]? = nil, documentExcerpt: TextWithHighlights? = nil, documentId: String? = nil, documentTitle: TextWithHighlights? = nil, documentURI: String? = nil, feedbackToken: String? = nil, format: QueryResultFormat? = nil, id: String? = nil, scoreAttributes: ScoreAttributes? = nil, tableExcerpt: TableExcerpt? = nil, type: QueryResultType? = nil) {
             self.additionalAttributes = additionalAttributes
+            self.collapsedResultDetail = collapsedResultDetail
             self.documentAttributes = documentAttributes
             self.documentExcerpt = documentExcerpt
             self.documentId = documentId
@@ -6799,6 +6926,7 @@ extension Kendra {
 
         private enum CodingKeys: String, CodingKey {
             case additionalAttributes = "AdditionalAttributes"
+            case collapsedResultDetail = "CollapsedResultDetail"
             case documentAttributes = "DocumentAttributes"
             case documentExcerpt = "DocumentExcerpt"
             case documentId = "DocumentId"
@@ -7008,19 +7136,19 @@ extension Kendra {
     }
 
     public struct RetrieveRequest: AWSEncodableShape {
-        /// Filters search results by document fields/attributes. You can only provide  one attribute filter; however, the AndAllFilters, NotFilter,  and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of  filtering rules that a document must satisfy to be included in the query results.
+        /// Filters search results by document fields/attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of filtering rules that a document must satisfy to be included in the query results.
         public let attributeFilter: AttributeFilter?
-        /// Overrides relevance tuning configurations of fields/attributes set at the index  level. If you use this API to override the relevance tuning configured at the index level,  but there is no relevance tuning configured at the index level, then  Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured for fields at the index level, and you use  this API to override only some of these fields, then for the fields you did not  override, the importance is set to 1.
+        /// Overrides relevance tuning configurations of fields/attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured for fields at the index level, and you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
         public let documentRelevanceOverrideConfigurations: [DocumentRelevanceConfiguration]?
-        /// The identifier of the index to retrieve relevant passages for the  search.
+        /// The identifier of the index to retrieve relevant passages for the search.
         public let indexId: String
-        /// Retrieved relevant passages are returned in pages the size of the  PageSize parameter. By default, Amazon Kendra returns the first page  of results. Use this parameter to get result pages after the first one.
+        /// Retrieved relevant passages are returned in pages the size of the PageSize parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.
         public let pageNumber: Int?
-        /// Sets the number of retrieved relevant passages that are returned in each page of  results. The default page size is 10. The maximum number of results returned is 100.  If you ask for more than 100 results, only 100 are returned.
+        /// Sets the number of retrieved relevant passages that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.
         public let pageSize: Int?
-        /// The input query text to retrieve relevant passages for the search.  Amazon Kendra truncates queries at 30 token words, which excludes  punctuation and stop words. Truncation still applies if you use Boolean  or more advanced, complex queries.
+        /// The input query text to retrieve relevant passages for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries.
         public let queryText: String
-        /// A list of document fields/attributes to include in the response. You can limit  the response to include certain document fields. By default, all document  fields are included in the response.
+        /// A list of document fields/attributes to include in the response. You can limit the response to include certain document fields. By default, all document fields are included in the response.
         public let requestedDocumentAttributes: [String]?
         /// The user context token or user and group information.
         public let userContext: UserContext?
@@ -7068,7 +7196,7 @@ extension Kendra {
     }
 
     public struct RetrieveResult: AWSDecodableShape {
-        /// The identifier of query used for the search. You also use QueryId to  identify the search when using the Submitfeedback API.
+        /// The identifier of query used for the search. You also use QueryId to identify the search when using the Submitfeedback API.
         public let queryId: String?
         /// The results of the retrieved relevant passages for the search.
         public let resultItems: [RetrieveResultItem]?
@@ -7087,7 +7215,7 @@ extension Kendra {
     public struct RetrieveResultItem: AWSDecodableShape {
         /// The contents of the relevant passage.
         public let content: String?
-        /// An array of document fields/attributes assigned to a document in the  search results. For example, the document author (_author)  or the source URI (_source_uri) of the document.
+        /// An array of document fields/attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
         public let documentAttributes: [DocumentAttribute]?
         /// The identifier of the document.
         public let documentId: String?
@@ -7097,7 +7225,7 @@ extension Kendra {
         public let documentURI: String?
         /// The identifier of the relevant passage result.
         public let id: String?
-        /// The confidence score bucket for a retrieved passage result. The confidence  bucket provides a relative ranking that indicates how confident Amazon Kendra  is that the response is relevant to the query.
+        /// The confidence score bucket for a retrieved passage result. The confidence bucket provides a relative ranking that indicates how confident Amazon Kendra is that the response is relevant to the query.
         public let scoreAttributes: ScoreAttributes?
 
         public init(content: String? = nil, documentAttributes: [DocumentAttribute]? = nil, documentId: String? = nil, documentTitle: String? = nil, documentURI: String? = nil, id: String? = nil, scoreAttributes: ScoreAttributes? = nil) {
@@ -8792,7 +8920,7 @@ extension Kendra {
         public let roleArn: String?
         /// The user context policy.
         public let userContextPolicy: UserContextPolicy?
-        /// Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
+        /// Enables fetching access levels of groups and users from an IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration.
         public let userGroupResolutionConfiguration: UserGroupResolutionConfiguration?
         /// The user token configuration.
         public let userTokenConfigurations: [UserTokenConfiguration]?
@@ -9060,7 +9188,7 @@ extension Kendra {
     }
 
     public struct UserGroupResolutionConfiguration: AWSEncodableShape & AWSDecodableShape {
-        /// The identity store provider (mode) you want to use to get users and groups.  IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
+        /// The identity store provider (mode) you want to use to get users and groups.  IAM Identity Center is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
         public let userGroupResolutionMode: UserGroupResolutionMode
 
         public init(userGroupResolutionMode: UserGroupResolutionMode) {

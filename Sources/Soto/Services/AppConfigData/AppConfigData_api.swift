@@ -55,6 +55,12 @@ public struct AppConfigData: AWSService {
             serviceProtocol: .restjson,
             apiVersion: "2021-11-11",
             endpoint: endpoint,
+            variantEndpoints: [
+                [.fips]: .init(endpoints: [
+                    "us-gov-east-1": "appconfigdata.us-gov-east-1.amazonaws.com",
+                    "us-gov-west-1": "appconfigdata.us-gov-west-1.amazonaws.com"
+                ])
+            ],
             errorType: AppConfigDataErrorType.self,
             timeout: timeout,
             byteBufferAllocator: byteBufferAllocator,

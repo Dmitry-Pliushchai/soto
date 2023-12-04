@@ -26,7 +26,7 @@ import SotoCore
 extension KafkaConnect {
     // MARK: Enums
 
-    public enum ConnectorState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectorState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "CREATING"
         case deleting = "DELETING"
         case failed = "FAILED"
@@ -35,13 +35,13 @@ extension KafkaConnect {
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomPluginContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomPluginContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case jar = "JAR"
         case zip = "ZIP"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomPluginState: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomPluginState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
@@ -51,13 +51,13 @@ extension KafkaConnect {
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaClusterClientAuthenticationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaClusterClientAuthenticationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iam = "IAM"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum KafkaClusterEncryptionInTransitType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KafkaClusterEncryptionInTransitType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case plaintext = "PLAINTEXT"
         case tls = "TLS"
         public var description: String { return self.rawValue }

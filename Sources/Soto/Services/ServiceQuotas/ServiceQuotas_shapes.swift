@@ -26,14 +26,14 @@ import SotoCore
 extension ServiceQuotas {
     // MARK: Enums
 
-    public enum AppliedLevelEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum AppliedLevelEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case all = "ALL"
         case resource = "RESOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dependencyAccessDeniedError = "DEPENDENCY_ACCESS_DENIED_ERROR"
         case dependencyServiceError = "DEPENDENCY_SERVICE_ERROR"
         case dependencyThrottlingError = "DEPENDENCY_THROTTLING_ERROR"
@@ -41,7 +41,7 @@ extension ServiceQuotas {
         public var description: String { return self.rawValue }
     }
 
-    public enum PeriodUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum PeriodUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case day = "DAY"
         case hour = "HOUR"
         case microsecond = "MICROSECOND"
@@ -52,13 +52,13 @@ extension ServiceQuotas {
         public var description: String { return self.rawValue }
     }
 
-    public enum QuotaContextScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuotaContextScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case resource = "RESOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RequestStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RequestStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case approved = "APPROVED"
         case caseClosed = "CASE_CLOSED"
         case caseOpened = "CASE_OPENED"
@@ -69,7 +69,7 @@ extension ServiceQuotas {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceQuotaTemplateAssociationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceQuotaTemplateAssociationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associated = "ASSOCIATED"
         case disassociated = "DISASSOCIATED"
         public var description: String { return self.rawValue }

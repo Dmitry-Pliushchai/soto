@@ -26,7 +26,7 @@ import SotoCore
 extension StorageGateway {
     // MARK: Enums
 
-    public enum ActiveDirectoryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActiveDirectoryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case detached = "DETACHED"
         case joined = "JOINED"
@@ -37,33 +37,33 @@ extension StorageGateway {
         public var description: String { return self.rawValue }
     }
 
-    public enum AvailabilityMonitorTestStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AvailabilityMonitorTestStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case failed = "FAILED"
         case pending = "PENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CaseSensitivity: String, CustomStringConvertible, Codable, Sendable {
+    public enum CaseSensitivity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case caseSensitive = "CaseSensitive"
         case clientSpecified = "ClientSpecified"
         public var description: String { return self.rawValue }
     }
 
-    public enum FileShareType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FileShareType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nfs = "NFS"
         case smb = "SMB"
         public var description: String { return self.rawValue }
     }
 
-    public enum GatewayCapacity: String, CustomStringConvertible, Codable, Sendable {
+    public enum GatewayCapacity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case large = "Large"
         case medium = "Medium"
         case small = "Small"
         public var description: String { return self.rawValue }
     }
 
-    public enum HostEnvironment: String, CustomStringConvertible, Codable, Sendable {
+    public enum HostEnvironment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ec2 = "EC2"
         case hyperV = "HYPER-V"
         case kvm = "KVM"
@@ -73,7 +73,7 @@ extension StorageGateway {
         public var description: String { return self.rawValue }
     }
 
-    public enum ObjectACL: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObjectACL: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `private` = "private"
         case authenticatedRead = "authenticated-read"
         case awsExecRead = "aws-exec-read"
@@ -84,27 +84,27 @@ extension StorageGateway {
         public var description: String { return self.rawValue }
     }
 
-    public enum PoolStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PoolStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleted = "DELETED"
         public var description: String { return self.rawValue }
     }
 
-    public enum RetentionLockType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RetentionLockType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case compliance = "COMPLIANCE"
         case governance = "GOVERNANCE"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SMBSecurityStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SMBSecurityStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case clientSpecified = "ClientSpecified"
         case mandatoryEncryption = "MandatoryEncryption"
         case mandatorySigning = "MandatorySigning"
         public var description: String { return self.rawValue }
     }
 
-    public enum TapeStorageClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum TapeStorageClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deepArchive = "DEEP_ARCHIVE"
         case glacier = "GLACIER"
         public var description: String { return self.rawValue }
@@ -354,7 +354,7 @@ extension StorageGateway {
             try self.validate(self.poolId, name: "poolId", parent: name, min: 1)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -570,7 +570,7 @@ extension StorageGateway {
     public struct BandwidthRateLimitInterval: AWSEncodableShape & AWSDecodableShape {
         ///  The average download rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the download rate limit is not set.
         public let averageDownloadRateLimitInBitsPerSec: Int64?
-        ///  The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.
+        ///  The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set.   For Tape Gateway and Volume Gateway, the minimum value is 51200. For S3 File Gateway and FSx File Gateway, the minimum value is 104857600.
         public let averageUploadRateLimitInBitsPerSec: Int64?
         ///  The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday.
         public let daysOfWeek: [Int]
@@ -711,7 +711,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -748,7 +748,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -836,7 +836,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.networkInterfaceId, name: "networkInterfaceId", parent: name, pattern: "^\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z$")
             try self.validate(self.snapshotId, name: "snapshotId", parent: name, pattern: "^\\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\\z$")
             try self.validate(self.sourceVolumeARN, name: "sourceVolumeARN", parent: name, max: 500)
@@ -967,7 +967,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.locationARN, name: "locationARN", parent: name, max: 1400)
             try self.validate(self.locationARN, name: "locationARN", parent: name, min: 16)
             try self.nfsFileShareDefaults?.validate(name: "\(name).nfsFileShareDefaults")
@@ -976,7 +976,7 @@ extension StorageGateway {
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, pattern: "^\\{[\\w\\s:\\{\\}\\[\\]\"]*}$")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):iam::([0-9]+):role/(\\S+)$")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):iam::([0-9]+):role/(\\S+)$")
             try self.validate(self.squash, name: "squash", parent: name, max: 15)
             try self.validate(self.squash, name: "squash", parent: name, min: 5)
             try self.tags?.forEach {
@@ -1134,7 +1134,7 @@ extension StorageGateway {
             try self.validate(self.invalidUserList, name: "invalidUserList", parent: name, max: 100)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.locationARN, name: "locationARN", parent: name, max: 1400)
             try self.validate(self.locationARN, name: "locationARN", parent: name, min: 16)
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, max: 100)
@@ -1142,7 +1142,7 @@ extension StorageGateway {
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, pattern: "^\\{[\\w\\s:\\{\\}\\[\\]\"]*}$")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):iam::([0-9]+):role/(\\S+)$")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):iam::([0-9]+):role/(\\S+)$")
             try self.tags?.forEach {
                 try $0.validate(name: "\(name).tags[]")
             }
@@ -1337,7 +1337,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.networkInterfaceId, name: "networkInterfaceId", parent: name, pattern: "^\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z$")
             try self.validate(self.snapshotId, name: "snapshotId", parent: name, pattern: "^\\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\\z$")
             try self.tags?.forEach {
@@ -1469,7 +1469,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.poolId, name: "poolId", parent: name, max: 100)
             try self.validate(self.poolId, name: "poolId", parent: name, min: 1)
             try self.tags?.forEach {
@@ -1547,7 +1547,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.numTapesToCreate, name: "numTapesToCreate", parent: name, max: 10)
             try self.validate(self.numTapesToCreate, name: "numTapesToCreate", parent: name, min: 1)
             try self.validate(self.poolId, name: "poolId", parent: name, max: 100)
@@ -1802,7 +1802,7 @@ extension StorageGateway {
         public func validate(name: String) throws {
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -1843,7 +1843,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -2240,6 +2240,8 @@ extension StorageGateway {
         public let nextUpdateAvailabilityDate: String?
         /// Date after which this gateway will not receive software updates for new features.
         public let softwareUpdatesEndDate: String?
+        /// The version number of the software running on the gateway appliance.
+        public let softwareVersion: String?
         /// A list of the metadata cache sizes that the gateway can support based on its current hardware specifications.
         public let supportedGatewayCapacities: [GatewayCapacity]?
         /// A list of up to 50 tags assigned to the gateway, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
@@ -2247,7 +2249,7 @@ extension StorageGateway {
         /// The configuration settings for the virtual private cloud (VPC) endpoint for your gateway.
         public let vpcEndpoint: String?
 
-        public init(cloudWatchLogGroupARN: String? = nil, deprecationDate: String? = nil, ec2InstanceId: String? = nil, ec2InstanceRegion: String? = nil, endpointType: String? = nil, gatewayARN: String? = nil, gatewayCapacity: GatewayCapacity? = nil, gatewayId: String? = nil, gatewayName: String? = nil, gatewayNetworkInterfaces: [NetworkInterface]? = nil, gatewayState: String? = nil, gatewayTimezone: String? = nil, gatewayType: String? = nil, hostEnvironment: HostEnvironment? = nil, hostEnvironmentId: String? = nil, lastSoftwareUpdate: String? = nil, nextUpdateAvailabilityDate: String? = nil, softwareUpdatesEndDate: String? = nil, supportedGatewayCapacities: [GatewayCapacity]? = nil, tags: [Tag]? = nil, vpcEndpoint: String? = nil) {
+        public init(cloudWatchLogGroupARN: String? = nil, deprecationDate: String? = nil, ec2InstanceId: String? = nil, ec2InstanceRegion: String? = nil, endpointType: String? = nil, gatewayARN: String? = nil, gatewayCapacity: GatewayCapacity? = nil, gatewayId: String? = nil, gatewayName: String? = nil, gatewayNetworkInterfaces: [NetworkInterface]? = nil, gatewayState: String? = nil, gatewayTimezone: String? = nil, gatewayType: String? = nil, hostEnvironment: HostEnvironment? = nil, hostEnvironmentId: String? = nil, lastSoftwareUpdate: String? = nil, nextUpdateAvailabilityDate: String? = nil, softwareUpdatesEndDate: String? = nil, softwareVersion: String? = nil, supportedGatewayCapacities: [GatewayCapacity]? = nil, tags: [Tag]? = nil, vpcEndpoint: String? = nil) {
             self.cloudWatchLogGroupARN = cloudWatchLogGroupARN
             self.deprecationDate = deprecationDate
             self.ec2InstanceId = ec2InstanceId
@@ -2266,6 +2268,7 @@ extension StorageGateway {
             self.lastSoftwareUpdate = lastSoftwareUpdate
             self.nextUpdateAvailabilityDate = nextUpdateAvailabilityDate
             self.softwareUpdatesEndDate = softwareUpdatesEndDate
+            self.softwareVersion = softwareVersion
             self.supportedGatewayCapacities = supportedGatewayCapacities
             self.tags = tags
             self.vpcEndpoint = vpcEndpoint
@@ -2290,6 +2293,7 @@ extension StorageGateway {
             case lastSoftwareUpdate = "LastSoftwareUpdate"
             case nextUpdateAvailabilityDate = "NextUpdateAvailabilityDate"
             case softwareUpdatesEndDate = "SoftwareUpdatesEndDate"
+            case softwareVersion = "SoftwareVersion"
             case supportedGatewayCapacities = "SupportedGatewayCapacities"
             case tags = "Tags"
             case vpcEndpoint = "VPCEndpoint"
@@ -2573,7 +2577,7 @@ extension StorageGateway {
             try self.tapeARNs?.forEach {
                 try validate($0, name: "tapeARNs[]", parent: name, max: 500)
                 try validate($0, name: "tapeARNs[]", parent: name, min: 50)
-                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
             }
         }
 
@@ -2674,7 +2678,7 @@ extension StorageGateway {
             try self.tapeARNs?.forEach {
                 try validate($0, name: "tapeARNs[]", parent: name, max: 500)
                 try validate($0, name: "tapeARNs[]", parent: name, min: 50)
-                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
             }
         }
 
@@ -3573,7 +3577,7 @@ extension StorageGateway {
             try self.tapeARNs?.forEach {
                 try validate($0, name: "tapeARNs[]", parent: name, max: 500)
                 try validate($0, name: "tapeARNs[]", parent: name, min: 50)
-                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+                try validate($0, name: "tapeARNs[]", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
             }
         }
 
@@ -4061,7 +4065,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -4098,7 +4102,7 @@ extension StorageGateway {
             try self.validate(self.gatewayARN, name: "gatewayARN", parent: name, min: 50)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, max: 500)
             try self.validate(self.tapeARN, name: "tapeARN", parent: name, min: 50)
-            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws|aws-cn|aws-us-gov):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
+            try self.validate(self.tapeARN, name: "tapeARN", parent: name, pattern: "^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):storagegateway:[a-z\\-0-9]+:[0-9]+:tape\\/[0-9A-Z]{5,16}$")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -5117,7 +5121,7 @@ extension StorageGateway {
             try self.validate(self.fileShareName, name: "fileShareName", parent: name, min: 1)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.nfsFileShareDefaults?.validate(name: "\(name).nfsFileShareDefaults")
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, max: 100)
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, min: 2)
@@ -5240,7 +5244,7 @@ extension StorageGateway {
             try self.validate(self.invalidUserList, name: "invalidUserList", parent: name, max: 100)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, max: 2048)
             try self.validate(self.kmsKey, name: "kmsKey", parent: name, min: 7)
-            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws|aws-cn|aws-us-gov):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
+            try self.validate(self.kmsKey, name: "kmsKey", parent: name, pattern: "^(^arn:(aws(|-cn|-us-gov|-iso[A-Za-z0-9_-]*)):kms:([a-zA-Z0-9-]+):([0-9]+):(key|alias)/(\\S+)$)|(^alias/(\\S+)$)$")
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, max: 100)
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, min: 2)
             try self.validate(self.notificationPolicy, name: "notificationPolicy", parent: name, pattern: "^\\{[\\w\\s:\\{\\}\\[\\]\"]*}$")

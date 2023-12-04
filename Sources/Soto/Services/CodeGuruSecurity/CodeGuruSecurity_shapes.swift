@@ -26,13 +26,13 @@ import SotoCore
 extension CodeGuruSecurity {
     // MARK: Enums
 
-    public enum AnalysisType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "All"
         case security = "Security"
         public var description: String { return self.rawValue }
     }
 
-    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case duplicateIdentifier = "DUPLICATE_IDENTIFIER"
         case internalError = "INTERNAL_ERROR"
         case invalidFindingId = "INVALID_FINDING_ID"
@@ -41,20 +41,20 @@ extension CodeGuruSecurity {
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case successful = "Successful"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case express = "Express"
         case standard = "Standard"
         public var description: String { return self.rawValue }
     }
 
-    public enum Severity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Severity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case critical = "Critical"
         case high = "High"
         case info = "Info"
@@ -63,7 +63,7 @@ extension CodeGuruSecurity {
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "All"
         case closed = "Closed"
         case open = "Open"

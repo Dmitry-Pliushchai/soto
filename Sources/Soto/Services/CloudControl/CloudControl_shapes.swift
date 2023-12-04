@@ -26,7 +26,7 @@ import SotoCore
 extension CloudControl {
     // MARK: Enums
 
-    public enum HandlerErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HandlerErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "AccessDenied"
         case alreadyExists = "AlreadyExists"
         case generalServiceException = "GeneralServiceException"
@@ -45,14 +45,14 @@ extension CloudControl {
         public var description: String { return self.rawValue }
     }
 
-    public enum Operation: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case create = "CREATE"
         case delete = "DELETE"
         case update = "UPDATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OperationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelComplete = "CANCEL_COMPLETE"
         case cancelInProgress = "CANCEL_IN_PROGRESS"
         case failed = "FAILED"

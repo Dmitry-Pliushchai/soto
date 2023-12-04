@@ -26,9 +26,14 @@ extension ElasticLoadBalancingV2 {
         return try await self.client.execute(operation: "AddListenerCertificates", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
+    /// Adds the specified tags to the specified Elastic Load Balancing resource. You can tag your Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, trust stores, listeners, and rules. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, AddTags updates its value.
     public func addTags(_ input: AddTagsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AddTagsOutput {
         return try await self.client.execute(operation: "AddTags", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Adds the specified revocation file to the specified trust store.
+    public func addTrustStoreRevocations(_ input: AddTrustStoreRevocationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AddTrustStoreRevocationsOutput {
+        return try await self.client.execute(operation: "AddTrustStoreRevocations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a listener for the specified Application Load Balancer, Network Load Balancer, or Gateway Load Balancer. For more information, see the following:    Listeners for your Application Load Balancers     Listeners for your Network Load Balancers     Listeners for your Gateway Load Balancers    This operation is idempotent, which means that it completes at most one time. If you attempt to create multiple listeners with the same settings, each call succeeds.
@@ -51,6 +56,11 @@ extension ElasticLoadBalancingV2 {
         return try await self.client.execute(operation: "CreateTargetGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a trust store.
+    public func createTrustStore(_ input: CreateTrustStoreInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateTrustStoreOutput {
+        return try await self.client.execute(operation: "CreateTrustStore", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes the specified listener. Alternatively, your listener is deleted when you delete the load balancer to which it is attached.
     public func deleteListener(_ input: DeleteListenerInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteListenerOutput {
         return try await self.client.execute(operation: "DeleteListener", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -69,6 +79,11 @@ extension ElasticLoadBalancingV2 {
     /// Deletes the specified target group. You can delete a target group if it is not referenced by any actions. Deleting a target group also deletes any associated health checks. Deleting a target group does not affect its registered targets. For example, any EC2 instances continue to run until you stop or terminate them.
     public func deleteTargetGroup(_ input: DeleteTargetGroupInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteTargetGroupOutput {
         return try await self.client.execute(operation: "DeleteTargetGroup", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a trust store.
+    public func deleteTrustStore(_ input: DeleteTrustStoreInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteTrustStoreOutput {
+        return try await self.client.execute(operation: "DeleteTrustStore", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer. The load balancer stops sending requests to targets that are deregistering, but uses  connection draining to ensure that in-flight traffic completes on the existing connections.  This deregistration delay is configured by default but can be updated for each target group. For more information, see the following:     Deregistration delay in the Application Load Balancers User Guide      Deregistration delay in the Network Load Balancers User Guide      Deregistration delay in the Gateway Load Balancers User Guide    Note: If the specified target does not exist, the action returns successfully.
@@ -131,6 +146,31 @@ extension ElasticLoadBalancingV2 {
         return try await self.client.execute(operation: "DescribeTargetHealth", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes all resources associated with the specified trust store.
+    public func describeTrustStoreAssociations(_ input: DescribeTrustStoreAssociationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeTrustStoreAssociationsOutput {
+        return try await self.client.execute(operation: "DescribeTrustStoreAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes the revocation files in use by the specified  trust store arn, or revocation ID.
+    public func describeTrustStoreRevocations(_ input: DescribeTrustStoreRevocationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeTrustStoreRevocationsOutput {
+        return try await self.client.execute(operation: "DescribeTrustStoreRevocations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes all trust stores for a given account  by trust store arn’s or name.
+    public func describeTrustStores(_ input: DescribeTrustStoresInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeTrustStoresOutput {
+        return try await self.client.execute(operation: "DescribeTrustStores", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the ca certificate bundle. This action returns a pre-signed S3 URI which is  active for ten minutes.
+    public func getTrustStoreCaCertificatesBundle(_ input: GetTrustStoreCaCertificatesBundleInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetTrustStoreCaCertificatesBundleOutput {
+        return try await self.client.execute(operation: "GetTrustStoreCaCertificatesBundle", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the specified revocation file. This action returns a pre-signed S3 URI which is  active for ten minutes.
+    public func getTrustStoreRevocationContent(_ input: GetTrustStoreRevocationContentInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetTrustStoreRevocationContentOutput {
+        return try await self.client.execute(operation: "GetTrustStoreRevocationContent", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Replaces the specified properties of the specified listener. Any properties that you do not specify remain unchanged. Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the security policy and default certificate properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and default certificate properties. To add an item to a list, remove an item from a list, or update an item in a list, you must provide the entire list. For example, to add an action, specify a list with the current actions plus the new action.
     public func modifyListener(_ input: ModifyListenerInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ModifyListenerOutput {
         return try await self.client.execute(operation: "ModifyListener", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -156,6 +196,11 @@ extension ElasticLoadBalancingV2 {
         return try await self.client.execute(operation: "ModifyTargetGroupAttributes", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Update the ca certificate bundle for a given trust store.
+    public func modifyTrustStore(_ input: ModifyTrustStoreInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ModifyTrustStoreOutput {
+        return try await self.client.execute(operation: "ModifyTrustStore", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Registers the specified targets with the specified target group. If the target is an EC2 instance, it must be in the running state when you register it. By default, the load balancer routes requests to registered targets using the protocol and port for the target group. Alternatively, you can override the port for a target when you register it. You can register each EC2 instance or IP address with the same target group multiple times using different ports. With a Network Load Balancer, you cannot register instances by instance ID if they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by IP address.
     public func registerTargets(_ input: RegisterTargetsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> RegisterTargetsOutput {
         return try await self.client.execute(operation: "RegisterTargets", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -169,6 +214,11 @@ extension ElasticLoadBalancingV2 {
     /// Removes the specified tags from the specified Elastic Load Balancing resources. You can remove the tags for one or more Application Load Balancers, Network Load Balancers, Gateway Load Balancers, target groups, listeners, or rules.
     public func removeTags(_ input: RemoveTagsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> RemoveTagsOutput {
         return try await self.client.execute(operation: "RemoveTags", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Removes the specified revocation file from the specified trust store.
+    public func removeTrustStoreRevocations(_ input: RemoveTrustStoreRevocationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> RemoveTrustStoreRevocationsOutput {
+        return try await self.client.execute(operation: "RemoveTrustStoreRevocations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Sets the type of IP addresses used by the subnets of the specified load balancer.
@@ -186,7 +236,7 @@ extension ElasticLoadBalancingV2 {
         return try await self.client.execute(operation: "SetSecurityGroups", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer or Network Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
+    /// Enables the Availability Zones for the specified public subnets for the specified Application Load Balancer, Network Load Balancer or Gateway Load Balancer. The specified subnets replace the previously enabled subnets. When you specify subnets for a Network Load Balancer, or Gateway Load Balancer you must include all subnets that were enabled previously, with their existing configurations, plus any additional subnets.
     public func setSubnets(_ input: SetSubnetsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> SetSubnetsOutput {
         return try await self.client.execute(operation: "SetSubnets", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -257,6 +307,72 @@ extension ElasticLoadBalancingV2 {
             command: self.describeTargetGroups,
             inputKey: \DescribeTargetGroupsInput.marker,
             outputKey: \DescribeTargetGroupsOutput.nextMarker,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Describes all resources associated with the specified trust store.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeTrustStoreAssociationsPaginator(
+        _ input: DescribeTrustStoreAssociationsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeTrustStoreAssociationsInput, DescribeTrustStoreAssociationsOutput> {
+        return .init(
+            input: input,
+            command: self.describeTrustStoreAssociations,
+            inputKey: \DescribeTrustStoreAssociationsInput.marker,
+            outputKey: \DescribeTrustStoreAssociationsOutput.nextMarker,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Describes the revocation files in use by the specified  trust store arn, or revocation ID.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeTrustStoreRevocationsPaginator(
+        _ input: DescribeTrustStoreRevocationsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeTrustStoreRevocationsInput, DescribeTrustStoreRevocationsOutput> {
+        return .init(
+            input: input,
+            command: self.describeTrustStoreRevocations,
+            inputKey: \DescribeTrustStoreRevocationsInput.marker,
+            outputKey: \DescribeTrustStoreRevocationsOutput.nextMarker,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Describes all trust stores for a given account  by trust store arn’s or name.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeTrustStoresPaginator(
+        _ input: DescribeTrustStoresInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeTrustStoresInput, DescribeTrustStoresOutput> {
+        return .init(
+            input: input,
+            command: self.describeTrustStores,
+            inputKey: \DescribeTrustStoresInput.marker,
+            outputKey: \DescribeTrustStoresOutput.nextMarker,
             logger: logger,
             on: eventLoop
         )

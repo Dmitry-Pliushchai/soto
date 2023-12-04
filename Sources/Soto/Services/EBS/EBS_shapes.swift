@@ -26,24 +26,24 @@ import SotoCore
 extension EBS {
     // MARK: Enums
 
-    public enum ChecksumAggregationMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChecksumAggregationMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case checksumAggregationLinear = "LINEAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChecksumAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChecksumAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case checksumAlgorithmSha256 = "SHA256"
         public var description: String { return self.rawValue }
     }
 
-    public enum SSEType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SSEType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "none"
         case sseEbs = "sse-ebs"
         case sseKms = "sse-kms"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "completed"
         case error = "error"
         case pending = "pending"

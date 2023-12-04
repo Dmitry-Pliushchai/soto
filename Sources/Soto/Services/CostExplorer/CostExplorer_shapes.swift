@@ -26,86 +26,86 @@ import SotoCore
 extension CostExplorer {
     // MARK: Enums
 
-    public enum AccountScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccountScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linked = "LINKED"
         case payer = "PAYER"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnomalyFeedbackType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnomalyFeedbackType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case no = "NO"
         case plannedActivity = "PLANNED_ACTIVITY"
         case yes = "YES"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnomalySubscriptionFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnomalySubscriptionFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daily = "DAILY"
         case immediate = "IMMEDIATE"
         case weekly = "WEEKLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum Context: String, CustomStringConvertible, Codable, Sendable {
+    public enum Context: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case costAndUsage = "COST_AND_USAGE"
         case reservations = "RESERVATIONS"
         case savingsPlans = "SAVINGS_PLANS"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostAllocationTagStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostAllocationTagStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case inactive = "Inactive"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostAllocationTagType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostAllocationTagType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsGenerated = "AWSGenerated"
         case userDefined = "UserDefined"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategoryInheritedValueDimensionName: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategoryInheritedValueDimensionName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linkedAccountName = "LINKED_ACCOUNT_NAME"
         case tag = "TAG"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategoryRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategoryRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inheritedValue = "INHERITED_VALUE"
         case regular = "REGULAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategoryRuleVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategoryRuleVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case costCategoryExpressionV1 = "CostCategoryExpression.v1"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategorySplitChargeMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategorySplitChargeMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case even = "EVEN"
         case fixed = "FIXED"
         case proportional = "PROPORTIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategorySplitChargeRuleParameterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategorySplitChargeRuleParameterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allocationPercentages = "ALLOCATION_PERCENTAGES"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategoryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategoryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case applied = "APPLIED"
         case processing = "PROCESSING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CostCategoryStatusComponent: String, CustomStringConvertible, Codable, Sendable {
+    public enum CostCategoryStatusComponent: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case costExplorer = "COST_EXPLORER"
         public var description: String { return self.rawValue }
     }
 
-    public enum Dimension: String, CustomStringConvertible, Codable, Sendable {
+    public enum Dimension: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agreementEndDateTimeAfter = "AGREEMENT_END_DATE_TIME_AFTER"
         case agreementEndDateTimeBefore = "AGREEMENT_END_DATE_TIME_BEFORE"
         case anomalyTotalImpactAbsolute = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
@@ -143,7 +143,7 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum FindingReasonCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum FindingReasonCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cpuOverProvisioned = "CPU_OVER_PROVISIONED"
         case cpuUnderProvisioned = "CPU_UNDER_PROVISIONED"
         case diskIopsOverProvisioned = "DISK_IOPS_OVER_PROVISIONED"
@@ -163,35 +163,35 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum GenerationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum GenerationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case processing = "PROCESSING"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Granularity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Granularity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daily = "DAILY"
         case hourly = "HOURLY"
         case monthly = "MONTHLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum GroupDefinitionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GroupDefinitionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case costCategory = "COST_CATEGORY"
         case dimension = "DIMENSION"
         case tag = "TAG"
         public var description: String { return self.rawValue }
     }
 
-    public enum LookbackPeriodInDays: String, CustomStringConvertible, Codable, Sendable {
+    public enum LookbackPeriodInDays: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sevenDays = "SEVEN_DAYS"
         case sixtyDays = "SIXTY_DAYS"
         case thirtyDays = "THIRTY_DAYS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MatchOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum MatchOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absent = "ABSENT"
         case caseInsensitive = "CASE_INSENSITIVE"
         case caseSensitive = "CASE_SENSITIVE"
@@ -203,7 +203,7 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum Metric: String, CustomStringConvertible, Codable, Sendable {
+    public enum Metric: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case amortizedCost = "AMORTIZED_COST"
         case blendedCost = "BLENDED_COST"
         case netAmortizedCost = "NET_AMORTIZED_COST"
@@ -214,18 +214,18 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum MonitorDimension: String, CustomStringConvertible, Codable, Sendable {
+    public enum MonitorDimension: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case service = "SERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum MonitorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MonitorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "CUSTOM"
         case dimensional = "DIMENSIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum NumericOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumericOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case between = "BETWEEN"
         case equal = "EQUAL"
         case greaterThan = "GREATER_THAN"
@@ -235,13 +235,13 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum OfferingClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum OfferingClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case convertible = "CONVERTIBLE"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum PaymentOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum PaymentOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allUpfront = "ALL_UPFRONT"
         case heavyUtilization = "HEAVY_UTILIZATION"
         case lightUtilization = "LIGHT_UTILIZATION"
@@ -251,7 +251,7 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum PlatformDifference: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlatformDifference: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hypervisor = "HYPERVISOR"
         case instanceStoreAvailability = "INSTANCE_STORE_AVAILABILITY"
         case networkInterface = "NETWORK_INTERFACE"
@@ -260,19 +260,19 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecommendationTarget: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecommendationTarget: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case crossInstanceFamily = "CROSS_INSTANCE_FAMILY"
         case sameInstanceFamily = "SAME_INSTANCE_FAMILY"
         public var description: String { return self.rawValue }
     }
 
-    public enum RightsizingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RightsizingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case modify = "MODIFY"
         case terminate = "TERMINATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SavingsPlansDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SavingsPlansDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case amortizedCommitment = "AMORTIZED_COMMITMENT"
         case attributes = "ATTRIBUTES"
         case savings = "SAVINGS"
@@ -280,32 +280,32 @@ extension CostExplorer {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SubscriberStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SubscriberStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case confirmed = "CONFIRMED"
         case declined = "DECLINED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SubscriberType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SubscriberType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case email = "EMAIL"
         case sns = "SNS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SupportedSavingsPlansType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SupportedSavingsPlansType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case computeSp = "COMPUTE_SP"
         case ec2InstanceSp = "EC2_INSTANCE_SP"
         case sagemakerSp = "SAGEMAKER_SP"
         public var description: String { return self.rawValue }
     }
 
-    public enum TermInYears: String, CustomStringConvertible, Codable, Sendable {
+    public enum TermInYears: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneYear = "ONE_YEAR"
         case threeYears = "THREE_YEARS"
         public var description: String { return self.rawValue }
@@ -2970,21 +2970,24 @@ extension CostExplorer {
     }
 
     public struct InstanceDetails: AWSDecodableShape {
-        /// The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
+        /// The Amazon EC2 reservations that Amazon Web Services recommends that you purchase.
         public let ec2InstanceDetails: EC2InstanceDetails?
-        /// The ElastiCache instances that Amazon Web Services recommends that you purchase.
+        /// The ElastiCache reservations that Amazon Web Services recommends that you purchase.
         public let elastiCacheInstanceDetails: ElastiCacheInstanceDetails?
-        /// The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
+        /// The Amazon OpenSearch Service reservations that Amazon Web Services recommends that you purchase.
         public let esInstanceDetails: ESInstanceDetails?
-        /// The Amazon RDS instances that Amazon Web Services recommends that you purchase.
+        /// The MemoryDB reservations that Amazon Web Services recommends that you purchase.
+        public let memoryDBInstanceDetails: MemoryDBInstanceDetails?
+        /// The Amazon RDS reservations that Amazon Web Services recommends that you purchase.
         public let rdsInstanceDetails: RDSInstanceDetails?
-        /// The Amazon Redshift instances that Amazon Web Services recommends that you purchase.
+        /// The Amazon Redshift reservations that Amazon Web Services recommends that you purchase.
         public let redshiftInstanceDetails: RedshiftInstanceDetails?
 
-        public init(ec2InstanceDetails: EC2InstanceDetails? = nil, elastiCacheInstanceDetails: ElastiCacheInstanceDetails? = nil, esInstanceDetails: ESInstanceDetails? = nil, rdsInstanceDetails: RDSInstanceDetails? = nil, redshiftInstanceDetails: RedshiftInstanceDetails? = nil) {
+        public init(ec2InstanceDetails: EC2InstanceDetails? = nil, elastiCacheInstanceDetails: ElastiCacheInstanceDetails? = nil, esInstanceDetails: ESInstanceDetails? = nil, memoryDBInstanceDetails: MemoryDBInstanceDetails? = nil, rdsInstanceDetails: RDSInstanceDetails? = nil, redshiftInstanceDetails: RedshiftInstanceDetails? = nil) {
             self.ec2InstanceDetails = ec2InstanceDetails
             self.elastiCacheInstanceDetails = elastiCacheInstanceDetails
             self.esInstanceDetails = esInstanceDetails
+            self.memoryDBInstanceDetails = memoryDBInstanceDetails
             self.rdsInstanceDetails = rdsInstanceDetails
             self.redshiftInstanceDetails = redshiftInstanceDetails
         }
@@ -2993,6 +2996,7 @@ extension CostExplorer {
             case ec2InstanceDetails = "EC2InstanceDetails"
             case elastiCacheInstanceDetails = "ElastiCacheInstanceDetails"
             case esInstanceDetails = "ESInstanceDetails"
+            case memoryDBInstanceDetails = "MemoryDBInstanceDetails"
             case rdsInstanceDetails = "RDSInstanceDetails"
             case redshiftInstanceDetails = "RedshiftInstanceDetails"
         }
@@ -3187,6 +3191,35 @@ extension CostExplorer {
 
         private enum CodingKeys: String, CodingKey {
             case resourceTags = "ResourceTags"
+        }
+    }
+
+    public struct MemoryDBInstanceDetails: AWSDecodableShape {
+        /// Determines whether the recommendation is for a current generation instance.
+        public let currentGeneration: Bool?
+        /// The instance family of the recommended reservation.
+        public let family: String?
+        /// The node type of the recommended reservation.
+        public let nodeType: String?
+        /// The Amazon Web Services Region of the recommended reservation.
+        public let region: String?
+        /// Determines whether the recommended reservation is size flexible.
+        public let sizeFlexEligible: Bool?
+
+        public init(currentGeneration: Bool? = nil, family: String? = nil, nodeType: String? = nil, region: String? = nil, sizeFlexEligible: Bool? = nil) {
+            self.currentGeneration = currentGeneration
+            self.family = family
+            self.nodeType = nodeType
+            self.region = region
+            self.sizeFlexEligible = sizeFlexEligible
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case currentGeneration = "CurrentGeneration"
+            case family = "Family"
+            case nodeType = "NodeType"
+            case region = "Region"
+            case sizeFlexEligible = "SizeFlexEligible"
         }
     }
 
@@ -3657,7 +3690,7 @@ extension CostExplorer {
         public let estimatedMonthlySavingsPercentage: String?
         /// How much Amazon Web Services estimates that you might spend for all usage during the specified historical period if you had a reservation.
         public let estimatedReservationCostForLookbackPeriod: String?
-        /// Details about the instances that Amazon Web Services recommends that you purchase.
+        /// Details about the reservations that Amazon Web Services recommends that you purchase.
         public let instanceDetails: InstanceDetails?
         /// The maximum number of normalized units that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
         public let maximumNormalizedUnitsUsedPerHour: String?

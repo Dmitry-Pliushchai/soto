@@ -51,6 +51,20 @@ extension InternetMonitor {
         return try await self.client.execute(operation: "GetMonitor", path: "/v20210603/Monitors/{MonitorName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing
+    /// 			a QueryId and a monitor name. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 			in the Amazon CloudWatch Internet Monitor User Guide.
+    public func getQueryResults(_ input: GetQueryResultsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetQueryResultsOutput {
+        return try await self.client.execute(operation: "GetQueryResults", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Results", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor.
+    /// 			When you run a query, check the status to make sure that the query has SUCCEEDED before you review the results.    QUEUED: The query is scheduled to run.    RUNNING: The query is in progress but not complete.    SUCCEEDED: The query completed sucessfully.    FAILED: The query failed due to an error.    CANCELED: The query was canceled.
+    public func getQueryStatus(_ input: GetQueryStatusInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetQueryStatusOutput {
+        return try await self.client.execute(operation: "GetQueryStatus", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}/Status", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and
     /// 			the status.  Health events that have start times during the time frame that is requested are not included in the list of health events.
     public func listHealthEvents(_ input: ListHealthEventsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListHealthEventsOutput {
@@ -65,6 +79,20 @@ extension InternetMonitor {
     /// Lists the tags for a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor.
     public func listTagsForResource(_ input: ListTagsForResourceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTagsForResourceOutput {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{ResourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface. Specify a time period
+    /// 			for the data that you want returned by using StartTime and EndTime. You filter the query
+    /// 			results to return by providing parameters that you specify with FilterParameters. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 		in the Amazon CloudWatch Internet Monitor User Guide.
+    public func startQuery(_ input: StartQueryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartQueryOutput {
+        return try await self.client.execute(operation: "StartQuery", path: "/v20210603/Monitors/{MonitorName}/Queries", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Stop a query that is progress for a specific monitor.
+    public func stopQuery(_ input: StopQueryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StopQueryOutput {
+        return try await self.client.execute(operation: "StopQuery", path: "/v20210603/Monitors/{MonitorName}/Queries/{QueryId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Adds a tag to a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor. You can add a maximum of 50 tags in Internet Monitor. A minimum of one tag is required for this call. It returns an error if you use the TagResource request with 0 tags.
@@ -89,6 +117,31 @@ extension InternetMonitor {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension InternetMonitor {
+    /// Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing
+    /// 			a QueryId and a monitor name. For more information about using the query interface, including examples, see
+    /// 			Using the Amazon CloudWatch Internet Monitor query interface
+    /// 			in the Amazon CloudWatch Internet Monitor User Guide.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func getQueryResultsPaginator(
+        _ input: GetQueryResultsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<GetQueryResultsInput, GetQueryResultsOutput> {
+        return .init(
+            input: input,
+            command: self.getQueryResults,
+            inputKey: \GetQueryResultsInput.nextToken,
+            outputKey: \GetQueryResultsOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and
     /// 			the status.  Health events that have start times during the time frame that is requested are not included in the list of health events.
     /// Return PaginatorSequence for operation.

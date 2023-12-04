@@ -26,7 +26,7 @@ import SotoCore
 extension InternetMonitor {
     // MARK: Enums
 
-    public enum HealthEventImpactType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthEventImpactType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case availability = "AVAILABILITY"
         case localAvailability = "LOCAL_AVAILABILITY"
         case localPerformance = "LOCAL_PERFORMANCE"
@@ -34,25 +34,25 @@ extension InternetMonitor {
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthEventStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthEventStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case resolved = "RESOLVED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LocalHealthEventsConfigStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LocalHealthEventsConfigStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogDeliveryStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogDeliveryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum MonitorConfigState: String, CustomStringConvertible, Codable, Sendable {
+    public enum MonitorConfigState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case error = "ERROR"
         case inactive = "INACTIVE"
@@ -60,7 +60,7 @@ extension InternetMonitor {
         public var description: String { return self.rawValue }
     }
 
-    public enum MonitorProcessingStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum MonitorProcessingStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case collectingData = "COLLECTING_DATA"
         case faultAccessCloudwatch = "FAULT_ACCESS_CLOUDWATCH"
         case faultService = "FAULT_SERVICE"
@@ -70,7 +70,29 @@ extension InternetMonitor {
         public var description: String { return self.rawValue }
     }
 
-    public enum TriangulationEventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case equals = "EQUALS"
+        case notEquals = "NOT_EQUALS"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum QueryStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case canceled = "CANCELED"
+        case failed = "FAILED"
+        case queued = "QUEUED"
+        case running = "RUNNING"
+        case succeeded = "SUCCEEDED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum QueryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case measurements = "MEASUREMENTS"
+        case topLocations = "TOP_LOCATIONS"
+        case topLocationDetails = "TOP_LOCATION_DETAILS"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum TriangulationEventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aws = "AWS"
         case internet = "Internet"
         public var description: String { return self.rawValue }
@@ -224,13 +246,38 @@ extension InternetMonitor {
         public init() {}
     }
 
+    public struct FilterParameter: AWSEncodableShape {
+        /// A data field that you want to filter, to further scope your application's Internet Monitor data in a repository that you
+        /// 			created by running a query. A field might be city, for example. The field must be one of the fields
+        /// 			that was returned by the specific query that you used to create the repository.
+        public let field: String?
+        /// The operator to use with the filter field and a value, such as not_equals.
+        public let `operator`: Operator?
+        /// One or more values to be used, together with the specified operator, to filter data for a query.
+        /// 			For example, you could specify an array of values such as ["Seattle", "Redmond"]. Values in the array are separated by
+        /// 			commas.
+        public let values: [String]?
+
+        public init(field: String? = nil, operator: Operator? = nil, values: [String]? = nil) {
+            self.field = field
+            self.`operator` = `operator`
+            self.values = values
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case field = "Field"
+            case `operator` = "Operator"
+            case values = "Values"
+        }
+    }
+
     public struct GetHealthEventInput: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "eventId", location: .uri("EventId")),
             AWSMemberEncoding(label: "monitorName", location: .uri("MonitorName"))
         ]
 
-        /// The internally generated identifier of a health event. Because EventID contains the forward slash (“/”) character, you must
+        /// The internally-generated identifier of a health event. Because EventID contains the forward slash (“/”) character, you must
         /// 			URL-encode the EventID field in the request URL.
         public let eventId: String
         /// The name of the monitor.
@@ -260,7 +307,7 @@ extension InternetMonitor {
         public let endedAt: Date?
         /// The Amazon Resource Name (ARN) of the event.
         public let eventArn: String
-        /// The internally generated identifier of a health event.
+        /// The internally-generated identifier of a health event.
         public let eventId: String
         /// The threshold percentage for a health score that determines, along with other configuration information,
         /// 			when Internet Monitor creates a health event when there's an internet issue that affects your application end users.
@@ -398,6 +445,105 @@ extension InternetMonitor {
         }
     }
 
+    public struct GetQueryResultsInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "maxResults", location: .querystring("MaxResults")),
+            AWSMemberEncoding(label: "monitorName", location: .uri("MonitorName")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("NextToken")),
+            AWSMemberEncoding(label: "queryId", location: .uri("QueryId"))
+        ]
+
+        /// The number of query results that you want to return with this call.
+        public let maxResults: Int?
+        /// The name of the monitor to return data for.
+        public let monitorName: String
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+        /// The ID of the query that you want to return data results for. A QueryId is an
+        /// 			internally-generated identifier for a specific query.
+        public let queryId: String
+
+        public init(maxResults: Int? = nil, monitorName: String, nextToken: String? = nil, queryId: String) {
+            self.maxResults = maxResults
+            self.monitorName = monitorName
+            self.nextToken = nextToken
+            self.queryId = queryId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, max: 255)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, min: 1)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, pattern: "^[a-zA-Z0-9_.-]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetQueryResultsOutput: AWSDecodableShape {
+        /// The data results that the query returns. Data is returned in arrays, aligned with the Fields
+        /// 		for the query, which creates a repository of Amazon CloudWatch Internet Monitor information for your application. Then, you can filter
+        /// 		the information in the repository by using FilterParameters that you define.
+        public let data: [[String]]
+        /// The fields that the query returns data for. Fields are name-data type pairs, such as
+        /// 			availability_score-float.
+        public let fields: [QueryField]
+        /// The token for the next set of results. You receive this token from a previous call.
+        public let nextToken: String?
+
+        public init(data: [[String]], fields: [QueryField], nextToken: String? = nil) {
+            self.data = data
+            self.fields = fields
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case data = "Data"
+            case fields = "Fields"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct GetQueryStatusInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "monitorName", location: .uri("MonitorName")),
+            AWSMemberEncoding(label: "queryId", location: .uri("QueryId"))
+        ]
+
+        /// The name of the monitor.
+        public let monitorName: String
+        /// The ID of the query that you want to return the status for. A QueryId is an internally-generated
+        /// 			dentifier for a specific query.
+        public let queryId: String
+
+        public init(monitorName: String, queryId: String) {
+            self.monitorName = monitorName
+            self.queryId = queryId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.monitorName, name: "monitorName", parent: name, max: 255)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, min: 1)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, pattern: "^[a-zA-Z0-9_.-]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetQueryStatusOutput: AWSDecodableShape {
+        /// The current status for a query.
+        public let status: QueryStatus
+
+        public init(status: QueryStatus) {
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case status = "Status"
+        }
+    }
+
     public struct HealthEvent: AWSDecodableShape {
         /// When the health event was created.
         public let createdAt: Date?
@@ -405,7 +551,7 @@ extension InternetMonitor {
         public let endedAt: Date?
         /// The Amazon Resource Name (ARN) of the event.
         public let eventArn: String
-        /// The internally generated identifier of a specific network traffic impairment health event.
+        /// The internally-generated identifier of a specific network traffic impairment health event.
         public let eventId: String
         /// The value of the threshold percentage for performance or availability that was configured when Amazon CloudWatch Internet Monitor created the health event.
         public let healthScoreThreshold: Double?
@@ -735,7 +881,7 @@ extension InternetMonitor {
         /// The health event threshold percentage set for a local health score.
         public let healthScoreThreshold: Double?
         /// The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a
-        /// 			threshold is crossed for a local health score.
+        /// 			threshold is crossed for a local health score. If you don't set a minimum traffic impact threshold, the default value is 0.01%.
         public let minTrafficImpact: Double?
         /// The status of whether Internet Monitor creates a health event based on a threshold percentage set for a local health score. The status can be ENABLED
         /// 		or DISABLED.
@@ -859,6 +1005,24 @@ extension InternetMonitor {
         }
     }
 
+    public struct QueryField: AWSDecodableShape {
+        /// The name of a field to query your application's Amazon CloudWatch Internet Monitor data for, such as availability_score.
+        public let name: String?
+        /// The data type for a query field, which must correspond to the field you're defining for QueryField. For example, if the query
+        /// 			field name is availability_score, the data type is float.
+        public let type: String?
+
+        public init(name: String? = nil, type: String? = nil) {
+            self.name = name
+            self.type = type
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case name = "Name"
+            case type = "Type"
+        }
+    }
+
     public struct RoundTripTime: AWSDecodableShape {
         /// RTT at the 50th percentile (p50).
         public let p50: Double?
@@ -899,6 +1063,92 @@ extension InternetMonitor {
             case bucketPrefix = "BucketPrefix"
             case logDeliveryStatus = "LogDeliveryStatus"
         }
+    }
+
+    public struct StartQueryInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "monitorName", location: .uri("MonitorName"))
+        ]
+
+        /// The timestamp that is the end of the period that you want to retrieve data for with your query.
+        public let endTime: Date
+        /// The FilterParameters field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines
+        /// 			how you want a query to be filtered. The filter parameters that you can specify depend on the query type, since
+        /// 			each query type returns a different set of Internet Monitor data. For more information about specifying filter parameters, see
+        /// 			Using the Amazon CloudWatch Internet Monitor query interface
+        /// 			in the Amazon CloudWatch Internet Monitor User Guide.
+        public let filterParameters: [FilterParameter]?
+        /// The name of the monitor to query.
+        public let monitorName: String
+        /// The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:    MEASUREMENTS: TBD definition    TOP_LOCATIONS: TBD definition    TOP_LOCATION_DETAILS: TBD definition   For lists of the fields returned with each query type and more information about how each type of query is
+        /// 			performed, see
+        /// 				Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+        public let queryType: QueryType
+        /// The timestamp that is the beginning of the period that you want to retrieve data for with your query.
+        public let startTime: Date
+
+        public init(endTime: Date, filterParameters: [FilterParameter]? = nil, monitorName: String, queryType: QueryType, startTime: Date) {
+            self.endTime = endTime
+            self.filterParameters = filterParameters
+            self.monitorName = monitorName
+            self.queryType = queryType
+            self.startTime = startTime
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.monitorName, name: "monitorName", parent: name, max: 255)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, min: 1)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, pattern: "^[a-zA-Z0-9_.-]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case endTime = "EndTime"
+            case filterParameters = "FilterParameters"
+            case queryType = "QueryType"
+            case startTime = "StartTime"
+        }
+    }
+
+    public struct StartQueryOutput: AWSDecodableShape {
+        /// The internally-generated identifier of a specific query.
+        public let queryId: String
+
+        public init(queryId: String) {
+            self.queryId = queryId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case queryId = "QueryId"
+        }
+    }
+
+    public struct StopQueryInput: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "monitorName", location: .uri("MonitorName")),
+            AWSMemberEncoding(label: "queryId", location: .uri("QueryId"))
+        ]
+
+        /// The name of the monitor.
+        public let monitorName: String
+        /// The ID of the query that you want to stop. A QueryId is an internally-generated identifier for a specific query.
+        public let queryId: String
+
+        public init(monitorName: String, queryId: String) {
+            self.monitorName = monitorName
+            self.queryId = queryId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.monitorName, name: "monitorName", parent: name, max: 255)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, min: 1)
+            try self.validate(self.monitorName, name: "monitorName", parent: name, pattern: "^[a-zA-Z0-9_.-]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct StopQueryOutput: AWSDecodableShape {
+        public init() {}
     }
 
     public struct TagResourceInput: AWSEncodableShape {

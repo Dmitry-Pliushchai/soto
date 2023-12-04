@@ -120,7 +120,7 @@ extension BedrockRuntime {
             try self.validate(self.body, name: "body", parent: name, max: 25000000)
             try self.validate(self.modelId, name: "modelId", parent: name, max: 2048)
             try self.validate(self.modelId, name: "modelId", parent: name, min: 1)
-            try self.validate(self.modelId, name: "modelId", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$")
+            try self.validate(self.modelId, name: "modelId", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -180,7 +180,7 @@ extension BedrockRuntime {
             try self.validate(self.body, name: "body", parent: name, max: 25000000)
             try self.validate(self.modelId, name: "modelId", parent: name, max: 2048)
             try self.validate(self.modelId, name: "modelId", parent: name, min: 1)
-            try self.validate(self.modelId, name: "modelId", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$")
+            try self.validate(self.modelId, name: "modelId", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:provisioned-model/[a-z0-9]{12})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)$")
         }
 
         private enum CodingKeys: CodingKey {}

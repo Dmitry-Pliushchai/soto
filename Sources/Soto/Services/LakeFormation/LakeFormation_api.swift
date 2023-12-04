@@ -55,6 +55,14 @@ public struct LakeFormation: AWSService {
             apiVersion: "2017-03-31",
             endpoint: endpoint,
             variantEndpoints: [
+                [.dualstack]: .init(endpoints: [
+                    "us-gov-east-1": "lakeformation.us-gov-east-1.api.aws",
+                    "us-gov-west-1": "lakeformation.us-gov-west-1.api.aws"
+                ]),
+                [.dualstack, .fips]: .init(endpoints: [
+                    "us-gov-east-1": "lakeformation-fips.us-gov-east-1.api.aws",
+                    "us-gov-west-1": "lakeformation-fips.us-gov-west-1.api.aws"
+                ]),
                 [.fips]: .init(endpoints: [
                     "us-east-1": "lakeformation-fips.us-east-1.amazonaws.com",
                     "us-east-2": "lakeformation-fips.us-east-2.amazonaws.com",
@@ -113,6 +121,11 @@ public struct LakeFormation: AWSService {
         return self.client.execute(operation: "CreateLFTag", path: "/CreateLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
+    public func createLakeFormationIdentityCenterConfiguration(_ input: CreateLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateLakeFormationIdentityCenterConfigurationResponse> {
+        return self.client.execute(operation: "CreateLakeFormationIdentityCenterConfiguration", path: "/CreateLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Enforce Lake Formation permissions for the given databases, tables, and principals.
     public func createLakeFormationOptIn(_ input: CreateLakeFormationOptInRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateLakeFormationOptInResponse> {
         return self.client.execute(operation: "CreateLakeFormationOptIn", path: "/CreateLakeFormationOptIn", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -128,6 +141,11 @@ public struct LakeFormation: AWSService {
         return self.client.execute(operation: "DeleteLFTag", path: "/DeleteLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes an IAM Identity Center connection with Lake Formation.
+    public func deleteLakeFormationIdentityCenterConfiguration(_ input: DeleteLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteLakeFormationIdentityCenterConfigurationResponse> {
+        return self.client.execute(operation: "DeleteLakeFormationIdentityCenterConfiguration", path: "/DeleteLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
     public func deleteLakeFormationOptIn(_ input: DeleteLakeFormationOptInRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteLakeFormationOptInResponse> {
         return self.client.execute(operation: "DeleteLakeFormationOptIn", path: "/DeleteLakeFormationOptIn", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -141,6 +159,11 @@ public struct LakeFormation: AWSService {
     /// Deregisters the resource as managed by the Data Catalog. When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.
     public func deregisterResource(_ input: DeregisterResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeregisterResourceResponse> {
         return self.client.execute(operation: "DeregisterResource", path: "/DeregisterResource", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the instance ARN and application ARN for the connection.
+    public func describeLakeFormationIdentityCenterConfiguration(_ input: DescribeLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeLakeFormationIdentityCenterConfigurationResponse> {
+        return self.client.execute(operation: "DescribeLakeFormationIdentityCenterConfiguration", path: "/DescribeLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves the current data access role for the given resource registered in Lake Formation.
@@ -307,6 +330,11 @@ public struct LakeFormation: AWSService {
     /// Updates the list of possible values for the specified LF-tag key. If the LF-tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the LF-tag key's value.
     public func updateLFTag(_ input: UpdateLFTagRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateLFTagResponse> {
         return self.client.execute(operation: "UpdateLFTag", path: "/UpdateLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the IAM Identity Center connection parameters.
+    public func updateLakeFormationIdentityCenterConfiguration(_ input: UpdateLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateLakeFormationIdentityCenterConfigurationResponse> {
+        return self.client.execute(operation: "UpdateLakeFormationIdentityCenterConfiguration", path: "/UpdateLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the data access role used for vending access to the given (registered) resource in Lake Formation.

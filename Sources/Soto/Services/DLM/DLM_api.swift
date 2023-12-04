@@ -73,8 +73,9 @@ public struct DLM: AWSService {
 
     // MARK: API Calls
 
-    /// Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can
-    /// 			create up to 100 lifecycle policies.
+    /// Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data Lifecycle Manager supports the following policy types:   Custom EBS snapshot policy   Custom EBS-backed AMI policy   Cross-account copy event policy   Default policy for EBS snapshots   Default policy for EBS-backed AMIs   For more information, see
+    /// 			Default policies vs custom policies.  If you create a default policy, you can specify the request parameters either in
+    /// 				the request body, or in the PolicyDetails request structure, but not both.
     public func createLifecyclePolicy(_ input: CreateLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateLifecyclePolicyResponse> {
         return self.client.execute(operation: "CreateLifecyclePolicy", path: "/policies", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

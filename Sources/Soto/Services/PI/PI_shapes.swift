@@ -26,32 +26,32 @@ import SotoCore
 extension PI {
     // MARK: Enums
 
-    public enum AcceptLanguage: String, CustomStringConvertible, Codable, Sendable {
+    public enum AcceptLanguage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enUs = "EN_US"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalysisStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case running = "RUNNING"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContextType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContextType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case causal = "CAUSAL"
         case contextual = "CONTEXTUAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum DetailStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DetailStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case processing = "PROCESSING"
         case unavailable = "UNAVAILABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FeatureStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeatureStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case disabledPendingReboot = "DISABLED_PENDING_REBOOT"
         case enabled = "ENABLED"
@@ -61,26 +61,26 @@ extension PI {
         public var description: String { return self.rawValue }
     }
 
-    public enum PeriodAlignment: String, CustomStringConvertible, Codable, Sendable {
+    public enum PeriodAlignment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case endTime = "END_TIME"
         case startTime = "START_TIME"
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case docdb = "DOCDB"
         case rds = "RDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Severity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Severity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum TextFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case markdown = "MARKDOWN"
         case plainText = "PLAIN_TEXT"
         public var description: String { return self.rawValue }

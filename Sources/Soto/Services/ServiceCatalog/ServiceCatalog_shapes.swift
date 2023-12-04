@@ -26,40 +26,40 @@ import SotoCore
 extension ServiceCatalog {
     // MARK: Enums
 
-    public enum AccessLevelFilterKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessLevelFilterKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "Account"
         case role = "Role"
         case user = "User"
         public var description: String { return self.rawValue }
     }
 
-    public enum AccessStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         case underChange = "UNDER_CHANGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChangeAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChangeAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case add = "ADD"
         case modify = "MODIFY"
         case remove = "REMOVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum CopyOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum CopyOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case copyTags = "CopyTags"
         public var description: String { return self.rawValue }
     }
 
-    public enum CopyProductStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CopyProductStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DescribePortfolioShareType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DescribePortfolioShareType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case organization = "ORGANIZATION"
         case organizationMemberAccount = "ORGANIZATION_MEMBER_ACCOUNT"
@@ -67,58 +67,59 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum EngineWorkflowStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EngineWorkflowStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EvaluationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EvaluationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case dynamic = "DYNAMIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum LastSyncStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastSyncStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrganizationNodeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrganizationNodeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case organization = "ORGANIZATION"
         case organizationalUnit = "ORGANIZATIONAL_UNIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum PortfolioShareType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PortfolioShareType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsOrganizations = "AWS_ORGANIZATIONS"
         case awsServicecatalog = "AWS_SERVICECATALOG"
         case imported = "IMPORTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iam = "IAM"
         case iamPattern = "IAM_PATTERN"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProductSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProductSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProductType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProductType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudFormationTemplate = "CLOUD_FORMATION_TEMPLATE"
+        case external = "EXTERNAL"
         case marketplace = "MARKETPLACE"
         case terraformCloud = "TERRAFORM_CLOUD"
         case terraformOpenSource = "TERRAFORM_OPEN_SOURCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProductViewFilterBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProductViewFilterBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullTextSearch = "FullTextSearch"
         case owner = "Owner"
         case productType = "ProductType"
@@ -126,20 +127,20 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProductViewSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProductViewSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationDate = "CreationDate"
         case title = "Title"
         case versionCount = "VersionCount"
         public var description: String { return self.rawValue }
     }
 
-    public enum PropertyKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum PropertyKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case launchRole = "LAUNCH_ROLE"
         case owner = "OWNER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedProductPlanStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedProductPlanStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createFailed = "CREATE_FAILED"
         case createInProgress = "CREATE_IN_PROGRESS"
         case createSuccess = "CREATE_SUCCESS"
@@ -149,12 +150,12 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedProductPlanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedProductPlanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudformation = "CLOUDFORMATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedProductStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedProductStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case error = "ERROR"
         case planInProgress = "PLAN_IN_PROGRESS"
@@ -163,24 +164,25 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedProductViewFilterBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedProductViewFilterBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case searchQuery = "SearchQuery"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisioningArtifactGuidance: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisioningArtifactGuidance: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case deprecated = "DEPRECATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisioningArtifactPropertyName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisioningArtifactPropertyName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case id = "Id"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisioningArtifactType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisioningArtifactType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudFormationTemplate = "CLOUD_FORMATION_TEMPLATE"
+        case external = "EXTERNAL"
         case marketplaceAmi = "MARKETPLACE_AMI"
         case marketplaceCar = "MARKETPLACE_CAR"
         case terraformCloud = "TERRAFORM_CLOUD"
@@ -188,7 +190,7 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
@@ -197,21 +199,21 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum Replacement: String, CustomStringConvertible, Codable, Sendable {
+    public enum Replacement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `false` = "FALSE"
         case `true` = "TRUE"
         case conditional = "CONDITIONAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum RequiresRecreation: String, CustomStringConvertible, Codable, Sendable {
+    public enum RequiresRecreation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case always = "ALWAYS"
         case conditionally = "CONDITIONALLY"
         case never = "NEVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationpolicy = "CREATIONPOLICY"
         case deletionpolicy = "DELETIONPOLICY"
         case metadata = "METADATA"
@@ -221,7 +223,7 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceActionAssociationErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceActionAssociationErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case duplicateResourceException = "DUPLICATE_RESOURCE"
         case internalFailure = "INTERNAL_FAILURE"
         case invalidParameterException = "INVALID_PARAMETER"
@@ -231,7 +233,7 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceActionDefinitionKey: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceActionDefinitionKey: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case assumeRole = "AssumeRole"
         case name = "Name"
         case parameters = "Parameters"
@@ -239,12 +241,12 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceActionDefinitionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceActionDefinitionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ssmAutomation = "SSM_AUTOMATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case completedWithErrors = "COMPLETED_WITH_ERRORS"
         case error = "ERROR"
@@ -253,32 +255,32 @@ extension ServiceCatalog {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codestar = "CODESTAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum StackInstanceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StackInstanceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case current = "CURRENT"
         case inoperable = "INOPERABLE"
         case outdated = "OUTDATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum StackSetOperationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StackSetOperationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case create = "CREATE"
         case delete = "DELETE"
         case update = "UPDATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case creating = "CREATING"
         case failed = "FAILED"
@@ -4546,7 +4548,7 @@ extension ServiceCatalog {
         public let statusMessage: String?
         /// One or more tags.
         public let tags: [Tag]?
-        /// The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
+        /// The type of provisioned product.  The supported values are CFN_STACK, CFN_STACKSET, TERRAFORM_OPEN_SOURCE,  TERRAFORM_CLOUD, and EXTERNAL.
         public let type: String?
         /// The Amazon Resource Name (ARN) of the user.
         public let userArn: String?
@@ -4625,7 +4627,7 @@ extension ServiceCatalog {
         public let status: ProvisionedProductStatus?
         /// The current status message of the provisioned product.
         public let statusMessage: String?
-        /// The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
+        /// The type of provisioned product.  The supported values are CFN_STACK, CFN_STACKSET, TERRAFORM_OPEN_SOURCE,  TERRAFORM_CLOUD, and EXTERNAL.
         public let type: String?
 
         public init(arn: String? = nil, createdTime: Date? = nil, id: String? = nil, idempotencyToken: String? = nil, lastProvisioningRecordId: String? = nil, lastRecordId: String? = nil, lastSuccessfulProvisioningRecordId: String? = nil, launchRoleArn: String? = nil, name: String? = nil, productId: String? = nil, provisioningArtifactId: String? = nil, status: ProvisionedProductStatus? = nil, statusMessage: String? = nil, type: String? = nil) {
@@ -4809,7 +4811,7 @@ extension ServiceCatalog {
         public let name: String?
         /// Specifies the revision of the external artifact that was used to automatically sync the Service Catalog product  and create the provisioning artifact. Service Catalog includes this response parameter as a high level  field to the existing ProvisioningArtifactDetail type, which is returned as part of the response for CreateProduct, UpdateProduct, DescribeProductAsAdmin,  DescribeProvisioningArtifact, ListProvisioningArtifact,  and UpdateProvisioningArticat APIs.  This field only exists for Repo-Synced products.
         public let sourceRevision: String?
-        /// The type of provisioning artifact.  CLOUD_FORMATION_TEMPLATE - CloudFormation template
+        /// The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    TERRAFORM_OPEN_SOURCE - Terraform Open Source configuration file    TERRAFORM_CLOUD - Terraform Cloud configuration file    EXTERNAL - External configuration file
         public let type: ProvisioningArtifactType?
 
         public init(active: Bool? = nil, createdTime: Date? = nil, description: String? = nil, guidance: ProvisioningArtifactGuidance? = nil, id: String? = nil, name: String? = nil, sourceRevision: String? = nil, type: ProvisioningArtifactType? = nil) {
@@ -4911,7 +4913,7 @@ extension ServiceCatalog {
         public let info: [String: String]?
         /// The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.
         public let name: String?
-        /// The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    TERRAFORM_OPEN_SOURCE - Terraform open source configuration file
+        /// The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    TERRAFORM_OPEN_SOURCE - Terraform Open Source configuration file    TERRAFORM_CLOUD - Terraform Cloud configuration file    EXTERNAL - External configuration file
         public let type: ProvisioningArtifactType?
 
         public init(description: String? = nil, disableTemplateValidation: Bool? = nil, info: [String: String]? = nil, name: String? = nil, type: ProvisioningArtifactType? = nil) {
@@ -5065,7 +5067,7 @@ extension ServiceCatalog {
         public let provisionedProductId: String?
         /// The user-friendly name of the provisioned product.
         public let provisionedProductName: String?
-        /// The type of provisioned product. The supported values are CFN_STACK, CFN_STACKSET,  TERRAFORM_OPEN_SOURCE, and TERRAFORM_CLOUD.
+        /// The type of provisioned product. The supported values are CFN_STACK, CFN_STACKSET,  TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, and EXTERNAL.
         public let provisionedProductType: String?
         /// The identifier of the provisioning artifact.
         public let provisioningArtifactId: String?

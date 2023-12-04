@@ -26,13 +26,19 @@ import SotoCore
 extension Bedrock {
     // MARK: Enums
 
-    public enum CommitmentDuration: String, CustomStringConvertible, Codable, Sendable {
+    public enum CommitmentDuration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case oneMonth = "OneMonth"
         case sixMonths = "SixMonths"
         public var description: String { return self.rawValue }
     }
 
-    public enum FineTuningJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomizationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case continuedPreTraining = "CONTINUED_PRE_TRAINING"
+        case fineTuning = "FINE_TUNING"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum FineTuningJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case failed = "Failed"
         case inProgress = "InProgress"
@@ -41,18 +47,25 @@ extension Bedrock {
         public var description: String { return self.rawValue }
     }
 
-    public enum InferenceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FoundationModelLifecycleStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case active = "ACTIVE"
+        case legacy = "LEGACY"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum InferenceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case onDemand = "ON_DEMAND"
         case provisioned = "PROVISIONED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelCustomization: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelCustomization: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case continuedPreTraining = "CONTINUED_PRE_TRAINING"
         case fineTuning = "FINE_TUNING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelCustomizationJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelCustomizationJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "Completed"
         case failed = "Failed"
         case inProgress = "InProgress"
@@ -61,14 +74,14 @@ extension Bedrock {
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelModality: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelModality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case embedding = "EMBEDDING"
         case image = "IMAGE"
         case text = "TEXT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedModelStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedModelStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creating = "Creating"
         case failed = "Failed"
         case inService = "InService"
@@ -76,22 +89,22 @@ extension Bedrock {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortByProvisionedModels: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortByProvisionedModels: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationTime = "CreationTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortJobsBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortJobsBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationTime = "CreationTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortModelsBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortModelsBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationTime = "CreationTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "Ascending"
         case descending = "Descending"
         public var description: String { return self.rawValue }
@@ -133,6 +146,8 @@ extension Bedrock {
         public let baseModelIdentifier: String
         /// Unique token value that you can provide. The GetModelCustomizationJob response includes the same token value.
         public let clientRequestToken: String?
+        /// The customization type.
+        public let customizationType: CustomizationType?
         /// The custom model is encrypted at rest using this key.
         public let customModelKmsKeyId: String?
         /// Enter a name for the custom model.
@@ -147,7 +162,7 @@ extension Bedrock {
         public let jobTags: [Tag]?
         /// S3 location for the output data.
         public let outputDataConfig: OutputDataConfig
-        /// The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume to perform tasks on your behalf. For example, during model training, Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket. To pass this role to Bedrock, the caller of this API must have the iam:PassRole permission.
+        /// The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can assume to perform tasks on your behalf. For example, during model training, Amazon Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket. To pass this role to Amazon Bedrock, the caller of this API must have the iam:PassRole permission.
         public let roleArn: String
         /// Information about the training dataset.
         public let trainingDataConfig: TrainingDataConfig
@@ -156,9 +171,10 @@ extension Bedrock {
         /// VPC configuration (optional). Configuration parameters for the private Virtual Private Cloud (VPC) that contains the resources you are using for this job.
         public let vpcConfig: VpcConfig?
 
-        public init(baseModelIdentifier: String, clientRequestToken: String? = CreateModelCustomizationJobRequest.idempotencyToken(), customModelKmsKeyId: String? = nil, customModelName: String, customModelTags: [Tag]? = nil, hyperParameters: [String: String], jobName: String, jobTags: [Tag]? = nil, outputDataConfig: OutputDataConfig, roleArn: String, trainingDataConfig: TrainingDataConfig, validationDataConfig: ValidationDataConfig? = nil, vpcConfig: VpcConfig? = nil) {
+        public init(baseModelIdentifier: String, clientRequestToken: String? = CreateModelCustomizationJobRequest.idempotencyToken(), customizationType: CustomizationType? = nil, customModelKmsKeyId: String? = nil, customModelName: String, customModelTags: [Tag]? = nil, hyperParameters: [String: String], jobName: String, jobTags: [Tag]? = nil, outputDataConfig: OutputDataConfig, roleArn: String, trainingDataConfig: TrainingDataConfig, validationDataConfig: ValidationDataConfig? = nil, vpcConfig: VpcConfig? = nil) {
             self.baseModelIdentifier = baseModelIdentifier
             self.clientRequestToken = clientRequestToken
+            self.customizationType = customizationType
             self.customModelKmsKeyId = customModelKmsKeyId
             self.customModelName = customModelName
             self.customModelTags = customModelTags
@@ -175,7 +191,7 @@ extension Bedrock {
         public func validate(name: String) throws {
             try self.validate(self.baseModelIdentifier, name: "baseModelIdentifier", parent: name, max: 2048)
             try self.validate(self.baseModelIdentifier, name: "baseModelIdentifier", parent: name, min: 1)
-            try self.validate(self.baseModelIdentifier, name: "baseModelIdentifier", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$")
+            try self.validate(self.baseModelIdentifier, name: "baseModelIdentifier", parent: name, pattern: "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.]?[a-z0-9-]{1,63})([:][a-z0-9-]{1,63}){0,2})|(([0-9a-zA-Z][_-]?)+)$")
             try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, max: 256)
             try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, min: 1)
             try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, pattern: "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$")
@@ -207,6 +223,7 @@ extension Bedrock {
         private enum CodingKeys: String, CodingKey {
             case baseModelIdentifier = "baseModelIdentifier"
             case clientRequestToken = "clientRequestToken"
+            case customizationType = "customizationType"
             case customModelKmsKeyId = "customModelKmsKeyId"
             case customModelName = "customModelName"
             case customModelTags = "customModelTags"
@@ -235,7 +252,7 @@ extension Bedrock {
     }
 
     public struct CreateProvisionedModelThroughputRequest: AWSEncodableShape {
-        /// Unique token value that you can provide. If this token matches a previous request, Bedrock ignores the request, but does not return an error.
+        /// Unique token value that you can provide. If this token matches a previous request, Amazon Bedrock ignores the request, but does not return an error.
         public let clientRequestToken: String?
         /// Commitment duration requested for the provisioned throughput.
         public let commitmentDuration: CommitmentDuration?
@@ -305,15 +322,18 @@ extension Bedrock {
         /// Creation time of the model.
         @CustomCoding<ISO8601DateCoder>
         public var creationTime: Date
+        /// Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see Custom models.
+        public let customizationType: CustomizationType?
         /// The ARN of the custom model.
         public let modelArn: String
         /// The name of the custom model.
         public let modelName: String
 
-        public init(baseModelArn: String, baseModelName: String, creationTime: Date, modelArn: String, modelName: String) {
+        public init(baseModelArn: String, baseModelName: String, creationTime: Date, customizationType: CustomizationType? = nil, modelArn: String, modelName: String) {
             self.baseModelArn = baseModelArn
             self.baseModelName = baseModelName
             self.creationTime = creationTime
+            self.customizationType = customizationType
             self.modelArn = modelArn
             self.modelName = modelName
         }
@@ -322,6 +342,7 @@ extension Bedrock {
             case baseModelArn = "baseModelArn"
             case baseModelName = "baseModelName"
             case creationTime = "creationTime"
+            case customizationType = "customizationType"
             case modelArn = "modelArn"
             case modelName = "modelName"
         }
@@ -394,6 +415,8 @@ extension Bedrock {
         public let modelArn: String
         /// The model identifier.
         public let modelId: String
+        /// Contains details about whether a model version is available or deprecated
+        public let modelLifecycle: FoundationModelLifecycle?
         /// The model name.
         public let modelName: String?
         /// The output modalities that the model supports.
@@ -403,12 +426,13 @@ extension Bedrock {
         /// Indicates whether the model supports streaming.
         public let responseStreamingSupported: Bool?
 
-        public init(customizationsSupported: [ModelCustomization]? = nil, inferenceTypesSupported: [InferenceType]? = nil, inputModalities: [ModelModality]? = nil, modelArn: String, modelId: String, modelName: String? = nil, outputModalities: [ModelModality]? = nil, providerName: String? = nil, responseStreamingSupported: Bool? = nil) {
+        public init(customizationsSupported: [ModelCustomization]? = nil, inferenceTypesSupported: [InferenceType]? = nil, inputModalities: [ModelModality]? = nil, modelArn: String, modelId: String, modelLifecycle: FoundationModelLifecycle? = nil, modelName: String? = nil, outputModalities: [ModelModality]? = nil, providerName: String? = nil, responseStreamingSupported: Bool? = nil) {
             self.customizationsSupported = customizationsSupported
             self.inferenceTypesSupported = inferenceTypesSupported
             self.inputModalities = inputModalities
             self.modelArn = modelArn
             self.modelId = modelId
+            self.modelLifecycle = modelLifecycle
             self.modelName = modelName
             self.outputModalities = outputModalities
             self.providerName = providerName
@@ -421,10 +445,24 @@ extension Bedrock {
             case inputModalities = "inputModalities"
             case modelArn = "modelArn"
             case modelId = "modelId"
+            case modelLifecycle = "modelLifecycle"
             case modelName = "modelName"
             case outputModalities = "outputModalities"
             case providerName = "providerName"
             case responseStreamingSupported = "responseStreamingSupported"
+        }
+    }
+
+    public struct FoundationModelLifecycle: AWSDecodableShape {
+        /// Specifies whether a model version is available (ACTIVE) or deprecated (LEGACY.
+        public let status: FoundationModelLifecycleStatus
+
+        public init(status: FoundationModelLifecycleStatus) {
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case status = "status"
         }
     }
 
@@ -439,6 +477,8 @@ extension Bedrock {
         public let modelArn: String
         /// The model Id of the foundation model.
         public let modelId: String
+        /// Contains details about whether a model version is available or deprecated.
+        public let modelLifecycle: FoundationModelLifecycle?
         /// The name of the model.
         public let modelName: String?
         /// The output modalities that the model supports.
@@ -448,12 +488,13 @@ extension Bedrock {
         /// Indicates whether the model supports streaming.
         public let responseStreamingSupported: Bool?
 
-        public init(customizationsSupported: [ModelCustomization]? = nil, inferenceTypesSupported: [InferenceType]? = nil, inputModalities: [ModelModality]? = nil, modelArn: String, modelId: String, modelName: String? = nil, outputModalities: [ModelModality]? = nil, providerName: String? = nil, responseStreamingSupported: Bool? = nil) {
+        public init(customizationsSupported: [ModelCustomization]? = nil, inferenceTypesSupported: [InferenceType]? = nil, inputModalities: [ModelModality]? = nil, modelArn: String, modelId: String, modelLifecycle: FoundationModelLifecycle? = nil, modelName: String? = nil, outputModalities: [ModelModality]? = nil, providerName: String? = nil, responseStreamingSupported: Bool? = nil) {
             self.customizationsSupported = customizationsSupported
             self.inferenceTypesSupported = inferenceTypesSupported
             self.inputModalities = inputModalities
             self.modelArn = modelArn
             self.modelId = modelId
+            self.modelLifecycle = modelLifecycle
             self.modelName = modelName
             self.outputModalities = outputModalities
             self.providerName = providerName
@@ -466,6 +507,7 @@ extension Bedrock {
             case inputModalities = "inputModalities"
             case modelArn = "modelArn"
             case modelId = "modelId"
+            case modelLifecycle = "modelLifecycle"
             case modelName = "modelName"
             case outputModalities = "outputModalities"
             case providerName = "providerName"
@@ -500,6 +542,8 @@ extension Bedrock {
         /// Creation time of the model.
         @CustomCoding<ISO8601DateCoder>
         public var creationTime: Date
+        /// The type of model customization.
+        public let customizationType: CustomizationType?
         /// Hyperparameter values associated with this model.
         public let hyperParameters: [String: String]?
         /// Job ARN associated with this model.
@@ -522,9 +566,10 @@ extension Bedrock {
         /// The validation metrics from the job creation.
         public let validationMetrics: [ValidatorMetric]?
 
-        public init(baseModelArn: String, creationTime: Date, hyperParameters: [String: String]? = nil, jobArn: String, jobName: String? = nil, modelArn: String, modelKmsKeyArn: String? = nil, modelName: String, outputDataConfig: OutputDataConfig, trainingDataConfig: TrainingDataConfig, trainingMetrics: TrainingMetrics? = nil, validationDataConfig: ValidationDataConfig? = nil, validationMetrics: [ValidatorMetric]? = nil) {
+        public init(baseModelArn: String, creationTime: Date, customizationType: CustomizationType? = nil, hyperParameters: [String: String]? = nil, jobArn: String, jobName: String? = nil, modelArn: String, modelKmsKeyArn: String? = nil, modelName: String, outputDataConfig: OutputDataConfig, trainingDataConfig: TrainingDataConfig, trainingMetrics: TrainingMetrics? = nil, validationDataConfig: ValidationDataConfig? = nil, validationMetrics: [ValidatorMetric]? = nil) {
             self.baseModelArn = baseModelArn
             self.creationTime = creationTime
+            self.customizationType = customizationType
             self.hyperParameters = hyperParameters
             self.jobArn = jobArn
             self.jobName = jobName
@@ -541,6 +586,7 @@ extension Bedrock {
         private enum CodingKeys: String, CodingKey {
             case baseModelArn = "baseModelArn"
             case creationTime = "creationTime"
+            case customizationType = "customizationType"
             case hyperParameters = "hyperParameters"
             case jobArn = "jobArn"
             case jobName = "jobName"
@@ -617,12 +663,14 @@ extension Bedrock {
         /// Time that the resource was created.
         @CustomCoding<ISO8601DateCoder>
         public var creationTime: Date
+        /// The type of model customization.
+        public let customizationType: CustomizationType?
         /// Time that the resource transitioned to terminal state.
         @OptionalCustomCoding<ISO8601DateCoder>
         public var endTime: Date?
         /// Information about why the job failed.
         public let failureMessage: String?
-        /// The hyperparameter values for the job.
+        /// The hyperparameter values for the job. For information about hyperparameters for specific models, see Guidelines for model customization.
         public let hyperParameters: [String: String]
         /// The ARN of the customization job.
         public let jobArn: String
@@ -651,10 +699,11 @@ extension Bedrock {
         /// VPC configuration for the custom model job.
         public let vpcConfig: VpcConfig?
 
-        public init(baseModelArn: String, clientRequestToken: String? = nil, creationTime: Date, endTime: Date? = nil, failureMessage: String? = nil, hyperParameters: [String: String], jobArn: String, jobName: String, lastModifiedTime: Date? = nil, outputDataConfig: OutputDataConfig, outputModelArn: String? = nil, outputModelKmsKeyArn: String? = nil, outputModelName: String, roleArn: String, status: ModelCustomizationJobStatus? = nil, trainingDataConfig: TrainingDataConfig, trainingMetrics: TrainingMetrics? = nil, validationDataConfig: ValidationDataConfig, validationMetrics: [ValidatorMetric]? = nil, vpcConfig: VpcConfig? = nil) {
+        public init(baseModelArn: String, clientRequestToken: String? = nil, creationTime: Date, customizationType: CustomizationType? = nil, endTime: Date? = nil, failureMessage: String? = nil, hyperParameters: [String: String], jobArn: String, jobName: String, lastModifiedTime: Date? = nil, outputDataConfig: OutputDataConfig, outputModelArn: String? = nil, outputModelKmsKeyArn: String? = nil, outputModelName: String, roleArn: String, status: ModelCustomizationJobStatus? = nil, trainingDataConfig: TrainingDataConfig, trainingMetrics: TrainingMetrics? = nil, validationDataConfig: ValidationDataConfig, validationMetrics: [ValidatorMetric]? = nil, vpcConfig: VpcConfig? = nil) {
             self.baseModelArn = baseModelArn
             self.clientRequestToken = clientRequestToken
             self.creationTime = creationTime
+            self.customizationType = customizationType
             self.endTime = endTime
             self.failureMessage = failureMessage
             self.hyperParameters = hyperParameters
@@ -678,6 +727,7 @@ extension Bedrock {
             case baseModelArn = "baseModelArn"
             case clientRequestToken = "clientRequestToken"
             case creationTime = "creationTime"
+            case customizationType = "customizationType"
             case endTime = "endTime"
             case failureMessage = "failureMessage"
             case hyperParameters = "hyperParameters"
@@ -825,7 +875,7 @@ extension Bedrock {
         public let maxResults: Int?
         /// Return custom models only if the job name contains these characters.
         public let nameContains: String?
-        /// Continuation token from the previous response, for Bedrock to list the next set of results.
+        /// Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
         public let nextToken: String?
         /// The field to sort by in the returned list of models.
         public let sortBy: SortModelsBy?
@@ -893,7 +943,7 @@ extension Bedrock {
         public let byInferenceType: InferenceType?
         /// List by output modality type.
         public let byOutputModality: ModelModality?
-        /// A Bedrock model provider.
+        /// A Amazon Bedrock model provider.
         public let byProvider: String?
 
         public init(byCustomizationType: ModelCustomization? = nil, byInferenceType: InferenceType? = nil, byOutputModality: ModelModality? = nil, byProvider: String? = nil) {
@@ -904,14 +954,14 @@ extension Bedrock {
         }
 
         public func validate(name: String) throws {
-            try self.validate(self.byProvider, name: "byProvider", parent: name, pattern: "^[a-z0-9-]{1,63}$")
+            try self.validate(self.byProvider, name: "byProvider", parent: name, pattern: "^[A-Za-z0-9- ]{1,63}$")
         }
 
         private enum CodingKeys: CodingKey {}
     }
 
     public struct ListFoundationModelsResponse: AWSDecodableShape {
-        /// A list of bedrock foundation models.
+        /// A list of Amazon Bedrock foundation models.
         public let modelSummaries: [FoundationModelSummary]?
 
         public init(modelSummaries: [FoundationModelSummary]? = nil) {
@@ -945,7 +995,7 @@ extension Bedrock {
         public let maxResults: Int?
         /// Return customization jobs only if the job name contains these characters.
         public let nameContains: String?
-        /// Continuation token from the previous response, for Bedrock to list the next set of results.
+        /// Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
         public let nextToken: String?
         /// The field to sort by in the returned list of jobs.
         public let sortBy: SortJobsBy?
@@ -1021,7 +1071,7 @@ extension Bedrock {
         public let modelArnEquals: String?
         /// Return the list of provisioned capacities if their name contains these characters.
         public let nameContains: String?
-        /// Continuation token from the previous response, for Bedrock to list the next set of results.
+        /// Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
         public let nextToken: String?
         /// The field to sort by in the returned list of provisioned capacities.
         public let sortBy: SortByProvisionedModels?
@@ -1148,6 +1198,8 @@ extension Bedrock {
         /// Creation time of the custom model.
         @CustomCoding<ISO8601DateCoder>
         public var creationTime: Date
+        /// Specifies whether to carry out continued pre-training of a model or whether to fine-tune it. For more information, see Custom models.
+        public let customizationType: CustomizationType?
         /// ARN of the custom model.
         public let customModelArn: String?
         /// Name of the custom model.
@@ -1165,9 +1217,10 @@ extension Bedrock {
         /// Status of the customization job.
         public let status: ModelCustomizationJobStatus
 
-        public init(baseModelArn: String, creationTime: Date, customModelArn: String? = nil, customModelName: String? = nil, endTime: Date? = nil, jobArn: String, jobName: String, lastModifiedTime: Date? = nil, status: ModelCustomizationJobStatus) {
+        public init(baseModelArn: String, creationTime: Date, customizationType: CustomizationType? = nil, customModelArn: String? = nil, customModelName: String? = nil, endTime: Date? = nil, jobArn: String, jobName: String, lastModifiedTime: Date? = nil, status: ModelCustomizationJobStatus) {
             self.baseModelArn = baseModelArn
             self.creationTime = creationTime
+            self.customizationType = customizationType
             self.customModelArn = customModelArn
             self.customModelName = customModelName
             self.endTime = endTime
@@ -1180,6 +1233,7 @@ extension Bedrock {
         private enum CodingKeys: String, CodingKey {
             case baseModelArn = "baseModelArn"
             case creationTime = "creationTime"
+            case customizationType = "customizationType"
             case customModelArn = "customModelArn"
             case customModelName = "customModelName"
             case endTime = "endTime"
@@ -1626,7 +1680,7 @@ public struct BedrockErrorType: AWSErrorType {
     public static var serviceQuotaExceededException: Self { .init(.serviceQuotaExceededException) }
     /// The number of requests exceeds the limit. Resubmit your request later.
     public static var throttlingException: Self { .init(.throttlingException) }
-    /// The request contains more tags than can be associated with a resource (50 tags per resource). The maximum number of tags includes both existing tags and those included in your current request.
+    /// The request contains more tags than can be associated with a resource (50 tags per resource).  The maximum number of tags includes both existing tags and those included in your current request.
     public static var tooManyTagsException: Self { .init(.tooManyTagsException) }
     /// Input validation failed. Check your request parameters and retry the request.
     public static var validationException: Self { .init(.validationException) }

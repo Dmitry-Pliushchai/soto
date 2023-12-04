@@ -72,6 +72,11 @@ public struct SSMIncidents: AWSService {
 
     // MARK: API Calls
 
+    /// Retrieves details about all specified findings for an incident, including descriptive details about each finding. A finding represents a recent application environment change made by an CodeDeploy deployment or an CloudFormation stack creation or update that can be investigated as a potential cause of the incident.
+    public func batchGetIncidentFindings(_ input: BatchGetIncidentFindingsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetIncidentFindingsOutput> {
+        return self.client.execute(operation: "BatchGetIncidentFindings", path: "/batchGetIncidentFindings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
     public func createReplicationSet(_ input: CreateReplicationSetInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateReplicationSetOutput> {
         return self.client.execute(operation: "CreateReplicationSet", path: "/createReplicationSet", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -137,6 +142,11 @@ public struct SSMIncidents: AWSService {
         return self.client.execute(operation: "GetTimelineEvent", path: "/getTimelineEvent", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident. A finding represents a recent application environment change made by an CloudFormation stack creation or update or an CodeDeploy deployment that can be investigated as a potential cause of the incident.
+    public func listIncidentFindings(_ input: ListIncidentFindingsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIncidentFindingsOutput> {
+        return self.client.execute(operation: "ListIncidentFindings", path: "/listIncidentFindings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update.
     public func listIncidentRecords(_ input: ListIncidentRecordsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListIncidentRecordsOutput> {
         return self.client.execute(operation: "ListIncidentRecords", path: "/listIncidentRecords", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -157,7 +167,7 @@ public struct SSMIncidents: AWSService {
         return self.client.execute(operation: "ListResponsePlans", path: "/listResponsePlans", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists the tags that are attached to the specified response plan.
+    /// Lists the tags that are attached to the specified response plan or incident.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTagsForResourceResponse> {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -278,6 +288,59 @@ extension SSMIncidents {
             command: self.getResourcePolicies,
             inputKey: \GetResourcePoliciesInput.nextToken,
             outputKey: \GetResourcePoliciesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident. A finding represents a recent application environment change made by an CloudFormation stack creation or update or an CodeDeploy deployment that can be investigated as a potential cause of the incident.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listIncidentFindingsPaginator<Result>(
+        _ input: ListIncidentFindingsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListIncidentFindingsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listIncidentFindings,
+            inputKey: \ListIncidentFindingsInput.nextToken,
+            outputKey: \ListIncidentFindingsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listIncidentFindingsPaginator(
+        _ input: ListIncidentFindingsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListIncidentFindingsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listIncidentFindings,
+            inputKey: \ListIncidentFindingsInput.nextToken,
+            outputKey: \ListIncidentFindingsOutput.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -555,6 +618,16 @@ extension SSMIncidents.GetResourcePoliciesInput: AWSPaginateToken {
             maxResults: self.maxResults,
             nextToken: token,
             resourceArn: self.resourceArn
+        )
+    }
+}
+
+extension SSMIncidents.ListIncidentFindingsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> SSMIncidents.ListIncidentFindingsInput {
+        return .init(
+            incidentRecordArn: self.incidentRecordArn,
+            maxResults: self.maxResults,
+            nextToken: token
         )
     }
 }

@@ -103,6 +103,11 @@ public struct Kafka: AWSService {
         return self.client.execute(operation: "CreateConfiguration", path: "/v1/configurations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates the replicator.
+    public func createReplicator(_ input: CreateReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateReplicatorResponse> {
+        return self.client.execute(operation: "CreateReplicator", path: "/replication/v1/replicators", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new MSK VPC connection.
     public func createVpcConnection(_ input: CreateVpcConnectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateVpcConnectionResponse> {
         return self.client.execute(operation: "CreateVpcConnection", path: "/v1/vpc-connection", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -121,6 +126,11 @@ public struct Kafka: AWSService {
     /// Deletes an MSK Configuration.
     public func deleteConfiguration(_ input: DeleteConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteConfigurationResponse> {
         return self.client.execute(operation: "DeleteConfiguration", path: "/v1/configurations/{Arn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a replicator.
+    public func deleteReplicator(_ input: DeleteReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteReplicatorResponse> {
+        return self.client.execute(operation: "DeleteReplicator", path: "/replication/v1/replicators/{ReplicatorArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a MSK VPC connection.
@@ -156,6 +166,11 @@ public struct Kafka: AWSService {
     /// Returns a description of this revision of the configuration.
     public func describeConfigurationRevision(_ input: DescribeConfigurationRevisionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeConfigurationRevisionResponse> {
         return self.client.execute(operation: "DescribeConfigurationRevision", path: "/v1/configurations/{Arn}/revisions/{Revision}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes a replicator.
+    public func describeReplicator(_ input: DescribeReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeReplicatorResponse> {
+        return self.client.execute(operation: "DescribeReplicator", path: "/replication/v1/replicators/{ReplicatorArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a description of this MSK VPC connection.
@@ -221,6 +236,11 @@ public struct Kafka: AWSService {
     /// Returns a list of the broker nodes in the cluster.
     public func listNodes(_ input: ListNodesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListNodesResponse> {
         return self.client.execute(operation: "ListNodes", path: "/v1/clusters/{ClusterArn}/nodes", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the replicators.
+    public func listReplicators(_ input: ListReplicatorsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListReplicatorsResponse> {
+        return self.client.execute(operation: "ListReplicators", path: "/replication/v1/replicators", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
@@ -301,6 +321,11 @@ public struct Kafka: AWSService {
     /// Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
     public func updateMonitoring(_ input: UpdateMonitoringRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateMonitoringResponse> {
         return self.client.execute(operation: "UpdateMonitoring", path: "/v1/clusters/{ClusterArn}/monitoring", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates replication info of a replicator.
+    public func updateReplicationInfo(_ input: UpdateReplicationInfoRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateReplicationInfoResponse> {
+        return self.client.execute(operation: "UpdateReplicationInfo", path: "/replication/v1/replicators/{ReplicatorArn}/replication-info", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.
@@ -803,6 +828,59 @@ extension Kafka {
         )
     }
 
+    /// Lists the replicators.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listReplicatorsPaginator<Result>(
+        _ input: ListReplicatorsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListReplicatorsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listReplicators,
+            inputKey: \ListReplicatorsRequest.nextToken,
+            outputKey: \ListReplicatorsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listReplicatorsPaginator(
+        _ input: ListReplicatorsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListReplicatorsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listReplicators,
+            inputKey: \ListReplicatorsRequest.nextToken,
+            outputKey: \ListReplicatorsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -995,6 +1073,16 @@ extension Kafka.ListNodesRequest: AWSPaginateToken {
             clusterArn: self.clusterArn,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension Kafka.ListReplicatorsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Kafka.ListReplicatorsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            replicatorNameFilter: self.replicatorNameFilter
         )
     }
 }

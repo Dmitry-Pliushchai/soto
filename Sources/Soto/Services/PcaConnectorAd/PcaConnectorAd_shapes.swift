@@ -26,13 +26,13 @@ import SotoCore
 extension PcaConnectorAd {
     // MARK: Enums
 
-    public enum AccessRight: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessRight: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case deny = "DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ApplicationPolicyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationPolicyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allApplicationPolicies = "ALL_APPLICATION_POLICIES"
         case anyPurpose = "ANY_PURPOSE"
         case attestationIdentityKeyCertificate = "ATTESTATION_IDENTITY_KEY_CERTIFICATE"
@@ -103,7 +103,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClientCompatibilityV2: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClientCompatibilityV2: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case windowsServer2003 = "WINDOWS_SERVER_2003"
         case windowsServer2008 = "WINDOWS_SERVER_2008"
         case windowsServer2008R2 = "WINDOWS_SERVER_2008_R2"
@@ -113,7 +113,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClientCompatibilityV3: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClientCompatibilityV3: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case windowsServer2008 = "WINDOWS_SERVER_2008"
         case windowsServer2008R2 = "WINDOWS_SERVER_2008_R2"
         case windowsServer2012 = "WINDOWS_SERVER_2012"
@@ -122,14 +122,14 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClientCompatibilityV4: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClientCompatibilityV4: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case windowsServer2012 = "WINDOWS_SERVER_2012"
         case windowsServer2012R2 = "WINDOWS_SERVER_2012_R2"
         case windowsServer2016 = "WINDOWS_SERVER_2016"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -137,7 +137,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectorStatusReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectorStatusReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directoryAccessDenied = "DIRECTORY_ACCESS_DENIED"
         case internalFailure = "INTERNAL_FAILURE"
         case privatecaAccessDenied = "PRIVATECA_ACCESS_DENIED"
@@ -149,7 +149,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum DirectoryRegistrationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DirectoryRegistrationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -157,7 +157,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum DirectoryRegistrationStatusReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum DirectoryRegistrationStatusReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directoryAccessDenied = "DIRECTORY_ACCESS_DENIED"
         case directoryNotActive = "DIRECTORY_NOT_ACTIVE"
         case directoryNotReachable = "DIRECTORY_NOT_REACHABLE"
@@ -167,25 +167,25 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum HashAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum HashAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sha256 = "SHA256"
         case sha384 = "SHA384"
         case sha512 = "SHA512"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeySpec: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeySpec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case keyExchange = "KEY_EXCHANGE"
         case signature = "SIGNATURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum KeyUsagePropertyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KeyUsagePropertyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum PrivateKeyAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrivateKeyAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ecdhP256 = "ECDH_P256"
         case ecdhP384 = "ECDH_P384"
         case ecdhP521 = "ECDH_P521"
@@ -193,7 +193,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServicePrincipalNameStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServicePrincipalNameStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -201,7 +201,7 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServicePrincipalNameStatusReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServicePrincipalNameStatusReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directoryAccessDenied = "DIRECTORY_ACCESS_DENIED"
         case directoryNotReachable = "DIRECTORY_NOT_REACHABLE"
         case directoryResourceNotFound = "DIRECTORY_RESOURCE_NOT_FOUND"
@@ -210,13 +210,13 @@ extension PcaConnectorAd {
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ValidityPeriodType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ValidityPeriodType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case days = "DAYS"
         case hours = "HOURS"
         case months = "MONTHS"

@@ -26,6 +26,11 @@ extension ApplicationDiscoveryService {
         return try await self.client.execute(operation: "AssociateConfigurationItemsToApplication", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not  delete the previously discovered data.  To delete the data collected, use StartBatchDeleteConfigurationTask.
+    public func batchDeleteAgents(_ input: BatchDeleteAgentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchDeleteAgentsResponse {
+        return try await self.client.execute(operation: "BatchDeleteAgents", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  Amazon Web Services Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
     public func batchDeleteImportData(_ input: BatchDeleteImportDataRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchDeleteImportDataResponse {
         return try await self.client.execute(operation: "BatchDeleteImportData", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -54,6 +59,11 @@ extension ApplicationDiscoveryService {
     /// Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
     public func describeAgents(_ input: DescribeAgentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeAgentsResponse {
         return try await self.client.execute(operation: "DescribeAgents", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+    public func describeBatchDeleteConfigurationTask(_ input: DescribeBatchDeleteConfigurationTaskRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeBatchDeleteConfigurationTaskResponse {
+        return try await self.client.execute(operation: "DescribeBatchDeleteConfigurationTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action in the Amazon Web Services Application Discovery Service User Guide.
@@ -111,6 +121,11 @@ extension ApplicationDiscoveryService {
         return try await self.client.execute(operation: "ListServerNeighbors", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  Takes a list of configurationId as input and starts an asynchronous deletion  task to remove the configurationItems. Returns a unique deletion task identifier.
+    public func startBatchDeleteConfigurationTask(_ input: StartBatchDeleteConfigurationTaskRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartBatchDeleteConfigurationTaskResponse {
+        return try await self.client.execute(operation: "StartBatchDeleteConfigurationTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Start the continuous flow of agent's discovered data into Amazon Athena.
     public func startContinuousExport(_ input: StartContinuousExportRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartContinuousExportResponse {
         return try await self.client.execute(operation: "StartContinuousExport", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -151,6 +166,28 @@ extension ApplicationDiscoveryService {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension ApplicationDiscoveryService {
+    /// Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeAgentsPaginator(
+        _ input: DescribeAgentsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeAgentsRequest, DescribeAgentsResponse> {
+        return .init(
+            input: input,
+            command: self.describeAgents,
+            inputKey: \DescribeAgentsRequest.nextToken,
+            outputKey: \DescribeAgentsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
     /// Return PaginatorSequence for operation.
     ///
@@ -173,6 +210,50 @@ extension ApplicationDiscoveryService {
         )
     }
 
+    ///  DescribeExportConfigurations is deprecated. Use DescribeExportTasks, instead.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeExportConfigurationsPaginator(
+        _ input: DescribeExportConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeExportConfigurationsRequest, DescribeExportConfigurationsResponse> {
+        return .init(
+            input: input,
+            command: self.describeExportConfigurations,
+            inputKey: \DescribeExportConfigurationsRequest.nextToken,
+            outputKey: \DescribeExportConfigurationsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeExportTasksPaginator(
+        _ input: DescribeExportTasksRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeExportTasksRequest, DescribeExportTasksResponse> {
+        return .init(
+            input: input,
+            command: self.describeExportTasks,
+            inputKey: \DescribeExportTasksRequest.nextToken,
+            outputKey: \DescribeExportTasksResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
     /// Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
     /// Return PaginatorSequence for operation.
     ///
@@ -190,6 +271,50 @@ extension ApplicationDiscoveryService {
             command: self.describeImportTasks,
             inputKey: \DescribeImportTasksRequest.nextToken,
             outputKey: \DescribeImportTasksResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user that have tags can be listed if you call DescribeTags as is without passing any parameters.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeTagsPaginator(
+        _ input: DescribeTagsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeTagsRequest, DescribeTagsResponse> {
+        return .init(
+            input: input,
+            command: self.describeTags,
+            inputKey: \DescribeTagsRequest.nextToken,
+            outputKey: \DescribeTagsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of configuration items as specified by the value passed to the required parameter configurationType. Optional filtering may be applied to refine search results.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listConfigurationsPaginator(
+        _ input: ListConfigurationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListConfigurationsRequest, ListConfigurationsResponse> {
+        return .init(
+            input: input,
+            command: self.listConfigurations,
+            inputKey: \ListConfigurationsRequest.nextToken,
+            outputKey: \ListConfigurationsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

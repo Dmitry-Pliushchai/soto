@@ -56,6 +56,14 @@ public struct Glue: AWSService {
             apiVersion: "2017-03-31",
             endpoint: endpoint,
             variantEndpoints: [
+                [.dualstack]: .init(endpoints: [
+                    "us-gov-east-1": "glue.us-gov-east-1.api.aws",
+                    "us-gov-west-1": "glue.us-gov-west-1.api.aws"
+                ]),
+                [.dualstack, .fips]: .init(endpoints: [
+                    "us-gov-east-1": "glue-fips.us-gov-east-1.api.aws",
+                    "us-gov-west-1": "glue-fips.us-gov-west-1.api.aws"
+                ]),
                 [.fips]: .init(endpoints: [
                     "us-east-1": "glue-fips.us-east-1.amazonaws.com",
                     "us-east-2": "glue-fips.us-east-2.amazonaws.com",
@@ -132,6 +140,11 @@ public struct Glue: AWSService {
     /// Retrieves partitions in a batch request.
     public func batchGetPartition(_ input: BatchGetPartitionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetPartitionResponse> {
         return self.client.execute(operation: "BatchGetPartition", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the configuration for the specified table optimizers.
+    public func batchGetTableOptimizer(_ input: BatchGetTableOptimizerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<BatchGetTableOptimizerResponse> {
+        return self.client.execute(operation: "BatchGetTableOptimizer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
@@ -269,6 +282,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "CreateTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a new table optimizer for a specific function. compaction is the only currently supported optimizer type.
+    public func createTableOptimizer(_ input: CreateTableOptimizerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateTableOptimizerResponse> {
+        return self.client.execute(operation: "CreateTableOptimizer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new trigger.
     public func createTrigger(_ input: CreateTriggerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateTriggerResponse> {
         return self.client.execute(operation: "CreateTrigger", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -389,6 +407,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "DeleteTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes an optimizer and all associated metadata for a table. The optimization will no longer be performed on the table.
+    public func deleteTableOptimizer(_ input: DeleteTableOptimizerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteTableOptimizerResponse> {
+        return self.client.execute(operation: "DeleteTableOptimizer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a specified version of a table.
     public func deleteTableVersion(_ input: DeleteTableVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteTableVersionResponse> {
         return self.client.execute(operation: "DeleteTableVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -447,6 +470,16 @@ public struct Glue: AWSService {
     /// Retrieves table statistics of columns. The Identity and Access Management (IAM) permission required for this operation is GetTable.
     public func getColumnStatisticsForTable(_ input: GetColumnStatisticsForTableRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetColumnStatisticsForTableResponse> {
         return self.client.execute(operation: "GetColumnStatisticsForTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get the associated metadata/information for a task run, given a task run ID.
+    public func getColumnStatisticsTaskRun(_ input: GetColumnStatisticsTaskRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetColumnStatisticsTaskRunResponse> {
+        return self.client.execute(operation: "GetColumnStatisticsTaskRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves information about all runs associated with the specified table.
+    public func getColumnStatisticsTaskRuns(_ input: GetColumnStatisticsTaskRunsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetColumnStatisticsTaskRunsResponse> {
+        return self.client.execute(operation: "GetColumnStatisticsTaskRuns", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves a connection definition from the Data Catalog.
@@ -659,6 +692,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "GetTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns the configuration of all optimizers associated with a specified table.
+    public func getTableOptimizer(_ input: GetTableOptimizerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetTableOptimizerResponse> {
+        return self.client.execute(operation: "GetTableOptimizer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves a specified version of a table.
     public func getTableVersion(_ input: GetTableVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetTableVersionResponse> {
         return self.client.execute(operation: "GetTableVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -744,6 +782,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "ListBlueprints", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// List all task runs for a particular account.
+    public func listColumnStatisticsTaskRuns(_ input: ListColumnStatisticsTaskRunsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListColumnStatisticsTaskRunsResponse> {
+        return self.client.execute(operation: "ListColumnStatisticsTaskRuns", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
     public func listCrawlers(_ input: ListCrawlersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCrawlersResponse> {
         return self.client.execute(operation: "ListCrawlers", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -819,6 +862,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "ListStatements", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Lists the history of previous optimizer runs for a specific table.
+    public func listTableOptimizerRuns(_ input: ListTableOptimizerRunsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTableOptimizerRunsResponse> {
+        return self.client.execute(operation: "ListTableOptimizerRuns", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
     public func listTriggers(_ input: ListTriggersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTriggersResponse> {
         return self.client.execute(operation: "ListTriggers", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -889,6 +937,11 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "StartBlueprintRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Starts a column statistics task run, for a specified table and columns.
+    public func startColumnStatisticsTaskRun(_ input: StartColumnStatisticsTaskRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartColumnStatisticsTaskRunResponse> {
+        return self.client.execute(operation: "StartColumnStatisticsTaskRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
     public func startCrawler(_ input: StartCrawlerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartCrawlerResponse> {
         return self.client.execute(operation: "StartCrawler", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -899,7 +952,7 @@ public struct Glue: AWSService {
         return self.client.execute(operation: "StartCrawlerSchedule", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.
+    /// Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking. Recommendation runs are automatically deleted after 90 days.
     public func startDataQualityRuleRecommendationRun(_ input: StartDataQualityRuleRecommendationRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartDataQualityRuleRecommendationRunResponse> {
         return self.client.execute(operation: "StartDataQualityRuleRecommendationRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -942,6 +995,11 @@ public struct Glue: AWSService {
     /// Starts a new run of the specified workflow.
     public func startWorkflowRun(_ input: StartWorkflowRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartWorkflowRunResponse> {
         return self.client.execute(operation: "StartWorkflowRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Stops a task run for the specified table.
+    public func stopColumnStatisticsTaskRun(_ input: StopColumnStatisticsTaskRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StopColumnStatisticsTaskRunResponse> {
+        return self.client.execute(operation: "StopColumnStatisticsTaskRun", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// If the specified crawler is running, stops the crawl.
@@ -1067,6 +1125,11 @@ public struct Glue: AWSService {
     /// Updates a metadata table in the Data Catalog.
     public func updateTable(_ input: UpdateTableRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateTableResponse> {
         return self.client.execute(operation: "UpdateTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the configuration for an existing table optimizer.
+    public func updateTableOptimizer(_ input: UpdateTableOptimizerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateTableOptimizerResponse> {
+        return self.client.execute(operation: "UpdateTableOptimizer", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a trigger definition.
@@ -1198,6 +1261,59 @@ extension Glue {
             command: self.getClassifiers,
             inputKey: \GetClassifiersRequest.nextToken,
             outputKey: \GetClassifiersResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Retrieves information about all runs associated with the specified table.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func getColumnStatisticsTaskRunsPaginator<Result>(
+        _ input: GetColumnStatisticsTaskRunsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, GetColumnStatisticsTaskRunsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.getColumnStatisticsTaskRuns,
+            inputKey: \GetColumnStatisticsTaskRunsRequest.nextToken,
+            outputKey: \GetColumnStatisticsTaskRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func getColumnStatisticsTaskRunsPaginator(
+        _ input: GetColumnStatisticsTaskRunsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (GetColumnStatisticsTaskRunsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.getColumnStatisticsTaskRuns,
+            inputKey: \GetColumnStatisticsTaskRunsRequest.nextToken,
+            outputKey: \GetColumnStatisticsTaskRunsResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -2263,6 +2379,59 @@ extension Glue {
         )
     }
 
+    /// List all task runs for a particular account.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listColumnStatisticsTaskRunsPaginator<Result>(
+        _ input: ListColumnStatisticsTaskRunsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListColumnStatisticsTaskRunsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listColumnStatisticsTaskRuns,
+            inputKey: \ListColumnStatisticsTaskRunsRequest.nextToken,
+            outputKey: \ListColumnStatisticsTaskRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listColumnStatisticsTaskRunsPaginator(
+        _ input: ListColumnStatisticsTaskRunsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListColumnStatisticsTaskRunsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listColumnStatisticsTaskRuns,
+            inputKey: \ListColumnStatisticsTaskRunsRequest.nextToken,
+            outputKey: \ListColumnStatisticsTaskRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -2952,6 +3121,59 @@ extension Glue {
         )
     }
 
+    /// Lists the history of previous optimizer runs for a specific table.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listTableOptimizerRunsPaginator<Result>(
+        _ input: ListTableOptimizerRunsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListTableOptimizerRunsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listTableOptimizerRuns,
+            inputKey: \ListTableOptimizerRunsRequest.nextToken,
+            outputKey: \ListTableOptimizerRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listTableOptimizerRunsPaginator(
+        _ input: ListTableOptimizerRunsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListTableOptimizerRunsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listTableOptimizerRuns,
+            inputKey: \ListTableOptimizerRunsRequest.nextToken,
+            outputKey: \ListTableOptimizerRunsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -3127,6 +3349,17 @@ extension Glue.GetClassifiersRequest: AWSPaginateToken {
         return .init(
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension Glue.GetColumnStatisticsTaskRunsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Glue.GetColumnStatisticsTaskRunsRequest {
+        return .init(
+            databaseName: self.databaseName,
+            maxResults: self.maxResults,
+            nextToken: token,
+            tableName: self.tableName
         )
     }
 }
@@ -3355,6 +3588,15 @@ extension Glue.ListBlueprintsRequest: AWSPaginateToken {
     }
 }
 
+extension Glue.ListColumnStatisticsTaskRunsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Glue.ListColumnStatisticsTaskRunsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
 extension Glue.ListCrawlersRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Glue.ListCrawlersRequest {
         return .init(
@@ -3484,6 +3726,19 @@ extension Glue.ListSessionsRequest: AWSPaginateToken {
             nextToken: token,
             requestOrigin: self.requestOrigin,
             tags: self.tags
+        )
+    }
+}
+
+extension Glue.ListTableOptimizerRunsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Glue.ListTableOptimizerRunsRequest {
+        return .init(
+            catalogId: self.catalogId,
+            databaseName: self.databaseName,
+            maxResults: self.maxResults,
+            nextToken: token,
+            tableName: self.tableName,
+            type: self.type
         )
     }
 }

@@ -74,6 +74,16 @@ public struct CodeStarConnections: AWSService {
         return self.client.execute(operation: "CreateHost", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates a link to a specified external Git repository. A repository link allows Git sync to monitor and sync changes to files in a specified Git repository.
+    public func createRepositoryLink(_ input: CreateRepositoryLinkInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateRepositoryLinkOutput> {
+        return self.client.execute(operation: "CreateRepositoryLink", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a sync configuration which allows Amazon Web Services to sync content from a Git repository to update a specified Amazon Web Services resource. Parameters for the sync configuration are determined by the sync type.
+    public func createSyncConfiguration(_ input: CreateSyncConfigurationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateSyncConfigurationOutput> {
+        return self.client.execute(operation: "CreateSyncConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// The connection to be deleted.
     public func deleteConnection(_ input: DeleteConnectionInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteConnectionOutput> {
         return self.client.execute(operation: "DeleteConnection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -82,6 +92,16 @@ public struct CodeStarConnections: AWSService {
     /// The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.  A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state.
     public func deleteHost(_ input: DeleteHostInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteHostOutput> {
         return self.client.execute(operation: "DeleteHost", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the association between your connection and a specified external Git repository.
+    public func deleteRepositoryLink(_ input: DeleteRepositoryLinkInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteRepositoryLinkOutput> {
+        return self.client.execute(operation: "DeleteRepositoryLink", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the sync configuration for a specified repository and connection.
+    public func deleteSyncConfiguration(_ input: DeleteSyncConfigurationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteSyncConfigurationOutput> {
+        return self.client.execute(operation: "DeleteSyncConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns the connection ARN and details such as status, owner, and provider type.
@@ -94,6 +114,31 @@ public struct CodeStarConnections: AWSService {
         return self.client.execute(operation: "GetHost", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns details about a repository link. A repository link allows Git sync to monitor and sync changes from files in a specified Git repository.
+    public func getRepositoryLink(_ input: GetRepositoryLinkInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRepositoryLinkOutput> {
+        return self.client.execute(operation: "GetRepositoryLink", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns details about the sync status for a repository. A repository sync uses Git sync to push and pull changes from your remote repository.
+    public func getRepositorySyncStatus(_ input: GetRepositorySyncStatusInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRepositorySyncStatusOutput> {
+        return self.client.execute(operation: "GetRepositorySyncStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns the status of the sync with the Git repository for a specific Amazon Web Services resource.
+    public func getResourceSyncStatus(_ input: GetResourceSyncStatusInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetResourceSyncStatusOutput> {
+        return self.client.execute(operation: "GetResourceSyncStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of the most recent sync blockers.
+    public func getSyncBlockerSummary(_ input: GetSyncBlockerSummaryInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetSyncBlockerSummaryOutput> {
+        return self.client.execute(operation: "GetSyncBlockerSummary", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns details about a sync configuration, including the sync type and resource name. A sync configuration allows the configuration to sync (push and pull) changes from the remote repository for a specified branch in a Git repository.
+    public func getSyncConfiguration(_ input: GetSyncConfigurationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetSyncConfigurationOutput> {
+        return self.client.execute(operation: "GetSyncConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists the connections associated with your account.
     public func listConnections(_ input: ListConnectionsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListConnectionsOutput> {
         return self.client.execute(operation: "ListConnections", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -102,6 +147,21 @@ public struct CodeStarConnections: AWSService {
     /// Lists the hosts associated with your account.
     public func listHosts(_ input: ListHostsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListHostsOutput> {
         return self.client.execute(operation: "ListHosts", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the repository links created for connections in your account.
+    public func listRepositoryLinks(_ input: ListRepositoryLinksInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRepositoryLinksOutput> {
+        return self.client.execute(operation: "ListRepositoryLinks", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the repository sync definitions for repository links in your account.
+    public func listRepositorySyncDefinitions(_ input: ListRepositorySyncDefinitionsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRepositorySyncDefinitionsOutput> {
+        return self.client.execute(operation: "ListRepositorySyncDefinitions", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of sync configurations for a specified repository.
+    public func listSyncConfigurations(_ input: ListSyncConfigurationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListSyncConfigurationsOutput> {
+        return self.client.execute(operation: "ListSyncConfigurations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets the set of key-value pairs (metadata) that are used to manage the resource.
@@ -122,6 +182,21 @@ public struct CodeStarConnections: AWSService {
     /// Updates a specified host with the provided configurations.
     public func updateHost(_ input: UpdateHostInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateHostOutput> {
         return self.client.execute(operation: "UpdateHost", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the association between your connection and a specified external Git repository. A repository link allows Git sync to monitor and sync changes to files in a specified Git repository.
+    public func updateRepositoryLink(_ input: UpdateRepositoryLinkInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateRepositoryLinkOutput> {
+        return self.client.execute(operation: "UpdateRepositoryLink", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Allows you to update the status of a sync blocker, resolving the blocker and allowing syncing to continue.
+    public func updateSyncBlocker(_ input: UpdateSyncBlockerInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateSyncBlockerOutput> {
+        return self.client.execute(operation: "UpdateSyncBlocker", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the sync configuration for your connection and a specified external Git repository.
+    public func updateSyncConfiguration(_ input: UpdateSyncConfigurationInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateSyncConfigurationOutput> {
+        return self.client.execute(operation: "UpdateSyncConfiguration", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -242,6 +317,112 @@ extension CodeStarConnections {
             onPage: onPage
         )
     }
+
+    /// Lists the repository links created for connections in your account.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRepositoryLinksPaginator<Result>(
+        _ input: ListRepositoryLinksInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRepositoryLinksOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRepositoryLinks,
+            inputKey: \ListRepositoryLinksInput.nextToken,
+            outputKey: \ListRepositoryLinksOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRepositoryLinksPaginator(
+        _ input: ListRepositoryLinksInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRepositoryLinksOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRepositoryLinks,
+            inputKey: \ListRepositoryLinksInput.nextToken,
+            outputKey: \ListRepositoryLinksOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of sync configurations for a specified repository.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listSyncConfigurationsPaginator<Result>(
+        _ input: ListSyncConfigurationsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListSyncConfigurationsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listSyncConfigurations,
+            inputKey: \ListSyncConfigurationsInput.nextToken,
+            outputKey: \ListSyncConfigurationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listSyncConfigurationsPaginator(
+        _ input: ListSyncConfigurationsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListSyncConfigurationsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listSyncConfigurations,
+            inputKey: \ListSyncConfigurationsInput.nextToken,
+            outputKey: \ListSyncConfigurationsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
 }
 
 extension CodeStarConnections.ListConnectionsInput: AWSPaginateToken {
@@ -260,6 +441,26 @@ extension CodeStarConnections.ListHostsInput: AWSPaginateToken {
         return .init(
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension CodeStarConnections.ListRepositoryLinksInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CodeStarConnections.ListRepositoryLinksInput {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension CodeStarConnections.ListSyncConfigurationsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> CodeStarConnections.ListSyncConfigurationsInput {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            repositoryLinkId: self.repositoryLinkId,
+            syncType: self.syncType
         )
     }
 }

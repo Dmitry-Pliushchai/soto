@@ -26,25 +26,25 @@ import SotoCore
 extension ConnectCases {
     // MARK: Enums
 
-    public enum CommentBodyTextType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CommentBodyTextType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case textPlain = "Text/Plain"
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case creationFailed = "CreationFailed"
         case creationInProgress = "CreationInProgress"
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldNamespace: String, CustomStringConvertible, Codable, Sendable {
+    public enum FieldNamespace: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case custom = "Custom"
         case system = "System"
         public var description: String { return self.rawValue }
     }
 
-    public enum FieldType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FieldType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case boolean = "Boolean"
         case dateTime = "DateTime"
         case number = "Number"
@@ -54,19 +54,19 @@ extension ConnectCases {
         public var description: String { return self.rawValue }
     }
 
-    public enum Order: String, CustomStringConvertible, Codable, Sendable {
+    public enum Order: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "Asc"
         case desc = "Desc"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelatedItemType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelatedItemType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case comment = "Comment"
         case contact = "Contact"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case inactive = "Inactive"
         public var description: String { return self.rawValue }
@@ -495,7 +495,7 @@ extension ConnectCases {
         }
 
         public func validate(name: String) throws {
-            try self.validate(self.body, name: "body", parent: name, max: 1000)
+            try self.validate(self.body, name: "body", parent: name, max: 3000)
             try self.validate(self.body, name: "body", parent: name, min: 1)
         }
 
@@ -786,13 +786,16 @@ extension ConnectCases {
         public let content: RelatedItemInputContent
         /// The unique identifier of the Cases domain.
         public let domainId: String
+        /// Represents the creator of the related item.
+        public let performedBy: UserUnion?
         /// The type of a related item.
         public let type: RelatedItemType
 
-        public init(caseId: String, content: RelatedItemInputContent, domainId: String, type: RelatedItemType) {
+        public init(caseId: String, content: RelatedItemInputContent, domainId: String, performedBy: UserUnion? = nil, type: RelatedItemType) {
             self.caseId = caseId
             self.content = content
             self.domainId = domainId
+            self.performedBy = performedBy
             self.type = type
         }
 
@@ -802,10 +805,12 @@ extension ConnectCases {
             try self.content.validate(name: "\(name).content")
             try self.validate(self.domainId, name: "domainId", parent: name, max: 500)
             try self.validate(self.domainId, name: "domainId", parent: name, min: 1)
+            try self.performedBy?.validate(name: "\(name).performedBy")
         }
 
         private enum CodingKeys: String, CodingKey {
             case content = "content"
+            case performedBy = "performedBy"
             case type = "type"
         }
     }
@@ -2106,6 +2111,8 @@ extension ConnectCases {
         public var associationTime: Date
         /// Represents the content of a particular type of related item.
         public let content: RelatedItemContent
+        /// Represents the creator of the related item.
+        public let performedBy: UserUnion?
         /// Unique identifier of a related item.
         public let relatedItemId: String
         /// A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.
@@ -2113,9 +2120,10 @@ extension ConnectCases {
         /// Type of a related item.
         public let type: RelatedItemType
 
-        public init(associationTime: Date, content: RelatedItemContent, relatedItemId: String, tags: [String: String]? = nil, type: RelatedItemType) {
+        public init(associationTime: Date, content: RelatedItemContent, performedBy: UserUnion? = nil, relatedItemId: String, tags: [String: String]? = nil, type: RelatedItemType) {
             self.associationTime = associationTime
             self.content = content
+            self.performedBy = performedBy
             self.relatedItemId = relatedItemId
             self.tags = tags
             self.type = type
@@ -2124,6 +2132,7 @@ extension ConnectCases {
         private enum CodingKeys: String, CodingKey {
             case associationTime = "associationTime"
             case content = "content"
+            case performedBy = "performedBy"
             case relatedItemId = "relatedItemId"
             case tags = "tags"
             case type = "type"
@@ -2319,7 +2328,7 @@ extension ConnectCases {
             AWSMemberEncoding(label: "layoutId", location: .uri("layoutId"))
         ]
 
-        /// Information about which fields will be present in the layout, the order of the fields, and a read-only attribute of the field.
+        /// Information about which fields will be present in the layout, the order of the fields.
         public let content: LayoutContent?
         /// The unique identifier of the Cases domain.
         public let domainId: String
@@ -2447,6 +2456,24 @@ extension ConnectCases {
 
         private enum CodingKeys: String, CodingKey {
             case fieldGroup = "fieldGroup"
+        }
+    }
+
+    public struct UserUnion: AWSEncodableShape & AWSDecodableShape {
+        /// Represents the Amazon Connect ARN of the user.
+        public let userArn: String?
+
+        public init(userArn: String? = nil) {
+            self.userArn = userArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.userArn, name: "userArn", parent: name, max: 500)
+            try self.validate(self.userArn, name: "userArn", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case userArn = "userArn"
         }
     }
 }

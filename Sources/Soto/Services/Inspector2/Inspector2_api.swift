@@ -19,7 +19,7 @@
 
 /// Service object for interacting with AWS Inspector2 service.
 ///
-/// Amazon Inspector is a vulnerability discovery service that automates continuous scanning for security vulnerabilities within your Amazon EC2 and Amazon ECR environments.
+/// Amazon Inspector is a vulnerability discovery service that automates continuous scanning for security vulnerabilities within your Amazon EC2, Amazon ECR, and Amazon Web Services Lambda environments.
 public struct Inspector2: AWSService {
     // MARK: Member variables
 
@@ -118,7 +118,7 @@ public struct Inspector2: AWSService {
         return self.client.execute(operation: "CancelSbomExport", path: "/sbomexport/cancel", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a filter resource using specified filter criteria.
+    /// Creates a filter resource using specified filter criteria. When the filter action is set to SUPPRESS this action creates a suppression rule.
     public func createFilter(_ input: CreateFilterRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateFilterResponse> {
         return self.client.execute(operation: "CreateFilter", path: "/filters/create", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

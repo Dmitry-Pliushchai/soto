@@ -66,12 +66,12 @@ extension MedicalImaging {
         return try await self.client.execute(operation: "GetImageSetMetadata", path: "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSetMetadata", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "runtime-", logger: logger, on: eventLoop)
     }
 
-    /// List import jobs created by this AWS account for a specific data store.
+    /// List import jobs created for a specific data store.
     public func listDICOMImportJobs(_ input: ListDICOMImportJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListDICOMImportJobsResponse {
         return try await self.client.execute(operation: "ListDICOMImportJobs", path: "/listDICOMImportJobs/datastore/{datastoreId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// List data stores created by this AWS account.
+    /// List data stores.
     public func listDatastores(_ input: ListDatastoresRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListDatastoresResponse {
         return try await self.client.execute(operation: "ListDatastores", path: "/datastore", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -86,7 +86,7 @@ extension MedicalImaging {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Search image sets based on defined input attributes.
+    /// Search image sets based on defined input attributes.   SearchImageSets accepts a single search  query parameter and returns a paginated response of all image sets that have the  matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting  in decreasing order from latest to oldest.
     public func searchImageSets(_ input: SearchImageSetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> SearchImageSetsResponse {
         return try await self.client.execute(operation: "SearchImageSets", path: "/datastore/{datastoreId}/searchImageSets", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "runtime-", logger: logger, on: eventLoop)
     }
@@ -128,7 +128,7 @@ extension MedicalImaging {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension MedicalImaging {
-    /// List import jobs created by this AWS account for a specific data store.
+    /// List import jobs created for a specific data store.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -150,7 +150,7 @@ extension MedicalImaging {
         )
     }
 
-    /// List data stores created by this AWS account.
+    /// List data stores.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -194,7 +194,7 @@ extension MedicalImaging {
         )
     }
 
-    /// Search image sets based on defined input attributes.
+    /// Search image sets based on defined input attributes.   SearchImageSets accepts a single search  query parameter and returns a paginated response of all image sets that have the  matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting  in decreasing order from latest to oldest.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:

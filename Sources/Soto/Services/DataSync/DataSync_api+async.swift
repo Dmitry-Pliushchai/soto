@@ -51,7 +51,7 @@ extension DataSync {
         return try await self.client.execute(operation: "CreateLocationFsxLustre", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can access for a transfer. For more information, see Creating a location for FSx for ONTAP.
+    /// Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for ONTAP file system.
     public func createLocationFsxOntap(_ input: CreateLocationFsxOntapRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateLocationFsxOntapResponse {
         return try await self.client.execute(operation: "CreateLocationFsxOntap", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -61,7 +61,7 @@ extension DataSync {
         return try await self.client.execute(operation: "CreateLocationFsxOpenZfs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates an endpoint for an Amazon FSx for Windows File Server file system.
+    /// Creates an endpoint for an Amazon FSx for Windows File Server file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for Windows File Server.
     public func createLocationFsxWindows(_ input: CreateLocationFsxWindowsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateLocationFsxWindowsResponse {
         return try await self.client.execute(operation: "CreateLocationFsxWindows", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -96,7 +96,7 @@ extension DataSync {
         return try await self.client.execute(operation: "CreateTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your Amazon Web Services account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.
+    /// Removes an DataSync agent resource from your Amazon Web Services account. Keep in mind that this operation (which can't be undone) doesn't remove the agent's virtual machine (VM) or Amazon EC2 instance from your storage environment. For next steps, you can delete the VM or instance from your storage environment or reuse it to activate a new agent.
     public func deleteAgent(_ input: DeleteAgentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteAgentResponse {
         return try await self.client.execute(operation: "DeleteAgent", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -111,7 +111,7 @@ extension DataSync {
         return try await self.client.execute(operation: "DeleteTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
+    /// Returns information about an DataSync agent, such as its name, service endpoint type, and status.
     public func describeAgent(_ input: DescribeAgentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeAgentResponse {
         return try await self.client.execute(operation: "DescribeAgent", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -271,7 +271,7 @@ extension DataSync {
         return try await self.client.execute(operation: "UntagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates the name of an agent.
+    /// Updates the name of an DataSync agent.
     public func updateAgent(_ input: UpdateAgentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateAgentResponse {
         return try await self.client.execute(operation: "UpdateAgent", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -301,7 +301,7 @@ extension DataSync {
         return try await self.client.execute(operation: "UpdateLocationObjectStorage", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see Creating a location for SMB.
+    /// Updates some of the parameters of a Server Message Block (SMB) file server location that you can use for DataSync transfers.
     public func updateLocationSmb(_ input: UpdateLocationSmbRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateLocationSmbResponse {
         return try await self.client.execute(operation: "UpdateLocationSmb", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

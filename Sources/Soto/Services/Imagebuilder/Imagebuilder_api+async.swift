@@ -27,6 +27,11 @@ extension Imagebuilder {
         return try await self.client.execute(operation: "CancelImageCreation", path: "/CancelImageCreation", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Cancel a specific image lifecycle policy runtime instance.
+    public func cancelLifecycleExecution(_ input: CancelLifecycleExecutionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CancelLifecycleExecutionResponse {
+        return try await self.client.execute(operation: "CancelLifecycleExecution", path: "/CancelLifecycleExecution", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new component that can be used to build, validate, test, and assess your
     /// 			image. The component is based on a YAML document that you specify using exactly one of
     /// 			the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the
@@ -73,6 +78,11 @@ extension Imagebuilder {
         return try await self.client.execute(operation: "CreateInfrastructureConfiguration", path: "/CreateInfrastructureConfiguration", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Create a lifecycle policy resource.
+    public func createLifecyclePolicy(_ input: CreateLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateLifecyclePolicyResponse {
+        return try await self.client.execute(operation: "CreateLifecyclePolicy", path: "/CreateLifecyclePolicy", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a component build version.
     public func deleteComponent(_ input: DeleteComponentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteComponentResponse {
         return try await self.client.execute(operation: "DeleteComponent", path: "/DeleteComponent", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -112,6 +122,11 @@ extension Imagebuilder {
     /// Deletes an infrastructure configuration.
     public func deleteInfrastructureConfiguration(_ input: DeleteInfrastructureConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteInfrastructureConfigurationResponse {
         return try await self.client.execute(operation: "DeleteInfrastructureConfiguration", path: "/DeleteInfrastructureConfiguration", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Delete the specified lifecycle policy resource.
+    public func deleteLifecyclePolicy(_ input: DeleteLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteLifecyclePolicyResponse {
+        return try await self.client.execute(operation: "DeleteLifecyclePolicy", path: "/DeleteLifecyclePolicy", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets a component object.
@@ -167,6 +182,16 @@ extension Imagebuilder {
     /// Gets an infrastructure configuration.
     public func getInfrastructureConfiguration(_ input: GetInfrastructureConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetInfrastructureConfigurationResponse {
         return try await self.client.execute(operation: "GetInfrastructureConfiguration", path: "/GetInfrastructureConfiguration", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.
+    public func getLifecycleExecution(_ input: GetLifecycleExecutionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetLifecycleExecutionResponse {
+        return try await self.client.execute(operation: "GetLifecycleExecution", path: "/GetLifecycleExecution", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get details for the specified image lifecycle policy.
+    public func getLifecyclePolicy(_ input: GetLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetLifecyclePolicyResponse {
+        return try await self.client.execute(operation: "GetLifecyclePolicy", path: "/GetLifecyclePolicy", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Get the runtime information that was logged for a specific runtime instance
@@ -278,6 +303,21 @@ extension Imagebuilder {
         return try await self.client.execute(operation: "ListInfrastructureConfigurations", path: "/ListInfrastructureConfigurations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
+    public func listLifecycleExecutionResources(_ input: ListLifecycleExecutionResourcesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListLifecycleExecutionResourcesResponse {
+        return try await self.client.execute(operation: "ListLifecycleExecutionResources", path: "/ListLifecycleExecutionResources", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get the lifecycle runtime history for the specified resource.
+    public func listLifecycleExecutions(_ input: ListLifecycleExecutionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListLifecycleExecutionsResponse {
+        return try await self.client.execute(operation: "ListLifecycleExecutions", path: "/ListLifecycleExecutions", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Get a list of lifecycle policies in your Amazon Web Services account.
+    public func listLifecyclePolicies(_ input: ListLifecyclePoliciesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListLifecyclePoliciesResponse {
+        return try await self.client.execute(operation: "ListLifecyclePolicies", path: "/ListLifecyclePolicies", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns the list of tags for the specified resource.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTagsForResourceResponse {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -333,6 +373,12 @@ extension Imagebuilder {
         return try await self.client.execute(operation: "StartImagePipelineExecution", path: "/StartImagePipelineExecution", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Begin asynchronous resource state update for lifecycle changes to the
+    /// 			specified image resources.
+    public func startResourceStateUpdate(_ input: StartResourceStateUpdateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartResourceStateUpdateResponse {
+        return try await self.client.execute(operation: "StartResourceStateUpdate", path: "/StartResourceStateUpdate", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Adds a tag to a resource.
     public func tagResource(_ input: TagResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> TagResourceResponse {
         return try await self.client.execute(operation: "TagResource", path: "/tags/{resourceArn}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -361,6 +407,11 @@ extension Imagebuilder {
     /// 			the environment in which your image will be built and tested.
     public func updateInfrastructureConfiguration(_ input: UpdateInfrastructureConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateInfrastructureConfigurationResponse {
         return try await self.client.execute(operation: "UpdateInfrastructureConfiguration", path: "/UpdateInfrastructureConfiguration", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Update the specified lifecycle policy.
+    public func updateLifecyclePolicy(_ input: UpdateLifecyclePolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateLifecyclePolicyResponse {
+        return try await self.client.execute(operation: "UpdateLifecyclePolicy", path: "/UpdateLifecyclePolicy", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 }
 
@@ -666,6 +717,72 @@ extension Imagebuilder {
             command: self.listInfrastructureConfigurations,
             inputKey: \ListInfrastructureConfigurationsRequest.nextToken,
             outputKey: \ListInfrastructureConfigurationsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listLifecycleExecutionResourcesPaginator(
+        _ input: ListLifecycleExecutionResourcesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListLifecycleExecutionResourcesRequest, ListLifecycleExecutionResourcesResponse> {
+        return .init(
+            input: input,
+            command: self.listLifecycleExecutionResources,
+            inputKey: \ListLifecycleExecutionResourcesRequest.nextToken,
+            outputKey: \ListLifecycleExecutionResourcesResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Get the lifecycle runtime history for the specified resource.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listLifecycleExecutionsPaginator(
+        _ input: ListLifecycleExecutionsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListLifecycleExecutionsRequest, ListLifecycleExecutionsResponse> {
+        return .init(
+            input: input,
+            command: self.listLifecycleExecutions,
+            inputKey: \ListLifecycleExecutionsRequest.nextToken,
+            outputKey: \ListLifecycleExecutionsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Get a list of lifecycle policies in your Amazon Web Services account.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listLifecyclePoliciesPaginator(
+        _ input: ListLifecyclePoliciesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListLifecyclePoliciesRequest, ListLifecyclePoliciesResponse> {
+        return .init(
+            input: input,
+            command: self.listLifecyclePolicies,
+            inputKey: \ListLifecyclePoliciesRequest.nextToken,
+            outputKey: \ListLifecyclePoliciesResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

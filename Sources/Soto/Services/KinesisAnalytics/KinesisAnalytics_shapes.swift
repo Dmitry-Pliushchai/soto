@@ -26,7 +26,7 @@ import SotoCore
 extension KinesisAnalytics {
     // MARK: Enums
 
-    public enum ApplicationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleting = "DELETING"
         case ready = "READY"
         case running = "RUNNING"
@@ -36,14 +36,14 @@ extension KinesisAnalytics {
         public var description: String { return self.rawValue }
     }
 
-    public enum InputStartingPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputStartingPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lastStoppedPoint = "LAST_STOPPED_POINT"
         case now = "NOW"
         case trimHorizon = "TRIM_HORIZON"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordFormatType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordFormatType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case json = "JSON"
         public var description: String { return self.rawValue }

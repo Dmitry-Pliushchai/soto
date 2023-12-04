@@ -26,7 +26,7 @@ import SotoCore
 extension AppFabric {
     // MARK: Enums
 
-    public enum AppAuthorizationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AppAuthorizationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connected = "Connected"
         case connectionValidationFailed = "ConnectionValidationFailed"
         case pendingConnect = "PendingConnect"
@@ -34,42 +34,42 @@ extension AppFabric {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case apiKey = "apiKey"
         case oauth2 = "oauth2"
         public var description: String { return self.rawValue }
     }
 
-    public enum Format: String, CustomStringConvertible, Codable, Sendable {
+    public enum Format: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case json = "json"
         case parquet = "parquet"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionDestinationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionDestinationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case failed = "Failed"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionState: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "disabled"
         case enabled = "enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auditLog = "auditLog"
         public var description: String { return self.rawValue }
     }
 
-    public enum Persona: String, CustomStringConvertible, Codable, Sendable {
+    public enum Persona: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case admin = "admin"
         case enduser = "endUser"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResultStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResultStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case expired = "EXPIRED"
         case failed = "FAILED"
@@ -77,7 +77,7 @@ extension AppFabric {
         public var description: String { return self.rawValue }
     }
 
-    public enum Schema: String, CustomStringConvertible, Codable, Sendable {
+    public enum Schema: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ocsf = "ocsf"
         case raw = "raw"
         public var description: String { return self.rawValue }

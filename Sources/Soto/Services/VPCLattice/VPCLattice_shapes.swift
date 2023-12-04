@@ -26,19 +26,19 @@ import SotoCore
 extension VPCLattice {
     // MARK: Enums
 
-    public enum AuthPolicyState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthPolicyState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case inactive = "Inactive"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsIam = "AWS_IAM"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HealthCheckProtocolVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum HealthCheckProtocolVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates use of HTTP/1.1 to send requests to target
         case http1 = "HTTP1"
         /// Indicates use of HTTP/2 to send requests to target
@@ -46,7 +46,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum IpAddressType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IpAddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates IPv4 address type
         case ipv4 = "IPV4"
         /// Indicates IPv6 address type
@@ -54,7 +54,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum LambdaEventStructureVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum LambdaEventStructureVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// This is the default lambda event structure version
         case v1 = "V1"
         /// Indicates use of lambda event structure version 2
@@ -62,7 +62,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum ListenerProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListenerProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates HTTP protocol
         case http = "HTTP"
         /// Indicates HTTPS protocol
@@ -70,7 +70,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceNetworkServiceAssociationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceNetworkServiceAssociationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// ServiceNetwork and Service association is active
         case active = "ACTIVE"
         /// ServiceNetwork and Service association creation failed.
@@ -84,7 +84,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceNetworkVpcAssociationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceNetworkVpcAssociationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// ServiceNetwork and Vpc association is active
         case active = "ACTIVE"
         /// ServiceNetwork and Vpc association creation failed.
@@ -102,7 +102,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Service is active.
         case active = "ACTIVE"
         /// Service creation failed
@@ -116,7 +116,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetGroupProtocol: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetGroupProtocol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates HTTP protocol
         case http = "HTTP"
         /// Indicates HTTPS protocol
@@ -124,7 +124,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetGroupProtocolVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetGroupProtocolVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates use of gRPC to send requests to target
         case grpc = "GRPC"
         /// Indicates use of HTTP/1.1 to send requests to target
@@ -134,7 +134,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetGroupStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetGroupStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// TargetGroup is active
         case active = "ACTIVE"
         /// TargetGroup creation failed.
@@ -148,7 +148,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetGroupType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetGroupType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// Indicates target in this target group is an ALB
         case alb = "ALB"
         /// Indicates targets in this target group are EC2 instances
@@ -160,7 +160,7 @@ extension VPCLattice {
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         /// The target is deregistering and connection draining is in process.
         case draining = "DRAINING"
         /// The target is healthy.

@@ -26,7 +26,7 @@ import SotoCore
 extension MediaLive {
     // MARK: Enums
 
-    public enum AacCodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacCodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case adReceiverMix = "AD_RECEIVER_MIX"
         case codingMode10 = "CODING_MODE_1_0"
         case codingMode11 = "CODING_MODE_1_1"
@@ -35,38 +35,38 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum AacInputType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacInputType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case broadcasterMixedAd = "BROADCASTER_MIXED_AD"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum AacProfile: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacProfile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hev1 = "HEV1"
         case hev2 = "HEV2"
         case lc = "LC"
         public var description: String { return self.rawValue }
     }
 
-    public enum AacRateControlMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacRateControlMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbr = "CBR"
         case vbr = "VBR"
         public var description: String { return self.rawValue }
     }
 
-    public enum AacRawFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacRawFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case latmLoas = "LATM_LOAS"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AacSpec: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacSpec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mpeg2 = "MPEG2"
         case mpeg4 = "MPEG4"
         public var description: String { return self.rawValue }
     }
 
-    public enum AacVbrQuality: String, CustomStringConvertible, Codable, Sendable {
+    public enum AacVbrQuality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case mediumHigh = "MEDIUM_HIGH"
@@ -74,13 +74,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3AttenuationControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3AttenuationControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attenuate3Db = "ATTENUATE_3_DB"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3BitstreamMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3BitstreamMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case commentary = "COMMENTARY"
         case completeMain = "COMPLETE_MAIN"
         case dialogue = "DIALOGUE"
@@ -92,7 +92,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3CodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3CodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codingMode10 = "CODING_MODE_1_0"
         case codingMode11 = "CODING_MODE_1_1"
         case codingMode20 = "CODING_MODE_2_0"
@@ -100,78 +100,78 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3DrcProfile: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3DrcProfile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filmStandard = "FILM_STANDARD"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3LfeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3LfeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Ac3MetadataControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Ac3MetadataControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case followInput = "FOLLOW_INPUT"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AcceptHeader: String, CustomStringConvertible, Codable, Sendable {
+    public enum AcceptHeader: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case imageJpeg = "image/jpeg"
         public var description: String { return self.rawValue }
     }
 
-    public enum AccessibilityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessibilityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doesNotImplementAccessibilityFeatures = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"
         case implementsAccessibilityFeatures = "IMPLEMENTS_ACCESSIBILITY_FEATURES"
         public var description: String { return self.rawValue }
     }
 
-    public enum AfdSignaling: String, CustomStringConvertible, Codable, Sendable {
+    public enum AfdSignaling: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case fixed = "FIXED"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioDescriptionAudioTypeControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioDescriptionAudioTypeControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case followInput = "FOLLOW_INPUT"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioDescriptionLanguageCodeControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioDescriptionLanguageCodeControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case followInput = "FOLLOW_INPUT"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioLanguageSelectionPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioLanguageSelectionPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case loose = "LOOSE"
         case strict = "STRICT"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioNormalizationAlgorithm: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioNormalizationAlgorithm: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case itu17701 = "ITU_1770_1"
         case itu17702 = "ITU_1770_2"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioNormalizationAlgorithmControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioNormalizationAlgorithmControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case correctAudio = "CORRECT_AUDIO"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioOnlyHlsSegmentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioOnlyHlsSegmentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aac = "AAC"
         case fmp4 = "FMP4"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioOnlyHlsTrackType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioOnlyHlsTrackType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alternateAudioAutoSelect = "ALTERNATE_AUDIO_AUTO_SELECT"
         case alternateAudioAutoSelectDefault = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"
         case alternateAudioNotAutoSelect = "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
@@ -179,7 +179,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cleanEffects = "CLEAN_EFFECTS"
         case hearingImpaired = "HEARING_IMPAIRED"
         case undefined = "UNDEFINED"
@@ -187,45 +187,45 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthenticationScheme: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthenticationScheme: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case akamai = "AKAMAI"
         case common = "COMMON"
         public var description: String { return self.rawValue }
     }
 
-    public enum AvailBlankingState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AvailBlankingState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BlackoutSlateNetworkEndBlackout: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlackoutSlateNetworkEndBlackout: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BlackoutSlateState: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlackoutSlateState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInAlignment: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInAlignment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case centered = "CENTERED"
         case left = "LEFT"
         case smart = "SMART"
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInBackgroundColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInBackgroundColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case none = "NONE"
         case white = "WHITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInFontColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInFontColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case blue = "BLUE"
         case green = "GREEN"
@@ -235,7 +235,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInOutlineColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInOutlineColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case blue = "BLUE"
         case green = "GREEN"
@@ -245,20 +245,20 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInShadowColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInShadowColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case none = "NONE"
         case white = "WHITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum BurnInTeletextGridControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum BurnInTeletextGridControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fixed = "FIXED"
         case scaled = "SCALED"
         public var description: String { return self.rawValue }
     }
 
-    public enum CdiInputResolution: String, CustomStringConvertible, Codable, Sendable {
+    public enum CdiInputResolution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fhd = "FHD"
         case hd = "HD"
         case sd = "SD"
@@ -266,13 +266,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case singlePipeline = "SINGLE_PIPELINE"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -287,25 +287,25 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case imageJpeg = "image/jpeg"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceSettingsSyncState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceSettingsSyncState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case synced = "SYNCED"
         case syncing = "SYNCING"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeviceUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeviceUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notUpToDate = "NOT_UP_TO_DATE"
         case upToDate = "UP_TO_DATE"
         case updating = "UPDATING"
         public var description: String { return self.rawValue }
     }
 
-    public enum DolbyEProgramSelection: String, CustomStringConvertible, Codable, Sendable {
+    public enum DolbyEProgramSelection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allChannels = "ALL_CHANNELS"
         case program1 = "PROGRAM_1"
         case program2 = "PROGRAM_2"
@@ -318,7 +318,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSdtOutputSdt: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSdtOutputSdt: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case sdtFollow = "SDT_FOLLOW"
         case sdtFollowIfPresent = "SDT_FOLLOW_IF_PRESENT"
         case sdtManual = "SDT_MANUAL"
@@ -326,21 +326,21 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationAlignment: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationAlignment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case centered = "CENTERED"
         case left = "LEFT"
         case smart = "SMART"
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationBackgroundColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationBackgroundColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case none = "NONE"
         case white = "WHITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationFontColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationFontColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case blue = "BLUE"
         case green = "GREEN"
@@ -350,7 +350,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationOutlineColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationOutlineColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case blue = "BLUE"
         case green = "GREEN"
@@ -360,20 +360,20 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationShadowColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationShadowColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "BLACK"
         case none = "NONE"
         case white = "WHITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubDestinationTeletextGridControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubDestinationTeletextGridControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fixed = "FIXED"
         case scaled = "SCALED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DvbSubOcrLanguage: String, CustomStringConvertible, Codable, Sendable {
+    public enum DvbSubOcrLanguage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deu = "DEU"
         case eng = "ENG"
         case fra = "FRA"
@@ -383,14 +383,14 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3AtmosCodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3AtmosCodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codingMode514 = "CODING_MODE_5_1_4"
         case codingMode714 = "CODING_MODE_7_1_4"
         case codingMode916 = "CODING_MODE_9_1_6"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3AtmosDrcLine: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3AtmosDrcLine: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filmLight = "FILM_LIGHT"
         case filmStandard = "FILM_STANDARD"
         case musicLight = "MUSIC_LIGHT"
@@ -400,7 +400,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3AtmosDrcRf: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3AtmosDrcRf: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filmLight = "FILM_LIGHT"
         case filmStandard = "FILM_STANDARD"
         case musicLight = "MUSIC_LIGHT"
@@ -410,13 +410,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3AttenuationControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3AttenuationControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attenuate3Db = "ATTENUATE_3_DB"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3BitstreamMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3BitstreamMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case commentary = "COMMENTARY"
         case completeMain = "COMPLETE_MAIN"
         case emergency = "EMERGENCY"
@@ -425,20 +425,20 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3CodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3CodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codingMode10 = "CODING_MODE_1_0"
         case codingMode20 = "CODING_MODE_2_0"
         case codingMode32 = "CODING_MODE_3_2"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3DcFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3DcFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3DrcLine: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3DrcLine: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filmLight = "FILM_LIGHT"
         case filmStandard = "FILM_STANDARD"
         case musicLight = "MUSIC_LIGHT"
@@ -448,7 +448,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3DrcRf: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3DrcRf: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filmLight = "FILM_LIGHT"
         case filmStandard = "FILM_STANDARD"
         case musicLight = "MUSIC_LIGHT"
@@ -458,37 +458,37 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3LfeControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3LfeControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lfe = "LFE"
         case noLfe = "NO_LFE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3LfeFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3LfeFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3MetadataControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3MetadataControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case followInput = "FOLLOW_INPUT"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3PassthroughControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3PassthroughControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case whenPossible = "WHEN_POSSIBLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3PhaseControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3PhaseControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noShift = "NO_SHIFT"
         case shift90Degrees = "SHIFT_90_DEGREES"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3StereoDownmix: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3StereoDownmix: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dpl2 = "DPL2"
         case loRo = "LO_RO"
         case ltRt = "LT_RT"
@@ -496,57 +496,63 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3SurroundExMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3SurroundExMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         case notIndicated = "NOT_INDICATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Eac3SurroundMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Eac3SurroundMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         case notIndicated = "NOT_INDICATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EbuTtDDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum EbuTtDDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum EbuTtDFillLineGapControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum EbuTtDFillLineGapControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum EmbeddedConvert608To708: String, CustomStringConvertible, Codable, Sendable {
+    public enum EmbeddedConvert608To708: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case upconvert = "UPCONVERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum EmbeddedScte20Detection: String, CustomStringConvertible, Codable, Sendable {
+    public enum EmbeddedScte20Detection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case off = "OFF"
         public var description: String { return self.rawValue }
     }
 
-    public enum FeatureActivationsInputPrepareScheduleActions: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeatureActivationsInputPrepareScheduleActions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FecOutputIncludeFec: String, CustomStringConvertible, Codable, Sendable {
+    public enum FeatureActivationsOutputStaticImageOverlayScheduleActions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case disabled = "DISABLED"
+        case enabled = "ENABLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum FecOutputIncludeFec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case column = "COLUMN"
         case columnAndRow = "COLUMN_AND_ROW"
         public var description: String { return self.rawValue }
     }
 
-    public enum FixedAfd: String, CustomStringConvertible, Codable, Sendable {
+    public enum FixedAfd: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afd0000 = "AFD_0000"
         case afd0010 = "AFD_0010"
         case afd0011 = "AFD_0011"
@@ -561,55 +567,55 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Fmp4NielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Fmp4NielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum Fmp4TimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Fmp4TimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum FollowPoint: String, CustomStringConvertible, Codable, Sendable {
+    public enum FollowPoint: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case end = "END"
         case start = "START"
         public var description: String { return self.rawValue }
     }
 
-    public enum FrameCaptureIntervalUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum FrameCaptureIntervalUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case milliseconds = "MILLISECONDS"
         case seconds = "SECONDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlobalConfigurationInputEndAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlobalConfigurationInputEndAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case switchAndLoopInputs = "SWITCH_AND_LOOP_INPUTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlobalConfigurationLowFramerateInputs: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlobalConfigurationLowFramerateInputs: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlobalConfigurationOutputLockingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlobalConfigurationOutputLockingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case epochLocking = "EPOCH_LOCKING"
         case pipelineLocking = "PIPELINE_LOCKING"
         public var description: String { return self.rawValue }
     }
 
-    public enum GlobalConfigurationOutputTimingSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum GlobalConfigurationOutputTimingSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inputClock = "INPUT_CLOCK"
         case systemClock = "SYSTEM_CLOCK"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case high = "HIGH"
         case higher = "HIGHER"
@@ -620,49 +626,49 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H264ColorMetadata: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264ColorMetadata: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignore = "IGNORE"
         case insert = "INSERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264EntropyEncoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264EntropyEncoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cabac = "CABAC"
         case cavlc = "CAVLC"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264FlickerAq: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264FlickerAq: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264ForceFieldPictures: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264ForceFieldPictures: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264FramerateControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264FramerateControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case initializeFromSource = "INITIALIZE_FROM_SOURCE"
         case specified = "SPECIFIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264GopBReference: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264GopBReference: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264GopSizeUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264GopSizeUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case frames = "FRAMES"
         case seconds = "SECONDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264Level: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264Level: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case h264Level1 = "H264_LEVEL_1"
         case h264Level11 = "H264_LEVEL_1_1"
         case h264Level12 = "H264_LEVEL_1_2"
@@ -683,20 +689,20 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H264LookAheadRateControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264LookAheadRateControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264ParControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264ParControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case initializeFromSource = "INITIALIZE_FROM_SOURCE"
         case specified = "SPECIFIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264Profile: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264Profile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case baseline = "BASELINE"
         case high = "HIGH"
         case high10Bit = "HIGH_10BIT"
@@ -706,13 +712,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H264QualityLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264QualityLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enhancedQuality = "ENHANCED_QUALITY"
         case standardQuality = "STANDARD_QUALITY"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264RateControlMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264RateControlMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbr = "CBR"
         case multiplex = "MULTIPLEX"
         case qvbr = "QVBR"
@@ -720,49 +726,49 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H264ScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264ScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interlaced = "INTERLACED"
         case progressive = "PROGRESSIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264SceneChangeDetect: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264SceneChangeDetect: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264SpatialAq: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264SpatialAq: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264SubGopLength: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264SubGopLength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dynamic = "DYNAMIC"
         case fixed = "FIXED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264Syntax: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264Syntax: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case rp2027 = "RP2027"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264TemporalAq: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264TemporalAq: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H264TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum H264TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case picTimingSei = "PIC_TIMING_SEI"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case high = "HIGH"
         case higher = "HIGHER"
@@ -773,31 +779,31 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H265AlternativeTransferFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265AlternativeTransferFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insert = "INSERT"
         case omit = "OMIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265ColorMetadata: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265ColorMetadata: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignore = "IGNORE"
         case insert = "INSERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265FlickerAq: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265FlickerAq: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265GopSizeUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265GopSizeUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case frames = "FRAMES"
         case seconds = "SECONDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265Level: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265Level: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case h265Level1 = "H265_LEVEL_1"
         case h265Level2 = "H265_LEVEL_2"
         case h265Level21 = "H265_LEVEL_2_1"
@@ -815,374 +821,374 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum H265LookAheadRateControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265LookAheadRateControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265Profile: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265Profile: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case main = "MAIN"
         case main10Bit = "MAIN_10BIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265RateControlMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265RateControlMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbr = "CBR"
         case multiplex = "MULTIPLEX"
         case qvbr = "QVBR"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265ScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265ScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interlaced = "INTERLACED"
         case progressive = "PROGRESSIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265SceneChangeDetect: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265SceneChangeDetect: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265Tier: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265Tier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case main = "MAIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum H265TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum H265TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case picTimingSei = "PIC_TIMING_SEI"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsAdMarkers: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsAdMarkers: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case adobe = "ADOBE"
         case elemental = "ELEMENTAL"
         case elementalScte35 = "ELEMENTAL_SCTE35"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsAkamaiHttpTransferMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsAkamaiHttpTransferMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chunked = "CHUNKED"
         case nonChunked = "NON_CHUNKED"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsCaptionLanguageSetting: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsCaptionLanguageSetting: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insert = "INSERT"
         case none = "NONE"
         case omit = "OMIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsClientCache: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsClientCache: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsCodecSpecification: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsCodecSpecification: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rfc4281 = "RFC_4281"
         case rfc6381 = "RFC_6381"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsDirectoryStructure: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsDirectoryStructure: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case singleDirectory = "SINGLE_DIRECTORY"
         case subdirectoryPerStream = "SUBDIRECTORY_PER_STREAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsDiscontinuityTags: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsDiscontinuityTags: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case insert = "INSERT"
         case neverInsert = "NEVER_INSERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsEncryptionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsEncryptionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aes128 = "AES128"
         case sampleAes = "SAMPLE_AES"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsH265PackagingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsH265PackagingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hev1 = "HEV1"
         case hvc1 = "HVC1"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsId3SegmentTaggingState: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsId3SegmentTaggingState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsIncompleteSegmentBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsIncompleteSegmentBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case suppress = "SUPPRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsIvInManifest: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsIvInManifest: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsIvSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsIvSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case explicit = "EXPLICIT"
         case followsSegmentNumber = "FOLLOWS_SEGMENT_NUMBER"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsManifestCompression: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsManifestCompression: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "GZIP"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsManifestDurationFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsManifestDurationFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case floatingPoint = "FLOATING_POINT"
         case integer = "INTEGER"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsMediaStoreStorageClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsMediaStoreStorageClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case temporal = "TEMPORAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case live = "LIVE"
         case vod = "VOD"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsOutputSelection: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsOutputSelection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case manifestsAndSegments = "MANIFESTS_AND_SEGMENTS"
         case segmentsOnly = "SEGMENTS_ONLY"
         case variantManifestsAndSegments = "VARIANT_MANIFESTS_AND_SEGMENTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsProgramDateTime: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsProgramDateTime: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsProgramDateTimeClock: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsProgramDateTimeClock: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case initializeFromOutputTimecode = "INITIALIZE_FROM_OUTPUT_TIMECODE"
         case systemClock = "SYSTEM_CLOCK"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsRedundantManifest: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsRedundantManifest: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsScte35SourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsScte35SourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case manifest = "MANIFEST"
         case segments = "SEGMENTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsSegmentationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsSegmentationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case useInputSegmentation = "USE_INPUT_SEGMENTATION"
         case useSegmentDuration = "USE_SEGMENT_DURATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsStreamInfResolution: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsStreamInfResolution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsTimedMetadataId3Frame: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsTimedMetadataId3Frame: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case priv = "PRIV"
         case tdrl = "TDRL"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsTsFileMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsTsFileMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case segmentedFiles = "SEGMENTED_FILES"
         case singleFile = "SINGLE_FILE"
         public var description: String { return self.rawValue }
     }
 
-    public enum HlsWebdavHttpTransferMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum HlsWebdavHttpTransferMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chunked = "CHUNKED"
         case nonChunked = "NON_CHUNKED"
         public var description: String { return self.rawValue }
     }
 
-    public enum IFrameOnlyPlaylistType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IFrameOnlyPlaylistType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum IncludeFillerNalUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum IncludeFillerNalUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case drop = "DROP"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case singlePipeline = "SINGLE_PIPELINE"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputCodec: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputCodec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avc = "AVC"
         case hevc = "HEVC"
         case mpeg2 = "MPEG2"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeblockFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeblockFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDenoiseFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDenoiseFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceActiveInput: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceActiveInput: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hdmi = "HDMI"
         case sdi = "SDI"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceCodec: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceCodec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case avc = "AVC"
         case hevc = "HEVC"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceConfiguredInput: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceConfiguredInput: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case hdmi = "HDMI"
         case sdi = "SDI"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceConnectionState: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceConnectionState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connected = "CONNECTED"
         case disconnected = "DISCONNECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceIpScheme: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceIpScheme: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case dhcp = "DHCP"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceOutputType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceOutputType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mediaconnectFlow = "MEDIACONNECT_FLOW"
         case medialiveInput = "MEDIALIVE_INPUT"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interlaced = "INTERLACED"
         case progressive = "PROGRESSIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceState: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case idle = "IDLE"
         case streaming = "STREAMING"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceTransferType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceTransferType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case incoming = "INCOMING"
         case outgoing = "OUTGOING"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputDeviceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputDeviceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hd = "HD"
         case uhd = "UHD"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case disabled = "DISABLED"
         case forced = "FORCED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputLossActionForHlsOut: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputLossActionForHlsOut: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emitOutput = "EMIT_OUTPUT"
         case pauseOutput = "PAUSE_OUTPUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputLossActionForMsSmoothOut: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputLossActionForMsSmoothOut: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emitOutput = "EMIT_OUTPUT"
         case pauseOutput = "PAUSE_OUTPUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputLossActionForRtmpOut: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputLossActionForRtmpOut: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emitOutput = "EMIT_OUTPUT"
         case pauseOutput = "PAUSE_OUTPUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputLossActionForUdpOut: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputLossActionForUdpOut: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dropProgram = "DROP_PROGRAM"
         case dropTs = "DROP_TS"
         case emitProgram = "EMIT_PROGRAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputLossImageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputLossImageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case color = "COLOR"
         case slate = "SLATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputMaximumBitrate: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputMaximumBitrate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case max10Mbps = "MAX_10_MBPS"
         case max20Mbps = "MAX_20_MBPS"
         case max50Mbps = "MAX_50_MBPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputPreference: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputPreference: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equalInputPreference = "EQUAL_INPUT_PREFERENCE"
         case primaryInputPreferred = "PRIMARY_INPUT_PREFERRED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputResolution: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputResolution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hd = "HD"
         case sd = "SD"
         case uhd = "UHD"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputSecurityGroupState: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputSecurityGroupState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case idle = "IDLE"
         case inUse = "IN_USE"
@@ -1190,19 +1196,19 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum InputSourceEndBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputSourceEndBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `continue` = "CONTINUE"
         case loop = "LOOP"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case dynamic = "DYNAMIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputState: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attached = "ATTACHED"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -1211,13 +1217,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum InputTimecodeSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputTimecodeSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case embedded = "EMBEDDED"
         case zerobased = "ZEROBASED"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsCdi = "AWS_CDI"
         case inputDevice = "INPUT_DEVICE"
         case mediaconnect = "MEDIACONNECT"
@@ -1231,13 +1237,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum LastFrameClippingBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum LastFrameClippingBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case excludeLastFrame = "EXCLUDE_LAST_FRAME"
         case includeLastFrame = "INCLUDE_LAST_FRAME"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case debug = "DEBUG"
         case disabled = "DISABLED"
         case error = "ERROR"
@@ -1246,103 +1252,103 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsAbsentInputAudioBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsAbsentInputAudioBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case drop = "DROP"
         case encodeSilence = "ENCODE_SILENCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsArib: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsArib: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsAribCaptionsPidControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsAribCaptionsPidControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsAudioBufferModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsAudioBufferModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case atsc = "ATSC"
         case dvb = "DVB"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsAudioInterval: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsAudioInterval: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case videoAndFixedIntervals = "VIDEO_AND_FIXED_INTERVALS"
         case videoInterval = "VIDEO_INTERVAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsAudioStreamType: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsAudioStreamType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case atsc = "ATSC"
         case dvb = "DVB"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsBufferModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsBufferModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multiplex = "MULTIPLEX"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsCcDescriptor: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsCcDescriptor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsEbifControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsEbifControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsEbpPlacement: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsEbpPlacement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case videoAndAudioPids = "VIDEO_AND_AUDIO_PIDS"
         case videoPid = "VIDEO_PID"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsEsRateInPes: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsEsRateInPes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsKlv: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsKlv: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsNielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsNielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsPcrControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsPcrControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case configuredPcrPeriod = "CONFIGURED_PCR_PERIOD"
         case pcrEveryPesPacket = "PCR_EVERY_PES_PACKET"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsRateMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsRateMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cbr = "CBR"
         case vbr = "VBR"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsScte35Control: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsScte35Control: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsSegmentationMarkers: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsSegmentationMarkers: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ebp = "EBP"
         case ebpLegacy = "EBP_LEGACY"
         case none = "NONE"
@@ -1352,49 +1358,49 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsSegmentationStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsSegmentationStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case maintainCadence = "MAINTAIN_CADENCE"
         case resetCadence = "RESET_CADENCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum M2tsTimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M2tsTimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M3u8KlvBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M3u8KlvBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M3u8NielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M3u8NielsenId3Behavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M3u8PcrControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum M3u8PcrControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case configuredPcrPeriod = "CONFIGURED_PCR_PERIOD"
         case pcrEveryPesPacket = "PCR_EVERY_PES_PACKET"
         public var description: String { return self.rawValue }
     }
 
-    public enum M3u8Scte35Behavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M3u8Scte35Behavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum M3u8TimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum M3u8TimedMetadataBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noPassthrough = "NO_PASSTHROUGH"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum MaintenanceDay: String, CustomStringConvertible, Codable, Sendable {
+    public enum MaintenanceDay: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case friday = "FRIDAY"
         case monday = "MONDAY"
         case saturday = "SATURDAY"
@@ -1405,19 +1411,19 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum MotionGraphicsInsertion: String, CustomStringConvertible, Codable, Sendable {
+    public enum MotionGraphicsInsertion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mp2CodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mp2CodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codingMode10 = "CODING_MODE_1_0"
         case codingMode20 = "CODING_MODE_2_0"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2AdaptiveQuantization: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case high = "HIGH"
         case low = "LOW"
@@ -1426,55 +1432,55 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2ColorMetadata: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2ColorMetadata: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignore = "IGNORE"
         case insert = "INSERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2ColorSpace: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2ColorSpace: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2DisplayRatio: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2DisplayRatio: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case displayratio16x9 = "DISPLAYRATIO16X9"
         case displayratio4x3 = "DISPLAYRATIO4X3"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2GopSizeUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2GopSizeUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case frames = "FRAMES"
         case seconds = "SECONDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2ScanType: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2ScanType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interlaced = "INTERLACED"
         case progressive = "PROGRESSIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2SubGopLength: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2SubGopLength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dynamic = "DYNAMIC"
         case fixed = "FIXED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mpeg2TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mpeg2TimecodeInsertionBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case gopTimecode = "GOP_TIMECODE"
         public var description: String { return self.rawValue }
     }
 
-    public enum MsSmoothH265PackagingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MsSmoothH265PackagingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hev1 = "HEV1"
         case hvc1 = "HVC1"
         public var description: String { return self.rawValue }
     }
 
-    public enum MultiplexState: String, CustomStringConvertible, Codable, Sendable {
+    public enum MultiplexState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
         case deleted = "DELETED"
@@ -1487,19 +1493,19 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkInputServerValidation: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkInputServerValidation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case checkCryptographyAndValidateName = "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME"
         case checkCryptographyOnly = "CHECK_CRYPTOGRAPHY_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum NielsenPcmToId3TaggingState: String, CustomStringConvertible, Codable, Sendable {
+    public enum NielsenPcmToId3TaggingState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum NielsenWatermarkTimezones: String, CustomStringConvertible, Codable, Sendable {
+    public enum NielsenWatermarkTimezones: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case americaPuertoRico = "AMERICA_PUERTO_RICO"
         case usAlaska = "US_ALASKA"
         case usArizona = "US_ARIZONA"
@@ -1513,55 +1519,55 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum NielsenWatermarksCbetStepaside: String, CustomStringConvertible, Codable, Sendable {
+    public enum NielsenWatermarksCbetStepaside: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum NielsenWatermarksDistributionTypes: String, CustomStringConvertible, Codable, Sendable {
+    public enum NielsenWatermarksDistributionTypes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case finalDistributor = "FINAL_DISTRIBUTOR"
         case programContent = "PROGRAM_CONTENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum OfferingDurationUnits: String, CustomStringConvertible, Codable, Sendable {
+    public enum OfferingDurationUnits: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case months = "MONTHS"
         public var description: String { return self.rawValue }
     }
 
-    public enum OfferingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OfferingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noUpfront = "NO_UPFRONT"
         public var description: String { return self.rawValue }
     }
 
-    public enum PipelineId: String, CustomStringConvertible, Codable, Sendable {
+    public enum PipelineId: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pipeline0 = "PIPELINE_0"
         case pipeline1 = "PIPELINE_1"
         public var description: String { return self.rawValue }
     }
 
-    public enum PreferredChannelPipeline: String, CustomStringConvertible, Codable, Sendable {
+    public enum PreferredChannelPipeline: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case currentlyActive = "CURRENTLY_ACTIVE"
         case pipeline0 = "PIPELINE_0"
         case pipeline1 = "PIPELINE_1"
         public var description: String { return self.rawValue }
     }
 
-    public enum RebootInputDeviceForce: String, CustomStringConvertible, Codable, Sendable {
+    public enum RebootInputDeviceForce: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case no = "NO"
         case yes = "YES"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationAutomaticRenewal: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationAutomaticRenewal: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         case unavailable = "UNAVAILABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationCodec: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationCodec: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audio = "AUDIO"
         case avc = "AVC"
         case hevc = "HEVC"
@@ -1570,20 +1576,20 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationMaximumBitrate: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationMaximumBitrate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case max10Mbps = "MAX_10_MBPS"
         case max20Mbps = "MAX_20_MBPS"
         case max50Mbps = "MAX_50_MBPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationMaximumFramerate: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationMaximumFramerate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case max30Fps = "MAX_30_FPS"
         case max60Fps = "MAX_60_FPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationResolution: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationResolution: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fhd = "FHD"
         case hd = "HD"
         case sd = "SD"
@@ -1591,7 +1597,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case channel = "CHANNEL"
         case input = "INPUT"
         case multiplex = "MULTIPLEX"
@@ -1599,7 +1605,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationSpecialFeature: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationSpecialFeature: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case advancedAudio = "ADVANCED_AUDIO"
         case audioNormalization = "AUDIO_NORMALIZATION"
         case mghd = "MGHD"
@@ -1607,7 +1613,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case canceled = "CANCELED"
         case deleted = "DELETED"
@@ -1615,38 +1621,38 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservationVideoQuality: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservationVideoQuality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enhanced = "ENHANCED"
         case premium = "PREMIUM"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum RtmpAdMarkers: String, CustomStringConvertible, Codable, Sendable {
+    public enum RtmpAdMarkers: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case onCuePointScte35 = "ON_CUE_POINT_SCTE35"
         public var description: String { return self.rawValue }
     }
 
-    public enum RtmpCacheFullBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum RtmpCacheFullBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disconnectImmediately = "DISCONNECT_IMMEDIATELY"
         case waitForServer = "WAIT_FOR_SERVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum RtmpCaptionData: String, CustomStringConvertible, Codable, Sendable {
+    public enum RtmpCaptionData: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case field1608 = "FIELD1_608"
         case field1AndField2608 = "FIELD1_AND_FIELD2_608"
         public var description: String { return self.rawValue }
     }
 
-    public enum RtmpOutputCertificateMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum RtmpOutputCertificateMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case selfSigned = "SELF_SIGNED"
         case verifyAuthenticity = "VERIFY_AUTHENTICITY"
         public var description: String { return self.rawValue }
     }
 
-    public enum S3CannedAcl: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3CannedAcl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case authenticatedRead = "AUTHENTICATED_READ"
         case bucketOwnerFullControl = "BUCKET_OWNER_FULL_CONTROL"
         case bucketOwnerRead = "BUCKET_OWNER_READ"
@@ -1654,13 +1660,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte20Convert608To708: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte20Convert608To708: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case upconvert = "UPCONVERT"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte27OcrLanguage: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte27OcrLanguage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deu = "DEU"
         case eng = "ENG"
         case fra = "FRA"
@@ -1670,25 +1676,25 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35AposNoRegionalBlackoutBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35AposNoRegionalBlackoutBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case follow = "FOLLOW"
         case ignore = "IGNORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35AposWebDeliveryAllowedBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35AposWebDeliveryAllowedBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case follow = "FOLLOW"
         case ignore = "IGNORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35ArchiveAllowedFlag: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35ArchiveAllowedFlag: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case archiveAllowed = "ARCHIVE_ALLOWED"
         case archiveNotAllowed = "ARCHIVE_NOT_ALLOWED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35DeviceRestrictions: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35DeviceRestrictions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case restrictGroup0 = "RESTRICT_GROUP0"
         case restrictGroup1 = "RESTRICT_GROUP1"
@@ -1696,106 +1702,106 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35InputMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35InputMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fixed = "FIXED"
         case followActive = "FOLLOW_ACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35NoRegionalBlackoutFlag: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35NoRegionalBlackoutFlag: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noRegionalBlackout = "NO_REGIONAL_BLACKOUT"
         case regionalBlackout = "REGIONAL_BLACKOUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35SegmentationCancelIndicator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35SegmentationCancelIndicator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case segmentationEventCanceled = "SEGMENTATION_EVENT_CANCELED"
         case segmentationEventNotCanceled = "SEGMENTATION_EVENT_NOT_CANCELED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35SpliceInsertNoRegionalBlackoutBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35SpliceInsertNoRegionalBlackoutBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case follow = "FOLLOW"
         case ignore = "IGNORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35SpliceInsertWebDeliveryAllowedBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35SpliceInsertWebDeliveryAllowedBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case follow = "FOLLOW"
         case ignore = "IGNORE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Scte35WebDeliveryAllowedFlag: String, CustomStringConvertible, Codable, Sendable {
+    public enum Scte35WebDeliveryAllowedFlag: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case webDeliveryAllowed = "WEB_DELIVERY_ALLOWED"
         case webDeliveryNotAllowed = "WEB_DELIVERY_NOT_ALLOWED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupAudioOnlyTimecodeControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupAudioOnlyTimecodeControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case passthrough = "PASSTHROUGH"
         case useConfiguredClock = "USE_CONFIGURED_CLOCK"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupCertificateMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupCertificateMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case selfSigned = "SELF_SIGNED"
         case verifyAuthenticity = "VERIFY_AUTHENTICITY"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupEventIdMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupEventIdMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noEventId = "NO_EVENT_ID"
         case useConfigured = "USE_CONFIGURED"
         case useTimestamp = "USE_TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupEventStopBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupEventStopBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case sendEos = "SEND_EOS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupSegmentationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupSegmentationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case useInputSegmentation = "USE_INPUT_SEGMENTATION"
         case useSegmentDuration = "USE_SEGMENT_DURATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupSparseTrackType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupSparseTrackType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case scte35 = "SCTE_35"
         case scte35WithoutSegmentation = "SCTE_35_WITHOUT_SEGMENTATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupStreamManifestBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupStreamManifestBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doNotSend = "DO_NOT_SEND"
         case send = "SEND"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmoothGroupTimestampOffsetMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmoothGroupTimestampOffsetMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case useConfiguredOffset = "USE_CONFIGURED_OFFSET"
         case useEventStartDate = "USE_EVENT_START_DATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum Smpte2038DataPreference: String, CustomStringConvertible, Codable, Sendable {
+    public enum Smpte2038DataPreference: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ignore = "IGNORE"
         case prefer = "PREFER"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemporalFilterPostFilterSharpening: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemporalFilterPostFilterSharpening: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemporalFilterStrength: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemporalFilterStrength: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case strength1 = "STRENGTH_1"
         case strength10 = "STRENGTH_10"
@@ -1816,19 +1822,19 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum ThumbnailState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThumbnailState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case disabled = "DISABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThumbnailType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThumbnailType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case currentActive = "CURRENT_ACTIVE"
         case unspecified = "UNSPECIFIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TimecodeBurninFontSize: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimecodeBurninFontSize: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case extraSmall10 = "EXTRA_SMALL_10"
         case large48 = "LARGE_48"
         case medium32 = "MEDIUM_32"
@@ -1836,7 +1842,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum TimecodeBurninPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimecodeBurninPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottomCenter = "BOTTOM_CENTER"
         case bottomLeft = "BOTTOM_LEFT"
         case bottomRight = "BOTTOM_RIGHT"
@@ -1849,40 +1855,40 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum TimecodeConfigSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimecodeConfigSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case embedded = "EMBEDDED"
         case systemclock = "SYSTEMCLOCK"
         case zerobased = "ZEROBASED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TtmlDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum TtmlDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case passthrough = "PASSTHROUGH"
         case useConfigured = "USE_CONFIGURED"
         public var description: String { return self.rawValue }
     }
 
-    public enum UdpTimedMetadataId3Frame: String, CustomStringConvertible, Codable, Sendable {
+    public enum UdpTimedMetadataId3Frame: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case priv = "PRIV"
         case tdrl = "TDRL"
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoDescriptionRespondToAfd: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoDescriptionRespondToAfd: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case passthrough = "PASSTHROUGH"
         case respond = "RESPOND"
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoDescriptionScalingBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoDescriptionScalingBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case stretchToOutput = "STRETCH_TO_OUTPUT"
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoSelectorColorSpace: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoSelectorColorSpace: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case follow = "FOLLOW"
         case hdr10 = "HDR10"
         case hlg2020 = "HLG_2020"
@@ -1891,13 +1897,13 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoSelectorColorSpaceUsage: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoSelectorColorSpaceUsage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fallback = "FALLBACK"
         case force = "FORCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum WavCodingMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum WavCodingMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codingMode10 = "CODING_MODE_1_0"
         case codingMode20 = "CODING_MODE_2_0"
         case codingMode40 = "CODING_MODE_4_0"
@@ -1905,7 +1911,7 @@ extension MediaLive {
         public var description: String { return self.rawValue }
     }
 
-    public enum WebvttDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable {
+    public enum WebvttDestinationStyleControl: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noStyleData = "NO_STYLE_DATA"
         case passthrough = "PASSTHROUGH"
         public var description: String { return self.rawValue }
@@ -2090,11 +2096,11 @@ extension MediaLive {
         /// Parameters that control interactions with the CDN.
         public let archiveCdnSettings: ArchiveCdnSettings?
         /// A directory and base filename where archive files should be written.
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// Number of seconds to write to archive file before closing and starting a new one.
         public let rolloverInterval: Int?
 
-        public init(archiveCdnSettings: ArchiveCdnSettings? = nil, destination: OutputLocationRef, rolloverInterval: Int? = nil) {
+        public init(archiveCdnSettings: ArchiveCdnSettings? = nil, destination: OutputLocationRef? = nil, rolloverInterval: Int? = nil) {
             self.archiveCdnSettings = archiveCdnSettings
             self.destination = destination
             self.rolloverInterval = rolloverInterval
@@ -2113,20 +2119,20 @@ extension MediaLive {
 
     public struct ArchiveOutputSettings: AWSEncodableShape & AWSDecodableShape {
         /// Settings specific to the container type of the file.
-        public let containerSettings: ArchiveContainerSettings
+        public let containerSettings: ArchiveContainerSettings?
         /// Output file extension. If excluded, this will be auto-selected from the container type.
         public let `extension`: String?
         /// String concatenated to the end of the destination filename.  Required for multiple outputs of the same type.
         public let nameModifier: String?
 
-        public init(containerSettings: ArchiveContainerSettings, extension: String? = nil, nameModifier: String? = nil) {
+        public init(containerSettings: ArchiveContainerSettings? = nil, extension: String? = nil, nameModifier: String? = nil) {
             self.containerSettings = containerSettings
             self.`extension` = `extension`
             self.nameModifier = nameModifier
         }
 
         public func validate(name: String) throws {
-            try self.containerSettings.validate(name: "\(name).containerSettings")
+            try self.containerSettings?.validate(name: "\(name).containerSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -2159,17 +2165,17 @@ extension MediaLive {
 
     public struct AudioChannelMapping: AWSEncodableShape & AWSDecodableShape {
         /// Indices and gain values for each input channel that should be remixed into this output channel.
-        public let inputChannelLevels: [InputChannelLevel]
+        public let inputChannelLevels: [InputChannelLevel]?
         /// The index of the output channel being produced.
-        public let outputChannel: Int
+        public let outputChannel: Int?
 
-        public init(inputChannelLevels: [InputChannelLevel], outputChannel: Int) {
+        public init(inputChannelLevels: [InputChannelLevel]? = nil, outputChannel: Int? = nil) {
             self.inputChannelLevels = inputChannelLevels
             self.outputChannel = outputChannel
         }
 
         public func validate(name: String) throws {
-            try self.inputChannelLevels.forEach {
+            try self.inputChannelLevels?.forEach {
                 try $0.validate(name: "\(name).inputChannelLevels[]")
             }
             try self.validate(self.outputChannel, name: "outputChannel", parent: name, max: 7)
@@ -2222,7 +2228,7 @@ extension MediaLive {
         /// Advanced audio normalization settings.
         public let audioNormalizationSettings: AudioNormalizationSettings?
         /// The name of the AudioSelector used as the source for this AudioDescription.
-        public let audioSelectorName: String
+        public let audioSelectorName: String?
         /// Applies only if audioTypeControl is useConfigured. The values for audioType are defined in ISO-IEC 13818-1.
         public let audioType: AudioType?
         /// Determines how audio type is determined. followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output. useConfigured: The value in Audio Type is included in the output.
@@ -2237,13 +2243,13 @@ extension MediaLive {
         /// Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.
         public let languageCodeControl: AudioDescriptionLanguageCodeControl?
         /// The name of this AudioDescription. Outputs will use this name to uniquely identify this AudioDescription.  Description names should be unique within this Live Event.
-        public let name: String
+        public let name: String?
         /// Settings that control how input audio channels are remixed into the output audio channels.
         public let remixSettings: RemixSettings?
         /// Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary).
         public let streamName: String?
 
-        public init(audioNormalizationSettings: AudioNormalizationSettings? = nil, audioSelectorName: String, audioType: AudioType? = nil, audioTypeControl: AudioDescriptionAudioTypeControl? = nil, audioWatermarkingSettings: AudioWatermarkSettings? = nil, codecSettings: AudioCodecSettings? = nil, languageCode: String? = nil, languageCodeControl: AudioDescriptionLanguageCodeControl? = nil, name: String, remixSettings: RemixSettings? = nil, streamName: String? = nil) {
+        public init(audioNormalizationSettings: AudioNormalizationSettings? = nil, audioSelectorName: String? = nil, audioType: AudioType? = nil, audioTypeControl: AudioDescriptionAudioTypeControl? = nil, audioWatermarkingSettings: AudioWatermarkSettings? = nil, codecSettings: AudioCodecSettings? = nil, languageCode: String? = nil, languageCodeControl: AudioDescriptionLanguageCodeControl? = nil, name: String? = nil, remixSettings: RemixSettings? = nil, streamName: String? = nil) {
             self.audioNormalizationSettings = audioNormalizationSettings
             self.audioSelectorName = audioSelectorName
             self.audioType = audioType
@@ -2283,9 +2289,9 @@ extension MediaLive {
 
     public struct AudioDolbyEDecode: AWSEncodableShape & AWSDecodableShape {
         /// Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
-        public let programSelection: DolbyEProgramSelection
+        public let programSelection: DolbyEProgramSelection?
 
-        public init(programSelection: DolbyEProgramSelection) {
+        public init(programSelection: DolbyEProgramSelection? = nil) {
             self.programSelection = programSelection
         }
 
@@ -2296,11 +2302,11 @@ extension MediaLive {
 
     public struct AudioHlsRenditionSelection: AWSEncodableShape & AWSDecodableShape {
         /// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
-        public let groupId: String
+        public let groupId: String?
         /// Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
-        public let name: String
+        public let name: String?
 
-        public init(groupId: String, name: String) {
+        public init(groupId: String? = nil, name: String? = nil) {
             self.groupId = groupId
             self.name = name
         }
@@ -2318,11 +2324,11 @@ extension MediaLive {
 
     public struct AudioLanguageSelection: AWSEncodableShape & AWSDecodableShape {
         /// Selects a specific three-letter language code from within an audio source.
-        public let languageCode: String
+        public let languageCode: String?
         /// When set to "strict", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If "loose", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can't find one with the same language.
         public let languageSelectionPolicy: AudioLanguageSelectionPolicy?
 
-        public init(languageCode: String, languageSelectionPolicy: AudioLanguageSelectionPolicy? = nil) {
+        public init(languageCode: String? = nil, languageSelectionPolicy: AudioLanguageSelectionPolicy? = nil) {
             self.languageCode = languageCode
             self.languageSelectionPolicy = languageSelectionPolicy
         }
@@ -2394,9 +2400,9 @@ extension MediaLive {
 
     public struct AudioPidSelection: AWSEncodableShape & AWSDecodableShape {
         /// Selects a specific PID from within a source.
-        public let pid: Int
+        public let pid: Int?
 
-        public init(pid: Int) {
+        public init(pid: Int? = nil) {
             self.pid = pid
         }
 
@@ -2412,11 +2418,11 @@ extension MediaLive {
 
     public struct AudioSelector: AWSEncodableShape & AWSDecodableShape {
         /// The name of this AudioSelector. AudioDescriptions will use this name to uniquely identify this Selector.  Selector names should be unique per input.
-        public let name: String
+        public let name: String?
         /// The audio selector settings.
         public let selectorSettings: AudioSelectorSettings?
 
-        public init(name: String, selectorSettings: AudioSelectorSettings? = nil) {
+        public init(name: String? = nil, selectorSettings: AudioSelectorSettings? = nil) {
             self.name = name
             self.selectorSettings = selectorSettings
         }
@@ -2461,11 +2467,11 @@ extension MediaLive {
 
     public struct AudioSilenceFailoverSettings: AWSEncodableShape & AWSDecodableShape {
         /// The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn't create an audio selector in this input, leave blank.
-        public let audioSelectorName: String
+        public let audioSelectorName: String?
         /// The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
         public let audioSilenceThresholdMsec: Int?
 
-        public init(audioSelectorName: String, audioSilenceThresholdMsec: Int? = nil) {
+        public init(audioSelectorName: String? = nil, audioSilenceThresholdMsec: Int? = nil) {
             self.audioSelectorName = audioSelectorName
             self.audioSilenceThresholdMsec = audioSilenceThresholdMsec
         }
@@ -2482,9 +2488,9 @@ extension MediaLive {
 
     public struct AudioTrack: AWSEncodableShape & AWSDecodableShape {
         /// 1-based integer value that maps to a specific audio track
-        public let track: Int
+        public let track: Int?
 
-        public init(track: Int) {
+        public init(track: Int? = nil) {
             self.track = track
         }
 
@@ -2501,15 +2507,15 @@ extension MediaLive {
         /// Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337
         public let dolbyEDecode: AudioDolbyEDecode?
         /// Selects one or more unique audio tracks from within a source.
-        public let tracks: [AudioTrack]
+        public let tracks: [AudioTrack]?
 
-        public init(dolbyEDecode: AudioDolbyEDecode? = nil, tracks: [AudioTrack]) {
+        public init(dolbyEDecode: AudioDolbyEDecode? = nil, tracks: [AudioTrack]? = nil) {
             self.dolbyEDecode = dolbyEDecode
             self.tracks = tracks
         }
 
         public func validate(name: String) throws {
-            try self.tracks.forEach {
+            try self.tracks?.forEach {
                 try $0.validate(name: "\(name).tracks[]")
             }
         }
@@ -2545,9 +2551,9 @@ extension MediaLive {
         /// Input preference when deciding which input to make active when a previously failed input has recovered.
         public let inputPreference: InputPreference?
         /// The input ID of the secondary input in the automatic input failover pair.
-        public let secondaryInputId: String
+        public let secondaryInputId: String?
 
-        public init(errorClearTimeMsec: Int? = nil, failoverConditions: [FailoverCondition]? = nil, inputPreference: InputPreference? = nil, secondaryInputId: String) {
+        public init(errorClearTimeMsec: Int? = nil, failoverConditions: [FailoverCondition]? = nil, inputPreference: InputPreference? = nil, secondaryInputId: String? = nil) {
             self.errorClearTimeMsec = errorClearTimeMsec
             self.failoverConditions = failoverConditions
             self.inputPreference = inputPreference
@@ -2700,14 +2706,14 @@ extension MediaLive {
 
     public struct BatchScheduleActionCreateRequest: AWSEncodableShape {
         /// A list of schedule actions to create.
-        public let scheduleActions: [ScheduleAction]
+        public let scheduleActions: [ScheduleAction]?
 
-        public init(scheduleActions: [ScheduleAction]) {
+        public init(scheduleActions: [ScheduleAction]? = nil) {
             self.scheduleActions = scheduleActions
         }
 
         public func validate(name: String) throws {
-            try self.scheduleActions.forEach {
+            try self.scheduleActions?.forEach {
                 try $0.validate(name: "\(name).scheduleActions[]")
             }
         }
@@ -2719,9 +2725,9 @@ extension MediaLive {
 
     public struct BatchScheduleActionCreateResult: AWSDecodableShape {
         /// List of actions that have been created in the schedule.
-        public let scheduleActions: [ScheduleAction]
+        public let scheduleActions: [ScheduleAction]?
 
-        public init(scheduleActions: [ScheduleAction]) {
+        public init(scheduleActions: [ScheduleAction]? = nil) {
             self.scheduleActions = scheduleActions
         }
 
@@ -2732,9 +2738,9 @@ extension MediaLive {
 
     public struct BatchScheduleActionDeleteRequest: AWSEncodableShape {
         /// A list of schedule actions to delete.
-        public let actionNames: [String]
+        public let actionNames: [String]?
 
-        public init(actionNames: [String]) {
+        public init(actionNames: [String]? = nil) {
             self.actionNames = actionNames
         }
 
@@ -2745,9 +2751,9 @@ extension MediaLive {
 
     public struct BatchScheduleActionDeleteResult: AWSDecodableShape {
         /// List of actions that have been deleted from the schedule.
-        public let scheduleActions: [ScheduleAction]
+        public let scheduleActions: [ScheduleAction]?
 
-        public init(scheduleActions: [ScheduleAction]) {
+        public init(scheduleActions: [ScheduleAction]? = nil) {
             self.scheduleActions = scheduleActions
         }
 
@@ -3042,7 +3048,7 @@ extension MediaLive {
         /// Indicates whether the caption track implements accessibility features such as written descriptions of spoken dialog, music, and sounds.
         public let accessibility: AccessibilityType?
         /// Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
-        public let captionSelectorName: String
+        public let captionSelectorName: String?
         /// Additional settings for captions destination that depend on the destination type.
         public let destinationSettings: CaptionDestinationSettings?
         /// ISO 639-2 three-digit code: http://www.loc.gov/standards/iso639-2/
@@ -3050,9 +3056,9 @@ extension MediaLive {
         /// Human readable information to indicate captions available for players (eg. English, or Spanish).
         public let languageDescription: String?
         /// Name of the caption description.  Used to associate a caption description with an output.  Names must be unique within an event.
-        public let name: String
+        public let name: String?
 
-        public init(accessibility: AccessibilityType? = nil, captionSelectorName: String, destinationSettings: CaptionDestinationSettings? = nil, languageCode: String? = nil, languageDescription: String? = nil, name: String) {
+        public init(accessibility: AccessibilityType? = nil, captionSelectorName: String? = nil, destinationSettings: CaptionDestinationSettings? = nil, languageCode: String? = nil, languageDescription: String? = nil, name: String? = nil) {
             self.accessibility = accessibility
             self.captionSelectorName = captionSelectorName
             self.destinationSettings = destinationSettings
@@ -3131,13 +3137,13 @@ extension MediaLive {
 
     public struct CaptionLanguageMapping: AWSEncodableShape & AWSDecodableShape {
         /// The closed caption channel being described by this CaptionLanguageMapping.  Each channel mapping must have a unique channel number (maximum of 4)
-        public let captionChannel: Int
+        public let captionChannel: Int?
         /// Three character ISO 639-2 language code (see http://www.loc.gov/standards/iso639-2)
-        public let languageCode: String
+        public let languageCode: String?
         /// Textual description of language
-        public let languageDescription: String
+        public let languageDescription: String?
 
-        public init(captionChannel: Int, languageCode: String, languageDescription: String) {
+        public init(captionChannel: Int? = nil, languageCode: String? = nil, languageDescription: String? = nil) {
             self.captionChannel = captionChannel
             self.languageCode = languageCode
             self.languageDescription = languageDescription
@@ -3162,22 +3168,22 @@ extension MediaLive {
         /// See the description in leftOffset.
         /// For height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \"80\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.
         /// This field corresponds to tts:extent - Y in the TTML standard.
-        public let height: Double
+        public let height: Double?
         /// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.
         /// If you specify a value for one of these fields, you must specify a value for all of them.
         /// For leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.
         /// This field corresponds to tts:origin - X in the TTML standard.
-        public let leftOffset: Double
+        public let leftOffset: Double?
         /// See the description in leftOffset.
         /// For topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \"10\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.
         /// This field corresponds to tts:origin - Y in the TTML standard.
-        public let topOffset: Double
+        public let topOffset: Double?
         /// See the description in leftOffset.
         /// For width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \"80\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.
         /// This field corresponds to tts:extent - X in the TTML standard.
-        public let width: Double
+        public let width: Double?
 
-        public init(height: Double, leftOffset: Double, topOffset: Double, width: Double) {
+        public init(height: Double? = nil, leftOffset: Double? = nil, topOffset: Double? = nil, width: Double? = nil) {
             self.height = height
             self.leftOffset = leftOffset
             self.topOffset = topOffset
@@ -3196,11 +3202,11 @@ extension MediaLive {
         /// When specified this field indicates the three letter language code of the caption track to extract from the source.
         public let languageCode: String?
         /// Name identifier for a caption selector.  This name is used to associate this caption selector with one or more caption descriptions.  Names must be unique within an event.
-        public let name: String
+        public let name: String?
         /// Caption selector settings.
         public let selectorSettings: CaptionSelectorSettings?
 
-        public init(languageCode: String? = nil, name: String, selectorSettings: CaptionSelectorSettings? = nil) {
+        public init(languageCode: String? = nil, name: String? = nil, selectorSettings: CaptionSelectorSettings? = nil) {
             self.languageCode = languageCode
             self.name = name
             self.selectorSettings = selectorSettings
@@ -3668,14 +3674,14 @@ extension MediaLive {
         /// ID of the multiplex where the program is to be created.
         public let multiplexId: String
         /// The settings for this multiplex program.
-        public let multiplexProgramSettings: MultiplexProgramSettings
+        public let multiplexProgramSettings: MultiplexProgramSettings?
         /// Name of multiplex program.
-        public let programName: String
+        public let programName: String?
         /// Unique request ID. This prevents retries from creating multiple
         /// resources.
-        public let requestId: String
+        public let requestId: String?
 
-        public init(multiplexId: String, multiplexProgramSettings: MultiplexProgramSettings, programName: String, requestId: String = CreateMultiplexProgramRequest.idempotencyToken()) {
+        public init(multiplexId: String, multiplexProgramSettings: MultiplexProgramSettings? = nil, programName: String? = nil, requestId: String? = nil) {
             self.multiplexId = multiplexId
             self.multiplexProgramSettings = multiplexProgramSettings
             self.programName = programName
@@ -3683,7 +3689,7 @@ extension MediaLive {
         }
 
         public func validate(name: String) throws {
-            try self.multiplexProgramSettings.validate(name: "\(name).multiplexProgramSettings")
+            try self.multiplexProgramSettings?.validate(name: "\(name).multiplexProgramSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -3708,18 +3714,18 @@ extension MediaLive {
 
     public struct CreateMultiplexRequest: AWSEncodableShape {
         /// A list of availability zones for the multiplex. You must specify exactly two.
-        public let availabilityZones: [String]
+        public let availabilityZones: [String]?
         /// Configuration for a multiplex event.
-        public let multiplexSettings: MultiplexSettings
+        public let multiplexSettings: MultiplexSettings?
         /// Name of multiplex.
-        public let name: String
+        public let name: String?
         /// Unique request ID. This prevents retries from creating multiple
         /// resources.
-        public let requestId: String
+        public let requestId: String?
         /// A collection of key-value pairs.
         public let tags: [String: String]?
 
-        public init(availabilityZones: [String], multiplexSettings: MultiplexSettings, name: String, requestId: String = CreateMultiplexRequest.idempotencyToken(), tags: [String: String]? = nil) {
+        public init(availabilityZones: [String]? = nil, multiplexSettings: MultiplexSettings? = nil, name: String? = nil, requestId: String? = nil, tags: [String: String]? = nil) {
             self.availabilityZones = availabilityZones
             self.multiplexSettings = multiplexSettings
             self.name = name
@@ -3728,7 +3734,7 @@ extension MediaLive {
         }
 
         public func validate(name: String) throws {
-            try self.multiplexSettings.validate(name: "\(name).multiplexSettings")
+            try self.multiplexSettings?.validate(name: "\(name).multiplexSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -4181,9 +4187,9 @@ extension MediaLive {
 
         public let resourceArn: String
         /// An array of tag keys to delete
-        public let tagKeys: [String]
+        public let tagKeys: [String]?
 
-        public init(resourceArn: String, tagKeys: [String]) {
+        public init(resourceArn: String, tagKeys: [String]? = nil) {
             self.resourceArn = resourceArn
             self.tagKeys = tagKeys
         }
@@ -4398,11 +4404,11 @@ extension MediaLive {
         ]
 
         /// The HTTP Accept header. Indicates the requested type for the thumbnail.
-        public let accept: AcceptHeader
+        public let accept: AcceptHeader?
         /// The unique ID of this input device. For example, hd-123456789abcdef.
         public let inputDeviceId: String
 
-        public init(accept: AcceptHeader, inputDeviceId: String) {
+        public init(accept: AcceptHeader? = nil, inputDeviceId: String) {
             self.accept = accept
             self.inputDeviceId = inputDeviceId
         }
@@ -4919,11 +4925,11 @@ extension MediaLive {
         /// Unique ID of the channel
         public let channelId: String
         /// Pipeline ID ("0" or "1")
-        public let pipelineId: String
+        public let pipelineId: String?
         /// thumbnail type
-        public let thumbnailType: String
+        public let thumbnailType: String?
 
-        public init(channelId: String, pipelineId: String, thumbnailType: String) {
+        public init(channelId: String, pipelineId: String? = nil, thumbnailType: String? = nil) {
             self.channelId = channelId
             self.pipelineId = pipelineId
             self.thumbnailType = thumbnailType
@@ -4950,13 +4956,13 @@ extension MediaLive {
 
     public struct DvbNitSettings: AWSEncodableShape & AWSDecodableShape {
         /// The numeric value placed in the Network Information Table (NIT).
-        public let networkId: Int
+        public let networkId: Int?
         /// The network name text placed in the networkNameDescriptor inside the Network Information Table. Maximum length is 256 characters.
-        public let networkName: String
+        public let networkName: String?
         /// The number of milliseconds between instances of this table in the output transport stream.
         public let repInterval: Int?
 
-        public init(networkId: Int, networkName: String, repInterval: Int? = nil) {
+        public init(networkId: Int? = nil, networkName: String? = nil, repInterval: Int? = nil) {
             self.networkId = networkId
             self.networkName = networkName
             self.repInterval = repInterval
@@ -5359,7 +5365,7 @@ extension MediaLive {
     }
 
     public struct EncoderSettings: AWSEncodableShape & AWSDecodableShape {
-        public let audioDescriptions: [AudioDescription]
+        public let audioDescriptions: [AudioDescription]?
         /// Settings for ad avail blanking.
         public let availBlanking: AvailBlanking?
         /// Event-wide configuration settings for ad avail insertion.
@@ -5376,14 +5382,14 @@ extension MediaLive {
         public let motionGraphicsConfiguration: MotionGraphicsConfiguration?
         /// Nielsen configuration settings.
         public let nielsenConfiguration: NielsenConfiguration?
-        public let outputGroups: [OutputGroup]
+        public let outputGroups: [OutputGroup]?
         /// Thumbnail configuration settings.
         public let thumbnailConfiguration: ThumbnailConfiguration?
         /// Contains settings used to acquire and adjust timecode information from inputs.
-        public let timecodeConfig: TimecodeConfig
-        public let videoDescriptions: [VideoDescription]
+        public let timecodeConfig: TimecodeConfig?
+        public let videoDescriptions: [VideoDescription]?
 
-        public init(audioDescriptions: [AudioDescription], availBlanking: AvailBlanking? = nil, availConfiguration: AvailConfiguration? = nil, blackoutSlate: BlackoutSlate? = nil, captionDescriptions: [CaptionDescription]? = nil, featureActivations: FeatureActivations? = nil, globalConfiguration: GlobalConfiguration? = nil, motionGraphicsConfiguration: MotionGraphicsConfiguration? = nil, nielsenConfiguration: NielsenConfiguration? = nil, outputGroups: [OutputGroup], thumbnailConfiguration: ThumbnailConfiguration? = nil, timecodeConfig: TimecodeConfig, videoDescriptions: [VideoDescription]) {
+        public init(audioDescriptions: [AudioDescription]? = nil, availBlanking: AvailBlanking? = nil, availConfiguration: AvailConfiguration? = nil, blackoutSlate: BlackoutSlate? = nil, captionDescriptions: [CaptionDescription]? = nil, featureActivations: FeatureActivations? = nil, globalConfiguration: GlobalConfiguration? = nil, motionGraphicsConfiguration: MotionGraphicsConfiguration? = nil, nielsenConfiguration: NielsenConfiguration? = nil, outputGroups: [OutputGroup]? = nil, thumbnailConfiguration: ThumbnailConfiguration? = nil, timecodeConfig: TimecodeConfig? = nil, videoDescriptions: [VideoDescription]? = nil) {
             self.audioDescriptions = audioDescriptions
             self.availBlanking = availBlanking
             self.availConfiguration = availConfiguration
@@ -5400,7 +5406,7 @@ extension MediaLive {
         }
 
         public func validate(name: String) throws {
-            try self.audioDescriptions.forEach {
+            try self.audioDescriptions?.forEach {
                 try $0.validate(name: "\(name).audioDescriptions[]")
             }
             try self.availBlanking?.validate(name: "\(name).availBlanking")
@@ -5410,11 +5416,11 @@ extension MediaLive {
                 try $0.validate(name: "\(name).captionDescriptions[]")
             }
             try self.globalConfiguration?.validate(name: "\(name).globalConfiguration")
-            try self.outputGroups.forEach {
+            try self.outputGroups?.forEach {
                 try $0.validate(name: "\(name).outputGroups[]")
             }
-            try self.timecodeConfig.validate(name: "\(name).timecodeConfig")
-            try self.videoDescriptions.forEach {
+            try self.timecodeConfig?.validate(name: "\(name).timecodeConfig")
+            try self.videoDescriptions?.forEach {
                 try $0.validate(name: "\(name).videoDescriptions[]")
             }
         }
@@ -5455,19 +5461,19 @@ extension MediaLive {
 
     public struct Esam: AWSEncodableShape & AWSDecodableShape {
         /// Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
-        public let acquisitionPointId: String
+        public let acquisitionPointId: String?
         /// When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
         public let adAvailOffset: Int?
         /// Documentation update needed
         public let passwordParam: String?
         /// The URL of the signal conditioner endpoint on the Placement Opportunity Information System (POIS). MediaLive sends SignalProcessingEvents here when SCTE-35 messages are read.
-        public let poisEndpoint: String
+        public let poisEndpoint: String?
         /// Documentation update needed
         public let username: String?
         /// Optional data sent as zoneIdentity to identify the MediaLive channel to the POIS.
         public let zoneIdentity: String?
 
-        public init(acquisitionPointId: String, adAvailOffset: Int? = nil, passwordParam: String? = nil, poisEndpoint: String, username: String? = nil, zoneIdentity: String? = nil) {
+        public init(acquisitionPointId: String? = nil, adAvailOffset: Int? = nil, passwordParam: String? = nil, poisEndpoint: String? = nil, username: String? = nil, zoneIdentity: String? = nil) {
             self.acquisitionPointId = acquisitionPointId
             self.adAvailOffset = adAvailOffset
             self.passwordParam = passwordParam
@@ -5542,13 +5548,18 @@ extension MediaLive {
         /// Enables the Input Prepare feature. You can create Input Prepare actions in the schedule only if this feature is enabled.
         /// If you disable the feature on an existing schedule, make sure that you first delete all input prepare actions from the schedule.
         public let inputPrepareScheduleActions: FeatureActivationsInputPrepareScheduleActions?
+        /// Enables the output static image overlay feature. Enabling this feature allows you to send channel schedule updates
+        /// to display/clear/modify image overlays on an output-by-output bases.
+        public let outputStaticImageOverlayScheduleActions: FeatureActivationsOutputStaticImageOverlayScheduleActions?
 
-        public init(inputPrepareScheduleActions: FeatureActivationsInputPrepareScheduleActions? = nil) {
+        public init(inputPrepareScheduleActions: FeatureActivationsInputPrepareScheduleActions? = nil, outputStaticImageOverlayScheduleActions: FeatureActivationsOutputStaticImageOverlayScheduleActions? = nil) {
             self.inputPrepareScheduleActions = inputPrepareScheduleActions
+            self.outputStaticImageOverlayScheduleActions = outputStaticImageOverlayScheduleActions
         }
 
         private enum CodingKeys: String, CodingKey {
             case inputPrepareScheduleActions = "inputPrepareScheduleActions"
+            case outputStaticImageOverlayScheduleActions = "outputStaticImageOverlayScheduleActions"
         }
     }
 
@@ -5582,9 +5593,9 @@ extension MediaLive {
 
     public struct FixedModeScheduleActionStartSettings: AWSEncodableShape & AWSDecodableShape {
         /// Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".
-        public let time: String
+        public let time: String?
 
-        public init(time: String) {
+        public init(time: String? = nil) {
             self.time = time
         }
 
@@ -5616,11 +5627,11 @@ extension MediaLive {
 
     public struct FollowModeScheduleActionStartSettings: AWSEncodableShape & AWSDecodableShape {
         /// Identifies whether this action starts relative to the start or relative to the end of the reference action.
-        public let followPoint: FollowPoint
+        public let followPoint: FollowPoint?
         /// The action name of another action that this one refers to.
-        public let referenceActionName: String
+        public let referenceActionName: String?
 
-        public init(followPoint: FollowPoint, referenceActionName: String) {
+        public init(followPoint: FollowPoint? = nil, referenceActionName: String? = nil) {
             self.followPoint = followPoint
             self.referenceActionName = referenceActionName
         }
@@ -5645,11 +5656,11 @@ extension MediaLive {
 
     public struct FrameCaptureGroupSettings: AWSEncodableShape & AWSDecodableShape {
         /// The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling-). The final file names consist of the prefix from the destination field (for example, "curling-") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curling-low.00001.jpg
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// Parameters that control interactions with the CDN.
         public let frameCaptureCdnSettings: FrameCaptureCdnSettings?
 
-        public init(destination: OutputLocationRef, frameCaptureCdnSettings: FrameCaptureCdnSettings? = nil) {
+        public init(destination: OutputLocationRef? = nil, frameCaptureCdnSettings: FrameCaptureCdnSettings? = nil) {
             self.destination = destination
             self.frameCaptureCdnSettings = frameCaptureCdnSettings
         }
@@ -6082,9 +6093,9 @@ extension MediaLive {
         /// If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
         public let flickerAq: H265FlickerAq?
         /// Framerate denominator.
-        public let framerateDenominator: Int
+        public let framerateDenominator: Int?
         /// Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
-        public let framerateNumerator: Int
+        public let framerateNumerator: Int?
         /// Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.
         public let gopClosedCadence: Int?
         /// GOP size (keyframe interval) in units of either frames or seconds per gopSizeUnits.
@@ -6137,7 +6148,7 @@ extension MediaLive {
         /// - 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config
         public let timecodeInsertion: H265TimecodeInsertionBehavior?
 
-        public init(adaptiveQuantization: H265AdaptiveQuantization? = nil, afdSignaling: AfdSignaling? = nil, alternativeTransferFunction: H265AlternativeTransferFunction? = nil, bitrate: Int? = nil, bufSize: Int? = nil, colorMetadata: H265ColorMetadata? = nil, colorSpaceSettings: H265ColorSpaceSettings? = nil, filterSettings: H265FilterSettings? = nil, fixedAfd: FixedAfd? = nil, flickerAq: H265FlickerAq? = nil, framerateDenominator: Int, framerateNumerator: Int, gopClosedCadence: Int? = nil, gopSize: Double? = nil, gopSizeUnits: H265GopSizeUnits? = nil, level: H265Level? = nil, lookAheadRateControl: H265LookAheadRateControl? = nil, maxBitrate: Int? = nil, minIInterval: Int? = nil, parDenominator: Int? = nil, parNumerator: Int? = nil, profile: H265Profile? = nil, qvbrQualityLevel: Int? = nil, rateControlMode: H265RateControlMode? = nil, scanType: H265ScanType? = nil, sceneChangeDetect: H265SceneChangeDetect? = nil, slices: Int? = nil, tier: H265Tier? = nil, timecodeBurninSettings: TimecodeBurninSettings? = nil, timecodeInsertion: H265TimecodeInsertionBehavior? = nil) {
+        public init(adaptiveQuantization: H265AdaptiveQuantization? = nil, afdSignaling: AfdSignaling? = nil, alternativeTransferFunction: H265AlternativeTransferFunction? = nil, bitrate: Int? = nil, bufSize: Int? = nil, colorMetadata: H265ColorMetadata? = nil, colorSpaceSettings: H265ColorSpaceSettings? = nil, filterSettings: H265FilterSettings? = nil, fixedAfd: FixedAfd? = nil, flickerAq: H265FlickerAq? = nil, framerateDenominator: Int? = nil, framerateNumerator: Int? = nil, gopClosedCadence: Int? = nil, gopSize: Double? = nil, gopSizeUnits: H265GopSizeUnits? = nil, level: H265Level? = nil, lookAheadRateControl: H265LookAheadRateControl? = nil, maxBitrate: Int? = nil, minIInterval: Int? = nil, parDenominator: Int? = nil, parNumerator: Int? = nil, profile: H265Profile? = nil, qvbrQualityLevel: Int? = nil, rateControlMode: H265RateControlMode? = nil, scanType: H265ScanType? = nil, sceneChangeDetect: H265SceneChangeDetect? = nil, slices: Int? = nil, tier: H265Tier? = nil, timecodeBurninSettings: TimecodeBurninSettings? = nil, timecodeInsertion: H265TimecodeInsertionBehavior? = nil) {
             self.adaptiveQuantization = adaptiveQuantization
             self.afdSignaling = afdSignaling
             self.alternativeTransferFunction = alternativeTransferFunction
@@ -6393,7 +6404,7 @@ extension MediaLive {
         /// For use with encryptionType. This is a 128-bit, 16-byte hex value represented by a 32-character text string. If ivSource is set to "explicit" then this parameter is required and is used as the IV for encryption.
         public let constantIv: String?
         /// A directory or HTTP destination for the HLS segments, manifest files, and encryption keys (if enabled).
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// Place segments in subdirectories.
         public let directoryStructure: HlsDirectoryStructure?
         /// Specifies whether to insert EXT-X-DISCONTINUITY tags in the HLS child manifests for this output group.
@@ -6475,7 +6486,7 @@ extension MediaLive {
         /// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
         public let tsFileMode: HlsTsFileMode?
 
-        public init(adMarkers: [HlsAdMarkers]? = nil, baseUrlContent: String? = nil, baseUrlContent1: String? = nil, baseUrlManifest: String? = nil, baseUrlManifest1: String? = nil, captionLanguageMappings: [CaptionLanguageMapping]? = nil, captionLanguageSetting: HlsCaptionLanguageSetting? = nil, clientCache: HlsClientCache? = nil, codecSpecification: HlsCodecSpecification? = nil, constantIv: String? = nil, destination: OutputLocationRef, directoryStructure: HlsDirectoryStructure? = nil, discontinuityTags: HlsDiscontinuityTags? = nil, encryptionType: HlsEncryptionType? = nil, hlsCdnSettings: HlsCdnSettings? = nil, hlsId3SegmentTagging: HlsId3SegmentTaggingState? = nil, iFrameOnlyPlaylists: IFrameOnlyPlaylistType? = nil, incompleteSegmentBehavior: HlsIncompleteSegmentBehavior? = nil, indexNSegments: Int? = nil, inputLossAction: InputLossActionForHlsOut? = nil, ivInManifest: HlsIvInManifest? = nil, ivSource: HlsIvSource? = nil, keepSegments: Int? = nil, keyFormat: String? = nil, keyFormatVersions: String? = nil, keyProviderSettings: KeyProviderSettings? = nil, manifestCompression: HlsManifestCompression? = nil, manifestDurationFormat: HlsManifestDurationFormat? = nil, minSegmentLength: Int? = nil, mode: HlsMode? = nil, outputSelection: HlsOutputSelection? = nil, programDateTime: HlsProgramDateTime? = nil, programDateTimeClock: HlsProgramDateTimeClock? = nil, programDateTimePeriod: Int? = nil, redundantManifest: HlsRedundantManifest? = nil, segmentationMode: HlsSegmentationMode? = nil, segmentLength: Int? = nil, segmentsPerSubdirectory: Int? = nil, streamInfResolution: HlsStreamInfResolution? = nil, timedMetadataId3Frame: HlsTimedMetadataId3Frame? = nil, timedMetadataId3Period: Int? = nil, timestampDeltaMilliseconds: Int? = nil, tsFileMode: HlsTsFileMode? = nil) {
+        public init(adMarkers: [HlsAdMarkers]? = nil, baseUrlContent: String? = nil, baseUrlContent1: String? = nil, baseUrlManifest: String? = nil, baseUrlManifest1: String? = nil, captionLanguageMappings: [CaptionLanguageMapping]? = nil, captionLanguageSetting: HlsCaptionLanguageSetting? = nil, clientCache: HlsClientCache? = nil, codecSpecification: HlsCodecSpecification? = nil, constantIv: String? = nil, destination: OutputLocationRef? = nil, directoryStructure: HlsDirectoryStructure? = nil, discontinuityTags: HlsDiscontinuityTags? = nil, encryptionType: HlsEncryptionType? = nil, hlsCdnSettings: HlsCdnSettings? = nil, hlsId3SegmentTagging: HlsId3SegmentTaggingState? = nil, iFrameOnlyPlaylists: IFrameOnlyPlaylistType? = nil, incompleteSegmentBehavior: HlsIncompleteSegmentBehavior? = nil, indexNSegments: Int? = nil, inputLossAction: InputLossActionForHlsOut? = nil, ivInManifest: HlsIvInManifest? = nil, ivSource: HlsIvSource? = nil, keepSegments: Int? = nil, keyFormat: String? = nil, keyFormatVersions: String? = nil, keyProviderSettings: KeyProviderSettings? = nil, manifestCompression: HlsManifestCompression? = nil, manifestDurationFormat: HlsManifestDurationFormat? = nil, minSegmentLength: Int? = nil, mode: HlsMode? = nil, outputSelection: HlsOutputSelection? = nil, programDateTime: HlsProgramDateTime? = nil, programDateTimeClock: HlsProgramDateTimeClock? = nil, programDateTimePeriod: Int? = nil, redundantManifest: HlsRedundantManifest? = nil, segmentationMode: HlsSegmentationMode? = nil, segmentLength: Int? = nil, segmentsPerSubdirectory: Int? = nil, streamInfResolution: HlsStreamInfResolution? = nil, timedMetadataId3Frame: HlsTimedMetadataId3Frame? = nil, timedMetadataId3Period: Int? = nil, timestampDeltaMilliseconds: Int? = nil, tsFileMode: HlsTsFileMode? = nil) {
             self.adMarkers = adMarkers
             self.baseUrlContent = baseUrlContent
             self.baseUrlContent1 = baseUrlContent1
@@ -6683,13 +6694,13 @@ extension MediaLive {
         /// Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
         public let h265PackagingType: HlsH265PackagingType?
         /// Settings regarding the underlying stream. These settings are different for audio-only outputs.
-        public let hlsSettings: HlsSettings
+        public let hlsSettings: HlsSettings?
         /// String concatenated to the end of the destination filename. Accepts \"Format Identifiers\":#formatIdentifierParameters.
         public let nameModifier: String?
         /// String concatenated to end of segment filenames.
         public let segmentModifier: String?
 
-        public init(h265PackagingType: HlsH265PackagingType? = nil, hlsSettings: HlsSettings, nameModifier: String? = nil, segmentModifier: String? = nil) {
+        public init(h265PackagingType: HlsH265PackagingType? = nil, hlsSettings: HlsSettings? = nil, nameModifier: String? = nil, segmentModifier: String? = nil) {
             self.h265PackagingType = h265PackagingType
             self.hlsSettings = hlsSettings
             self.nameModifier = nameModifier
@@ -6697,7 +6708,7 @@ extension MediaLive {
         }
 
         public func validate(name: String) throws {
-            try self.hlsSettings.validate(name: "\(name).hlsSettings")
+            try self.hlsSettings?.validate(name: "\(name).hlsSettings")
             try self.validate(self.nameModifier, name: "nameModifier", parent: name, min: 1)
         }
 
@@ -6750,9 +6761,9 @@ extension MediaLive {
 
     public struct HlsTimedMetadataScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
         /// Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
-        public let id3: String
+        public let id3: String?
 
-        public init(id3: String) {
+        public init(id3: String? = nil) {
             self.id3 = id3
         }
 
@@ -6912,11 +6923,11 @@ extension MediaLive {
 
     public struct InputChannelLevel: AWSEncodableShape & AWSDecodableShape {
         /// Remixing value. Units are in dB and acceptable values are within the range from -60 (mute) and 6 dB.
-        public let gain: Int
+        public let gain: Int?
         /// The index of the input channel used as a source.
-        public let inputChannel: Int
+        public let inputChannel: Int?
 
-        public init(gain: Int, inputChannel: Int) {
+        public init(gain: Int? = nil, inputChannel: Int? = nil) {
             self.gain = gain
             self.inputChannel = inputChannel
         }
@@ -6936,13 +6947,13 @@ extension MediaLive {
 
     public struct InputClippingSettings: AWSEncodableShape & AWSDecodableShape {
         /// The source of the timecodes in the source being clipped.
-        public let inputTimecodeSource: InputTimecodeSource
+        public let inputTimecodeSource: InputTimecodeSource?
         /// Settings to identify the start of the clip.
         public let startTimecode: StartTimecode?
         /// Settings to identify the end of the clip.
         public let stopTimecode: StopTimecode?
 
-        public init(inputTimecodeSource: InputTimecodeSource, startTimecode: StartTimecode? = nil, stopTimecode: StopTimecode? = nil) {
+        public init(inputTimecodeSource: InputTimecodeSource? = nil, startTimecode: StartTimecode? = nil, stopTimecode: StopTimecode? = nil) {
             self.inputTimecodeSource = inputTimecodeSource
             self.startTimecode = startTimecode
             self.stopTimecode = stopTimecode
@@ -7321,11 +7332,11 @@ extension MediaLive {
         /// key used to extract the password from EC2 Parameter store
         public let passwordParam: String?
         /// Uniform Resource Identifier - This should be a path to a file accessible to the Live system (eg. a http:// URI) depending on the output type. For example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
-        public let uri: String
+        public let uri: String?
         /// Documentation update needed
         public let username: String?
 
-        public init(passwordParam: String? = nil, uri: String, username: String? = nil) {
+        public init(passwordParam: String? = nil, uri: String? = nil, username: String? = nil) {
             self.passwordParam = passwordParam
             self.uri = uri
             self.username = username
@@ -7592,13 +7603,13 @@ extension MediaLive {
 
     public struct InputSwitchScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
         /// The name of the input attachment (not the name of the input!) to switch to. The name is specified in the channel configuration.
-        public let inputAttachmentNameReference: String
+        public let inputAttachmentNameReference: String?
         /// Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.
         public let inputClippingSettings: InputClippingSettings?
         /// The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source.
         public let urlPath: [String]?
 
-        public init(inputAttachmentNameReference: String, inputClippingSettings: InputClippingSettings? = nil, urlPath: [String]? = nil) {
+        public init(inputAttachmentNameReference: String? = nil, inputClippingSettings: InputClippingSettings? = nil, urlPath: [String]? = nil) {
             self.inputAttachmentNameReference = inputAttachmentNameReference
             self.inputClippingSettings = inputClippingSettings
             self.urlPath = urlPath
@@ -7617,9 +7628,9 @@ extension MediaLive {
         public let securityGroupIds: [String]?
         /// A list of 2 VPC subnet IDs from the same VPC.
         /// Subnet IDs must be mapped to two unique availability zones (AZ).
-        public let subnetIds: [String]
+        public let subnetIds: [String]?
 
-        public init(securityGroupIds: [String]? = nil, subnetIds: [String]) {
+        public init(securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
             self.securityGroupIds = securityGroupIds
             self.subnetIds = subnetIds
         }
@@ -7718,9 +7729,9 @@ extension MediaLive {
 
         public let maxResults: Int?
         public let nextToken: String?
-        public let transferType: String
+        public let transferType: String?
 
-        public init(maxResults: Int? = nil, nextToken: String? = nil, transferType: String) {
+        public init(maxResults: Int? = nil, nextToken: String? = nil, transferType: String? = nil) {
             self.maxResults = maxResults
             self.nextToken = nextToken
             self.transferType = transferType
@@ -8548,9 +8559,9 @@ extension MediaLive {
 
     public struct MediaPackageGroupSettings: AWSEncodableShape & AWSDecodableShape {
         /// MediaPackage channel destination.
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
 
-        public init(destination: OutputLocationRef) {
+        public init(destination: OutputLocationRef? = nil) {
             self.destination = destination
         }
 
@@ -8613,9 +8624,9 @@ extension MediaLive {
     public struct MotionGraphicsConfiguration: AWSEncodableShape & AWSDecodableShape {
         public let motionGraphicsInsertion: MotionGraphicsInsertion?
         /// Motion Graphics Settings
-        public let motionGraphicsSettings: MotionGraphicsSettings
+        public let motionGraphicsSettings: MotionGraphicsSettings?
 
-        public init(motionGraphicsInsertion: MotionGraphicsInsertion? = nil, motionGraphicsSettings: MotionGraphicsSettings) {
+        public init(motionGraphicsInsertion: MotionGraphicsInsertion? = nil, motionGraphicsSettings: MotionGraphicsSettings? = nil) {
             self.motionGraphicsInsertion = motionGraphicsInsertion
             self.motionGraphicsSettings = motionGraphicsSettings
         }
@@ -8698,9 +8709,9 @@ extension MediaLive {
         /// Complete this field only when afdSignaling is set to FIXED. Enter the AFD value (4 bits) to write on all frames of the video encode.
         public let fixedAfd: FixedAfd?
         /// description": "The framerate denominator. For example, 1001. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
-        public let framerateDenominator: Int
+        public let framerateDenominator: Int?
         /// The framerate numerator. For example, 24000. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
-        public let framerateNumerator: Int
+        public let framerateNumerator: Int?
         /// MPEG2: default is open GOP.
         public let gopClosedCadence: Int?
         /// Relates to the GOP structure. The number of B-frames between reference frames. If you do not know what a B-frame is, use the default.
@@ -8724,7 +8735,7 @@ extension MediaLive {
         /// GOP_TIMECODE: Include timecode metadata in the GOP header.
         public let timecodeInsertion: Mpeg2TimecodeInsertionBehavior?
 
-        public init(adaptiveQuantization: Mpeg2AdaptiveQuantization? = nil, afdSignaling: AfdSignaling? = nil, colorMetadata: Mpeg2ColorMetadata? = nil, colorSpace: Mpeg2ColorSpace? = nil, displayAspectRatio: Mpeg2DisplayRatio? = nil, filterSettings: Mpeg2FilterSettings? = nil, fixedAfd: FixedAfd? = nil, framerateDenominator: Int, framerateNumerator: Int, gopClosedCadence: Int? = nil, gopNumBFrames: Int? = nil, gopSize: Double? = nil, gopSizeUnits: Mpeg2GopSizeUnits? = nil, scanType: Mpeg2ScanType? = nil, subgopLength: Mpeg2SubGopLength? = nil, timecodeBurninSettings: TimecodeBurninSettings? = nil, timecodeInsertion: Mpeg2TimecodeInsertionBehavior? = nil) {
+        public init(adaptiveQuantization: Mpeg2AdaptiveQuantization? = nil, afdSignaling: AfdSignaling? = nil, colorMetadata: Mpeg2ColorMetadata? = nil, colorSpace: Mpeg2ColorSpace? = nil, displayAspectRatio: Mpeg2DisplayRatio? = nil, filterSettings: Mpeg2FilterSettings? = nil, fixedAfd: FixedAfd? = nil, framerateDenominator: Int? = nil, framerateNumerator: Int? = nil, gopClosedCadence: Int? = nil, gopNumBFrames: Int? = nil, gopSize: Double? = nil, gopSizeUnits: Mpeg2GopSizeUnits? = nil, scanType: Mpeg2ScanType? = nil, subgopLength: Mpeg2SubGopLength? = nil, timecodeBurninSettings: TimecodeBurninSettings? = nil, timecodeInsertion: Mpeg2TimecodeInsertionBehavior? = nil) {
             self.adaptiveQuantization = adaptiveQuantization
             self.afdSignaling = afdSignaling
             self.colorMetadata = colorMetadata
@@ -8784,7 +8795,7 @@ extension MediaLive {
         /// Number of seconds to wait before retrying connection to the IIS server if the connection is lost. Content will be cached during this time and the cache will be be delivered to the IIS server once the connection is re-established.
         public let connectionRetryInterval: Int?
         /// Smooth Streaming publish point on an IIS server. Elemental Live acts as a "Push" encoder to IIS.
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// MS Smooth event ID to be sent to the IIS server.
         /// Should only be specified if eventIdMode is set to useConfigured.
         public let eventId: String?
@@ -8824,7 +8835,7 @@ extension MediaLive {
         /// - useConfiguredOffset: Use an explicitly configured date as the offset
         public let timestampOffsetMode: SmoothGroupTimestampOffsetMode?
 
-        public init(acquisitionPointId: String? = nil, audioOnlyTimecodeControl: SmoothGroupAudioOnlyTimecodeControl? = nil, certificateMode: SmoothGroupCertificateMode? = nil, connectionRetryInterval: Int? = nil, destination: OutputLocationRef, eventId: String? = nil, eventIdMode: SmoothGroupEventIdMode? = nil, eventStopBehavior: SmoothGroupEventStopBehavior? = nil, filecacheDuration: Int? = nil, fragmentLength: Int? = nil, inputLossAction: InputLossActionForMsSmoothOut? = nil, numRetries: Int? = nil, restartDelay: Int? = nil, segmentationMode: SmoothGroupSegmentationMode? = nil, sendDelayMs: Int? = nil, sparseTrackType: SmoothGroupSparseTrackType? = nil, streamManifestBehavior: SmoothGroupStreamManifestBehavior? = nil, timestampOffset: String? = nil, timestampOffsetMode: SmoothGroupTimestampOffsetMode? = nil) {
+        public init(acquisitionPointId: String? = nil, audioOnlyTimecodeControl: SmoothGroupAudioOnlyTimecodeControl? = nil, certificateMode: SmoothGroupCertificateMode? = nil, connectionRetryInterval: Int? = nil, destination: OutputLocationRef? = nil, eventId: String? = nil, eventIdMode: SmoothGroupEventIdMode? = nil, eventStopBehavior: SmoothGroupEventStopBehavior? = nil, filecacheDuration: Int? = nil, fragmentLength: Int? = nil, inputLossAction: InputLossActionForMsSmoothOut? = nil, numRetries: Int? = nil, restartDelay: Int? = nil, segmentationMode: SmoothGroupSegmentationMode? = nil, sendDelayMs: Int? = nil, sparseTrackType: SmoothGroupSparseTrackType? = nil, streamManifestBehavior: SmoothGroupStreamManifestBehavior? = nil, timestampOffset: String? = nil, timestampOffsetMode: SmoothGroupTimestampOffsetMode? = nil) {
             self.acquisitionPointId = acquisitionPointId
             self.audioOnlyTimecodeControl = audioOnlyTimecodeControl
             self.certificateMode = certificateMode
@@ -8978,9 +8989,9 @@ extension MediaLive {
 
     public struct MultiplexOutputSettings: AWSEncodableShape & AWSDecodableShape {
         /// Destination is a Multiplex.
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
 
-        public init(destination: OutputLocationRef) {
+        public init(destination: OutputLocationRef? = nil) {
             self.destination = destination
         }
 
@@ -9108,11 +9119,11 @@ extension MediaLive {
 
     public struct MultiplexProgramServiceDescriptor: AWSEncodableShape & AWSDecodableShape {
         /// Name of the provider.
-        public let providerName: String
+        public let providerName: String?
         /// Name of the service.
-        public let serviceName: String
+        public let serviceName: String?
 
-        public init(providerName: String, serviceName: String) {
+        public init(providerName: String? = nil, serviceName: String? = nil) {
             self.providerName = providerName
             self.serviceName = serviceName
         }
@@ -9132,13 +9143,13 @@ extension MediaLive {
         /// Indicates which pipeline is preferred by the multiplex for program ingest.
         public let preferredChannelPipeline: PreferredChannelPipeline?
         /// Unique program number.
-        public let programNumber: Int
+        public let programNumber: Int?
         /// Transport stream service descriptor configuration for the Multiplex program.
         public let serviceDescriptor: MultiplexProgramServiceDescriptor?
         /// Program video settings configuration.
         public let videoSettings: MultiplexVideoSettings?
 
-        public init(preferredChannelPipeline: PreferredChannelPipeline? = nil, programNumber: Int, serviceDescriptor: MultiplexProgramServiceDescriptor? = nil, videoSettings: MultiplexVideoSettings? = nil) {
+        public init(preferredChannelPipeline: PreferredChannelPipeline? = nil, programNumber: Int? = nil, serviceDescriptor: MultiplexProgramServiceDescriptor? = nil, videoSettings: MultiplexVideoSettings? = nil) {
             self.preferredChannelPipeline = preferredChannelPipeline
             self.programNumber = programNumber
             self.serviceDescriptor = serviceDescriptor
@@ -9181,13 +9192,13 @@ extension MediaLive {
         /// Maximum video buffer delay in milliseconds.
         public let maximumVideoBufferDelayMilliseconds: Int?
         /// Transport stream bit rate.
-        public let transportStreamBitrate: Int
+        public let transportStreamBitrate: Int?
         /// Transport stream ID.
-        public let transportStreamId: Int
+        public let transportStreamId: Int?
         /// Transport stream reserved bit rate.
         public let transportStreamReservedBitrate: Int?
 
-        public init(maximumVideoBufferDelayMilliseconds: Int? = nil, transportStreamBitrate: Int, transportStreamId: Int, transportStreamReservedBitrate: Int? = nil) {
+        public init(maximumVideoBufferDelayMilliseconds: Int? = nil, transportStreamBitrate: Int? = nil, transportStreamId: Int? = nil, transportStreamReservedBitrate: Int? = nil) {
             self.maximumVideoBufferDelayMilliseconds = maximumVideoBufferDelayMilliseconds
             self.transportStreamBitrate = transportStreamBitrate
             self.transportStreamId = transportStreamId
@@ -9349,13 +9360,13 @@ extension MediaLive {
 
     public struct NielsenCBET: AWSEncodableShape & AWSDecodableShape {
         /// Enter the CBET check digits to use in the watermark.
-        public let cbetCheckDigitString: String
+        public let cbetCheckDigitString: String?
         /// Determines the method of CBET insertion mode when prior encoding is detected on the same layer.
-        public let cbetStepaside: NielsenWatermarksCbetStepaside
+        public let cbetStepaside: NielsenWatermarksCbetStepaside?
         /// Enter the CBET Source ID (CSID) to use in the watermark
-        public let csid: String
+        public let csid: String?
 
-        public init(cbetCheckDigitString: String, cbetStepaside: NielsenWatermarksCbetStepaside, csid: String) {
+        public init(cbetCheckDigitString: String? = nil, cbetStepaside: NielsenWatermarksCbetStepaside? = nil, csid: String? = nil) {
             self.cbetCheckDigitString = cbetCheckDigitString
             self.cbetStepaside = cbetStepaside
             self.csid = csid
@@ -9394,14 +9405,14 @@ extension MediaLive {
 
     public struct NielsenNaesIiNw: AWSEncodableShape & AWSDecodableShape {
         /// Enter the check digit string for the watermark
-        public let checkDigitString: String
+        public let checkDigitString: String?
         /// Enter the Nielsen Source ID (SID) to include in the watermark
-        public let sid: Double
+        public let sid: Double?
         /// Choose the timezone for the time stamps in the watermark. If not provided,
         /// the timestamps will be in Coordinated Universal Time (UTC)
         public let timezone: NielsenWatermarkTimezones?
 
-        public init(checkDigitString: String, sid: Double, timezone: NielsenWatermarkTimezones? = nil) {
+        public init(checkDigitString: String? = nil, sid: Double? = nil, timezone: NielsenWatermarkTimezones? = nil) {
             self.checkDigitString = checkDigitString
             self.sid = sid
             self.timezone = timezone
@@ -9508,11 +9519,11 @@ extension MediaLive {
         /// The name used to identify an output.
         public let outputName: String?
         /// Output type-specific settings.
-        public let outputSettings: OutputSettings
+        public let outputSettings: OutputSettings?
         /// The name of the VideoDescription used as the source for this output.
         public let videoDescriptionName: String?
 
-        public init(audioDescriptionNames: [String]? = nil, captionDescriptionNames: [String]? = nil, outputName: String? = nil, outputSettings: OutputSettings, videoDescriptionName: String? = nil) {
+        public init(audioDescriptionNames: [String]? = nil, captionDescriptionNames: [String]? = nil, outputName: String? = nil, outputSettings: OutputSettings? = nil, videoDescriptionName: String? = nil) {
             self.audioDescriptionNames = audioDescriptionNames
             self.captionDescriptionNames = captionDescriptionNames
             self.outputName = outputName
@@ -9523,7 +9534,7 @@ extension MediaLive {
         public func validate(name: String) throws {
             try self.validate(self.outputName, name: "outputName", parent: name, max: 255)
             try self.validate(self.outputName, name: "outputName", parent: name, min: 1)
-            try self.outputSettings.validate(name: "\(name).outputSettings")
+            try self.outputSettings?.validate(name: "\(name).outputSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -9596,10 +9607,10 @@ extension MediaLive {
         /// Custom output group name optionally defined by the user.
         public let name: String?
         /// Settings associated with the output group.
-        public let outputGroupSettings: OutputGroupSettings
-        public let outputs: [Output]
+        public let outputGroupSettings: OutputGroupSettings?
+        public let outputs: [Output]?
 
-        public init(name: String? = nil, outputGroupSettings: OutputGroupSettings, outputs: [Output]) {
+        public init(name: String? = nil, outputGroupSettings: OutputGroupSettings? = nil, outputs: [Output]? = nil) {
             self.name = name
             self.outputGroupSettings = outputGroupSettings
             self.outputs = outputs
@@ -9607,8 +9618,8 @@ extension MediaLive {
 
         public func validate(name: String) throws {
             try self.validate(self.name, name: "name", parent: name, max: 32)
-            try self.outputGroupSettings.validate(name: "\(name).outputGroupSettings")
-            try self.outputs.forEach {
+            try self.outputGroupSettings?.validate(name: "\(name).outputGroupSettings")
+            try self.outputs?.forEach {
                 try $0.validate(name: "\(name).outputs[]")
             }
         }
@@ -9779,9 +9790,9 @@ extension MediaLive {
 
     public struct PipelinePauseStateSettings: AWSEncodableShape & AWSDecodableShape {
         /// Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
-        public let pipelineId: PipelineId
+        public let pipelineId: PipelineId?
 
-        public init(pipelineId: PipelineId) {
+        public init(pipelineId: PipelineId? = nil) {
             self.pipelineId = pipelineId
         }
 
@@ -9796,7 +9807,7 @@ extension MediaLive {
         ]
 
         /// Number of resources
-        public let count: Int
+        public let count: Int?
         /// Name for the new reservation
         public let name: String?
         /// Offering to purchase, e.g. '87654321'
@@ -9810,7 +9821,7 @@ extension MediaLive {
         /// A collection of key-value pairs
         public let tags: [String: String]?
 
-        public init(count: Int, name: String? = nil, offeringId: String, renewalSettings: RenewalSettings? = nil, requestId: String? = PurchaseOfferingRequest.idempotencyToken(), start: String? = nil, tags: [String: String]? = nil) {
+        public init(count: Int? = nil, name: String? = nil, offeringId: String, renewalSettings: RenewalSettings? = nil, requestId: String? = PurchaseOfferingRequest.idempotencyToken(), start: String? = nil, tags: [String: String]? = nil) {
             self.count = count
             self.name = name
             self.offeringId = offeringId
@@ -9904,21 +9915,21 @@ extension MediaLive {
 
     public struct RemixSettings: AWSEncodableShape & AWSDecodableShape {
         /// Mapping of input channels to output channels, with appropriate gain adjustments.
-        public let channelMappings: [AudioChannelMapping]
+        public let channelMappings: [AudioChannelMapping]?
         /// Number of input channels to be used.
         public let channelsIn: Int?
         /// Number of output channels to be produced.
         /// Valid values: 1, 2, 4, 6, 8
         public let channelsOut: Int?
 
-        public init(channelMappings: [AudioChannelMapping], channelsIn: Int? = nil, channelsOut: Int? = nil) {
+        public init(channelMappings: [AudioChannelMapping]? = nil, channelsIn: Int? = nil, channelsOut: Int? = nil) {
             self.channelMappings = channelMappings
             self.channelsIn = channelsIn
             self.channelsOut = channelsOut
         }
 
         public func validate(name: String) throws {
-            try self.channelMappings.forEach {
+            try self.channelMappings?.forEach {
                 try $0.validate(name: "\(name).channelMappings[]")
             }
             try self.validate(self.channelsIn, name: "channelsIn", parent: name, max: 16)
@@ -10139,11 +10150,11 @@ extension MediaLive {
         /// Number of seconds to wait before retrying a connection to the Flash Media server if the connection is lost.
         public let connectionRetryInterval: Int?
         /// The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For connection to Akamai, a username and password must be supplied. URI fields accept format identifiers.
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// Number of retry attempts.
         public let numRetries: Int?
 
-        public init(certificateMode: RtmpOutputCertificateMode? = nil, connectionRetryInterval: Int? = nil, destination: OutputLocationRef, numRetries: Int? = nil) {
+        public init(certificateMode: RtmpOutputCertificateMode? = nil, connectionRetryInterval: Int? = nil, destination: OutputLocationRef? = nil, numRetries: Int? = nil) {
             self.certificateMode = certificateMode
             self.connectionRetryInterval = connectionRetryInterval
             self.destination = destination
@@ -10165,20 +10176,20 @@ extension MediaLive {
 
     public struct ScheduleAction: AWSEncodableShape & AWSDecodableShape {
         /// The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.
-        public let actionName: String
+        public let actionName: String?
         /// Settings for this schedule action.
-        public let scheduleActionSettings: ScheduleActionSettings
+        public let scheduleActionSettings: ScheduleActionSettings?
         /// The time for the action to start in the channel.
-        public let scheduleActionStartSettings: ScheduleActionStartSettings
+        public let scheduleActionStartSettings: ScheduleActionStartSettings?
 
-        public init(actionName: String, scheduleActionSettings: ScheduleActionSettings, scheduleActionStartSettings: ScheduleActionStartSettings) {
+        public init(actionName: String? = nil, scheduleActionSettings: ScheduleActionSettings? = nil, scheduleActionStartSettings: ScheduleActionStartSettings? = nil) {
             self.actionName = actionName
             self.scheduleActionSettings = scheduleActionSettings
             self.scheduleActionStartSettings = scheduleActionStartSettings
         }
 
         public func validate(name: String) throws {
-            try self.scheduleActionSettings.validate(name: "\(name).scheduleActionSettings")
+            try self.scheduleActionSettings?.validate(name: "\(name).scheduleActionSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -10215,8 +10226,12 @@ extension MediaLive {
         public let staticImageActivateSettings: StaticImageActivateScheduleActionSettings?
         /// Action to deactivate a static image overlay
         public let staticImageDeactivateSettings: StaticImageDeactivateScheduleActionSettings?
+        /// Action to activate a static image overlay in one or more specified outputs
+        public let staticImageOutputActivateSettings: StaticImageOutputActivateScheduleActionSettings?
+        /// Action to deactivate a static image overlay in one or more specified outputs
+        public let staticImageOutputDeactivateSettings: StaticImageOutputDeactivateScheduleActionSettings?
 
-        public init(hlsId3SegmentTaggingSettings: HlsId3SegmentTaggingScheduleActionSettings? = nil, hlsTimedMetadataSettings: HlsTimedMetadataScheduleActionSettings? = nil, inputPrepareSettings: InputPrepareScheduleActionSettings? = nil, inputSwitchSettings: InputSwitchScheduleActionSettings? = nil, motionGraphicsImageActivateSettings: MotionGraphicsActivateScheduleActionSettings? = nil, motionGraphicsImageDeactivateSettings: MotionGraphicsDeactivateScheduleActionSettings? = nil, pauseStateSettings: PauseStateScheduleActionSettings? = nil, scte35InputSettings: Scte35InputScheduleActionSettings? = nil, scte35ReturnToNetworkSettings: Scte35ReturnToNetworkScheduleActionSettings? = nil, scte35SpliceInsertSettings: Scte35SpliceInsertScheduleActionSettings? = nil, scte35TimeSignalSettings: Scte35TimeSignalScheduleActionSettings? = nil, staticImageActivateSettings: StaticImageActivateScheduleActionSettings? = nil, staticImageDeactivateSettings: StaticImageDeactivateScheduleActionSettings? = nil) {
+        public init(hlsId3SegmentTaggingSettings: HlsId3SegmentTaggingScheduleActionSettings? = nil, hlsTimedMetadataSettings: HlsTimedMetadataScheduleActionSettings? = nil, inputPrepareSettings: InputPrepareScheduleActionSettings? = nil, inputSwitchSettings: InputSwitchScheduleActionSettings? = nil, motionGraphicsImageActivateSettings: MotionGraphicsActivateScheduleActionSettings? = nil, motionGraphicsImageDeactivateSettings: MotionGraphicsDeactivateScheduleActionSettings? = nil, pauseStateSettings: PauseStateScheduleActionSettings? = nil, scte35InputSettings: Scte35InputScheduleActionSettings? = nil, scte35ReturnToNetworkSettings: Scte35ReturnToNetworkScheduleActionSettings? = nil, scte35SpliceInsertSettings: Scte35SpliceInsertScheduleActionSettings? = nil, scte35TimeSignalSettings: Scte35TimeSignalScheduleActionSettings? = nil, staticImageActivateSettings: StaticImageActivateScheduleActionSettings? = nil, staticImageDeactivateSettings: StaticImageDeactivateScheduleActionSettings? = nil, staticImageOutputActivateSettings: StaticImageOutputActivateScheduleActionSettings? = nil, staticImageOutputDeactivateSettings: StaticImageOutputDeactivateScheduleActionSettings? = nil) {
             self.hlsId3SegmentTaggingSettings = hlsId3SegmentTaggingSettings
             self.hlsTimedMetadataSettings = hlsTimedMetadataSettings
             self.inputPrepareSettings = inputPrepareSettings
@@ -10230,6 +10245,8 @@ extension MediaLive {
             self.scte35TimeSignalSettings = scte35TimeSignalSettings
             self.staticImageActivateSettings = staticImageActivateSettings
             self.staticImageDeactivateSettings = staticImageDeactivateSettings
+            self.staticImageOutputActivateSettings = staticImageOutputActivateSettings
+            self.staticImageOutputDeactivateSettings = staticImageOutputDeactivateSettings
         }
 
         public func validate(name: String) throws {
@@ -10239,6 +10256,8 @@ extension MediaLive {
             try self.scte35TimeSignalSettings?.validate(name: "\(name).scte35TimeSignalSettings")
             try self.staticImageActivateSettings?.validate(name: "\(name).staticImageActivateSettings")
             try self.staticImageDeactivateSettings?.validate(name: "\(name).staticImageDeactivateSettings")
+            try self.staticImageOutputActivateSettings?.validate(name: "\(name).staticImageOutputActivateSettings")
+            try self.staticImageOutputDeactivateSettings?.validate(name: "\(name).staticImageOutputDeactivateSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -10255,6 +10274,8 @@ extension MediaLive {
             case scte35TimeSignalSettings = "scte35TimeSignalSettings"
             case staticImageActivateSettings = "staticImageActivateSettings"
             case staticImageDeactivateSettings = "staticImageDeactivateSettings"
+            case staticImageOutputActivateSettings = "staticImageOutputActivateSettings"
+            case staticImageOutputDeactivateSettings = "staticImageOutputDeactivateSettings"
         }
     }
 
@@ -10333,15 +10354,15 @@ extension MediaLive {
 
     public struct Scte35DeliveryRestrictions: AWSEncodableShape & AWSDecodableShape {
         /// Corresponds to SCTE-35 archive_allowed_flag.
-        public let archiveAllowedFlag: Scte35ArchiveAllowedFlag
+        public let archiveAllowedFlag: Scte35ArchiveAllowedFlag?
         /// Corresponds to SCTE-35 device_restrictions parameter.
-        public let deviceRestrictions: Scte35DeviceRestrictions
+        public let deviceRestrictions: Scte35DeviceRestrictions?
         /// Corresponds to SCTE-35 no_regional_blackout_flag parameter.
-        public let noRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag
+        public let noRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag?
         /// Corresponds to SCTE-35 web_delivery_allowed_flag parameter.
-        public let webDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag
+        public let webDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag?
 
-        public init(archiveAllowedFlag: Scte35ArchiveAllowedFlag, deviceRestrictions: Scte35DeviceRestrictions, noRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag, webDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag) {
+        public init(archiveAllowedFlag: Scte35ArchiveAllowedFlag? = nil, deviceRestrictions: Scte35DeviceRestrictions? = nil, noRegionalBlackoutFlag: Scte35NoRegionalBlackoutFlag? = nil, webDeliveryAllowedFlag: Scte35WebDeliveryAllowedFlag? = nil) {
             self.archiveAllowedFlag = archiveAllowedFlag
             self.deviceRestrictions = deviceRestrictions
             self.noRegionalBlackoutFlag = noRegionalBlackoutFlag
@@ -10358,14 +10379,14 @@ extension MediaLive {
 
     public struct Scte35Descriptor: AWSEncodableShape & AWSDecodableShape {
         /// SCTE-35 Descriptor Settings.
-        public let scte35DescriptorSettings: Scte35DescriptorSettings
+        public let scte35DescriptorSettings: Scte35DescriptorSettings?
 
-        public init(scte35DescriptorSettings: Scte35DescriptorSettings) {
+        public init(scte35DescriptorSettings: Scte35DescriptorSettings? = nil) {
             self.scte35DescriptorSettings = scte35DescriptorSettings
         }
 
         public func validate(name: String) throws {
-            try self.scte35DescriptorSettings.validate(name: "\(name).scte35DescriptorSettings")
+            try self.scte35DescriptorSettings?.validate(name: "\(name).scte35DescriptorSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -10375,14 +10396,14 @@ extension MediaLive {
 
     public struct Scte35DescriptorSettings: AWSEncodableShape & AWSDecodableShape {
         /// SCTE-35 Segmentation Descriptor.
-        public let segmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor
+        public let segmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor?
 
-        public init(segmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor) {
+        public init(segmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor? = nil) {
             self.segmentationDescriptorScte35DescriptorSettings = segmentationDescriptorScte35DescriptorSettings
         }
 
         public func validate(name: String) throws {
-            try self.segmentationDescriptorScte35DescriptorSettings.validate(name: "\(name).segmentationDescriptorScte35DescriptorSettings")
+            try self.segmentationDescriptorScte35DescriptorSettings?.validate(name: "\(name).segmentationDescriptorScte35DescriptorSettings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -10394,9 +10415,9 @@ extension MediaLive {
         /// In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don't enter the ID of the input.)"
         public let inputAttachmentNameReference: String?
         /// Whether the SCTE-35 input should be the active input or a fixed input.
-        public let mode: Scte35InputMode
+        public let mode: Scte35InputMode?
 
-        public init(inputAttachmentNameReference: String? = nil, mode: Scte35InputMode) {
+        public init(inputAttachmentNameReference: String? = nil, mode: Scte35InputMode? = nil) {
             self.inputAttachmentNameReference = inputAttachmentNameReference
             self.mode = mode
         }
@@ -10409,9 +10430,9 @@ extension MediaLive {
 
     public struct Scte35ReturnToNetworkScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
         /// The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
-        public let spliceEventId: Int64
+        public let spliceEventId: Int64?
 
-        public init(spliceEventId: Int64) {
+        public init(spliceEventId: Int64? = nil) {
             self.spliceEventId = spliceEventId
         }
 
@@ -10429,11 +10450,11 @@ extension MediaLive {
         /// Holds the four SCTE-35 delivery restriction parameters.
         public let deliveryRestrictions: Scte35DeliveryRestrictions?
         /// Corresponds to SCTE-35 segmentation_event_cancel_indicator.
-        public let segmentationCancelIndicator: Scte35SegmentationCancelIndicator
+        public let segmentationCancelIndicator: Scte35SegmentationCancelIndicator?
         /// Corresponds to SCTE-35 segmentation_duration. Optional. The duration for the time_signal, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. Enter time in 90 KHz clock ticks. If you do not enter a duration, the time_signal will continue until you insert a cancellation message.
         public let segmentationDuration: Int64?
         /// Corresponds to SCTE-35 segmentation_event_id.
-        public let segmentationEventId: Int64
+        public let segmentationEventId: Int64?
         /// Corresponds to SCTE-35 segmentation_type_id. One of the segmentation_type_id values listed in the SCTE-35 specification. On the console, enter the ID in decimal (for example, "52"). In the CLI, API, or an SDK, enter the ID in hex (for example, "0x34") or decimal (for example, "52").
         public let segmentationTypeId: Int?
         /// Corresponds to SCTE-35 segmentation_upid. Enter a string containing the hexadecimal representation of the characters that make up the SCTE-35 segmentation_upid value. Must contain an even number of hex characters. Do not include spaces between each hex pair. For example, the ASCII "ADS Information" becomes hex "41445320496e666f726d6174696f6e.
@@ -10449,7 +10470,7 @@ extension MediaLive {
         /// Corresponds to SCTE-35 sub_segments_expected. A value that is valid for the specified segmentation_type_id.
         public let subSegmentsExpected: Int?
 
-        public init(deliveryRestrictions: Scte35DeliveryRestrictions? = nil, segmentationCancelIndicator: Scte35SegmentationCancelIndicator, segmentationDuration: Int64? = nil, segmentationEventId: Int64, segmentationTypeId: Int? = nil, segmentationUpid: String? = nil, segmentationUpidType: Int? = nil, segmentNum: Int? = nil, segmentsExpected: Int? = nil, subSegmentNum: Int? = nil, subSegmentsExpected: Int? = nil) {
+        public init(deliveryRestrictions: Scte35DeliveryRestrictions? = nil, segmentationCancelIndicator: Scte35SegmentationCancelIndicator? = nil, segmentationDuration: Int64? = nil, segmentationEventId: Int64? = nil, segmentationTypeId: Int? = nil, segmentationUpid: String? = nil, segmentationUpidType: Int? = nil, segmentNum: Int? = nil, segmentsExpected: Int? = nil, subSegmentNum: Int? = nil, subSegmentsExpected: Int? = nil) {
             self.deliveryRestrictions = deliveryRestrictions
             self.segmentationCancelIndicator = segmentationCancelIndicator
             self.segmentationDuration = segmentationDuration
@@ -10527,9 +10548,9 @@ extension MediaLive {
         /// Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.
         public let duration: Int64?
         /// The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
-        public let spliceEventId: Int64
+        public let spliceEventId: Int64?
 
-        public init(duration: Int64? = nil, spliceEventId: Int64) {
+        public init(duration: Int64? = nil, spliceEventId: Int64? = nil) {
             self.duration = duration
             self.spliceEventId = spliceEventId
         }
@@ -10575,14 +10596,14 @@ extension MediaLive {
 
     public struct Scte35TimeSignalScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
         /// The list of SCTE-35 descriptors accompanying the SCTE-35 time_signal.
-        public let scte35Descriptors: [Scte35Descriptor]
+        public let scte35Descriptors: [Scte35Descriptor]?
 
-        public init(scte35Descriptors: [Scte35Descriptor]) {
+        public init(scte35Descriptors: [Scte35Descriptor]? = nil) {
             self.scte35Descriptors = scte35Descriptors
         }
 
         public func validate(name: String) throws {
-            try self.scte35Descriptors.forEach {
+            try self.scte35Descriptors?.forEach {
                 try $0.validate(name: "\(name).scte35Descriptors[]")
             }
         }
@@ -10599,15 +10620,15 @@ extension MediaLive {
     public struct StandardHlsSettings: AWSEncodableShape & AWSDecodableShape {
         /// List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','.
         public let audioRenditionSets: String?
-        public let m3u8Settings: M3u8Settings
+        public let m3u8Settings: M3u8Settings?
 
-        public init(audioRenditionSets: String? = nil, m3u8Settings: M3u8Settings) {
+        public init(audioRenditionSets: String? = nil, m3u8Settings: M3u8Settings? = nil) {
             self.audioRenditionSets = audioRenditionSets
             self.m3u8Settings = m3u8Settings
         }
 
         public func validate(name: String) throws {
-            try self.m3u8Settings.validate(name: "\(name).m3u8Settings")
+            try self.m3u8Settings?.validate(name: "\(name).m3u8Settings")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -10736,7 +10757,7 @@ extension MediaLive {
             AWSMemberEncoding(label: "inputDeviceId", location: .uri("InputDeviceId"))
         ]
 
-        /// The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+        /// The unique ID of the input device to start. For example, hd-123456789abcdef.
         public let inputDeviceId: String
 
         public init(inputDeviceId: String) {
@@ -10837,7 +10858,7 @@ extension MediaLive {
         /// The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.
         public let height: Int?
         /// The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.
-        public let image: InputLocation
+        public let image: InputLocation?
         /// Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.
         public let imageX: Int?
         /// Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.
@@ -10849,7 +10870,7 @@ extension MediaLive {
         /// The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
         public let width: Int?
 
-        public init(duration: Int? = nil, fadeIn: Int? = nil, fadeOut: Int? = nil, height: Int? = nil, image: InputLocation, imageX: Int? = nil, imageY: Int? = nil, layer: Int? = nil, opacity: Int? = nil, width: Int? = nil) {
+        public init(duration: Int? = nil, fadeIn: Int? = nil, fadeOut: Int? = nil, height: Int? = nil, image: InputLocation? = nil, imageX: Int? = nil, imageY: Int? = nil, layer: Int? = nil, opacity: Int? = nil, width: Int? = nil) {
             self.duration = duration
             self.fadeIn = fadeIn
             self.fadeOut = fadeOut
@@ -10867,7 +10888,7 @@ extension MediaLive {
             try self.validate(self.fadeIn, name: "fadeIn", parent: name, min: 0)
             try self.validate(self.fadeOut, name: "fadeOut", parent: name, min: 0)
             try self.validate(self.height, name: "height", parent: name, min: 1)
-            try self.image.validate(name: "\(name).image")
+            try self.image?.validate(name: "\(name).image")
             try self.validate(self.imageX, name: "imageX", parent: name, min: 0)
             try self.validate(self.imageY, name: "imageY", parent: name, min: 0)
             try self.validate(self.layer, name: "layer", parent: name, max: 7)
@@ -10914,13 +10935,108 @@ extension MediaLive {
         }
     }
 
+    public struct StaticImageOutputActivateScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
+        /// The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.
+        public let duration: Int?
+        /// The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).
+        public let fadeIn: Int?
+        /// Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).
+        public let fadeOut: Int?
+        /// The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.
+        public let height: Int?
+        /// The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.
+        public let image: InputLocation?
+        /// Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.
+        public let imageX: Int?
+        /// Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.
+        public let imageY: Int?
+        /// The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.
+        public let layer: Int?
+        /// Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
+        public let opacity: Int?
+        /// The name(s) of the output(s) the activation should apply to.
+        public let outputNames: [String]?
+        /// The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
+        public let width: Int?
+
+        public init(duration: Int? = nil, fadeIn: Int? = nil, fadeOut: Int? = nil, height: Int? = nil, image: InputLocation? = nil, imageX: Int? = nil, imageY: Int? = nil, layer: Int? = nil, opacity: Int? = nil, outputNames: [String]? = nil, width: Int? = nil) {
+            self.duration = duration
+            self.fadeIn = fadeIn
+            self.fadeOut = fadeOut
+            self.height = height
+            self.image = image
+            self.imageX = imageX
+            self.imageY = imageY
+            self.layer = layer
+            self.opacity = opacity
+            self.outputNames = outputNames
+            self.width = width
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.duration, name: "duration", parent: name, min: 0)
+            try self.validate(self.fadeIn, name: "fadeIn", parent: name, min: 0)
+            try self.validate(self.fadeOut, name: "fadeOut", parent: name, min: 0)
+            try self.validate(self.height, name: "height", parent: name, min: 1)
+            try self.image?.validate(name: "\(name).image")
+            try self.validate(self.imageX, name: "imageX", parent: name, min: 0)
+            try self.validate(self.imageY, name: "imageY", parent: name, min: 0)
+            try self.validate(self.layer, name: "layer", parent: name, max: 7)
+            try self.validate(self.layer, name: "layer", parent: name, min: 0)
+            try self.validate(self.opacity, name: "opacity", parent: name, max: 100)
+            try self.validate(self.opacity, name: "opacity", parent: name, min: 0)
+            try self.validate(self.width, name: "width", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case duration = "duration"
+            case fadeIn = "fadeIn"
+            case fadeOut = "fadeOut"
+            case height = "height"
+            case image = "image"
+            case imageX = "imageX"
+            case imageY = "imageY"
+            case layer = "layer"
+            case opacity = "opacity"
+            case outputNames = "outputNames"
+            case width = "width"
+        }
+    }
+
+    public struct StaticImageOutputDeactivateScheduleActionSettings: AWSEncodableShape & AWSDecodableShape {
+        /// The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
+        public let fadeOut: Int?
+        /// The image overlay layer to deactivate, 0 to 7. Default is 0.
+        public let layer: Int?
+        /// The name(s) of the output(s) the deactivation should apply to.
+        public let outputNames: [String]?
+
+        public init(fadeOut: Int? = nil, layer: Int? = nil, outputNames: [String]? = nil) {
+            self.fadeOut = fadeOut
+            self.layer = layer
+            self.outputNames = outputNames
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.fadeOut, name: "fadeOut", parent: name, min: 0)
+            try self.validate(self.layer, name: "layer", parent: name, max: 7)
+            try self.validate(self.layer, name: "layer", parent: name, min: 0)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case fadeOut = "fadeOut"
+            case layer = "layer"
+            case outputNames = "outputNames"
+        }
+    }
+
     public struct StaticKeySettings: AWSEncodableShape & AWSDecodableShape {
         /// The URL of the license server used for protecting content.
         public let keyProviderServer: InputLocation?
         /// Static key value as a 32 character hexadecimal string.
-        public let staticKeyValue: String
+        public let staticKeyValue: String?
 
-        public init(keyProviderServer: InputLocation? = nil, staticKeyValue: String) {
+        public init(keyProviderServer: InputLocation? = nil, staticKeyValue: String? = nil) {
             self.keyProviderServer = keyProviderServer
             self.staticKeyValue = staticKeyValue
         }
@@ -11038,7 +11154,7 @@ extension MediaLive {
             AWSMemberEncoding(label: "inputDeviceId", location: .uri("InputDeviceId"))
         ]
 
-        /// The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+        /// The unique ID of the input device to stop. For example, hd-123456789abcdef.
         public let inputDeviceId: String
 
         public init(inputDeviceId: String) {
@@ -11200,10 +11316,10 @@ extension MediaLive {
     }
 
     public struct ThumbnailConfiguration: AWSEncodableShape & AWSDecodableShape {
-        /// Whether Thumbnail is enabled.
-        public let state: ThumbnailState
+        /// Enables the thumbnail feature. The feature generates thumbnails of the incoming video in each pipeline in the channel. AUTO turns the feature on, DISABLE turns the feature off.
+        public let state: ThumbnailState?
 
-        public init(state: ThumbnailState) {
+        public init(state: ThumbnailState? = nil) {
             self.state = state
         }
 
@@ -11231,13 +11347,13 @@ extension MediaLive {
 
     public struct TimecodeBurninSettings: AWSEncodableShape & AWSDecodableShape {
         /// Choose a timecode burn-in font size
-        public let fontSize: TimecodeBurninFontSize
+        public let fontSize: TimecodeBurninFontSize?
         /// Choose a timecode burn-in output position
-        public let position: TimecodeBurninPosition
+        public let position: TimecodeBurninPosition?
         /// Create a timecode burn-in prefix (optional)
         public let prefix: String?
 
-        public init(fontSize: TimecodeBurninFontSize, position: TimecodeBurninPosition, prefix: String? = nil) {
+        public init(fontSize: TimecodeBurninFontSize? = nil, position: TimecodeBurninPosition? = nil, prefix: String? = nil) {
             self.fontSize = fontSize
             self.position = position
             self.prefix = prefix
@@ -11259,11 +11375,11 @@ extension MediaLive {
         /// -Embedded (embedded): Initialize the output timecode with timecode from the the source.  If no embedded timecode is detected in the source, the system falls back to using "Start at 0" (zerobased).
         /// -System Clock (systemclock): Use the UTC time.
         /// -Start at 0 (zerobased): The time of the first frame of the event will be 00:00:00:00.
-        public let source: TimecodeConfigSource
+        public let source: TimecodeConfigSource?
         /// Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified.
         public let syncThreshold: Int?
 
-        public init(source: TimecodeConfigSource, syncThreshold: Int? = nil) {
+        public init(source: TimecodeConfigSource? = nil, syncThreshold: Int? = nil) {
             self.source = source
             self.syncThreshold = syncThreshold
         }
@@ -11393,13 +11509,13 @@ extension MediaLive {
     public struct UdpOutputSettings: AWSEncodableShape & AWSDecodableShape {
         /// UDP output buffering in milliseconds. Larger values increase latency through the transcoder but simultaneously assist the transcoder in maintaining a constant, low-jitter UDP/RTP output while accommodating clock recovery, input switching, input disruptions, picture reordering, etc.
         public let bufferMsec: Int?
-        public let containerSettings: UdpContainerSettings
+        public let containerSettings: UdpContainerSettings?
         /// Destination address and port number for RTP or UDP packets. Can be unicast or multicast RTP or UDP (eg. rtp://239.10.10.10:5001 or udp://10.100.100.100:5002).
-        public let destination: OutputLocationRef
+        public let destination: OutputLocationRef?
         /// Settings for enabling and adjusting Forward Error Correction on UDP outputs.
         public let fecOutputSettings: FecOutputSettings?
 
-        public init(bufferMsec: Int? = nil, containerSettings: UdpContainerSettings, destination: OutputLocationRef, fecOutputSettings: FecOutputSettings? = nil) {
+        public init(bufferMsec: Int? = nil, containerSettings: UdpContainerSettings? = nil, destination: OutputLocationRef? = nil, fecOutputSettings: FecOutputSettings? = nil) {
             self.bufferMsec = bufferMsec
             self.containerSettings = containerSettings
             self.destination = destination
@@ -11409,7 +11525,7 @@ extension MediaLive {
         public func validate(name: String) throws {
             try self.validate(self.bufferMsec, name: "bufferMsec", parent: name, max: 10000)
             try self.validate(self.bufferMsec, name: "bufferMsec", parent: name, min: 0)
-            try self.containerSettings.validate(name: "\(name).containerSettings")
+            try self.containerSettings?.validate(name: "\(name).containerSettings")
             try self.fecOutputSettings?.validate(name: "\(name).fecOutputSettings")
         }
 
@@ -11451,13 +11567,13 @@ extension MediaLive {
         ]
 
         /// The channel class that you wish to update this channel to use.
-        public let channelClass: ChannelClass
+        public let channelClass: ChannelClass?
         /// Channel Id of the channel whose class should be updated.
         public let channelId: String
         /// A list of output destinations for this channel.
         public let destinations: [OutputDestination]?
 
-        public init(channelClass: ChannelClass, channelId: String, destinations: [OutputDestination]? = nil) {
+        public init(channelClass: ChannelClass? = nil, channelId: String, destinations: [OutputDestination]? = nil) {
             self.channelClass = channelClass
             self.channelId = channelId
             self.destinations = destinations
@@ -11939,7 +12055,7 @@ extension MediaLive {
         /// Output video height, in pixels. Must be an even number. For most codecs, you can leave this field and width blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
         public let height: Int?
         /// The name of this VideoDescription. Outputs will use this name to uniquely identify this Description.  Description names should be unique within this Live Event.
-        public let name: String
+        public let name: String?
         /// Indicates how MediaLive will respond to the AFD values that might be in the input video. If you do not know what AFD signaling is, or if your downstream system has not given you guidance, choose PASSTHROUGH.
         /// RESPOND: MediaLive clips the input video using a formula that uses the AFD values (configured in afdSignaling ), the input display aspect ratio, and the output display aspect ratio. MediaLive also includes the AFD values in the output, unless the codec for this encode is FRAME_CAPTURE.
         /// PASSTHROUGH: MediaLive ignores the AFD values and does not clip the video. But MediaLive does include the values in the output.
@@ -11952,7 +12068,7 @@ extension MediaLive {
         /// Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
         public let width: Int?
 
-        public init(codecSettings: VideoCodecSettings? = nil, height: Int? = nil, name: String, respondToAfd: VideoDescriptionRespondToAfd? = nil, scalingBehavior: VideoDescriptionScalingBehavior? = nil, sharpness: Int? = nil, width: Int? = nil) {
+        public init(codecSettings: VideoCodecSettings? = nil, height: Int? = nil, name: String? = nil, respondToAfd: VideoDescriptionRespondToAfd? = nil, scalingBehavior: VideoDescriptionScalingBehavior? = nil, sharpness: Int? = nil, width: Int? = nil) {
             self.codecSettings = codecSettings
             self.height = height
             self.name = name
@@ -12090,9 +12206,9 @@ extension MediaLive {
         public let securityGroupIds: [String]?
         /// A list of VPC subnet IDs from the same VPC.
         /// If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
-        public let subnetIds: [String]
+        public let subnetIds: [String]?
 
-        public init(publicAddressAllocationIds: [String]? = nil, securityGroupIds: [String]? = nil, subnetIds: [String]) {
+        public init(publicAddressAllocationIds: [String]? = nil, securityGroupIds: [String]? = nil, subnetIds: [String]? = nil) {
             self.publicAddressAllocationIds = publicAddressAllocationIds
             self.securityGroupIds = securityGroupIds
             self.subnetIds = subnetIds

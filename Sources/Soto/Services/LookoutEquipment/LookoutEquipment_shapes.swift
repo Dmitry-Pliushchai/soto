@@ -26,7 +26,7 @@ import SotoCore
 extension LookoutEquipment {
     // MARK: Enums
 
-    public enum AutoPromotionResult: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoPromotionResult: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case modelNotPromoted = "MODEL_NOT_PROMOTED"
         case modelPromoted = "MODEL_PROMOTED"
         case retrainingCancelled = "RETRAINING_CANCELLED"
@@ -35,7 +35,7 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataUploadFrequency: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataUploadFrequency: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pt10m = "PT10M"
         case pt15m = "PT15M"
         case pt1h = "PT1H"
@@ -44,7 +44,7 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case created = "CREATED"
         case importInProgress = "IMPORT_IN_PROGRESS"
@@ -52,21 +52,21 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum InferenceDataImportStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum InferenceDataImportStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case addWhenEmpty = "ADD_WHEN_EMPTY"
         case noImport = "NO_IMPORT"
         case overwrite = "OVERWRITE"
         public var description: String { return self.rawValue }
     }
 
-    public enum InferenceExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum InferenceExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum InferenceSchedulerStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum InferenceSchedulerStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pending = "PENDING"
         case running = "RUNNING"
         case stopped = "STOPPED"
@@ -74,7 +74,7 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case importInProgress = "IMPORT_IN_PROGRESS"
         case inProgress = "IN_PROGRESS"
@@ -82,26 +82,26 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelRating: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelRating: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case anomaly = "ANOMALY"
         case neutral = "NEUTRAL"
         case noAnomaly = "NO_ANOMALY"
         public var description: String { return self.rawValue }
     }
 
-    public enum LatestInferenceResult: String, CustomStringConvertible, Codable, Sendable {
+    public enum LatestInferenceResult: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case anomalous = "ANOMALOUS"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelPromoteMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelPromoteMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case managed = "MANAGED"
         case manual = "MANUAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case importInProgress = "IMPORT_IN_PROGRESS"
         case inProgress = "IN_PROGRESS"
@@ -109,14 +109,14 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelVersionSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelVersionSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `import` = "IMPORT"
         case retraining = "RETRAINING"
         case training = "TRAINING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ModelVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ModelVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case canceled = "CANCELED"
         case failed = "FAILED"
         case importInProgress = "IMPORT_IN_PROGRESS"
@@ -125,14 +125,14 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum Monotonicity: String, CustomStringConvertible, Codable, Sendable {
+    public enum Monotonicity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case decreasing = "DECREASING"
         case increasing = "INCREASING"
         public var description: String { return self.rawValue }
     }
 
-    public enum RetrainingSchedulerStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RetrainingSchedulerStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pending = "PENDING"
         case running = "RUNNING"
         case stopped = "STOPPED"
@@ -140,13 +140,13 @@ extension LookoutEquipment {
         public var description: String { return self.rawValue }
     }
 
-    public enum StatisticalIssueStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StatisticalIssueStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case noIssueDetected = "NO_ISSUE_DETECTED"
         case potentialIssueDetected = "POTENTIAL_ISSUE_DETECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetSamplingRate: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetSamplingRate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pt10m = "PT10M"
         case pt10s = "PT10S"
         case pt15m = "PT15M"

@@ -26,30 +26,30 @@ import SotoCore
 extension VerifiedPermissions {
     // MARK: Enums
 
-    public enum Decision: String, CustomStringConvertible, Codable, Sendable {
+    public enum Decision: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allow = "ALLOW"
         case deny = "DENY"
         public var description: String { return self.rawValue }
     }
 
-    public enum OpenIdIssuer: String, CustomStringConvertible, Codable, Sendable {
+    public enum OpenIdIssuer: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cognito = "COGNITO"
         public var description: String { return self.rawValue }
     }
 
-    public enum PolicyType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PolicyType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "STATIC"
         case templateLinked = "TEMPLATE_LINKED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ValidationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ValidationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case off = "OFF"
         case strict = "STRICT"
         public var description: String { return self.rawValue }
     }
 
-    public enum AttributeValue: AWSEncodableShape, Sendable {
+    public enum AttributeValue: AWSEncodableShape & AWSDecodableShape, Sendable {
         /// An attribute value of Boolean type. Example: {"boolean": true}
         case boolean(Bool)
         /// An attribute value of type EntityIdentifier. Example: "entityIdentifier": { "entityId": "&lt;id&gt;", "entityType": "&lt;entity type&gt;"}
@@ -62,6 +62,37 @@ extension VerifiedPermissions {
         case set([AttributeValue])
         /// An attribute value of String type. Example: {"string": "abc"}
         case string(String)
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            guard container.allKeys.count == 1, let key = container.allKeys.first else {
+                let context = DecodingError.Context(
+                    codingPath: container.codingPath,
+                    debugDescription: "Expected exactly one key, but got \(container.allKeys.count)"
+                )
+                throw DecodingError.dataCorrupted(context)
+            }
+            switch key {
+            case .boolean:
+                let value = try container.decode(Bool.self, forKey: .boolean)
+                self = .boolean(value)
+            case .entityIdentifier:
+                let value = try container.decode(EntityIdentifier.self, forKey: .entityIdentifier)
+                self = .entityIdentifier(value)
+            case .long:
+                let value = try container.decode(Int64.self, forKey: .long)
+                self = .long(value)
+            case .record:
+                let value = try container.decode([String: AttributeValue].self, forKey: .record)
+                self = .record(value)
+            case .set:
+                let value = try container.decode([AttributeValue].self, forKey: .set)
+                self = .set(value)
+            case .string:
+                let value = try container.decode(String.self, forKey: .string)
+                self = .string(value)
+            }
+        }
 
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
@@ -234,7 +265,7 @@ extension VerifiedPermissions {
 
     // MARK: Shapes
 
-    public struct ActionIdentifier: AWSEncodableShape {
+    public struct ActionIdentifier: AWSEncodableShape & AWSDecodableShape {
         /// The ID of an action.
         public let actionId: String
         /// The type of an action.
@@ -257,6 +288,108 @@ extension VerifiedPermissions {
         private enum CodingKeys: String, CodingKey {
             case actionId = "actionId"
             case actionType = "actionType"
+        }
+    }
+
+    public struct BatchIsAuthorizedInput: AWSEncodableShape {
+        /// Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema.
+        public let entities: EntitiesDefinition?
+        /// Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.
+        public let policyStoreId: String
+        /// An array of up to 30 requests that you want Verified Permissions to evaluate.
+        public let requests: [BatchIsAuthorizedInputItem]
+
+        public init(entities: EntitiesDefinition? = nil, policyStoreId: String, requests: [BatchIsAuthorizedInputItem]) {
+            self.entities = entities
+            self.policyStoreId = policyStoreId
+            self.requests = requests
+        }
+
+        public func validate(name: String) throws {
+            try self.entities?.validate(name: "\(name).entities")
+            try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, max: 200)
+            try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, min: 1)
+            try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, pattern: "^[a-zA-Z0-9-]*$")
+            try self.requests.forEach {
+                try $0.validate(name: "\(name).requests[]")
+            }
+            try self.validate(self.requests, name: "requests", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case entities = "entities"
+            case policyStoreId = "policyStoreId"
+            case requests = "requests"
+        }
+    }
+
+    public struct BatchIsAuthorizedInputItem: AWSEncodableShape & AWSDecodableShape {
+        /// Specifies the requested action to be authorized. For example, is the principal authorized to perform this action on the resource?
+        public let action: ActionIdentifier?
+        /// Specifies additional context that can be used to make more granular authorization decisions.
+        public let context: ContextDefinition?
+        /// Specifies the principal for which the authorization decision is to be made.
+        public let principal: EntityIdentifier?
+        /// Specifies the resource for which the authorization decision is to be made.
+        public let resource: EntityIdentifier?
+
+        public init(action: ActionIdentifier? = nil, context: ContextDefinition? = nil, principal: EntityIdentifier? = nil, resource: EntityIdentifier? = nil) {
+            self.action = action
+            self.context = context
+            self.principal = principal
+            self.resource = resource
+        }
+
+        public func validate(name: String) throws {
+            try self.action?.validate(name: "\(name).action")
+            try self.context?.validate(name: "\(name).context")
+            try self.principal?.validate(name: "\(name).principal")
+            try self.resource?.validate(name: "\(name).resource")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case action = "action"
+            case context = "context"
+            case principal = "principal"
+            case resource = "resource"
+        }
+    }
+
+    public struct BatchIsAuthorizedOutput: AWSDecodableShape {
+        /// A series of Allow or Deny decisions for each request, and the policies that produced them.
+        public let results: [BatchIsAuthorizedOutputItem]
+
+        public init(results: [BatchIsAuthorizedOutputItem]) {
+            self.results = results
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case results = "results"
+        }
+    }
+
+    public struct BatchIsAuthorizedOutputItem: AWSDecodableShape {
+        /// An authorization decision that indicates if the authorization request should be allowed or denied.
+        public let decision: Decision
+        /// The list of determining policies used to make the authorization decision. For example, if there are two matching policies, where one is a forbid and the other is a permit, then the forbid policy will be the determining policy. In the case of multiple matching permit policies then there would be multiple determining policies. In the case that no policies match, and hence the response is DENY, there would be no determining policies.
+        public let determiningPolicies: [DeterminingPolicyItem]
+        /// Errors that occurred while making an authorization decision, for example, a policy references an Entity or entity Attribute that does not exist in the slice.
+        public let errors: [EvaluationErrorItem]
+        /// The authorization request that initiated the decision.
+        public let request: BatchIsAuthorizedInputItem
+
+        public init(decision: Decision, determiningPolicies: [DeterminingPolicyItem], errors: [EvaluationErrorItem], request: BatchIsAuthorizedInputItem) {
+            self.decision = decision
+            self.determiningPolicies = determiningPolicies
+            self.errors = errors
+            self.request = request
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case decision = "decision"
+            case determiningPolicies = "determiningPolicies"
+            case errors = "errors"
+            case request = "request"
         }
     }
 
@@ -427,11 +560,14 @@ extension VerifiedPermissions {
     public struct CreatePolicyStoreInput: AWSEncodableShape {
         /// Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other  parameters. We recommend that you use a UUID type of  value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with  different parameters, the retry fails with an IdempotentParameterMismatch error.
         public let clientToken: String?
+        /// Descriptive text that you can provide to help with identification  of the current policy store.
+        public let description: String?
         /// Specifies the validation setting for this policy store. Currently, the only valid and required value is Mode.  We recommend that you turn on STRICT mode only after you define a schema. If a schema doesn't exist, then STRICT mode causes any policy to fail validation, and Verified Permissions rejects the policy. You can turn off validation by using the UpdatePolicyStore. Then, when you have a schema defined, use UpdatePolicyStore again to turn validation back on.
         public let validationSettings: ValidationSettings
 
-        public init(clientToken: String? = CreatePolicyStoreInput.idempotencyToken(), validationSettings: ValidationSettings) {
+        public init(clientToken: String? = CreatePolicyStoreInput.idempotencyToken(), description: String? = nil, validationSettings: ValidationSettings) {
             self.clientToken = clientToken
+            self.description = description
             self.validationSettings = validationSettings
         }
 
@@ -439,10 +575,12 @@ extension VerifiedPermissions {
             try self.validate(self.clientToken, name: "clientToken", parent: name, max: 64)
             try self.validate(self.clientToken, name: "clientToken", parent: name, min: 1)
             try self.validate(self.clientToken, name: "clientToken", parent: name, pattern: "^[a-zA-Z0-9-]*$")
+            try self.validate(self.description, name: "description", parent: name, max: 150)
         }
 
         private enum CodingKeys: String, CodingKey {
             case clientToken = "clientToken"
+            case description = "description"
             case validationSettings = "validationSettings"
         }
     }
@@ -890,6 +1028,8 @@ extension VerifiedPermissions {
         /// The date and time that the policy store was originally created.
         @CustomCoding<ISO8601DateCoder>
         public var createdDate: Date
+        /// Descriptive text that you can provide to help with identification  of the current policy store.
+        public let description: String?
         /// The date and time that the policy store was last updated.
         @CustomCoding<ISO8601DateCoder>
         public var lastUpdatedDate: Date
@@ -898,9 +1038,10 @@ extension VerifiedPermissions {
         /// The current validation settings for the policy store.
         public let validationSettings: ValidationSettings
 
-        public init(arn: String, createdDate: Date, lastUpdatedDate: Date, policyStoreId: String, validationSettings: ValidationSettings) {
+        public init(arn: String, createdDate: Date, description: String? = nil, lastUpdatedDate: Date, policyStoreId: String, validationSettings: ValidationSettings) {
             self.arn = arn
             self.createdDate = createdDate
+            self.description = description
             self.lastUpdatedDate = lastUpdatedDate
             self.policyStoreId = policyStoreId
             self.validationSettings = validationSettings
@@ -909,6 +1050,7 @@ extension VerifiedPermissions {
         private enum CodingKeys: String, CodingKey {
             case arn = "arn"
             case createdDate = "createdDate"
+            case description = "description"
             case lastUpdatedDate = "lastUpdatedDate"
             case policyStoreId = "policyStoreId"
             case validationSettings = "validationSettings"
@@ -1002,14 +1144,17 @@ extension VerifiedPermissions {
         /// The date and time that the schema was most recently updated.
         @CustomCoding<ISO8601DateCoder>
         public var lastUpdatedDate: Date
+        /// The namespaces of the entities referenced by this schema.
+        public let namespaces: [String]?
         /// The ID of the policy store that contains the schema.
         public let policyStoreId: String
         /// The body of the schema, written in Cedar schema JSON.
         public let schema: String
 
-        public init(createdDate: Date, lastUpdatedDate: Date, policyStoreId: String, schema: String) {
+        public init(createdDate: Date, lastUpdatedDate: Date, namespaces: [String]? = nil, policyStoreId: String, schema: String) {
             self.createdDate = createdDate
             self.lastUpdatedDate = lastUpdatedDate
+            self.namespaces = namespaces
             self.policyStoreId = policyStoreId
             self.schema = schema
         }
@@ -1017,6 +1162,7 @@ extension VerifiedPermissions {
         private enum CodingKeys: String, CodingKey {
             case createdDate = "createdDate"
             case lastUpdatedDate = "lastUpdatedDate"
+            case namespaces = "namespaces"
             case policyStoreId = "policyStoreId"
             case schema = "schema"
         }
@@ -1549,18 +1695,27 @@ extension VerifiedPermissions {
         /// The date and time the policy was created.
         @CustomCoding<ISO8601DateCoder>
         public var createdDate: Date
+        /// Descriptive text that you can provide to help with identification  of the current policy store.
+        public let description: String?
+        /// The date and time the policy store was most recently updated.
+        @OptionalCustomCoding<ISO8601DateCoder>
+        public var lastUpdatedDate: Date?
         /// The unique identifier of the policy store.
         public let policyStoreId: String
 
-        public init(arn: String, createdDate: Date, policyStoreId: String) {
+        public init(arn: String, createdDate: Date, description: String? = nil, lastUpdatedDate: Date? = nil, policyStoreId: String) {
             self.arn = arn
             self.createdDate = createdDate
+            self.description = description
+            self.lastUpdatedDate = lastUpdatedDate
             self.policyStoreId = policyStoreId
         }
 
         private enum CodingKeys: String, CodingKey {
             case arn = "arn"
             case createdDate = "createdDate"
+            case description = "description"
+            case lastUpdatedDate = "lastUpdatedDate"
             case policyStoreId = "policyStoreId"
         }
     }
@@ -1936,23 +2091,28 @@ extension VerifiedPermissions {
     }
 
     public struct UpdatePolicyStoreInput: AWSEncodableShape {
+        /// Descriptive text that you can provide to help with identification  of the current policy store.
+        public let description: String?
         /// Specifies the ID of the policy store that you want to update
         public let policyStoreId: String
         /// A structure that defines the validation settings that want to enable for the policy store.
         public let validationSettings: ValidationSettings
 
-        public init(policyStoreId: String, validationSettings: ValidationSettings) {
+        public init(description: String? = nil, policyStoreId: String, validationSettings: ValidationSettings) {
+            self.description = description
             self.policyStoreId = policyStoreId
             self.validationSettings = validationSettings
         }
 
         public func validate(name: String) throws {
+            try self.validate(self.description, name: "description", parent: name, max: 150)
             try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, max: 200)
             try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, min: 1)
             try self.validate(self.policyStoreId, name: "policyStoreId", parent: name, pattern: "^[a-zA-Z0-9-]*$")
         }
 
         private enum CodingKeys: String, CodingKey {
+            case description = "description"
             case policyStoreId = "policyStoreId"
             case validationSettings = "validationSettings"
         }
@@ -2102,8 +2262,8 @@ extension VerifiedPermissions {
         }
     }
 
-    public struct ContextDefinition: AWSEncodableShape {
-        /// An list of attributes that are needed to successfully evaluate an authorization request. Each attribute in this array must include a map of a data type and its value. Example: "Context":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}}
+    public struct ContextDefinition: AWSEncodableShape & AWSDecodableShape {
+        /// An list of attributes that are needed to successfully evaluate an authorization request. Each attribute in this array must include a map of a data type and its value. Example: "contextMap":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}}
         public let contextMap: [String: AttributeValue]?
 
         public init(contextMap: [String: AttributeValue]? = nil) {
@@ -2149,7 +2309,7 @@ extension VerifiedPermissions {
         }
 
         public func validate(name: String) throws {
-            try self.validate(self.cedarJson, name: "cedarJson", parent: name, max: 10000)
+            try self.validate(self.cedarJson, name: "cedarJson", parent: name, max: 100000)
             try self.validate(self.cedarJson, name: "cedarJson", parent: name, min: 1)
         }
 

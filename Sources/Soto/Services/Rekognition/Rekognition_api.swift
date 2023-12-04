@@ -84,7 +84,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "CompareFaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and destination projects can be in different AWS accounts but must be in the same AWS Region. You can't copy a model to another AWS service.   To copy a model version to a different AWS account, you need to create a resource-based policy known as a project policy. You attach the project policy to the source project by calling PutProjectPolicy. The project policy gives permission to copy the model version from a trusting AWS account to a trusted account. For more information creating and attaching a project policy, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.  To copy a model, the destination project, source project, and source model version must already exist.  Copying a model version takes a while to complete. To get the current status, call DescribeProjectVersions and check the value of Status in the ProjectVersionDescription object. The copy operation has finished when the value of Status is COPYING_COMPLETED. This operation requires permissions to perform the rekognition:CopyProjectVersion action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Copies a version of an Amazon Rekognition Custom Labels model from a source project to a destination project. The source and destination projects can be in different AWS accounts but must be in the same AWS Region. You can't copy a model to another AWS service.   To copy a model version to a different AWS account, you need to create a resource-based policy known as a project policy. You attach the project policy to the source project by calling PutProjectPolicy. The project policy gives permission to copy the model version from a trusting AWS account to a trusted account. For more information creating and attaching a project policy, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  If you are copying a model version to a project in the same AWS account, you don't need to create a project policy.  Copying project versions is supported only for Custom Labels models.  To copy a model, the destination project, source project, and source model version must already exist.  Copying a model version takes a while to complete. To get the current status, call DescribeProjectVersions and check the value of Status in the ProjectVersionDescription object. The copy operation has finished when the value of Status is COPYING_COMPLETED. This operation requires permissions to perform the rekognition:CopyProjectVersion action.
     public func copyProjectVersion(_ input: CopyProjectVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CopyProjectVersionResponse> {
         return self.client.execute(operation: "CopyProjectVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -94,7 +94,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "CreateCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset. To create a training dataset for a project, specify TRAIN for the value of  DatasetType. To create the test dataset for a project, specify TEST for the value of DatasetType.  The response from CreateDataset is the Amazon Resource Name (ARN) for the dataset. Creating a dataset takes a while to complete. Use DescribeDataset to check the  current status. The dataset created successfully if the value of Status is CREATE_COMPLETE.  To check if any non-terminal errors occurred, call ListDatasetEntries
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset. To create a training dataset for a project, specify TRAIN for the value of  DatasetType. To create the test dataset for a project, specify TEST for the value of DatasetType.  The response from CreateDataset is the Amazon Resource Name (ARN) for the dataset. Creating a dataset takes a while to complete. Use DescribeDataset to check the  current status. The dataset created successfully if the value of Status is CREATE_COMPLETE.  To check if any non-terminal errors occurred, call ListDatasetEntries
     /// and check for the presence of errors lists in the JSON Lines. Dataset creation fails if a terminal error occurs (Status = CREATE_FAILED).  Currently, you can't access the terminal error information.   For more information, see Creating dataset in the Amazon Rekognition Custom Labels Developer Guide. This operation requires permissions to perform the rekognition:CreateDataset action. If you want to copy an existing dataset, you also require permission to perform the rekognition:ListDatasetEntries action.
     public func createDataset(_ input: CreateDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateDatasetResponse> {
         return self.client.execute(operation: "CreateDataset", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -105,12 +105,12 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "CreateFaceLivenessSession", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a new Amazon Rekognition Custom Labels project. A project is a group of resources (datasets, model versions)  that you use to create and manage Amazon Rekognition Custom Labels models.   This operation requires permissions to perform the rekognition:CreateProject action.
+    /// Creates a new Amazon Rekognition project. A project is a group of resources (datasets, model versions) that you use to create and manage a Amazon Rekognition Custom Labels Model or custom adapter. You can specify a feature to create the project with, if no feature is specified then Custom Labels is used by default. For adapters, you can also choose whether or not to have the project auto update by using the AutoUpdate argument. This operation requires permissions to perform the rekognition:CreateProject action.
     public func createProject(_ input: CreateProjectRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateProjectResponse> {
         return self.client.execute(operation: "CreateProject", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a new version of a model and begins training.  Models are managed as part of an Amazon Rekognition Custom Labels project.  The response from CreateProjectVersion is an Amazon Resource Name (ARN) for the version of the model.  Training uses the training and test datasets associated with the project.  For more information, see Creating training and test dataset in the Amazon Rekognition Custom Labels Developer Guide.   You can train a model in a project that doesn't have associated datasets by specifying manifest files in the TrainingData and TestingData fields.  If you open the console after training a model with manifest files, Amazon Rekognition Custom Labels creates the datasets for you using the most recent manifest files. You can no longer train a model version for the project by specifying manifest files.  Instead of training with a project without associated datasets, we recommend that you use the manifest files to create training and test datasets for the project.  Training takes a while to complete. You can get the current status by calling DescribeProjectVersions. Training completed successfully if the value of the Status field is TRAINING_COMPLETED. If training  fails, see Debugging a failed model training in the Amazon Rekognition Custom Labels developer guide.  Once training has successfully completed, call DescribeProjectVersions to get the training results and evaluate the model.  For more information, see Improving a trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom Labels developers guide.  After evaluating the model, you start the model by calling StartProjectVersion. This operation requires permissions to perform the rekognition:CreateProjectVersion action.
+    /// Creates a new version of Amazon Rekognition project (like a Custom Labels model or a custom adapter) and begins training. Models and adapters are managed as part of a Rekognition project. The response from CreateProjectVersion is an Amazon Resource Name (ARN) for the project version.  The FeatureConfig operation argument allows you to configure specific model or adapter settings. You can provide a description to the project version by using the VersionDescription argment. Training can take a while to complete. You can get the current status by calling DescribeProjectVersions. Training completed successfully if the value of the Status field is TRAINING_COMPLETED. Once training has successfully completed, call DescribeProjectVersions to get the training results and evaluate the model. This operation requires permissions to perform the rekognition:CreateProjectVersion action.   The following applies only to projects with Amazon Rekognition Custom Labels as the chosen feature:  You can train a model in a project that doesn't have associated datasets by specifying manifest files in the TrainingData and TestingData fields.  If you open the console after training a model with manifest files, Amazon Rekognition Custom Labels creates the datasets for you using the most recent manifest files. You can no longer train a model version for the project by specifying manifest files.  Instead of training with a project without associated datasets, we recommend that you use the manifest files to create training and test datasets for the project.
     public func createProjectVersion(_ input: CreateProjectVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateProjectVersionResponse> {
         return self.client.execute(operation: "CreateProjectVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -130,7 +130,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DeleteCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting a dataset might take while. Use DescribeDataset to check the  current status. The dataset is still deleting if the value of Status is DELETE_IN_PROGRESS. If you try to access the dataset after it is deleted, you get a ResourceNotFoundException exception.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting a dataset might take while. Use DescribeDataset to check the  current status. The dataset is still deleting if the value of Status is DELETE_IN_PROGRESS. If you try to access the dataset after it is deleted, you get a ResourceNotFoundException exception.
     ///  You can't delete a dataset while it is creating (Status =  CREATE_IN_PROGRESS) or if the dataset is updating (Status =  UPDATE_IN_PROGRESS). This operation requires permissions to perform the rekognition:DeleteDataset action.
     public func deleteDataset(_ input: DeleteDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteDatasetResponse> {
         return self.client.execute(operation: "DeleteDataset", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -141,17 +141,17 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DeleteFaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes an Amazon Rekognition Custom Labels project.  To delete a project you must first delete all models associated  with the project. To delete a model, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. Be aware that deleting a given project will also delete any ProjectPolicies associated with that project. This operation requires permissions to perform the rekognition:DeleteProject action.
+    /// Deletes a Amazon Rekognition project. To delete a project you must first delete all models or adapters associated with the project. To delete a model or adapter, see DeleteProjectVersion.  DeleteProject is an asynchronous operation. To check if the project is deleted, call DescribeProjects. The project is deleted when the project no longer appears in the response. Be aware that deleting a given project will also delete any ProjectPolicies associated with that project. This operation requires permissions to perform the rekognition:DeleteProject action.
     public func deleteProject(_ input: DeleteProjectRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteProjectResponse> {
         return self.client.execute(operation: "DeleteProject", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes an existing project policy. To get a list of project policies attached to a project, call ListProjectPolicies. To attach a project policy to a project, call PutProjectPolicy. This operation requires permissions to perform the rekognition:DeleteProjectPolicy action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Deletes an existing project policy. To get a list of project policies attached to a project, call ListProjectPolicies. To attach a project policy to a project, call PutProjectPolicy. This operation requires permissions to perform the rekognition:DeleteProjectPolicy action.
     public func deleteProjectPolicy(_ input: DeleteProjectPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteProjectPolicyResponse> {
         return self.client.execute(operation: "DeleteProjectPolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes an Amazon Rekognition Custom Labels model.   You can't delete a model if it is running or if it is training.  To check the status of a model, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion. If the model is training, wait until it finishes. This operation requires permissions to perform the rekognition:DeleteProjectVersion action.
+    /// Deletes a Rekognition project model or project version, like a Amazon Rekognition Custom Labels model or a custom adapter. You can't delete a project version if it is running or if it is training. To check the status of a project version, use the Status field returned from DescribeProjectVersions. To stop a project version call StopProjectVersion. If the project version is training, wait until it finishes. This operation requires permissions to perform the rekognition:DeleteProjectVersion action.
     public func deleteProjectVersion(_ input: DeleteProjectVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteProjectVersionResponse> {
         return self.client.execute(operation: "DeleteProjectVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -171,6 +171,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DescribeCollection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  This operation applies only to Amazon Rekognition Custom Labels.
     /// Describes an Amazon Rekognition Custom Labels dataset. You can get information such as the current status of a dataset and
     /// statistics about the images and labels in a dataset.
     ///  This operation requires permissions to perform the rekognition:DescribeDataset action.
@@ -178,12 +179,12 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DescribeDataset", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists and describes the versions of a model in an Amazon Rekognition Custom Labels project. You  can specify up to 10 model versions in ProjectVersionArns. If you don't specify a value, descriptions for all model versions in the project are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
+    /// Lists and describes the versions of an Amazon Rekognition project. You can specify up to 10 model or adapter versions in ProjectVersionArns. If you don't specify a value, descriptions for all model/adapter versions in the project are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
     public func describeProjectVersions(_ input: DescribeProjectVersionsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeProjectVersionsResponse> {
         return self.client.execute(operation: "DescribeProjectVersions", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Gets information about your Amazon Rekognition Custom Labels projects.  This operation requires permissions to perform the rekognition:DescribeProjects action.
+    /// Gets information about your Rekognition projects. This operation requires permissions to perform the rekognition:DescribeProjects action.
     public func describeProjects(_ input: DescribeProjectsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeProjectsResponse> {
         return self.client.execute(operation: "DescribeProjects", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -193,7 +194,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DescribeStreamProcessor", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model.  You specify which version of a model version to use by using the ProjectVersionArn input parameter.  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  For each object that the model version detects on an image, the API returns a  (CustomLabel) object in an array (CustomLabels). Each CustomLabel object provides the label name (Name), the level of confidence that the image contains the object (Confidence), and  object location information, if it exists,  for the label on the image (Geometry).  To filter labels that are returned, specify a value for MinConfidence. DetectCustomLabelsLabels only returns labels with a confidence that's higher than the specified value.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model.  You specify which version of a model version to use by using the ProjectVersionArn input parameter.  You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  For each object that the model version detects on an image, the API returns a  (CustomLabel) object in an array (CustomLabels). Each CustomLabel object provides the label name (Name), the level of confidence that the image contains the object (Confidence), and  object location information, if it exists,  for the label on the image (Geometry).  To filter labels that are returned, specify a value for MinConfidence. DetectCustomLabelsLabels only returns labels with a confidence that's higher than the specified value.
     ///  The value of MinConfidence maps to the assumed threshold values created during training. For more information, see Assumed threshold in the Amazon Rekognition Custom Labels Developer Guide.  Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of MinConfidence normalizes the threshold value to a percentage value (0-100). Confidence responses from DetectCustomLabels are also returned as a percentage.  You can use MinConfidence to change the precision and recall or your model.  For more information, see  Analyzing an image in the Amazon Rekognition Custom Labels Developer Guide.  If you don't specify a value for MinConfidence,  DetectCustomLabels returns labels based on the assumed threshold of each label. This is a stateless API operation. That is, the operation does not persist any data. This operation requires permissions to perform the rekognition:DetectCustomLabels action.  For more information, see  Analyzing an image in the Amazon Rekognition Custom Labels Developer Guide.
     public func detectCustomLabels(_ input: DetectCustomLabelsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DetectCustomLabelsResponse> {
         return self.client.execute(operation: "DetectCustomLabels", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -209,7 +210,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DetectLabels", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Detects unsafe content in a specified JPEG or PNG format image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide. You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.
+    /// Detects unsafe content in a specified JPEG or PNG format image. Use DetectModerationLabels to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content. To filter images, use the labels returned by DetectModerationLabels to determine which types of content are appropriate. For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide. You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.  You can specify an adapter to use when retrieving label predictions by providing a ProjectVersionArn to the ProjectVersion argument.
     public func detectModerationLabels(_ input: DetectModerationLabelsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DetectModerationLabelsResponse> {
         return self.client.execute(operation: "DetectModerationLabels", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -229,7 +230,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "DisassociateFaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project. DistributeDatasetEntries moves 20% of the training dataset images to the test dataset. An entry is a JSON Line that describes an image.  You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset.  The training dataset must contain the images that you want to split. The test dataset  must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call CreateDataset. Distributing a dataset takes a while to complete. To check the status call DescribeDataset. The operation is complete when the Status field for the training dataset and the test dataset is UPDATE_COMPLETE.  If the dataset split fails, the value of Status is UPDATE_FAILED. This operation requires permissions to perform the rekognition:DistributeDatasetEntries action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project. DistributeDatasetEntries moves 20% of the training dataset images to the test dataset. An entry is a JSON Line that describes an image.  You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset.  The training dataset must contain the images that you want to split. The test dataset  must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call CreateDataset. Distributing a dataset takes a while to complete. To check the status call DescribeDataset. The operation is complete when the Status field for the training dataset and the test dataset is UPDATE_COMPLETE.  If the dataset split fails, the value of Status is UPDATE_FAILED. This operation requires permissions to perform the rekognition:DistributeDatasetEntries action.
     public func distributeDatasetEntries(_ input: DistributeDatasetEntriesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DistributeDatasetEntriesResponse> {
         return self.client.execute(operation: "DistributeDatasetEntries", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -269,6 +270,11 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "GetLabelDetection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves the results for a given media analysis job.  Takes a JobId returned by StartMediaAnalysisJob.
+    public func getMediaAnalysisJob(_ input: GetMediaAnalysisJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetMediaAnalysisJobResponse> {
+        return self.client.execute(operation: "GetMediaAnalysisJob", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Gets the path tracking results of a Amazon Rekognition Video analysis started by StartPersonTracking. The person path tracking operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person path tracking operation, first check  that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call  GetPersonTracking and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) their  paths were tracked in the video.    GetPersonTracking only returns the default   facial attributes (BoundingBox, Confidence,  Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned.  For more information, see FaceDetail in the Amazon Rekognition Developer Guide.  By default, the array is sorted by the time(s) a person's path is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
     public func getPersonTracking(_ input: GetPersonTrackingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetPersonTrackingResponse> {
         return self.client.execute(operation: "GetPersonTracking", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -294,6 +300,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "ListCollections", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    ///  This operation applies only to Amazon Rekognition Custom Labels.
     /// Lists the entries (images) within a dataset. An entry is a
     /// JSON Line that contains the information for a single image, including
     /// the image location, assigned labels, and object location bounding boxes. For
@@ -303,7 +310,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "ListDatasetEntries", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see  Labeling images.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see  Labeling images.
     ///   Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see Labeling images in the Amazon Rekognition Custom Labels Developer Guide.
     public func listDatasetLabels(_ input: ListDatasetLabelsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDatasetLabelsResponse> {
         return self.client.execute(operation: "ListDatasetLabels", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -314,7 +321,12 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "ListFaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy. This operation requires permissions to perform the rekognition:ListProjectPolicies action.
+    /// Returns a list of media analysis jobs. Results are sorted by CreationTimestamp in descending order.
+    public func listMediaAnalysisJobs(_ input: ListMediaAnalysisJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListMediaAnalysisJobsResponse> {
+        return self.client.execute(operation: "ListMediaAnalysisJobs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy. This operation requires permissions to perform the rekognition:ListProjectPolicies action.
     public func listProjectPolicies(_ input: ListProjectPoliciesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListProjectPoliciesResponse> {
         return self.client.execute(operation: "ListProjectPolicies", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -334,7 +346,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "ListUsers", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A project policy specifies that a trusted AWS account can copy a model version from a trusting AWS account to a project in the trusted AWS account. To copy a model version you use the CopyProjectVersion operation. For more information about the format of a project policy document, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  The response from PutProjectPolicy is a revision ID for the project policy. You can attach multiple project policies to a project. You can also update an existing project policy by specifying the policy revision ID of the existing policy. To remove a project policy from a project, call DeleteProjectPolicy. To get a list of project policies attached to a project, call ListProjectPolicies.  You copy a model version by calling CopyProjectVersion. This operation requires permissions to perform the rekognition:PutProjectPolicy action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A project policy specifies that a trusted AWS account can copy a model version from a trusting AWS account to a project in the trusted AWS account. To copy a model version you use the CopyProjectVersion operation. Only applies to Custom Labels projects. For more information about the format of a project policy document, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  The response from PutProjectPolicy is a revision ID for the project policy. You can attach multiple project policies to a project. You can also update an existing project policy by specifying the policy revision ID of the existing policy. To remove a project policy from a project, call DeleteProjectPolicy. To get a list of project policies attached to a project, call ListProjectPolicies.  You copy a model version by calling CopyProjectVersion. This operation requires permissions to perform the rekognition:PutProjectPolicy action.
     public func putProjectPolicy(_ input: PutProjectPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<PutProjectPolicyResponse> {
         return self.client.execute(operation: "PutProjectPolicy", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -389,12 +401,17 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "StartLabelDetection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Initiates a new media analysis job. Accepts a manifest file in an Amazon S3 bucket. The output is a manifest file and a summary of the manifest stored in the Amazon S3 bucket.
+    public func startMediaAnalysisJob(_ input: StartMediaAnalysisJobRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartMediaAnalysisJobResponse> {
+        return self.client.execute(operation: "StartMediaAnalysisJob", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Starts the asynchronous tracking of a person's path in a stored video. Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartPersonTracking returns a job identifier (JobId) which you use to get the results of the operation. When label detection is finished, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel.  To get the results of the person detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call  GetPersonTracking and pass the job identifier (JobId) from the initial call to StartPersonTracking.
     public func startPersonTracking(_ input: StartPersonTrackingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartPersonTrackingResponse> {
         return self.client.execute(operation: "StartPersonTracking", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions. Once the model is running, you can detect custom labels in new images by calling  DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  For more information, see Running a trained Amazon Rekognition Custom Labels model in the Amazon Rekognition Custom Labels Guide. This operation requires permissions to perform the  rekognition:StartProjectVersion action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Starts the running of the version of a model. Starting a model takes a while to complete. To check the current state of the model, use DescribeProjectVersions.  Once the model is running, you can detect custom labels in new images by calling  DetectCustomLabels.  You are charged for the amount of time that the model is running. To stop a running model, call StopProjectVersion.  This operation requires permissions to perform the  rekognition:StartProjectVersion action.
     public func startProjectVersion(_ input: StartProjectVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartProjectVersionResponse> {
         return self.client.execute(operation: "StartProjectVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -414,7 +431,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "StartTextDetection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Stops a running model. The operation might take a while to complete. To check the current status, call DescribeProjectVersions.  This operation requires permissions to perform the rekognition:StopProjectVersion action.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Stops a running model. The operation might take a while to complete. To check the current status, call DescribeProjectVersions. Only applies to Custom Labels projects. This operation requires permissions to perform the rekognition:StopProjectVersion action.
     public func stopProjectVersion(_ input: StopProjectVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StopProjectVersionResponse> {
         return self.client.execute(operation: "StopProjectVersion", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -434,7 +451,7 @@ public struct Rekognition: AWSService {
         return self.client.execute(operation: "UntagResource", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the information for a single image,  including the image location, assigned labels, and object location bounding boxes.  For more information,  see Image-Level labels in manifest files and Object localization in manifest files in the Amazon Rekognition Custom Labels Developer Guide.  If the source-ref field in the JSON line references an existing image, the existing image in the dataset is updated.  If source-ref field doesn't reference an existing image, the image is added as a new image to the dataset.  You specify the changes that you want to make in the Changes input parameter.  There isn't a limit to the number JSON Lines that you can change, but the size of Changes must be less
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Adds or updates one or more entries (images) in a dataset. An entry is a JSON Line which contains the information for a single image,  including the image location, assigned labels, and object location bounding boxes.  For more information,  see Image-Level labels in manifest files and Object localization in manifest files in the Amazon Rekognition Custom Labels Developer Guide.  If the source-ref field in the JSON line references an existing image, the existing image in the dataset is updated.  If source-ref field doesn't reference an existing image, the image is added as a new image to the dataset.  You specify the changes that you want to make in the Changes input parameter.  There isn't a limit to the number JSON Lines that you can change, but the size of Changes must be less
     /// than 5MB.  UpdateDatasetEntries returns immediatly, but the dataset update might take a while to complete. Use DescribeDataset to check the  current status. The dataset updated successfully if the value of Status is UPDATE_COMPLETE.  To check if any non-terminal errors occured, call ListDatasetEntries and check for the presence of errors lists in the JSON Lines. Dataset update fails if a terminal error occurs (Status = UPDATE_FAILED).  Currently, you can't access the terminal error information from the Amazon Rekognition Custom Labels SDK.  This operation requires permissions to perform the rekognition:UpdateDatasetEntries action.
     public func updateDatasetEntries(_ input: UpdateDatasetEntriesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateDatasetEntriesResponse> {
         return self.client.execute(operation: "UpdateDatasetEntries", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -458,7 +475,7 @@ extension Rekognition {
 // MARK: Paginators
 
 extension Rekognition {
-    /// Lists and describes the versions of a model in an Amazon Rekognition Custom Labels project. You  can specify up to 10 model versions in ProjectVersionArns. If you don't specify a value, descriptions for all model versions in the project are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
+    /// Lists and describes the versions of an Amazon Rekognition project. You can specify up to 10 model or adapter versions in ProjectVersionArns. If you don't specify a value, descriptions for all model/adapter versions in the project are returned. This operation requires permissions to perform the rekognition:DescribeProjectVersions action.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -511,7 +528,7 @@ extension Rekognition {
         )
     }
 
-    /// Gets information about your Amazon Rekognition Custom Labels projects.  This operation requires permissions to perform the rekognition:DescribeProjects action.
+    /// Gets information about your Rekognition projects. This operation requires permissions to perform the rekognition:DescribeProjects action.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -1041,6 +1058,7 @@ extension Rekognition {
         )
     }
 
+    ///  This operation applies only to Amazon Rekognition Custom Labels.
     /// Lists the entries (images) within a dataset. An entry is a
     /// JSON Line that contains the information for a single image, including
     /// the image location, assigned labels, and object location bounding boxes. For
@@ -1098,7 +1116,7 @@ extension Rekognition {
         )
     }
 
-    /// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see  Labeling images.
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see  Labeling images.
     ///   Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe images. For more information, see Labeling images in the Amazon Rekognition Custom Labels Developer Guide.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -1205,7 +1223,60 @@ extension Rekognition {
         )
     }
 
-    /// Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy. This operation requires permissions to perform the rekognition:ListProjectPolicies action.
+    /// Returns a list of media analysis jobs. Results are sorted by CreationTimestamp in descending order.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listMediaAnalysisJobsPaginator<Result>(
+        _ input: ListMediaAnalysisJobsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListMediaAnalysisJobsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listMediaAnalysisJobs,
+            inputKey: \ListMediaAnalysisJobsRequest.nextToken,
+            outputKey: \ListMediaAnalysisJobsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listMediaAnalysisJobsPaginator(
+        _ input: ListMediaAnalysisJobsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListMediaAnalysisJobsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listMediaAnalysisJobs,
+            inputKey: \ListMediaAnalysisJobsRequest.nextToken,
+            outputKey: \ListMediaAnalysisJobsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    ///  This operation applies only to Amazon Rekognition Custom Labels.  Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy. This operation requires permissions to perform the rekognition:ListProjectPolicies action.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -1379,6 +1450,7 @@ extension Rekognition.DescribeProjectVersionsRequest: AWSPaginateToken {
 extension Rekognition.DescribeProjectsRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Rekognition.DescribeProjectsRequest {
         return .init(
+            features: self.features,
             maxResults: self.maxResults,
             nextToken: token,
             projectNames: self.projectNames
@@ -1514,6 +1586,15 @@ extension Rekognition.ListFacesRequest: AWSPaginateToken {
             maxResults: self.maxResults,
             nextToken: token,
             userId: self.userId
+        )
+    }
+}
+
+extension Rekognition.ListMediaAnalysisJobsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Rekognition.ListMediaAnalysisJobsRequest {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
         )
     }
 }

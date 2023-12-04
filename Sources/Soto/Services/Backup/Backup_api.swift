@@ -103,6 +103,16 @@ public struct Backup: AWSService {
         return self.client.execute(operation: "CreateReportPlan", path: "/audit/report-plans", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// This is the first of two steps to create a restore testing  plan; once this request is successful, finish the procedure with  request CreateRestoreTestingSelection. You must include the parameter RestoreTestingPlan. You may  optionally include CreatorRequestId and Tags.
+    public func createRestoreTestingPlan(_ input: CreateRestoreTestingPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateRestoreTestingPlanOutput> {
+        return self.client.execute(operation: "CreateRestoreTestingPlan", path: "/restore-testing/plans", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This request can be sent after CreateRestoreTestingPlan request  returns successfully. This is the second part of creating a resource testing  plan, and it must be completed sequentially. This consists of RestoreTestingSelectionName, ProtectedResourceType, and one of the following:    ProtectedResourceArns     ProtectedResourceConditions    Each protected resource type can have one single value. A restore testing selection can include a wildcard value ("*") for ProtectedResourceArns along with ProtectedResourceConditions. Alternatively, you can include up to 30 specific protected resource ARNs in ProtectedResourceArns. Cannot select by both protected resource types AND specific ARNs.  Request will fail if both are included.
+    public func createRestoreTestingSelection(_ input: CreateRestoreTestingSelectionInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateRestoreTestingSelectionOutput> {
+        return self.client.execute(operation: "CreateRestoreTestingSelection", path: "/restore-testing/plans/{RestoreTestingPlanName}/selections", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
     public func deleteBackupPlan(_ input: DeleteBackupPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteBackupPlanOutput> {
         return self.client.execute(operation: "DeleteBackupPlan", path: "/backup/plans/{BackupPlanId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -146,6 +156,16 @@ public struct Backup: AWSService {
     /// Deletes the report plan specified by a report plan name.
     @discardableResult public func deleteReportPlan(_ input: DeleteReportPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "DeleteReportPlan", path: "/audit/report-plans/{ReportPlanName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This request deletes the specified restore testing plan. Deletion can only successfully occur if all associated  restore testing selections are deleted first.
+    @discardableResult public func deleteRestoreTestingPlan(_ input: DeleteRestoreTestingPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteRestoreTestingPlan", path: "/restore-testing/plans/{RestoreTestingPlanName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Input the Restore Testing Plan name and Restore Testing Selection  name. All testing selections associated with a restore testing plan must  be deleted before the restore testing plan can be deleted.
+    @discardableResult public func deleteRestoreTestingSelection(_ input: DeleteRestoreTestingSelectionInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "DeleteRestoreTestingSelection", path: "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns backup job details for the specified BackupJobId.
@@ -258,9 +278,34 @@ public struct Backup: AWSService {
         return self.client.execute(operation: "GetRecoveryPointRestoreMetadata", path: "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/restore-metadata", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// This request returns the metadata for the specified restore job.
+    public func getRestoreJobMetadata(_ input: GetRestoreJobMetadataInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRestoreJobMetadataOutput> {
+        return self.client.execute(operation: "GetRestoreJobMetadata", path: "/restore-jobs/{RestoreJobId}/metadata", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This request returns the minimal required set of metadata needed to  start a restore job with secure default settings. BackupVaultName  and RecoveryPointArn are required parameters.  BackupVaultAccountId is an optional parameter.
+    public func getRestoreTestingInferredMetadata(_ input: GetRestoreTestingInferredMetadataInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRestoreTestingInferredMetadataOutput> {
+        return self.client.execute(operation: "GetRestoreTestingInferredMetadata", path: "/restore-testing/inferred-metadata", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns RestoreTestingPlan details for the specified RestoreTestingPlanName. The details are the body of a restore testing plan in JSON format, in addition to plan metadata.
+    public func getRestoreTestingPlan(_ input: GetRestoreTestingPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRestoreTestingPlanOutput> {
+        return self.client.execute(operation: "GetRestoreTestingPlan", path: "/restore-testing/plans/{RestoreTestingPlanName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns RestoreTestingSelection, which displays resources  and elements of the restore testing plan.
+    public func getRestoreTestingSelection(_ input: GetRestoreTestingSelectionInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetRestoreTestingSelectionOutput> {
+        return self.client.execute(operation: "GetRestoreTestingSelection", path: "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns the Amazon Web Services resource types supported by Backup.
     public func getSupportedResourceTypes(logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetSupportedResourceTypesOutput> {
         return self.client.execute(operation: "GetSupportedResourceTypes", path: "/supported-resource-types", httpMethod: .GET, serviceConfig: self.config, logger: logger, on: eventLoop)
+    }
+
+    /// This is a request for a summary of backup jobs created  or running within the most recent 30 days. You can  include parameters AccountID, State, ResourceType, MessageCategory,  AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, ResourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    public func listBackupJobSummaries(_ input: ListBackupJobSummariesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListBackupJobSummariesOutput> {
+        return self.client.execute(operation: "ListBackupJobSummaries", path: "/audit/backup-job-summaries", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these monitoring tools.
@@ -291,6 +336,11 @@ public struct Backup: AWSService {
     /// Returns a list of recovery point storage containers along with information about them.
     public func listBackupVaults(_ input: ListBackupVaultsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListBackupVaultsOutput> {
         return self.client.execute(operation: "ListBackupVaults", path: "/backup-vaults", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This request obtains a list of copy jobs created  or running within the the most recent 30 days. You can  include parameters AccountID, State, ResourceType, MessageCategory,  AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, RestourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    public func listCopyJobSummaries(_ input: ListCopyJobSummariesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListCopyJobSummariesOutput> {
+        return self.client.execute(operation: "ListCopyJobSummaries", path: "/audit/copy-job-summaries", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns metadata about your copy jobs.
@@ -343,9 +393,29 @@ public struct Backup: AWSService {
         return self.client.execute(operation: "ListReportPlans", path: "/audit/report-plans", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// This request obtains a summary of restore jobs created  or running within the the most recent 30 days. You can  include parameters AccountID, State, ResourceType,   AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, RestourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    public func listRestoreJobSummaries(_ input: ListRestoreJobSummariesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRestoreJobSummariesOutput> {
+        return self.client.execute(operation: "ListRestoreJobSummaries", path: "/audit/restore-job-summaries", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.
     public func listRestoreJobs(_ input: ListRestoreJobsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRestoreJobsOutput> {
         return self.client.execute(operation: "ListRestoreJobs", path: "/restore-jobs", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This returns restore jobs that contain the specified protected resource. You must include ResourceArn. You can optionally include NextToken, ByStatus, MaxResults, ByRecoveryPointCreationDateAfter , and ByRecoveryPointCreationDateBefore.
+    public func listRestoreJobsByProtectedResource(_ input: ListRestoreJobsByProtectedResourceInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRestoreJobsByProtectedResourceOutput> {
+        return self.client.execute(operation: "ListRestoreJobsByProtectedResource", path: "/resources/{ResourceArn}/restore-jobs", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of restore testing plans.
+    public func listRestoreTestingPlans(_ input: ListRestoreTestingPlansInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRestoreTestingPlansOutput> {
+        return self.client.execute(operation: "ListRestoreTestingPlans", path: "/restore-testing/plans", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns a list of restore testing selections. Can be filtered  by MaxResults and RestoreTestingPlanName.
+    public func listRestoreTestingSelections(_ input: ListRestoreTestingSelectionsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListRestoreTestingSelectionsOutput> {
+        return self.client.execute(operation: "ListRestoreTestingSelections", path: "/restore-testing/plans/{RestoreTestingPlanName}/selections", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.  ListTags only works for resource types that support full Backup management of their backups. Those resource types are listed in the "Full Backup management" section of the  Feature availability by resource table.
@@ -366,6 +436,11 @@ public struct Backup: AWSService {
     /// Turns on notifications on a backup vault for the specified topic and events.
     @discardableResult public func putBackupVaultNotifications(_ input: PutBackupVaultNotificationsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
         return self.client.execute(operation: "PutBackupVaultNotifications", path: "/backup-vaults/{BackupVaultName}/notification-configuration", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// This request allows you to send your independent self-run  restore test validation results.  RestoreJobId and ValidationStatus  are required. Optionally, you can input a  ValidationStatusMessage.
+    @discardableResult public func putRestoreValidationResult(_ input: PutRestoreValidationResultInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<Void> {
+        return self.client.execute(operation: "PutRestoreValidationResult", path: "/restore-jobs/{RestoreJobId}/validations", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Starts an on-demand backup job for the specified resource.
@@ -432,6 +507,16 @@ public struct Backup: AWSService {
     public func updateReportPlan(_ input: UpdateReportPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateReportPlanOutput> {
         return self.client.execute(operation: "UpdateReportPlan", path: "/audit/report-plans/{ReportPlanName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
+
+    /// This request will send changes to your specified restore testing  plan. RestoreTestingPlanName  cannot be updated after it is created.  RecoveryPointSelection can contain:    Algorithm     ExcludeVaults     IncludeVaults     RecoveryPointTypes     SelectionWindowDays
+    public func updateRestoreTestingPlan(_ input: UpdateRestoreTestingPlanInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateRestoreTestingPlanOutput> {
+        return self.client.execute(operation: "UpdateRestoreTestingPlan", path: "/restore-testing/plans/{RestoreTestingPlanName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Most elements except the RestoreTestingSelectionName  can be updated with this request.  RestoreTestingSelection can use either protected  resource ARNs or conditions, but not both. That is, if your selection  has ProtectedResourceArns, requesting an update with the  parameter ProtectedResourceConditions will be  unsuccessful.
+    public func updateRestoreTestingSelection(_ input: UpdateRestoreTestingSelectionInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateRestoreTestingSelectionOutput> {
+        return self.client.execute(operation: "UpdateRestoreTestingSelection", path: "/restore-testing/plans/{RestoreTestingPlanName}/selections/{RestoreTestingSelectionName}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
 }
 
 extension Backup {
@@ -446,6 +531,59 @@ extension Backup {
 // MARK: Paginators
 
 extension Backup {
+    /// This is a request for a summary of backup jobs created  or running within the most recent 30 days. You can  include parameters AccountID, State, ResourceType, MessageCategory,  AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, ResourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listBackupJobSummariesPaginator<Result>(
+        _ input: ListBackupJobSummariesInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListBackupJobSummariesOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listBackupJobSummaries,
+            inputKey: \ListBackupJobSummariesInput.nextToken,
+            outputKey: \ListBackupJobSummariesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listBackupJobSummariesPaginator(
+        _ input: ListBackupJobSummariesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListBackupJobSummariesOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listBackupJobSummaries,
+            inputKey: \ListBackupJobSummariesInput.nextToken,
+            outputKey: \ListBackupJobSummariesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these monitoring tools.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -759,6 +897,59 @@ extension Backup {
             command: self.listBackupVaults,
             inputKey: \ListBackupVaultsInput.nextToken,
             outputKey: \ListBackupVaultsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// This request obtains a list of copy jobs created  or running within the the most recent 30 days. You can  include parameters AccountID, State, ResourceType, MessageCategory,  AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, RestourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listCopyJobSummariesPaginator<Result>(
+        _ input: ListCopyJobSummariesInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListCopyJobSummariesOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listCopyJobSummaries,
+            inputKey: \ListCopyJobSummariesInput.nextToken,
+            outputKey: \ListCopyJobSummariesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listCopyJobSummariesPaginator(
+        _ input: ListCopyJobSummariesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListCopyJobSummariesOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listCopyJobSummaries,
+            inputKey: \ListCopyJobSummariesInput.nextToken,
+            outputKey: \ListCopyJobSummariesOutput.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -1294,6 +1485,59 @@ extension Backup {
         )
     }
 
+    /// This request obtains a summary of restore jobs created  or running within the the most recent 30 days. You can  include parameters AccountID, State, ResourceType,   AggregationPeriod, MaxResults, or NextToken to filter  results. This request returns a summary that contains  Region, Account, State, RestourceType, MessageCategory,  StartTime, EndTime, and Count of included jobs.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRestoreJobSummariesPaginator<Result>(
+        _ input: ListRestoreJobSummariesInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRestoreJobSummariesOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRestoreJobSummaries,
+            inputKey: \ListRestoreJobSummariesInput.nextToken,
+            outputKey: \ListRestoreJobSummariesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRestoreJobSummariesPaginator(
+        _ input: ListRestoreJobSummariesInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRestoreJobSummariesOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRestoreJobSummaries,
+            inputKey: \ListRestoreJobSummariesInput.nextToken,
+            outputKey: \ListRestoreJobSummariesOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
     /// Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
@@ -1342,6 +1586,165 @@ extension Backup {
             command: self.listRestoreJobs,
             inputKey: \ListRestoreJobsInput.nextToken,
             outputKey: \ListRestoreJobsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// This returns restore jobs that contain the specified protected resource. You must include ResourceArn. You can optionally include NextToken, ByStatus, MaxResults, ByRecoveryPointCreationDateAfter , and ByRecoveryPointCreationDateBefore.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRestoreJobsByProtectedResourcePaginator<Result>(
+        _ input: ListRestoreJobsByProtectedResourceInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRestoreJobsByProtectedResourceOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRestoreJobsByProtectedResource,
+            inputKey: \ListRestoreJobsByProtectedResourceInput.nextToken,
+            outputKey: \ListRestoreJobsByProtectedResourceOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRestoreJobsByProtectedResourcePaginator(
+        _ input: ListRestoreJobsByProtectedResourceInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRestoreJobsByProtectedResourceOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRestoreJobsByProtectedResource,
+            inputKey: \ListRestoreJobsByProtectedResourceInput.nextToken,
+            outputKey: \ListRestoreJobsByProtectedResourceOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of restore testing plans.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRestoreTestingPlansPaginator<Result>(
+        _ input: ListRestoreTestingPlansInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRestoreTestingPlansOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRestoreTestingPlans,
+            inputKey: \ListRestoreTestingPlansInput.nextToken,
+            outputKey: \ListRestoreTestingPlansOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRestoreTestingPlansPaginator(
+        _ input: ListRestoreTestingPlansInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRestoreTestingPlansOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRestoreTestingPlans,
+            inputKey: \ListRestoreTestingPlansInput.nextToken,
+            outputKey: \ListRestoreTestingPlansOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Returns a list of restore testing selections. Can be filtered  by MaxResults and RestoreTestingPlanName.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listRestoreTestingSelectionsPaginator<Result>(
+        _ input: ListRestoreTestingSelectionsInput,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListRestoreTestingSelectionsOutput, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listRestoreTestingSelections,
+            inputKey: \ListRestoreTestingSelectionsInput.nextToken,
+            outputKey: \ListRestoreTestingSelectionsOutput.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listRestoreTestingSelectionsPaginator(
+        _ input: ListRestoreTestingSelectionsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListRestoreTestingSelectionsOutput, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listRestoreTestingSelections,
+            inputKey: \ListRestoreTestingSelectionsInput.nextToken,
+            outputKey: \ListRestoreTestingSelectionsOutput.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -1401,6 +1804,20 @@ extension Backup {
     }
 }
 
+extension Backup.ListBackupJobSummariesInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListBackupJobSummariesInput {
+        return .init(
+            accountId: self.accountId,
+            aggregationPeriod: self.aggregationPeriod,
+            maxResults: self.maxResults,
+            messageCategory: self.messageCategory,
+            nextToken: token,
+            resourceType: self.resourceType,
+            state: self.state
+        )
+    }
+}
+
 extension Backup.ListBackupJobsInput: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Backup.ListBackupJobsInput {
         return .init(
@@ -1410,6 +1827,7 @@ extension Backup.ListBackupJobsInput: AWSPaginateToken {
             byCompleteBefore: self.byCompleteBefore,
             byCreatedAfter: self.byCreatedAfter,
             byCreatedBefore: self.byCreatedBefore,
+            byMessageCategory: self.byMessageCategory,
             byParentJobId: self.byParentJobId,
             byResourceArn: self.byResourceArn,
             byResourceType: self.byResourceType,
@@ -1470,6 +1888,20 @@ extension Backup.ListBackupVaultsInput: AWSPaginateToken {
     }
 }
 
+extension Backup.ListCopyJobSummariesInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListCopyJobSummariesInput {
+        return .init(
+            accountId: self.accountId,
+            aggregationPeriod: self.aggregationPeriod,
+            maxResults: self.maxResults,
+            messageCategory: self.messageCategory,
+            nextToken: token,
+            resourceType: self.resourceType,
+            state: self.state
+        )
+    }
+}
+
 extension Backup.ListCopyJobsInput: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Backup.ListCopyJobsInput {
         return .init(
@@ -1479,6 +1911,7 @@ extension Backup.ListCopyJobsInput: AWSPaginateToken {
             byCreatedAfter: self.byCreatedAfter,
             byCreatedBefore: self.byCreatedBefore,
             byDestinationVaultArn: self.byDestinationVaultArn,
+            byMessageCategory: self.byMessageCategory,
             byParentJobId: self.byParentJobId,
             byResourceArn: self.byResourceArn,
             byResourceType: self.byResourceType,
@@ -1586,6 +2019,32 @@ extension Backup.ListReportPlansInput: AWSPaginateToken {
     }
 }
 
+extension Backup.ListRestoreJobSummariesInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListRestoreJobSummariesInput {
+        return .init(
+            accountId: self.accountId,
+            aggregationPeriod: self.aggregationPeriod,
+            maxResults: self.maxResults,
+            nextToken: token,
+            resourceType: self.resourceType,
+            state: self.state
+        )
+    }
+}
+
+extension Backup.ListRestoreJobsByProtectedResourceInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListRestoreJobsByProtectedResourceInput {
+        return .init(
+            byRecoveryPointCreationDateAfter: self.byRecoveryPointCreationDateAfter,
+            byRecoveryPointCreationDateBefore: self.byRecoveryPointCreationDateBefore,
+            byStatus: self.byStatus,
+            maxResults: self.maxResults,
+            nextToken: token,
+            resourceArn: self.resourceArn
+        )
+    }
+}
+
 extension Backup.ListRestoreJobsInput: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Backup.ListRestoreJobsInput {
         return .init(
@@ -1594,9 +2053,29 @@ extension Backup.ListRestoreJobsInput: AWSPaginateToken {
             byCompleteBefore: self.byCompleteBefore,
             byCreatedAfter: self.byCreatedAfter,
             byCreatedBefore: self.byCreatedBefore,
+            byRestoreTestingPlanArn: self.byRestoreTestingPlanArn,
             byStatus: self.byStatus,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension Backup.ListRestoreTestingPlansInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListRestoreTestingPlansInput {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token
+        )
+    }
+}
+
+extension Backup.ListRestoreTestingSelectionsInput: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> Backup.ListRestoreTestingSelectionsInput {
+        return .init(
+            maxResults: self.maxResults,
+            nextToken: token,
+            restoreTestingPlanName: self.restoreTestingPlanName
         )
     }
 }

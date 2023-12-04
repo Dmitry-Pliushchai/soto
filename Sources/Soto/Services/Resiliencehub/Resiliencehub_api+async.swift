@@ -21,7 +21,7 @@ import SotoCore
 extension Resiliencehub {
     // MARK: Async API Calls
 
-    /// Adds the resource mapping for the draft application version. You can also update an existing resource mapping to a new physical resource.
+    /// Adds the source of resource-maps to the draft version of an application. During assessment, Resilience Hub will use these resource-maps to resolve the latest physical ID for each resource in the application template. For more information about different types of resources suported by Resilience Hub and how to add them in your application, see Step 2: How is your application managed? in the Resilience Hub User Guide.
     public func addDraftAppVersionResourceMappings(_ input: AddDraftAppVersionResourceMappingsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AddDraftAppVersionResourceMappingsResponse {
         return try await self.client.execute(operation: "AddDraftAppVersionResourceMappings", path: "/add-draft-app-version-resource-mappings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -51,7 +51,7 @@ extension Resiliencehub {
         return try await self.client.execute(operation: "CreateRecommendationTemplate", path: "/create-recommendation-template", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a resiliency policy for an application.
+    /// Creates a resiliency policy for an application.  Resilience Hub allows you to provide a value of zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while assessing your application, the lowest possible assessment result is near zero. Hence, if you provide value zero for rtoInSecs and rpoInSecs, the estimated workload RTO and estimated workload RPO result will be near zero and the Compliance status for your application will be set to Policy breached.
     public func createResiliencyPolicy(_ input: CreateResiliencyPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateResiliencyPolicyResponse {
         return try await self.client.execute(operation: "CreateResiliencyPolicy", path: "/create-resiliency-policy", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -286,7 +286,7 @@ extension Resiliencehub {
         return try await self.client.execute(operation: "UpdateAppVersionResource", path: "/update-app-version-resource", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates a resiliency policy.
+    /// Updates a resiliency policy.  Resilience Hub allows you to provide a value of zero for rtoInSecs and rpoInSecs of your resiliency policy. But, while assessing your application, the lowest possible assessment result is near zero. Hence, if you provide value zero for rtoInSecs and rpoInSecs, the estimated workload RTO and estimated workload RPO result will be near zero and the Compliance status for your application will be set to Policy breached.
     public func updateResiliencyPolicy(_ input: UpdateResiliencyPolicyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateResiliencyPolicyResponse {
         return try await self.client.execute(operation: "UpdateResiliencyPolicy", path: "/update-resiliency-policy", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

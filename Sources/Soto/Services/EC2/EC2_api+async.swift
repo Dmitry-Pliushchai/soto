@@ -137,12 +137,17 @@ extension EC2 {
         return try await self.client.execute(operation: "AssociateInstanceEventWindow", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region.  For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide. After the association succeeds, the ASN is eligible for  advertisement. You can view the association with DescribeByoipCidrs. You can advertise the CIDR with AdvertiseByoipCidr.
+    public func associateIpamByoasn(_ input: AssociateIpamByoasnRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateIpamByoasnResult {
+        return try await self.client.execute(operation: "AssociateIpamByoasn", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
     public func associateIpamResourceDiscovery(_ input: AssociateIpamResourceDiscoveryRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateIpamResourceDiscoveryResult {
         return try await self.client.execute(operation: "AssociateIpamResourceDiscovery", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information,  see Work with NAT gateways in the Amazon VPC User Guide. By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. For more information, see Elastic IP address quotas in the Amazon VPC User Guide.
+    /// Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway. For more information,  see Work with NAT gateways in the Amazon VPC User Guide. By default, you can associate up to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by requesting a quota adjustment. For more information, see Elastic IP address quotas in the Amazon VPC User Guide.  When you associate an EIP or secondary EIPs with a public NAT gateway, the network border group of the EIPs must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. If it's not the same, the EIP will fail to associate. You can see the network border group for the subnet's AZ by viewing the details of the subnet. Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. For more information about network border groups and EIPs, see Allocate an Elastic IP address in the Amazon VPC User Guide.
     public func associateNatGatewayAddress(_ input: AssociateNatGatewayAddressRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateNatGatewayAddressResult {
         return try await self.client.execute(operation: "AssociateNatGatewayAddress", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -152,7 +157,7 @@ extension EC2 {
         return try await self.client.execute(operation: "AssociateRouteTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
+    /// Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet.
     public func associateSubnetCidrBlock(_ input: AssociateSubnetCidrBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateSubnetCidrBlockResult {
         return try await self.client.execute(operation: "AssociateSubnetCidrBlock", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -172,12 +177,12 @@ extension EC2 {
         return try await self.client.execute(operation: "AssociateTransitGatewayRouteTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    ///  This API action is currently in limited preview only.  If you are interested in using this feature, contact your account manager.  Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
+    /// Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
     public func associateTrunkInterface(_ input: AssociateTrunkInterfaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateTrunkInterfaceResult {
         return try await self.client.execute(operation: "AssociateTrunkInterface", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). The IPv6 CIDR block size is fixed at /56. You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets  in the Amazon VPC User Guide.
+    /// Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP).  You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets  in the Amazon VPC User Guide.
     public func associateVpcCidrBlock(_ input: AssociateVpcCidrBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AssociateVpcCidrBlockResult {
         return try await self.client.execute(operation: "AssociateVpcCidrBlock", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -225,7 +230,7 @@ extension EC2 {
         return try await self.client.execute(operation: "AuthorizeClientVpnIngress", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP).  For the TCP and UDP protocols, you must also specify the destination port or port range.  For the ICMP protocol, you must also specify the ICMP type and code.  You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+    /// Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP).  For the TCP and UDP protocols, you must also specify the destination port or port range.  For the ICMP protocol, you must also specify the ICMP type and code.  You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.  If you want to reference a security group across VPCs attached to a transit gateway using the security group referencing feature, note that you can only reference security groups for ingress rules. You cannot reference a security group for egress rules.
     public func authorizeSecurityGroupEgress(_ input: AuthorizeSecurityGroupEgressRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AuthorizeSecurityGroupEgressResult {
         return try await self.client.execute(operation: "AuthorizeSecurityGroupEgress", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -509,7 +514,7 @@ extension EC2 {
         return try await self.client.execute(operation: "CreateManagedPrefixList", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway. With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet. With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks. For more information, see NAT gateways in the Amazon VPC User Guide.
+    /// Creates a NAT gateway in the specified subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. You can create either a public NAT gateway or a private NAT gateway. With a public NAT gateway, internet-bound traffic from a private subnet can be routed to the NAT gateway, so that instances in a private subnet can connect to the internet. With a private NAT gateway, private communication is routed across VPCs and on-premises networks through a transit gateway or virtual private gateway. Common use cases include running large workloads behind a small pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and communicating between overlapping networks. For more information, see NAT gateways in the Amazon VPC User Guide.  When you create a public NAT gateway and assign it an EIP or secondary EIPs, the network border group of the EIPs must match the network border group of the Availability Zone (AZ) that the public NAT gateway is in. If it's not the same, the NAT gateway will fail to launch. You can see the network border group for the subnet's AZ by viewing the details of the subnet. Similarly, you can view the network border group of an EIP by viewing the details of the EIP address. For more information about network border groups and EIPs, see Allocate an Elastic IP address in the Amazon VPC User Guide.
     public func createNatGateway(_ input: CreateNatGatewayRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateNatGatewayResult {
         return try await self.client.execute(operation: "CreateNatGateway", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -623,7 +628,7 @@ extension EC2 {
         return try await self.client.execute(operation: "CreateStoreImageTask", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and   a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and  the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block  with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
+    /// Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and   a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and  the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
     public func createSubnet(_ input: CreateSubnetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateSubnetResult {
         return try await self.client.execute(operation: "CreateSubnet", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -738,7 +743,7 @@ extension EC2 {
         return try await self.client.execute(operation: "CreateVolume", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the  Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided  IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address  pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which
+    /// Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the  Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which
     /// 			include only a default DNS server that we provide (AmazonProvidedDNS). For more
     /// 			information, see DHCP option sets in the Amazon VPC User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon EC2 User Guide.
     public func createVpc(_ input: CreateVpcRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateVpcResult {
@@ -1123,7 +1128,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DeleteVolume", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes the specified VPC. You must detach or delete all gateways and resources that are associated with the VPC before you can delete it. For example, you must terminate all instances running in the VPC, delete all security groups associated with the VPC (except the default one), delete all route tables associated with the VPC (except the default one), and so on.
+    /// Deletes the specified VPC. You must detach or delete all gateways and resources that are associated with the VPC before you can delete it. For example, you must terminate all instances running in the VPC, delete all security groups associated with the VPC (except the default one), delete all route tables associated with the VPC (except the default one), and so on. When you delete the VPC, it deletes the VPC's default security group, network ACL, and route table.
     public func deleteVpc(_ input: DeleteVpcRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
         return try await self.client.execute(operation: "DeleteVpc", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1143,7 +1148,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DeleteVpcEndpoints", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed state.
+    /// Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed or rejected state.
     public func deleteVpcPeeringConnection(_ input: DeleteVpcPeeringConnectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteVpcPeeringConnectionResult {
         return try await self.client.execute(operation: "DeleteVpcPeeringConnection", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1166,6 +1171,11 @@ extension EC2 {
     /// Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool. Before you can release an address range, you must stop advertising it using WithdrawByoipCidr and you must not have any IP addresses allocated from its address range.
     public func deprovisionByoipCidr(_ input: DeprovisionByoipCidrRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeprovisionByoipCidrResult {
         return try await self.client.execute(operation: "DeprovisionByoipCidr", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deprovisions your Autonomous System Number (ASN) from your Amazon Web Services account. This action can only be called after any BYOIP CIDR associations are removed from your Amazon Web Services account with DisassociateIpamByoasn. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+    public func deprovisionIpamByoasn(_ input: DeprovisionIpamByoasnRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeprovisionIpamByoasnResult {
+        return try await self.client.execute(operation: "DeprovisionIpamByoasn", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
@@ -1245,6 +1255,11 @@ extension EC2 {
     /// Describes the IP address ranges that were specified in calls to ProvisionByoipCidr. To describe the address pools that were created when you provisioned the address ranges, use DescribePublicIpv4Pools or DescribeIpv6Pools.
     public func describeByoipCidrs(_ input: DescribeByoipCidrsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeByoipCidrsResult {
         return try await self.client.execute(operation: "DescribeByoipCidrs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes Capacity Block offerings available for purchase. With Capacity Blocks, you purchase a specific instance type for a period of time.
+    public func describeCapacityBlockOfferings(_ input: DescribeCapacityBlockOfferingsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeCapacityBlockOfferingsResult {
+        return try await self.client.execute(operation: "DescribeCapacityBlockOfferings", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Describes one or more Capacity Reservation Fleets.
@@ -1337,7 +1352,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeExportTasks", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Describe details for Windows AMIs that are configured for faster launching.
+    /// Describe details for Windows AMIs that are configured for Windows fast launch.
     public func describeFastLaunchImages(_ input: DescribeFastLaunchImagesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeFastLaunchImagesResult {
         return try await self.client.execute(operation: "DescribeFastLaunchImages", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1459,6 +1474,11 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeInstanceStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes a tree-based hierarchy that represents the physical host placement of your EC2 instances within an Availability Zone or Local Zone. You can use this information to determine the relative proximity of your EC2 instances within the Amazon Web Services network to support your tightly coupled workloads.  Limitations    Supported zones   Availability Zone   Local Zone     Supported instance types    hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge | hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge | hpc7g.16xlarge     p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge     trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge      For more information, see Amazon EC2 instance topology in the Amazon EC2 User Guide.
+    public func describeInstanceTopology(_ input: DescribeInstanceTopologyRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeInstanceTopologyResult {
+        return try await self.client.execute(operation: "DescribeInstanceTopology", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
     public func describeInstanceTypeOfferings(_ input: DescribeInstanceTypeOfferingsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeInstanceTypeOfferingsResult {
         return try await self.client.execute(operation: "DescribeInstanceTypeOfferings", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -1477,6 +1497,11 @@ extension EC2 {
     /// Describes one or more of your internet gateways.
     public func describeInternetGateways(_ input: DescribeInternetGatewaysRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeInternetGatewaysResult {
         return try await self.client.execute(operation: "DescribeInternetGateways", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+    public func describeIpamByoasn(_ input: DescribeIpamByoasnRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeIpamByoasnResult {
+        return try await self.client.execute(operation: "DescribeIpamByoasn", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Get information about your IPAM pools.
@@ -1555,6 +1580,11 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeLocalGateways", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes the lock status for a snapshot.
+    public func describeLockedSnapshots(_ input: DescribeLockedSnapshotsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeLockedSnapshotsResult {
+        return try await self.client.execute(operation: "DescribeLockedSnapshots", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Describes your managed prefix lists and any Amazon Web Services-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
     public func describeManagedPrefixLists(_ input: DescribeManagedPrefixListsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeManagedPrefixListsResult {
         return try await self.client.execute(operation: "DescribeManagedPrefixLists", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -1606,7 +1636,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeNetworkInterfacePermissions", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Describes one or more of your network interfaces.
+    /// Describes one or more of your network interfaces. If you have a large number of network interfaces, the operation fails unless  you use pagination or one of the following filters: group-id,  mac-address, private-dns-name, private-ip-address,  private-dns-name, subnet-id, or vpc-id.
     public func describeNetworkInterfaces(_ input: DescribeNetworkInterfacesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeNetworkInterfacesResult {
         return try await self.client.execute(operation: "DescribeNetworkInterfaces", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1679,7 +1709,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeScheduledInstances", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+    /// Describes the VPCs on the other side of a VPC peering connection or the VPCs attached to a transit gateway that are referencing the security groups you've specified in this request.
     public func describeSecurityGroupReferences(_ input: DescribeSecurityGroupReferencesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeSecurityGroupReferencesResult {
         return try await self.client.execute(operation: "DescribeSecurityGroupReferences", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1739,7 +1769,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeSpotPriceHistory", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Describes the stale security group rules for security groups in a specified VPC.  Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC,  or if they reference a security group in a peer VPC for which the VPC peering connection has  been deleted.
+    /// Describes the stale security group rules for security groups in a specified VPC.  Rules are stale when they reference a deleted security group in the same VPC, peered VPC, or in separate VPCs attached to a transit gateway (with security group referencing support enabled). Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has  been deleted or if they reference a security group in a VPC that has been detached from a transit gateway.
     public func describeStaleSecurityGroups(_ input: DescribeStaleSecurityGroupsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeStaleSecurityGroupsResult {
         return try await self.client.execute(operation: "DescribeStaleSecurityGroups", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1825,7 +1855,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DescribeTransitGateways", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    ///  This API action is currently in limited preview only.  If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
+    /// Describes one or more network interface trunk associations.
     public func describeTrunkInterfaceAssociations(_ input: DescribeTrunkInterfaceAssociationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeTrunkInterfaceAssociationsResult {
         return try await self.client.execute(operation: "DescribeTrunkInterfaceAssociations", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1989,9 +2019,9 @@ extension EC2 {
         return try await self.client.execute(operation: "DisableEbsEncryptionByDefault", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots.
-    /// 			When you disable faster launching, the AMI uses the standard launch process for each
-    /// 			instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI.
+    /// Discontinue Windows fast launch for a Windows AMI, and clean up existing pre-provisioned snapshots.
+    /// 			After you disable Windows fast launch, the AMI uses the standard launch process for each
+    /// 			new instance. Amazon EC2 must remove all pre-provisioned snapshots before you can enable Windows fast launch again.  You can only change these settings for Windows AMIs that you own or that have been shared with you.
     public func disableFastLaunch(_ input: DisableFastLaunchRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisableFastLaunchResult {
         return try await self.client.execute(operation: "DisableFastLaunch", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -1999,6 +2029,11 @@ extension EC2 {
     /// Disables fast snapshot restores for the specified snapshots in the specified Availability Zones.
     public func disableFastSnapshotRestores(_ input: DisableFastSnapshotRestoresRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisableFastSnapshotRestoresResult {
         return try await self.client.execute(operation: "DisableFastSnapshotRestores", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Sets the AMI state to disabled and removes all launch permissions from the AMI. A disabled AMI can't be used for instance launches. A disabled AMI can't be shared. If an AMI was public or previously shared, it is made private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit, they lose access to the disabled AMI.  A disabled AMI does not appear in DescribeImages API calls by default. Only the AMI owner can disable an AMI. You can re-enable a disabled AMI using EnableImage. For more information, see Disable an AMI in the Amazon EC2 User Guide.
+    public func disableImage(_ input: DisableImageRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisableImageResult {
+        return try await self.client.execute(operation: "DisableImage", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Disables block public access for AMIs at the account level in the specified Amazon Web Services Region. This removes the block public access restriction from your account. With the restriction removed, you can publicly share your AMIs in the specified Amazon Web Services Region. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be block-new-sharing. When the API has completed the configuration, the response will be unblocked. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
@@ -2022,6 +2057,11 @@ extension EC2 {
     /// 				User Guide.
     public func disableSerialConsoleAccess(_ input: DisableSerialConsoleAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisableSerialConsoleAccessResult {
         return try await self.client.execute(operation: "DisableSerialConsoleAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Disables the block public access for snapshots setting at  the account level for the specified Amazon Web Services Region. After you disable block public  access for snapshots in a Region, users can publicly share snapshots in that Region. If block public access is enabled in block-all-sharing mode, and  you disable block public access, all snapshots that were previously publicly shared  are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide .
+    public func disableSnapshotBlockPublicAccess(_ input: DisableSnapshotBlockPublicAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisableSnapshotBlockPublicAccessResult {
+        return try await self.client.execute(operation: "DisableSnapshotBlockPublicAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Disables the specified resource attachment from propagating routes to the specified propagation route table.
@@ -2076,6 +2116,11 @@ extension EC2 {
         return try await self.client.execute(operation: "DisassociateInstanceEventWindow", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs.  For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+    public func disassociateIpamByoasn(_ input: DisassociateIpamByoasnRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisassociateIpamByoasnResult {
+        return try await self.client.execute(operation: "DisassociateIpamByoasn", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
     public func disassociateIpamResourceDiscovery(_ input: DisassociateIpamResourceDiscoveryRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisassociateIpamResourceDiscoveryResult {
         return try await self.client.execute(operation: "DisassociateIpamResourceDiscovery", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -2114,7 +2159,7 @@ extension EC2 {
         return try await self.client.execute(operation: "DisassociateTransitGatewayRouteTable", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    ///  This API action is currently in limited preview only.  If you are interested in using this feature, contact your account manager.  Removes an association between a branch network interface with a trunk network interface.
+    /// Removes an association between a branch network interface with a trunk network interface.
     public func disassociateTrunkInterface(_ input: DisassociateTrunkInterfaceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DisassociateTrunkInterfaceResult {
         return try await self.client.execute(operation: "DisassociateTrunkInterface", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -2140,12 +2185,12 @@ extension EC2 {
         return try await self.client.execute(operation: "EnableEbsEncryptionByDefault", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// When you enable faster launching for a Windows AMI, images are pre-provisioned,
+    /// When you enable Windows fast launch for a Windows AMI, images are pre-provisioned,
     /// 			using snapshots to launch instances up to 65% faster. To create the optimized Windows
     /// 			image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required.
     /// 			Then it creates a set of reserved snapshots that are used for subsequent launches. The
     /// 			reserved snapshots are automatically replenished as they are used, depending on your
-    /// 			settings for launch frequency.  To change these settings, you must own the AMI.
+    /// 			settings for launch frequency.  You can only change these settings for Windows AMIs that you own or that have been shared with you.
     public func enableFastLaunch(_ input: EnableFastLaunchRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> EnableFastLaunchResult {
         return try await self.client.execute(operation: "EnableFastLaunch", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -2153,6 +2198,11 @@ extension EC2 {
     /// Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
     public func enableFastSnapshotRestores(_ input: EnableFastSnapshotRestoresRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> EnableFastSnapshotRestoresResult {
         return try await self.client.execute(operation: "EnableFastSnapshotRestores", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Re-enables a disabled AMI. The re-enabled AMI is marked as available and can be used for instance launches, appears in describe operations, and can be shared. Amazon Web Services accounts, organizations, and Organizational Units that lost access to the AMI when it was disabled do not regain access automatically. Once the AMI is available, it can be shared with them again. Only the AMI owner can re-enable a disabled AMI. For more information, see Disable an AMI in the Amazon EC2 User Guide.
+    public func enableImage(_ input: EnableImageRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> EnableImageResult {
+        return try await self.client.execute(operation: "EnableImage", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Enables block public access for AMIs at the account level in the specified Amazon Web Services Region. This prevents the public sharing of your AMIs. However, if you already have public AMIs, they will remain publicly available. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be unblocked. When the API has completed the configuration, the response will be block-new-sharing. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
@@ -2180,6 +2230,11 @@ extension EC2 {
     /// 			in the Amazon EC2 User Guide.
     public func enableSerialConsoleAccess(_ input: EnableSerialConsoleAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> EnableSerialConsoleAccessResult {
         return try await self.client.execute(operation: "EnableSerialConsoleAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Enables or modifies the block public access for snapshots  setting at the account level for the specified Amazon Web Services Region. After you enable block  public access for snapshots in a Region, users can no longer request public sharing  for snapshots in that Region. Snapshots that are already publicly shared are either  treated as private or they remain publicly shared, depending on the  State that you specify. If block public access is enabled in block-all-sharing mode, and  you change the mode to block-new-sharing, all snapshots that were  previously publicly shared are no longer treated as private and they become publicly  accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+    public func enableSnapshotBlockPublicAccess(_ input: EnableSnapshotBlockPublicAccessRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> EnableSnapshotBlockPublicAccessResult {
+        return try await self.client.execute(operation: "EnableSnapshotBlockPublicAccess", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Enables the specified attachment to propagate routes to the specified propagation route table.
@@ -2333,6 +2388,11 @@ extension EC2 {
         return try await self.client.execute(operation: "GetIpamDiscoveredAccounts", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets the public IP addresses that have been discovered by IPAM.
+    public func getIpamDiscoveredPublicAddresses(_ input: GetIpamDiscoveredPublicAddressesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetIpamDiscoveredPublicAddressesResult {
+        return try await self.client.execute(operation: "GetIpamDiscoveredPublicAddresses", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns the resource CIDRs that are monitored as part of a resource discovery. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses.
     public func getIpamDiscoveredResourceCidrs(_ input: GetIpamDiscoveredResourceCidrsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetIpamDiscoveredResourceCidrsResult {
         return try await self.client.execute(operation: "GetIpamDiscoveredResourceCidrs", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -2388,12 +2448,22 @@ extension EC2 {
         return try await self.client.execute(operation: "GetReservedInstancesExchangeQuote", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Gets security groups that can be associated by the Amazon Web Services account making the request with network interfaces in the specified VPC.
+    public func getSecurityGroupsForVpc(_ input: GetSecurityGroupsForVpcRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSecurityGroupsForVpcResult {
+        return try await self.client.execute(operation: "GetSecurityGroupsForVpc", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves the access status of your account to the EC2 serial console of all instances. By
     /// 			default, access to the EC2 serial console is disabled for your account. For more
     /// 			information, see Manage account access to the EC2 serial console in the Amazon EC2
     /// 				User Guide.
     public func getSerialConsoleAccessStatus(_ input: GetSerialConsoleAccessStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSerialConsoleAccessStatusResult {
         return try await self.client.execute(operation: "GetSerialConsoleAccessStatus", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Gets the current state of block public access for snapshots setting  for the account and Region. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+    public func getSnapshotBlockPublicAccessState(_ input: GetSnapshotBlockPublicAccessStateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetSnapshotBlockPublicAccessStateResult {
+        return try await self.client.execute(operation: "GetSnapshotBlockPublicAccessState", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
@@ -2505,6 +2575,11 @@ extension EC2 {
     /// Lists one or more snapshots that are currently in the Recycle Bin.
     public func listSnapshotsInRecycleBin(_ input: ListSnapshotsInRecycleBinRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSnapshotsInRecycleBinResult {
         return try await self.client.execute(operation: "ListSnapshotsInRecycleBin", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Locks an Amazon EBS snapshot in either governance or compliance  mode to protect it against accidental or malicious deletions for a specific duration. A locked snapshot  can't be deleted. You can also use this action to modify the lock settings for a snapshot that is already locked. The  allowed modifications depend on the lock mode and lock state:   If the snapshot is locked in governance mode, you can modify the lock mode and the lock duration  or lock expiration date.   If the snapshot is locked in compliance mode and it is in the cooling-off period, you can modify  the lock mode and the lock duration or lock expiration date.   If the snapshot is locked in compliance mode and the cooling-off period has lapsed, you can  only increase the lock duration or extend the lock expiration date.
+    public func lockSnapshot(_ input: LockSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> LockSnapshotResult {
+        return try await self.client.execute(operation: "LockSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Modifies an attribute of the specified Elastic IP address. For requirements, see Using reverse DNS for email applications.
@@ -2860,6 +2935,11 @@ extension EC2 {
         return try await self.client.execute(operation: "ProvisionByoipCidr", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Provisions your Autonomous System Number (ASN) for use in your Amazon Web Services account. This action requires authorization context for Amazon to bring the ASN to an Amazon Web Services account. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+    public func provisionIpamByoasn(_ input: ProvisionIpamByoasnRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ProvisionIpamByoasnResult {
+        return try await self.client.execute(operation: "ProvisionIpamByoasn", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide.
     public func provisionIpamPoolCidr(_ input: ProvisionIpamPoolCidrRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ProvisionIpamPoolCidrResult {
         return try await self.client.execute(operation: "ProvisionIpamPoolCidr", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -2868,6 +2948,12 @@ extension EC2 {
     /// Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
     public func provisionPublicIpv4PoolCidr(_ input: ProvisionPublicIpv4PoolCidrRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ProvisionPublicIpv4PoolCidrResult {
         return try await self.client.execute(operation: "ProvisionPublicIpv4PoolCidr", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Purchase the Capacity Block for use with your account.
+    /// 		 With Capacity Blocks you ensure GPU capacity is available for machine learning (ML) workloads. You must specify the ID of the Capacity Block offering you are purchasing.
+    public func purchaseCapacityBlock(_ input: PurchaseCapacityBlockRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> PurchaseCapacityBlockResult {
+        return try await self.client.execute(operation: "PurchaseCapacityBlock", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
@@ -3167,6 +3253,11 @@ extension EC2 {
         return try await self.client.execute(operation: "UnassignPrivateNatGatewayAddress", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Unlocks a snapshot that is locked in governance mode or that is locked in compliance mode  but still in the cooling-off period. You can't unlock a snapshot that is locked in compliance  mode after the cooling-off period has expired.
+    public func unlockSnapshot(_ input: UnlockSnapshotRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UnlockSnapshotResult {
+        return try await self.client.execute(operation: "UnlockSnapshot", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Disables detailed monitoring for a running instance. For more information, see Monitoring your instances and volumes in the Amazon EC2 User Guide.
     public func unmonitorInstances(_ input: UnmonitorInstancesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UnmonitorInstancesResult {
         return try await self.client.execute(operation: "UnmonitorInstances", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -3281,6 +3372,28 @@ extension EC2 {
             command: self.describeByoipCidrs,
             inputKey: \DescribeByoipCidrsRequest.nextToken,
             outputKey: \DescribeByoipCidrsResult.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Describes Capacity Block offerings available for purchase. With Capacity Blocks, you purchase a specific instance type for a period of time.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeCapacityBlockOfferingsPaginator(
+        _ input: DescribeCapacityBlockOfferingsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeCapacityBlockOfferingsRequest, DescribeCapacityBlockOfferingsResult> {
+        return .init(
+            input: input,
+            command: self.describeCapacityBlockOfferings,
+            inputKey: \DescribeCapacityBlockOfferingsRequest.nextToken,
+            outputKey: \DescribeCapacityBlockOfferingsResult.nextToken,
             logger: logger,
             on: eventLoop
         )
@@ -3577,7 +3690,7 @@ extension EC2 {
         )
     }
 
-    /// Describe details for Windows AMIs that are configured for faster launching.
+    /// Describe details for Windows AMIs that are configured for Windows fast launch.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -3926,6 +4039,28 @@ extension EC2 {
             command: self.describeInstanceStatus,
             inputKey: \DescribeInstanceStatusRequest.nextToken,
             outputKey: \DescribeInstanceStatusResult.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Describes a tree-based hierarchy that represents the physical host placement of your EC2 instances within an Availability Zone or Local Zone. You can use this information to determine the relative proximity of your EC2 instances within the Amazon Web Services network to support your tightly coupled workloads.  Limitations    Supported zones   Availability Zone   Local Zone     Supported instance types    hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge | hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge | hpc7g.16xlarge     p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge     trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge      For more information, see Amazon EC2 instance topology in the Amazon EC2 User Guide.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func describeInstanceTopologyPaginator(
+        _ input: DescribeInstanceTopologyRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<DescribeInstanceTopologyRequest, DescribeInstanceTopologyResult> {
+        return .init(
+            input: input,
+            command: self.describeInstanceTopology,
+            inputKey: \DescribeInstanceTopologyRequest.nextToken,
+            outputKey: \DescribeInstanceTopologyResult.nextToken,
             logger: logger,
             on: eventLoop
         )
@@ -4526,7 +4661,7 @@ extension EC2 {
         )
     }
 
-    /// Describes one or more of your network interfaces.
+    /// Describes one or more of your network interfaces. If you have a large number of network interfaces, the operation fails unless  you use pagination or one of the following filters: group-id,  mac-address, private-dns-name, private-ip-address,  private-dns-name, subnet-id, or vpc-id.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -4902,7 +5037,7 @@ extension EC2 {
         )
     }
 
-    /// Describes the stale security group rules for security groups in a specified VPC.  Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC,  or if they reference a security group in a peer VPC for which the VPC peering connection has  been deleted.
+    /// Describes the stale security group rules for security groups in a specified VPC.  Rules are stale when they reference a deleted security group in the same VPC, peered VPC, or in separate VPCs attached to a transit gateway (with security group referencing support enabled). Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has  been deleted or if they reference a security group in a VPC that has been detached from a transit gateway.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -5277,7 +5412,7 @@ extension EC2 {
         )
     }
 
-    ///  This API action is currently in limited preview only.  If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
+    /// Describes one or more network interface trunk associations.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -5932,6 +6067,28 @@ extension EC2 {
             command: self.getNetworkInsightsAccessScopeAnalysisFindings,
             inputKey: \GetNetworkInsightsAccessScopeAnalysisFindingsRequest.nextToken,
             outputKey: \GetNetworkInsightsAccessScopeAnalysisFindingsResult.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Gets security groups that can be associated by the Amazon Web Services account making the request with network interfaces in the specified VPC.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func getSecurityGroupsForVpcPaginator(
+        _ input: GetSecurityGroupsForVpcRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<GetSecurityGroupsForVpcRequest, GetSecurityGroupsForVpcResult> {
+        return .init(
+            input: input,
+            command: self.getSecurityGroupsForVpc,
+            inputKey: \GetSecurityGroupsForVpcRequest.nextToken,
+            outputKey: \GetSecurityGroupsForVpcResult.nextToken,
             logger: logger,
             on: eventLoop
         )

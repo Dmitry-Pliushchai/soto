@@ -26,7 +26,7 @@ import SotoCore
 extension Budgets {
     // MARK: Enums
 
-    public enum ActionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case executionFailure = "EXECUTION_FAILURE"
         case executionInProgress = "EXECUTION_IN_PROGRESS"
         case executionSuccess = "EXECUTION_SUCCESS"
@@ -40,32 +40,32 @@ extension Budgets {
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionSubType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionSubType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case stopEc2 = "STOP_EC2_INSTANCES"
         case stopRds = "STOP_RDS_INSTANCES"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iam = "APPLY_IAM_POLICY"
         case scp = "APPLY_SCP_POLICY"
         case ssm = "RUN_SSM_DOCUMENTS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ApprovalModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApprovalModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTOMATIC"
         case manual = "MANUAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum AutoAdjustType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoAdjustType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case forecast = "FORECAST"
         case historical = "HISTORICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum BudgetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BudgetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cost = "COST"
         case riCoverage = "RI_COVERAGE"
         case riUtilization = "RI_UTILIZATION"
@@ -75,14 +75,14 @@ extension Budgets {
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equalTo = "EQUAL_TO"
         case greaterThan = "GREATER_THAN"
         case lessThan = "LESS_THAN"
         public var description: String { return self.rawValue }
     }
 
-    public enum EventType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EventType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createAction = "CREATE_ACTION"
         case deleteAction = "DELETE_ACTION"
         case executeAction = "EXECUTE_ACTION"
@@ -91,7 +91,7 @@ extension Budgets {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExecutionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecutionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case approveBudgetAction = "APPROVE_BUDGET_ACTION"
         case resetBudgetAction = "RESET_BUDGET_ACTION"
         case retryBudgetAction = "RETRY_BUDGET_ACTION"
@@ -99,31 +99,31 @@ extension Budgets {
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alarm = "ALARM"
         case ok = "OK"
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case actual = "ACTUAL"
         case forecasted = "FORECASTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SubscriptionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SubscriptionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case email = "EMAIL"
         case sns = "SNS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThresholdType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThresholdType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absoluteValue = "ABSOLUTE_VALUE"
         case percentage = "PERCENTAGE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TimeUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimeUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case annually = "ANNUALLY"
         case daily = "DAILY"
         case monthly = "MONTHLY"

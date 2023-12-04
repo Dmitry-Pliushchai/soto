@@ -26,6 +26,11 @@ extension OpenSearch {
         return try await self.client.execute(operation: "AcceptInboundConnection", path: "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}/accept", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Adds the data source on the domain.
+    public func addDataSource(_ input: AddDataSourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> AddDataSourceResponse {
+        return try await self.client.execute(operation: "AddDataSource", path: "/2021-01-01/opensearch/domain/{DomainName}/dataSource", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Attaches tags to an existing Amazon OpenSearch Service domain. Tags are a set of case-sensitive key-value pairs. A domain can have up to 10 tags. For more information, see Tagging Amazon OpenSearch Service domains.
     public func addTags(_ input: AddTagsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
         return try await self.client.execute(operation: "AddTags", path: "/2021-01-01/tags", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -64,6 +69,11 @@ extension OpenSearch {
     /// Creates an Amazon OpenSearch Service-managed VPC endpoint.
     public func createVpcEndpoint(_ input: CreateVpcEndpointRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateVpcEndpointResponse {
         return try await self.client.execute(operation: "CreateVpcEndpoint", path: "/2021-01-01/opensearch/vpcEndpoints", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes the data source.
+    public func deleteDataSource(_ input: DeleteDataSourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteDataSourceResponse {
+        return try await self.client.execute(operation: "DeleteDataSource", path: "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes an Amazon OpenSearch Service domain and all of its data. You can't recover a domain after you delete it.
@@ -176,6 +186,16 @@ extension OpenSearch {
         return try await self.client.execute(operation: "GetCompatibleVersions", path: "/2021-01-01/opensearch/compatibleVersions", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Describes the data source details.
+    public func getDataSource(_ input: GetDataSourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetDataSourceResponse {
+        return try await self.client.execute(operation: "GetDataSource", path: "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// The status of the maintenance action.
+    public func getDomainMaintenanceStatus(_ input: GetDomainMaintenanceStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetDomainMaintenanceStatusResponse {
+        return try await self.client.execute(operation: "GetDomainMaintenanceStatus", path: "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the  package is a zip plugin package). For more information, see Custom packages for Amazon OpenSearch Service.
     public func getPackageVersionHistory(_ input: GetPackageVersionHistoryRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetPackageVersionHistoryResponse {
         return try await self.client.execute(operation: "GetPackageVersionHistory", path: "/2021-01-01/packages/{PackageID}/history", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -189,6 +209,16 @@ extension OpenSearch {
     /// Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
     public func getUpgradeStatus(_ input: GetUpgradeStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetUpgradeStatusResponse {
         return try await self.client.execute(operation: "GetUpgradeStatus", path: "/2021-01-01/opensearch/upgradeDomain/{DomainName}/status", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// A list of the data source details of the domain.
+    public func listDataSources(_ input: ListDataSourcesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListDataSourcesResponse {
+        return try await self.client.execute(operation: "ListDataSources", path: "/2021-01-01/opensearch/domain/{DomainName}/dataSource", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// A list of maintenance actions for the domain.
+    public func listDomainMaintenances(_ input: ListDomainMaintenancesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListDomainMaintenancesResponse {
+        return try await self.client.execute(operation: "ListDomainMaintenances", path: "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenances", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
@@ -261,12 +291,22 @@ extension OpenSearch {
         return try await self.client.execute(operation: "RevokeVpcEndpointAccess", path: "/2021-01-01/opensearch/domain/{DomainName}/revokeVpcEndpointAccess", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart, or a Dashboard or Kibana restart.
+    public func startDomainMaintenance(_ input: StartDomainMaintenanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartDomainMaintenanceResponse {
+        return try await self.client.execute(operation: "StartDomainMaintenance", path: "/2021-01-01/opensearch/domain/{DomainName}/domainMaintenance", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Schedules a service software update for an Amazon OpenSearch Service domain. For more information, see Service software updates in Amazon OpenSearch Service.
     public func startServiceSoftwareUpdate(_ input: StartServiceSoftwareUpdateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartServiceSoftwareUpdateResponse {
         return try await self.client.execute(operation: "StartServiceSoftwareUpdate", path: "/2021-01-01/opensearch/serviceSoftwareUpdate/start", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
+    /// Updates the data source on the domain.
+    public func updateDataSource(_ input: UpdateDataSourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateDataSourceResponse {
+        return try await self.client.execute(operation: "UpdateDataSource", path: "/2021-01-01/opensearch/domain/{DomainName}/dataSource/{Name}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
     public func updateDomainConfig(_ input: UpdateDomainConfigRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateDomainConfigResponse {
         return try await self.client.execute(operation: "UpdateDomainConfig", path: "/2021-01-01/opensearch/domain/{DomainName}/config", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -467,6 +507,28 @@ extension OpenSearch {
             command: self.getUpgradeHistory,
             inputKey: \GetUpgradeHistoryRequest.nextToken,
             outputKey: \GetUpgradeHistoryResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// A list of maintenance actions for the domain.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listDomainMaintenancesPaginator(
+        _ input: ListDomainMaintenancesRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListDomainMaintenancesRequest, ListDomainMaintenancesResponse> {
+        return .init(
+            input: input,
+            command: self.listDomainMaintenances,
+            inputKey: \ListDomainMaintenancesRequest.nextToken,
+            outputKey: \ListDomainMaintenancesResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

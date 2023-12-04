@@ -97,7 +97,7 @@ public struct LexModelsV2: AWSService {
         return self.client.execute(operation: "CreateBotLocale", path: "/bots/{botId}/botversions/{botVersion}/botlocales", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a new version of the bot based on the DRAFT version. If the DRAFT version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version. When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
+    /// Creates an immutable version of the bot. When you create the first  version of a bot, Amazon Lex sets the version number to 1. Subsequent bot versions increase  in an increment of 1. The version number will always represent the total number  of versions created of the bot, not the current number of versions. If a bot version is deleted, that bot version number will not be reused.
     public func createBotVersion(_ input: CreateBotVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateBotVersionResponse> {
         return self.client.execute(operation: "CreateBotVersion", path: "/bots/{botId}/botversions", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -232,6 +232,11 @@ public struct LexModelsV2: AWSService {
         return self.client.execute(operation: "DescribeBotRecommendation", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns information about a request to generate a bot through natural language description, made through  the StartBotResource API. Use the generatedBotLocaleUrl  to retrieve the Amazon S3 object containing the bot locale configuration. You can  then modify and import this configuration.
+    public func describeBotResourceGeneration(_ input: DescribeBotResourceGenerationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeBotResourceGenerationResponse> {
+        return self.client.execute(operation: "DescribeBotResourceGeneration", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations/{generationId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Provides metadata about a version of a bot.
     public func describeBotVersion(_ input: DescribeBotVersionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DescribeBotVersionResponse> {
         return self.client.execute(operation: "DescribeBotVersion", path: "/bots/{botId}/botversions/{botVersion}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -292,6 +297,11 @@ public struct LexModelsV2: AWSService {
         return self.client.execute(operation: "DescribeTestSetGeneration", path: "/testsetgenerations/{testSetGenerationId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Generates sample utterances for an intent.
+    public func generateBotElement(_ input: GenerateBotElementRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GenerateBotElementResponse> {
+        return self.client.execute(operation: "GenerateBotElement", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// The pre-signed Amazon S3 URL to download the test execution result artifacts.
     public func getTestExecutionArtifactsUrl(_ input: GetTestExecutionArtifactsUrlRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetTestExecutionArtifactsUrlResponse> {
         return self.client.execute(operation: "GetTestExecutionArtifactsUrl", path: "/testexecutions/{testExecutionId}/artifacturl", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -315,6 +325,11 @@ public struct LexModelsV2: AWSService {
     /// Get a list of bot recommendations that meet the specified criteria.
     public func listBotRecommendations(_ input: ListBotRecommendationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListBotRecommendationsResponse> {
         return self.client.execute(operation: "ListBotRecommendations", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the generation requests made for a bot locale.
+    public func listBotResourceGenerations(_ input: ListBotResourceGenerationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListBotResourceGenerationsResponse> {
+        return self.client.execute(operation: "ListBotResourceGenerations", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/generations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about all of the versions of a bot. The ListBotVersions operation returns a summary of each version of a bot. For example, if a bot has three numbered versions, the ListBotVersions operation returns for summaries, one for each numbered version and one for the DRAFT version. The ListBotVersions operation always returns at least one version, the DRAFT version.
@@ -440,6 +455,11 @@ public struct LexModelsV2: AWSService {
     /// Use this to provide your transcript data, and to start the bot recommendation process.
     public func startBotRecommendation(_ input: StartBotRecommendationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartBotRecommendationResponse> {
         return self.client.execute(operation: "StartBotRecommendation", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Starts a request for the descriptive bot builder to generate a bot locale configuration  based on the prompt you provide it. After you make this call, use the DescribeBotResourceGeneration  operation to check on the status of the generation and for the generatedBotLocaleUrl when the  generation is complete. Use that value to retrieve the Amazon S3 object containing the bot locale configuration. You can  then modify and import this configuration.
+    public func startBotResourceGeneration(_ input: StartBotResourceGenerationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartBotResourceGenerationResponse> {
+        return self.client.execute(operation: "StartBotResourceGeneration", path: "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/startgeneration", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
@@ -742,6 +762,59 @@ extension LexModelsV2 {
             command: self.listBotRecommendations,
             inputKey: \ListBotRecommendationsRequest.nextToken,
             outputKey: \ListBotRecommendationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Lists the generation requests made for a bot locale.
+    ///
+    /// Provide paginated results to closure `onPage` for it to combine them into one result.
+    /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
+    ///
+    /// Parameters:
+    ///   - input: Input for request
+    ///   - initialValue: The value to use as the initial accumulating value. `initialValue` is passed to `onPage` the first time it is called.
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
+    ///         along with a boolean indicating if the paginate operation should continue.
+    public func listBotResourceGenerationsPaginator<Result>(
+        _ input: ListBotResourceGenerationsRequest,
+        _ initialValue: Result,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (Result, ListBotResourceGenerationsResponse, EventLoop) -> EventLoopFuture<(Bool, Result)>
+    ) -> EventLoopFuture<Result> {
+        return self.client.paginate(
+            input: input,
+            initialValue: initialValue,
+            command: self.listBotResourceGenerations,
+            inputKey: \ListBotResourceGenerationsRequest.nextToken,
+            outputKey: \ListBotResourceGenerationsResponse.nextToken,
+            on: eventLoop,
+            onPage: onPage
+        )
+    }
+
+    /// Provide paginated results to closure `onPage`.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    public func listBotResourceGenerationsPaginator(
+        _ input: ListBotResourceGenerationsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil,
+        onPage: @escaping (ListBotResourceGenerationsResponse, EventLoop) -> EventLoopFuture<Bool>
+    ) -> EventLoopFuture<Void> {
+        return self.client.paginate(
+            input: input,
+            command: self.listBotResourceGenerations,
+            inputKey: \ListBotResourceGenerationsRequest.nextToken,
+            outputKey: \ListBotResourceGenerationsResponse.nextToken,
             on: eventLoop,
             onPage: onPage
         )
@@ -1908,6 +1981,19 @@ extension LexModelsV2.ListBotRecommendationsRequest: AWSPaginateToken {
             localeId: self.localeId,
             maxResults: self.maxResults,
             nextToken: token
+        )
+    }
+}
+
+extension LexModelsV2.ListBotResourceGenerationsRequest: AWSPaginateToken {
+    public func usingPaginationToken(_ token: String) -> LexModelsV2.ListBotResourceGenerationsRequest {
+        return .init(
+            botId: self.botId,
+            botVersion: self.botVersion,
+            localeId: self.localeId,
+            maxResults: self.maxResults,
+            nextToken: token,
+            sortBy: self.sortBy
         )
     }
 }

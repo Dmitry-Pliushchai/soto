@@ -26,7 +26,7 @@ import SotoCore
 extension SimSpaceWeaver {
     // MARK: Enums
 
-    public enum ClockStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClockStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case starting = "STARTING"
         case stopped = "STOPPED"
@@ -35,14 +35,14 @@ extension SimSpaceWeaver {
         public var description: String { return self.rawValue }
     }
 
-    public enum ClockTargetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ClockTargetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case stopped = "STOPPED"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum LifecycleManagementStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum LifecycleManagementStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case byRequest = "ByRequest"
         case bySpatialSubdivision = "BySpatialSubdivision"
         case perWorker = "PerWorker"
@@ -50,7 +50,7 @@ extension SimSpaceWeaver {
         public var description: String { return self.rawValue }
     }
 
-    public enum SimulationAppStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimulationAppStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case started = "STARTED"
         case starting = "STARTING"
@@ -60,14 +60,14 @@ extension SimSpaceWeaver {
         public var description: String { return self.rawValue }
     }
 
-    public enum SimulationAppTargetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimulationAppTargetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case started = "STARTED"
         case stopped = "STOPPED"
         case unknown = "UNKNOWN"
         public var description: String { return self.rawValue }
     }
 
-    public enum SimulationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimulationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case deleting = "DELETING"
         case failed = "FAILED"
@@ -80,7 +80,7 @@ extension SimSpaceWeaver {
         public var description: String { return self.rawValue }
     }
 
-    public enum SimulationTargetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimulationTargetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case started = "STARTED"
         case stopped = "STOPPED"

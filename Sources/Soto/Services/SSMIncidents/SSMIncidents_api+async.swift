@@ -21,6 +21,11 @@ import SotoCore
 extension SSMIncidents {
     // MARK: Async API Calls
 
+    /// Retrieves details about all specified findings for an incident, including descriptive details about each finding. A finding represents a recent application environment change made by an CodeDeploy deployment or an CloudFormation stack creation or update that can be investigated as a potential cause of the incident.
+    public func batchGetIncidentFindings(_ input: BatchGetIncidentFindingsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> BatchGetIncidentFindingsOutput {
+        return try await self.client.execute(operation: "BatchGetIncidentFindings", path: "/batchGetIncidentFindings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// A replication set replicates and encrypts your data to the provided Regions with the provided KMS key.
     public func createReplicationSet(_ input: CreateReplicationSetInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateReplicationSetOutput {
         return try await self.client.execute(operation: "CreateReplicationSet", path: "/createReplicationSet", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -86,6 +91,11 @@ extension SSMIncidents {
         return try await self.client.execute(operation: "GetTimelineEvent", path: "/getTimelineEvent", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident. A finding represents a recent application environment change made by an CloudFormation stack creation or update or an CodeDeploy deployment that can be investigated as a potential cause of the incident.
+    public func listIncidentFindings(_ input: ListIncidentFindingsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIncidentFindingsOutput {
+        return try await self.client.execute(operation: "ListIncidentFindings", path: "/listIncidentFindings", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all incident records in your account. Use this command to retrieve the Amazon Resource Name (ARN) of the incident record you want to update.
     public func listIncidentRecords(_ input: ListIncidentRecordsInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIncidentRecordsOutput {
         return try await self.client.execute(operation: "ListIncidentRecords", path: "/listIncidentRecords", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -106,7 +116,7 @@ extension SSMIncidents {
         return try await self.client.execute(operation: "ListResponsePlans", path: "/listResponsePlans", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists the tags that are attached to the specified response plan.
+    /// Lists the tags that are attached to the specified response plan or incident.
     public func listTagsForResource(_ input: ListTagsForResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListTagsForResourceResponse {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -188,6 +198,28 @@ extension SSMIncidents {
             command: self.getResourcePolicies,
             inputKey: \GetResourcePoliciesInput.nextToken,
             outputKey: \GetResourcePoliciesOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of the IDs of findings, plus their last modified times, that have been identified for a specified incident. A finding represents a recent application environment change made by an CloudFormation stack creation or update or an CodeDeploy deployment that can be investigated as a potential cause of the incident.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listIncidentFindingsPaginator(
+        _ input: ListIncidentFindingsInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListIncidentFindingsInput, ListIncidentFindingsOutput> {
+        return .init(
+            input: input,
+            command: self.listIncidentFindings,
+            inputKey: \ListIncidentFindingsInput.nextToken,
+            outputKey: \ListIncidentFindingsOutput.nextToken,
             logger: logger,
             on: eventLoop
         )

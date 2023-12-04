@@ -204,6 +204,11 @@ public struct AppSync: AWSService {
         return self.client.execute(operation: "GetDataSource", path: "/v1/apis/{apiId}/datasources/{name}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves the record of an existing introspection. If the retrieval is successful, the result of the instrospection will also be returned. If the retrieval fails the operation, an error message will be returned instead.
+    public func getDataSourceIntrospection(_ input: GetDataSourceIntrospectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDataSourceIntrospectionResponse> {
+        return self.client.execute(operation: "GetDataSourceIntrospection", path: "/v1/datasources/introspections/{introspectionId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves a custom DomainName object.
     public func getDomainName(_ input: GetDomainNameRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDomainNameResponse> {
         return self.client.execute(operation: "GetDomainName", path: "/v1/domainnames/{domainName}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -297,6 +302,11 @@ public struct AppSync: AWSService {
     /// Lists Type objects by the source API association ID.
     public func listTypesByAssociation(_ input: ListTypesByAssociationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListTypesByAssociationResponse> {
         return self.client.execute(operation: "ListTypesByAssociation", path: "/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/types", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Creates a new introspection. Returns the introspectionId of the new introspection after its creation.
+    public func startDataSourceIntrospection(_ input: StartDataSourceIntrospectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<StartDataSourceIntrospectionResponse> {
+        return self.client.execute(operation: "StartDataSourceIntrospection", path: "/v1/datasources/introspections", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Adds a new schema to your GraphQL API. This operation is asynchronous. Use  to determine when it has completed.

@@ -26,18 +26,18 @@ import SotoCore
 extension Neptunedata {
     // MARK: Enums
 
-    public enum Action: String, CustomStringConvertible, Codable, Sendable {
+    public enum Action: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case initializeReset = "initiateDatabaseReset"
         case performReset = "performDatabaseReset"
         public var description: String { return self.rawValue }
     }
 
-    public enum Encoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum Encoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gzip = "gzip"
         public var description: String { return self.rawValue }
     }
 
-    public enum Format: String, CustomStringConvertible, Codable, Sendable {
+    public enum Format: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "csv"
         case nquads = "nquads"
         case ntriples = "ntriples"
@@ -47,13 +47,13 @@ extension Neptunedata {
         public var description: String { return self.rawValue }
     }
 
-    public enum GraphSummaryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GraphSummaryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "basic"
         case detailed = "detailed"
         public var description: String { return self.rawValue }
     }
 
-    public enum IteratorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IteratorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterSequenceNumber = "AFTER_SEQUENCE_NUMBER"
         case atSequenceNumber = "AT_SEQUENCE_NUMBER"
         case latest = "LATEST"
@@ -61,21 +61,21 @@ extension Neptunedata {
         public var description: String { return self.rawValue }
     }
 
-    public enum Mode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case new = "NEW"
         case resume = "RESUME"
         public var description: String { return self.rawValue }
     }
 
-    public enum OpenCypherExplainMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum OpenCypherExplainMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `static` = "static"
         case details = "details"
         case dynamic = "dynamic"
         public var description: String { return self.rawValue }
     }
 
-    public enum Parallelism: String, CustomStringConvertible, Codable, Sendable {
+    public enum Parallelism: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
@@ -83,7 +83,7 @@ extension Neptunedata {
         public var description: String { return self.rawValue }
     }
 
-    public enum S3BucketRegion: String, CustomStringConvertible, Codable, Sendable {
+    public enum S3BucketRegion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afSouth1 = "af-south-1"
         case apEast1 = "ap-east-1"
         case apNortheast1 = "ap-northeast-1"
@@ -110,7 +110,7 @@ extension Neptunedata {
         public var description: String { return self.rawValue }
     }
 
-    public enum StatisticsAutoGenerationMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum StatisticsAutoGenerationMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableAutocompute = "disableAutoCompute"
         case enableAutocompute = "enableAutoCompute"
         case refresh = "refresh"
@@ -736,7 +736,7 @@ extension Neptunedata {
     public struct ExecuteOpenCypherQueryInput: AWSEncodableShape {
         /// The openCypher query string to be executed.
         public let openCypherQuery: String
-        /// The openCypher query parameters for query execution.  See Examples of openCypher parameterized queries for more information.
+        /// The openCypher query parameters for query execution. See Examples of openCypher parameterized queries for more information.
         public let parameters: String?
 
         public init(openCypherQuery: String, parameters: String? = nil) {
@@ -1298,7 +1298,7 @@ extension Neptunedata {
     public struct GetSparqlStatisticsOutput: AWSDecodableShape {
         /// Statistics for RDF data.
         public let payload: Statistics
-        /// The HTTP return code of the request. If the request succeeded, the code is 200. See Common error codes for DFE statistics request for a list of common errors.
+        /// The HTTP return code of the request. If the request succeeded, the code is 200. See Common error codes for DFE statistics request for a list of common errors. When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the neptune-db:GetStatisticsStatus IAM action in that cluster.
         public let status: String
 
         public init(payload: Statistics, status: String) {
@@ -2128,7 +2128,7 @@ extension Neptunedata {
         public let parallelism: Parallelism?
         ///   parserConfiguration   –   An optional object with additional parser configuration values. Each of the child parameters is also optional:        namedGraphUri   –   The default graph for all RDF formats when no graph is specified (for non-quads formats and NQUAD entries with no graph). The default is https://aws.amazon.com/neptune/vocab/v01/DefaultNamedGraph.     baseUri   –   The base URI for RDF/XML and Turtle formats. The default is https://aws.amazon.com/neptune/default.     allowEmptyStrings   –   Gremlin users need to be able to pass empty string values("") as node and edge properties when loading CSV data. If allowEmptyStrings is set to false (the default), such empty strings are treated as nulls and are not loaded. If allowEmptyStrings is set to true, the loader treats empty strings as valid property values and loads them accordingly.
         public let parserConfiguration: [String: String]?
-        /// This is an optional flag parameter that indicates whether the load request can be queued up or not.  You don't have to wait for one load job to complete before issuing the next one, because Neptune can queue up as many as 64 jobs at a time, provided that their queueRequest parameters are all set to "TRUE". If the queueRequest parameter is omitted or set to "FALSE", the load request will fail if another load job is already running.  Allowed values: "TRUE", "FALSE".  Default value: "FALSE".
+        /// This is an optional flag parameter that indicates whether the load request can be queued up or not.  You don't have to wait for one load job to complete before issuing the next one, because Neptune can queue up as many as 64 jobs at a time, provided that their queueRequest parameters are all set to "TRUE". The queue order of the jobs will be first-in-first-out (FIFO). If the queueRequest parameter is omitted or set to "FALSE", the load request will fail if another load job is already running.  Allowed values: "TRUE", "FALSE".  Default value: "FALSE".
         public let queueRequest: Bool?
         /// The Amazon region of the S3 bucket. This must match the Amazon Region of the DB cluster.
         public let s3BucketRegion: S3BucketRegion

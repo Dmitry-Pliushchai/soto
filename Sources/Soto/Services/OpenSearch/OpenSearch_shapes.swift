@@ -26,14 +26,14 @@ import SotoCore
 extension OpenSearch {
     // MARK: Enums
 
-    public enum ActionSeverity: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionSeverity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case eligible = "ELIGIBLE"
         case failed = "FAILED"
@@ -43,20 +43,20 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum ActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case jvmHeapSizeTuning = "JVM_HEAP_SIZE_TUNING"
         case jvmYoungGenTuning = "JVM_YOUNG_GEN_TUNING"
         case serviceSoftwareUpdate = "SERVICE_SOFTWARE_UPDATE"
         public var description: String { return self.rawValue }
     }
 
-    public enum AutoTuneDesiredState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoTuneDesiredState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AutoTuneState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoTuneState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableInProgress = "DISABLE_IN_PROGRESS"
         case disabled = "DISABLED"
         case disabledAndRollbackComplete = "DISABLED_AND_ROLLBACK_COMPLETE"
@@ -69,18 +69,18 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum AutoTuneType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AutoTuneType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case scheduledAction = "SCHEDULED_ACTION"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConnectionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConnectionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case direct = "DIRECT"
         case vpcEndpoint = "VPC_ENDPOINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case eligible = "ELIGIBLE"
         case inProgress = "IN_PROGRESS"
@@ -89,14 +89,16 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum DescribePackagesFilterName: String, CustomStringConvertible, Codable, Sendable {
+    public enum DescribePackagesFilterName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case engineVersion = "EngineVersion"
         case packageID = "PackageID"
         case packageName = "PackageName"
         case packageStatus = "PackageStatus"
+        case packageType = "PackageType"
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainHealth: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainHealth: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case green = "Green"
         case notAvailable = "NotAvailable"
         case red = "Red"
@@ -104,7 +106,7 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainPackageStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainPackageStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case associating = "ASSOCIATING"
         case associationFailed = "ASSOCIATION_FAILED"
@@ -113,26 +115,32 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum DomainState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DomainState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case notAvailable = "NotAvailable"
         case processing = "Processing"
         public var description: String { return self.rawValue }
     }
 
-    public enum DryRunMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DryRunMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "Basic"
         case verbose = "Verbose"
         public var description: String { return self.rawValue }
     }
 
-    public enum EngineType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EngineType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case elasticsearch = "Elasticsearch"
         case openSearch = "OpenSearch"
         public var description: String { return self.rawValue }
     }
 
-    public enum InboundConnectionStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum IPAddressType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case dualstack = "dualstack"
+        case ipv4 = "ipv4"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum InboundConnectionStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case approved = "APPROVED"
         case deleted = "DELETED"
@@ -144,7 +152,7 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auditLogs = "AUDIT_LOGS"
         case esApplicationLogs = "ES_APPLICATION_LOGS"
         case indexSlowLogs = "INDEX_SLOW_LOGS"
@@ -152,27 +160,43 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum MasterNodeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MaintenanceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case completed = "COMPLETED"
+        case failed = "FAILED"
+        case inProgress = "IN_PROGRESS"
+        case pending = "PENDING"
+        case timedOut = "TIMED_OUT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum MaintenanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case rebootNode = "REBOOT_NODE"
+        case restartDashboard = "RESTART_DASHBOARD"
+        case restartSearchProcess = "RESTART_SEARCH_PROCESS"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum MasterNodeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "Available"
         case unAvailable = "UnAvailable"
         public var description: String { return self.rawValue }
     }
 
-    public enum NodeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NodeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case notAvailable = "NotAvailable"
         case standBy = "StandBy"
         public var description: String { return self.rawValue }
     }
 
-    public enum NodeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NodeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case data = "Data"
         case master = "Master"
         case ultrawarm = "Ultrawarm"
         public var description: String { return self.rawValue }
     }
 
-    public enum OpenSearchPartitionInstanceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OpenSearchPartitionInstanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case c42XlargeSearch = "c4.2xlarge.search"
         case c44XlargeSearch = "c4.4xlarge.search"
         case c48XlargeSearch = "c4.8xlarge.search"
@@ -271,21 +295,21 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum OpenSearchWarmPartitionInstanceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OpenSearchWarmPartitionInstanceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ultrawarm1LargeSearch = "ultrawarm1.large.search"
         case ultrawarm1MediumSearch = "ultrawarm1.medium.search"
         case ultrawarm1XlargeSearch = "ultrawarm1.xlarge.search"
         public var description: String { return self.rawValue }
     }
 
-    public enum OptionState: String, CustomStringConvertible, Codable, Sendable {
+    public enum OptionState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case processing = "Processing"
         case requiresIndexDocuments = "RequiresIndexDocuments"
         public var description: String { return self.rawValue }
     }
 
-    public enum OutboundConnectionStatusCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum OutboundConnectionStatusCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case approved = "APPROVED"
         case deleted = "DELETED"
@@ -299,7 +323,7 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum OverallChangeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OverallChangeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case pending = "PENDING"
@@ -307,7 +331,7 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case copyFailed = "COPY_FAILED"
         case copying = "COPYING"
@@ -319,74 +343,75 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum PackageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PackageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case txtDictionary = "TXT-DICTIONARY"
+        case zipPlugin = "ZIP-PLUGIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrincipalType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsAccount = "AWS_ACCOUNT"
         case awsService = "AWS_SERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReservedInstancePaymentOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReservedInstancePaymentOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allUpfront = "ALL_UPFRONT"
         case noUpfront = "NO_UPFRONT"
         case partialUpfront = "PARTIAL_UPFRONT"
         public var description: String { return self.rawValue }
     }
 
-    public enum RollbackOnDisable: String, CustomStringConvertible, Codable, Sendable {
+    public enum RollbackOnDisable: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case defaultRollback = "DEFAULT_ROLLBACK"
         case noRollback = "NO_ROLLBACK"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduleAt: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduleAt: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case now = "NOW"
         case offPeakWindow = "OFF_PEAK_WINDOW"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduledAutoTuneActionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduledAutoTuneActionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case jvmHeapSizeTuning = "JVM_HEAP_SIZE_TUNING"
         case jvmYoungGenTuning = "JVM_YOUNG_GEN_TUNING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduledAutoTuneSeverityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduledAutoTuneSeverityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case low = "LOW"
         case medium = "MEDIUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduledBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduledBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case customer = "CUSTOMER"
         case system = "SYSTEM"
         public var description: String { return self.rawValue }
     }
 
-    public enum SkipUnavailableStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SkipUnavailableStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TLSSecurityPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum TLSSecurityPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case policyMinTls10201907 = "Policy-Min-TLS-1-0-2019-07"
         case policyMinTls12201907 = "Policy-Min-TLS-1-2-2019-07"
         public var description: String { return self.rawValue }
     }
 
-    public enum TimeUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimeUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hours = "HOURS"
         public var description: String { return self.rawValue }
     }
 
-    public enum UpgradeStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpgradeStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
@@ -394,14 +419,14 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum UpgradeStep: String, CustomStringConvertible, Codable, Sendable {
+    public enum UpgradeStep: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case preUpgradeCheck = "PRE_UPGRADE_CHECK"
         case snapshot = "SNAPSHOT"
         case upgrade = "UPGRADE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VolumeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum VolumeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gp2 = "gp2"
         case gp3 = "gp3"
         case io1 = "io1"
@@ -409,13 +434,13 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum VpcEndpointErrorCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum VpcEndpointErrorCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case endpointNotFound = "ENDPOINT_NOT_FOUND"
         case serverError = "SERVER_ERROR"
         public var description: String { return self.rawValue }
     }
 
-    public enum VpcEndpointStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VpcEndpointStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case createFailed = "CREATE_FAILED"
         case creating = "CREATING"
@@ -426,7 +451,7 @@ extension OpenSearch {
         public var description: String { return self.rawValue }
     }
 
-    public enum ZoneStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ZoneStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "Active"
         case notAvailable = "NotAvailable"
         case standBy = "StandBy"
@@ -516,6 +541,59 @@ extension OpenSearch {
         private enum CodingKeys: String, CodingKey {
             case options = "Options"
             case status = "Status"
+        }
+    }
+
+    public struct AddDataSourceRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName"))
+        ]
+
+        /// The type of data source.
+        public let dataSourceType: DataSourceType
+        /// A description of the data source.
+        public let description: String?
+        /// The name of the domain.
+        public let domainName: String
+        /// The name of the data source.
+        public let name: String
+
+        public init(dataSourceType: DataSourceType, description: String? = nil, domainName: String, name: String) {
+            self.dataSourceType = dataSourceType
+            self.description = description
+            self.domainName = domainName
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSourceType.validate(name: "\(name).dataSourceType")
+            try self.validate(self.description, name: "description", parent: name, max: 1000)
+            try self.validate(self.description, name: "description", parent: name, pattern: "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$")
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.name, name: "name", parent: name, max: 80)
+            try self.validate(self.name, name: "name", parent: name, min: 3)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[a-z][a-z0-9_]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceType = "DataSourceType"
+            case description = "Description"
+            case name = "Name"
+        }
+    }
+
+    public struct AddDataSourceResponse: AWSDecodableShape {
+        /// A message associated with the data source.
+        public let message: String?
+
+        public init(message: String? = nil) {
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case message = "Message"
         }
     }
 
@@ -679,6 +757,7 @@ extension OpenSearch {
             try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
             try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
             try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1093,7 +1172,7 @@ extension OpenSearch {
         public let dedicatedMasterEnabled: Bool?
         /// OpenSearch Service instance type of the dedicated master nodes in the cluster.
         public let dedicatedMasterType: OpenSearchPartitionInstanceType?
-        /// Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
+        /// Number of data nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
         public let instanceCount: Int?
         /// Instance type of data nodes in the cluster.
         public let instanceType: OpenSearchPartitionInstanceType?
@@ -1286,6 +1365,8 @@ extension OpenSearch {
         public let encryptionAtRestOptions: EncryptionAtRestOptions?
         /// String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine version for the OpenSearch Service domain. For example, OpenSearch_1.0 or Elasticsearch_7.9. For more information, see Creating and managing Amazon OpenSearch Service domains.
         public let engineVersion: String?
+        /// The type of IP addresses supported by the endpoint for the domain.
+        public let ipAddressType: IPAddressType?
         /// Key-value pairs to configure log publishing.
         public let logPublishingOptions: [LogType: LogPublishingOption]?
         /// Enables node-to-node encryption.
@@ -1301,7 +1382,7 @@ extension OpenSearch {
         /// Container for the values required to configure VPC access domains. If you don't specify these values, OpenSearch Service creates the domain with a public endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC.
         public let vpcOptions: VPCOptions?
 
-        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptionsInput? = nil, autoTuneOptions: AutoTuneOptionsInput? = nil, clusterConfig: ClusterConfig? = nil, cognitoOptions: CognitoOptions? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainName: String, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, engineVersion: String? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, tagList: [Tag]? = nil, vpcOptions: VPCOptions? = nil) {
+        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptionsInput? = nil, autoTuneOptions: AutoTuneOptionsInput? = nil, clusterConfig: ClusterConfig? = nil, cognitoOptions: CognitoOptions? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainName: String, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, engineVersion: String? = nil, ipAddressType: IPAddressType? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, tagList: [Tag]? = nil, vpcOptions: VPCOptions? = nil) {
             self.accessPolicies = accessPolicies
             self.advancedOptions = advancedOptions
             self.advancedSecurityOptions = advancedSecurityOptions
@@ -1313,6 +1394,7 @@ extension OpenSearch {
             self.ebsOptions = ebsOptions
             self.encryptionAtRestOptions = encryptionAtRestOptions
             self.engineVersion = engineVersion
+            self.ipAddressType = ipAddressType
             self.logPublishingOptions = logPublishingOptions
             self.nodeToNodeEncryptionOptions = nodeToNodeEncryptionOptions
             self.offPeakWindowOptions = offPeakWindowOptions
@@ -1357,6 +1439,7 @@ extension OpenSearch {
             case ebsOptions = "EBSOptions"
             case encryptionAtRestOptions = "EncryptionAtRestOptions"
             case engineVersion = "EngineVersion"
+            case ipAddressType = "IPAddressType"
             case logPublishingOptions = "LogPublishingOptions"
             case nodeToNodeEncryptionOptions = "NodeToNodeEncryptionOptions"
             case offPeakWindowOptions = "OffPeakWindowOptions"
@@ -1474,7 +1557,7 @@ extension OpenSearch {
 
         public func validate(name: String) throws {
             try self.validate(self.packageDescription, name: "packageDescription", parent: name, max: 1024)
-            try self.validate(self.packageName, name: "packageName", parent: name, max: 28)
+            try self.validate(self.packageName, name: "packageName", parent: name, max: 256)
             try self.validate(self.packageName, name: "packageName", parent: name, min: 3)
             try self.validate(self.packageName, name: "packageName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
             try self.packageSource.validate(name: "\(name).packageSource")
@@ -1544,7 +1627,7 @@ extension OpenSearch {
     }
 
     public struct CrossClusterSearchConnectionProperties: AWSEncodableShape & AWSDecodableShape {
-        /// Status of SkipUnavailable param for outbound connection.
+        /// The status of the SkipUnavailable setting for the outbound connection. This feature allows you to specify some clusters as optional and ensure that your cross-cluster queries return partial results despite failures on one or more remote clusters.
         public let skipUnavailable: SkipUnavailableStatus?
 
         public init(skipUnavailable: SkipUnavailableStatus? = nil) {
@@ -1553,6 +1636,68 @@ extension OpenSearch {
 
         private enum CodingKeys: String, CodingKey {
             case skipUnavailable = "SkipUnavailable"
+        }
+    }
+
+    public struct DataSourceDetails: AWSDecodableShape {
+        /// The type of data source.
+        public let dataSourceType: DataSourceType?
+        /// A description of the data source.
+        public let description: String?
+        /// The name of the data source.
+        public let name: String?
+
+        public init(dataSourceType: DataSourceType? = nil, description: String? = nil, name: String? = nil) {
+            self.dataSourceType = dataSourceType
+            self.description = description
+            self.name = name
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceType = "DataSourceType"
+            case description = "Description"
+            case name = "Name"
+        }
+    }
+
+    public struct DeleteDataSourceRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName")),
+            AWSMemberEncoding(label: "name", location: .uri("Name"))
+        ]
+
+        /// The name of the domain.
+        public let domainName: String
+        /// The name of the data source.
+        public let name: String
+
+        public init(domainName: String, name: String) {
+            self.domainName = domainName
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.name, name: "name", parent: name, max: 80)
+            try self.validate(self.name, name: "name", parent: name, min: 3)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[a-z][a-z0-9_]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteDataSourceResponse: AWSDecodableShape {
+        /// A message associated with the initiated request.
+        public let message: String?
+
+        public init(message: String? = nil) {
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case message = "Message"
         }
     }
 
@@ -1668,6 +1813,10 @@ extension OpenSearch {
 
         public init(packageID: String) {
             self.packageID = packageID
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -1994,7 +2143,7 @@ extension OpenSearch {
     }
 
     public struct DescribeDomainsRequest: AWSEncodableShape {
-        /// Array of OpenSearch Service domain names that you want information about. If you don't specify any domains, OpenSearch Service returns information about all domains owned by the account.
+        /// Array of OpenSearch Service domain names that you want information about. You must specify at least one domain name.
         public let domainNames: [String]
 
         public init(domainNames: [String]) {
@@ -2228,8 +2377,9 @@ extension OpenSearch {
 
         public func validate(name: String) throws {
             try self.value?.forEach {
-                try validate($0, name: "value[]", parent: name, pattern: "^[0-9a-zA-Z\\*\\.\\\\/\\?-]*$")
+                try validate($0, name: "value[]", parent: name, pattern: "^[0-9a-zA-Z\\*\\.\\_\\\\\\/\\?-]+$")
             }
+            try self.validate(self.value, name: "value", parent: name, min: 1)
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -2435,6 +2585,7 @@ extension OpenSearch {
             try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
             try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
             try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -2476,6 +2627,8 @@ extension OpenSearch {
         public let encryptionAtRestOptions: EncryptionAtRestOptionsStatus?
         /// The OpenSearch or Elasticsearch version that the domain is running.
         public let engineVersion: VersionStatus?
+        /// The type of IP addresses supported by the endpoint for the domain.
+        public let ipAddressType: IPAddressTypeStatus?
         /// Key-value pairs to configure log publishing.
         public let logPublishingOptions: LogPublishingOptionsStatus?
         /// Whether node-to-node encryption is enabled or disabled.
@@ -2489,7 +2642,7 @@ extension OpenSearch {
         /// The current VPC options for the domain and the status of any updates to their configuration.
         public let vpcOptions: VPCDerivedInfoStatus?
 
-        public init(accessPolicies: AccessPoliciesStatus? = nil, advancedOptions: AdvancedOptionsStatus? = nil, advancedSecurityOptions: AdvancedSecurityOptionsStatus? = nil, autoTuneOptions: AutoTuneOptionsStatus? = nil, changeProgressDetails: ChangeProgressDetails? = nil, clusterConfig: ClusterConfigStatus? = nil, cognitoOptions: CognitoOptionsStatus? = nil, domainEndpointOptions: DomainEndpointOptionsStatus? = nil, ebsOptions: EBSOptionsStatus? = nil, encryptionAtRestOptions: EncryptionAtRestOptionsStatus? = nil, engineVersion: VersionStatus? = nil, logPublishingOptions: LogPublishingOptionsStatus? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptionsStatus? = nil, offPeakWindowOptions: OffPeakWindowOptionsStatus? = nil, snapshotOptions: SnapshotOptionsStatus? = nil, softwareUpdateOptions: SoftwareUpdateOptionsStatus? = nil, vpcOptions: VPCDerivedInfoStatus? = nil) {
+        public init(accessPolicies: AccessPoliciesStatus? = nil, advancedOptions: AdvancedOptionsStatus? = nil, advancedSecurityOptions: AdvancedSecurityOptionsStatus? = nil, autoTuneOptions: AutoTuneOptionsStatus? = nil, changeProgressDetails: ChangeProgressDetails? = nil, clusterConfig: ClusterConfigStatus? = nil, cognitoOptions: CognitoOptionsStatus? = nil, domainEndpointOptions: DomainEndpointOptionsStatus? = nil, ebsOptions: EBSOptionsStatus? = nil, encryptionAtRestOptions: EncryptionAtRestOptionsStatus? = nil, engineVersion: VersionStatus? = nil, ipAddressType: IPAddressTypeStatus? = nil, logPublishingOptions: LogPublishingOptionsStatus? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptionsStatus? = nil, offPeakWindowOptions: OffPeakWindowOptionsStatus? = nil, snapshotOptions: SnapshotOptionsStatus? = nil, softwareUpdateOptions: SoftwareUpdateOptionsStatus? = nil, vpcOptions: VPCDerivedInfoStatus? = nil) {
             self.accessPolicies = accessPolicies
             self.advancedOptions = advancedOptions
             self.advancedSecurityOptions = advancedSecurityOptions
@@ -2501,6 +2654,7 @@ extension OpenSearch {
             self.ebsOptions = ebsOptions
             self.encryptionAtRestOptions = encryptionAtRestOptions
             self.engineVersion = engineVersion
+            self.ipAddressType = ipAddressType
             self.logPublishingOptions = logPublishingOptions
             self.nodeToNodeEncryptionOptions = nodeToNodeEncryptionOptions
             self.offPeakWindowOptions = offPeakWindowOptions
@@ -2521,6 +2675,7 @@ extension OpenSearch {
             case ebsOptions = "EBSOptions"
             case encryptionAtRestOptions = "EncryptionAtRestOptions"
             case engineVersion = "EngineVersion"
+            case ipAddressType = "IPAddressType"
             case logPublishingOptions = "LogPublishingOptions"
             case nodeToNodeEncryptionOptions = "NodeToNodeEncryptionOptions"
             case offPeakWindowOptions = "OffPeakWindowOptions"
@@ -2539,7 +2694,7 @@ extension OpenSearch {
         public let customEndpointEnabled: Bool?
         /// True to require that all traffic to the domain arrive over HTTPS.
         public let enforceHTTPS: Bool?
-        /// Specify the TLS security policy to apply to the HTTPS endpoint of the domain. Can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 and higher.    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2
+        /// Specify the TLS security policy to apply to the HTTPS endpoint of the domain. The policy can be one of the following values:    Policy-Min-TLS-1-0-2019-07: TLS security policy which supports TLS version 1.0 to TLS version 1.2    Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only TLS version 1.2    Policy-Min-TLS-1-0-2023-10: TLS security policy which supports TLS version 1.0 to TLS version 1.3    Policy-Min-TLS-1-2-2023-10: TLS security policy which supports TLS version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites
         public let tlsSecurityPolicy: TLSSecurityPolicy?
 
         public init(customEndpoint: String? = nil, customEndpointCertificateArn: String? = nil, customEndpointEnabled: Bool? = nil, enforceHTTPS: Bool? = nil, tlsSecurityPolicy: TLSSecurityPolicy? = nil) {
@@ -2616,6 +2771,47 @@ extension OpenSearch {
 
         private enum CodingKeys: String, CodingKey {
             case awsDomainInformation = "AWSDomainInformation"
+        }
+    }
+
+    public struct DomainMaintenanceDetails: AWSDecodableShape {
+        /// The name of the action.
+        public let action: MaintenanceType?
+        /// The time at which the action was created.
+        public let createdAt: Date?
+        /// The name of the domain.
+        public let domainName: String?
+        /// The ID of the requested action.
+        public let maintenanceId: String?
+        /// The ID of the data node.
+        public let nodeId: String?
+        /// The status of the action.
+        public let status: MaintenanceStatus?
+        /// The status message for the action.
+        public let statusMessage: String?
+        /// The time at which the action was updated.
+        public let updatedAt: Date?
+
+        public init(action: MaintenanceType? = nil, createdAt: Date? = nil, domainName: String? = nil, maintenanceId: String? = nil, nodeId: String? = nil, status: MaintenanceStatus? = nil, statusMessage: String? = nil, updatedAt: Date? = nil) {
+            self.action = action
+            self.createdAt = createdAt
+            self.domainName = domainName
+            self.maintenanceId = maintenanceId
+            self.nodeId = nodeId
+            self.status = status
+            self.statusMessage = statusMessage
+            self.updatedAt = updatedAt
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case action = "Action"
+            case createdAt = "CreatedAt"
+            case domainName = "DomainName"
+            case maintenanceId = "MaintenanceId"
+            case nodeId = "NodeId"
+            case status = "Status"
+            case statusMessage = "StatusMessage"
+            case updatedAt = "UpdatedAt"
         }
     }
 
@@ -2740,8 +2936,11 @@ extension OpenSearch {
         public let endpoint: String?
         /// The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
         public let endpoints: [String: String]?
+        public let endpointV2: String?
         /// Version of OpenSearch or Elasticsearch that the domain is running, in the format Elasticsearch_X.Y or OpenSearch_X.Y.
         public let engineVersion: String?
+        /// The type of IP addresses supported by the endpoint for the domain.
+        public let ipAddressType: IPAddressType?
         /// Log publishing options for the domain.
         public let logPublishingOptions: [LogType: LogPublishingOption]?
         /// Whether node-to-node encryption is enabled or disabled.
@@ -2761,7 +2960,7 @@ extension OpenSearch {
         /// The VPC configuration for the domain.
         public let vpcOptions: VPCDerivedInfo?
 
-        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptions? = nil, arn: String, autoTuneOptions: AutoTuneOptionsOutput? = nil, changeProgressDetails: ChangeProgressDetails? = nil, clusterConfig: ClusterConfig, cognitoOptions: CognitoOptions? = nil, created: Bool? = nil, deleted: Bool? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainId: String, domainName: String, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, endpoint: String? = nil, endpoints: [String: String]? = nil, engineVersion: String? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, processing: Bool? = nil, serviceSoftwareOptions: ServiceSoftwareOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, upgradeProcessing: Bool? = nil, vpcOptions: VPCDerivedInfo? = nil) {
+        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptions? = nil, arn: String, autoTuneOptions: AutoTuneOptionsOutput? = nil, changeProgressDetails: ChangeProgressDetails? = nil, clusterConfig: ClusterConfig, cognitoOptions: CognitoOptions? = nil, created: Bool? = nil, deleted: Bool? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainId: String, domainName: String, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, endpoint: String? = nil, endpoints: [String: String]? = nil, endpointV2: String? = nil, engineVersion: String? = nil, ipAddressType: IPAddressType? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, processing: Bool? = nil, serviceSoftwareOptions: ServiceSoftwareOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, upgradeProcessing: Bool? = nil, vpcOptions: VPCDerivedInfo? = nil) {
             self.accessPolicies = accessPolicies
             self.advancedOptions = advancedOptions
             self.advancedSecurityOptions = advancedSecurityOptions
@@ -2779,7 +2978,9 @@ extension OpenSearch {
             self.encryptionAtRestOptions = encryptionAtRestOptions
             self.endpoint = endpoint
             self.endpoints = endpoints
+            self.endpointV2 = endpointV2
             self.engineVersion = engineVersion
+            self.ipAddressType = ipAddressType
             self.logPublishingOptions = logPublishingOptions
             self.nodeToNodeEncryptionOptions = nodeToNodeEncryptionOptions
             self.offPeakWindowOptions = offPeakWindowOptions
@@ -2809,7 +3010,9 @@ extension OpenSearch {
             case encryptionAtRestOptions = "EncryptionAtRestOptions"
             case endpoint = "Endpoint"
             case endpoints = "Endpoints"
+            case endpointV2 = "EndpointV2"
             case engineVersion = "EngineVersion"
+            case ipAddressType = "IPAddressType"
             case logPublishingOptions = "LogPublishingOptions"
             case nodeToNodeEncryptionOptions = "NodeToNodeEncryptionOptions"
             case offPeakWindowOptions = "OffPeakWindowOptions"
@@ -3069,6 +3272,116 @@ extension OpenSearch {
         }
     }
 
+    public struct GetDataSourceRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName")),
+            AWSMemberEncoding(label: "name", location: .uri("Name"))
+        ]
+
+        /// The name of the domain.
+        public let domainName: String
+        /// The name of the data source.
+        public let name: String
+
+        public init(domainName: String, name: String) {
+            self.domainName = domainName
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.name, name: "name", parent: name, max: 80)
+            try self.validate(self.name, name: "name", parent: name, min: 3)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[a-z][a-z0-9_]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetDataSourceResponse: AWSDecodableShape {
+        /// The type of data source.
+        public let dataSourceType: DataSourceType?
+        /// A description of the data source.
+        public let description: String?
+        /// The name of the data source.
+        public let name: String?
+
+        public init(dataSourceType: DataSourceType? = nil, description: String? = nil, name: String? = nil) {
+            self.dataSourceType = dataSourceType
+            self.description = description
+            self.name = name
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceType = "DataSourceType"
+            case description = "Description"
+            case name = "Name"
+        }
+    }
+
+    public struct GetDomainMaintenanceStatusRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName")),
+            AWSMemberEncoding(label: "maintenanceId", location: .querystring("maintenanceId"))
+        ]
+
+        /// The name of the domain.
+        public let domainName: String
+        /// The request ID of the maintenance action.
+        public let maintenanceId: String
+
+        public init(domainName: String, maintenanceId: String) {
+            self.domainName = domainName
+            self.maintenanceId = maintenanceId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.maintenanceId, name: "maintenanceId", parent: name, max: 100)
+            try self.validate(self.maintenanceId, name: "maintenanceId", parent: name, min: 1)
+            try self.validate(self.maintenanceId, name: "maintenanceId", parent: name, pattern: "^([\\s\\S]*)$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct GetDomainMaintenanceStatusResponse: AWSDecodableShape {
+        /// The action name.
+        public let action: MaintenanceType?
+        /// The time at which the action was created.
+        public let createdAt: Date?
+        /// The node ID of the maintenance action.
+        public let nodeId: String?
+        /// The status of the maintenance action.
+        public let status: MaintenanceStatus?
+        /// The status message of the maintenance action.
+        public let statusMessage: String?
+        /// The time at which the action was updated.
+        public let updatedAt: Date?
+
+        public init(action: MaintenanceType? = nil, createdAt: Date? = nil, nodeId: String? = nil, status: MaintenanceStatus? = nil, statusMessage: String? = nil, updatedAt: Date? = nil) {
+            self.action = action
+            self.createdAt = createdAt
+            self.nodeId = nodeId
+            self.status = status
+            self.statusMessage = statusMessage
+            self.updatedAt = updatedAt
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case action = "Action"
+            case createdAt = "CreatedAt"
+            case nodeId = "NodeId"
+            case status = "Status"
+            case statusMessage = "StatusMessage"
+            case updatedAt = "UpdatedAt"
+        }
+    }
+
     public struct GetPackageVersionHistoryRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
@@ -3091,6 +3404,7 @@ extension OpenSearch {
 
         public func validate(name: String) throws {
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -3203,6 +3517,22 @@ extension OpenSearch {
             case stepStatus = "StepStatus"
             case upgradeName = "UpgradeName"
             case upgradeStep = "UpgradeStep"
+        }
+    }
+
+    public struct IPAddressTypeStatus: AWSDecodableShape {
+        /// The IP address options for the domain.
+        public let options: IPAddressType
+        public let status: OptionStatus
+
+        public init(options: IPAddressType, status: OptionStatus) {
+            self.options = options
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case options = "Options"
+            case status = "Status"
         }
     }
 
@@ -3344,6 +3674,95 @@ extension OpenSearch {
         }
     }
 
+    public struct ListDataSourcesRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName"))
+        ]
+
+        /// The name of the domain.
+        public let domainName: String
+
+        public init(domainName: String) {
+            self.domainName = domainName
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListDataSourcesResponse: AWSDecodableShape {
+        /// A list of the data sources.
+        public let dataSources: [DataSourceDetails]?
+
+        public init(dataSources: [DataSourceDetails]? = nil) {
+            self.dataSources = dataSources
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSources = "DataSources"
+        }
+    }
+
+    public struct ListDomainMaintenancesRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "action", location: .querystring("action")),
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("maxResults")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("nextToken")),
+            AWSMemberEncoding(label: "status", location: .querystring("status"))
+        ]
+
+        /// The name of the action.
+        public let action: MaintenanceType?
+        /// The name of the domain.
+        public let domainName: String
+        /// An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+        public let maxResults: Int?
+        /// If your initial ListDomainMaintenances operation returns a nextToken, include the returned nextToken in subsequent ListDomainMaintenances operations, which returns results in the next page.
+        public let nextToken: String?
+        /// The status of the action.
+        public let status: MaintenanceStatus?
+
+        public init(action: MaintenanceType? = nil, domainName: String, maxResults: Int? = nil, nextToken: String? = nil, status: MaintenanceStatus? = nil) {
+            self.action = action
+            self.domainName = domainName
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+            self.status = status
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListDomainMaintenancesResponse: AWSDecodableShape {
+        /// A list of the submitted maintenance actions.
+        public let domainMaintenances: [DomainMaintenanceDetails]?
+        /// When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+        public let nextToken: String?
+
+        public init(domainMaintenances: [DomainMaintenanceDetails]? = nil, nextToken: String? = nil) {
+            self.domainMaintenances = domainMaintenances
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case domainMaintenances = "DomainMaintenances"
+            case nextToken = "NextToken"
+        }
+    }
+
     public struct ListDomainNamesRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "engineType", location: .querystring("engineType"))
@@ -3394,6 +3813,7 @@ extension OpenSearch {
 
         public func validate(name: String) throws {
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
         }
 
         private enum CodingKeys: CodingKey {}
@@ -4009,8 +4429,12 @@ extension OpenSearch {
     public struct PackageDetails: AWSDecodableShape {
         /// The package version.
         public let availablePackageVersion: String?
+        /// If the package is a ZIP-PLUGIN package, additional information about plugin properties.
+        public let availablePluginProperties: PluginProperties?
         /// The timestamp when the package was created.
         public let createdAt: Date?
+        /// Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+        public let engineVersion: String?
         /// Additional information if the package is in an error state. Null otherwise.
         public let errorDetails: ErrorDetails?
         /// Date and time when the package was last updated.
@@ -4026,9 +4450,11 @@ extension OpenSearch {
         /// The type of package.
         public let packageType: PackageType?
 
-        public init(availablePackageVersion: String? = nil, createdAt: Date? = nil, errorDetails: ErrorDetails? = nil, lastUpdatedAt: Date? = nil, packageDescription: String? = nil, packageID: String? = nil, packageName: String? = nil, packageStatus: PackageStatus? = nil, packageType: PackageType? = nil) {
+        public init(availablePackageVersion: String? = nil, availablePluginProperties: PluginProperties? = nil, createdAt: Date? = nil, engineVersion: String? = nil, errorDetails: ErrorDetails? = nil, lastUpdatedAt: Date? = nil, packageDescription: String? = nil, packageID: String? = nil, packageName: String? = nil, packageStatus: PackageStatus? = nil, packageType: PackageType? = nil) {
             self.availablePackageVersion = availablePackageVersion
+            self.availablePluginProperties = availablePluginProperties
             self.createdAt = createdAt
+            self.engineVersion = engineVersion
             self.errorDetails = errorDetails
             self.lastUpdatedAt = lastUpdatedAt
             self.packageDescription = packageDescription
@@ -4040,7 +4466,9 @@ extension OpenSearch {
 
         private enum CodingKeys: String, CodingKey {
             case availablePackageVersion = "AvailablePackageVersion"
+            case availablePluginProperties = "AvailablePluginProperties"
             case createdAt = "CreatedAt"
+            case engineVersion = "EngineVersion"
             case errorDetails = "ErrorDetails"
             case lastUpdatedAt = "LastUpdatedAt"
             case packageDescription = "PackageDescription"
@@ -4082,17 +4510,50 @@ extension OpenSearch {
         public let createdAt: Date?
         /// The package version.
         public let packageVersion: String?
+        /// Additional information about plugin properties if the package is a ZIP-PLUGIN package.
+        public let pluginProperties: PluginProperties?
 
-        public init(commitMessage: String? = nil, createdAt: Date? = nil, packageVersion: String? = nil) {
+        public init(commitMessage: String? = nil, createdAt: Date? = nil, packageVersion: String? = nil, pluginProperties: PluginProperties? = nil) {
             self.commitMessage = commitMessage
             self.createdAt = createdAt
             self.packageVersion = packageVersion
+            self.pluginProperties = pluginProperties
         }
 
         private enum CodingKeys: String, CodingKey {
             case commitMessage = "CommitMessage"
             case createdAt = "CreatedAt"
             case packageVersion = "PackageVersion"
+            case pluginProperties = "PluginProperties"
+        }
+    }
+
+    public struct PluginProperties: AWSDecodableShape {
+        /// The name of the class to load.
+        public let className: String?
+        /// The description of the plugin.
+        public let description: String?
+        /// The name of the plugin.
+        public let name: String?
+        /// The uncompressed size of the plugin.
+        public let uncompressedSizeInBytes: Int64?
+        /// The version of the plugin.
+        public let version: String?
+
+        public init(className: String? = nil, description: String? = nil, name: String? = nil, uncompressedSizeInBytes: Int64? = nil, version: String? = nil) {
+            self.className = className
+            self.description = description
+            self.name = name
+            self.uncompressedSizeInBytes = uncompressedSizeInBytes
+            self.version = version
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case className = "ClassName"
+            case description = "Description"
+            case name = "Name"
+            case uncompressedSizeInBytes = "UncompressedSizeInBytes"
+            case version = "Version"
         }
     }
 
@@ -4353,6 +4814,25 @@ extension OpenSearch {
 
     public struct RevokeVpcEndpointAccessResponse: AWSDecodableShape {
         public init() {}
+    }
+
+    public struct S3GlueDataCatalog: AWSEncodableShape & AWSDecodableShape {
+        /// The role ARN for the AWS S3 Glue Data Catalog.
+        public let roleArn: String?
+
+        public init(roleArn: String? = nil) {
+            self.roleArn = roleArn
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.roleArn, name: "roleArn", parent: name, max: 2048)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, min: 20)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, pattern: "^arn:(aws|aws\\-cn|aws\\-us\\-gov|aws\\-iso|aws\\-iso\\-b):iam::[0-9]+:role\\/")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case roleArn = "RoleArn"
+        }
     }
 
     public struct SAMLIdp: AWSEncodableShape & AWSDecodableShape {
@@ -4625,6 +5105,51 @@ extension OpenSearch {
         }
     }
 
+    public struct StartDomainMaintenanceRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName"))
+        ]
+
+        /// The name of the action.
+        public let action: MaintenanceType
+        /// The name of the domain.
+        public let domainName: String
+        /// The ID of the data node.
+        public let nodeId: String?
+
+        public init(action: MaintenanceType, domainName: String, nodeId: String? = nil) {
+            self.action = action
+            self.domainName = domainName
+            self.nodeId = nodeId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.nodeId, name: "nodeId", parent: name, max: 40)
+            try self.validate(self.nodeId, name: "nodeId", parent: name, min: 10)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case action = "Action"
+            case nodeId = "NodeId"
+        }
+    }
+
+    public struct StartDomainMaintenanceResponse: AWSDecodableShape {
+        /// The request ID of requested action.
+        public let maintenanceId: String?
+
+        public init(maintenanceId: String? = nil) {
+            self.maintenanceId = maintenanceId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maintenanceId = "MaintenanceId"
+        }
+    }
+
     public struct StartServiceSoftwareUpdateRequest: AWSEncodableShape {
         /// The Epoch timestamp when you want the service software update to start. You only need to specify this parameter if you set ScheduleAt to TIMESTAMP.
         public let desiredStartTime: Int64?
@@ -4728,6 +5253,59 @@ extension OpenSearch {
         }
     }
 
+    public struct UpdateDataSourceRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "domainName", location: .uri("DomainName")),
+            AWSMemberEncoding(label: "name", location: .uri("Name"))
+        ]
+
+        /// The type of data source.
+        public let dataSourceType: DataSourceType
+        /// A description of the data source.
+        public let description: String?
+        /// The name of the domain.
+        public let domainName: String
+        /// The name of the data source.
+        public let name: String
+
+        public init(dataSourceType: DataSourceType, description: String? = nil, domainName: String, name: String) {
+            self.dataSourceType = dataSourceType
+            self.description = description
+            self.domainName = domainName
+            self.name = name
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSourceType.validate(name: "\(name).dataSourceType")
+            try self.validate(self.description, name: "description", parent: name, max: 1000)
+            try self.validate(self.description, name: "description", parent: name, pattern: "^([a-zA-Z0-9_])*[\\\\a-zA-Z0-9_@#%*+=:?./!\\s-]*$")
+            try self.validate(self.domainName, name: "domainName", parent: name, max: 28)
+            try self.validate(self.domainName, name: "domainName", parent: name, min: 3)
+            try self.validate(self.domainName, name: "domainName", parent: name, pattern: "^[a-z][a-z0-9\\-]+$")
+            try self.validate(self.name, name: "name", parent: name, max: 80)
+            try self.validate(self.name, name: "name", parent: name, min: 3)
+            try self.validate(self.name, name: "name", parent: name, pattern: "^[a-z][a-z0-9_]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceType = "DataSourceType"
+            case description = "Description"
+        }
+    }
+
+    public struct UpdateDataSourceResponse: AWSDecodableShape {
+        /// A message associated with the data source.
+        public let message: String?
+
+        public init(message: String? = nil) {
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case message = "Message"
+        }
+    }
+
     public struct UpdateDomainConfigRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "domainName", location: .uri("DomainName"))
@@ -4757,6 +5335,8 @@ extension OpenSearch {
         public let ebsOptions: EBSOptions?
         /// Encryption at rest options for the domain.
         public let encryptionAtRestOptions: EncryptionAtRestOptions?
+        /// The type of IP addresses supported by the endpoint for the domain.
+        public let ipAddressType: IPAddressType?
         /// Options to publish OpenSearch logs to Amazon CloudWatch Logs.
         public let logPublishingOptions: [LogType: LogPublishingOption]?
         /// Node-to-node encryption options for the domain.
@@ -4770,7 +5350,7 @@ extension OpenSearch {
         /// Options to specify the subnets and security groups for a VPC endpoint. For more information, see Launching your Amazon OpenSearch Service domains using a VPC.
         public let vpcOptions: VPCOptions?
 
-        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptionsInput? = nil, autoTuneOptions: AutoTuneOptions? = nil, clusterConfig: ClusterConfig? = nil, cognitoOptions: CognitoOptions? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainName: String, dryRun: Bool? = nil, dryRunMode: DryRunMode? = nil, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, vpcOptions: VPCOptions? = nil) {
+        public init(accessPolicies: String? = nil, advancedOptions: [String: String]? = nil, advancedSecurityOptions: AdvancedSecurityOptionsInput? = nil, autoTuneOptions: AutoTuneOptions? = nil, clusterConfig: ClusterConfig? = nil, cognitoOptions: CognitoOptions? = nil, domainEndpointOptions: DomainEndpointOptions? = nil, domainName: String, dryRun: Bool? = nil, dryRunMode: DryRunMode? = nil, ebsOptions: EBSOptions? = nil, encryptionAtRestOptions: EncryptionAtRestOptions? = nil, ipAddressType: IPAddressType? = nil, logPublishingOptions: [LogType: LogPublishingOption]? = nil, nodeToNodeEncryptionOptions: NodeToNodeEncryptionOptions? = nil, offPeakWindowOptions: OffPeakWindowOptions? = nil, snapshotOptions: SnapshotOptions? = nil, softwareUpdateOptions: SoftwareUpdateOptions? = nil, vpcOptions: VPCOptions? = nil) {
             self.accessPolicies = accessPolicies
             self.advancedOptions = advancedOptions
             self.advancedSecurityOptions = advancedSecurityOptions
@@ -4783,6 +5363,7 @@ extension OpenSearch {
             self.dryRunMode = dryRunMode
             self.ebsOptions = ebsOptions
             self.encryptionAtRestOptions = encryptionAtRestOptions
+            self.ipAddressType = ipAddressType
             self.logPublishingOptions = logPublishingOptions
             self.nodeToNodeEncryptionOptions = nodeToNodeEncryptionOptions
             self.offPeakWindowOptions = offPeakWindowOptions
@@ -4820,6 +5401,7 @@ extension OpenSearch {
             case dryRunMode = "DryRunMode"
             case ebsOptions = "EBSOptions"
             case encryptionAtRestOptions = "EncryptionAtRestOptions"
+            case ipAddressType = "IPAddressType"
             case logPublishingOptions = "LogPublishingOptions"
             case nodeToNodeEncryptionOptions = "NodeToNodeEncryptionOptions"
             case offPeakWindowOptions = "OffPeakWindowOptions"
@@ -4870,6 +5452,7 @@ extension OpenSearch {
         public func validate(name: String) throws {
             try self.validate(self.commitMessage, name: "commitMessage", parent: name, max: 160)
             try self.validate(self.packageDescription, name: "packageDescription", parent: name, max: 1024)
+            try self.validate(self.packageID, name: "packageID", parent: name, pattern: "^([FG][0-9]+)$")
             try self.packageSource.validate(name: "\(name).packageSource")
         }
 
@@ -5304,6 +5887,23 @@ extension OpenSearch {
 
         private enum CodingKeys: String, CodingKey {
             case availabilityZoneCount = "AvailabilityZoneCount"
+        }
+    }
+
+    public struct DataSourceType: AWSEncodableShape & AWSDecodableShape {
+        /// The data source for the AWS S3 Glue Data Catalog.
+        public let s3GlueDataCatalog: S3GlueDataCatalog?
+
+        public init(s3GlueDataCatalog: S3GlueDataCatalog? = nil) {
+            self.s3GlueDataCatalog = s3GlueDataCatalog
+        }
+
+        public func validate(name: String) throws {
+            try self.s3GlueDataCatalog?.validate(name: "\(name).s3GlueDataCatalog")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case s3GlueDataCatalog = "S3GlueDataCatalog"
         }
     }
 }

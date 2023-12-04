@@ -383,7 +383,9 @@ extension ECS {
     /// 			task hosted on Fargate, the tasks need to be stopped and new tasks launched to replace
     /// 			them. Use fargateTaskRetirementWaitPeriod to configure the wait time to
     /// 			retire a Fargate task. For information about the Fargate tasks maintenance, see Amazon Web Services Fargate task maintenance in the Amazon ECS Developer
-    /// 					Guide.
+    /// 					Guide. The guardDutyActivate parameter is read-only in Amazon ECS and indicates whether
+    /// 			Amazon ECS Runtime Monitoring is enabled or disabled by your security administrator in your
+    /// 			Amazon ECS account. Amazon GuardDuty controls this account setting on your behalf. For more information, see Protecting Amazon ECS workloads with Amazon ECS Runtime Monitoring.
     public func putAccountSetting(_ input: PutAccountSettingRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> PutAccountSettingResponse {
         return try await self.client.execute(operation: "PutAccountSetting", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }

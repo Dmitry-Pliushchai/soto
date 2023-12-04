@@ -26,92 +26,92 @@ import SotoCore
 extension MediaTailor {
     // MARK: Enums
 
-    public enum AccessType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AccessType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case autodetectSigv4 = "AUTODETECT_SIGV4"
         case s3Sigv4 = "S3_SIGV4"
         case secretsManagerAccessToken = "SECRETS_MANAGER_ACCESS_TOKEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum AdMarkupType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AdMarkupType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daterange = "DATERANGE"
         case scte35Enhanced = "SCTE35_ENHANCED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AlertCategory: String, CustomStringConvertible, Codable, Sendable {
+    public enum AlertCategory: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case info = "INFO"
         case playbackWarning = "PLAYBACK_WARNING"
         case schedulingError = "SCHEDULING_ERROR"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case running = "RUNNING"
         case stopped = "STOPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FillPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum FillPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullAvailOnly = "FULL_AVAIL_ONLY"
         case partialAvail = "PARTIAL_AVAIL"
         public var description: String { return self.rawValue }
     }
 
-    public enum LogType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asRun = "AS_RUN"
         public var description: String { return self.rawValue }
     }
 
-    public enum MessageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MessageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case spliceInsert = "SPLICE_INSERT"
         case timeSignal = "TIME_SIGNAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum Mode: String, CustomStringConvertible, Codable, Sendable {
+    public enum Mode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterLiveEdge = "AFTER_LIVE_EDGE"
         case behindLiveEdge = "BEHIND_LIVE_EDGE"
         case off = "OFF"
         public var description: String { return self.rawValue }
     }
 
-    public enum Operator: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum OriginManifestType: String, CustomStringConvertible, Codable, Sendable {
+    public enum OriginManifestType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multiPeriod = "MULTI_PERIOD"
         case singlePeriod = "SINGLE_PERIOD"
         public var description: String { return self.rawValue }
     }
 
-    public enum PlaybackMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum PlaybackMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linear = "LINEAR"
         case loop = "LOOP"
         public var description: String { return self.rawValue }
     }
 
-    public enum RelativePosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelativePosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterProgram = "AFTER_PROGRAM"
         case beforeProgram = "BEFORE_PROGRAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum ScheduleEntryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ScheduleEntryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fillerSlate = "FILLER_SLATE"
         case program = "PROGRAM"
         public var description: String { return self.rawValue }
     }
 
-    public enum Tier: String, CustomStringConvertible, Codable, Sendable {
+    public enum Tier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "BASIC"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum `Type`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Type`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dash = "DASH"
         case hls = "HLS"
         public var description: String { return self.rawValue }
@@ -166,6 +166,19 @@ extension MediaTailor {
             case slate = "Slate"
             case spliceInsertMessage = "SpliceInsertMessage"
             case timeSignalMessage = "TimeSignalMessage"
+        }
+    }
+
+    public struct AdBreakOpportunity: AWSDecodableShape {
+        /// The offset in milliseconds from the start of the VOD source at which an ad marker was detected.
+        public let offsetMillis: Int64
+
+        public init(offsetMillis: Int64) {
+            self.offsetMillis = offsetMillis
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case offsetMillis = "OffsetMillis"
         }
     }
 
@@ -1416,6 +1429,8 @@ extension MediaTailor {
     }
 
     public struct DescribeVodSourceResponse: AWSDecodableShape {
+        /// The ad break opportunities within the VOD source.
+        public let adBreakOpportunities: [AdBreakOpportunity]?
         /// The ARN of the VOD source.
         public let arn: String?
         /// The timestamp that indicates when the VOD source was created.
@@ -1433,7 +1448,8 @@ extension MediaTailor {
         /// The name of the VOD source.
         public let vodSourceName: String?
 
-        public init(arn: String? = nil, creationTime: Date? = nil, httpPackageConfigurations: [HttpPackageConfiguration]? = nil, lastModifiedTime: Date? = nil, sourceLocationName: String? = nil, tags: [String: String]? = nil, vodSourceName: String? = nil) {
+        public init(adBreakOpportunities: [AdBreakOpportunity]? = nil, arn: String? = nil, creationTime: Date? = nil, httpPackageConfigurations: [HttpPackageConfiguration]? = nil, lastModifiedTime: Date? = nil, sourceLocationName: String? = nil, tags: [String: String]? = nil, vodSourceName: String? = nil) {
+            self.adBreakOpportunities = adBreakOpportunities
             self.arn = arn
             self.creationTime = creationTime
             self.httpPackageConfigurations = httpPackageConfigurations
@@ -1444,6 +1460,7 @@ extension MediaTailor {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case adBreakOpportunities = "AdBreakOpportunities"
             case arn = "Arn"
             case creationTime = "CreationTime"
             case httpPackageConfigurations = "HttpPackageConfigurations"

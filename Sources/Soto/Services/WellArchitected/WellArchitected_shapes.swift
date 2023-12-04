@@ -26,13 +26,13 @@ import SotoCore
 extension WellArchitected {
     // MARK: Enums
 
-    public enum AdditionalResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AdditionalResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case helpfulResource = "HELPFUL_RESOURCE"
         case improvementPlan = "IMPROVEMENT_PLAN"
         public var description: String { return self.rawValue }
     }
 
-    public enum AnswerReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnswerReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case architectureConstraints = "ARCHITECTURE_CONSTRAINTS"
         case businessPriorities = "BUSINESS_PRIORITIES"
         case none = "NONE"
@@ -41,7 +41,7 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum CheckFailureReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum CheckFailureReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case assumeRoleError = "ASSUME_ROLE_ERROR"
         case premiumSupportRequired = "PREMIUM_SUPPORT_REQUIRED"
@@ -49,12 +49,12 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum CheckProvider: String, CustomStringConvertible, Codable, Sendable {
+    public enum CheckProvider: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case trustedAdvisor = "TRUSTED_ADVISOR"
         public var description: String { return self.rawValue }
     }
 
-    public enum CheckStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CheckStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case fetchFailed = "FETCH_FAILED"
         case notAvailable = "NOT_AVAILABLE"
@@ -63,7 +63,7 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChoiceReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChoiceReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case architectureConstraints = "ARCHITECTURE_CONSTRAINTS"
         case businessPriorities = "BUSINESS_PRIORITIES"
         case none = "NONE"
@@ -72,40 +72,40 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum ChoiceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChoiceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case notApplicable = "NOT_APPLICABLE"
         case selected = "SELECTED"
         case unselected = "UNSELECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DefinitionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DefinitionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case appRegistry = "APP_REGISTRY"
         case workloadMetadata = "WORKLOAD_METADATA"
         public var description: String { return self.rawValue }
     }
 
-    public enum DifferenceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DifferenceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deleted = "DELETED"
         case new = "NEW"
         case updated = "UPDATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DiscoveryIntegrationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DiscoveryIntegrationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportLensStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportLensStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case error = "ERROR"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum LensStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LensStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case current = "CURRENT"
         case deleted = "DELETED"
         case deprecated = "DEPRECATED"
@@ -114,92 +114,92 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum LensStatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LensStatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case draft = "DRAFT"
         case published = "PUBLISHED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LensType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LensType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case awsOfficial = "AWS_OFFICIAL"
         case customSelf = "CUSTOM_SELF"
         case customShared = "CUSTOM_SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum MetricType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MetricType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case workload = "WORKLOAD"
         public var description: String { return self.rawValue }
     }
 
-    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lensVersionDeprecated = "LENS_VERSION_DEPRECATED"
         case lensVersionUpgraded = "LENS_VERSION_UPGRADED"
         public var description: String { return self.rawValue }
     }
 
-    public enum OrganizationSharingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum OrganizationSharingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PermissionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contributor = "CONTRIBUTOR"
         case readonly = "READONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProfileNotificationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProfileNotificationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case profileAnswersUpdated = "PROFILE_ANSWERS_UPDATED"
         case profileDeleted = "PROFILE_DELETED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProfileOwnerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProfileOwnerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case _self = "SELF"
         case shared = "SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum Question: String, CustomStringConvertible, Codable, Sendable {
+    public enum Question: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case answered = "ANSWERED"
         case unanswered = "UNANSWERED"
         public var description: String { return self.rawValue }
     }
 
-    public enum QuestionPriority: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuestionPriority: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case prioritized = "PRIORITIZED"
         public var description: String { return self.rawValue }
     }
 
-    public enum QuestionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum QuestionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case nonPrioritized = "NON_PRIORITIZED"
         case prioritized = "PRIORITIZED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReportFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReportFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case json = "JSON"
         case pdf = "PDF"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReviewTemplateAnswerStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReviewTemplateAnswerStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case answered = "ANSWERED"
         case unanswered = "UNANSWERED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReviewTemplateUpdateStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReviewTemplateUpdateStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case current = "CURRENT"
         case lensNotCurrent = "LENS_NOT_CURRENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum Risk: String, CustomStringConvertible, Codable, Sendable {
+    public enum Risk: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "HIGH"
         case medium = "MEDIUM"
         case none = "NONE"
@@ -208,13 +208,13 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareInvitationAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareInvitationAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accept = "ACCEPT"
         case reject = "REJECT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case lens = "LENS"
         case profile = "PROFILE"
         case template = "TEMPLATE"
@@ -222,7 +222,7 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ShareStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accepted = "ACCEPTED"
         case associated = "ASSOCIATED"
         case associating = "ASSOCIATING"
@@ -234,19 +234,19 @@ extension WellArchitected {
         public var description: String { return self.rawValue }
     }
 
-    public enum TrustedAdvisorIntegrationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TrustedAdvisorIntegrationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkloadEnvironment: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkloadEnvironment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case preproduction = "PREPRODUCTION"
         case production = "PRODUCTION"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkloadImprovementStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkloadImprovementStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case inProgress = "IN_PROGRESS"
         case notApplicable = "NOT_APPLICABLE"
@@ -375,16 +375,16 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let lensAliases: [String]
+        public let lensAliases: [String]?
         public let workloadId: String
 
-        public init(lensAliases: [String], workloadId: String) {
+        public init(lensAliases: [String]? = nil, workloadId: String) {
             self.lensAliases = lensAliases
             self.workloadId = workloadId
         }
 
         public func validate(name: String) throws {
-            try self.lensAliases.forEach {
+            try self.lensAliases?.forEach {
                 try validate($0, name: "lensAliases[]", parent: name, max: 128)
                 try validate($0, name: "lensAliases[]", parent: name, min: 1)
             }
@@ -405,16 +405,16 @@ extension WellArchitected {
         ]
 
         /// The list of profile ARNs to associate with the workload.
-        public let profileArns: [String]
+        public let profileArns: [String]?
         public let workloadId: String
 
-        public init(profileArns: [String], workloadId: String) {
+        public init(profileArns: [String]? = nil, workloadId: String) {
             self.profileArns = profileArns
             self.workloadId = workloadId
         }
 
         public func validate(name: String) throws {
-            try self.profileArns.forEach {
+            try self.profileArns?.forEach {
                 try validate($0, name: "profileArns[]", parent: name, max: 2084)
                 try validate($0, name: "profileArns[]", parent: name, pattern: "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$")
             }
@@ -665,9 +665,9 @@ extension WellArchitected {
         /// The reason why a choice is non-applicable to a question in your workload.
         public let reason: ChoiceReason?
         /// The status of a choice.
-        public let status: ChoiceStatus
+        public let status: ChoiceStatus?
 
-        public init(notes: String? = nil, reason: ChoiceReason? = nil, status: ChoiceStatus) {
+        public init(notes: String? = nil, reason: ChoiceReason? = nil, status: ChoiceStatus? = nil) {
             self.notes = notes
             self.reason = reason
             self.status = status
@@ -725,11 +725,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "lensAlias", location: .uri("LensAlias"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let lensAlias: String
-        public let sharedWith: String
+        public let sharedWith: String?
 
-        public init(clientRequestToken: String = CreateLensShareInput.idempotencyToken(), lensAlias: String, sharedWith: String) {
+        public init(clientRequestToken: String? = nil, lensAlias: String, sharedWith: String? = nil) {
             self.clientRequestToken = clientRequestToken
             self.lensAlias = lensAlias
             self.sharedWith = sharedWith
@@ -767,14 +767,14 @@ extension WellArchitected {
             AWSMemberEncoding(label: "lensAlias", location: .uri("LensAlias"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// Set to true if this new major lens version.
         public let isMajorVersion: Bool?
         public let lensAlias: String
         /// The version of the lens being created.
-        public let lensVersion: String
+        public let lensVersion: String?
 
-        public init(clientRequestToken: String = CreateLensVersionInput.idempotencyToken(), isMajorVersion: Bool? = nil, lensAlias: String, lensVersion: String) {
+        public init(clientRequestToken: String? = nil, isMajorVersion: Bool? = nil, lensAlias: String, lensVersion: String? = nil) {
             self.clientRequestToken = clientRequestToken
             self.isMajorVersion = isMajorVersion
             self.lensAlias = lensAlias
@@ -819,11 +819,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let clientRequestToken: String
-        public let milestoneName: String
+        public let clientRequestToken: String?
+        public let milestoneName: String?
         public let workloadId: String
 
-        public init(clientRequestToken: String = CreateMilestoneInput.idempotencyToken(), milestoneName: String, workloadId: String) {
+        public init(clientRequestToken: String? = nil, milestoneName: String? = nil, workloadId: String) {
             self.clientRequestToken = clientRequestToken
             self.milestoneName = milestoneName
             self.workloadId = workloadId
@@ -861,17 +861,17 @@ extension WellArchitected {
     }
 
     public struct CreateProfileInput: AWSEncodableShape {
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The profile description.
-        public let profileDescription: String
+        public let profileDescription: String?
         /// Name of the profile.
-        public let profileName: String
+        public let profileName: String?
         /// The profile questions.
-        public let profileQuestions: [ProfileQuestionUpdate]
+        public let profileQuestions: [ProfileQuestionUpdate]?
         /// The tags assigned to the profile.
         public let tags: [String: String]?
 
-        public init(clientRequestToken: String = CreateProfileInput.idempotencyToken(), profileDescription: String, profileName: String, profileQuestions: [ProfileQuestionUpdate], tags: [String: String]? = nil) {
+        public init(clientRequestToken: String? = nil, profileDescription: String? = nil, profileName: String? = nil, profileQuestions: [ProfileQuestionUpdate]? = nil, tags: [String: String]? = nil) {
             self.clientRequestToken = clientRequestToken
             self.profileDescription = profileDescription
             self.profileName = profileName
@@ -888,7 +888,7 @@ extension WellArchitected {
             try self.validate(self.profileName, name: "profileName", parent: name, max: 100)
             try self.validate(self.profileName, name: "profileName", parent: name, min: 3)
             try self.validate(self.profileName, name: "profileName", parent: name, pattern: "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$")
-            try self.profileQuestions.forEach {
+            try self.profileQuestions?.forEach {
                 try $0.validate(name: "\(name).profileQuestions[]")
             }
             try self.tags?.forEach {
@@ -931,12 +931,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "profileArn", location: .uri("ProfileArn"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The profile ARN.
         public let profileArn: String
-        public let sharedWith: String
+        public let sharedWith: String?
 
-        public init(clientRequestToken: String = CreateProfileShareInput.idempotencyToken(), profileArn: String, sharedWith: String) {
+        public init(clientRequestToken: String? = nil, profileArn: String, sharedWith: String? = nil) {
             self.clientRequestToken = clientRequestToken
             self.profileArn = profileArn
             self.sharedWith = sharedWith
@@ -974,18 +974,18 @@ extension WellArchitected {
     }
 
     public struct CreateReviewTemplateInput: AWSEncodableShape {
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The review template description.
-        public let description: String
+        public let description: String?
         /// Lenses applied to the review template.
-        public let lenses: [String]
+        public let lenses: [String]?
         public let notes: String?
         /// The tags assigned to the review template.
         public let tags: [String: String]?
         /// Name of the review template.
-        public let templateName: String
+        public let templateName: String?
 
-        public init(clientRequestToken: String = CreateReviewTemplateInput.idempotencyToken(), description: String, lenses: [String], notes: String? = nil, tags: [String: String]? = nil, templateName: String) {
+        public init(clientRequestToken: String? = nil, description: String? = nil, lenses: [String]? = nil, notes: String? = nil, tags: [String: String]? = nil, templateName: String? = nil) {
             self.clientRequestToken = clientRequestToken
             self.description = description
             self.lenses = lenses
@@ -1000,7 +1000,7 @@ extension WellArchitected {
             try self.validate(self.description, name: "description", parent: name, max: 250)
             try self.validate(self.description, name: "description", parent: name, min: 3)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$")
-            try self.lenses.forEach {
+            try self.lenses?.forEach {
                 try validate($0, name: "lenses[]", parent: name, max: 128)
                 try validate($0, name: "lenses[]", parent: name, min: 1)
             }
@@ -1045,12 +1045,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "templateArn", location: .uri("TemplateArn"))
         ]
 
-        public let clientRequestToken: String
-        public let sharedWith: String
+        public let clientRequestToken: String?
+        public let sharedWith: String?
         /// The review template ARN.
         public let templateArn: String
 
-        public init(clientRequestToken: String = CreateTemplateShareInput.idempotencyToken(), sharedWith: String, templateArn: String) {
+        public init(clientRequestToken: String? = nil, sharedWith: String? = nil, templateArn: String) {
             self.clientRequestToken = clientRequestToken
             self.sharedWith = sharedWith
             self.templateArn = templateArn
@@ -1094,14 +1094,14 @@ extension WellArchitected {
         public let applications: [String]?
         public let architecturalDesign: String?
         public let awsRegions: [String]?
-        public let clientRequestToken: String
-        public let description: String
+        public let clientRequestToken: String?
+        public let description: String?
         /// Well-Architected discovery configuration settings associated to the workload.
         public let discoveryConfig: WorkloadDiscoveryConfig?
-        public let environment: WorkloadEnvironment
+        public let environment: WorkloadEnvironment?
         public let industry: String?
         public let industryType: String?
-        public let lenses: [String]
+        public let lenses: [String]?
         public let nonAwsRegions: [String]?
         public let notes: String?
         public let pillarPriorities: [String]?
@@ -1112,9 +1112,9 @@ extension WellArchitected {
         public let reviewTemplateArns: [String]?
         /// The tags to be associated with the workload.
         public let tags: [String: String]?
-        public let workloadName: String
+        public let workloadName: String?
 
-        public init(accountIds: [String]? = nil, applications: [String]? = nil, architecturalDesign: String? = nil, awsRegions: [String]? = nil, clientRequestToken: String = CreateWorkloadInput.idempotencyToken(), description: String, discoveryConfig: WorkloadDiscoveryConfig? = nil, environment: WorkloadEnvironment, industry: String? = nil, industryType: String? = nil, lenses: [String], nonAwsRegions: [String]? = nil, notes: String? = nil, pillarPriorities: [String]? = nil, profileArns: [String]? = nil, reviewOwner: String? = nil, reviewTemplateArns: [String]? = nil, tags: [String: String]? = nil, workloadName: String) {
+        public init(accountIds: [String]? = nil, applications: [String]? = nil, architecturalDesign: String? = nil, awsRegions: [String]? = nil, clientRequestToken: String? = nil, description: String? = nil, discoveryConfig: WorkloadDiscoveryConfig? = nil, environment: WorkloadEnvironment? = nil, industry: String? = nil, industryType: String? = nil, lenses: [String]? = nil, nonAwsRegions: [String]? = nil, notes: String? = nil, pillarPriorities: [String]? = nil, profileArns: [String]? = nil, reviewOwner: String? = nil, reviewTemplateArns: [String]? = nil, tags: [String: String]? = nil, workloadName: String? = nil) {
             self.accountIds = accountIds
             self.applications = applications
             self.architecturalDesign = architecturalDesign
@@ -1160,7 +1160,7 @@ extension WellArchitected {
             try self.validate(self.description, name: "description", parent: name, min: 3)
             try self.validate(self.industry, name: "industry", parent: name, max: 100)
             try self.validate(self.industryType, name: "industryType", parent: name, max: 100)
-            try self.lenses.forEach {
+            try self.lenses?.forEach {
                 try validate($0, name: "lenses[]", parent: name, max: 128)
                 try validate($0, name: "lenses[]", parent: name, min: 1)
             }
@@ -1241,12 +1241,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let clientRequestToken: String
-        public let permissionType: PermissionType
-        public let sharedWith: String
+        public let clientRequestToken: String?
+        public let permissionType: PermissionType?
+        public let sharedWith: String?
         public let workloadId: String
 
-        public init(clientRequestToken: String = CreateWorkloadShareInput.idempotencyToken(), permissionType: PermissionType, sharedWith: String, workloadId: String) {
+        public init(clientRequestToken: String? = nil, permissionType: PermissionType? = nil, sharedWith: String? = nil, workloadId: String) {
             self.clientRequestToken = clientRequestToken
             self.permissionType = permissionType
             self.sharedWith = sharedWith
@@ -1292,12 +1292,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "lensStatus", location: .querystring("LensStatus"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let lensAlias: String
         /// The status of the lens to be deleted.
-        public let lensStatus: LensStatusType
+        public let lensStatus: LensStatusType?
 
-        public init(clientRequestToken: String = DeleteLensInput.idempotencyToken(), lensAlias: String, lensStatus: LensStatusType) {
+        public init(clientRequestToken: String? = nil, lensAlias: String, lensStatus: LensStatusType? = nil) {
             self.clientRequestToken = clientRequestToken
             self.lensAlias = lensAlias
             self.lensStatus = lensStatus
@@ -1320,11 +1320,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "shareId", location: .uri("ShareId"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let lensAlias: String
         public let shareId: String
 
-        public init(clientRequestToken: String = DeleteLensShareInput.idempotencyToken(), lensAlias: String, shareId: String) {
+        public init(clientRequestToken: String? = nil, lensAlias: String, shareId: String) {
             self.clientRequestToken = clientRequestToken
             self.lensAlias = lensAlias
             self.shareId = shareId
@@ -1347,11 +1347,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "profileArn", location: .uri("ProfileArn"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The profile ARN.
         public let profileArn: String
 
-        public init(clientRequestToken: String = DeleteProfileInput.idempotencyToken(), profileArn: String) {
+        public init(clientRequestToken: String? = nil, profileArn: String) {
             self.clientRequestToken = clientRequestToken
             self.profileArn = profileArn
         }
@@ -1373,12 +1373,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "shareId", location: .uri("ShareId"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The profile ARN.
         public let profileArn: String
         public let shareId: String
 
-        public init(clientRequestToken: String = DeleteProfileShareInput.idempotencyToken(), profileArn: String, shareId: String) {
+        public init(clientRequestToken: String? = nil, profileArn: String, shareId: String) {
             self.clientRequestToken = clientRequestToken
             self.profileArn = profileArn
             self.shareId = shareId
@@ -1401,11 +1401,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "templateArn", location: .uri("TemplateArn"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The review template ARN.
         public let templateArn: String
 
-        public init(clientRequestToken: String = DeleteReviewTemplateInput.idempotencyToken(), templateArn: String) {
+        public init(clientRequestToken: String? = nil, templateArn: String) {
             self.clientRequestToken = clientRequestToken
             self.templateArn = templateArn
         }
@@ -1428,12 +1428,12 @@ extension WellArchitected {
             AWSMemberEncoding(label: "templateArn", location: .uri("TemplateArn"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let shareId: String
         /// The review template ARN.
         public let templateArn: String
 
-        public init(clientRequestToken: String = DeleteTemplateShareInput.idempotencyToken(), shareId: String, templateArn: String) {
+        public init(clientRequestToken: String? = nil, shareId: String, templateArn: String) {
             self.clientRequestToken = clientRequestToken
             self.shareId = shareId
             self.templateArn = templateArn
@@ -1457,10 +1457,10 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let workloadId: String
 
-        public init(clientRequestToken: String = DeleteWorkloadInput.idempotencyToken(), workloadId: String) {
+        public init(clientRequestToken: String? = nil, workloadId: String) {
             self.clientRequestToken = clientRequestToken
             self.workloadId = workloadId
         }
@@ -1483,11 +1483,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         public let shareId: String
         public let workloadId: String
 
-        public init(clientRequestToken: String = DeleteWorkloadShareInput.idempotencyToken(), shareId: String, workloadId: String) {
+        public init(clientRequestToken: String? = nil, shareId: String, workloadId: String) {
             self.clientRequestToken = clientRequestToken
             self.shareId = shareId
             self.workloadId = workloadId
@@ -1510,16 +1510,16 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let lensAliases: [String]
+        public let lensAliases: [String]?
         public let workloadId: String
 
-        public init(lensAliases: [String], workloadId: String) {
+        public init(lensAliases: [String]? = nil, workloadId: String) {
             self.lensAliases = lensAliases
             self.workloadId = workloadId
         }
 
         public func validate(name: String) throws {
-            try self.lensAliases.forEach {
+            try self.lensAliases?.forEach {
                 try validate($0, name: "lensAliases[]", parent: name, max: 128)
                 try validate($0, name: "lensAliases[]", parent: name, min: 1)
             }
@@ -1540,16 +1540,16 @@ extension WellArchitected {
         ]
 
         /// The list of profile ARNs to disassociate from the workload.
-        public let profileArns: [String]
+        public let profileArns: [String]?
         public let workloadId: String
 
-        public init(profileArns: [String], workloadId: String) {
+        public init(profileArns: [String]? = nil, workloadId: String) {
             self.profileArns = profileArns
             self.workloadId = workloadId
         }
 
         public func validate(name: String) throws {
-            try self.profileArns.forEach {
+            try self.profileArns?.forEach {
                 try validate($0, name: "profileArns[]", parent: name, max: 2084)
                 try validate($0, name: "profileArns[]", parent: name, pattern: "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$")
             }
@@ -1671,14 +1671,14 @@ extension WellArchitected {
         ]
 
         /// The format of the consolidated report. For PDF, Base64String is returned. For JSON,  Metrics is returned.
-        public let format: ReportFormat
+        public let format: ReportFormat?
         /// Set to true to have shared resources included in the report.
         public let includeSharedResources: Bool?
         /// The maximum number of results to return for this request.
         public let maxResults: Int?
         public let nextToken: String?
 
-        public init(format: ReportFormat, includeSharedResources: Bool? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
+        public init(format: ReportFormat? = nil, includeSharedResources: Bool? = nil, maxResults: Int? = nil, nextToken: String? = nil) {
             self.format = format
             self.includeSharedResources = includeSharedResources
             self.maxResults = maxResults
@@ -1917,7 +1917,7 @@ extension WellArchitected {
         public let milestoneNumber: Int
         public let workloadId: String
 
-        public init(milestoneNumber: Int = 0, workloadId: String) {
+        public init(milestoneNumber: Int, workloadId: String) {
             self.milestoneNumber = milestoneNumber
             self.workloadId = workloadId
         }
@@ -2166,14 +2166,14 @@ extension WellArchitected {
     }
 
     public struct ImportLensInput: AWSEncodableShape {
-        public let clientRequestToken: String
+        public let clientRequestToken: String?
         /// The JSON representation of a lens.
-        public let jsonString: String
+        public let jsonString: String?
         public let lensAlias: String?
         /// Tags to associate to a lens.
         public let tags: [String: String]?
 
-        public init(clientRequestToken: String = ImportLensInput.idempotencyToken(), jsonString: String, lensAlias: String? = nil, tags: [String: String]? = nil) {
+        public init(clientRequestToken: String? = nil, jsonString: String? = nil, lensAlias: String? = nil, tags: [String: String]? = nil) {
             self.clientRequestToken = clientRequestToken
             self.jsonString = jsonString
             self.lensAlias = lensAlias
@@ -2595,16 +2595,16 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let choiceId: String
+        public let choiceId: String?
         /// Well-Architected Lens ARN.
-        public let lensArn: String
+        public let lensArn: String?
         public let maxResults: Int?
         public let nextToken: String?
-        public let pillarId: String
-        public let questionId: String
+        public let pillarId: String?
+        public let questionId: String?
         public let workloadId: String
 
-        public init(choiceId: String, lensArn: String, maxResults: Int? = nil, nextToken: String? = nil, pillarId: String, questionId: String, workloadId: String) {
+        public init(choiceId: String? = nil, lensArn: String? = nil, maxResults: Int? = nil, nextToken: String? = nil, pillarId: String? = nil, questionId: String? = nil, workloadId: String) {
             self.choiceId = choiceId
             self.lensArn = lensArn
             self.maxResults = maxResults
@@ -2659,16 +2659,16 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let choiceId: String
+        public let choiceId: String?
         /// Well-Architected Lens ARN.
-        public let lensArn: String
+        public let lensArn: String?
         public let maxResults: Int?
         public let nextToken: String?
-        public let pillarId: String
-        public let questionId: String
+        public let pillarId: String?
+        public let questionId: String?
         public let workloadId: String
 
-        public init(choiceId: String, lensArn: String, maxResults: Int? = nil, nextToken: String? = nil, pillarId: String, questionId: String, workloadId: String) {
+        public init(choiceId: String? = nil, lensArn: String? = nil, maxResults: Int? = nil, nextToken: String? = nil, pillarId: String? = nil, questionId: String? = nil, workloadId: String) {
             self.choiceId = choiceId
             self.lensArn = lensArn
             self.maxResults = maxResults
@@ -4330,16 +4330,16 @@ extension WellArchitected {
         ]
 
         /// The tags for the resource.
-        public let tags: [String: String]
+        public let tags: [String: String]?
         public let workloadArn: String
 
-        public init(tags: [String: String], workloadArn: String) {
+        public init(tags: [String: String]? = nil, workloadArn: String) {
             self.tags = tags
             self.workloadArn = workloadArn
         }
 
         public func validate(name: String) throws {
-            try self.tags.forEach {
+            try self.tags?.forEach {
                 try validate($0.key, name: "tags.key", parent: name, max: 128)
                 try validate($0.key, name: "tags.key", parent: name, min: 1)
                 try validate($0.value, name: "tags[\"\($0.key)\"]", parent: name, max: 256)
@@ -4386,16 +4386,16 @@ extension WellArchitected {
         ]
 
         /// A list of tag keys. Existing tags of the resource  whose keys are members of this list are removed from the resource.
-        public let tagKeys: [String]
+        public let tagKeys: [String]?
         public let workloadArn: String
 
-        public init(tagKeys: [String], workloadArn: String) {
+        public init(tagKeys: [String]? = nil, workloadArn: String) {
             self.tagKeys = tagKeys
             self.workloadArn = workloadArn
         }
 
         public func validate(name: String) throws {
-            try self.tagKeys.forEach {
+            try self.tagKeys?.forEach {
                 try validate($0, name: "tagKeys[]", parent: name, max: 128)
                 try validate($0, name: "tagKeys[]", parent: name, min: 1)
             }
@@ -4821,11 +4821,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "shareInvitationId", location: .uri("ShareInvitationId"))
         ]
 
-        public let shareInvitationAction: ShareInvitationAction
+        public let shareInvitationAction: ShareInvitationAction?
         /// The ID assigned to the share invitation.
         public let shareInvitationId: String
 
-        public init(shareInvitationAction: ShareInvitationAction, shareInvitationId: String) {
+        public init(shareInvitationAction: ShareInvitationAction? = nil, shareInvitationId: String) {
             self.shareInvitationAction = shareInvitationAction
             self.shareInvitationId = shareInvitationId
         }
@@ -4977,11 +4977,11 @@ extension WellArchitected {
             AWSMemberEncoding(label: "workloadId", location: .uri("WorkloadId"))
         ]
 
-        public let permissionType: PermissionType
+        public let permissionType: PermissionType?
         public let shareId: String
         public let workloadId: String
 
-        public init(permissionType: PermissionType, shareId: String, workloadId: String) {
+        public init(permissionType: PermissionType? = nil, shareId: String, workloadId: String) {
             self.permissionType = permissionType
             self.shareId = shareId
             self.workloadId = workloadId
@@ -5022,10 +5022,10 @@ extension WellArchitected {
 
         public let clientRequestToken: String?
         public let lensAlias: String
-        public let milestoneName: String
+        public let milestoneName: String?
         public let workloadId: String
 
-        public init(clientRequestToken: String? = nil, lensAlias: String, milestoneName: String, workloadId: String) {
+        public init(clientRequestToken: String? = nil, lensAlias: String, milestoneName: String? = nil, workloadId: String) {
             self.clientRequestToken = clientRequestToken
             self.lensAlias = lensAlias
             self.milestoneName = milestoneName

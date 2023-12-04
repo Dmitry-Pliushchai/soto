@@ -26,55 +26,61 @@ import SotoCore
 extension Transfer {
     // MARK: Enums
 
-    public enum AgreementStatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AgreementStatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum As2Transport: String, CustomStringConvertible, Codable, Sendable {
+    public enum As2Transport: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case http = "HTTP"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateStatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateStatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case inactive = "INACTIVE"
         case pendingRotation = "PENDING_ROTATION"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case certificate = "CERTIFICATE"
         case certificateWithPrivateKey = "CERTIFICATE_WITH_PRIVATE_KEY"
         public var description: String { return self.rawValue }
     }
 
-    public enum CertificateUsageType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CertificateUsageType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case encryption = "ENCRYPTION"
         case signing = "SIGNING"
         public var description: String { return self.rawValue }
     }
 
-    public enum CompressionEnum: String, CustomStringConvertible, Codable, Sendable {
+    public enum CompressionEnum: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case zlib = "ZLIB"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomStepStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomStepStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failure = "FAILURE"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Domain: String, CustomStringConvertible, Codable, Sendable {
+    public enum DirectoryListingOptimization: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case disabled = "DISABLED"
+        case enabled = "ENABLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum Domain: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case efs = "EFS"
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionAlg: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionAlg: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case aes128Cbc = "AES128_CBC"
         case aes192Cbc = "AES192_CBC"
         case aes256Cbc = "AES256_CBC"
@@ -82,19 +88,19 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EncryptionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pgp = "PGP"
         public var description: String { return self.rawValue }
     }
 
-    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EndpointType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `public` = "PUBLIC"
         case vpc = "VPC"
         case vpcEndpoint = "VPC_ENDPOINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExecutionErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecutionErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alreadyExists = "ALREADY_EXISTS"
         case badRequest = "BAD_REQUEST"
         case customStepFailed = "CUSTOM_STEP_FAILED"
@@ -106,7 +112,7 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum ExecutionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExecutionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case exception = "EXCEPTION"
         case handlingException = "HANDLING_EXCEPTION"
@@ -114,13 +120,13 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum HomeDirectoryType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HomeDirectoryType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case logical = "LOGICAL"
         case path = "PATH"
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityProviderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityProviderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case apiGateway = "API_GATEWAY"
         case awsDirectoryService = "AWS_DIRECTORY_SERVICE"
         case awsLambda = "AWS_LAMBDA"
@@ -128,13 +134,19 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum MdnResponse: String, CustomStringConvertible, Codable, Sendable {
+    public enum MapType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case directory = "DIRECTORY"
+        case file = "FILE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum MdnResponse: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case sync = "SYNC"
         public var description: String { return self.rawValue }
     }
 
-    public enum MdnSigningAlg: String, CustomStringConvertible, Codable, Sendable {
+    public enum MdnSigningAlg: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case none = "NONE"
         case sha1 = "SHA1"
@@ -144,25 +156,25 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum OverwriteExisting: String, CustomStringConvertible, Codable, Sendable {
+    public enum OverwriteExisting: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `false` = "FALSE"
         case `true` = "TRUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProfileType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProfileType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case local = "LOCAL"
         case partner = "PARTNER"
         public var description: String { return self.rawValue }
     }
 
-    public enum SetStatOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum SetStatOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case enableNoOp = "ENABLE_NO_OP"
         public var description: String { return self.rawValue }
     }
 
-    public enum SftpAuthenticationMethods: String, CustomStringConvertible, Codable, Sendable {
+    public enum SftpAuthenticationMethods: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case password = "PASSWORD"
         case publicKey = "PUBLIC_KEY"
         case publicKeyAndPassword = "PUBLIC_KEY_AND_PASSWORD"
@@ -170,7 +182,7 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum SigningAlg: String, CustomStringConvertible, Codable, Sendable {
+    public enum SigningAlg: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case sha1 = "SHA1"
         case sha256 = "SHA256"
@@ -179,7 +191,7 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum State: String, CustomStringConvertible, Codable, Sendable {
+    public enum State: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case offline = "OFFLINE"
         case online = "ONLINE"
         case startFailed = "START_FAILED"
@@ -189,14 +201,14 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum TlsSessionResumptionMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum TlsSessionResumptionMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         case enforced = "ENFORCED"
         public var description: String { return self.rawValue }
     }
 
-    public enum WorkflowStepType: String, CustomStringConvertible, Codable, Sendable {
+    public enum WorkflowStepType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case copy = "COPY"
         case custom = "CUSTOM"
         case decrypt = "DECRYPT"
@@ -205,7 +217,7 @@ extension Transfer {
         public var description: String { return self.rawValue }
     }
 
-    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable {
+    public enum `Protocol`: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case as2 = "AS2"
         case ftp = "FTP"
         case ftps = "FTPS"
@@ -309,7 +321,7 @@ extension Transfer {
     public struct CreateAccessRequest: AWSEncodableShape {
         /// A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.  Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid  In that command, replace YourGroupName with the name of your Active Directory group. The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-
         public let externalId: String
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -339,17 +351,17 @@ extension Transfer {
             try self.validate(self.externalId, name: "externalId", parent: name, min: 1)
             try self.validate(self.externalId, name: "externalId", parent: name, pattern: "^S-1-[\\d-]+$")
             try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, max: 1024)
-            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^(|/.*)$")
             try self.homeDirectoryMappings?.forEach {
                 try $0.validate(name: "\(name).homeDirectoryMappings[]")
             }
-            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50)
+            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50000)
             try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, min: 1)
             try self.validate(self.policy, name: "policy", parent: name, max: 2048)
             try self.posixProfile?.validate(name: "\(name).posixProfile")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.serverId, name: "serverId", parent: name, max: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, min: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, pattern: "^s-([0-9a-f]{17})$")
@@ -416,9 +428,9 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.accessRole, name: "accessRole", parent: name, max: 2048)
             try self.validate(self.accessRole, name: "accessRole", parent: name, min: 20)
-            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, max: 1024)
-            try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, pattern: "^(|/.*)$")
             try self.validate(self.description, name: "description", parent: name, max: 200)
             try self.validate(self.description, name: "description", parent: name, min: 1)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\p{Graph}]+$")
@@ -489,11 +501,11 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.accessRole, name: "accessRole", parent: name, max: 2048)
             try self.validate(self.accessRole, name: "accessRole", parent: name, min: 20)
-            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.as2Config?.validate(name: "\(name).as2Config")
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, max: 2048)
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, min: 20)
-            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.sftpConfig?.validate(name: "\(name).sftpConfig")
             try self.tags?.forEach {
                 try $0.validate(name: "\(name).tags[]")
@@ -605,6 +617,8 @@ extension Transfer {
         public let protocolDetails: ProtocolDetails?
         /// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM)  which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types:  SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.
         public let protocols: [`Protocol`]?
+        /// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+        public let s3StorageOptions: S3StorageOptions?
         /// Specifies the name of the security policy that is attached to the server.
         public let securityPolicyName: String?
         /// Specifies the log groups to which your server logs are sent. To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:  arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*  For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*  If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an update-server call. For example:  update-server --server-id s-1234567890abcdef0 --structured-log-destinations
@@ -614,7 +628,7 @@ extension Transfer {
         /// Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.
         public let workflowDetails: WorkflowDetails?
 
-        public init(certificate: String? = nil, domain: Domain? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKey: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, identityProviderType: IdentityProviderType? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, securityPolicyName: String? = nil, structuredLogDestinations: [String]? = nil, tags: [Tag]? = nil, workflowDetails: WorkflowDetails? = nil) {
+        public init(certificate: String? = nil, domain: Domain? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKey: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, identityProviderType: IdentityProviderType? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, s3StorageOptions: S3StorageOptions? = nil, securityPolicyName: String? = nil, structuredLogDestinations: [String]? = nil, tags: [Tag]? = nil, workflowDetails: WorkflowDetails? = nil) {
             self.certificate = certificate
             self.domain = domain
             self.endpointDetails = endpointDetails
@@ -627,6 +641,7 @@ extension Transfer {
             self.preAuthenticationLoginBanner = preAuthenticationLoginBanner
             self.protocolDetails = protocolDetails
             self.protocols = protocols
+            self.s3StorageOptions = s3StorageOptions
             self.securityPolicyName = securityPolicyName
             self.structuredLogDestinations = structuredLogDestinations
             self.tags = tags
@@ -639,11 +654,10 @@ extension Transfer {
             try self.validate(self.hostKey, name: "hostKey", parent: name, max: 4096)
             try self.identityProviderDetails?.validate(name: "\(name).identityProviderDetails")
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, max: 2048)
-            try self.validate(self.loggingRole, name: "loggingRole", parent: name, min: 20)
-            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^arn:.*role/")
-            try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, max: 512)
+            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^(|arn:.*role/\\S+)$")
+            try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, max: 4096)
             try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, pattern: "^[\\x09-\\x0D\\x20-\\x7E]*$")
-            try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, max: 512)
+            try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, max: 4096)
             try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, pattern: "^[\\x09-\\x0D\\x20-\\x7E]*$")
             try self.protocolDetails?.validate(name: "\(name).protocolDetails")
             try self.validate(self.protocols, name: "protocols", parent: name, max: 4)
@@ -653,7 +667,7 @@ extension Transfer {
             try self.structuredLogDestinations?.forEach {
                 try validate($0, name: "structuredLogDestinations[]", parent: name, max: 1600)
                 try validate($0, name: "structuredLogDestinations[]", parent: name, min: 20)
-                try validate($0, name: "structuredLogDestinations[]", parent: name, pattern: "^arn:")
+                try validate($0, name: "structuredLogDestinations[]", parent: name, pattern: "^arn:\\S+$")
             }
             try self.validate(self.structuredLogDestinations, name: "structuredLogDestinations", parent: name, max: 1)
             try self.tags?.forEach {
@@ -677,6 +691,7 @@ extension Transfer {
             case preAuthenticationLoginBanner = "PreAuthenticationLoginBanner"
             case protocolDetails = "ProtocolDetails"
             case protocols = "Protocols"
+            case s3StorageOptions = "S3StorageOptions"
             case securityPolicyName = "SecurityPolicyName"
             case structuredLogDestinations = "StructuredLogDestinations"
             case tags = "Tags"
@@ -698,7 +713,7 @@ extension Transfer {
     }
 
     public struct CreateUserRequest: AWSEncodableShape {
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the value the user should see for their home directory when they log in. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -712,7 +727,7 @@ extension Transfer {
         public let role: String
         /// A system-assigned unique identifier for a server instance. This is the specific server that you added your user to.
         public let serverId: String
-        /// The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. The three standard SSH public key format elements are , , and  an optional , with spaces between each element. Transfer Family accepts RSA, ECDSA, and ED25519 keys.   For RSA keys, the key type  is ssh-rsa.   For ED25519 keys, the key type is ssh-ed25519.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.
+        /// The public portion of the Secure Shell (SSH) key used to authenticate the user to the server. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and  an optional &lt;comment&gt;, with spaces between each element. Transfer Family accepts RSA, ECDSA, and ED25519 keys.   For RSA keys, the key type  is ssh-rsa.   For ED25519 keys, the key type is ssh-ed25519.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.
         public let sshPublicKeyBody: String?
         /// Key-value pairs that can be used to group and search for users. Tags are metadata attached to users for any purpose.
         public let tags: [Tag]?
@@ -734,17 +749,17 @@ extension Transfer {
 
         public func validate(name: String) throws {
             try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, max: 1024)
-            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^(|/.*)$")
             try self.homeDirectoryMappings?.forEach {
                 try $0.validate(name: "\(name).homeDirectoryMappings[]")
             }
-            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50)
+            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50000)
             try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, min: 1)
             try self.validate(self.policy, name: "policy", parent: name, max: 2048)
             try self.posixProfile?.validate(name: "\(name).posixProfile")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.serverId, name: "serverId", parent: name, max: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, min: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, pattern: "^s-([0-9a-f]{17})$")
@@ -1576,7 +1591,7 @@ extension Transfer {
     public struct DescribedAccess: AWSDecodableShape {
         /// A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.  Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid  In that command, replace YourGroupName with the name of your Active Directory group. The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-
         public let externalId: String?
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the session policy to lock down the associated access to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -1934,6 +1949,8 @@ extension Transfer {
         public let protocolDetails: ProtocolDetails?
         /// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM)  which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types:  SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.
         public let protocols: [`Protocol`]?
+        /// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+        public let s3StorageOptions: S3StorageOptions?
         /// Specifies the name of the security policy that is attached to the server.
         public let securityPolicyName: String?
         /// Specifies the unique system-assigned identifier for a server that you instantiate.
@@ -1949,7 +1966,7 @@ extension Transfer {
         /// Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.
         public let workflowDetails: WorkflowDetails?
 
-        public init(arn: String, certificate: String? = nil, domain: Domain? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKeyFingerprint: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, identityProviderType: IdentityProviderType? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, securityPolicyName: String? = nil, serverId: String? = nil, state: State? = nil, structuredLogDestinations: [String]? = nil, tags: [Tag]? = nil, userCount: Int? = nil, workflowDetails: WorkflowDetails? = nil) {
+        public init(arn: String, certificate: String? = nil, domain: Domain? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKeyFingerprint: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, identityProviderType: IdentityProviderType? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, s3StorageOptions: S3StorageOptions? = nil, securityPolicyName: String? = nil, serverId: String? = nil, state: State? = nil, structuredLogDestinations: [String]? = nil, tags: [Tag]? = nil, userCount: Int? = nil, workflowDetails: WorkflowDetails? = nil) {
             self.arn = arn
             self.certificate = certificate
             self.domain = domain
@@ -1963,6 +1980,7 @@ extension Transfer {
             self.preAuthenticationLoginBanner = preAuthenticationLoginBanner
             self.protocolDetails = protocolDetails
             self.protocols = protocols
+            self.s3StorageOptions = s3StorageOptions
             self.securityPolicyName = securityPolicyName
             self.serverId = serverId
             self.state = state
@@ -1986,6 +2004,7 @@ extension Transfer {
             case preAuthenticationLoginBanner = "PreAuthenticationLoginBanner"
             case protocolDetails = "ProtocolDetails"
             case protocols = "Protocols"
+            case s3StorageOptions = "S3StorageOptions"
             case securityPolicyName = "SecurityPolicyName"
             case serverId = "ServerId"
             case state = "State"
@@ -1999,7 +2018,7 @@ extension Transfer {
     public struct DescribedUser: AWSDecodableShape {
         /// Specifies the unique Amazon Resource Name (ARN) for the user that was requested to be described.
         public let arn: String
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -2218,24 +2237,28 @@ extension Transfer {
     public struct HomeDirectoryMapEntry: AWSEncodableShape & AWSDecodableShape {
         /// Represents an entry for HomeDirectoryMappings.
         public let entry: String
-        /// Represents the map target that is used in a HomeDirectorymapEntry.
+        /// Represents the map target that is used in a HomeDirectoryMapEntry.
         public let target: String
+        /// Specifies the type of mapping. Set the type to FILE if you want the mapping to point to a file, or DIRECTORY for the directory to point to a directory.  By default, home directory mappings have a Type of DIRECTORY when you create a Transfer Family server. You would need to explicitly set Type to FILE if you want a mapping to have a file target.
+        public let type: MapType?
 
-        public init(entry: String, target: String) {
+        public init(entry: String, target: String, type: MapType? = nil) {
             self.entry = entry
             self.target = target
+            self.type = type
         }
 
         public func validate(name: String) throws {
             try self.validate(self.entry, name: "entry", parent: name, max: 1024)
-            try self.validate(self.entry, name: "entry", parent: name, pattern: "^/")
+            try self.validate(self.entry, name: "entry", parent: name, pattern: "^/.*$")
             try self.validate(self.target, name: "target", parent: name, max: 1024)
-            try self.validate(self.target, name: "target", parent: name, pattern: "^/")
+            try self.validate(self.target, name: "target", parent: name, pattern: "^/.*$")
         }
 
         private enum CodingKeys: String, CodingKey {
             case entry = "Entry"
             case target = "Target"
+            case type = "Type"
         }
     }
 
@@ -2268,7 +2291,7 @@ extension Transfer {
             try self.validate(self.function, name: "function", parent: name, pattern: "^arn:[a-z-]+:lambda:.*$")
             try self.validate(self.invocationRole, name: "invocationRole", parent: name, max: 2048)
             try self.validate(self.invocationRole, name: "invocationRole", parent: name, min: 20)
-            try self.validate(self.invocationRole, name: "invocationRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.invocationRole, name: "invocationRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.url, name: "url", parent: name, max: 255)
         }
 
@@ -2915,7 +2938,7 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.arn, name: "arn", parent: name, max: 1600)
             try self.validate(self.arn, name: "arn", parent: name, min: 20)
-            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:")
+            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:\\S+$")
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 1000)
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 6144)
@@ -3046,7 +3069,7 @@ extension Transfer {
     public struct ListedAccess: AWSDecodableShape {
         /// A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.  Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid  In that command, replace YourGroupName with the name of your Active Directory group. The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-
         public let externalId: String?
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// The type of landing directory (folder) that you want your users' home directory to be when they log in to the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer  protocol clients. If you set it to LOGICAL, you need to provide mappings in the HomeDirectoryMappings for  how you want to make Amazon S3 or Amazon EFS paths visible to your users.  If HomeDirectoryType is LOGICAL, you must provide mappings, using the HomeDirectoryMappings parameter. If, on the other hand, HomeDirectoryType is PATH, you provide an absolute path using the HomeDirectory parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your template.
         public let homeDirectoryType: HomeDirectoryType?
@@ -3294,7 +3317,7 @@ extension Transfer {
     public struct ListedUser: AWSDecodableShape {
         /// Provides the unique Amazon Resource Name (ARN) for the user that you want to learn about.
         public let arn: String
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// The type of landing directory (folder) that you want your users' home directory to be when they log in to the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or Amazon EFS path as is in their file transfer  protocol clients. If you set it to LOGICAL, you need to provide mappings in the HomeDirectoryMappings for  how you want to make Amazon S3 or Amazon EFS paths visible to your users.  If HomeDirectoryType is LOGICAL, you must provide mappings, using the HomeDirectoryMappings parameter. If, on the other hand, HomeDirectoryType is PATH, you provide an absolute path using the HomeDirectory parameter. You cannot have both HomeDirectory and HomeDirectoryMappings in your template.
         public let homeDirectoryType: HomeDirectoryType?
@@ -3476,6 +3499,19 @@ extension Transfer {
         }
     }
 
+    public struct S3StorageOptions: AWSEncodableShape & AWSDecodableShape {
+        /// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+        public let directoryListingOptimization: DirectoryListingOptimization?
+
+        public init(directoryListingOptimization: DirectoryListingOptimization? = nil) {
+            self.directoryListingOptimization = directoryListingOptimization
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case directoryListingOptimization = "DirectoryListingOptimization"
+        }
+    }
+
     public struct S3Tag: AWSEncodableShape & AWSDecodableShape {
         /// The name assigned to the tag that you create.
         public let key: String
@@ -3556,9 +3592,9 @@ extension Transfer {
     }
 
     public struct SftpConnectorConfig: AWSEncodableShape & AWSDecodableShape {
-        /// The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the ssh-keyscan command against the SFTP server to retrieve the necessary key. The three standard SSH public key format elements are , , and an optional , with spaces between each element. Specify only the   and : do not enter the  portion of the key. For the trusted host key, Transfer Family accepts RSA and ECDSA keys.   For RSA keys, the key type  is ssh-rsa.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.
+        /// The public portion of the host key, or keys, that are used to identify the external server to which you are connecting. You can use the ssh-keyscan command against the SFTP server to retrieve the necessary key. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. Specify only the  &lt;key type&gt; and &lt;body base64&gt;: do not enter the &lt;comment&gt; portion of the key. For the trusted host key, Transfer Family accepts RSA and ECDSA keys.   For RSA keys, the &lt;key type&gt; string is ssh-rsa.   For ECDSA keys, the &lt;key type&gt; string is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.
         public let trustedHostKeys: [String]?
-        /// The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
+        /// The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier must be the Amazon Resource Name (ARN) of the secret.
         public let userSecretId: String?
 
         public init(trustedHostKeys: [String]? = nil, userSecretId: String? = nil) {
@@ -3746,7 +3782,7 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.arn, name: "arn", parent: name, max: 1600)
             try self.validate(self.arn, name: "arn", parent: name, min: 20)
-            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:")
+            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:\\S+$")
             try self.tags.forEach {
                 try $0.validate(name: "\(name).tags[]")
             }
@@ -3913,7 +3949,7 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.arn, name: "arn", parent: name, max: 1600)
             try self.validate(self.arn, name: "arn", parent: name, min: 20)
-            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:")
+            try self.validate(self.arn, name: "arn", parent: name, pattern: "^arn:\\S+$")
             try self.tagKeys.forEach {
                 try validate($0, name: "tagKeys[]", parent: name, max: 128)
             }
@@ -3930,7 +3966,7 @@ extension Transfer {
     public struct UpdateAccessRequest: AWSEncodableShape {
         /// A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.  Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid  In that command, replace YourGroupName with the name of your Active Directory group. The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-
         public let externalId: String
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -3960,17 +3996,17 @@ extension Transfer {
             try self.validate(self.externalId, name: "externalId", parent: name, min: 1)
             try self.validate(self.externalId, name: "externalId", parent: name, pattern: "^S-1-[\\d-]+$")
             try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, max: 1024)
-            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^(|/.*)$")
             try self.homeDirectoryMappings?.forEach {
                 try $0.validate(name: "\(name).homeDirectoryMappings[]")
             }
-            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50)
+            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50000)
             try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, min: 1)
             try self.validate(self.policy, name: "policy", parent: name, max: 2048)
             try self.posixProfile?.validate(name: "\(name).posixProfile")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.serverId, name: "serverId", parent: name, max: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, min: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, pattern: "^s-([0-9a-f]{17})$")
@@ -4037,12 +4073,12 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.accessRole, name: "accessRole", parent: name, max: 2048)
             try self.validate(self.accessRole, name: "accessRole", parent: name, min: 20)
-            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.agreementId, name: "agreementId", parent: name, max: 19)
             try self.validate(self.agreementId, name: "agreementId", parent: name, min: 19)
             try self.validate(self.agreementId, name: "agreementId", parent: name, pattern: "^a-([0-9a-f]{17})$")
             try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, max: 1024)
-            try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.baseDirectory, name: "baseDirectory", parent: name, pattern: "^(|/.*)$")
             try self.validate(self.description, name: "description", parent: name, max: 200)
             try self.validate(self.description, name: "description", parent: name, min: 1)
             try self.validate(self.description, name: "description", parent: name, pattern: "^[\\p{Graph}]+$")
@@ -4155,14 +4191,14 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.accessRole, name: "accessRole", parent: name, max: 2048)
             try self.validate(self.accessRole, name: "accessRole", parent: name, min: 20)
-            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.accessRole, name: "accessRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.as2Config?.validate(name: "\(name).as2Config")
             try self.validate(self.connectorId, name: "connectorId", parent: name, max: 19)
             try self.validate(self.connectorId, name: "connectorId", parent: name, min: 19)
             try self.validate(self.connectorId, name: "connectorId", parent: name, pattern: "^c-([0-9a-f]{17})$")
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, max: 2048)
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, min: 20)
-            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.sftpConfig?.validate(name: "\(name).sftpConfig")
             try self.validate(self.url, name: "url", parent: name, max: 255)
         }
@@ -4301,6 +4337,8 @@ extension Transfer {
         public let protocolDetails: ProtocolDetails?
         /// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    AS2 (Applicability Statement 2): used for transporting structured business-to-business data      If you select FTPS, you must choose a certificate stored in Certificate Manager (ACM)  which is used to identify your server when clients connect to it over FTPS.   If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be either AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes FTP, then AddressAllocationIds cannot be associated.   If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set any of the supported identity types:  SERVICE_MANAGED, AWS_DIRECTORY_SERVICE, AWS_LAMBDA, or API_GATEWAY.   If Protocol includes AS2, then the EndpointType must be VPC, and domain must be Amazon S3.
         public let protocols: [`Protocol`]?
+        /// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+        public let s3StorageOptions: S3StorageOptions?
         /// Specifies the name of the security policy that is attached to the server.
         public let securityPolicyName: String?
         /// A system-assigned unique identifier for a server instance that the Transfer Family user is assigned to.
@@ -4310,7 +4348,7 @@ extension Transfer {
         /// Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
         public let workflowDetails: WorkflowDetails?
 
-        public init(certificate: String? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKey: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, securityPolicyName: String? = nil, serverId: String, structuredLogDestinations: [String]? = nil, workflowDetails: WorkflowDetails? = nil) {
+        public init(certificate: String? = nil, endpointDetails: EndpointDetails? = nil, endpointType: EndpointType? = nil, hostKey: String? = nil, identityProviderDetails: IdentityProviderDetails? = nil, loggingRole: String? = nil, postAuthenticationLoginBanner: String? = nil, preAuthenticationLoginBanner: String? = nil, protocolDetails: ProtocolDetails? = nil, protocols: [`Protocol`]? = nil, s3StorageOptions: S3StorageOptions? = nil, securityPolicyName: String? = nil, serverId: String, structuredLogDestinations: [String]? = nil, workflowDetails: WorkflowDetails? = nil) {
             self.certificate = certificate
             self.endpointDetails = endpointDetails
             self.endpointType = endpointType
@@ -4321,6 +4359,7 @@ extension Transfer {
             self.preAuthenticationLoginBanner = preAuthenticationLoginBanner
             self.protocolDetails = protocolDetails
             self.protocols = protocols
+            self.s3StorageOptions = s3StorageOptions
             self.securityPolicyName = securityPolicyName
             self.serverId = serverId
             self.structuredLogDestinations = structuredLogDestinations
@@ -4333,10 +4372,10 @@ extension Transfer {
             try self.validate(self.hostKey, name: "hostKey", parent: name, max: 4096)
             try self.identityProviderDetails?.validate(name: "\(name).identityProviderDetails")
             try self.validate(self.loggingRole, name: "loggingRole", parent: name, max: 2048)
-            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^$|arn:.*role/")
-            try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, max: 512)
+            try self.validate(self.loggingRole, name: "loggingRole", parent: name, pattern: "^(|arn:.*role/\\S+)$")
+            try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, max: 4096)
             try self.validate(self.postAuthenticationLoginBanner, name: "postAuthenticationLoginBanner", parent: name, pattern: "^[\\x09-\\x0D\\x20-\\x7E]*$")
-            try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, max: 512)
+            try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, max: 4096)
             try self.validate(self.preAuthenticationLoginBanner, name: "preAuthenticationLoginBanner", parent: name, pattern: "^[\\x09-\\x0D\\x20-\\x7E]*$")
             try self.protocolDetails?.validate(name: "\(name).protocolDetails")
             try self.validate(self.protocols, name: "protocols", parent: name, max: 4)
@@ -4349,7 +4388,7 @@ extension Transfer {
             try self.structuredLogDestinations?.forEach {
                 try validate($0, name: "structuredLogDestinations[]", parent: name, max: 1600)
                 try validate($0, name: "structuredLogDestinations[]", parent: name, min: 20)
-                try validate($0, name: "structuredLogDestinations[]", parent: name, pattern: "^arn:")
+                try validate($0, name: "structuredLogDestinations[]", parent: name, pattern: "^arn:\\S+$")
             }
             try self.validate(self.structuredLogDestinations, name: "structuredLogDestinations", parent: name, max: 1)
             try self.workflowDetails?.validate(name: "\(name).workflowDetails")
@@ -4366,6 +4405,7 @@ extension Transfer {
             case preAuthenticationLoginBanner = "PreAuthenticationLoginBanner"
             case protocolDetails = "ProtocolDetails"
             case protocols = "Protocols"
+            case s3StorageOptions = "S3StorageOptions"
             case securityPolicyName = "SecurityPolicyName"
             case serverId = "ServerId"
             case structuredLogDestinations = "StructuredLogDestinations"
@@ -4387,7 +4427,7 @@ extension Transfer {
     }
 
     public struct UpdateUserRequest: AWSEncodableShape {
-        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL.
+        /// The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH.
         public let homeDirectory: String?
         /// Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM)  role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]
         public let homeDirectoryMappings: [HomeDirectoryMapEntry]?
@@ -4417,17 +4457,17 @@ extension Transfer {
 
         public func validate(name: String) throws {
             try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, max: 1024)
-            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^$|/")
+            try self.validate(self.homeDirectory, name: "homeDirectory", parent: name, pattern: "^(|/.*)$")
             try self.homeDirectoryMappings?.forEach {
                 try $0.validate(name: "\(name).homeDirectoryMappings[]")
             }
-            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50)
+            try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, max: 50000)
             try self.validate(self.homeDirectoryMappings, name: "homeDirectoryMappings", parent: name, min: 1)
             try self.validate(self.policy, name: "policy", parent: name, max: 2048)
             try self.posixProfile?.validate(name: "\(name).posixProfile")
             try self.validate(self.role, name: "role", parent: name, max: 2048)
             try self.validate(self.role, name: "role", parent: name, min: 20)
-            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.role, name: "role", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.serverId, name: "serverId", parent: name, max: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, min: 19)
             try self.validate(self.serverId, name: "serverId", parent: name, pattern: "^s-([0-9a-f]{17})$")
@@ -4500,7 +4540,7 @@ extension Transfer {
         public func validate(name: String) throws {
             try self.validate(self.executionRole, name: "executionRole", parent: name, max: 2048)
             try self.validate(self.executionRole, name: "executionRole", parent: name, min: 20)
-            try self.validate(self.executionRole, name: "executionRole", parent: name, pattern: "^arn:.*role/")
+            try self.validate(self.executionRole, name: "executionRole", parent: name, pattern: "^arn:.*role/\\S+$")
             try self.validate(self.workflowId, name: "workflowId", parent: name, max: 19)
             try self.validate(self.workflowId, name: "workflowId", parent: name, min: 19)
             try self.validate(self.workflowId, name: "workflowId", parent: name, pattern: "^w-([a-z0-9]{17})$")

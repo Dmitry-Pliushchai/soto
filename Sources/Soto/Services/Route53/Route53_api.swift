@@ -141,8 +141,8 @@ public struct Route53: AWSService {
     /// 			Guide.  Create, Delete, and Upsert  Use ChangeResourceRecordsSetsRequest to perform the following
     /// 			actions:    CREATE: Creates a resource record set that has the specified
     /// 					values.    DELETE: Deletes an existing resource record set that has the
-    /// 					specified values.    UPSERT: If a resource set exists Route 53 updates it with the
-    /// 					values in the request.     Syntaxes for Creating, Updating, and Deleting Resource Record
+    /// 					specified values.    UPSERT: If a resource set doesn't exist, Route 53 creates it. If a resource
+    /// 					set exists Route 53 updates it with the values in the request.     Syntaxes for Creating, Updating, and Deleting Resource Record
     /// 				Sets  The syntax for a request depends on the type of resource record set that you want to
     /// 			create, delete, or update, such as weighted, alias, or failover. The XML elements in
     /// 			your request must appear in the order listed in the syntax.  For an example for each type of resource record set, see "Examples." Don't refer to the syntax in the "Parameter Syntax" section, which includes
@@ -331,7 +331,12 @@ public struct Route53: AWSService {
     /// 			associates the resource record sets with a specified domain name (such as example.com)
     /// 			or subdomain name (such as www.example.com). Amazon Route 53 responds to DNS queries for
     /// 			the domain or subdomain name by using the resource record sets that
-    /// 				CreateTrafficPolicyInstance created.
+    /// 				CreateTrafficPolicyInstance created.  After you submit an CreateTrafficPolicyInstance request, there's a
+    /// 				brief delay while Amazon Route 53 creates the resource record sets that are
+    /// 				specified in the traffic policy definition.
+    /// 				Use GetTrafficPolicyInstance with the id of new traffic policy instance to confirm that the CreateTrafficPolicyInstance
+    /// 				request completed successfully. For more information, see the
+    /// 				State response element.
     public func createTrafficPolicyInstance(_ input: CreateTrafficPolicyInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateTrafficPolicyInstanceResponse> {
         return self.client.execute(operation: "CreateTrafficPolicyInstance", path: "/2013-04-01/trafficpolicyinstance", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -612,10 +617,10 @@ public struct Route53: AWSService {
         return self.client.execute(operation: "GetTrafficPolicy", path: "/2013-04-01/trafficpolicy/{Id}/{Version}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Gets information about a specified traffic policy instance.  After you submit a CreateTrafficPolicyInstance or an
-    /// 					UpdateTrafficPolicyInstance request, there's a brief delay while
-    /// 				Amazon Route 53 creates the resource record sets that are specified in the traffic
-    /// 				policy definition. For more information, see the State response
+    /// Gets information about a specified traffic policy instance.
+    /// 				Use GetTrafficPolicyInstance with the id of new traffic policy instance to confirm that the
+    /// 				CreateTrafficPolicyInstance or an UpdateTrafficPolicyInstance request completed successfully.
+    /// 				For more information, see the State response
     /// 				element.   In the Route 53 console, traffic policy instances are known as policy
     /// 				records.
     public func getTrafficPolicyInstance(_ input: GetTrafficPolicyInstanceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetTrafficPolicyInstanceResponse> {
@@ -858,7 +863,10 @@ public struct Route53: AWSService {
         return self.client.execute(operation: "UpdateTrafficPolicyComment", path: "/2013-04-01/trafficpolicy/{Id}/{Version}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Updates the resource record sets in a specified hosted zone that were created based on
+    ///  After you submit a UpdateTrafficPolicyInstance request, there's a brief delay while Route 53 creates the resource record sets
+    /// 			that are specified in the traffic policy definition. Use GetTrafficPolicyInstance with the id of updated traffic policy instance confirm
+    /// 			that the
+    /// 			UpdateTrafficPolicyInstance request completed successfully. For more information, see the State response element.  Updates the resource record sets in a specified hosted zone that were created based on
     /// 			the settings in a specified traffic policy version. When you update a traffic policy instance, Amazon Route 53 continues to respond to DNS
     /// 			queries for the root resource record set name (such as example.com) while it replaces
     /// 			one group of resource record sets with another. Route 53 performs the following
@@ -1258,6 +1266,7 @@ extension Route53.ListHostedZonesRequest: AWSPaginateToken {
     public func usingPaginationToken(_ token: String) -> Route53.ListHostedZonesRequest {
         return .init(
             delegationSetId: self.delegationSetId,
+            hostedZoneType: self.hostedZoneType,
             marker: token,
             maxItems: self.maxItems
         )

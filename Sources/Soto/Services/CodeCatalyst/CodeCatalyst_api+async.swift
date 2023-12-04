@@ -106,6 +106,16 @@ extension CodeCatalyst {
         return try await self.client.execute(operation: "GetUserDetails", path: "/userDetails", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Returns information about a workflow.
+    public func getWorkflow(_ input: GetWorkflowRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetWorkflowResponse {
+        return try await self.client.execute(operation: "GetWorkflow", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflows/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Returns information about a specified run of a workflow.
+    public func getWorkflowRun(_ input: GetWorkflowRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetWorkflowRunResponse {
+        return try await self.client.execute(operation: "GetWorkflowRun", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns/{id}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your Amazon Web Services Builder ID.
     public func listAccessTokens(_ input: ListAccessTokensRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListAccessTokensResponse {
         return try await self.client.execute(operation: "ListAccessTokens", path: "/v1/accessTokens", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -118,10 +128,10 @@ extension CodeCatalyst {
 
     /// Retrieves a list of Dev Environments in a project.
     public func listDevEnvironments(_ input: ListDevEnvironmentsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListDevEnvironmentsResponse {
-        return try await self.client.execute(operation: "ListDevEnvironments", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+        return try await self.client.execute(operation: "ListDevEnvironments", path: "/v1/spaces/{spaceName}/devEnvironments", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+    /// Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails.
     public func listEventLogs(_ input: ListEventLogsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListEventLogsResponse {
         return try await self.client.execute(operation: "ListEventLogs", path: "/v1/spaces/{spaceName}/eventLogs", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -146,6 +156,16 @@ extension CodeCatalyst {
         return try await self.client.execute(operation: "ListSpaces", path: "/v1/spaces", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves a list of workflow runs of a specified workflow.
+    public func listWorkflowRuns(_ input: ListWorkflowRunsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListWorkflowRunsResponse {
+        return try await self.client.execute(operation: "ListWorkflowRuns", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a list of workflows in a specified project.
+    public func listWorkflows(_ input: ListWorkflowsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListWorkflowsResponse {
+        return try await self.client.execute(operation: "ListWorkflows", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflows", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Starts a specified Dev Environment and puts it into an active state.
     public func startDevEnvironment(_ input: StartDevEnvironmentRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartDevEnvironmentResponse {
         return try await self.client.execute(operation: "StartDevEnvironment", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/start", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -154,6 +174,11 @@ extension CodeCatalyst {
     /// Starts a session for a specified Dev Environment.
     public func startDevEnvironmentSession(_ input: StartDevEnvironmentSessionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartDevEnvironmentSessionResponse {
         return try await self.client.execute(operation: "StartDevEnvironmentSession", path: "/v1/spaces/{spaceName}/projects/{projectName}/devEnvironments/{id}/session", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Begins a run of a specified workflow.
+    public func startWorkflowRun(_ input: StartWorkflowRunRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> StartWorkflowRunResponse {
+        return try await self.client.execute(operation: "StartWorkflowRun", path: "/v1/spaces/{spaceName}/projects/{projectName}/workflowRuns", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Pauses a specified Dev Environment and places it in a non-running state. Stopped Dev Environments do not consume compute minutes.
@@ -257,7 +282,7 @@ extension CodeCatalyst {
         )
     }
 
-    /// Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+    /// Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
@@ -362,6 +387,50 @@ extension CodeCatalyst {
             command: self.listSpaces,
             inputKey: \ListSpacesRequest.nextToken,
             outputKey: \ListSpacesResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of workflow runs of a specified workflow.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listWorkflowRunsPaginator(
+        _ input: ListWorkflowRunsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListWorkflowRunsRequest, ListWorkflowRunsResponse> {
+        return .init(
+            input: input,
+            command: self.listWorkflowRuns,
+            inputKey: \ListWorkflowRunsRequest.nextToken,
+            outputKey: \ListWorkflowRunsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of workflows in a specified project.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listWorkflowsPaginator(
+        _ input: ListWorkflowsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListWorkflowsRequest, ListWorkflowsResponse> {
+        return .init(
+            input: input,
+            command: self.listWorkflows,
+            inputKey: \ListWorkflowsRequest.nextToken,
+            outputKey: \ListWorkflowsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

@@ -26,7 +26,7 @@ import SotoCore
 extension CognitoSync {
     // MARK: Enums
 
-    public enum BulkPublishStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BulkPublishStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case notStarted = "NOT_STARTED"
@@ -34,13 +34,13 @@ extension CognitoSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum Operation: String, CustomStringConvertible, Codable, Sendable {
+    public enum Operation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case remove = "remove"
         case replace = "replace"
         public var description: String { return self.rawValue }
     }
 
-    public enum Platform: String, CustomStringConvertible, Codable, Sendable {
+    public enum Platform: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case adm = "ADM"
         case apns = "APNS"
         case apnsSandbox = "APNS_SANDBOX"
@@ -48,7 +48,7 @@ extension CognitoSync {
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamingStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamingStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }

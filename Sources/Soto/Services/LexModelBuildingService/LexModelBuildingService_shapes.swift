@@ -26,14 +26,14 @@ import SotoCore
 extension LexModelBuildingService {
     // MARK: Enums
 
-    public enum ChannelStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ChannelType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ChannelType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case facebook = "Facebook"
         case kik = "Kik"
         case slack = "Slack"
@@ -41,46 +41,46 @@ extension LexModelBuildingService {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case customPayload = "CustomPayload"
         case plainText = "PlainText"
         case ssml = "SSML"
         public var description: String { return self.rawValue }
     }
 
-    public enum Destination: String, CustomStringConvertible, Codable, Sendable {
+    public enum Destination: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudwatchLogs = "CLOUDWATCH_LOGS"
         case s3 = "S3"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case ready = "READY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ExportType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ExportType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case alexaSkillsKit = "ALEXA_SKILLS_KIT"
         case lex = "LEX"
         public var description: String { return self.rawValue }
     }
 
-    public enum FulfillmentActivityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FulfillmentActivityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case codeHook = "CodeHook"
         case returnIntent = "ReturnIntent"
         public var description: String { return self.rawValue }
     }
 
-    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ImportStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case complete = "COMPLETE"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum Locale: String, CustomStringConvertible, Codable, Sendable {
+    public enum Locale: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deDe = "de-DE"
         case enAu = "en-AU"
         case enGb = "en-GB"
@@ -97,81 +97,81 @@ extension LexModelBuildingService {
         public var description: String { return self.rawValue }
     }
 
-    public enum LogType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LogType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audio = "AUDIO"
         case text = "TEXT"
         public var description: String { return self.rawValue }
     }
 
-    public enum MergeStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum MergeStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failOnConflict = "FAIL_ON_CONFLICT"
         case overwriteLatest = "OVERWRITE_LATEST"
         public var description: String { return self.rawValue }
     }
 
-    public enum MigrationAlertType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MigrationAlertType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case error = "ERROR"
         case warn = "WARN"
         public var description: String { return self.rawValue }
     }
 
-    public enum MigrationSortAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum MigrationSortAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case migrationDateTime = "MIGRATION_DATE_TIME"
         case v1BotName = "V1_BOT_NAME"
         public var description: String { return self.rawValue }
     }
 
-    public enum MigrationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MigrationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum MigrationStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum MigrationStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createNew = "CREATE_NEW"
         case updateExisting = "UPDATE_EXISTING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ObfuscationSetting: String, CustomStringConvertible, Codable, Sendable {
+    public enum ObfuscationSetting: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case defaultObfuscation = "DEFAULT_OBFUSCATION"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProcessBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProcessBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case build = "BUILD"
         case save = "SAVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bot = "BOT"
         case intent = "INTENT"
         case slotType = "SLOT_TYPE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotConstraint: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotConstraint: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case optional = "Optional"
         case required = "Required"
         public var description: String { return self.rawValue }
     }
 
-    public enum SlotValueSelectionStrategy: String, CustomStringConvertible, Codable, Sendable {
+    public enum SlotValueSelectionStrategy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case originalValue = "ORIGINAL_VALUE"
         case topResolution = "TOP_RESOLUTION"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case building = "BUILDING"
         case failed = "FAILED"
         case notBuilt = "NOT_BUILT"
@@ -180,7 +180,7 @@ extension LexModelBuildingService {
         public var description: String { return self.rawValue }
     }
 
-    public enum StatusType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StatusType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case detected = "Detected"
         case missed = "Missed"
         public var description: String { return self.rawValue }

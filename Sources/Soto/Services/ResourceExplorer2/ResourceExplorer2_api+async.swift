@@ -56,6 +56,11 @@ extension ResourceExplorer2 {
         return try await self.client.execute(operation: "DisassociateDefaultView", path: "/DisassociateDefaultView", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
     }
 
+    /// Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    public func getAccountLevelServiceConfiguration(logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetAccountLevelServiceConfigurationOutput {
+        return try await self.client.execute(operation: "GetAccountLevelServiceConfiguration", path: "/GetAccountLevelServiceConfiguration", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
+    }
+
     /// Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation. You can then call GetView to retrieve the details of that view.
     public func getDefaultView(logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetDefaultViewOutput {
         return try await self.client.execute(operation: "GetDefaultView", path: "/GetDefaultView", httpMethod: .POST, serviceConfig: self.config, logger: logger, on: eventLoop)
@@ -74,6 +79,11 @@ extension ResourceExplorer2 {
     /// Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer.
     public func listIndexes(_ input: ListIndexesInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIndexesOutput {
         return try await self.client.execute(operation: "ListIndexes", path: "/ListIndexes", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    public func listIndexesForMembers(_ input: ListIndexesForMembersInput, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListIndexesForMembersOutput {
+        return try await self.client.execute(operation: "ListIndexesForMembers", path: "/ListIndexesForMembers", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves a list of all resource types currently supported by Amazon Web Services Resource Explorer.
@@ -142,6 +152,28 @@ extension ResourceExplorer2 {
             command: self.listIndexes,
             inputKey: \ListIndexesInput.nextToken,
             outputKey: \ListIndexesOutput.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listIndexesForMembersPaginator(
+        _ input: ListIndexesForMembersInput,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListIndexesForMembersInput, ListIndexesForMembersOutput> {
+        return .init(
+            input: input,
+            command: self.listIndexesForMembers,
+            inputKey: \ListIndexesForMembersInput.nextToken,
+            outputKey: \ListIndexesForMembersOutput.nextToken,
             logger: logger,
             on: eventLoop
         )

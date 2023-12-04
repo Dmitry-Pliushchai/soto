@@ -26,6 +26,11 @@ extension MigrationHubConfig {
         return try await self.client.execute(operation: "CreateHomeRegionControl", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// This operation deletes the home region configuration for the calling account. The operation does not delete discovery or migration tracking data in the home region.
+    public func deleteHomeRegionControl(_ input: DeleteHomeRegionControlRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteHomeRegionControlResult {
+        return try await self.client.execute(operation: "DeleteHomeRegionControl", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// This API permits filtering on the ControlId and HomeRegion fields.
     public func describeHomeRegionControls(_ input: DescribeHomeRegionControlsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeHomeRegionControlsResult {
         return try await self.client.execute(operation: "DescribeHomeRegionControls", path: "/", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)

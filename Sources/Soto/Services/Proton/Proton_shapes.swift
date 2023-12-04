@@ -26,24 +26,24 @@ import SotoCore
 extension Proton {
     // MARK: Enums
 
-    public enum BlockerStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlockerStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case resolved = "RESOLVED"
         public var description: String { return self.rawValue }
     }
 
-    public enum BlockerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BlockerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automated = "AUTOMATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ComponentDeploymentUpdateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComponentDeploymentUpdateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case currentVersion = "CURRENT_VERSION"
         case none = "NONE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case deleteComplete = "DELETE_COMPLETE"
@@ -55,7 +55,7 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentTargetResourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentTargetResourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case component = "COMPONENT"
         case environment = "ENVIRONMENT"
         case serviceInstance = "SERVICE_INSTANCE"
@@ -63,7 +63,7 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum DeploymentUpdateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DeploymentUpdateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case currentVersion = "CURRENT_VERSION"
         case majorVersion = "MAJOR_VERSION"
         case minorVersion = "MINOR_VERSION"
@@ -71,20 +71,20 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum EnvironmentAccountConnectionRequesterAccountType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnvironmentAccountConnectionRequesterAccountType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case environmentAccount = "ENVIRONMENT_ACCOUNT"
         case managementAccount = "MANAGEMENT_ACCOUNT"
         public var description: String { return self.rawValue }
     }
 
-    public enum EnvironmentAccountConnectionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum EnvironmentAccountConnectionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connected = "CONNECTED"
         case pending = "PENDING"
         case rejected = "REJECTED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ListServiceInstancesFilterBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListServiceInstancesFilterBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdAtAfter = "createdAtAfter"
         case createdAtBefore = "createdAtBefore"
         case deployedTemplateVersionStatus = "deployedTemplateVersionStatus"
@@ -98,7 +98,7 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum ListServiceInstancesSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ListServiceInstancesSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createdAt = "createdAt"
         case deploymentStatus = "deploymentStatus"
         case environmentName = "environmentName"
@@ -109,25 +109,25 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProvisionedResourceEngine: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProvisionedResourceEngine: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudformation = "CLOUDFORMATION"
         case terraform = "TERRAFORM"
         public var description: String { return self.rawValue }
     }
 
-    public enum Provisioning: String, CustomStringConvertible, Codable, Sendable {
+    public enum Provisioning: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case customerManaged = "CUSTOMER_MANAGED"
         public var description: String { return self.rawValue }
     }
 
-    public enum RepositoryProvider: String, CustomStringConvertible, Codable, Sendable {
+    public enum RepositoryProvider: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bitbucket = "BITBUCKET"
         case github = "GITHUB"
         case githubEnterprise = "GITHUB_ENTERPRISE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RepositorySyncStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum RepositorySyncStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         ///     The repository sync attempt has failed.
         case failed = "FAILED"
         ///    A repository sync attempt has been created and will begin soon.
@@ -141,14 +141,14 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceDeploymentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceDeploymentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceSyncStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceSyncStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         ///     Syncing has failed.
         case failed = "FAILED"
         ///    A sync attempt has been created and will begin soon.
@@ -160,7 +160,7 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case createFailed = "CREATE_FAILED"
         case createFailedCleanupComplete = "CREATE_FAILED_CLEANUP_COMPLETE"
@@ -178,18 +178,18 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum ServiceTemplateSupportedComponentSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceTemplateSupportedComponentSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directlyDefined = "DIRECTLY_DEFINED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case ascending = "ASCENDING"
         case descending = "DESCENDING"
         public var description: String { return self.rawValue }
     }
 
-    public enum SyncType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SyncType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         ///     Syncs services and service instances to Proton.
         case serviceSync = "SERVICE_SYNC"
         ///     Syncs environment and service templates to Proton.
@@ -197,13 +197,13 @@ extension Proton {
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case environment = "ENVIRONMENT"
         case service = "SERVICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case draft = "DRAFT"
         case published = "PUBLISHED"
         case registrationFailed = "REGISTRATION_FAILED"

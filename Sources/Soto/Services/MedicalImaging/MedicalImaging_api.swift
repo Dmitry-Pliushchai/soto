@@ -19,7 +19,7 @@
 
 /// Service object for interacting with AWS MedicalImaging service.
 ///
-/// This is the AWS HealthImaging API Reference. AWS HealthImaging is an AWS service for storing, accessing, and analyzing medical images. For an introduction to the service, see the  AWS HealthImaging Developer Guide .  We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as they take care of request authentication, serialization, and connection management. For more information, see Tools to build on AWS. For information about using AWS HealthImaging API actions in one of the language-specific AWS SDKs, refer to the See Also link at the end of each section that describes an API action or data type.  The following sections list AWS HealthImaging API actions categorized according to functionality. Links are  provided to actions within this Reference, along with links back to corresponding sections in the  AWS HealthImaging Developer Guide so you can view console procedures and CLI/SDK code examples.  Data store actions     CreateDatastore – See  Creating a data store.    GetDatastore – See  Getting data store properties.    ListDatastores – See  Listing data stores.    DeleteDatastore – See  Deleting a data store.    Import job actions     StartDICOMImportJob – See  Starting an import job.    GetDICOMImportJob – See  Getting import job properties.    ListDICOMImportJobs – See  Listing import jobs.    Image set access actions     SearchImageSets – See  Searching image sets.    GetImageSet – See  Getting image set properties.    GetImageSetMetadata – See  Getting image set metadata.    GetImageFrame – See  Getting image set pixel data.    Image set modification actions     ListImageSetVersions – See  Listing image set versions.    UpdateImageSetMetadata – See  Updating image set metadata.    CopyImageSet – See  Copying an image set.    DeleteImageSet – See  Deleting an image set.    Tagging actions     TagResource – See  Tagging a data store and Tagging an image set.    ListTagsForResource – See  Tagging a data store and Tagging an image set.    UntagResource – See  Tagging a data store and Tagging an image set.
+/// This is the AWS HealthImaging API Reference. AWS HealthImaging is a HIPAA-eligible service that helps health care providers and their medical imaging ISV partners store, transform, and apply machine learning to medical images. For an introduction to the service, see the  AWS HealthImaging Developer Guide .  We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as they take care of request authentication, serialization, and connection management. For more information, see Tools to build on AWS. For information about using HealthImaging API actions in one of the language-specific AWS SDKs, refer to the See Also link at the end of each section that describes an API action or data type.  The following sections list AWS HealthImaging API actions categorized according to functionality. Links are  provided to actions within this Reference, along with links back to corresponding sections in the  AWS HealthImaging Developer Guide where you can view console procedures and CLI/SDK code examples.  Data store actions     CreateDatastore – See  Creating a data store.    GetDatastore – See  Getting data store properties.    ListDatastores – See  Listing data stores.    DeleteDatastore – See  Deleting a data store.    Import job actions     StartDICOMImportJob – See  Starting an import job.    GetDICOMImportJob – See  Getting import job properties.    ListDICOMImportJobs – See  Listing import jobs.    Image set access actions     SearchImageSets – See  Searching image sets.    GetImageSet – See  Getting image set properties.    GetImageSetMetadata – See  Getting image set metadata.    GetImageFrame – See  Getting image set pixel data.    Image set modification actions     ListImageSetVersions – See  Listing image set versions.    UpdateImageSetMetadata – See  Updating image set metadata.    CopyImageSet – See  Copying an image set.    DeleteImageSet – See  Deleting an image set.    Tagging actions     TagResource – See  Tagging a data store and Tagging an image set.    ListTagsForResource – See  Tagging a data store and Tagging an image set.    UntagResource – See  Tagging a data store and Tagging an image set.
 public struct MedicalImaging: AWSService {
     // MARK: Member variables
 
@@ -108,12 +108,12 @@ public struct MedicalImaging: AWSService {
         return self.client.execute(operation: "GetImageSetMetadata", path: "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSetMetadata", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "runtime-", logger: logger, on: eventLoop)
     }
 
-    /// List import jobs created by this AWS account for a specific data store.
+    /// List import jobs created for a specific data store.
     public func listDICOMImportJobs(_ input: ListDICOMImportJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDICOMImportJobsResponse> {
         return self.client.execute(operation: "ListDICOMImportJobs", path: "/listDICOMImportJobs/datastore/{datastoreId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// List data stores created by this AWS account.
+    /// List data stores.
     public func listDatastores(_ input: ListDatastoresRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDatastoresResponse> {
         return self.client.execute(operation: "ListDatastores", path: "/datastore", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -128,7 +128,7 @@ public struct MedicalImaging: AWSService {
         return self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Search image sets based on defined input attributes.
+    /// Search image sets based on defined input attributes.   SearchImageSets accepts a single search  query parameter and returns a paginated response of all image sets that have the  matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting  in decreasing order from latest to oldest.
     public func searchImageSets(_ input: SearchImageSetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<SearchImageSetsResponse> {
         return self.client.execute(operation: "SearchImageSets", path: "/datastore/{datastoreId}/searchImageSets", httpMethod: .POST, serviceConfig: self.config, input: input, hostPrefix: "runtime-", logger: logger, on: eventLoop)
     }
@@ -178,7 +178,7 @@ extension MedicalImaging {
 // MARK: Paginators
 
 extension MedicalImaging {
-    /// List import jobs created by this AWS account for a specific data store.
+    /// List import jobs created for a specific data store.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -231,7 +231,7 @@ extension MedicalImaging {
         )
     }
 
-    /// List data stores created by this AWS account.
+    /// List data stores.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.
@@ -337,7 +337,7 @@ extension MedicalImaging {
         )
     }
 
-    /// Search image sets based on defined input attributes.
+    /// Search image sets based on defined input attributes.   SearchImageSets accepts a single search  query parameter and returns a paginated response of all image sets that have the  matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting  in decreasing order from latest to oldest.
     ///
     /// Provide paginated results to closure `onPage` for it to combine them into one result.
     /// This works in a similar manner to `Array.reduce<Result>(_:_:) -> Result`.

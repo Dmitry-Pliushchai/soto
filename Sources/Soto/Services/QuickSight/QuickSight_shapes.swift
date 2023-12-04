@@ -26,7 +26,7 @@ import SotoCore
 extension QuickSight {
     // MARK: Enums
 
-    public enum AnalysisErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case columnGeographicRoleMismatch = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
         case columnReplacementMissing = "COLUMN_REPLACEMENT_MISSING"
@@ -40,7 +40,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnalysisFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnalysisFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case analysisName = "ANALYSIS_NAME"
         case directQuicksightOwner = "DIRECT_QUICKSIGHT_OWNER"
         case directQuicksightSoleOwner = "DIRECT_QUICKSIGHT_SOLE_OWNER"
@@ -51,12 +51,12 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AnchorOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum AnchorOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case now = "NOW"
         public var description: String { return self.rawValue }
     }
 
-    public enum ArcThickness: String, CustomStringConvertible, Codable, Sendable {
+    public enum ArcThickness: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case large = "LARGE"
         case medium = "MEDIUM"
         case small = "SMALL"
@@ -64,35 +64,35 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ArcThicknessOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum ArcThicknessOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case large = "LARGE"
         case medium = "MEDIUM"
         case small = "SMALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cloudformationJson = "CLOUDFORMATION_JSON"
         case quicksightJson = "QUICKSIGHT_JSON"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobAnalysisPropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobAnalysisPropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "Name"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobDashboardPropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobDashboardPropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "Name"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobDataSetPropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobDataSetPropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "Name"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobDataSourcePropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobDataSourcePropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case catalog = "Catalog"
         case clusterId = "ClusterId"
         case dataSetName = "DataSetName"
@@ -113,12 +113,12 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobRefreshSchedulePropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobRefreshSchedulePropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case startAfterDateTime = "StartAfterDateTime"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case queuedForImmediateExecution = "QUEUED_FOR_IMMEDIATE_EXECUTION"
@@ -126,25 +126,25 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobThemePropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobThemePropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "Name"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleExportJobVPCConnectionPropertyToOverride: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleExportJobVPCConnectionPropertyToOverride: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dnsResolvers = "DnsResolvers"
         case name = "Name"
         case roleArn = "RoleArn"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleImportFailureAction: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleImportFailureAction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doNothing = "DO_NOTHING"
         case rollback = "ROLLBACK"
         public var description: String { return self.rawValue }
     }
 
-    public enum AssetBundleImportJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssetBundleImportJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case failedRollbackCompleted = "FAILED_ROLLBACK_COMPLETED"
         case failedRollbackError = "FAILED_ROLLBACK_ERROR"
@@ -155,14 +155,14 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AssignmentStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum AssignmentStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case draft = "DRAFT"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthenticationMethodOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthenticationMethodOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activeDirectory = "ACTIVE_DIRECTORY"
         case iamAndQuicksight = "IAM_AND_QUICKSIGHT"
         case iamIdentityCenter = "IAM_IDENTITY_CENTER"
@@ -170,7 +170,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AuthorSpecifiedAggregation: String, CustomStringConvertible, Codable, Sendable {
+    public enum AuthorSpecifiedAggregation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `var` = "VAR"
         case average = "AVERAGE"
         case count = "COUNT"
@@ -186,26 +186,26 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum AxisBinding: String, CustomStringConvertible, Codable, Sendable {
+    public enum AxisBinding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case primaryYaxis = "PRIMARY_YAXIS"
         case secondaryYaxis = "SECONDARY_YAXIS"
         public var description: String { return self.rawValue }
     }
 
-    public enum BarChartOrientation: String, CustomStringConvertible, Codable, Sendable {
+    public enum BarChartOrientation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case horizontal = "HORIZONTAL"
         case vertical = "VERTICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum BarsArrangement: String, CustomStringConvertible, Codable, Sendable {
+    public enum BarsArrangement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case clustered = "CLUSTERED"
         case stacked = "STACKED"
         case stackedPercent = "STACKED_PERCENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum BaseMapStyleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum BaseMapStyleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case darkGray = "DARK_GRAY"
         case imagery = "IMAGERY"
         case lightGray = "LIGHT_GRAY"
@@ -213,25 +213,25 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum BoxPlotFillStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum BoxPlotFillStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case solid = "SOLID"
         case transparent = "TRANSPARENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum CategoricalAggregationFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum CategoricalAggregationFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "COUNT"
         case distinctCount = "DISTINCT_COUNT"
         public var description: String { return self.rawValue }
     }
 
-    public enum CategoryFilterFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum CategoryFilterFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CONTAINS"
         case exact = "EXACT"
         public var description: String { return self.rawValue }
     }
 
-    public enum CategoryFilterMatchOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum CategoryFilterMatchOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contains = "CONTAINS"
         case doesNotContain = "DOES_NOT_CONTAIN"
         case doesNotEqual = "DOES_NOT_EQUAL"
@@ -241,31 +241,37 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum CategoryFilterSelectAllOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum CategoryFilterSelectAllOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filterAllValues = "FILTER_ALL_VALUES"
         public var description: String { return self.rawValue }
     }
 
-    public enum CategoryFilterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CategoryFilterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case customFilter = "CUSTOM_FILTER"
         case customFilterList = "CUSTOM_FILTER_LIST"
         case filterList = "FILTER_LIST"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColorFillType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColorFillType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case discrete = "DISCRETE"
         case gradient = "GRADIENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnDataRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnDataRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dimension = "DIMENSION"
         case measure = "MEASURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnDataSubType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case fixed = "FIXED"
+        case float = "FLOAT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ColumnDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case datetime = "DATETIME"
         case decimal = "DECIMAL"
         case integer = "INTEGER"
@@ -273,38 +279,38 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnOrderingType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnOrderingType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case greaterIsBetter = "GREATER_IS_BETTER"
         case lesserIsBetter = "LESSER_IS_BETTER"
         case specified = "SPECIFIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dimension = "DIMENSION"
         case measure = "MEASURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ColumnTagName: String, CustomStringConvertible, Codable, Sendable {
+    public enum ColumnTagName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case columnDescription = "COLUMN_DESCRIPTION"
         case columnGeographicRole = "COLUMN_GEOGRAPHIC_ROLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ComparisonMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum ComparisonMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case difference = "DIFFERENCE"
         case percent = "PERCENT"
         case percentDifference = "PERCENT_DIFFERENCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConditionalFormattingIconDisplayOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConditionalFormattingIconDisplayOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iconOnly = "ICON_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConditionalFormattingIconSetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConditionalFormattingIconSetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bars = "BARS"
         case caretUpMinusDown = "CARET_UP_MINUS_DOWN"
         case checkX = "CHECK_X"
@@ -319,20 +325,20 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ConstantType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConstantType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case collective = "COLLECTIVE"
         case range = "RANGE"
         case singular = "SINGULAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum CrossDatasetTypes: String, CustomStringConvertible, Codable, Sendable {
+    public enum CrossDatasetTypes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allDatasets = "ALL_DATASETS"
         case singleDataset = "SINGLE_DATASET"
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomContentImageScalingConfiguration: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomContentImageScalingConfiguration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doNotScale = "DO_NOT_SCALE"
         case fitToHeight = "FIT_TO_HEIGHT"
         case fitToWidth = "FIT_TO_WIDTH"
@@ -340,19 +346,19 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum CustomContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case image = "IMAGE"
         case otherEmbeddedContent = "OTHER_EMBEDDED_CONTENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DashboardBehavior: String, CustomStringConvertible, Codable, Sendable {
+    public enum DashboardBehavior: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DashboardErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DashboardErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case columnGeographicRoleMismatch = "COLUMN_GEOGRAPHIC_ROLE_MISMATCH"
         case columnReplacementMissing = "COLUMN_REPLACEMENT_MISSING"
@@ -366,7 +372,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DashboardFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum DashboardFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dashboardName = "DASHBOARD_NAME"
         case directQuicksightOwner = "DIRECT_QUICKSIGHT_OWNER"
         case directQuicksightSoleOwner = "DIRECT_QUICKSIGHT_SOLE_OWNER"
@@ -377,26 +383,26 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DashboardUIState: String, CustomStringConvertible, Codable, Sendable {
+    public enum DashboardUIState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case collapsed = "COLLAPSED"
         case expanded = "EXPANDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataLabelContent: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataLabelContent: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case percent = "PERCENT"
         case value = "VALUE"
         case valueAndPercent = "VALUE_AND_PERCENT"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataLabelOverlap: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataLabelOverlap: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disableOverlap = "DISABLE_OVERLAP"
         case enableOverlap = "ENABLE_OVERLAP"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataLabelPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataLabelPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottom = "BOTTOM"
         case inside = "INSIDE"
         case left = "LEFT"
@@ -406,7 +412,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSetFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSetFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case datasetName = "DATASET_NAME"
         case directQuicksightOwner = "DIRECT_QUICKSIGHT_OWNER"
         case directQuicksightSoleOwner = "DIRECT_QUICKSIGHT_SOLE_OWNER"
@@ -416,13 +422,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSetImportMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSetImportMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directQuery = "DIRECT_QUERY"
         case spice = "SPICE"
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceErrorInfoType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceErrorInfoType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case conflict = "CONFLICT"
         case copySourceNotFound = "COPY_SOURCE_NOT_FOUND"
@@ -434,7 +440,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case datasourceName = "DATASOURCE_NAME"
         case directQuicksightOwner = "DIRECT_QUICKSIGHT_OWNER"
         case directQuicksightSoleOwner = "DIRECT_QUICKSIGHT_SOLE_OWNER"
@@ -442,7 +448,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DataSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case adobeAnalytics = "ADOBE_ANALYTICS"
         case amazonElasticsearch = "AMAZON_ELASTICSEARCH"
         case amazonOpensearch = "AMAZON_OPENSEARCH"
@@ -450,6 +456,7 @@ extension QuickSight {
         case aurora = "AURORA"
         case auroraPostgresql = "AURORA_POSTGRESQL"
         case awsIotAnalytics = "AWS_IOT_ANALYTICS"
+        case bigquery = "BIGQUERY"
         case databricks = "DATABRICKS"
         case exasol = "EXASOL"
         case github = "GITHUB"
@@ -466,19 +473,21 @@ extension QuickSight {
         case snowflake = "SNOWFLAKE"
         case spark = "SPARK"
         case sqlserver = "SQLSERVER"
+        case starburst = "STARBURST"
         case teradata = "TERADATA"
         case timestream = "TIMESTREAM"
+        case trino = "TRINO"
         case twitter = "TWITTER"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetParameterValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetParameterValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multiValued = "MULTI_VALUED"
         case singleValued = "SINGLE_VALUED"
         public var description: String { return self.rawValue }
     }
 
-    public enum DateAggregationFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum DateAggregationFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case count = "COUNT"
         case distinctCount = "DISTINCT_COUNT"
         case max = "MAX"
@@ -486,7 +495,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DayOfWeek: String, CustomStringConvertible, Codable, Sendable {
+    public enum DayOfTheWeek: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case friday = "FRIDAY"
         case monday = "MONDAY"
         case saturday = "SATURDAY"
@@ -497,7 +506,18 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DefaultAggregation: String, CustomStringConvertible, Codable, Sendable {
+    public enum DayOfWeek: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case friday = "FRIDAY"
+        case monday = "MONDAY"
+        case saturday = "SATURDAY"
+        case sunday = "SUNDAY"
+        case thursday = "THURSDAY"
+        case tuesday = "TUESDAY"
+        case wednesday = "WEDNESDAY"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum DefaultAggregation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `var` = "VAR"
         case average = "AVERAGE"
         case count = "COUNT"
@@ -512,7 +532,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum DisplayFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum DisplayFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case currency = "CURRENCY"
         case date = "DATE"
@@ -522,21 +542,21 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum Edition: String, CustomStringConvertible, Codable, Sendable {
+    public enum Edition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enterprise = "ENTERPRISE"
         case enterpriseAndQ = "ENTERPRISE_AND_Q"
         case standard = "STANDARD"
         public var description: String { return self.rawValue }
     }
 
-    public enum EmbeddingIdentityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum EmbeddingIdentityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case anonymous = "ANONYMOUS"
         case iam = "IAM"
         case quicksight = "QUICKSIGHT"
         public var description: String { return self.rawValue }
     }
 
-    public enum FileFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum FileFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case clf = "CLF"
         case csv = "CSV"
         case elf = "ELF"
@@ -546,33 +566,33 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterClass: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterClass: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case conditionalValueFilter = "CONDITIONAL_VALUE_FILTER"
         case enforcedValueFilter = "ENFORCED_VALUE_FILTER"
         case namedValueFilter = "NAMED_VALUE_FILTER"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterNullOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterNullOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allValues = "ALL_VALUES"
         case nonNullsOnly = "NON_NULLS_ONLY"
         case nullsOnly = "NULLS_ONLY"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case stringEquals = "StringEquals"
         case stringLike = "StringLike"
         public var description: String { return self.rawValue }
     }
 
-    public enum FilterVisualScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum FilterVisualScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allVisuals = "ALL_VISUALS"
         case selectedVisuals = "SELECTED_VISUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum FolderFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum FolderFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case directQuicksightOwner = "DIRECT_QUICKSIGHT_OWNER"
         case directQuicksightSoleOwner = "DIRECT_QUICKSIGHT_SOLE_OWNER"
         case directQuicksightViewerOrOwner = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
@@ -583,36 +603,37 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum FolderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FolderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case restricted = "RESTRICTED"
         case shared = "SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum FontDecoration: String, CustomStringConvertible, Codable, Sendable {
+    public enum FontDecoration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case underline = "UNDERLINE"
         public var description: String { return self.rawValue }
     }
 
-    public enum FontStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum FontStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case italic = "ITALIC"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum FontWeightName: String, CustomStringConvertible, Codable, Sendable {
+    public enum FontWeightName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bold = "BOLD"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum ForecastComputationSeasonality: String, CustomStringConvertible, Codable, Sendable {
+    public enum ForecastComputationSeasonality: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case automatic = "AUTOMATIC"
         case custom = "CUSTOM"
         public var description: String { return self.rawValue }
     }
 
-    public enum FunnelChartMeasureDataLabelStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum FunnelChartMeasureDataLabelStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case percentageByFirstStage = "PERCENTAGE_BY_FIRST_STAGE"
         case percentageByPreviousStage = "PERCENTAGE_BY_PREVIOUS_STAGE"
         case valueAndPercentageByFirstStage = "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE"
@@ -621,12 +642,12 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum GeoSpatialCountryCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeoSpatialCountryCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case us = "US"
         public var description: String { return self.rawValue }
     }
 
-    public enum GeoSpatialDataRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeoSpatialDataRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case city = "CITY"
         case country = "COUNTRY"
         case county = "COUNTY"
@@ -637,30 +658,30 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum GeospatialSelectedPointStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum GeospatialSelectedPointStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cluster = "CLUSTER"
         case heatmap = "HEATMAP"
         case point = "POINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum GroupFilterAttribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum GroupFilterAttribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case groupName = "GROUP_NAME"
         public var description: String { return self.rawValue }
     }
 
-    public enum GroupFilterOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum GroupFilterOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case startsWith = "StartsWith"
         public var description: String { return self.rawValue }
     }
 
-    public enum HistogramBinType: String, CustomStringConvertible, Codable, Sendable {
+    public enum HistogramBinType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case binCount = "BIN_COUNT"
         case binWidth = "BIN_WIDTH"
         public var description: String { return self.rawValue }
     }
 
-    public enum HorizontalTextAlignment: String, CustomStringConvertible, Codable, Sendable {
+    public enum HorizontalTextAlignment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case center = "CENTER"
         case left = "LEFT"
@@ -668,7 +689,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum Icon: String, CustomStringConvertible, Codable, Sendable {
+    public enum Icon: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arrowDown = "ARROW_DOWN"
         case arrowDownLeft = "ARROW_DOWN_LEFT"
         case arrowDownRight = "ARROW_DOWN_RIGHT"
@@ -698,19 +719,19 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityStore: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityStore: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case quicksight = "QUICKSIGHT"
         public var description: String { return self.rawValue }
     }
 
-    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IdentityType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case iam = "IAM"
         case iamIdentityCenter = "IAM_IDENTITY_CENTER"
         case quicksight = "QUICKSIGHT"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accountCapacityLimitExceeded = "ACCOUNT_CAPACITY_LIMIT_EXCEEDED"
         case connectionFailure = "CONNECTION_FAILURE"
         case cursorNotEnabled = "CURSOR_NOT_ENABLED"
@@ -759,13 +780,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionRequestSource: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionRequestSource: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case manual = "MANUAL"
         case scheduled = "SCHEDULED"
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionRequestType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionRequestType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case edit = "EDIT"
         case fullRefresh = "FULL_REFRESH"
         case incrementalRefresh = "INCREMENTAL_REFRESH"
@@ -773,7 +794,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -783,13 +804,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum IngestionType: String, CustomStringConvertible, Codable, Sendable {
+    public enum IngestionType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fullRefresh = "FULL_REFRESH"
         case incrementalRefresh = "INCREMENTAL_REFRESH"
         public var description: String { return self.rawValue }
     }
 
-    public enum InputColumnDataType: String, CustomStringConvertible, Codable, Sendable {
+    public enum InputColumnDataType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bit = "BIT"
         case boolean = "BOOLEAN"
         case datetime = "DATETIME"
@@ -800,7 +821,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum JoinType: String, CustomStringConvertible, Codable, Sendable {
+    public enum JoinType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inner = "INNER"
         case left = "LEFT"
         case outer = "OUTER"
@@ -808,19 +829,19 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum KPISparklineType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KPISparklineType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case area = "AREA"
         case line = "LINE"
         public var description: String { return self.rawValue }
     }
 
-    public enum KPIVisualStandardLayoutType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KPIVisualStandardLayoutType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case classic = "CLASSIC"
         case vertical = "VERTICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum LayoutElementType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LayoutElementType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filterControl = "FILTER_CONTROL"
         case parameterControl = "PARAMETER_CONTROL"
         case textBox = "TEXT_BOX"
@@ -828,7 +849,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum LegendPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum LegendPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case bottom = "BOTTOM"
         case right = "RIGHT"
@@ -836,14 +857,14 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum LineChartLineStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineChartLineStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dashed = "DASHED"
         case dotted = "DOTTED"
         case solid = "SOLID"
         public var description: String { return self.rawValue }
     }
 
-    public enum LineChartMarkerShape: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineChartMarkerShape: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case circle = "CIRCLE"
         case diamond = "DIAMOND"
         case roundedSquare = "ROUNDED_SQUARE"
@@ -852,55 +873,56 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum LineChartType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineChartType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case area = "AREA"
         case line = "LINE"
         case stackedArea = "STACKED_AREA"
         public var description: String { return self.rawValue }
     }
 
-    public enum LineInterpolation: String, CustomStringConvertible, Codable, Sendable {
+    public enum LineInterpolation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case linear = "LINEAR"
         case smooth = "SMOOTH"
         case stepped = "STEPPED"
         public var description: String { return self.rawValue }
     }
 
-    public enum LookbackWindowSizeUnit: String, CustomStringConvertible, Codable, Sendable {
+    public enum LookbackWindowSizeUnit: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case day = "DAY"
         case hour = "HOUR"
         case week = "WEEK"
         public var description: String { return self.rawValue }
     }
 
-    public enum MapZoomMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum MapZoomMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case manual = "MANUAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum MaximumMinimumComputationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MaximumMinimumComputationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case maximum = "MAXIMUM"
         case minimum = "MINIMUM"
         public var description: String { return self.rawValue }
     }
 
-    public enum MemberType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MemberType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case analysis = "ANALYSIS"
         case dashboard = "DASHBOARD"
         case dataset = "DATASET"
+        case datasource = "DATASOURCE"
         case topic = "TOPIC"
         public var description: String { return self.rawValue }
     }
 
-    public enum MissingDataTreatmentOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum MissingDataTreatmentOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interpolate = "INTERPOLATE"
         case showAsBlank = "SHOW_AS_BLANK"
         case showAsZero = "SHOW_AS_ZERO"
         public var description: String { return self.rawValue }
     }
 
-    public enum NamedEntityAggType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamedEntityAggType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `var` = "VAR"
         case average = "AVERAGE"
         case count = "COUNT"
@@ -917,7 +939,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NamedFilterAggType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamedFilterAggType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `var` = "VAR"
         case average = "AVERAGE"
         case count = "COUNT"
@@ -933,7 +955,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NamedFilterType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamedFilterType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case categoryFilter = "CATEGORY_FILTER"
         case dateRangeFilter = "DATE_RANGE_FILTER"
         case numericEqualityFilter = "NUMERIC_EQUALITY_FILTER"
@@ -942,13 +964,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NamespaceErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamespaceErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case internalServiceError = "INTERNAL_SERVICE_ERROR"
         case permissionDenied = "PERMISSION_DENIED"
         public var description: String { return self.rawValue }
     }
 
-    public enum NamespaceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NamespaceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -957,13 +979,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NegativeValueDisplayMode: String, CustomStringConvertible, Codable, Sendable {
+    public enum NegativeValueDisplayMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case negative = "NEGATIVE"
         case positive = "POSITIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum NetworkInterfaceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum NetworkInterfaceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case attachmentFailedRollbackFailed = "ATTACHMENT_FAILED_ROLLBACK_FAILED"
         case available = "AVAILABLE"
         case creating = "CREATING"
@@ -977,7 +999,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NumberScale: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumberScale: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case billions = "BILLIONS"
         case millions = "MILLIONS"
@@ -987,44 +1009,44 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum NumericEqualityMatchOperator: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumericEqualityMatchOperator: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doesNotEqual = "DOES_NOT_EQUAL"
         case equals = "EQUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum NumericFilterSelectAllOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumericFilterSelectAllOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case filterAllValues = "FILTER_ALL_VALUES"
         public var description: String { return self.rawValue }
     }
 
-    public enum NumericSeparatorSymbol: String, CustomStringConvertible, Codable, Sendable {
+    public enum NumericSeparatorSymbol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case comma = "COMMA"
         case dot = "DOT"
         case space = "SPACE"
         public var description: String { return self.rawValue }
     }
 
-    public enum OtherCategories: String, CustomStringConvertible, Codable, Sendable {
+    public enum OtherCategories: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exclude = "EXCLUDE"
         case include = "INCLUDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum PanelBorderStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum PanelBorderStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dashed = "DASHED"
         case dotted = "DOTTED"
         case solid = "SOLID"
         public var description: String { return self.rawValue }
     }
 
-    public enum PaperOrientation: String, CustomStringConvertible, Codable, Sendable {
+    public enum PaperOrientation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case landscape = "LANDSCAPE"
         case portrait = "PORTRAIT"
         public var description: String { return self.rawValue }
     }
 
-    public enum PaperSize: String, CustomStringConvertible, Codable, Sendable {
+    public enum PaperSize: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case a0 = "A0"
         case a1 = "A1"
         case a2 = "A2"
@@ -1039,104 +1061,118 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ParameterValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParameterValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multiValued = "MULTI_VALUED"
         case singleValued = "SINGLE_VALUED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PivotTableConditionalFormattingScopeRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum PivotTableConditionalFormattingScopeRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case field = "FIELD"
         case fieldTotal = "FIELD_TOTAL"
         case grandTotal = "GRAND_TOTAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum PivotTableFieldCollapseState: String, CustomStringConvertible, Codable, Sendable {
+    public enum PivotTableDataPathType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case countMetricColumn = "COUNT_METRIC_COLUMN"
+        case emptyColumnHeader = "EMPTY_COLUMN_HEADER"
+        case hierarchyRowsLayoutColumn = "HIERARCHY_ROWS_LAYOUT_COLUMN"
+        case multipleRowMetricsColumn = "MULTIPLE_ROW_METRICS_COLUMN"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum PivotTableFieldCollapseState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case collapsed = "COLLAPSED"
         case expanded = "EXPANDED"
         public var description: String { return self.rawValue }
     }
 
-    public enum PivotTableMetricPlacement: String, CustomStringConvertible, Codable, Sendable {
+    public enum PivotTableMetricPlacement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case column = "COLUMN"
         case row = "ROW"
         public var description: String { return self.rawValue }
     }
 
-    public enum PivotTableRowsLayout: String, CustomStringConvertible, Codable, Sendable {
+    public enum PivotTableRowsLayout: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hierarchy = "HIERARCHY"
         case tabular = "TABULAR"
         public var description: String { return self.rawValue }
     }
 
-    public enum PivotTableSubtotalLevel: String, CustomStringConvertible, Codable, Sendable {
+    public enum PivotTableSubtotalLevel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case custom = "CUSTOM"
         case last = "LAST"
         public var description: String { return self.rawValue }
     }
 
-    public enum PrimaryValueDisplayType: String, CustomStringConvertible, Codable, Sendable {
+    public enum PrimaryValueDisplayType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case actual = "ACTUAL"
         case comparison = "COMPARISON"
         case hidden = "HIDDEN"
         public var description: String { return self.rawValue }
     }
 
-    public enum PropertyRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum PropertyRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case id = "ID"
         case primary = "PRIMARY"
         public var description: String { return self.rawValue }
     }
 
-    public enum PropertyUsage: String, CustomStringConvertible, Codable, Sendable {
+    public enum PropertyUsage: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dimension = "DIMENSION"
         case inherit = "INHERIT"
         case measure = "MEASURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum RadarChartAxesRangeScale: String, CustomStringConvertible, Codable, Sendable {
+    public enum RadarChartAxesRangeScale: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case independent = "INDEPENDENT"
         case shared = "SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum RadarChartShape: String, CustomStringConvertible, Codable, Sendable {
+    public enum RadarChartShape: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case circle = "CIRCLE"
         case polygon = "POLYGON"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceLineLabelHorizontalPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceLineLabelHorizontalPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case center = "CENTER"
         case left = "LEFT"
         case right = "RIGHT"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceLineLabelVerticalPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceLineLabelVerticalPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case above = "ABOVE"
         case below = "BELOW"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceLinePatternType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceLinePatternType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dashed = "DASHED"
         case dotted = "DOTTED"
         case solid = "SOLID"
         public var description: String { return self.rawValue }
     }
 
-    public enum ReferenceLineValueLabelRelativePosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ReferenceLineSeriesType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case bar = "BAR"
+        case line = "LINE"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ReferenceLineValueLabelRelativePosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case afterCustomLabel = "AFTER_CUSTOM_LABEL"
         case beforeCustomLabel = "BEFORE_CUSTOM_LABEL"
         public var description: String { return self.rawValue }
     }
 
-    public enum RefreshInterval: String, CustomStringConvertible, Codable, Sendable {
+    public enum RefreshInterval: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daily = "DAILY"
         case hourly = "HOURLY"
         case minute15 = "MINUTE15"
@@ -1146,7 +1182,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum RelativeDateType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelativeDateType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case last = "LAST"
         case next = "NEXT"
         case now = "NOW"
@@ -1155,7 +1191,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum RelativeFontSize: String, CustomStringConvertible, Codable, Sendable {
+    public enum RelativeFontSize: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case extraLarge = "EXTRA_LARGE"
         case extraSmall = "EXTRA_SMALL"
         case large = "LARGE"
@@ -1164,13 +1200,13 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ResizeOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResizeOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fixed = "FIXED"
         case responsive = "RESPONSIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResourceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResourceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationFailed = "CREATION_FAILED"
         case creationInProgress = "CREATION_IN_PROGRESS"
         case creationSuccessful = "CREATION_SUCCESSFUL"
@@ -1181,76 +1217,88 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum RowLevelPermissionFormatVersion: String, CustomStringConvertible, Codable, Sendable {
+    public enum Role: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case admin = "ADMIN"
+        case author = "AUTHOR"
+        case reader = "READER"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum RowLevelPermissionFormatVersion: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case version1 = "VERSION_1"
         case version2 = "VERSION_2"
         public var description: String { return self.rawValue }
     }
 
-    public enum RowLevelPermissionPolicy: String, CustomStringConvertible, Codable, Sendable {
+    public enum RowLevelPermissionPolicy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case denyAccess = "DENY_ACCESS"
         case grantAccess = "GRANT_ACCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SectionPageBreakStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SectionPageBreakStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SelectAllValueOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum SelectAllValueOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allValues = "ALL_VALUES"
         public var description: String { return self.rawValue }
     }
 
-    public enum SelectedFieldOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum SelectedFieldOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allFields = "ALL_FIELDS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SelectedTooltipType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SelectedTooltipType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case basic = "BASIC"
         case detailed = "DETAILED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SharingModel: String, CustomStringConvertible, Codable, Sendable {
+    public enum ServiceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case redshift = "REDSHIFT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum SharingModel: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case account = "ACCOUNT"
         case namespace = "NAMESPACE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SheetContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SheetContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case interactive = "INTERACTIVE"
         case paginated = "PAGINATED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SheetControlDateTimePickerType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SheetControlDateTimePickerType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dateRange = "DATE_RANGE"
         case singleValued = "SINGLE_VALUED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SheetControlListType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SheetControlListType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case multiSelect = "MULTI_SELECT"
         case singleSelect = "SINGLE_SELECT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SheetControlSliderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SheetControlSliderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case range = "RANGE"
         case singlePoint = "SINGLE_POINT"
         public var description: String { return self.rawValue }
     }
 
-    public enum SimpleAttributeAggregationFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimpleAttributeAggregationFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case uniqueValue = "UNIQUE_VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SimpleNumericalAggregationFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimpleNumericalAggregationFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `var` = "VAR"
         case average = "AVERAGE"
         case count = "COUNT"
@@ -1265,32 +1313,42 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum SmallMultiplesAxisPlacement: String, CustomStringConvertible, Codable, Sendable {
+    public enum SimpleTotalAggregationFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case `default` = "DEFAULT"
+        case average = "AVERAGE"
+        case max = "MAX"
+        case min = "MIN"
+        case none = "NONE"
+        case sum = "SUM"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum SmallMultiplesAxisPlacement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case inside = "INSIDE"
         case outside = "OUTSIDE"
         public var description: String { return self.rawValue }
     }
 
-    public enum SmallMultiplesAxisScale: String, CustomStringConvertible, Codable, Sendable {
+    public enum SmallMultiplesAxisScale: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case independent = "INDEPENDENT"
         case shared = "SHARED"
         public var description: String { return self.rawValue }
     }
 
-    public enum SnapshotFileFormatType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnapshotFileFormatType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case csv = "CSV"
         case excel = "EXCEL"
         case pdf = "PDF"
         public var description: String { return self.rawValue }
     }
 
-    public enum SnapshotFileSheetSelectionScope: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnapshotFileSheetSelectionScope: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allVisuals = "ALL_VISUALS"
         case selectedVisuals = "SELECTED_VISUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum SnapshotJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum SnapshotJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case completed = "COMPLETED"
         case failed = "FAILED"
         case queued = "QUEUED"
@@ -1298,74 +1356,81 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum SortDirection: String, CustomStringConvertible, Codable, Sendable {
+    public enum SortDirection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case asc = "ASC"
         case desc = "DESC"
         public var description: String { return self.rawValue }
     }
 
-    public enum SpecialValue: String, CustomStringConvertible, Codable, Sendable {
+    public enum SpecialValue: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case empty = "EMPTY"
         case null = "NULL"
         case other = "OTHER"
         public var description: String { return self.rawValue }
     }
 
-    public enum Status: String, CustomStringConvertible, Codable, Sendable {
+    public enum StarburstProductType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case enterprise = "ENTERPRISE"
+        case galaxy = "GALAXY"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum Status: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum StyledCellType: String, CustomStringConvertible, Codable, Sendable {
+    public enum StyledCellType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case metricHeader = "METRIC_HEADER"
         case total = "TOTAL"
         case value = "VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableBorderStyle: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableBorderStyle: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case solid = "SOLID"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableCellImageScalingConfiguration: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableCellImageScalingConfiguration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doNotScale = "DO_NOT_SCALE"
         case fitToCellHeight = "FIT_TO_CELL_HEIGHT"
         case fitToCellWidth = "FIT_TO_CELL_WIDTH"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableFieldIconSetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableFieldIconSetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case link = "LINK"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableOrientation: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableOrientation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case horizontal = "HORIZONTAL"
         case vertical = "VERTICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableTotalsPlacement: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableTotalsPlacement: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case auto = "AUTO"
         case end = "END"
         case start = "START"
         public var description: String { return self.rawValue }
     }
 
-    public enum TableTotalsScrollStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TableTotalsScrollStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pinned = "PINNED"
         case scrolled = "SCROLLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum TargetVisualOptions: String, CustomStringConvertible, Codable, Sendable {
+    public enum TargetVisualOptions: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case allVisuals = "ALL_VISUALS"
         public var description: String { return self.rawValue }
     }
 
-    public enum TemplateErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TemplateErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case accessDenied = "ACCESS_DENIED"
         case dataSetNotFound = "DATA_SET_NOT_FOUND"
         case internalFailure = "INTERNAL_FAILURE"
@@ -1373,31 +1438,31 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum TextQualifier: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextQualifier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case doubleQuote = "DOUBLE_QUOTE"
         case singleQuote = "SINGLE_QUOTE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TextWrap: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextWrap: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case wrap = "WRAP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThemeErrorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThemeErrorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case internalFailure = "INTERNAL_FAILURE"
         public var description: String { return self.rawValue }
     }
 
-    public enum ThemeType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ThemeType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case all = "ALL"
         case custom = "CUSTOM"
         case quicksight = "QUICKSIGHT"
         public var description: String { return self.rawValue }
     }
 
-    public enum TimeGranularity: String, CustomStringConvertible, Codable, Sendable {
+    public enum TimeGranularity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case day = "DAY"
         case hour = "HOUR"
         case millisecond = "MILLISECOND"
@@ -1410,31 +1475,31 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum TooltipTitleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TooltipTitleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case none = "NONE"
         case primaryValue = "PRIMARY_VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TopBottomComputationType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopBottomComputationType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottom = "BOTTOM"
         case top = "TOP"
         public var description: String { return self.rawValue }
     }
 
-    public enum TopBottomSortOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopBottomSortOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case absoluteDifference = "ABSOLUTE_DIFFERENCE"
         case percentDifference = "PERCENT_DIFFERENCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicNumericSeparatorSymbol: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicNumericSeparatorSymbol: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case comma = "COMMA"
         case dot = "DOT"
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicRefreshStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicRefreshStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case completed = "COMPLETED"
         case failed = "FAILED"
@@ -1443,7 +1508,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicRelativeDateFilterFunction: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicRelativeDateFilterFunction: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case last = "LAST"
         case next = "NEXT"
         case now = "NOW"
@@ -1452,7 +1517,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicScheduleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicScheduleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case daily = "DAILY"
         case hourly = "HOURLY"
         case monthly = "MONTHLY"
@@ -1460,7 +1525,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum TopicTimeGranularity: String, CustomStringConvertible, Codable, Sendable {
+    public enum TopicTimeGranularity: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case day = "DAY"
         case hour = "HOUR"
         case minute = "MINUTE"
@@ -1472,20 +1537,20 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum URLTargetConfiguration: String, CustomStringConvertible, Codable, Sendable {
+    public enum URLTargetConfiguration: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case newTab = "NEW_TAB"
         case newWindow = "NEW_WINDOW"
         case sameTab = "SAME_TAB"
         public var description: String { return self.rawValue }
     }
 
-    public enum UndefinedSpecifiedValueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum UndefinedSpecifiedValueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case least = "LEAST"
         case most = "MOST"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case admin = "ADMIN"
         case author = "AUTHOR"
         case reader = "READER"
@@ -1494,14 +1559,14 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum VPCConnectionAvailabilityStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VPCConnectionAvailabilityStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case available = "AVAILABLE"
         case partiallyAvailable = "PARTIALLY_AVAILABLE"
         case unavailable = "UNAVAILABLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VPCConnectionResourceStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VPCConnectionResourceStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case creationFailed = "CREATION_FAILED"
         case creationInProgress = "CREATION_IN_PROGRESS"
         case creationSuccessful = "CREATION_SUCCESSFUL"
@@ -1514,13 +1579,19 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum ValueWhenUnsetOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ValidationStrategyMode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case lenient = "LENIENT"
+        case strict = "STRICT"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ValueWhenUnsetOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case null = "NULL"
         case recommendedValue = "RECOMMENDED_VALUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VerticalTextAlignment: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerticalTextAlignment: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case bottom = "BOTTOM"
         case middle = "MIDDLE"
@@ -1528,43 +1599,43 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum Visibility: String, CustomStringConvertible, Codable, Sendable {
+    public enum Visibility: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case hidden = "HIDDEN"
         case visible = "VISIBLE"
         public var description: String { return self.rawValue }
     }
 
-    public enum VisualCustomActionTrigger: String, CustomStringConvertible, Codable, Sendable {
+    public enum VisualCustomActionTrigger: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case dataPointClick = "DATA_POINT_CLICK"
         case dataPointMenu = "DATA_POINT_MENU"
         public var description: String { return self.rawValue }
     }
 
-    public enum WidgetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum WidgetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "DISABLED"
         case enabled = "ENABLED"
         public var description: String { return self.rawValue }
     }
 
-    public enum WordCloudCloudLayout: String, CustomStringConvertible, Codable, Sendable {
+    public enum WordCloudCloudLayout: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fluid = "FLUID"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum WordCloudWordCasing: String, CustomStringConvertible, Codable, Sendable {
+    public enum WordCloudWordCasing: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case existingCase = "EXISTING_CASE"
         case lowerCase = "LOWER_CASE"
         public var description: String { return self.rawValue }
     }
 
-    public enum WordCloudWordOrientation: String, CustomStringConvertible, Codable, Sendable {
+    public enum WordCloudWordOrientation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case horizontal = "HORIZONTAL"
         case horizontalAndVertical = "HORIZONTAL_AND_VERTICAL"
         public var description: String { return self.rawValue }
     }
 
-    public enum WordCloudWordPadding: String, CustomStringConvertible, Codable, Sendable {
+    public enum WordCloudWordPadding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case large = "LARGE"
         case medium = "MEDIUM"
         case none = "NONE"
@@ -1572,7 +1643,7 @@ extension QuickSight {
         public var description: String { return self.rawValue }
     }
 
-    public enum WordCloudWordScaling: String, CustomStringConvertible, Codable, Sendable {
+    public enum WordCloudWordScaling: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case emphasize = "EMPHASIZE"
         case normal = "NORMAL"
         public var description: String { return self.rawValue }
@@ -1591,7 +1662,9 @@ extension QuickSight {
         case auroraPostgreSqlParameters(AuroraPostgreSqlParameters)
         /// The parameters for IoT Analytics.
         case awsIotAnalyticsParameters(AwsIotAnalyticsParameters)
-        /// The required parameters that are needed to connect to a Databricks data source.
+        /// The parameters that are required to connect to a Google BigQuery data source.
+        case bigQueryParameters(BigQueryParameters)
+        /// The parameters that are required to connect to a Databricks data source.
         case databricksParameters(DatabricksParameters)
         /// The parameters for Exasol.
         case exasolParameters(ExasolParameters)
@@ -1621,8 +1694,12 @@ extension QuickSight {
         case sparkParameters(SparkParameters)
         /// The parameters for SQL Server.
         case sqlServerParameters(SqlServerParameters)
+        /// The parameters that are required to connect to a Starburst data source.
+        case starburstParameters(StarburstParameters)
         /// The parameters for Teradata.
         case teradataParameters(TeradataParameters)
+        /// The parameters that are required to connect to a Trino data source.
+        case trinoParameters(TrinoParameters)
         /// The parameters for Twitter.
         case twitterParameters(TwitterParameters)
 
@@ -1654,6 +1731,9 @@ extension QuickSight {
             case .awsIotAnalyticsParameters:
                 let value = try container.decode(AwsIotAnalyticsParameters.self, forKey: .awsIotAnalyticsParameters)
                 self = .awsIotAnalyticsParameters(value)
+            case .bigQueryParameters:
+                let value = try container.decode(BigQueryParameters.self, forKey: .bigQueryParameters)
+                self = .bigQueryParameters(value)
             case .databricksParameters:
                 let value = try container.decode(DatabricksParameters.self, forKey: .databricksParameters)
                 self = .databricksParameters(value)
@@ -1699,9 +1779,15 @@ extension QuickSight {
             case .sqlServerParameters:
                 let value = try container.decode(SqlServerParameters.self, forKey: .sqlServerParameters)
                 self = .sqlServerParameters(value)
+            case .starburstParameters:
+                let value = try container.decode(StarburstParameters.self, forKey: .starburstParameters)
+                self = .starburstParameters(value)
             case .teradataParameters:
                 let value = try container.decode(TeradataParameters.self, forKey: .teradataParameters)
                 self = .teradataParameters(value)
+            case .trinoParameters:
+                let value = try container.decode(TrinoParameters.self, forKey: .trinoParameters)
+                self = .trinoParameters(value)
             case .twitterParameters:
                 let value = try container.decode(TwitterParameters.self, forKey: .twitterParameters)
                 self = .twitterParameters(value)
@@ -1723,6 +1809,8 @@ extension QuickSight {
                 try container.encode(value, forKey: .auroraPostgreSqlParameters)
             case .awsIotAnalyticsParameters(let value):
                 try container.encode(value, forKey: .awsIotAnalyticsParameters)
+            case .bigQueryParameters(let value):
+                try container.encode(value, forKey: .bigQueryParameters)
             case .databricksParameters(let value):
                 try container.encode(value, forKey: .databricksParameters)
             case .exasolParameters(let value):
@@ -1753,8 +1841,12 @@ extension QuickSight {
                 try container.encode(value, forKey: .sparkParameters)
             case .sqlServerParameters(let value):
                 try container.encode(value, forKey: .sqlServerParameters)
+            case .starburstParameters(let value):
+                try container.encode(value, forKey: .starburstParameters)
             case .teradataParameters(let value):
                 try container.encode(value, forKey: .teradataParameters)
+            case .trinoParameters(let value):
+                try container.encode(value, forKey: .trinoParameters)
             case .twitterParameters(let value):
                 try container.encode(value, forKey: .twitterParameters)
             }
@@ -1774,6 +1866,8 @@ extension QuickSight {
                 try value.validate(name: "\(name).auroraPostgreSqlParameters")
             case .awsIotAnalyticsParameters(let value):
                 try value.validate(name: "\(name).awsIotAnalyticsParameters")
+            case .bigQueryParameters(let value):
+                try value.validate(name: "\(name).bigQueryParameters")
             case .databricksParameters(let value):
                 try value.validate(name: "\(name).databricksParameters")
             case .exasolParameters(let value):
@@ -1804,8 +1898,12 @@ extension QuickSight {
                 try value.validate(name: "\(name).sparkParameters")
             case .sqlServerParameters(let value):
                 try value.validate(name: "\(name).sqlServerParameters")
+            case .starburstParameters(let value):
+                try value.validate(name: "\(name).starburstParameters")
             case .teradataParameters(let value):
                 try value.validate(name: "\(name).teradataParameters")
+            case .trinoParameters(let value):
+                try value.validate(name: "\(name).trinoParameters")
             case .twitterParameters(let value):
                 try value.validate(name: "\(name).twitterParameters")
             }
@@ -1818,6 +1916,7 @@ extension QuickSight {
             case auroraParameters = "AuroraParameters"
             case auroraPostgreSqlParameters = "AuroraPostgreSqlParameters"
             case awsIotAnalyticsParameters = "AwsIotAnalyticsParameters"
+            case bigQueryParameters = "BigQueryParameters"
             case databricksParameters = "DatabricksParameters"
             case exasolParameters = "ExasolParameters"
             case jiraParameters = "JiraParameters"
@@ -1833,7 +1932,9 @@ extension QuickSight {
             case snowflakeParameters = "SnowflakeParameters"
             case sparkParameters = "SparkParameters"
             case sqlServerParameters = "SqlServerParameters"
+            case starburstParameters = "StarburstParameters"
             case teradataParameters = "TeradataParameters"
+            case trinoParameters = "TrinoParameters"
             case twitterParameters = "TwitterParameters"
         }
     }
@@ -2288,17 +2389,20 @@ extension QuickSight {
         public let dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration]
         /// Filter definitions for an analysis. For more information, see Filtering Data in Amazon QuickSight in the Amazon QuickSight User Guide.
         public let filterGroups: [FilterGroup]?
+        /// An array of option definitions for an analysis.
+        public let options: AssetOptions?
         /// An array of parameter declarations for an analysis. Parameters are named variables that can transfer a value for use by an action or an object. For more information, see Parameters in Amazon QuickSight in the Amazon QuickSight User Guide.
         public let parameterDeclarations: [ParameterDeclaration]?
         /// An array of sheet definitions for an analysis. Each SheetDefinition provides detailed information about a sheet within this analysis.
         public let sheets: [SheetDefinition]?
 
-        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration], filterGroups: [FilterGroup]? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
+        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration], filterGroups: [FilterGroup]? = nil, options: AssetOptions? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
             self.analysisDefaults = analysisDefaults
             self.calculatedFields = calculatedFields
             self.columnConfigurations = columnConfigurations
             self.dataSetIdentifierDeclarations = dataSetIdentifierDeclarations
             self.filterGroups = filterGroups
+            self.options = options
             self.parameterDeclarations = parameterDeclarations
             self.sheets = sheets
         }
@@ -2337,6 +2441,7 @@ extension QuickSight {
             case columnConfigurations = "ColumnConfigurations"
             case dataSetIdentifierDeclarations = "DataSetIdentifierDeclarations"
             case filterGroups = "FilterGroups"
+            case options = "Options"
             case parameterDeclarations = "ParameterDeclarations"
             case sheets = "Sheets"
         }
@@ -2721,11 +2826,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobAnalysisOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific Analysis resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of Analysis resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobAnalysisPropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobAnalysisPropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobAnalysisPropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2743,11 +2848,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobDashboardOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific Dashboard resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of Dashboard resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobDashboardPropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobDashboardPropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobDashboardPropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2765,11 +2870,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobDataSetOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific DataSet resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of DataSet resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobDataSetPropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobDataSetPropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobDataSetPropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2787,11 +2892,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobDataSourceOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific DataSource resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of DataSource resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobDataSourcePropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobDataSourcePropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobDataSourcePropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2830,11 +2935,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobRefreshScheduleOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific RefreshSchedule resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of RefreshSchedule resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobRefreshSchedulePropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobRefreshSchedulePropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobRefreshSchedulePropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2874,15 +2979,21 @@ extension QuickSight {
         public let exportFormat: AssetBundleExportFormat?
         /// The flag that determines the inclusion of resource dependencies in the returned asset bundle.
         public let includeAllDependencies: Bool?
+        /// The flag that determines the inclusion of permissions associated with each resource ARN.
+        public let includePermissions: Bool?
+        /// The flag that determines the inclusion of tags associated with each resource ARN.
+        public let includeTags: Bool?
         /// The current status of the export job.
         public let jobStatus: AssetBundleExportJobStatus?
 
-        public init(arn: String? = nil, assetBundleExportJobId: String? = nil, createdTime: Date? = nil, exportFormat: AssetBundleExportFormat? = nil, includeAllDependencies: Bool? = nil, jobStatus: AssetBundleExportJobStatus? = nil) {
+        public init(arn: String? = nil, assetBundleExportJobId: String? = nil, createdTime: Date? = nil, exportFormat: AssetBundleExportFormat? = nil, includeAllDependencies: Bool? = nil, includePermissions: Bool? = nil, includeTags: Bool? = nil, jobStatus: AssetBundleExportJobStatus? = nil) {
             self.arn = arn
             self.assetBundleExportJobId = assetBundleExportJobId
             self.createdTime = createdTime
             self.exportFormat = exportFormat
             self.includeAllDependencies = includeAllDependencies
+            self.includePermissions = includePermissions
+            self.includeTags = includeTags
             self.jobStatus = jobStatus
         }
 
@@ -2892,17 +3003,19 @@ extension QuickSight {
             case createdTime = "CreatedTime"
             case exportFormat = "ExportFormat"
             case includeAllDependencies = "IncludeAllDependencies"
+            case includePermissions = "IncludePermissions"
+            case includeTags = "IncludeTags"
             case jobStatus = "JobStatus"
         }
     }
 
     public struct AssetBundleExportJobThemeOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific Theme resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of Theme resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobThemePropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobThemePropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobThemePropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2920,11 +3033,11 @@ extension QuickSight {
 
     public struct AssetBundleExportJobVPCConnectionOverrideProperties: AWSEncodableShape & AWSDecodableShape {
         /// The ARN of the specific VPCConnection resource whose override properties are configured in this structure.
-        public let arn: String?
+        public let arn: String
         /// A list of VPCConnection resource properties to generate variables for in the returned CloudFormation template.
         public let properties: [AssetBundleExportJobVPCConnectionPropertyToOverride]
 
-        public init(arn: String? = nil, properties: [AssetBundleExportJobVPCConnectionPropertyToOverride]) {
+        public init(arn: String, properties: [AssetBundleExportJobVPCConnectionPropertyToOverride]) {
             self.arn = arn
             self.properties = properties
         }
@@ -2937,6 +3050,36 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case arn = "Arn"
             case properties = "Properties"
+        }
+    }
+
+    public struct AssetBundleExportJobValidationStrategy: AWSEncodableShape & AWSDecodableShape {
+        /// A Boolean value that indicates whether to export resources under strict or lenient mode.
+        public let strictModeForAllResources: Bool?
+
+        public init(strictModeForAllResources: Bool? = nil) {
+            self.strictModeForAllResources = strictModeForAllResources
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case strictModeForAllResources = "StrictModeForAllResources"
+        }
+    }
+
+    public struct AssetBundleExportJobWarning: AWSDecodableShape {
+        /// The ARN of the resource whose processing caused a warning.
+        public let arn: String?
+        /// A description of the warning.
+        public let message: String?
+
+        public init(arn: String? = nil, message: String? = nil) {
+            self.arn = arn
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case arn = "Arn"
+            case message = "Message"
         }
     }
 
@@ -2962,6 +3105,62 @@ extension QuickSight {
         }
     }
 
+    public struct AssetBundleImportJobAnalysisOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of analysis IDs that you want to apply overrides to. You can use * to override all analyses in this asset bundle.
+        public let analysisIds: [String]
+        /// A list of permissions for the analyses that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions
+
+        public init(analysisIds: [String], permissions: AssetBundleResourcePermissions) {
+            self.analysisIds = analysisIds
+            self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.analysisIds.forEach {
+                try validate($0, name: "analysisIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.analysisIds, name: "analysisIds", parent: name, max: 50)
+            try self.validate(self.analysisIds, name: "analysisIds", parent: name, min: 1)
+            try self.permissions.validate(name: "\(name).permissions")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case analysisIds = "AnalysisIds"
+            case permissions = "Permissions"
+        }
+    }
+
+    public struct AssetBundleImportJobAnalysisOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of analysis IDs that you want to apply overrides to. You can use * to override all analyses in this asset bundle.
+        public let analysisIds: [String]
+        /// A list of tags for the analyses that you want to apply overrides to.
+        public let tags: [Tag]
+
+        public init(analysisIds: [String], tags: [Tag]) {
+            self.analysisIds = analysisIds
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.analysisIds.forEach {
+                try validate($0, name: "analysisIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.analysisIds, name: "analysisIds", parent: name, max: 50)
+            try self.validate(self.analysisIds, name: "analysisIds", parent: name, min: 1)
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case analysisIds = "AnalysisIds"
+            case tags = "Tags"
+        }
+    }
+
     public struct AssetBundleImportJobDashboardOverrideParameters: AWSEncodableShape & AWSDecodableShape {
         /// The ID of the dashboard that you want to apply overrides to.
         public let dashboardId: String
@@ -2984,6 +3183,67 @@ extension QuickSight {
         }
     }
 
+    public struct AssetBundleImportJobDashboardOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of dashboard IDs that you want to apply overrides to. You can use * to override all dashboards in this asset bundle.
+        public let dashboardIds: [String]
+        /// A structure that contains the link sharing configurations that you want to apply overrides to.
+        public let linkSharingConfiguration: AssetBundleResourceLinkSharingConfiguration?
+        /// A list of permissions for the dashboards that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions?
+
+        public init(dashboardIds: [String], linkSharingConfiguration: AssetBundleResourceLinkSharingConfiguration? = nil, permissions: AssetBundleResourcePermissions? = nil) {
+            self.dashboardIds = dashboardIds
+            self.linkSharingConfiguration = linkSharingConfiguration
+            self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.dashboardIds.forEach {
+                try validate($0, name: "dashboardIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dashboardIds, name: "dashboardIds", parent: name, max: 50)
+            try self.validate(self.dashboardIds, name: "dashboardIds", parent: name, min: 1)
+            try self.linkSharingConfiguration?.validate(name: "\(name).linkSharingConfiguration")
+            try self.permissions?.validate(name: "\(name).permissions")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dashboardIds = "DashboardIds"
+            case linkSharingConfiguration = "LinkSharingConfiguration"
+            case permissions = "Permissions"
+        }
+    }
+
+    public struct AssetBundleImportJobDashboardOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of dashboard IDs that you want to apply overrides to. You can use * to override all dashboards in this asset bundle.
+        public let dashboardIds: [String]
+        /// A list of tags for the dashboards that you want to apply overrides to.
+        public let tags: [Tag]
+
+        public init(dashboardIds: [String], tags: [Tag]) {
+            self.dashboardIds = dashboardIds
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.dashboardIds.forEach {
+                try validate($0, name: "dashboardIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dashboardIds, name: "dashboardIds", parent: name, max: 50)
+            try self.validate(self.dashboardIds, name: "dashboardIds", parent: name, min: 1)
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dashboardIds = "DashboardIds"
+            case tags = "Tags"
+        }
+    }
+
     public struct AssetBundleImportJobDataSetOverrideParameters: AWSEncodableShape & AWSDecodableShape {
         /// The ID of the dataset to apply overrides to.
         public let dataSetId: String
@@ -3003,6 +3263,62 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case dataSetId = "DataSetId"
             case name = "Name"
+        }
+    }
+
+    public struct AssetBundleImportJobDataSetOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of dataset IDs that you want to apply overrides to. You can use * to override all datasets in this asset bundle.
+        public let dataSetIds: [String]
+        /// A list of permissions for the datasets that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions
+
+        public init(dataSetIds: [String], permissions: AssetBundleResourcePermissions) {
+            self.dataSetIds = dataSetIds
+            self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSetIds.forEach {
+                try validate($0, name: "dataSetIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dataSetIds, name: "dataSetIds", parent: name, max: 50)
+            try self.validate(self.dataSetIds, name: "dataSetIds", parent: name, min: 1)
+            try self.permissions.validate(name: "\(name).permissions")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSetIds = "DataSetIds"
+            case permissions = "Permissions"
+        }
+    }
+
+    public struct AssetBundleImportJobDataSetOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of dataset IDs that you want to apply overrides to. You can use * to override all datasets in this asset bundle.
+        public let dataSetIds: [String]
+        /// A list of tags for the datasets that you want to apply overrides to.
+        public let tags: [Tag]
+
+        public init(dataSetIds: [String], tags: [Tag]) {
+            self.dataSetIds = dataSetIds
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSetIds.forEach {
+                try validate($0, name: "dataSetIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dataSetIds, name: "dataSetIds", parent: name, max: 50)
+            try self.validate(self.dataSetIds, name: "dataSetIds", parent: name, min: 1)
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSetIds = "DataSetIds"
+            case tags = "Tags"
         }
     }
 
@@ -3088,6 +3404,62 @@ extension QuickSight {
             case name = "Name"
             case sslProperties = "SslProperties"
             case vpcConnectionProperties = "VpcConnectionProperties"
+        }
+    }
+
+    public struct AssetBundleImportJobDataSourceOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of data source IDs that you want to apply overrides to. You can use * to override all data sources in this asset bundle.
+        public let dataSourceIds: [String]
+        /// A list of permissions for the data source that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions
+
+        public init(dataSourceIds: [String], permissions: AssetBundleResourcePermissions) {
+            self.dataSourceIds = dataSourceIds
+            self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSourceIds.forEach {
+                try validate($0, name: "dataSourceIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dataSourceIds, name: "dataSourceIds", parent: name, max: 50)
+            try self.validate(self.dataSourceIds, name: "dataSourceIds", parent: name, min: 1)
+            try self.permissions.validate(name: "\(name).permissions")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceIds = "DataSourceIds"
+            case permissions = "Permissions"
+        }
+    }
+
+    public struct AssetBundleImportJobDataSourceOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of data source IDs that you want to apply overrides to. You can use * to override all data sources in this asset bundle.
+        public let dataSourceIds: [String]
+        /// A list of tags for the data source that you want to apply overrides to.
+        public let tags: [Tag]
+
+        public init(dataSourceIds: [String], tags: [Tag]) {
+            self.dataSourceIds = dataSourceIds
+            self.tags = tags
+        }
+
+        public func validate(name: String) throws {
+            try self.dataSourceIds.forEach {
+                try validate($0, name: "dataSourceIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.dataSourceIds, name: "dataSourceIds", parent: name, max: 50)
+            try self.validate(self.dataSourceIds, name: "dataSourceIds", parent: name, min: 1)
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSourceIds = "DataSourceIds"
+            case tags = "Tags"
         }
     }
 
@@ -3188,6 +3560,142 @@ extension QuickSight {
         }
     }
 
+    public struct AssetBundleImportJobOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of permissions overrides for any Analysis resources that are present in the asset bundle that is imported.
+        public let analyses: [AssetBundleImportJobAnalysisOverridePermissions]?
+        /// A list of permissions overrides for any Dashboard resources that are present in the asset bundle that is imported.
+        public let dashboards: [AssetBundleImportJobDashboardOverridePermissions]?
+        /// A list of permissions overrides for any DataSet resources that are present in the asset bundle that is imported.
+        public let dataSets: [AssetBundleImportJobDataSetOverridePermissions]?
+        /// A list of permissions overrides for any DataSource resources that are present in the asset bundle that is imported.
+        public let dataSources: [AssetBundleImportJobDataSourceOverridePermissions]?
+        /// A list of permissions overrides for any Theme resources that are present in the asset bundle that is imported.
+        public let themes: [AssetBundleImportJobThemeOverridePermissions]?
+
+        public init(analyses: [AssetBundleImportJobAnalysisOverridePermissions]? = nil, dashboards: [AssetBundleImportJobDashboardOverridePermissions]? = nil, dataSets: [AssetBundleImportJobDataSetOverridePermissions]? = nil, dataSources: [AssetBundleImportJobDataSourceOverridePermissions]? = nil, themes: [AssetBundleImportJobThemeOverridePermissions]? = nil) {
+            self.analyses = analyses
+            self.dashboards = dashboards
+            self.dataSets = dataSets
+            self.dataSources = dataSources
+            self.themes = themes
+        }
+
+        public func validate(name: String) throws {
+            try self.analyses?.forEach {
+                try $0.validate(name: "\(name).analyses[]")
+            }
+            try self.validate(self.analyses, name: "analyses", parent: name, max: 1)
+            try self.validate(self.analyses, name: "analyses", parent: name, min: 1)
+            try self.dashboards?.forEach {
+                try $0.validate(name: "\(name).dashboards[]")
+            }
+            try self.validate(self.dashboards, name: "dashboards", parent: name, max: 2)
+            try self.validate(self.dashboards, name: "dashboards", parent: name, min: 1)
+            try self.dataSets?.forEach {
+                try $0.validate(name: "\(name).dataSets[]")
+            }
+            try self.validate(self.dataSets, name: "dataSets", parent: name, max: 2)
+            try self.validate(self.dataSets, name: "dataSets", parent: name, min: 1)
+            try self.dataSources?.forEach {
+                try $0.validate(name: "\(name).dataSources[]")
+            }
+            try self.validate(self.dataSources, name: "dataSources", parent: name, max: 2)
+            try self.validate(self.dataSources, name: "dataSources", parent: name, min: 1)
+            try self.themes?.forEach {
+                try $0.validate(name: "\(name).themes[]")
+            }
+            try self.validate(self.themes, name: "themes", parent: name, max: 2)
+            try self.validate(self.themes, name: "themes", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case analyses = "Analyses"
+            case dashboards = "Dashboards"
+            case dataSets = "DataSets"
+            case dataSources = "DataSources"
+            case themes = "Themes"
+        }
+    }
+
+    public struct AssetBundleImportJobOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of tag overrides for any Analysis resources that are present in the asset bundle that is imported.
+        public let analyses: [AssetBundleImportJobAnalysisOverrideTags]?
+        /// A list of tag overrides for any Dashboard resources that are present in the asset bundle that is imported.
+        public let dashboards: [AssetBundleImportJobDashboardOverrideTags]?
+        /// A list of tag overrides for any DataSet resources that are present in the asset bundle that is imported.
+        public let dataSets: [AssetBundleImportJobDataSetOverrideTags]?
+        /// A list of tag overrides for any DataSource resources that are present in the asset bundle that is imported.
+        public let dataSources: [AssetBundleImportJobDataSourceOverrideTags]?
+        /// A list of tag overrides for any Theme resources that are present in the asset bundle that is imported.
+        public let themes: [AssetBundleImportJobThemeOverrideTags]?
+        /// A list of tag overrides for any VPCConnection resources that are present in the asset bundle that is imported.
+        public let vpcConnections: [AssetBundleImportJobVPCConnectionOverrideTags]?
+
+        public init(analyses: [AssetBundleImportJobAnalysisOverrideTags]? = nil, dashboards: [AssetBundleImportJobDashboardOverrideTags]? = nil, dataSets: [AssetBundleImportJobDataSetOverrideTags]? = nil, dataSources: [AssetBundleImportJobDataSourceOverrideTags]? = nil, themes: [AssetBundleImportJobThemeOverrideTags]? = nil, vpcConnections: [AssetBundleImportJobVPCConnectionOverrideTags]? = nil) {
+            self.analyses = analyses
+            self.dashboards = dashboards
+            self.dataSets = dataSets
+            self.dataSources = dataSources
+            self.themes = themes
+            self.vpcConnections = vpcConnections
+        }
+
+        public func validate(name: String) throws {
+            try self.analyses?.forEach {
+                try $0.validate(name: "\(name).analyses[]")
+            }
+            try self.validate(self.analyses, name: "analyses", parent: name, max: 5)
+            try self.validate(self.analyses, name: "analyses", parent: name, min: 1)
+            try self.dashboards?.forEach {
+                try $0.validate(name: "\(name).dashboards[]")
+            }
+            try self.validate(self.dashboards, name: "dashboards", parent: name, max: 5)
+            try self.validate(self.dashboards, name: "dashboards", parent: name, min: 1)
+            try self.dataSets?.forEach {
+                try $0.validate(name: "\(name).dataSets[]")
+            }
+            try self.validate(self.dataSets, name: "dataSets", parent: name, max: 5)
+            try self.validate(self.dataSets, name: "dataSets", parent: name, min: 1)
+            try self.dataSources?.forEach {
+                try $0.validate(name: "\(name).dataSources[]")
+            }
+            try self.validate(self.dataSources, name: "dataSources", parent: name, max: 5)
+            try self.validate(self.dataSources, name: "dataSources", parent: name, min: 1)
+            try self.themes?.forEach {
+                try $0.validate(name: "\(name).themes[]")
+            }
+            try self.validate(self.themes, name: "themes", parent: name, max: 5)
+            try self.validate(self.themes, name: "themes", parent: name, min: 1)
+            try self.vpcConnections?.forEach {
+                try $0.validate(name: "\(name).vpcConnections[]")
+            }
+            try self.validate(self.vpcConnections, name: "vpcConnections", parent: name, max: 5)
+            try self.validate(self.vpcConnections, name: "vpcConnections", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case analyses = "Analyses"
+            case dashboards = "Dashboards"
+            case dataSets = "DataSets"
+            case dataSources = "DataSources"
+            case themes = "Themes"
+            case vpcConnections = "VPCConnections"
+        }
+    }
+
+    public struct AssetBundleImportJobOverrideValidationStrategy: AWSEncodableShape & AWSDecodableShape {
+        /// A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode.
+        public let strictModeForAllResources: Bool?
+
+        public init(strictModeForAllResources: Bool? = nil) {
+            self.strictModeForAllResources = strictModeForAllResources
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case strictModeForAllResources = "StrictModeForAllResources"
+        }
+    }
+
     public struct AssetBundleImportJobRefreshScheduleOverrideParameters: AWSEncodableShape & AWSDecodableShape {
         /// A partial identifier for the specific RefreshSchedule resource that is being overridden. This structure is used together with the ScheduleID structure.
         public let dataSetId: String
@@ -3273,6 +3781,62 @@ extension QuickSight {
         }
     }
 
+    public struct AssetBundleImportJobThemeOverridePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of permissions for the themes that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions
+        /// A list of theme IDs that you want to apply overrides to. You can use * to override all themes in this asset bundle.
+        public let themeIds: [String]
+
+        public init(permissions: AssetBundleResourcePermissions, themeIds: [String]) {
+            self.permissions = permissions
+            self.themeIds = themeIds
+        }
+
+        public func validate(name: String) throws {
+            try self.permissions.validate(name: "\(name).permissions")
+            try self.themeIds.forEach {
+                try validate($0, name: "themeIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.themeIds, name: "themeIds", parent: name, max: 50)
+            try self.validate(self.themeIds, name: "themeIds", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case permissions = "Permissions"
+            case themeIds = "ThemeIds"
+        }
+    }
+
+    public struct AssetBundleImportJobThemeOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of tags for the themes that you want to apply overrides to.
+        public let tags: [Tag]
+        /// A list of theme IDs that you want to apply overrides to. You can use * to override all themes in this asset bundle.
+        public let themeIds: [String]
+
+        public init(tags: [Tag], themeIds: [String]) {
+            self.tags = tags
+            self.themeIds = themeIds
+        }
+
+        public func validate(name: String) throws {
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+            try self.themeIds.forEach {
+                try validate($0, name: "themeIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.themeIds, name: "themeIds", parent: name, max: 50)
+            try self.validate(self.themeIds, name: "themeIds", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case tags = "Tags"
+            case themeIds = "ThemeIds"
+        }
+    }
+
     public struct AssetBundleImportJobVPCConnectionOverrideParameters: AWSEncodableShape & AWSDecodableShape {
         /// An optional override of DNS resolvers to be used by the VPC connection.
         public let dnsResolvers: [String]?
@@ -3334,6 +3898,36 @@ extension QuickSight {
         }
     }
 
+    public struct AssetBundleImportJobVPCConnectionOverrideTags: AWSEncodableShape & AWSDecodableShape {
+        /// A list of tags for the VPC connections that you want to apply overrides to.
+        public let tags: [Tag]
+        /// A list of VPC connection IDs that you want to apply overrides to. You can use * to override all VPC connections in this asset bundle.
+        public let vpcConnectionIds: [String]
+
+        public init(tags: [Tag], vpcConnectionIds: [String]) {
+            self.tags = tags
+            self.vpcConnectionIds = vpcConnectionIds
+        }
+
+        public func validate(name: String) throws {
+            try self.tags.forEach {
+                try $0.validate(name: "\(name).tags[]")
+            }
+            try self.validate(self.tags, name: "tags", parent: name, max: 200)
+            try self.validate(self.tags, name: "tags", parent: name, min: 1)
+            try self.vpcConnectionIds.forEach {
+                try validate($0, name: "vpcConnectionIds[]", parent: name, pattern: "^\\*|[\\w\\-]{1,2048}$")
+            }
+            try self.validate(self.vpcConnectionIds, name: "vpcConnectionIds", parent: name, max: 50)
+            try self.validate(self.vpcConnectionIds, name: "vpcConnectionIds", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case tags = "Tags"
+            case vpcConnectionIds = "VPCConnectionIds"
+        }
+    }
+
     public struct AssetBundleImportSource: AWSEncodableShape {
         /// The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.
         public let body: AWSBase64Data?
@@ -3370,6 +3964,68 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case body = "Body"
             case s3Uri = "S3Uri"
+        }
+    }
+
+    public struct AssetBundleResourceLinkSharingConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// A list of link sharing permissions for the dashboards that you want to apply overrides to.
+        public let permissions: AssetBundleResourcePermissions?
+
+        public init(permissions: AssetBundleResourcePermissions? = nil) {
+            self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.permissions?.validate(name: "\(name).permissions")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case permissions = "Permissions"
+        }
+    }
+
+    public struct AssetBundleResourcePermissions: AWSEncodableShape & AWSDecodableShape {
+        /// A list of IAM actions to grant permissions on.
+        public let actions: [String]
+        /// A list of principals to grant permissions on.
+        public let principals: [String]
+
+        public init(actions: [String], principals: [String]) {
+            self.actions = actions
+            self.principals = principals
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.actions, name: "actions", parent: name, max: 20)
+            try self.validate(self.actions, name: "actions", parent: name, min: 1)
+            try self.principals.forEach {
+                try validate($0, name: "principals[]", parent: name, max: 256)
+                try validate($0, name: "principals[]", parent: name, min: 1)
+            }
+            try self.validate(self.principals, name: "principals", parent: name, max: 64)
+            try self.validate(self.principals, name: "principals", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case actions = "Actions"
+            case principals = "Principals"
+        }
+    }
+
+    public struct AssetOptions: AWSEncodableShape & AWSDecodableShape {
+        /// Determines the timezone for the analysis.
+        public let timezone: String?
+        /// Determines the week start day for an analysis.
+        public let weekStart: DayOfTheWeek?
+
+        public init(timezone: String? = nil, weekStart: DayOfTheWeek? = nil) {
+            self.timezone = timezone
+            self.weekStart = weekStart
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case timezone = "Timezone"
+            case weekStart = "WeekStart"
         }
     }
 
@@ -3471,6 +4127,23 @@ extension QuickSight {
             case database = "Database"
             case host = "Host"
             case port = "Port"
+        }
+    }
+
+    public struct AuthorizedTargetsByService: AWSDecodableShape {
+        /// Aist of authorized targets that are represented by IAM Identity Center application ARNs.
+        public let authorizedTargets: [String]?
+        /// The name of the Amazon Web Services service.
+        public let service: ServiceType?
+
+        public init(authorizedTargets: [String]? = nil, service: ServiceType? = nil) {
+            self.authorizedTargets = authorizedTargets
+            self.service = service
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case authorizedTargets = "AuthorizedTargets"
+            case service = "Service"
         }
     }
 
@@ -3955,6 +4628,30 @@ extension QuickSight {
             case subtitle = "Subtitle"
             case title = "Title"
             case visualId = "VisualId"
+        }
+    }
+
+    public struct BigQueryParameters: AWSEncodableShape & AWSDecodableShape {
+        /// The storage location where you create a Google BigQuery data source.
+        public let dataSetRegion: String?
+        /// The Google Cloud Platform project ID where your datasource was created.
+        public let projectId: String
+
+        public init(dataSetRegion: String? = nil, projectId: String) {
+            self.dataSetRegion = dataSetRegion
+            self.projectId = projectId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.dataSetRegion, name: "dataSetRegion", parent: name, max: 256)
+            try self.validate(self.dataSetRegion, name: "dataSetRegion", parent: name, min: 1)
+            try self.validate(self.projectId, name: "projectId", parent: name, max: 256)
+            try self.validate(self.projectId, name: "projectId", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case dataSetRegion = "DataSetRegion"
+            case projectId = "ProjectId"
         }
     }
 
@@ -4488,11 +5185,14 @@ extension QuickSight {
         public let format: String?
         /// New column data type.
         public let newColumnType: ColumnDataType
+        /// The sub data type of the new column. Sub types are only available for decimal columns that are part of a SPICE dataset.
+        public let subType: ColumnDataSubType?
 
-        public init(columnName: String, format: String? = nil, newColumnType: ColumnDataType) {
+        public init(columnName: String, format: String? = nil, newColumnType: ColumnDataType, subType: ColumnDataSubType? = nil) {
             self.columnName = columnName
             self.format = format
             self.newColumnType = newColumnType
+            self.subType = subType
         }
 
         public func validate(name: String) throws {
@@ -4505,6 +5205,7 @@ extension QuickSight {
             case columnName = "ColumnName"
             case format = "Format"
             case newColumnType = "NewColumnType"
+            case subType = "SubType"
         }
     }
 
@@ -5730,11 +6431,11 @@ extension QuickSight {
         public let accountName: String
         /// The name of your Active Directory. This field is required if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon QuickSight account.
         public let activeDirectoryName: String?
-        /// The admin group associated with your Active Directory. This field is required if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon QuickSight account. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+        /// The admin group associated with your Active Directory or IAM Identity Center account. This field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method of the new Amazon QuickSight account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
         public let adminGroup: [String]?
-        /// The method that you want to use to authenticate your Amazon QuickSight account. Currently, the valid values for this parameter are IAM_AND_QUICKSIGHT, IAM_ONLY, and ACTIVE_DIRECTORY. If you choose ACTIVE_DIRECTORY, provide an ActiveDirectoryName and an AdminGroup associated with your Active Directory.
+        /// The method that you want to use to authenticate your Amazon QuickSight account. If you choose ACTIVE_DIRECTORY, provide an ActiveDirectoryName and an AdminGroup associated with your Active Directory. If you choose IAM_IDENTITY_CENTER, provide an AdminGroup associated with your IAM Identity Center account.
         public let authenticationMethod: AuthenticationMethodOption
-        /// The author group associated with your Active Directory. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+        /// The author group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
         public let authorGroup: [String]?
         /// The Amazon Web Services account ID of the account that you're using to create your Amazon QuickSight account.
         public let awsAccountId: String
@@ -5752,7 +6453,7 @@ extension QuickSight {
         public let lastName: String?
         /// The email address that you want Amazon QuickSight to send notifications to regarding your Amazon QuickSight account or Amazon QuickSight subscription.
         public let notificationEmail: String
-        /// The reader group associated with your Active Direcrtory. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+        /// The reader group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
         public let readerGroup: [String]?
         /// The realm of the Active Directory that is associated with your Amazon QuickSight account. This field is required if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon QuickSight account.
         public let realm: String?
@@ -5839,6 +6540,8 @@ extension QuickSight {
         public let awsAccountId: String
         /// The definition of an analysis. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in  order for the request to be valid.
         public let definition: AnalysisDefinition?
+        /// When you create the analysis, Amazon QuickSight adds the analysis to these folders.
+        public let folderArns: [String]?
         /// A descriptive name for the analysis that you're creating. This name displays for the analysis in the Amazon QuickSight console.
         public let name: String
         /// The parameter names and override values that you want to use. An analysis can have  any parameter type, and some parameters might accept multiple values.
@@ -5851,17 +6554,21 @@ extension QuickSight {
         public let tags: [Tag]?
         /// The ARN for the theme to apply to the analysis that you're creating. To see the theme in the Amazon QuickSight console, make sure that you have access to it.
         public let themeArn: String?
+        /// The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
 
-        public init(analysisId: String, awsAccountId: String, definition: AnalysisDefinition? = nil, name: String, parameters: Parameters? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: AnalysisSourceEntity? = nil, tags: [Tag]? = nil, themeArn: String? = nil) {
+        public init(analysisId: String, awsAccountId: String, definition: AnalysisDefinition? = nil, folderArns: [String]? = nil, name: String, parameters: Parameters? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: AnalysisSourceEntity? = nil, tags: [Tag]? = nil, themeArn: String? = nil, validationStrategy: ValidationStrategy? = nil) {
             self.analysisId = analysisId
             self.awsAccountId = awsAccountId
             self.definition = definition
+            self.folderArns = folderArns
             self.name = name
             self.parameters = parameters
             self.permissions = permissions
             self.sourceEntity = sourceEntity
             self.tags = tags
             self.themeArn = themeArn
+            self.validationStrategy = validationStrategy
         }
 
         public func validate(name: String) throws {
@@ -5872,6 +6579,7 @@ extension QuickSight {
             try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
             try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
             try self.definition?.validate(name: "\(name).definition")
+            try self.validate(self.folderArns, name: "folderArns", parent: name, max: 1)
             try self.validate(self.name, name: "name", parent: name, max: 2048)
             try self.validate(self.name, name: "name", parent: name, min: 1)
             try self.parameters?.validate(name: "\(name).parameters")
@@ -5890,12 +6598,14 @@ extension QuickSight {
 
         private enum CodingKeys: String, CodingKey {
             case definition = "Definition"
+            case folderArns = "FolderArns"
             case name = "Name"
             case parameters = "Parameters"
             case permissions = "Permissions"
             case sourceEntity = "SourceEntity"
             case tags = "Tags"
             case themeArn = "ThemeArn"
+            case validationStrategy = "ValidationStrategy"
         }
     }
 
@@ -5967,6 +6677,10 @@ extension QuickSight {
         public let dashboardPublishOptions: DashboardPublishOptions?
         /// The definition of a dashboard. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in  order for the request to be valid.
         public let definition: DashboardVersionDefinition?
+        /// When you create the dashboard, Amazon QuickSight adds the dashboard to these folders.
+        public let folderArns: [String]?
+        /// A structure that contains the permissions of a shareable link to the dashboard.
+        public let linkSharingConfiguration: LinkSharingConfiguration?
         /// The display name of the dashboard.
         public let name: String
         /// The parameters for the creation of the dashboard, which you want to use to override the default settings. A dashboard can have any type of parameters, and some parameters might accept multiple values.
@@ -5979,20 +6693,25 @@ extension QuickSight {
         public let tags: [Tag]?
         /// The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that is used in the source entity. The theme ARN must exist in the same Amazon Web Services account where you create the dashboard.
         public let themeArn: String?
+        /// The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
         /// A description for the first version of the dashboard being created.
         public let versionDescription: String?
 
-        public init(awsAccountId: String, dashboardId: String, dashboardPublishOptions: DashboardPublishOptions? = nil, definition: DashboardVersionDefinition? = nil, name: String, parameters: Parameters? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: DashboardSourceEntity? = nil, tags: [Tag]? = nil, themeArn: String? = nil, versionDescription: String? = nil) {
+        public init(awsAccountId: String, dashboardId: String, dashboardPublishOptions: DashboardPublishOptions? = nil, definition: DashboardVersionDefinition? = nil, folderArns: [String]? = nil, linkSharingConfiguration: LinkSharingConfiguration? = nil, name: String, parameters: Parameters? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: DashboardSourceEntity? = nil, tags: [Tag]? = nil, themeArn: String? = nil, validationStrategy: ValidationStrategy? = nil, versionDescription: String? = nil) {
             self.awsAccountId = awsAccountId
             self.dashboardId = dashboardId
             self.dashboardPublishOptions = dashboardPublishOptions
             self.definition = definition
+            self.folderArns = folderArns
+            self.linkSharingConfiguration = linkSharingConfiguration
             self.name = name
             self.parameters = parameters
             self.permissions = permissions
             self.sourceEntity = sourceEntity
             self.tags = tags
             self.themeArn = themeArn
+            self.validationStrategy = validationStrategy
             self.versionDescription = versionDescription
         }
 
@@ -6004,6 +6723,8 @@ extension QuickSight {
             try self.validate(self.dashboardId, name: "dashboardId", parent: name, min: 1)
             try self.validate(self.dashboardId, name: "dashboardId", parent: name, pattern: "^[\\w\\-]+$")
             try self.definition?.validate(name: "\(name).definition")
+            try self.validate(self.folderArns, name: "folderArns", parent: name, max: 1)
+            try self.linkSharingConfiguration?.validate(name: "\(name).linkSharingConfiguration")
             try self.validate(self.name, name: "name", parent: name, max: 2048)
             try self.validate(self.name, name: "name", parent: name, min: 1)
             try self.parameters?.validate(name: "\(name).parameters")
@@ -6025,12 +6746,15 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case dashboardPublishOptions = "DashboardPublishOptions"
             case definition = "Definition"
+            case folderArns = "FolderArns"
+            case linkSharingConfiguration = "LinkSharingConfiguration"
             case name = "Name"
             case parameters = "Parameters"
             case permissions = "Permissions"
             case sourceEntity = "SourceEntity"
             case tags = "Tags"
             case themeArn = "ThemeArn"
+            case validationStrategy = "ValidationStrategy"
             case versionDescription = "VersionDescription"
         }
     }
@@ -6090,6 +6814,8 @@ extension QuickSight {
         public let dataSetUsageConfiguration: DataSetUsageConfiguration?
         /// The folder that contains fields and nested subfolders for your dataset.
         public let fieldFolders: [String: FieldFolder]?
+        /// When you create the dataset, Amazon QuickSight adds the dataset to these folders.
+        public let folderArns: [String]?
         /// Indicates whether you want to import the data into SPICE.
         public let importMode: DataSetImportMode
         /// Configures the combination and transformation of the data from the physical tables.
@@ -6107,7 +6833,7 @@ extension QuickSight {
         /// Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
         public let tags: [Tag]?
 
-        public init(awsAccountId: String, columnGroups: [ColumnGroup]? = nil, columnLevelPermissionRules: [ColumnLevelPermissionRule]? = nil, dataSetId: String, datasetParameters: [DatasetParameter]? = nil, dataSetUsageConfiguration: DataSetUsageConfiguration? = nil, fieldFolders: [String: FieldFolder]? = nil, importMode: DataSetImportMode, logicalTableMap: [String: LogicalTable]? = nil, name: String, permissions: [ResourcePermission]? = nil, physicalTableMap: [String: PhysicalTable], rowLevelPermissionDataSet: RowLevelPermissionDataSet? = nil, rowLevelPermissionTagConfiguration: RowLevelPermissionTagConfiguration? = nil, tags: [Tag]? = nil) {
+        public init(awsAccountId: String, columnGroups: [ColumnGroup]? = nil, columnLevelPermissionRules: [ColumnLevelPermissionRule]? = nil, dataSetId: String, datasetParameters: [DatasetParameter]? = nil, dataSetUsageConfiguration: DataSetUsageConfiguration? = nil, fieldFolders: [String: FieldFolder]? = nil, folderArns: [String]? = nil, importMode: DataSetImportMode, logicalTableMap: [String: LogicalTable]? = nil, name: String, permissions: [ResourcePermission]? = nil, physicalTableMap: [String: PhysicalTable], rowLevelPermissionDataSet: RowLevelPermissionDataSet? = nil, rowLevelPermissionTagConfiguration: RowLevelPermissionTagConfiguration? = nil, tags: [Tag]? = nil) {
             self.awsAccountId = awsAccountId
             self.columnGroups = columnGroups
             self.columnLevelPermissionRules = columnLevelPermissionRules
@@ -6115,6 +6841,7 @@ extension QuickSight {
             self.datasetParameters = datasetParameters
             self.dataSetUsageConfiguration = dataSetUsageConfiguration
             self.fieldFolders = fieldFolders
+            self.folderArns = folderArns
             self.importMode = importMode
             self.logicalTableMap = logicalTableMap
             self.name = name
@@ -6148,6 +6875,7 @@ extension QuickSight {
                 try validate($0.key, name: "fieldFolders.key", parent: name, min: 1)
                 try $0.value.validate(name: "\(name).fieldFolders[\"\($0.key)\"]")
             }
+            try self.validate(self.folderArns, name: "folderArns", parent: name, max: 1)
             try self.logicalTableMap?.forEach {
                 try validate($0.key, name: "logicalTableMap.key", parent: name, max: 64)
                 try validate($0.key, name: "logicalTableMap.key", parent: name, min: 1)
@@ -6186,6 +6914,7 @@ extension QuickSight {
             case datasetParameters = "DatasetParameters"
             case dataSetUsageConfiguration = "DataSetUsageConfiguration"
             case fieldFolders = "FieldFolders"
+            case folderArns = "FolderArns"
             case importMode = "ImportMode"
             case logicalTableMap = "LogicalTableMap"
             case name = "Name"
@@ -6250,6 +6979,8 @@ extension QuickSight {
         public let dataSourceId: String
         /// The parameters that Amazon QuickSight uses to connect to your underlying source.
         public let dataSourceParameters: DataSourceParameters?
+        /// When you create the data source, Amazon QuickSight adds the data source to these folders.
+        public let folderArns: [String]?
         /// A display name for the data source.
         public let name: String
         /// A list of resource permissions on the data source.
@@ -6265,11 +6996,12 @@ extension QuickSight {
         /// 			your underlying source.
         public let vpcConnectionProperties: VpcConnectionProperties?
 
-        public init(awsAccountId: String, credentials: DataSourceCredentials? = nil, dataSourceId: String, dataSourceParameters: DataSourceParameters? = nil, name: String, permissions: [ResourcePermission]? = nil, sslProperties: SslProperties? = nil, tags: [Tag]? = nil, type: DataSourceType, vpcConnectionProperties: VpcConnectionProperties? = nil) {
+        public init(awsAccountId: String, credentials: DataSourceCredentials? = nil, dataSourceId: String, dataSourceParameters: DataSourceParameters? = nil, folderArns: [String]? = nil, name: String, permissions: [ResourcePermission]? = nil, sslProperties: SslProperties? = nil, tags: [Tag]? = nil, type: DataSourceType, vpcConnectionProperties: VpcConnectionProperties? = nil) {
             self.awsAccountId = awsAccountId
             self.credentials = credentials
             self.dataSourceId = dataSourceId
             self.dataSourceParameters = dataSourceParameters
+            self.folderArns = folderArns
             self.name = name
             self.permissions = permissions
             self.sslProperties = sslProperties
@@ -6284,6 +7016,7 @@ extension QuickSight {
             try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
             try self.credentials?.validate(name: "\(name).credentials")
             try self.dataSourceParameters?.validate(name: "\(name).dataSourceParameters")
+            try self.validate(self.folderArns, name: "folderArns", parent: name, max: 1)
             try self.validate(self.name, name: "name", parent: name, max: 128)
             try self.validate(self.name, name: "name", parent: name, min: 1)
             try self.permissions?.forEach {
@@ -6302,6 +7035,7 @@ extension QuickSight {
             case credentials = "Credentials"
             case dataSourceId = "DataSourceId"
             case dataSourceParameters = "DataSourceParameters"
+            case folderArns = "FolderArns"
             case name = "Name"
             case permissions = "Permissions"
             case sslProperties = "SslProperties"
@@ -6945,6 +7679,64 @@ extension QuickSight {
         }
     }
 
+    public struct CreateRoleMembershipRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "memberName", location: .uri("MemberName")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The name of the group that you want to add to the role.
+        public let memberName: String
+        /// The namespace that the role belongs to.
+        public let namespace: String
+        /// The role that you want to add a group to.
+        public let role: Role
+
+        public init(awsAccountId: String, memberName: String, namespace: String, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.memberName = memberName
+            self.namespace = namespace
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.memberName, name: "memberName", parent: name, min: 1)
+            try self.validate(self.memberName, name: "memberName", parent: name, pattern: "^[\\u0020-\\u00FF]+$")
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct CreateRoleMembershipResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
     public struct CreateTemplateAliasRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "aliasName", location: .uri("AliasName")),
@@ -7044,13 +7836,15 @@ extension QuickSight {
         /// An ID for the template that you want to create. This template is unique per Amazon Web Services Region; in
         /// 			each Amazon Web Services account.
         public let templateId: String
+        /// TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
         /// A description of the current template version being created. This API operation creates the
         /// 			first version of the template. Every time UpdateTemplate is called, a new
         /// 			version is created. Each version of the template maintains a description of the version
         /// 			in the VersionDescription field.
         public let versionDescription: String?
 
-        public init(awsAccountId: String, definition: TemplateVersionDefinition? = nil, name: String? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: TemplateSourceEntity? = nil, tags: [Tag]? = nil, templateId: String, versionDescription: String? = nil) {
+        public init(awsAccountId: String, definition: TemplateVersionDefinition? = nil, name: String? = nil, permissions: [ResourcePermission]? = nil, sourceEntity: TemplateSourceEntity? = nil, tags: [Tag]? = nil, templateId: String, validationStrategy: ValidationStrategy? = nil, versionDescription: String? = nil) {
             self.awsAccountId = awsAccountId
             self.definition = definition
             self.name = name
@@ -7058,6 +7852,7 @@ extension QuickSight {
             self.sourceEntity = sourceEntity
             self.tags = tags
             self.templateId = templateId
+            self.validationStrategy = validationStrategy
             self.versionDescription = versionDescription
         }
 
@@ -7092,6 +7887,7 @@ extension QuickSight {
             case permissions = "Permissions"
             case sourceEntity = "SourceEntity"
             case tags = "Tags"
+            case validationStrategy = "ValidationStrategy"
             case versionDescription = "VersionDescription"
         }
     }
@@ -8316,17 +9112,20 @@ extension QuickSight {
         public let dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration]
         /// The filter definitions for a dashboard. For more information, see Filtering Data in Amazon QuickSight in the Amazon QuickSight User Guide.
         public let filterGroups: [FilterGroup]?
+        /// An array of option definitions for a dashboard.
+        public let options: AssetOptions?
         /// The parameter declarations for a dashboard. Parameters are named variables that can transfer a value for use by an action or an object. For more information, see Parameters in Amazon QuickSight in the Amazon QuickSight User Guide.
         public let parameterDeclarations: [ParameterDeclaration]?
         /// An array of sheet definitions for a dashboard.
         public let sheets: [SheetDefinition]?
 
-        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration], filterGroups: [FilterGroup]? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
+        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetIdentifierDeclarations: [DataSetIdentifierDeclaration], filterGroups: [FilterGroup]? = nil, options: AssetOptions? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
             self.analysisDefaults = analysisDefaults
             self.calculatedFields = calculatedFields
             self.columnConfigurations = columnConfigurations
             self.dataSetIdentifierDeclarations = dataSetIdentifierDeclarations
             self.filterGroups = filterGroups
+            self.options = options
             self.parameterDeclarations = parameterDeclarations
             self.sheets = sheets
         }
@@ -8365,6 +9164,7 @@ extension QuickSight {
             case columnConfigurations = "ColumnConfigurations"
             case dataSetIdentifierDeclarations = "DataSetIdentifierDeclarations"
             case filterGroups = "FilterGroups"
+            case options = "Options"
             case parameterDeclarations = "ParameterDeclarations"
             case sheets = "Sheets"
         }
@@ -8752,13 +9552,29 @@ extension QuickSight {
         }
     }
 
-    public struct DataPathValue: AWSEncodableShape & AWSDecodableShape {
-        /// The field ID of the field that needs to be sorted.
-        public let fieldId: String
-        /// The actual value of the field that needs to be sorted.
-        public let fieldValue: String
+    public struct DataPathType: AWSEncodableShape & AWSDecodableShape {
+        /// The type of data path value utilized in a pivot table. Choose one of the following options:    HIERARCHY_ROWS_LAYOUT_COLUMN - The type of data path for the rows layout column, when RowsLayout is set to HIERARCHY.    MULTIPLE_ROW_METRICS_COLUMN - The type of data path for the metric column when the row is set to Metric Placement.    EMPTY_COLUMN_HEADER - The type of data path for the column with empty column header, when there is no field in ColumnsFieldWell and the row is set to Metric Placement.    COUNT_METRIC_COLUMN - The type of data path for the column with COUNT as the metric, when there is no field in the ValuesFieldWell.
+        public let pivotTableDataPathType: PivotTableDataPathType?
 
-        public init(fieldId: String, fieldValue: String) {
+        public init(pivotTableDataPathType: PivotTableDataPathType? = nil) {
+            self.pivotTableDataPathType = pivotTableDataPathType
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case pivotTableDataPathType = "PivotTableDataPathType"
+        }
+    }
+
+    public struct DataPathValue: AWSEncodableShape & AWSDecodableShape {
+        /// The type configuration of the field.
+        public let dataPathType: DataPathType?
+        /// The field ID of the field that needs to be sorted.
+        public let fieldId: String?
+        /// The actual value of the field that needs to be sorted.
+        public let fieldValue: String?
+
+        public init(dataPathType: DataPathType? = nil, fieldId: String? = nil, fieldValue: String? = nil) {
+            self.dataPathType = dataPathType
             self.fieldId = fieldId
             self.fieldValue = fieldValue
         }
@@ -8770,6 +9586,7 @@ extension QuickSight {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case dataPathType = "DataPathType"
             case fieldId = "FieldId"
             case fieldValue = "FieldValue"
         }
@@ -10635,6 +11452,52 @@ extension QuickSight {
         }
     }
 
+    public struct DeleteIdentityPropagationConfigRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "service", location: .uri("Service"))
+        ]
+
+        /// The ID of the Amazon Web Services account that you want to delete an identity propagation configuration from.
+        public let awsAccountId: String
+        /// The name of the Amazon Web Services service that you want to delete the associated access scopes and authorized targets from.
+        public let service: ServiceType
+
+        public init(awsAccountId: String, service: ServiceType) {
+            self.awsAccountId = awsAccountId
+            self.service = service
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteIdentityPropagationConfigResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
     public struct DeleteNamespaceRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
@@ -10737,6 +11600,112 @@ extension QuickSight {
             case arn = "Arn"
             case requestId = "RequestId"
             case scheduleId = "ScheduleId"
+            case status = "Status"
+        }
+    }
+
+    public struct DeleteRoleCustomPermissionRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The namespace that includes the role.
+        public let namespace: String
+        /// The role that you want to remove permissions from.
+        public let role: Role
+
+        public init(awsAccountId: String, namespace: String, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.namespace = namespace
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteRoleCustomPermissionResponse: AWSDecodableShape {
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
+    public struct DeleteRoleMembershipRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "memberName", location: .uri("MemberName")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The name of the group.
+        public let memberName: String
+        /// The namespace that contains the role.
+        public let namespace: String
+        /// The role that you want to remove permissions from.
+        public let role: Role
+
+        public init(awsAccountId: String, memberName: String, namespace: String, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.memberName = memberName
+            self.namespace = namespace
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.memberName, name: "memberName", parent: name, min: 1)
+            try self.validate(self.memberName, name: "memberName", parent: name, pattern: "^[\\u0020-\\u00FF]+$")
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DeleteRoleMembershipResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
             case status = "Status"
         }
     }
@@ -11701,6 +12670,10 @@ extension QuickSight {
         public let exportFormat: AssetBundleExportFormat?
         /// The include dependencies flag.
         public let includeAllDependencies: Bool?
+        /// The include permissions flag.
+        public let includePermissions: Bool?
+        /// The include tags flag.
+        public let includeTags: Bool?
         /// Indicates the status of a job through its queuing and execution. Poll this DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED.
         public let jobStatus: AssetBundleExportJobStatus?
         /// The Amazon Web Services request ID for this operation.
@@ -11709,8 +12682,12 @@ extension QuickSight {
         public let resourceArns: [String]?
         /// The HTTP status of the response.
         public let status: Int?
+        /// The validation strategy that is used to export the analysis or dashboard.
+        public let validationStrategy: AssetBundleExportJobValidationStrategy?
+        /// An array of warning records that describe the analysis or dashboard that is exported. This array includes UI errors that can be skipped during the validation process. This property only appears if StrictModeForAllResources in ValidationStrategy is set to FALSE.
+        public let warnings: [AssetBundleExportJobWarning]?
 
-        public init(arn: String? = nil, assetBundleExportJobId: String? = nil, awsAccountId: String? = nil, cloudFormationOverridePropertyConfiguration: AssetBundleCloudFormationOverridePropertyConfiguration? = nil, createdTime: Date? = nil, downloadUrl: String? = nil, errors: [AssetBundleExportJobError]? = nil, exportFormat: AssetBundleExportFormat? = nil, includeAllDependencies: Bool? = nil, jobStatus: AssetBundleExportJobStatus? = nil, requestId: String? = nil, resourceArns: [String]? = nil, status: Int? = nil) {
+        public init(arn: String? = nil, assetBundleExportJobId: String? = nil, awsAccountId: String? = nil, cloudFormationOverridePropertyConfiguration: AssetBundleCloudFormationOverridePropertyConfiguration? = nil, createdTime: Date? = nil, downloadUrl: String? = nil, errors: [AssetBundleExportJobError]? = nil, exportFormat: AssetBundleExportFormat? = nil, includeAllDependencies: Bool? = nil, includePermissions: Bool? = nil, includeTags: Bool? = nil, jobStatus: AssetBundleExportJobStatus? = nil, requestId: String? = nil, resourceArns: [String]? = nil, status: Int? = nil, validationStrategy: AssetBundleExportJobValidationStrategy? = nil, warnings: [AssetBundleExportJobWarning]? = nil) {
             self.arn = arn
             self.assetBundleExportJobId = assetBundleExportJobId
             self.awsAccountId = awsAccountId
@@ -11720,10 +12697,14 @@ extension QuickSight {
             self.errors = errors
             self.exportFormat = exportFormat
             self.includeAllDependencies = includeAllDependencies
+            self.includePermissions = includePermissions
+            self.includeTags = includeTags
             self.jobStatus = jobStatus
             self.requestId = requestId
             self.resourceArns = resourceArns
             self.status = status
+            self.validationStrategy = validationStrategy
+            self.warnings = warnings
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -11736,10 +12717,14 @@ extension QuickSight {
             case errors = "Errors"
             case exportFormat = "ExportFormat"
             case includeAllDependencies = "IncludeAllDependencies"
+            case includePermissions = "IncludePermissions"
+            case includeTags = "IncludeTags"
             case jobStatus = "JobStatus"
             case requestId = "RequestId"
             case resourceArns = "ResourceArns"
             case status = "Status"
+            case validationStrategy = "ValidationStrategy"
+            case warnings = "Warnings"
         }
     }
 
@@ -11792,8 +12777,14 @@ extension QuickSight {
         public let failureAction: AssetBundleImportFailureAction?
         /// Indicates the status of a job through its queuing and execution. Poll the DescribeAssetBundleImport API until JobStatus returns one of the following values:    SUCCESSFUL     FAILED     FAILED_ROLLBACK_COMPLETED     FAILED_ROLLBACK_ERROR
         public let jobStatus: AssetBundleImportJobStatus?
-        /// Optional overrides to be applied to the resource configuration before import.
+        /// Optional overrides that are applied to the resource configuration before import.
         public let overrideParameters: AssetBundleImportJobOverrideParameters?
+        /// Optional permission overrides that are applied to the resource configuration before import.
+        public let overridePermissions: AssetBundleImportJobOverridePermissions?
+        /// Optional tag overrides that are applied to the resource configuration before import.
+        public let overrideTags: AssetBundleImportJobOverrideTags?
+        /// An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.
+        public let overrideValidationStrategy: AssetBundleImportJobOverrideValidationStrategy?
         /// The Amazon Web Services request ID for this operation.
         public let requestId: String?
         /// An array of error records that describes any failures that occurred while an import job was attempting a rollback. Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.
@@ -11801,7 +12792,7 @@ extension QuickSight {
         /// The HTTP status of the response.
         public let status: Int?
 
-        public init(arn: String? = nil, assetBundleImportJobId: String? = nil, assetBundleImportSource: AssetBundleImportSourceDescription? = nil, awsAccountId: String? = nil, createdTime: Date? = nil, errors: [AssetBundleImportJobError]? = nil, failureAction: AssetBundleImportFailureAction? = nil, jobStatus: AssetBundleImportJobStatus? = nil, overrideParameters: AssetBundleImportJobOverrideParameters? = nil, requestId: String? = nil, rollbackErrors: [AssetBundleImportJobError]? = nil, status: Int? = nil) {
+        public init(arn: String? = nil, assetBundleImportJobId: String? = nil, assetBundleImportSource: AssetBundleImportSourceDescription? = nil, awsAccountId: String? = nil, createdTime: Date? = nil, errors: [AssetBundleImportJobError]? = nil, failureAction: AssetBundleImportFailureAction? = nil, jobStatus: AssetBundleImportJobStatus? = nil, overrideParameters: AssetBundleImportJobOverrideParameters? = nil, overridePermissions: AssetBundleImportJobOverridePermissions? = nil, overrideTags: AssetBundleImportJobOverrideTags? = nil, overrideValidationStrategy: AssetBundleImportJobOverrideValidationStrategy? = nil, requestId: String? = nil, rollbackErrors: [AssetBundleImportJobError]? = nil, status: Int? = nil) {
             self.arn = arn
             self.assetBundleImportJobId = assetBundleImportJobId
             self.assetBundleImportSource = assetBundleImportSource
@@ -11811,6 +12802,9 @@ extension QuickSight {
             self.failureAction = failureAction
             self.jobStatus = jobStatus
             self.overrideParameters = overrideParameters
+            self.overridePermissions = overridePermissions
+            self.overrideTags = overrideTags
+            self.overrideValidationStrategy = overrideValidationStrategy
             self.requestId = requestId
             self.rollbackErrors = rollbackErrors
             self.status = status
@@ -11826,6 +12820,9 @@ extension QuickSight {
             case failureAction = "FailureAction"
             case jobStatus = "JobStatus"
             case overrideParameters = "OverrideParameters"
+            case overridePermissions = "OverridePermissions"
+            case overrideTags = "OverrideTags"
+            case overrideValidationStrategy = "OverrideValidationStrategy"
             case requestId = "RequestId"
             case rollbackErrors = "RollbackErrors"
             case status = "Status"
@@ -13099,6 +14096,58 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case arn = "Arn"
             case refreshSchedule = "RefreshSchedule"
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
+    public struct DescribeRoleCustomPermissionRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The namespace that contains the role.
+        public let namespace: String
+        /// The name of the role whose permissions you want described.
+        public let role: Role
+
+        public init(awsAccountId: String, namespace: String, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.namespace = namespace
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct DescribeRoleCustomPermissionResponse: AWSDecodableShape {
+        /// The name of the custom permission that is described.
+        public let customPermissionsName: String?
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(customPermissionsName: String? = nil, requestId: String? = nil, status: Int? = nil) {
+            self.customPermissionsName = customPermissionsName
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case customPermissionsName = "CustomPermissionsName"
             case requestId = "RequestId"
             case status = "Status"
         }
@@ -14971,12 +16020,15 @@ extension QuickSight {
         public let categoryValues: [String]?
         /// The match operator that is used to determine if a filter should be applied.
         public let matchOperator: CategoryFilterMatchOperator
+        /// This option determines how null values should be treated when filtering data.    ALL_VALUES: Include null values in filtered results.    NULLS_ONLY: Only include null values in filtered results.    NON_NULLS_ONLY: Exclude null values from filtered results.
+        public let nullOption: FilterNullOption?
         /// Select all of the values. Null is not the assigned value of select all.    FILTER_ALL_VALUES
         public let selectAllOptions: CategoryFilterSelectAllOptions?
 
-        public init(categoryValues: [String]? = nil, matchOperator: CategoryFilterMatchOperator, selectAllOptions: CategoryFilterSelectAllOptions? = nil) {
+        public init(categoryValues: [String]? = nil, matchOperator: CategoryFilterMatchOperator, nullOption: FilterNullOption? = nil, selectAllOptions: CategoryFilterSelectAllOptions? = nil) {
             self.categoryValues = categoryValues
             self.matchOperator = matchOperator
+            self.nullOption = nullOption
             self.selectAllOptions = selectAllOptions
         }
 
@@ -14990,6 +16042,7 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case categoryValues = "CategoryValues"
             case matchOperator = "MatchOperator"
+            case nullOption = "NullOption"
             case selectAllOptions = "SelectAllOptions"
         }
     }
@@ -17625,6 +18678,19 @@ extension QuickSight {
         }
     }
 
+    public struct IdentityCenterConfiguration: AWSEncodableShape & AWSDecodableShape {
+        /// A Boolean option that controls whether Trusted Identity Propagation should be used.
+        public let enableIdentityPropagation: Bool?
+
+        public init(enableIdentityPropagation: Bool? = nil) {
+            self.enableIdentityPropagation = enableIdentityPropagation
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case enableIdentityPropagation = "EnableIdentityPropagation"
+        }
+    }
+
     public struct IncrementalRefresh: AWSEncodableShape & AWSDecodableShape {
         /// The lookback window setup for an incremental refresh configuration.
         public let lookbackWindow: LookbackWindow
@@ -17696,11 +18762,14 @@ extension QuickSight {
     public struct InputColumn: AWSEncodableShape & AWSDecodableShape {
         /// The name of this column in the underlying data source.
         public let name: String
+        /// The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.
+        public let subType: ColumnDataSubType?
         /// The data type of the column.
         public let type: InputColumnDataType
 
-        public init(name: String, type: InputColumnDataType) {
+        public init(name: String, subType: ColumnDataSubType? = nil, type: InputColumnDataType) {
             self.name = name
+            self.subType = subType
             self.type = type
         }
 
@@ -17711,6 +18780,7 @@ extension QuickSight {
 
         private enum CodingKeys: String, CodingKey {
             case name = "Name"
+            case subType = "SubType"
             case type = "Type"
         }
     }
@@ -18906,12 +19976,20 @@ extension QuickSight {
         }
     }
 
-    public struct LinkSharingConfiguration: AWSDecodableShape {
+    public struct LinkSharingConfiguration: AWSEncodableShape & AWSDecodableShape {
         /// A structure that contains the permissions of a shareable link.
         public let permissions: [ResourcePermission]?
 
         public init(permissions: [ResourcePermission]? = nil) {
             self.permissions = permissions
+        }
+
+        public func validate(name: String) throws {
+            try self.permissions?.forEach {
+                try $0.validate(name: "\(name).permissions[]")
+            }
+            try self.validate(self.permissions, name: "permissions", parent: name, max: 64)
+            try self.validate(self.permissions, name: "permissions", parent: name, min: 1)
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -19812,6 +20890,66 @@ extension QuickSight {
         }
     }
 
+    public struct ListIdentityPropagationConfigsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("max-results")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("next-token"))
+        ]
+
+        /// The ID of the Amazon Web Services account that contain the identity propagation configurations of.
+        public let awsAccountId: String
+        /// The maximum number of results to be returned.
+        public let maxResults: Int?
+        /// The token for the next set of results, or null if there are no more results.
+        public let nextToken: String?
+
+        public init(awsAccountId: String, maxResults: Int? = nil, nextToken: String? = nil) {
+            self.awsAccountId = awsAccountId
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 10)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListIdentityPropagationConfigsResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The token for the next set of results, or null if there are no more results.
+        public let nextToken: String?
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// A list of services and their authorized targets that the Amazon QuickSight IAM Identity Center application can access.
+        public let services: [AuthorizedTargetsByService]?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(nextToken: String? = nil, requestId: String? = nil, services: [AuthorizedTargetsByService]? = nil, status: Int? = nil) {
+            self.nextToken = nextToken
+            self.requestId = requestId
+            self.services = services
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case nextToken = "NextToken"
+            case requestId = "RequestId"
+            case services = "Services"
+            case status = "Status"
+        }
+    }
+
     public struct ListIngestionsRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
@@ -19981,6 +21119,76 @@ extension QuickSight {
 
         private enum CodingKeys: String, CodingKey {
             case refreshSchedules = "RefreshSchedules"
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
+    public struct ListRoleMembershipsRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "maxResults", location: .querystring("max-results")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "nextToken", location: .querystring("next-token")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The maximum number of results to return.
+        public let maxResults: Int?
+        /// The namespace that includes the role.
+        public let namespace: String
+        /// A pagination token that can be used in a subsequent request.
+        public let nextToken: String?
+        /// The name of the role.
+        public let role: Role
+
+        public init(awsAccountId: String, maxResults: Int? = nil, namespace: String, nextToken: String? = nil, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.maxResults = maxResults
+            self.namespace = namespace
+            self.nextToken = nextToken
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: CodingKey {}
+    }
+
+    public struct ListRoleMembershipsResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The list of groups associated with a role
+        public let membersList: [String]?
+        /// A pagination token that can be used in a subsequent request.
+        public let nextToken: String?
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(membersList: [String]? = nil, nextToken: String? = nil, requestId: String? = nil, status: Int? = nil) {
+            self.membersList = membersList
+            self.nextToken = nextToken
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case membersList = "MembersList"
+            case nextToken = "NextToken"
             case requestId = "RequestId"
             case status = "Status"
         }
@@ -21794,20 +23002,24 @@ extension QuickSight {
     public struct OutputColumn: AWSDecodableShape {
         /// A description for a column.
         public let description: String?
-        /// A display name for the dataset.
+        /// The display name of the column..
         public let name: String?
-        /// The type.
+        /// The sub data type of the column.
+        public let subType: ColumnDataSubType?
+        /// The data type of the column.
         public let type: ColumnDataType?
 
-        public init(description: String? = nil, name: String? = nil, type: ColumnDataType? = nil) {
+        public init(description: String? = nil, name: String? = nil, subType: ColumnDataSubType? = nil, type: ColumnDataType? = nil) {
             self.description = description
             self.name = name
+            self.subType = subType
             self.type = type
         }
 
         private enum CodingKeys: String, CodingKey {
             case description = "Description"
             case name = "Name"
+            case subType = "SubType"
             case type = "Type"
         }
     }
@@ -23303,6 +24515,8 @@ extension QuickSight {
         public let placement: TableTotalsPlacement?
         /// The scroll status (pinned, scrolled) for the total cells.
         public let scrollStatus: TableTotalsScrollStatus?
+        /// The total aggregation options for each value field.
+        public let totalAggregationOptions: [TotalAggregationOption]?
         /// The cell styling options for the total cells.
         public let totalCellStyle: TableCellStyle?
         /// The visibility configuration for the total cells.
@@ -23310,11 +24524,12 @@ extension QuickSight {
         /// The cell styling options for the totals of value cells.
         public let valueCellStyle: TableCellStyle?
 
-        public init(customLabel: String? = nil, metricHeaderCellStyle: TableCellStyle? = nil, placement: TableTotalsPlacement? = nil, scrollStatus: TableTotalsScrollStatus? = nil, totalCellStyle: TableCellStyle? = nil, totalsVisibility: Visibility? = nil, valueCellStyle: TableCellStyle? = nil) {
+        public init(customLabel: String? = nil, metricHeaderCellStyle: TableCellStyle? = nil, placement: TableTotalsPlacement? = nil, scrollStatus: TableTotalsScrollStatus? = nil, totalAggregationOptions: [TotalAggregationOption]? = nil, totalCellStyle: TableCellStyle? = nil, totalsVisibility: Visibility? = nil, valueCellStyle: TableCellStyle? = nil) {
             self.customLabel = customLabel
             self.metricHeaderCellStyle = metricHeaderCellStyle
             self.placement = placement
             self.scrollStatus = scrollStatus
+            self.totalAggregationOptions = totalAggregationOptions
             self.totalCellStyle = totalCellStyle
             self.totalsVisibility = totalsVisibility
             self.valueCellStyle = valueCellStyle
@@ -23322,6 +24537,10 @@ extension QuickSight {
 
         public func validate(name: String) throws {
             try self.metricHeaderCellStyle?.validate(name: "\(name).metricHeaderCellStyle")
+            try self.totalAggregationOptions?.forEach {
+                try $0.validate(name: "\(name).totalAggregationOptions[]")
+            }
+            try self.validate(self.totalAggregationOptions, name: "totalAggregationOptions", parent: name, max: 200)
             try self.totalCellStyle?.validate(name: "\(name).totalCellStyle")
             try self.valueCellStyle?.validate(name: "\(name).valueCellStyle")
         }
@@ -23331,6 +24550,7 @@ extension QuickSight {
             case metricHeaderCellStyle = "MetricHeaderCellStyle"
             case placement = "Placement"
             case scrollStatus = "ScrollStatus"
+            case totalAggregationOptions = "TotalAggregationOptions"
             case totalCellStyle = "TotalCellStyle"
             case totalsVisibility = "TotalsVisibility"
             case valueCellStyle = "ValueCellStyle"
@@ -23839,6 +25059,44 @@ extension QuickSight {
         }
     }
 
+    public struct RedshiftIAMParameters: AWSEncodableShape & AWSDecodableShape {
+        /// Automatically creates a database user. If your database doesn't have a DatabaseUser, set this parameter to True. If there is no DatabaseUser, Amazon QuickSight can't connect to your cluster. The RoleArn that you use for this operation must grant access to redshift:CreateClusterUser to successfully create the user.
+        public let autoCreateDatabaseUser: Bool?
+        /// A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the DatabaseUser. If you choose to include this parameter, the RoleArn must grant access to redshift:JoinGroup.
+        public let databaseGroups: [String]?
+        /// The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new user with PUBLIC permissions.
+        public let databaseUser: String
+        /// Use the RoleArn structure to allow Amazon QuickSight to call redshift:GetClusterCredentials on your cluster. The calling principal must have iam:PassRole access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.
+        public let roleArn: String
+
+        public init(autoCreateDatabaseUser: Bool? = nil, databaseGroups: [String]? = nil, databaseUser: String, roleArn: String) {
+            self.autoCreateDatabaseUser = autoCreateDatabaseUser
+            self.databaseGroups = databaseGroups
+            self.databaseUser = databaseUser
+            self.roleArn = roleArn
+        }
+
+        public func validate(name: String) throws {
+            try self.databaseGroups?.forEach {
+                try validate($0, name: "databaseGroups[]", parent: name, max: 64)
+                try validate($0, name: "databaseGroups[]", parent: name, min: 1)
+            }
+            try self.validate(self.databaseGroups, name: "databaseGroups", parent: name, max: 50)
+            try self.validate(self.databaseGroups, name: "databaseGroups", parent: name, min: 1)
+            try self.validate(self.databaseUser, name: "databaseUser", parent: name, max: 64)
+            try self.validate(self.databaseUser, name: "databaseUser", parent: name, min: 1)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, max: 2048)
+            try self.validate(self.roleArn, name: "roleArn", parent: name, min: 20)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case autoCreateDatabaseUser = "AutoCreateDatabaseUser"
+            case databaseGroups = "DatabaseGroups"
+            case databaseUser = "DatabaseUser"
+            case roleArn = "RoleArn"
+        }
+    }
+
     public struct RedshiftParameters: AWSEncodableShape & AWSDecodableShape {
         /// Cluster ID. This field can be blank if the Host and Port are provided.
         public let clusterId: String?
@@ -23846,13 +25104,19 @@ extension QuickSight {
         public let database: String
         /// Host. This field can be blank if ClusterId is provided.
         public let host: String?
+        /// An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of DataSourceCredentials.
+        public let iamParameters: RedshiftIAMParameters?
+        /// An optional parameter that configures IAM Identity Center authentication to grant Amazon QuickSight access to your cluster. This parameter can only be specified if your Amazon QuickSight account is configured with IAM Identity Center.
+        public let identityCenterConfiguration: IdentityCenterConfiguration?
         /// Port. This field can be blank if the ClusterId is provided.
         public let port: Int?
 
-        public init(clusterId: String? = nil, database: String, host: String? = nil, port: Int? = nil) {
+        public init(clusterId: String? = nil, database: String, host: String? = nil, iamParameters: RedshiftIAMParameters? = nil, identityCenterConfiguration: IdentityCenterConfiguration? = nil, port: Int? = nil) {
             self.clusterId = clusterId
             self.database = database
             self.host = host
+            self.iamParameters = iamParameters
+            self.identityCenterConfiguration = identityCenterConfiguration
             self.port = port
         }
 
@@ -23863,6 +25127,7 @@ extension QuickSight {
             try self.validate(self.database, name: "database", parent: name, min: 1)
             try self.validate(self.host, name: "host", parent: name, max: 256)
             try self.validate(self.host, name: "host", parent: name, min: 1)
+            try self.iamParameters?.validate(name: "\(name).iamParameters")
             try self.validate(self.port, name: "port", parent: name, max: 65535)
             try self.validate(self.port, name: "port", parent: name, min: 0)
         }
@@ -23871,6 +25136,8 @@ extension QuickSight {
             case clusterId = "ClusterId"
             case database = "Database"
             case host = "Host"
+            case iamParameters = "IAMParameters"
+            case identityCenterConfiguration = "IdentityCenterConfiguration"
             case port = "Port"
         }
     }
@@ -23924,16 +25191,19 @@ extension QuickSight {
     }
 
     public struct ReferenceLineDataConfiguration: AWSEncodableShape & AWSDecodableShape {
-        /// The axis binding type of the reference line. Choose one of the following options:   PrimaryY   SecondaryY
+        /// The axis binding type of the reference line. Choose one of the following options:    PrimaryY     SecondaryY
         public let axisBinding: AxisBinding?
         /// The dynamic configuration of the reference line data configuration.
         public let dynamicConfiguration: ReferenceLineDynamicDataConfiguration?
+        /// The series type of the reference line data configuration. Choose one of the following options:    BAR     LINE
+        public let seriesType: ReferenceLineSeriesType?
         /// The static data configuration of the reference line data configuration.
         public let staticConfiguration: ReferenceLineStaticDataConfiguration?
 
-        public init(axisBinding: AxisBinding? = nil, dynamicConfiguration: ReferenceLineDynamicDataConfiguration? = nil, staticConfiguration: ReferenceLineStaticDataConfiguration? = nil) {
+        public init(axisBinding: AxisBinding? = nil, dynamicConfiguration: ReferenceLineDynamicDataConfiguration? = nil, seriesType: ReferenceLineSeriesType? = nil, staticConfiguration: ReferenceLineStaticDataConfiguration? = nil) {
             self.axisBinding = axisBinding
             self.dynamicConfiguration = dynamicConfiguration
+            self.seriesType = seriesType
             self.staticConfiguration = staticConfiguration
         }
 
@@ -23944,6 +25214,7 @@ extension QuickSight {
         private enum CodingKeys: String, CodingKey {
             case axisBinding = "AxisBinding"
             case dynamicConfiguration = "DynamicConfiguration"
+            case seriesType = "SeriesType"
             case staticConfiguration = "StaticConfiguration"
         }
     }
@@ -24448,9 +25719,9 @@ extension QuickSight {
             }
             try self.validate(self.inputColumns, name: "inputColumns", parent: name, max: 2048)
             try self.validate(self.inputColumns, name: "inputColumns", parent: name, min: 1)
-            try self.validate(self.name, name: "name", parent: name, max: 64)
+            try self.validate(self.name, name: "name", parent: name, max: 256)
             try self.validate(self.name, name: "name", parent: name, min: 1)
-            try self.validate(self.schema, name: "schema", parent: name, max: 64)
+            try self.validate(self.schema, name: "schema", parent: name, max: 256)
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -26981,6 +28252,39 @@ extension QuickSight {
         }
     }
 
+    public struct StarburstParameters: AWSEncodableShape & AWSDecodableShape {
+        /// The catalog name for the Starburst data source.
+        public let catalog: String
+        /// The host name of the Starburst data source.
+        public let host: String
+        /// The port for the Starburst data source.
+        public let port: Int
+        /// The product type for the Starburst data source.
+        public let productType: StarburstProductType?
+
+        public init(catalog: String, host: String, port: Int, productType: StarburstProductType? = nil) {
+            self.catalog = catalog
+            self.host = host
+            self.port = port
+            self.productType = productType
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalog, name: "catalog", parent: name, max: 128)
+            try self.validate(self.host, name: "host", parent: name, max: 256)
+            try self.validate(self.host, name: "host", parent: name, min: 1)
+            try self.validate(self.port, name: "port", parent: name, max: 65535)
+            try self.validate(self.port, name: "port", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalog = "Catalog"
+            case host = "Host"
+            case port = "Port"
+            case productType = "ProductType"
+        }
+    }
+
     public struct StartAssetBundleExportJobRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId"))
@@ -26996,16 +28300,25 @@ extension QuickSight {
         public let exportFormat: AssetBundleExportFormat
         /// A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the ResourceArns parameter. If you set IncludeAllDependencies to TRUE, any theme, dataset, and data source resource that is a dependency of the dashboard is also exported.
         public let includeAllDependencies: Bool?
+        /// A Boolean that determines whether all permissions for each resource ARN are exported with the job. If you set IncludePermissions to TRUE, any permissions associated with each resource are exported.
+        public let includePermissions: Bool?
+        ///  A Boolean that determines whether all tags for each resource ARN are exported with the job. If you set IncludeTags to TRUE, any tags associated with each resource are exported.
+        public let includeTags: Bool?
         /// An array of resource ARNs to export. The following resources are supported.    Analysis     Dashboard     DataSet     DataSource     RefreshSchedule     Theme     VPCConnection    The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.
         public let resourceArns: [String]
+        /// An optional parameter that determines which validation strategy to use for the export job. If StrictModeForAllResources is set to TRUE, strict validation for every error is enforced. If it is set to FALSE, validation is skipped for specific UI errors that are shown as warnings. The default value for StrictModeForAllResources is FALSE.
+        public let validationStrategy: AssetBundleExportJobValidationStrategy?
 
-        public init(assetBundleExportJobId: String, awsAccountId: String, cloudFormationOverridePropertyConfiguration: AssetBundleCloudFormationOverridePropertyConfiguration? = nil, exportFormat: AssetBundleExportFormat, includeAllDependencies: Bool? = nil, resourceArns: [String]) {
+        public init(assetBundleExportJobId: String, awsAccountId: String, cloudFormationOverridePropertyConfiguration: AssetBundleCloudFormationOverridePropertyConfiguration? = nil, exportFormat: AssetBundleExportFormat, includeAllDependencies: Bool? = nil, includePermissions: Bool? = nil, includeTags: Bool? = nil, resourceArns: [String], validationStrategy: AssetBundleExportJobValidationStrategy? = nil) {
             self.assetBundleExportJobId = assetBundleExportJobId
             self.awsAccountId = awsAccountId
             self.cloudFormationOverridePropertyConfiguration = cloudFormationOverridePropertyConfiguration
             self.exportFormat = exportFormat
             self.includeAllDependencies = includeAllDependencies
+            self.includePermissions = includePermissions
+            self.includeTags = includeTags
             self.resourceArns = resourceArns
+            self.validationStrategy = validationStrategy
         }
 
         public func validate(name: String) throws {
@@ -27025,7 +28338,10 @@ extension QuickSight {
             case cloudFormationOverridePropertyConfiguration = "CloudFormationOverridePropertyConfiguration"
             case exportFormat = "ExportFormat"
             case includeAllDependencies = "IncludeAllDependencies"
+            case includePermissions = "IncludePermissions"
+            case includeTags = "IncludeTags"
             case resourceArns = "ResourceArns"
+            case validationStrategy = "ValidationStrategy"
         }
     }
 
@@ -27071,15 +28387,24 @@ extension QuickSight {
         public let awsAccountId: String
         /// The failure action for the import job. If you choose ROLLBACK, failed  import jobs will attempt to  undo any asset changes caused by the failed job. If you choose DO_NOTHING, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.
         public let failureAction: AssetBundleImportFailureAction?
-        /// Optional overrides to be applied to the resource configuration before import.
+        /// Optional overrides that are applied to the resource configuration before import.
         public let overrideParameters: AssetBundleImportJobOverrideParameters?
+        /// Optional permission overrides that are applied to the resource configuration before import.
+        public let overridePermissions: AssetBundleImportJobOverridePermissions?
+        /// Optional tag overrides that are applied to the resource configuration before import.
+        public let overrideTags: AssetBundleImportJobOverrideTags?
+        /// An optional validation strategy override for all analyses and dashboards that is applied to the resource configuration before import.
+        public let overrideValidationStrategy: AssetBundleImportJobOverrideValidationStrategy?
 
-        public init(assetBundleImportJobId: String, assetBundleImportSource: AssetBundleImportSource, awsAccountId: String, failureAction: AssetBundleImportFailureAction? = nil, overrideParameters: AssetBundleImportJobOverrideParameters? = nil) {
+        public init(assetBundleImportJobId: String, assetBundleImportSource: AssetBundleImportSource, awsAccountId: String, failureAction: AssetBundleImportFailureAction? = nil, overrideParameters: AssetBundleImportJobOverrideParameters? = nil, overridePermissions: AssetBundleImportJobOverridePermissions? = nil, overrideTags: AssetBundleImportJobOverrideTags? = nil, overrideValidationStrategy: AssetBundleImportJobOverrideValidationStrategy? = nil) {
             self.assetBundleImportJobId = assetBundleImportJobId
             self.assetBundleImportSource = assetBundleImportSource
             self.awsAccountId = awsAccountId
             self.failureAction = failureAction
             self.overrideParameters = overrideParameters
+            self.overridePermissions = overridePermissions
+            self.overrideTags = overrideTags
+            self.overrideValidationStrategy = overrideValidationStrategy
         }
 
         public func validate(name: String) throws {
@@ -27091,6 +28416,8 @@ extension QuickSight {
             try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
             try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
             try self.overrideParameters?.validate(name: "\(name).overrideParameters")
+            try self.overridePermissions?.validate(name: "\(name).overridePermissions")
+            try self.overrideTags?.validate(name: "\(name).overrideTags")
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -27098,6 +28425,9 @@ extension QuickSight {
             case assetBundleImportSource = "AssetBundleImportSource"
             case failureAction = "FailureAction"
             case overrideParameters = "OverrideParameters"
+            case overridePermissions = "OverridePermissions"
+            case overrideTags = "OverrideTags"
+            case overrideValidationStrategy = "OverrideValidationStrategy"
         }
     }
 
@@ -28457,17 +29787,20 @@ extension QuickSight {
         public let dataSetConfigurations: [DataSetConfiguration]
         /// Filter definitions for a template. For more information, see Filtering Data in the Amazon QuickSight User Guide.
         public let filterGroups: [FilterGroup]?
+        /// An array of option definitions for a template.
+        public let options: AssetOptions?
         /// An array of parameter declarations for a template.  Parameters are named variables that can transfer a value for use by an action or an object. For more information, see Parameters in Amazon QuickSight in the Amazon QuickSight User Guide.
         public let parameterDeclarations: [ParameterDeclaration]?
         /// An array of sheet definitions for a template.
         public let sheets: [SheetDefinition]?
 
-        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetConfigurations: [DataSetConfiguration], filterGroups: [FilterGroup]? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
+        public init(analysisDefaults: AnalysisDefaults? = nil, calculatedFields: [CalculatedField]? = nil, columnConfigurations: [ColumnConfiguration]? = nil, dataSetConfigurations: [DataSetConfiguration], filterGroups: [FilterGroup]? = nil, options: AssetOptions? = nil, parameterDeclarations: [ParameterDeclaration]? = nil, sheets: [SheetDefinition]? = nil) {
             self.analysisDefaults = analysisDefaults
             self.calculatedFields = calculatedFields
             self.columnConfigurations = columnConfigurations
             self.dataSetConfigurations = dataSetConfigurations
             self.filterGroups = filterGroups
+            self.options = options
             self.parameterDeclarations = parameterDeclarations
             self.sheets = sheets
         }
@@ -28505,6 +29838,7 @@ extension QuickSight {
             case columnConfigurations = "ColumnConfigurations"
             case dataSetConfigurations = "DataSetConfigurations"
             case filterGroups = "FilterGroups"
+            case options = "Options"
             case parameterDeclarations = "ParameterDeclarations"
             case sheets = "Sheets"
         }
@@ -28964,17 +30298,20 @@ extension QuickSight {
         public let column: ColumnIdentifier
         /// An identifier that uniquely identifies a filter within a dashboard, analysis, or template.
         public let filterId: String
-        /// The parameter whose value should be used for the filter value. This field is mutually exclusive to Value.
+        /// The parameter whose value should be used for the filter value. This field is mutually exclusive to Value and RollingDate.
         public let parameterName: String?
+        /// The rolling date input for the TimeEquality filter. This field is mutually exclusive to Value and ParameterName.
+        public let rollingDate: RollingDateConfiguration?
         /// The level of time precision that is used to aggregate DateTime values.
         public let timeGranularity: TimeGranularity?
-        /// The value of a TimeEquality filter. This field is mutually exclusive to ParameterName.
+        /// The value of a TimeEquality filter. This field is mutually exclusive to RollingDate and ParameterName.
         public let value: Date?
 
-        public init(column: ColumnIdentifier, filterId: String, parameterName: String? = nil, timeGranularity: TimeGranularity? = nil, value: Date? = nil) {
+        public init(column: ColumnIdentifier, filterId: String, parameterName: String? = nil, rollingDate: RollingDateConfiguration? = nil, timeGranularity: TimeGranularity? = nil, value: Date? = nil) {
             self.column = column
             self.filterId = filterId
             self.parameterName = parameterName
+            self.rollingDate = rollingDate
             self.timeGranularity = timeGranularity
             self.value = value
         }
@@ -28987,12 +30324,14 @@ extension QuickSight {
             try self.validate(self.parameterName, name: "parameterName", parent: name, max: 2048)
             try self.validate(self.parameterName, name: "parameterName", parent: name, min: 1)
             try self.validate(self.parameterName, name: "parameterName", parent: name, pattern: "^[a-zA-Z0-9]+$")
+            try self.rollingDate?.validate(name: "\(name).rollingDate")
         }
 
         private enum CodingKeys: String, CodingKey {
             case column = "Column"
             case filterId = "FilterId"
             case parameterName = "ParameterName"
+            case rollingDate = "RollingDate"
             case timeGranularity = "TimeGranularity"
             case value = "Value"
         }
@@ -29940,6 +31279,41 @@ extension QuickSight {
         }
     }
 
+    public struct TotalAggregationFunction: AWSEncodableShape & AWSDecodableShape {
+        /// A built in aggregation function for total values.
+        public let simpleTotalAggregationFunction: SimpleTotalAggregationFunction?
+
+        public init(simpleTotalAggregationFunction: SimpleTotalAggregationFunction? = nil) {
+            self.simpleTotalAggregationFunction = simpleTotalAggregationFunction
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case simpleTotalAggregationFunction = "SimpleTotalAggregationFunction"
+        }
+    }
+
+    public struct TotalAggregationOption: AWSEncodableShape & AWSDecodableShape {
+        /// The field id that's associated with the total aggregation option.
+        public let fieldId: String
+        /// The total aggregation function that you want to set for a specified field id.
+        public let totalAggregationFunction: TotalAggregationFunction
+
+        public init(fieldId: String, totalAggregationFunction: TotalAggregationFunction) {
+            self.fieldId = fieldId
+            self.totalAggregationFunction = totalAggregationFunction
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.fieldId, name: "fieldId", parent: name, max: 512)
+            try self.validate(self.fieldId, name: "fieldId", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case fieldId = "FieldId"
+            case totalAggregationFunction = "TotalAggregationFunction"
+        }
+    }
+
     public struct TotalOptions: AWSEncodableShape & AWSDecodableShape {
         /// The custom label string for the total cells.
         public let customLabel: String?
@@ -29947,20 +31321,27 @@ extension QuickSight {
         public let placement: TableTotalsPlacement?
         /// The scroll status (pinned, scrolled) for the total cells.
         public let scrollStatus: TableTotalsScrollStatus?
+        /// The total aggregation settings for each value field.
+        public let totalAggregationOptions: [TotalAggregationOption]?
         /// Cell styling options for the total cells.
         public let totalCellStyle: TableCellStyle?
         /// The visibility configuration for the total cells.
         public let totalsVisibility: Visibility?
 
-        public init(customLabel: String? = nil, placement: TableTotalsPlacement? = nil, scrollStatus: TableTotalsScrollStatus? = nil, totalCellStyle: TableCellStyle? = nil, totalsVisibility: Visibility? = nil) {
+        public init(customLabel: String? = nil, placement: TableTotalsPlacement? = nil, scrollStatus: TableTotalsScrollStatus? = nil, totalAggregationOptions: [TotalAggregationOption]? = nil, totalCellStyle: TableCellStyle? = nil, totalsVisibility: Visibility? = nil) {
             self.customLabel = customLabel
             self.placement = placement
             self.scrollStatus = scrollStatus
+            self.totalAggregationOptions = totalAggregationOptions
             self.totalCellStyle = totalCellStyle
             self.totalsVisibility = totalsVisibility
         }
 
         public func validate(name: String) throws {
+            try self.totalAggregationOptions?.forEach {
+                try $0.validate(name: "\(name).totalAggregationOptions[]")
+            }
+            try self.validate(self.totalAggregationOptions, name: "totalAggregationOptions", parent: name, max: 200)
             try self.totalCellStyle?.validate(name: "\(name).totalCellStyle")
         }
 
@@ -29968,6 +31349,7 @@ extension QuickSight {
             case customLabel = "CustomLabel"
             case placement = "Placement"
             case scrollStatus = "ScrollStatus"
+            case totalAggregationOptions = "TotalAggregationOptions"
             case totalCellStyle = "TotalCellStyle"
             case totalsVisibility = "TotalsVisibility"
         }
@@ -30167,6 +31549,35 @@ extension QuickSight {
 
         private enum CodingKeys: String, CodingKey {
             case visibility = "Visibility"
+        }
+    }
+
+    public struct TrinoParameters: AWSEncodableShape & AWSDecodableShape {
+        /// The catalog name for the Trino data source.
+        public let catalog: String
+        /// The host name of the Trino data source.
+        public let host: String
+        /// The port for the Trino data source.
+        public let port: Int
+
+        public init(catalog: String, host: String, port: Int) {
+            self.catalog = catalog
+            self.host = host
+            self.port = port
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.catalog, name: "catalog", parent: name, max: 128)
+            try self.validate(self.host, name: "host", parent: name, max: 256)
+            try self.validate(self.host, name: "host", parent: name, min: 1)
+            try self.validate(self.port, name: "port", parent: name, max: 65535)
+            try self.validate(self.port, name: "port", parent: name, min: 1)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case catalog = "Catalog"
+            case host = "Host"
+            case port = "Port"
         }
     }
 
@@ -30653,8 +32064,10 @@ extension QuickSight {
         public let sourceEntity: AnalysisSourceEntity?
         /// The Amazon Resource Name (ARN) for the theme to apply to the analysis that you're creating. To see the theme in the Amazon QuickSight console, make sure that you have access to it.
         public let themeArn: String?
+        /// The option to relax the validation needed to update an analysis with definition objects. This skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
 
-        public init(analysisId: String, awsAccountId: String, definition: AnalysisDefinition? = nil, name: String, parameters: Parameters? = nil, sourceEntity: AnalysisSourceEntity? = nil, themeArn: String? = nil) {
+        public init(analysisId: String, awsAccountId: String, definition: AnalysisDefinition? = nil, name: String, parameters: Parameters? = nil, sourceEntity: AnalysisSourceEntity? = nil, themeArn: String? = nil, validationStrategy: ValidationStrategy? = nil) {
             self.analysisId = analysisId
             self.awsAccountId = awsAccountId
             self.definition = definition
@@ -30662,6 +32075,7 @@ extension QuickSight {
             self.parameters = parameters
             self.sourceEntity = sourceEntity
             self.themeArn = themeArn
+            self.validationStrategy = validationStrategy
         }
 
         public func validate(name: String) throws {
@@ -30684,6 +32098,7 @@ extension QuickSight {
             case parameters = "Parameters"
             case sourceEntity = "SourceEntity"
             case themeArn = "ThemeArn"
+            case validationStrategy = "ValidationStrategy"
         }
     }
 
@@ -30758,7 +32173,7 @@ extension QuickSight {
             try self.grantLinkPermissions?.forEach {
                 try $0.validate(name: "\(name).grantLinkPermissions[]")
             }
-            try self.validate(self.grantLinkPermissions, name: "grantLinkPermissions", parent: name, max: 2)
+            try self.validate(self.grantLinkPermissions, name: "grantLinkPermissions", parent: name, max: 100)
             try self.grantPermissions?.forEach {
                 try $0.validate(name: "\(name).grantPermissions[]")
             }
@@ -30766,7 +32181,7 @@ extension QuickSight {
             try self.revokeLinkPermissions?.forEach {
                 try $0.validate(name: "\(name).revokeLinkPermissions[]")
             }
-            try self.validate(self.revokeLinkPermissions, name: "revokeLinkPermissions", parent: name, max: 2)
+            try self.validate(self.revokeLinkPermissions, name: "revokeLinkPermissions", parent: name, max: 100)
             try self.revokePermissions?.forEach {
                 try $0.validate(name: "\(name).revokePermissions[]")
             }
@@ -30902,10 +32317,12 @@ extension QuickSight {
         public let sourceEntity: DashboardSourceEntity?
         /// The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that was originally associated with the entity. The theme ARN must exist in the same Amazon Web Services account where you create the dashboard.
         public let themeArn: String?
+        /// The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
         /// A description for the first version of the dashboard being created.
         public let versionDescription: String?
 
-        public init(awsAccountId: String, dashboardId: String, dashboardPublishOptions: DashboardPublishOptions? = nil, definition: DashboardVersionDefinition? = nil, name: String, parameters: Parameters? = nil, sourceEntity: DashboardSourceEntity? = nil, themeArn: String? = nil, versionDescription: String? = nil) {
+        public init(awsAccountId: String, dashboardId: String, dashboardPublishOptions: DashboardPublishOptions? = nil, definition: DashboardVersionDefinition? = nil, name: String, parameters: Parameters? = nil, sourceEntity: DashboardSourceEntity? = nil, themeArn: String? = nil, validationStrategy: ValidationStrategy? = nil, versionDescription: String? = nil) {
             self.awsAccountId = awsAccountId
             self.dashboardId = dashboardId
             self.dashboardPublishOptions = dashboardPublishOptions
@@ -30914,6 +32331,7 @@ extension QuickSight {
             self.parameters = parameters
             self.sourceEntity = sourceEntity
             self.themeArn = themeArn
+            self.validationStrategy = validationStrategy
             self.versionDescription = versionDescription
         }
 
@@ -30940,6 +32358,7 @@ extension QuickSight {
             case parameters = "Parameters"
             case sourceEntity = "SourceEntity"
             case themeArn = "ThemeArn"
+            case validationStrategy = "ValidationStrategy"
             case versionDescription = "VersionDescription"
         }
     }
@@ -31665,6 +33084,57 @@ extension QuickSight {
         }
     }
 
+    public struct UpdateIdentityPropagationConfigRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "service", location: .uri("Service"))
+        ]
+
+        /// Specifies a list of application ARNs that represent the authorized targets for a service.
+        public let authorizedTargets: [String]?
+        /// The ID of the Amazon Web Services account that contains the identity propagation configuration that you want to update.
+        public let awsAccountId: String
+        /// The name of the Amazon Web Services service that contains the authorized targets that you want to add or update.
+        public let service: ServiceType
+
+        public init(authorizedTargets: [String]? = nil, awsAccountId: String, service: ServiceType) {
+            self.authorizedTargets = authorizedTargets
+            self.awsAccountId = awsAccountId
+            self.service = service
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case authorizedTargets = "AuthorizedTargets"
+        }
+    }
+
+    public struct UpdateIdentityPropagationConfigResponse: AWSDecodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "status", location: .statusCode)
+        ]
+
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
+            case status = "Status"
+        }
+    }
+
     public struct UpdateIpRestrictionRequest: AWSEncodableShape {
         public static var _encoding = [
             AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId"))
@@ -31827,6 +33297,62 @@ extension QuickSight {
             case arn = "Arn"
             case requestId = "RequestId"
             case scheduleId = "ScheduleId"
+            case status = "Status"
+        }
+    }
+
+    public struct UpdateRoleCustomPermissionRequest: AWSEncodableShape {
+        public static var _encoding = [
+            AWSMemberEncoding(label: "awsAccountId", location: .uri("AwsAccountId")),
+            AWSMemberEncoding(label: "namespace", location: .uri("Namespace")),
+            AWSMemberEncoding(label: "role", location: .uri("Role"))
+        ]
+
+        /// The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+        public let awsAccountId: String
+        /// The name of the custom permission that you want to update the role with.
+        public let customPermissionsName: String
+        /// The namespace that contains the role that you want to update.
+        public let namespace: String
+        /// The name of role tht you want to update.
+        public let role: Role
+
+        public init(awsAccountId: String, customPermissionsName: String, namespace: String, role: Role) {
+            self.awsAccountId = awsAccountId
+            self.customPermissionsName = customPermissionsName
+            self.namespace = namespace
+            self.role = role
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, max: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, min: 12)
+            try self.validate(self.awsAccountId, name: "awsAccountId", parent: name, pattern: "^[0-9]{12}$")
+            try self.validate(self.customPermissionsName, name: "customPermissionsName", parent: name, max: 64)
+            try self.validate(self.customPermissionsName, name: "customPermissionsName", parent: name, min: 1)
+            try self.validate(self.customPermissionsName, name: "customPermissionsName", parent: name, pattern: "^[a-zA-Z0-9+=,.@_-]+$")
+            try self.validate(self.namespace, name: "namespace", parent: name, max: 64)
+            try self.validate(self.namespace, name: "namespace", parent: name, pattern: "^[a-zA-Z0-9._-]*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case customPermissionsName = "CustomPermissionsName"
+        }
+    }
+
+    public struct UpdateRoleCustomPermissionResponse: AWSDecodableShape {
+        /// The Amazon Web Services request ID for this operation.
+        public let requestId: String?
+        /// The HTTP status of the request.
+        public let status: Int?
+
+        public init(requestId: String? = nil, status: Int? = nil) {
+            self.requestId = requestId
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case requestId = "RequestId"
             case status = "Status"
         }
     }
@@ -32002,18 +33528,21 @@ extension QuickSight {
         public let sourceEntity: TemplateSourceEntity?
         /// The ID for the template.
         public let templateId: String
+        /// The option to relax the validation needed to update a template with definition objects. This skips the validation step for specific errors.
+        public let validationStrategy: ValidationStrategy?
         /// A description of the current template version that is being updated. Every time you call
         /// 				UpdateTemplate, you create a new version of the template. Each version
         /// 			of the template maintains a description of the version in the
         /// 				VersionDescription field.
         public let versionDescription: String?
 
-        public init(awsAccountId: String, definition: TemplateVersionDefinition? = nil, name: String? = nil, sourceEntity: TemplateSourceEntity? = nil, templateId: String, versionDescription: String? = nil) {
+        public init(awsAccountId: String, definition: TemplateVersionDefinition? = nil, name: String? = nil, sourceEntity: TemplateSourceEntity? = nil, templateId: String, validationStrategy: ValidationStrategy? = nil, versionDescription: String? = nil) {
             self.awsAccountId = awsAccountId
             self.definition = definition
             self.name = name
             self.sourceEntity = sourceEntity
             self.templateId = templateId
+            self.validationStrategy = validationStrategy
             self.versionDescription = versionDescription
         }
 
@@ -32036,6 +33565,7 @@ extension QuickSight {
             case definition = "Definition"
             case name = "Name"
             case sourceEntity = "SourceEntity"
+            case validationStrategy = "ValidationStrategy"
             case versionDescription = "VersionDescription"
         }
     }
@@ -32932,6 +34462,19 @@ extension QuickSight {
             case status = "Status"
             case vpcConnectionId = "VPCConnectionId"
             case vpcId = "VPCId"
+        }
+    }
+
+    public struct ValidationStrategy: AWSEncodableShape {
+        /// The mode of validation for the asset to be created or updated. When you set this value to STRICT, strict validation for every error is enforced. When you set this value to LENIENT, validation is skipped for specific UI errors.
+        public let mode: ValidationStrategyMode
+
+        public init(mode: ValidationStrategyMode) {
+            self.mode = mode
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case mode = "Mode"
         }
     }
 

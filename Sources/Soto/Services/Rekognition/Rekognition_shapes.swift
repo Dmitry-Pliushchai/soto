@@ -26,7 +26,7 @@ import SotoCore
 extension Rekognition {
     // MARK: Enums
 
-    public enum Attribute: String, CustomStringConvertible, Codable, Sendable {
+    public enum Attribute: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case ageRange = "AGE_RANGE"
         case all = "ALL"
@@ -44,7 +44,7 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum BodyPart: String, CustomStringConvertible, Codable, Sendable {
+    public enum BodyPart: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case face = "FACE"
         case head = "HEAD"
         case leftHand = "LEFT_HAND"
@@ -52,31 +52,37 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum CelebrityRecognitionSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum CelebrityRecognitionSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case id = "ID"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentClassifier: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentClassifier: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case freeOfAdultContent = "FreeOfAdultContent"
         case freeOfPersonallyIdentifiableInformation = "FreeOfPersonallyIdentifiableInformation"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentModerationAggregateBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentModerationAggregateBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case segments = "SEGMENTS"
         case timestamps = "TIMESTAMPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentModerationSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentModerationSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "NAME"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum CustomizationFeature: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case contentModeration = "CONTENT_MODERATION"
+        case customLabels = "CUSTOM_LABELS"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum DatasetStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case createComplete = "CREATE_COMPLETE"
         case createFailed = "CREATE_FAILED"
         case createInProgress = "CREATE_IN_PROGRESS"
@@ -87,26 +93,26 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetStatusMessageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetStatusMessageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case clientError = "CLIENT_ERROR"
         case serviceError = "SERVICE_ERROR"
         case success = "SUCCESS"
         public var description: String { return self.rawValue }
     }
 
-    public enum DatasetType: String, CustomStringConvertible, Codable, Sendable {
+    public enum DatasetType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case test = "TEST"
         case train = "TRAIN"
         public var description: String { return self.rawValue }
     }
 
-    public enum DetectLabelsFeatureName: String, CustomStringConvertible, Codable, Sendable {
+    public enum DetectLabelsFeatureName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case generalLabels = "GENERAL_LABELS"
         case imageProperties = "IMAGE_PROPERTIES"
         public var description: String { return self.rawValue }
     }
 
-    public enum EmotionName: String, CustomStringConvertible, Codable, Sendable {
+    public enum EmotionName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case angry = "ANGRY"
         case calm = "CALM"
         case confused = "CONFUSED"
@@ -119,25 +125,25 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum FaceAttributes: String, CustomStringConvertible, Codable, Sendable {
+    public enum FaceAttributes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case `default` = "DEFAULT"
         case all = "ALL"
         public var description: String { return self.rawValue }
     }
 
-    public enum FaceSearchSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum FaceSearchSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case index = "INDEX"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum GenderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum GenderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case female = "Female"
         case male = "Male"
         public var description: String { return self.rawValue }
     }
 
-    public enum KnownGenderType: String, CustomStringConvertible, Codable, Sendable {
+    public enum KnownGenderType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case female = "Female"
         case male = "Male"
         case nonbinary = "Nonbinary"
@@ -145,24 +151,24 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelDetectionAggregateBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelDetectionAggregateBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case segments = "SEGMENTS"
         case timestamps = "TIMESTAMPS"
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelDetectionFeatureName: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelDetectionFeatureName: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case generalLabels = "GENERAL_LABELS"
         public var description: String { return self.rawValue }
     }
 
-    public enum LabelDetectionSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum LabelDetectionSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case name = "NAME"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum LandmarkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LandmarkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chinBottom = "chinBottom"
         case eyeLeft = "eyeLeft"
         case eyeRight = "eyeRight"
@@ -196,7 +202,7 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum LivenessSessionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum LivenessSessionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case expired = "EXPIRED"
         case failed = "FAILED"
@@ -205,7 +211,29 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum OrientationCorrection: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaAnalysisJobFailureCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case accessDenied = "ACCESS_DENIED"
+        case internalError = "INTERNAL_ERROR"
+        case invalidKmsKey = "INVALID_KMS_KEY"
+        case invalidManifest = "INVALID_MANIFEST"
+        case invalidOutputConfig = "INVALID_OUTPUT_CONFIG"
+        case invalidS3Object = "INVALID_S3_OBJECT"
+        case resourceNotFound = "RESOURCE_NOT_FOUND"
+        case resourceNotReady = "RESOURCE_NOT_READY"
+        case throttled = "THROTTLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum MediaAnalysisJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case created = "CREATED"
+        case failed = "FAILED"
+        case inProgress = "IN_PROGRESS"
+        case queued = "QUEUED"
+        case succeeded = "SUCCEEDED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum OrientationCorrection: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rotate0 = "ROTATE_0"
         case rotate180 = "ROTATE_180"
         case rotate270 = "ROTATE_270"
@@ -213,24 +241,32 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum PersonTrackingSortBy: String, CustomStringConvertible, Codable, Sendable {
+    public enum PersonTrackingSortBy: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case index = "INDEX"
         case timestamp = "TIMESTAMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProjectStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProjectAutoUpdate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
+        case disabled = "DISABLED"
+        case enabled = "ENABLED"
+        public var description: String { return self.rawValue }
+    }
+
+    public enum ProjectStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case creating = "CREATING"
         case deleting = "DELETING"
         public var description: String { return self.rawValue }
     }
 
-    public enum ProjectVersionStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProjectVersionStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case copyingCompleted = "COPYING_COMPLETED"
         case copyingFailed = "COPYING_FAILED"
         case copyingInProgress = "COPYING_IN_PROGRESS"
         case deleting = "DELETING"
+        case deprecated = "DEPRECATED"
+        case expired = "EXPIRED"
         case failed = "FAILED"
         case running = "RUNNING"
         case starting = "STARTING"
@@ -242,14 +278,14 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum ProtectiveEquipmentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ProtectiveEquipmentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case faceCover = "FACE_COVER"
         case handCover = "HAND_COVER"
         case headCover = "HEAD_COVER"
         public var description: String { return self.rawValue }
     }
 
-    public enum QualityFilter: String, CustomStringConvertible, Codable, Sendable {
+    public enum QualityFilter: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case auto = "AUTO"
         case high = "HIGH"
         case low = "LOW"
@@ -258,7 +294,7 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum Reason: String, CustomStringConvertible, Codable, Sendable {
+    public enum Reason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exceedsMaxFaces = "EXCEEDS_MAX_FACES"
         case extremePose = "EXTREME_POSE"
         case lowBrightness = "LOW_BRIGHTNESS"
@@ -269,19 +305,19 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum SegmentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SegmentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case shot = "SHOT"
         case technicalCue = "TECHNICAL_CUE"
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamProcessorParameterToDelete: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamProcessorParameterToDelete: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case connectedHomeMinConfidence = "ConnectedHomeMinConfidence"
         case regionsOfInterest = "RegionsOfInterest"
         public var description: String { return self.rawValue }
     }
 
-    public enum StreamProcessorStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum StreamProcessorStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case running = "RUNNING"
         case starting = "STARTING"
@@ -291,7 +327,7 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum TechnicalCueType: String, CustomStringConvertible, Codable, Sendable {
+    public enum TechnicalCueType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case blackFrames = "BlackFrames"
         case colorBars = "ColorBars"
         case content = "Content"
@@ -302,13 +338,13 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum TextTypes: String, CustomStringConvertible, Codable, Sendable {
+    public enum TextTypes: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case line = "LINE"
         case word = "WORD"
         public var description: String { return self.rawValue }
     }
 
-    public enum UnsearchedFaceReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnsearchedFaceReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case exceedsMaxFaces = "EXCEEDS_MAX_FACES"
         case extremePose = "EXTREME_POSE"
         case faceNotLargest = "FACE_NOT_LARGEST"
@@ -320,26 +356,26 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum UnsuccessfulFaceAssociationReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnsuccessfulFaceAssociationReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associatedToADifferentUser = "ASSOCIATED_TO_A_DIFFERENT_USER"
         case faceNotFound = "FACE_NOT_FOUND"
         case lowMatchConfidence = "LOW_MATCH_CONFIDENCE"
         public var description: String { return self.rawValue }
     }
 
-    public enum UnsuccessfulFaceDeletionReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnsuccessfulFaceDeletionReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associatedToAnExistingUser = "ASSOCIATED_TO_AN_EXISTING_USER"
         case faceNotFound = "FACE_NOT_FOUND"
         public var description: String { return self.rawValue }
     }
 
-    public enum UnsuccessfulFaceDisassociationReason: String, CustomStringConvertible, Codable, Sendable {
+    public enum UnsuccessfulFaceDisassociationReason: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case associatedToADifferentUser = "ASSOCIATED_TO_A_DIFFERENT_USER"
         case faceNotFound = "FACE_NOT_FOUND"
         public var description: String { return self.rawValue }
     }
 
-    public enum UserStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum UserStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case created = "CREATED"
         case creating = "CREATING"
@@ -347,13 +383,13 @@ extension Rekognition {
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoColorRange: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoColorRange: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case full = "FULL"
         case limited = "LIMITED"
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoJobStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoJobStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "FAILED"
         case inProgress = "IN_PROGRESS"
         case succeeded = "SUCCEEDED"
@@ -1138,10 +1174,16 @@ extension Rekognition {
     }
 
     public struct CreateProjectRequest: AWSEncodableShape {
+        /// Specifies whether automatic retraining should be attempted for the versions of the project. Automatic retraining is done as a best effort. Required argument for Content Moderation. Applicable only to adapters.
+        public let autoUpdate: ProjectAutoUpdate?
+        /// Specifies feature that is being customized. If no value is provided CUSTOM_LABELS is used as a default.
+        public let feature: CustomizationFeature?
         /// The name of the project to create.
         public let projectName: String
 
-        public init(projectName: String) {
+        public init(autoUpdate: ProjectAutoUpdate? = nil, feature: CustomizationFeature? = nil, projectName: String) {
+            self.autoUpdate = autoUpdate
+            self.feature = feature
             self.projectName = projectName
         }
 
@@ -1152,6 +1194,8 @@ extension Rekognition {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case autoUpdate = "AutoUpdate"
+            case feature = "Feature"
             case projectName = "ProjectName"
         }
     }
@@ -1170,32 +1214,39 @@ extension Rekognition {
     }
 
     public struct CreateProjectVersionRequest: AWSEncodableShape {
-        /// The identifier for your AWS Key Management Service key (AWS KMS key). You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. The key is also used to encrypt training results and manifest files written to the output Amazon S3 bucket (OutputConfig). If you choose to use your own KMS key, you need the following permissions on the KMS key.   kms:CreateGrant   kms:DescribeKey   kms:GenerateDataKey   kms:Decrypt   If you don't specify a value for KmsKeyId, images copied into the service are encrypted using a key that AWS owns and manages.
+        /// Feature-specific configuration of the training job. If the job configuration does not match the feature type associated with the project, an InvalidParameterException is returned.
+        public let featureConfig: CustomizationFeatureConfig?
+        /// The identifier for your AWS Key Management Service key (AWS KMS key). You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key, an alias for your KMS key, or an alias ARN. The key is used to encrypt training images, test images, and manifest files copied into the service for the project version. Your source images are unaffected. The key is also used to encrypt training results and manifest files written to the output Amazon S3 bucket (OutputConfig). If you choose to use your own KMS key, you need the following permissions on the KMS key.   kms:CreateGrant   kms:DescribeKey   kms:GenerateDataKey   kms:Decrypt   If you don't specify a value for KmsKeyId, images copied into the service are encrypted using a key that AWS owns and manages.
         public let kmsKeyId: String?
-        /// The Amazon S3 bucket location to store the results of training. The S3 bucket can be in any AWS account as long as the caller has s3:PutObject permissions on the S3 bucket.
+        /// The Amazon S3 bucket location to store the results of training. The bucket can be any S3 bucket in your AWS account. You need s3:PutObject permission on the bucket.
         public let outputConfig: OutputConfig
-        /// The ARN of the Amazon Rekognition Custom Labels project that  manages the model that you want to train.
+        /// The ARN of the Amazon Rekognition project that will manage the project version you want to train.
         public let projectArn: String
-        ///  A set of tags (key-value pairs) that you want to attach to the model.
+        ///  A set of tags (key-value pairs) that you want to attach to the project version.
         public let tags: [String: String]?
-        /// Specifies an external manifest that the service uses to test the model. If you specify TestingData you must also specify TrainingData. The project must not have any associated datasets.
+        /// Specifies an external manifest that the service uses to test the project version. If you specify TestingData you must also specify TrainingData. The project must not have any associated datasets.
         public let testingData: TestingData?
-        /// Specifies an external manifest that the services uses to train the model. If you specify TrainingData you must also specify TestingData. The project must not have any associated datasets.
+        /// Specifies an external manifest that the services uses to train the project version. If you specify TrainingData you must also specify TestingData. The project must not have any associated datasets.
         public let trainingData: TrainingData?
-        /// A name for the version of the model. This value must be unique.
+        /// A description applied to the project version being created.
+        public let versionDescription: String?
+        /// A name for the version of the project version. This value must be unique.
         public let versionName: String
 
-        public init(kmsKeyId: String? = nil, outputConfig: OutputConfig, projectArn: String, tags: [String: String]? = nil, testingData: TestingData? = nil, trainingData: TrainingData? = nil, versionName: String) {
+        public init(featureConfig: CustomizationFeatureConfig? = nil, kmsKeyId: String? = nil, outputConfig: OutputConfig, projectArn: String, tags: [String: String]? = nil, testingData: TestingData? = nil, trainingData: TrainingData? = nil, versionDescription: String? = nil, versionName: String) {
+            self.featureConfig = featureConfig
             self.kmsKeyId = kmsKeyId
             self.outputConfig = outputConfig
             self.projectArn = projectArn
             self.tags = tags
             self.testingData = testingData
             self.trainingData = trainingData
+            self.versionDescription = versionDescription
             self.versionName = versionName
         }
 
         public func validate(name: String) throws {
+            try self.featureConfig?.validate(name: "\(name).featureConfig")
             try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, max: 2048)
             try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, min: 1)
             try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, pattern: "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$")
@@ -1213,24 +1264,29 @@ extension Rekognition {
             try self.validate(self.tags, name: "tags", parent: name, max: 200)
             try self.testingData?.validate(name: "\(name).testingData")
             try self.trainingData?.validate(name: "\(name).trainingData")
+            try self.validate(self.versionDescription, name: "versionDescription", parent: name, max: 255)
+            try self.validate(self.versionDescription, name: "versionDescription", parent: name, min: 1)
+            try self.validate(self.versionDescription, name: "versionDescription", parent: name, pattern: "^[a-zA-Z0-9-_. ()':,;?]+$")
             try self.validate(self.versionName, name: "versionName", parent: name, max: 255)
             try self.validate(self.versionName, name: "versionName", parent: name, min: 1)
             try self.validate(self.versionName, name: "versionName", parent: name, pattern: "^[a-zA-Z0-9_.\\-]+$")
         }
 
         private enum CodingKeys: String, CodingKey {
+            case featureConfig = "FeatureConfig"
             case kmsKeyId = "KmsKeyId"
             case outputConfig = "OutputConfig"
             case projectArn = "ProjectArn"
             case tags = "Tags"
             case testingData = "TestingData"
             case trainingData = "TrainingData"
+            case versionDescription = "VersionDescription"
             case versionName = "VersionName"
         }
     }
 
     public struct CreateProjectVersionResponse: AWSDecodableShape {
-        /// The ARN of the model version that was created. Use DescribeProjectVersion to get the current status of the training operation.
+        /// The ARN of the model or the project version that was created. Use DescribeProjectVersion to get the current status of the training operation.
         public let projectVersionArn: String?
 
         public init(projectVersionArn: String? = nil) {
@@ -1381,6 +1437,41 @@ extension Rekognition {
             case confidence = "Confidence"
             case geometry = "Geometry"
             case name = "Name"
+        }
+    }
+
+    public struct CustomizationFeatureConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Configuration options for Custom Moderation training.
+        public let contentModeration: CustomizationFeatureContentModerationConfig?
+
+        public init(contentModeration: CustomizationFeatureContentModerationConfig? = nil) {
+            self.contentModeration = contentModeration
+        }
+
+        public func validate(name: String) throws {
+            try self.contentModeration?.validate(name: "\(name).contentModeration")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case contentModeration = "ContentModeration"
+        }
+    }
+
+    public struct CustomizationFeatureContentModerationConfig: AWSEncodableShape & AWSDecodableShape {
+        /// The confidence level you plan to use to identify if unsafe content is present during inference.
+        public let confidenceThreshold: Float?
+
+        public init(confidenceThreshold: Float? = nil) {
+            self.confidenceThreshold = confidenceThreshold
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.confidenceThreshold, name: "confidenceThreshold", parent: name, max: 100.0)
+            try self.validate(self.confidenceThreshold, name: "confidenceThreshold", parent: name, min: 0.0)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case confidenceThreshold = "ConfidenceThreshold"
         }
     }
 
@@ -1720,7 +1811,7 @@ extension Rekognition {
     }
 
     public struct DeleteProjectVersionRequest: AWSEncodableShape {
-        /// The Amazon Resource Name (ARN) of the model version that you want to delete.
+        /// The Amazon Resource Name (ARN) of the project version that you want to delete.
         public let projectVersionArn: String
 
         public init(projectVersionArn: String) {
@@ -1894,11 +1985,11 @@ extension Rekognition {
     public struct DescribeProjectVersionsRequest: AWSEncodableShape {
         /// The maximum number of results to return per paginated call.  The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100.
         public let maxResults: Int?
-        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
+        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
         public let nextToken: String?
-        /// The Amazon Resource Name (ARN) of the project that contains the models you want to describe.
+        /// The Amazon Resource Name (ARN) of the project that contains the model/adapter you want to describe.
         public let projectArn: String
-        /// A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don't specify a value, all model descriptions are returned.  A version name is part of a model (ProjectVersion) ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the following ARN. arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
+        /// A list of model or project version names that you want to describe. You can add up to 10 model or project version names to the list. If you don't specify a value, all project version descriptions are returned. A version name is part of a project version ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the following ARN. arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
         public let versionNames: [String]?
 
         public init(maxResults: Int? = nil, nextToken: String? = nil, projectArn: String, versionNames: [String]? = nil) {
@@ -1933,9 +2024,9 @@ extension Rekognition {
     }
 
     public struct DescribeProjectVersionsResponse: AWSDecodableShape {
-        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
+        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
         public let nextToken: String?
-        /// A list of model descriptions. The list is sorted by the creation date and time of the model versions, latest to earliest.
+        /// A list of project version descriptions. The list is sorted by the creation date and time of the project versions, latest to earliest.
         public let projectVersionDescriptions: [ProjectVersionDescription]?
 
         public init(nextToken: String? = nil, projectVersionDescriptions: [ProjectVersionDescription]? = nil) {
@@ -1950,20 +2041,25 @@ extension Rekognition {
     }
 
     public struct DescribeProjectsRequest: AWSEncodableShape {
+        /// Specifies the type of customization to filter projects by. If no value is specified,  CUSTOM_LABELS is used as a default.
+        public let features: [CustomizationFeature]?
         /// The maximum number of results to return per paginated call. The largest value you can specify is 100.  If you specify a value greater than 100, a ValidationException error occurs. The default value is 100.
         public let maxResults: Int?
-        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination  token to retrieve the next set of results.
+        /// If the previous response was incomplete (because there is more results to retrieve), Rekognition returns a pagination token in the response. You can use this pagination  token to retrieve the next set of results.
         public let nextToken: String?
-        /// A list of the projects that you want Amazon Rekognition Custom Labels to describe. If you don't specify a value,  the response includes descriptions for all the projects in your AWS account.
+        /// A list of the projects that you want Rekognition to describe. If you don't specify a value,  the response includes descriptions for all the projects in your AWS account.
         public let projectNames: [String]?
 
-        public init(maxResults: Int? = nil, nextToken: String? = nil, projectNames: [String]? = nil) {
+        public init(features: [CustomizationFeature]? = nil, maxResults: Int? = nil, nextToken: String? = nil, projectNames: [String]? = nil) {
+            self.features = features
             self.maxResults = maxResults
             self.nextToken = nextToken
             self.projectNames = projectNames
         }
 
         public func validate(name: String) throws {
+            try self.validate(self.features, name: "features", parent: name, max: 2)
+            try self.validate(self.features, name: "features", parent: name, min: 1)
             try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
             try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
             try self.validate(self.nextToken, name: "nextToken", parent: name, max: 1024)
@@ -1977,6 +2073,7 @@ extension Rekognition {
         }
 
         private enum CodingKeys: String, CodingKey {
+            case features = "Features"
             case maxResults = "MaxResults"
             case nextToken = "NextToken"
             case projectNames = "ProjectNames"
@@ -1984,7 +2081,7 @@ extension Rekognition {
     }
 
     public struct DescribeProjectsResponse: AWSDecodableShape {
-        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
+        /// If the previous response was incomplete (because there is more results to retrieve), Amazon Rekognition returns a pagination token in the response.  You can use this pagination token to retrieve the next set of results.
         public let nextToken: String?
         /// A list of project descriptions. The list is sorted by the date and time the projects are created.
         public let projectDescriptions: [ProjectDescription]?
@@ -2089,7 +2186,7 @@ extension Rekognition {
         public let maxResults: Int?
         /// Specifies the minimum confidence level for the labels to return.  DetectCustomLabels doesn't return any labels with a confidence value that's lower than this specified value. If you specify a value of 0, DetectCustomLabels returns all labels, regardless of the assumed  threshold applied to each label. If you don't specify a value for MinConfidence,  DetectCustomLabels returns labels based on the assumed threshold of each label.
         public let minConfidence: Float?
-        /// The ARN of the model version that you want to use.
+        /// The ARN of the model version that you want to use. Only models associated with Custom Labels projects accepted by the operation. If a provided ARN refers to a model version associated with a project for a different feature type, then an InvalidParameterException is returned.
         public let projectVersionArn: String
 
         public init(image: Image, maxResults: Int? = nil, minConfidence: Float? = nil, projectVersionArn: String) {
@@ -2358,11 +2455,14 @@ extension Rekognition {
         public let image: Image
         /// Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value. If you don't specify MinConfidence, the operation returns labels with confidence values greater than or equal to 50 percent.
         public let minConfidence: Float?
+        /// Identifier for the custom adapter. Expects the ProjectVersionArn as a value.  Use the CreateProject or CreateProjectVersion APIs to create a custom adapter.
+        public let projectVersion: String?
 
-        public init(humanLoopConfig: HumanLoopConfig? = nil, image: Image, minConfidence: Float? = nil) {
+        public init(humanLoopConfig: HumanLoopConfig? = nil, image: Image, minConfidence: Float? = nil, projectVersion: String? = nil) {
             self.humanLoopConfig = humanLoopConfig
             self.image = image
             self.minConfidence = minConfidence
+            self.projectVersion = projectVersion
         }
 
         public func validate(name: String) throws {
@@ -2370,12 +2470,16 @@ extension Rekognition {
             try self.image.validate(name: "\(name).image")
             try self.validate(self.minConfidence, name: "minConfidence", parent: name, max: 100.0)
             try self.validate(self.minConfidence, name: "minConfidence", parent: name, min: 0.0)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, max: 2048)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, min: 20)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, pattern: "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/version\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$")
         }
 
         private enum CodingKeys: String, CodingKey {
             case humanLoopConfig = "HumanLoopConfig"
             case image = "Image"
             case minConfidence = "MinConfidence"
+            case projectVersion = "ProjectVersion"
         }
     }
 
@@ -2384,19 +2488,23 @@ extension Rekognition {
         public let humanLoopActivationOutput: HumanLoopActivationOutput?
         /// Array of detected Moderation labels and the time, in milliseconds from the start of the video, they were detected.
         public let moderationLabels: [ModerationLabel]?
-        /// Version number of the moderation detection model that was used to detect unsafe content.
+        /// Version number of the base moderation detection model that was used to detect unsafe content.
         public let moderationModelVersion: String?
+        /// Identifier of the custom adapter that was used during inference. If during inference the adapter was EXPIRED, then the parameter will not be returned, indicating that a base moderation detection project version was used.
+        public let projectVersion: String?
 
-        public init(humanLoopActivationOutput: HumanLoopActivationOutput? = nil, moderationLabels: [ModerationLabel]? = nil, moderationModelVersion: String? = nil) {
+        public init(humanLoopActivationOutput: HumanLoopActivationOutput? = nil, moderationLabels: [ModerationLabel]? = nil, moderationModelVersion: String? = nil, projectVersion: String? = nil) {
             self.humanLoopActivationOutput = humanLoopActivationOutput
             self.moderationLabels = moderationLabels
             self.moderationModelVersion = moderationModelVersion
+            self.projectVersion = projectVersion
         }
 
         private enum CodingKeys: String, CodingKey {
             case humanLoopActivationOutput = "HumanLoopActivationOutput"
             case moderationLabels = "ModerationLabels"
             case moderationModelVersion = "ModerationModelVersion"
+            case projectVersion = "ProjectVersion"
         }
     }
 
@@ -3598,6 +3706,82 @@ extension Rekognition {
         }
     }
 
+    public struct GetMediaAnalysisJobRequest: AWSEncodableShape {
+        /// Unique identifier for the media analysis job for which you want to retrieve results.
+        public let jobId: String
+
+        public init(jobId: String) {
+            self.jobId = jobId
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.jobId, name: "jobId", parent: name, max: 64)
+            try self.validate(self.jobId, name: "jobId", parent: name, min: 1)
+            try self.validate(self.jobId, name: "jobId", parent: name, pattern: "^[a-zA-Z0-9-_]+$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case jobId = "JobId"
+        }
+    }
+
+    public struct GetMediaAnalysisJobResponse: AWSDecodableShape {
+        /// The Unix date and time when the job finished.
+        public let completionTimestamp: Date?
+        /// The Unix date and time when the job was started.
+        public let creationTimestamp: Date
+        /// Details about the error that resulted in failure of the job.
+        public let failureDetails: MediaAnalysisJobFailureDetails?
+        /// Reference to the input manifest that was provided in the job creation request.
+        public let input: MediaAnalysisInput
+        /// The identifier for the media analysis job.
+        public let jobId: String
+        /// The name of the media analysis job.
+        public let jobName: String?
+        /// KMS Key that was provided in the creation request.
+        public let kmsKeyId: String?
+        /// The summary manifest provides statistics on input manifest and errors identified in the input manifest.
+        public let manifestSummary: MediaAnalysisManifestSummary?
+        /// Operation configurations that were provided during job creation.
+        public let operationsConfig: MediaAnalysisOperationsConfig
+        /// Output configuration that was provided in the creation request.
+        public let outputConfig: MediaAnalysisOutputConfig
+        /// Output manifest that contains prediction results.
+        public let results: MediaAnalysisResults?
+        /// The current status of the media analysis job.
+        public let status: MediaAnalysisJobStatus
+
+        public init(completionTimestamp: Date? = nil, creationTimestamp: Date, failureDetails: MediaAnalysisJobFailureDetails? = nil, input: MediaAnalysisInput, jobId: String, jobName: String? = nil, kmsKeyId: String? = nil, manifestSummary: MediaAnalysisManifestSummary? = nil, operationsConfig: MediaAnalysisOperationsConfig, outputConfig: MediaAnalysisOutputConfig, results: MediaAnalysisResults? = nil, status: MediaAnalysisJobStatus) {
+            self.completionTimestamp = completionTimestamp
+            self.creationTimestamp = creationTimestamp
+            self.failureDetails = failureDetails
+            self.input = input
+            self.jobId = jobId
+            self.jobName = jobName
+            self.kmsKeyId = kmsKeyId
+            self.manifestSummary = manifestSummary
+            self.operationsConfig = operationsConfig
+            self.outputConfig = outputConfig
+            self.results = results
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case completionTimestamp = "CompletionTimestamp"
+            case creationTimestamp = "CreationTimestamp"
+            case failureDetails = "FailureDetails"
+            case input = "Input"
+            case jobId = "JobId"
+            case jobName = "JobName"
+            case kmsKeyId = "KmsKeyId"
+            case manifestSummary = "ManifestSummary"
+            case operationsConfig = "OperationsConfig"
+            case outputConfig = "OutputConfig"
+            case results = "Results"
+            case status = "Status"
+        }
+    }
+
     public struct GetPersonTrackingRequest: AWSEncodableShape {
         /// The identifier for a job that tracks persons in a video. You get the JobId from a call to StartPersonTracking.
         public let jobId: String
@@ -4460,6 +4644,46 @@ extension Rekognition {
         }
     }
 
+    public struct ListMediaAnalysisJobsRequest: AWSEncodableShape {
+        /// The maximum number of results to return per paginated call. The largest value user can specify is 100.  If user specifies a value greater than 100, an InvalidParameterException error occurs. The default value is 100.
+        public let maxResults: Int?
+        /// Pagination token, if the previous response was incomplete.
+        public let nextToken: String?
+
+        public init(maxResults: Int? = nil, nextToken: String? = nil) {
+            self.maxResults = maxResults
+            self.nextToken = nextToken
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.maxResults, name: "maxResults", parent: name, max: 100)
+            try self.validate(self.maxResults, name: "maxResults", parent: name, min: 1)
+            try self.validate(self.nextToken, name: "nextToken", parent: name, max: 1024)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case maxResults = "MaxResults"
+            case nextToken = "NextToken"
+        }
+    }
+
+    public struct ListMediaAnalysisJobsResponse: AWSDecodableShape {
+        /// Contains a list of all media analysis jobs.
+        public let mediaAnalysisJobs: [MediaAnalysisJobDescription]
+        /// Pagination token, if the previous response was incomplete.
+        public let nextToken: String?
+
+        public init(mediaAnalysisJobs: [MediaAnalysisJobDescription], nextToken: String? = nil) {
+            self.mediaAnalysisJobs = mediaAnalysisJobs
+            self.nextToken = nextToken
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case mediaAnalysisJobs = "MediaAnalysisJobs"
+            case nextToken = "NextToken"
+        }
+    }
+
     public struct ListProjectPoliciesRequest: AWSEncodableShape {
         /// The maximum number of results to return per paginated call. The largest value you can specify is 5. If you specify a value greater than 5, a ValidationException error occurs. The default value is 5.
         public let maxResults: Int?
@@ -4663,6 +4887,187 @@ extension Rekognition {
         private enum CodingKeys: String, CodingKey {
             case userId = "UserId"
             case userStatus = "UserStatus"
+        }
+    }
+
+    public struct MediaAnalysisDetectModerationLabelsConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Specifies the minimum confidence level for the moderation labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value.
+        public let minConfidence: Float?
+        /// Specifies the custom moderation model to be used during the label detection job.  If not provided the pre-trained model is used.
+        public let projectVersion: String?
+
+        public init(minConfidence: Float? = nil, projectVersion: String? = nil) {
+            self.minConfidence = minConfidence
+            self.projectVersion = projectVersion
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.minConfidence, name: "minConfidence", parent: name, max: 100.0)
+            try self.validate(self.minConfidence, name: "minConfidence", parent: name, min: 0.0)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, max: 2048)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, min: 20)
+            try self.validate(self.projectVersion, name: "projectVersion", parent: name, pattern: "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/version\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case minConfidence = "MinConfidence"
+            case projectVersion = "ProjectVersion"
+        }
+    }
+
+    public struct MediaAnalysisInput: AWSEncodableShape & AWSDecodableShape {
+        public let s3Object: S3Object
+
+        public init(s3Object: S3Object) {
+            self.s3Object = s3Object
+        }
+
+        public func validate(name: String) throws {
+            try self.s3Object.validate(name: "\(name).s3Object")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case s3Object = "S3Object"
+        }
+    }
+
+    public struct MediaAnalysisJobDescription: AWSDecodableShape {
+        /// The Unix date and time when the job finished.
+        public let completionTimestamp: Date?
+        /// The Unix date and time when the job was started.
+        public let creationTimestamp: Date
+        /// Details about the error that resulted in failure of the job.
+        public let failureDetails: MediaAnalysisJobFailureDetails?
+        /// Reference to the input manifest that was provided in the job creation request.
+        public let input: MediaAnalysisInput
+        /// The identifier for a media analysis job.
+        public let jobId: String
+        /// The name of a media analysis job.
+        public let jobName: String?
+        /// KMS Key that was provided in the creation request.
+        public let kmsKeyId: String?
+        /// Provides statistics on input manifest and errors identified in the input manifest.
+        public let manifestSummary: MediaAnalysisManifestSummary?
+        /// Operation configurations that were provided during job creation.
+        public let operationsConfig: MediaAnalysisOperationsConfig
+        /// Output configuration that was provided in the creation request.
+        public let outputConfig: MediaAnalysisOutputConfig
+        /// Output manifest that contains prediction results.
+        public let results: MediaAnalysisResults?
+        /// The status of the media analysis job being retrieved.
+        public let status: MediaAnalysisJobStatus
+
+        public init(completionTimestamp: Date? = nil, creationTimestamp: Date, failureDetails: MediaAnalysisJobFailureDetails? = nil, input: MediaAnalysisInput, jobId: String, jobName: String? = nil, kmsKeyId: String? = nil, manifestSummary: MediaAnalysisManifestSummary? = nil, operationsConfig: MediaAnalysisOperationsConfig, outputConfig: MediaAnalysisOutputConfig, results: MediaAnalysisResults? = nil, status: MediaAnalysisJobStatus) {
+            self.completionTimestamp = completionTimestamp
+            self.creationTimestamp = creationTimestamp
+            self.failureDetails = failureDetails
+            self.input = input
+            self.jobId = jobId
+            self.jobName = jobName
+            self.kmsKeyId = kmsKeyId
+            self.manifestSummary = manifestSummary
+            self.operationsConfig = operationsConfig
+            self.outputConfig = outputConfig
+            self.results = results
+            self.status = status
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case completionTimestamp = "CompletionTimestamp"
+            case creationTimestamp = "CreationTimestamp"
+            case failureDetails = "FailureDetails"
+            case input = "Input"
+            case jobId = "JobId"
+            case jobName = "JobName"
+            case kmsKeyId = "KmsKeyId"
+            case manifestSummary = "ManifestSummary"
+            case operationsConfig = "OperationsConfig"
+            case outputConfig = "OutputConfig"
+            case results = "Results"
+            case status = "Status"
+        }
+    }
+
+    public struct MediaAnalysisJobFailureDetails: AWSDecodableShape {
+        /// Error code for the failed job.
+        public let code: MediaAnalysisJobFailureCode?
+        /// Human readable error message.
+        public let message: String?
+
+        public init(code: MediaAnalysisJobFailureCode? = nil, message: String? = nil) {
+            self.code = code
+            self.message = message
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case code = "Code"
+            case message = "Message"
+        }
+    }
+
+    public struct MediaAnalysisManifestSummary: AWSDecodableShape {
+        public let s3Object: S3Object?
+
+        public init(s3Object: S3Object? = nil) {
+            self.s3Object = s3Object
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case s3Object = "S3Object"
+        }
+    }
+
+    public struct MediaAnalysisOperationsConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Contains configuration options for a DetectModerationLabels job.
+        public let detectModerationLabels: MediaAnalysisDetectModerationLabelsConfig?
+
+        public init(detectModerationLabels: MediaAnalysisDetectModerationLabelsConfig? = nil) {
+            self.detectModerationLabels = detectModerationLabels
+        }
+
+        public func validate(name: String) throws {
+            try self.detectModerationLabels?.validate(name: "\(name).detectModerationLabels")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case detectModerationLabels = "DetectModerationLabels"
+        }
+    }
+
+    public struct MediaAnalysisOutputConfig: AWSEncodableShape & AWSDecodableShape {
+        /// Specifies the Amazon S3 bucket to contain the output of the media analysis job.
+        public let s3Bucket: String
+        /// Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for storage.
+        public let s3KeyPrefix: String?
+
+        public init(s3Bucket: String, s3KeyPrefix: String? = nil) {
+            self.s3Bucket = s3Bucket
+            self.s3KeyPrefix = s3KeyPrefix
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.s3Bucket, name: "s3Bucket", parent: name, max: 255)
+            try self.validate(self.s3Bucket, name: "s3Bucket", parent: name, min: 3)
+            try self.validate(self.s3Bucket, name: "s3Bucket", parent: name, pattern: "^[0-9A-Za-z\\.\\-_]*$")
+            try self.validate(self.s3KeyPrefix, name: "s3KeyPrefix", parent: name, max: 800)
+            try self.validate(self.s3KeyPrefix, name: "s3KeyPrefix", parent: name, pattern: "^\\S*$")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case s3Bucket = "S3Bucket"
+            case s3KeyPrefix = "S3KeyPrefix"
+        }
+    }
+
+    public struct MediaAnalysisResults: AWSDecodableShape {
+        public let s3Object: S3Object?
+
+        public init(s3Object: S3Object? = nil) {
+            self.s3Object = s3Object
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case s3Object = "S3Object"
         }
     }
 
@@ -4878,25 +5283,33 @@ extension Rekognition {
     }
 
     public struct ProjectDescription: AWSDecodableShape {
+        /// Indicates whether automatic retraining will be attempted for the versions of the project. Applies only to adapters.
+        public let autoUpdate: ProjectAutoUpdate?
         /// The Unix timestamp for the date and time that the project was created.
         public let creationTimestamp: Date?
         ///  Information about the training and test datasets in the project.
         public let datasets: [DatasetMetadata]?
+        /// Specifies the project that is being customized.
+        public let feature: CustomizationFeature?
         /// The Amazon Resource Name (ARN) of the project.
         public let projectArn: String?
         /// The current status of the project.
         public let status: ProjectStatus?
 
-        public init(creationTimestamp: Date? = nil, datasets: [DatasetMetadata]? = nil, projectArn: String? = nil, status: ProjectStatus? = nil) {
+        public init(autoUpdate: ProjectAutoUpdate? = nil, creationTimestamp: Date? = nil, datasets: [DatasetMetadata]? = nil, feature: CustomizationFeature? = nil, projectArn: String? = nil, status: ProjectStatus? = nil) {
+            self.autoUpdate = autoUpdate
             self.creationTimestamp = creationTimestamp
             self.datasets = datasets
+            self.feature = feature
             self.projectArn = projectArn
             self.status = status
         }
 
         private enum CodingKeys: String, CodingKey {
+            case autoUpdate = "AutoUpdate"
             case creationTimestamp = "CreationTimestamp"
             case datasets = "Datasets"
+            case feature = "Feature"
             case projectArn = "ProjectArn"
             case status = "Status"
         }
@@ -4936,23 +5349,29 @@ extension Rekognition {
     }
 
     public struct ProjectVersionDescription: AWSDecodableShape {
+        /// The base detection model version used to create the project version.
+        public let baseModelVersion: String?
         /// The duration, in seconds, that you were billed for a successful training of the model version.  This value is only returned if the model version has been successfully trained.
         public let billableTrainingTimeInSeconds: Int64?
         /// The Unix datetime for the date and time that training started.
         public let creationTimestamp: Date?
         /// The training results. EvaluationResult is only returned if training is successful.
         public let evaluationResult: EvaluationResult?
+        /// The feature that was customized.
+        public let feature: CustomizationFeature?
+        /// Feature specific configuration that was applied during training.
+        public let featureConfig: CustomizationFeatureConfig?
         /// The identifer for the AWS Key Management Service key (AWS KMS key) that was used to encrypt the model during training.
         public let kmsKeyId: String?
         /// The location of the summary manifest. The summary manifest provides aggregate data validation results for the training and test datasets.
         public let manifestSummary: GroundTruthManifest?
-        /// The maximum number of inference units Amazon Rekognition Custom Labels uses to auto-scale the model. For more information, see StartProjectVersion.
+        /// The maximum number of inference units Amazon Rekognition uses to auto-scale the model. Applies only to Custom Labels projects. For more information, see StartProjectVersion.
         public let maxInferenceUnits: Int?
-        /// The minimum number of inference units used by the model. For more information, see StartProjectVersion.
+        /// The minimum number of inference units used by the model. Applies only to Custom Labels projects. For more information, see StartProjectVersion.
         public let minInferenceUnits: Int?
         /// The location where training results are saved.
         public let outputConfig: OutputConfig?
-        /// The Amazon Resource Name (ARN) of the model version.
+        /// The Amazon Resource Name (ARN) of the project version.
         public let projectVersionArn: String?
         /// If the model version was copied from a different project, SourceProjectVersionArn contains the ARN of the source model version.
         public let sourceProjectVersionArn: String?
@@ -4966,11 +5385,16 @@ extension Rekognition {
         public let trainingDataResult: TrainingDataResult?
         /// The Unix date and time that training of the model ended.
         public let trainingEndTimestamp: Date?
+        /// A user-provided description of the project version.
+        public let versionDescription: String?
 
-        public init(billableTrainingTimeInSeconds: Int64? = nil, creationTimestamp: Date? = nil, evaluationResult: EvaluationResult? = nil, kmsKeyId: String? = nil, manifestSummary: GroundTruthManifest? = nil, maxInferenceUnits: Int? = nil, minInferenceUnits: Int? = nil, outputConfig: OutputConfig? = nil, projectVersionArn: String? = nil, sourceProjectVersionArn: String? = nil, status: ProjectVersionStatus? = nil, statusMessage: String? = nil, testingDataResult: TestingDataResult? = nil, trainingDataResult: TrainingDataResult? = nil, trainingEndTimestamp: Date? = nil) {
+        public init(baseModelVersion: String? = nil, billableTrainingTimeInSeconds: Int64? = nil, creationTimestamp: Date? = nil, evaluationResult: EvaluationResult? = nil, feature: CustomizationFeature? = nil, featureConfig: CustomizationFeatureConfig? = nil, kmsKeyId: String? = nil, manifestSummary: GroundTruthManifest? = nil, maxInferenceUnits: Int? = nil, minInferenceUnits: Int? = nil, outputConfig: OutputConfig? = nil, projectVersionArn: String? = nil, sourceProjectVersionArn: String? = nil, status: ProjectVersionStatus? = nil, statusMessage: String? = nil, testingDataResult: TestingDataResult? = nil, trainingDataResult: TrainingDataResult? = nil, trainingEndTimestamp: Date? = nil, versionDescription: String? = nil) {
+            self.baseModelVersion = baseModelVersion
             self.billableTrainingTimeInSeconds = billableTrainingTimeInSeconds
             self.creationTimestamp = creationTimestamp
             self.evaluationResult = evaluationResult
+            self.feature = feature
+            self.featureConfig = featureConfig
             self.kmsKeyId = kmsKeyId
             self.manifestSummary = manifestSummary
             self.maxInferenceUnits = maxInferenceUnits
@@ -4983,12 +5407,16 @@ extension Rekognition {
             self.testingDataResult = testingDataResult
             self.trainingDataResult = trainingDataResult
             self.trainingEndTimestamp = trainingEndTimestamp
+            self.versionDescription = versionDescription
         }
 
         private enum CodingKeys: String, CodingKey {
+            case baseModelVersion = "BaseModelVersion"
             case billableTrainingTimeInSeconds = "BillableTrainingTimeInSeconds"
             case creationTimestamp = "CreationTimestamp"
             case evaluationResult = "EvaluationResult"
+            case feature = "Feature"
+            case featureConfig = "FeatureConfig"
             case kmsKeyId = "KmsKeyId"
             case manifestSummary = "ManifestSummary"
             case maxInferenceUnits = "MaxInferenceUnits"
@@ -5001,6 +5429,7 @@ extension Rekognition {
             case testingDataResult = "TestingDataResult"
             case trainingDataResult = "TrainingDataResult"
             case trainingEndTimestamp = "TrainingEndTimestamp"
+            case versionDescription = "VersionDescription"
         }
     }
 
@@ -5939,6 +6368,67 @@ extension Rekognition {
         }
     }
 
+    public struct StartMediaAnalysisJobRequest: AWSEncodableShape {
+        /// Idempotency token used to prevent the accidental creation of duplicate versions. If you use the same token with multiple StartMediaAnalysisJobRequest requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+        public let clientRequestToken: String?
+        /// Input data to be analyzed by the job.
+        public let input: MediaAnalysisInput
+        /// The name of the job. Does not have to be unique.
+        public let jobName: String?
+        /// The identifier of customer managed AWS KMS key (name or ARN). The key  is used to encrypt images copied into the service. The key is also used  to encrypt results and manifest files written to the output Amazon S3 bucket.
+        public let kmsKeyId: String?
+        /// Configuration options for the media analysis job to be created.
+        public let operationsConfig: MediaAnalysisOperationsConfig
+        /// The Amazon S3 bucket location to store the results.
+        public let outputConfig: MediaAnalysisOutputConfig
+
+        public init(clientRequestToken: String? = StartMediaAnalysisJobRequest.idempotencyToken(), input: MediaAnalysisInput, jobName: String? = nil, kmsKeyId: String? = nil, operationsConfig: MediaAnalysisOperationsConfig, outputConfig: MediaAnalysisOutputConfig) {
+            self.clientRequestToken = clientRequestToken
+            self.input = input
+            self.jobName = jobName
+            self.kmsKeyId = kmsKeyId
+            self.operationsConfig = operationsConfig
+            self.outputConfig = outputConfig
+        }
+
+        public func validate(name: String) throws {
+            try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, max: 64)
+            try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, min: 1)
+            try self.validate(self.clientRequestToken, name: "clientRequestToken", parent: name, pattern: "^[a-zA-Z0-9-_]+$")
+            try self.input.validate(name: "\(name).input")
+            try self.validate(self.jobName, name: "jobName", parent: name, max: 64)
+            try self.validate(self.jobName, name: "jobName", parent: name, min: 1)
+            try self.validate(self.jobName, name: "jobName", parent: name, pattern: "^[a-zA-Z0-9_.\\-]+$")
+            try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, max: 2048)
+            try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, min: 1)
+            try self.validate(self.kmsKeyId, name: "kmsKeyId", parent: name, pattern: "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$")
+            try self.operationsConfig.validate(name: "\(name).operationsConfig")
+            try self.outputConfig.validate(name: "\(name).outputConfig")
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case clientRequestToken = "ClientRequestToken"
+            case input = "Input"
+            case jobName = "JobName"
+            case kmsKeyId = "KmsKeyId"
+            case operationsConfig = "OperationsConfig"
+            case outputConfig = "OutputConfig"
+        }
+    }
+
+    public struct StartMediaAnalysisJobResponse: AWSDecodableShape {
+        /// Identifier for the created job.
+        public let jobId: String
+
+        public init(jobId: String) {
+            self.jobId = jobId
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case jobId = "JobId"
+        }
+    }
+
     public struct StartPersonTrackingRequest: AWSEncodableShape {
         /// Idempotent token used to identify the start request. If you use the same token with multiple StartPersonTracking requests, the same JobId is returned. Use ClientRequestToken to prevent the same job from being accidently started more than once.
         public let clientRequestToken: String?
@@ -5991,7 +6481,7 @@ extension Rekognition {
     public struct StartProjectVersionRequest: AWSEncodableShape {
         /// The maximum number of inference units to use for auto-scaling the model. If you don't specify a value, Amazon Rekognition Custom Labels doesn't auto-scale the model.
         public let maxInferenceUnits: Int?
-        /// The minimum number of inference units to use. A single inference unit represents 1 hour of processing.  For information about the number  of transactions per second (TPS) that an inference unit can support, see  Running a trained Amazon Rekognition Custom Labels model in the  Amazon Rekognition Custom Labels Guide.  Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use.
+        /// The minimum number of inference units to use. A single inference unit represents 1 hour of processing.  Use a higher number to increase the TPS throughput of your model. You are charged for the number of inference units that you use.
         public let minInferenceUnits: Int
         /// The Amazon Resource Name(ARN) of the model version that you want to start.
         public let projectVersionArn: String
@@ -6268,7 +6758,7 @@ extension Rekognition {
     }
 
     public struct StopProjectVersionRequest: AWSEncodableShape {
-        /// The Amazon Resource Name (ARN) of the model version that you want to delete. This operation requires permissions to perform the rekognition:StopProjectVersion action.
+        /// The Amazon Resource Name (ARN) of the model version that you want to stop. This operation requires permissions to perform the rekognition:StopProjectVersion action.
         public let projectVersionArn: String
 
         public init(projectVersionArn: String) {
@@ -6564,7 +7054,7 @@ extension Rekognition {
     public struct TestingData: AWSEncodableShape & AWSDecodableShape {
         /// The assets used for testing.
         public let assets: [Asset]?
-        /// If specified, Amazon Rekognition Custom Labels temporarily splits the training dataset (80%) to create a test dataset (20%) for the training job. After training completes, the test dataset is not stored and the training dataset reverts to its previous size.
+        /// If specified, Rekognition splits training dataset to create a test dataset for the training job.
         public let autoCreate: Bool?
 
         public init(assets: [Asset]? = nil, autoCreate: Bool? = nil) {
@@ -6656,7 +7146,7 @@ extension Rekognition {
     }
 
     public struct TrainingData: AWSEncodableShape & AWSDecodableShape {
-        /// A Sagemaker GroundTruth manifest file that contains the training images (assets).
+        /// A manifest file that contains references to the training images and ground-truth annotations.
         public let assets: [Asset]?
 
         public init(assets: [Asset]? = nil) {
@@ -6675,11 +7165,11 @@ extension Rekognition {
     }
 
     public struct TrainingDataResult: AWSDecodableShape {
-        /// The training assets that you supplied for training.
+        /// The training data that you supplied.
         public let input: TrainingData?
-        /// The images (assets) that were actually trained by Amazon Rekognition Custom Labels.
+        /// Reference to images (assets) that were actually used during training with trained model predictions.
         public let output: TrainingData?
-        /// The location of the data validation manifest. The data validation manifest is created for the training dataset during model training.
+        /// A manifest that you supplied for training, with validation results for each line.
         public let validation: ValidationData?
 
         public init(input: TrainingData? = nil, output: TrainingData? = nil, validation: ValidationData? = nil) {
@@ -7010,6 +7500,7 @@ public struct RekognitionErrorType: AWSErrorType {
         case imageTooLargeException = "ImageTooLargeException"
         case internalServerError = "InternalServerError"
         case invalidImageFormatException = "InvalidImageFormatException"
+        case invalidManifestException = "InvalidManifestException"
         case invalidPaginationTokenException = "InvalidPaginationTokenException"
         case invalidParameterException = "InvalidParameterException"
         case invalidPolicyRevisionIdException = "InvalidPolicyRevisionIdException"
@@ -7059,6 +7550,8 @@ public struct RekognitionErrorType: AWSErrorType {
     public static var internalServerError: Self { .init(.internalServerError) }
     /// The provided image format is not supported.
     public static var invalidImageFormatException: Self { .init(.invalidImageFormatException) }
+    /// Indicates that a provided manifest file is empty or larger than the allowed limit.
+    public static var invalidManifestException: Self { .init(.invalidManifestException) }
     /// Pagination token in the request is not valid.
     public static var invalidPaginationTokenException: Self { .init(.invalidPaginationTokenException) }
     /// Input parameter violated a constraint. Validate your parameter before calling the API operation again.
@@ -7067,7 +7560,7 @@ public struct RekognitionErrorType: AWSErrorType {
     public static var invalidPolicyRevisionIdException: Self { .init(.invalidPolicyRevisionIdException) }
     /// Amazon Rekognition is unable to access the S3 object specified in the request.
     public static var invalidS3ObjectException: Self { .init(.invalidS3ObjectException) }
-    /// An Amazon Rekognition service limit was exceeded. For example, if you start too many Amazon Rekognition Video jobs concurrently, calls to start operations  (StartLabelDetection, for example) will raise a LimitExceededException exception (HTTP status code: 400) until the number of concurrently running jobs is below the Amazon Rekognition service limit.
+    /// An Amazon Rekognition service limit was exceeded. For example, if you start too many jobs concurrently, subsequent calls to start operations (ex: StartLabelDetection) will raise a LimitExceededException exception (HTTP status code: 400) until the number of concurrently running jobs is below the Amazon Rekognition service limit.
     public static var limitExceededException: Self { .init(.limitExceededException) }
     /// The format of the project policy document that you supplied to  PutProjectPolicy is incorrect.
     public static var malformedPolicyDocumentException: Self { .init(.malformedPolicyDocumentException) }

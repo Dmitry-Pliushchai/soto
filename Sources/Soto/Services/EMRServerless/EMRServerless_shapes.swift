@@ -26,7 +26,7 @@ import SotoCore
 extension EMRServerless {
     // MARK: Enums
 
-    public enum ApplicationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ApplicationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case created = "CREATED"
         case creating = "CREATING"
         case started = "STARTED"
@@ -37,13 +37,13 @@ extension EMRServerless {
         public var description: String { return self.rawValue }
     }
 
-    public enum Architecture: String, CustomStringConvertible, Codable, Sendable {
+    public enum Architecture: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case arm64 = "ARM64"
         case x8664 = "X86_64"
         public var description: String { return self.rawValue }
     }
 
-    public enum JobRunState: String, CustomStringConvertible, Codable, Sendable {
+    public enum JobRunState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case cancelled = "CANCELLED"
         case cancelling = "CANCELLING"
         case failed = "FAILED"

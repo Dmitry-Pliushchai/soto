@@ -64,156 +64,187 @@ public struct FinspaceData: AWSService {
     // MARK: API Calls
 
     /// Adds a user to a permission group to grant permissions for actions a user can perform in FinSpace.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func associateUserToPermissionGroup(_ input: AssociateUserToPermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<AssociateUserToPermissionGroupResponse> {
         return self.client.execute(operation: "AssociateUserToPermissionGroup", path: "/permission-group/{permissionGroupId}/users/{userId}", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a new Changeset in a FinSpace Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createChangeset(_ input: CreateChangesetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateChangesetResponse> {
         return self.client.execute(operation: "CreateChangeset", path: "/datasets/{datasetId}/changesetsv2", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a Dataview for a Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createDataView(_ input: CreateDataViewRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateDataViewResponse> {
         return self.client.execute(operation: "CreateDataView", path: "/datasets/{datasetId}/dataviewsv2", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a new FinSpace Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createDataset(_ input: CreateDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateDatasetResponse> {
         return self.client.execute(operation: "CreateDataset", path: "/datasetsv2", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a group of permissions for various actions that a user can perform in FinSpace.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createPermissionGroup(_ input: CreatePermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreatePermissionGroupResponse> {
         return self.client.execute(operation: "CreatePermissionGroup", path: "/permission-group", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Creates a new user in FinSpace.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func createUser(_ input: CreateUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<CreateUserResponse> {
         return self.client.execute(operation: "CreateUser", path: "/user", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a FinSpace Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func deleteDataset(_ input: DeleteDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeleteDatasetResponse> {
         return self.client.execute(operation: "DeleteDataset", path: "/datasetsv2/{datasetId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a permission group. This action is irreversible.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func deletePermissionGroup(_ input: DeletePermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DeletePermissionGroupResponse> {
         return self.client.execute(operation: "DeletePermissionGroup", path: "/permission-group/{permissionGroupId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Denies access to the FinSpace web application and API for the specified user.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func disableUser(_ input: DisableUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DisableUserResponse> {
         return self.client.execute(operation: "DisableUser", path: "/user/{userId}/disable", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Removes a user from a permission group.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func disassociateUserFromPermissionGroup(_ input: DisassociateUserFromPermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<DisassociateUserFromPermissionGroupResponse> {
         return self.client.execute(operation: "DisassociateUserFromPermissionGroup", path: "/permission-group/{permissionGroupId}/users/{userId}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     ///  Allows the specified user to access the FinSpace web application and API.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func enableUser(_ input: EnableUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<EnableUserResponse> {
         return self.client.execute(operation: "EnableUser", path: "/user/{userId}/enable", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Get information about a Changeset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getChangeset(_ input: GetChangesetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetChangesetResponse> {
         return self.client.execute(operation: "GetChangeset", path: "/datasets/{datasetId}/changesetsv2/{changesetId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Gets information about a Dataview.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getDataView(_ input: GetDataViewRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDataViewResponse> {
         return self.client.execute(operation: "GetDataView", path: "/datasets/{datasetId}/dataviewsv2/{dataViewId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns information about a Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getDataset(_ input: GetDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetDatasetResponse> {
         return self.client.execute(operation: "GetDataset", path: "/datasetsv2/{datasetId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns the credentials to access the external Dataview from an S3 location. To call this API:   You must retrieve the programmatic credentials.   You must be a member of a FinSpace user group, where the dataset that you want to access has Read Dataset Data permissions.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getExternalDataViewAccessDetails(_ input: GetExternalDataViewAccessDetailsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetExternalDataViewAccessDetailsResponse> {
         return self.client.execute(operation: "GetExternalDataViewAccessDetails", path: "/datasets/{datasetId}/dataviewsv2/{dataViewId}/external-access-details", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves the details of a specific permission group.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getPermissionGroup(_ input: GetPermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetPermissionGroupResponse> {
         return self.client.execute(operation: "GetPermissionGroup", path: "/permission-group/{permissionGroupId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Request programmatic credentials to use with FinSpace SDK. For more information, see Step 2. Access credentials programmatically using IAM access key id and secret access key.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getProgrammaticAccessCredentials(_ input: GetProgrammaticAccessCredentialsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetProgrammaticAccessCredentialsResponse> {
         return self.client.execute(operation: "GetProgrammaticAccessCredentials", path: "/credentials/programmatic", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves details for a specific user.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getUser(_ input: GetUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetUserResponse> {
         return self.client.execute(operation: "GetUser", path: "/user/{userId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// A temporary Amazon S3 location, where you can copy your files from a source location to stage or use as a scratch space in FinSpace notebook.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func getWorkingLocation(_ input: GetWorkingLocationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<GetWorkingLocationResponse> {
         return self.client.execute(operation: "GetWorkingLocation", path: "/workingLocationV1", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists the FinSpace Changesets for a Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listChangesets(_ input: ListChangesetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListChangesetsResponse> {
         return self.client.execute(operation: "ListChangesets", path: "/datasets/{datasetId}/changesetsv2", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all available Dataviews for a Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDataViews(_ input: ListDataViewsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDataViewsResponse> {
         return self.client.execute(operation: "ListDataViews", path: "/datasets/{datasetId}/dataviewsv2", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all of the active Datasets that a user has access to.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDatasets(_ input: ListDatasetsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListDatasetsResponse> {
         return self.client.execute(operation: "ListDatasets", path: "/datasetsv2", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all available permission groups in FinSpace.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listPermissionGroups(_ input: ListPermissionGroupsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListPermissionGroupsResponse> {
         return self.client.execute(operation: "ListPermissionGroups", path: "/permission-group", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all the permission groups that are associated with a specific user.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listPermissionGroupsByUser(_ input: ListPermissionGroupsByUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListPermissionGroupsByUserResponse> {
         return self.client.execute(operation: "ListPermissionGroupsByUser", path: "/user/{userId}/permission-groups", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists all available users in FinSpace.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listUsers(_ input: ListUsersRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListUsersResponse> {
         return self.client.execute(operation: "ListUsers", path: "/user", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Lists details of all the users in a specific permission group.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listUsersByPermissionGroup(_ input: ListUsersByPermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ListUsersByPermissionGroupResponse> {
         return self.client.execute(operation: "ListUsersByPermissionGroup", path: "/permission-group/{permissionGroupId}/users", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Resets the password for a specified user ID and generates a temporary one. Only a superuser can reset password for other users. Resetting the password immediately invalidates the previous password associated with the user.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func resetUserPassword(_ input: ResetUserPasswordRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<ResetUserPasswordResponse> {
         return self.client.execute(operation: "ResetUserPassword", path: "/user/{userId}/password", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a FinSpace Changeset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func updateChangeset(_ input: UpdateChangesetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateChangesetResponse> {
         return self.client.execute(operation: "UpdateChangeset", path: "/datasets/{datasetId}/changesetsv2/{changesetId}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates a FinSpace Dataset.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func updateDataset(_ input: UpdateDatasetRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateDatasetResponse> {
         return self.client.execute(operation: "UpdateDataset", path: "/datasetsv2/{datasetId}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Modifies the details of a permission group. You cannot modify a permissionGroupID.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func updatePermissionGroup(_ input: UpdatePermissionGroupRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdatePermissionGroupResponse> {
         return self.client.execute(operation: "UpdatePermissionGroup", path: "/permission-group/{permissionGroupId}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Modifies the details of the specified user. You cannot update the userId for a user.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func updateUser(_ input: UpdateUserRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) -> EventLoopFuture<UpdateUserResponse> {
         return self.client.execute(operation: "UpdateUser", path: "/user/{userId}", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -243,6 +274,7 @@ extension FinspaceData {
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
     ///         along with a boolean indicating if the paginate operation should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listChangesetsPaginator<Result>(
         _ input: ListChangesetsRequest,
         _ initialValue: Result,
@@ -268,6 +300,7 @@ extension FinspaceData {
     ///   - logger: Logger used flot logging
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listChangesetsPaginator(
         _ input: ListChangesetsRequest,
         logger: Logger = AWSClient.loggingDisabled,
@@ -296,6 +329,7 @@ extension FinspaceData {
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
     ///         along with a boolean indicating if the paginate operation should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDataViewsPaginator<Result>(
         _ input: ListDataViewsRequest,
         _ initialValue: Result,
@@ -321,6 +355,7 @@ extension FinspaceData {
     ///   - logger: Logger used flot logging
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDataViewsPaginator(
         _ input: ListDataViewsRequest,
         logger: Logger = AWSClient.loggingDisabled,
@@ -349,6 +384,7 @@ extension FinspaceData {
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
     ///         along with a boolean indicating if the paginate operation should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDatasetsPaginator<Result>(
         _ input: ListDatasetsRequest,
         _ initialValue: Result,
@@ -374,6 +410,7 @@ extension FinspaceData {
     ///   - logger: Logger used flot logging
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listDatasetsPaginator(
         _ input: ListDatasetsRequest,
         logger: Logger = AWSClient.loggingDisabled,
@@ -402,6 +439,7 @@ extension FinspaceData {
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
     ///         along with a boolean indicating if the paginate operation should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listPermissionGroupsPaginator<Result>(
         _ input: ListPermissionGroupsRequest,
         _ initialValue: Result,
@@ -427,6 +465,7 @@ extension FinspaceData {
     ///   - logger: Logger used flot logging
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listPermissionGroupsPaginator(
         _ input: ListPermissionGroupsRequest,
         logger: Logger = AWSClient.loggingDisabled,
@@ -455,6 +494,7 @@ extension FinspaceData {
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each paginated response. It combines an accumulating result with the contents of response. This combined result is then returned
     ///         along with a boolean indicating if the paginate operation should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listUsersPaginator<Result>(
         _ input: ListUsersRequest,
         _ initialValue: Result,
@@ -480,6 +520,7 @@ extension FinspaceData {
     ///   - logger: Logger used flot logging
     ///   - eventLoop: EventLoop to run this process on
     ///   - onPage: closure called with each block of entries. Returns boolean indicating whether we should continue.
+    @available(*, deprecated, message: "This method will be discontinued.")
     public func listUsersPaginator(
         _ input: ListUsersRequest,
         logger: Logger = AWSClient.loggingDisabled,

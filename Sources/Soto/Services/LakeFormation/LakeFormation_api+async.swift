@@ -61,6 +61,11 @@ extension LakeFormation {
         return try await self.client.execute(operation: "CreateLFTag", path: "/CreateLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates an IAM Identity Center connection with Lake Formation to allow IAM Identity Center users and groups to access Data Catalog resources.
+    public func createLakeFormationIdentityCenterConfiguration(_ input: CreateLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateLakeFormationIdentityCenterConfigurationResponse {
+        return try await self.client.execute(operation: "CreateLakeFormationIdentityCenterConfiguration", path: "/CreateLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Enforce Lake Formation permissions for the given databases, tables, and principals.
     public func createLakeFormationOptIn(_ input: CreateLakeFormationOptInRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateLakeFormationOptInResponse {
         return try await self.client.execute(operation: "CreateLakeFormationOptIn", path: "/CreateLakeFormationOptIn", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -76,6 +81,11 @@ extension LakeFormation {
         return try await self.client.execute(operation: "DeleteLFTag", path: "/DeleteLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Deletes an IAM Identity Center connection with Lake Formation.
+    public func deleteLakeFormationIdentityCenterConfiguration(_ input: DeleteLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteLakeFormationIdentityCenterConfigurationResponse {
+        return try await self.client.execute(operation: "DeleteLakeFormationIdentityCenterConfiguration", path: "/DeleteLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
     public func deleteLakeFormationOptIn(_ input: DeleteLakeFormationOptInRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteLakeFormationOptInResponse {
         return try await self.client.execute(operation: "DeleteLakeFormationOptIn", path: "/DeleteLakeFormationOptIn", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -89,6 +99,11 @@ extension LakeFormation {
     /// Deregisters the resource as managed by the Data Catalog. When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.
     public func deregisterResource(_ input: DeregisterResourceRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeregisterResourceResponse {
         return try await self.client.execute(operation: "DeregisterResource", path: "/DeregisterResource", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Retrieves the instance ARN and application ARN for the connection.
+    public func describeLakeFormationIdentityCenterConfiguration(_ input: DescribeLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeLakeFormationIdentityCenterConfigurationResponse {
+        return try await self.client.execute(operation: "DescribeLakeFormationIdentityCenterConfiguration", path: "/DescribeLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Retrieves the current data access role for the given resource registered in Lake Formation.
@@ -255,6 +270,11 @@ extension LakeFormation {
     /// Updates the list of possible values for the specified LF-tag key. If the LF-tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the LF-tag key's value.
     public func updateLFTag(_ input: UpdateLFTagRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateLFTagResponse {
         return try await self.client.execute(operation: "UpdateLFTag", path: "/UpdateLFTag", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates the IAM Identity Center connection parameters.
+    public func updateLakeFormationIdentityCenterConfiguration(_ input: UpdateLakeFormationIdentityCenterConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateLakeFormationIdentityCenterConfigurationResponse {
+        return try await self.client.execute(operation: "UpdateLakeFormationIdentityCenterConfiguration", path: "/UpdateLakeFormationIdentityCenterConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the data access role used for vending access to the given (registered) resource in Lake Formation.

@@ -26,7 +26,7 @@ import SotoCore
 extension ChimeSDKMediaPipelines {
     // MARK: Enums
 
-    public enum ActiveSpeakerPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum ActiveSpeakerPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottomLeft = "BottomLeft"
         case bottomRight = "BottomRight"
         case topLeft = "TopLeft"
@@ -34,37 +34,37 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum ArtifactsConcatenationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ArtifactsConcatenationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum ArtifactsState: String, CustomStringConvertible, Codable, Sendable {
+    public enum ArtifactsState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioArtifactsConcatenationState: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioArtifactsConcatenationState: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioChannelsOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioChannelsOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mono = "Mono"
         case stereo = "Stereo"
         public var description: String { return self.rawValue }
     }
 
-    public enum AudioMuxType: String, CustomStringConvertible, Codable, Sendable {
+    public enum AudioMuxType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audioOnly = "AudioOnly"
         case audioWithActiveSpeakerVideo = "AudioWithActiveSpeakerVideo"
         case audioWithCompositedVideo = "AudioWithCompositedVideo"
         public var description: String { return self.rawValue }
     }
 
-    public enum BorderColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum BorderColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "Black"
         case blue = "Blue"
         case green = "Green"
@@ -74,7 +74,7 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum CallAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum CallAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case deDe = "de-DE"
         case enAu = "en-AU"
         case enGb = "en-GB"
@@ -87,34 +87,34 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum CanvasOrientation: String, CustomStringConvertible, Codable, Sendable {
+    public enum CanvasOrientation: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case landscape = "Landscape"
         case portrait = "Portrait"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConcatenationSinkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConcatenationSinkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3Bucket = "S3Bucket"
         public var description: String { return self.rawValue }
     }
 
-    public enum ConcatenationSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ConcatenationSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mediaCapturePipeline = "MediaCapturePipeline"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentMuxType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentMuxType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case contentOnly = "ContentOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentRedactionOutput: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentRedactionOutput: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case redacted = "redacted"
         case redactedAndUnredacted = "redacted_and_unredacted"
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentShareLayoutOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentShareLayoutOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case activeSpeakerOnly = "ActiveSpeakerOnly"
         case horizontal = "Horizontal"
         case presenterOnly = "PresenterOnly"
@@ -122,18 +122,18 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum ContentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum ContentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pii = "PII"
         public var description: String { return self.rawValue }
     }
 
-    public enum FragmentSelectorType: String, CustomStringConvertible, Codable, Sendable {
+    public enum FragmentSelectorType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case producerTimestamp = "ProducerTimestamp"
         case serverTimestamp = "ServerTimestamp"
         public var description: String { return self.rawValue }
     }
 
-    public enum HighlightColor: String, CustomStringConvertible, Codable, Sendable {
+    public enum HighlightColor: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case black = "Black"
         case blue = "Blue"
         case green = "Green"
@@ -143,13 +143,13 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum HorizontalTilePosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum HorizontalTilePosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottom = "Bottom"
         case top = "Top"
         public var description: String { return self.rawValue }
     }
 
-    public enum KinesisVideoStreamPoolStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum KinesisVideoStreamPoolStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case active = "ACTIVE"
         case creating = "CREATING"
         case deleting = "DELETING"
@@ -158,33 +158,33 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum LayoutOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum LayoutOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case gridView = "GridView"
         public var description: String { return self.rawValue }
     }
 
-    public enum LiveConnectorMuxType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LiveConnectorMuxType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case audioWithActiveSpeakerVideo = "AudioWithActiveSpeakerVideo"
         case audioWithCompositedVideo = "AudioWithCompositedVideo"
         public var description: String { return self.rawValue }
     }
 
-    public enum LiveConnectorSinkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LiveConnectorSinkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case rtmp = "RTMP"
         public var description: String { return self.rawValue }
     }
 
-    public enum LiveConnectorSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum LiveConnectorSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chimeSdkMeeting = "ChimeSdkMeeting"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaEncoding: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaEncoding: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pcm = "pcm"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaInsightsPipelineConfigurationElementType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaInsightsPipelineConfigurationElementType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case amazonTranscribeCallAnalyticsProcessor = "AmazonTranscribeCallAnalyticsProcessor"
         case amazonTranscribeProcessor = "AmazonTranscribeProcessor"
         case kinesisDataStreamSink = "KinesisDataStreamSink"
@@ -197,7 +197,7 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineElementStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineElementStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case initializing = "Initializing"
@@ -209,17 +209,17 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineSinkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineSinkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case s3Bucket = "S3Bucket"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineSourceType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineSourceType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case chimeSdkMeeting = "ChimeSdkMeeting"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case initializing = "Initializing"
@@ -230,13 +230,13 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineStatusUpdate: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineStatusUpdate: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case pause = "Pause"
         case resume = "Resume"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaPipelineTaskStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaPipelineTaskStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case failed = "Failed"
         case inProgress = "InProgress"
         case initializing = "Initializing"
@@ -246,31 +246,31 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaStreamPipelineSinkType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaStreamPipelineSinkType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case kinesisVideoStreamPool = "KinesisVideoStreamPool"
         public var description: String { return self.rawValue }
     }
 
-    public enum MediaStreamType: String, CustomStringConvertible, Codable, Sendable {
+    public enum MediaStreamType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case individualAudio = "IndividualAudio"
         case mixedAudio = "MixedAudio"
         public var description: String { return self.rawValue }
     }
 
-    public enum PartialResultsStability: String, CustomStringConvertible, Codable, Sendable {
+    public enum PartialResultsStability: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case high = "high"
         case low = "low"
         case medium = "medium"
         public var description: String { return self.rawValue }
     }
 
-    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable {
+    public enum ParticipantRole: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case agent = "AGENT"
         case customer = "CUSTOMER"
         public var description: String { return self.rawValue }
     }
 
-    public enum PresenterPosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum PresenterPosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case bottomLeft = "BottomLeft"
         case bottomRight = "BottomRight"
         case topLeft = "TopLeft"
@@ -278,61 +278,61 @@ extension ChimeSDKMediaPipelines {
         public var description: String { return self.rawValue }
     }
 
-    public enum RealTimeAlertRuleType: String, CustomStringConvertible, Codable, Sendable {
+    public enum RealTimeAlertRuleType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case issueDetection = "IssueDetection"
         case keywordMatch = "KeywordMatch"
         case sentiment = "Sentiment"
         public var description: String { return self.rawValue }
     }
 
-    public enum RecordingFileFormat: String, CustomStringConvertible, Codable, Sendable {
+    public enum RecordingFileFormat: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case opus = "Opus"
         case wav = "Wav"
         public var description: String { return self.rawValue }
     }
 
-    public enum ResolutionOption: String, CustomStringConvertible, Codable, Sendable {
+    public enum ResolutionOption: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case fhd = "FHD"
         case hd = "HD"
         public var description: String { return self.rawValue }
     }
 
-    public enum SentimentType: String, CustomStringConvertible, Codable, Sendable {
+    public enum SentimentType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case negative = "NEGATIVE"
         public var description: String { return self.rawValue }
     }
 
-    public enum TileOrder: String, CustomStringConvertible, Codable, Sendable {
+    public enum TileOrder: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case joinSequence = "JoinSequence"
         case speakerSequence = "SpeakerSequence"
         public var description: String { return self.rawValue }
     }
 
-    public enum VerticalTilePosition: String, CustomStringConvertible, Codable, Sendable {
+    public enum VerticalTilePosition: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case left = "Left"
         case right = "Right"
         public var description: String { return self.rawValue }
     }
 
-    public enum VideoMuxType: String, CustomStringConvertible, Codable, Sendable {
+    public enum VideoMuxType: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case videoOnly = "VideoOnly"
         public var description: String { return self.rawValue }
     }
 
-    public enum VocabularyFilterMethod: String, CustomStringConvertible, Codable, Sendable {
+    public enum VocabularyFilterMethod: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case mask = "mask"
         case remove = "remove"
         case tag = "tag"
         public var description: String { return self.rawValue }
     }
 
-    public enum VoiceAnalyticsConfigurationStatus: String, CustomStringConvertible, Codable, Sendable {
+    public enum VoiceAnalyticsConfigurationStatus: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case disabled = "Disabled"
         case enabled = "Enabled"
         public var description: String { return self.rawValue }
     }
 
-    public enum VoiceAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable {
+    public enum VoiceAnalyticsLanguageCode: String, CustomStringConvertible, Codable, Sendable, CodingKeyRepresentable {
         case enUs = "en-US"
         public var description: String { return self.rawValue }
     }

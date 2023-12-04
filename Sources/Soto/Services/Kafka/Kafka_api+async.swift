@@ -46,6 +46,11 @@ extension Kafka {
         return try await self.client.execute(operation: "CreateConfiguration", path: "/v1/configurations", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Creates the replicator.
+    public func createReplicator(_ input: CreateReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateReplicatorResponse {
+        return try await self.client.execute(operation: "CreateReplicator", path: "/replication/v1/replicators", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new MSK VPC connection.
     public func createVpcConnection(_ input: CreateVpcConnectionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> CreateVpcConnectionResponse {
         return try await self.client.execute(operation: "CreateVpcConnection", path: "/v1/vpc-connection", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -64,6 +69,11 @@ extension Kafka {
     /// Deletes an MSK Configuration.
     public func deleteConfiguration(_ input: DeleteConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteConfigurationResponse {
         return try await self.client.execute(operation: "DeleteConfiguration", path: "/v1/configurations/{Arn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Deletes a replicator.
+    public func deleteReplicator(_ input: DeleteReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteReplicatorResponse {
+        return try await self.client.execute(operation: "DeleteReplicator", path: "/replication/v1/replicators/{ReplicatorArn}", httpMethod: .DELETE, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a MSK VPC connection.
@@ -99,6 +109,11 @@ extension Kafka {
     /// Returns a description of this revision of the configuration.
     public func describeConfigurationRevision(_ input: DescribeConfigurationRevisionRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeConfigurationRevisionResponse {
         return try await self.client.execute(operation: "DescribeConfigurationRevision", path: "/v1/configurations/{Arn}/revisions/{Revision}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Describes a replicator.
+    public func describeReplicator(_ input: DescribeReplicatorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DescribeReplicatorResponse {
+        return try await self.client.execute(operation: "DescribeReplicator", path: "/replication/v1/replicators/{ReplicatorArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a description of this MSK VPC connection.
@@ -164,6 +179,11 @@ extension Kafka {
     /// Returns a list of the broker nodes in the cluster.
     public func listNodes(_ input: ListNodesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListNodesResponse {
         return try await self.client.execute(operation: "ListNodes", path: "/v1/clusters/{ClusterArn}/nodes", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Lists the replicators.
+    public func listReplicators(_ input: ListReplicatorsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListReplicatorsResponse {
+        return try await self.client.execute(operation: "ListReplicators", path: "/replication/v1/replicators", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
@@ -244,6 +264,11 @@ extension Kafka {
     /// Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
     public func updateMonitoring(_ input: UpdateMonitoringRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateMonitoringResponse {
         return try await self.client.execute(operation: "UpdateMonitoring", path: "/v1/clusters/{ClusterArn}/monitoring", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Updates replication info of a replicator.
+    public func updateReplicationInfo(_ input: UpdateReplicationInfoRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> UpdateReplicationInfoResponse {
+        return try await self.client.execute(operation: "UpdateReplicationInfo", path: "/replication/v1/replicators/{ReplicatorArn}/replication-info", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.
@@ -454,6 +479,28 @@ extension Kafka {
             command: self.listNodes,
             inputKey: \ListNodesRequest.nextToken,
             outputKey: \ListNodesResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// Lists the replicators.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listReplicatorsPaginator(
+        _ input: ListReplicatorsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListReplicatorsRequest, ListReplicatorsResponse> {
+        return .init(
+            input: input,
+            command: self.listReplicators,
+            inputKey: \ListReplicatorsRequest.nextToken,
+            outputKey: \ListReplicatorsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

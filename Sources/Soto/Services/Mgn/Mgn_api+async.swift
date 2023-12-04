@@ -51,6 +51,11 @@ extension Mgn {
         return try await self.client.execute(operation: "CreateApplication", path: "/CreateApplication", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Create Connector.
+    public func createConnector(_ input: CreateConnectorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> Connector {
+        return try await self.client.execute(operation: "CreateConnector", path: "/CreateConnector", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Creates a new Launch Configuration Template.
     public func createLaunchConfigurationTemplate(_ input: CreateLaunchConfigurationTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> LaunchConfigurationTemplate {
         return try await self.client.execute(operation: "CreateLaunchConfigurationTemplate", path: "/CreateLaunchConfigurationTemplate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -69,6 +74,11 @@ extension Mgn {
     /// Delete application.
     public func deleteApplication(_ input: DeleteApplicationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> DeleteApplicationResponse {
         return try await self.client.execute(operation: "DeleteApplication", path: "/DeleteApplication", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Delete Connector.
+    public func deleteConnector(_ input: DeleteConnectorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws {
+        return try await self.client.execute(operation: "DeleteConnector", path: "/DeleteConnector", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Deletes a single Job by ID.
@@ -169,6 +179,11 @@ extension Mgn {
     /// Retrieves all applications or multiple applications by ID.
     public func listApplications(_ input: ListApplicationsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListApplicationsResponse {
         return try await self.client.execute(operation: "ListApplications", path: "/ListApplications", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// List Connectors.
+    public func listConnectors(_ input: ListConnectorsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListConnectorsResponse {
+        return try await self.client.execute(operation: "ListConnectors", path: "/ListConnectors", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// List export errors.
@@ -316,6 +331,11 @@ extension Mgn {
         return try await self.client.execute(operation: "UpdateApplication", path: "/UpdateApplication", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
+    /// Update Connector.
+    public func updateConnector(_ input: UpdateConnectorRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> Connector {
+        return try await self.client.execute(operation: "UpdateConnector", path: "/UpdateConnector", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
     /// Updates multiple LaunchConfigurations by Source Server ID.
     public func updateLaunchConfiguration(_ input: UpdateLaunchConfigurationRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> LaunchConfiguration {
         return try await self.client.execute(operation: "UpdateLaunchConfiguration", path: "/UpdateLaunchConfiguration", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
@@ -334,6 +354,11 @@ extension Mgn {
     /// Updates multiple ReplicationConfigurationTemplates by ID.
     public func updateReplicationConfigurationTemplate(_ input: UpdateReplicationConfigurationTemplateRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ReplicationConfigurationTemplate {
         return try await self.client.execute(operation: "UpdateReplicationConfigurationTemplate", path: "/UpdateReplicationConfigurationTemplate", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
+    }
+
+    /// Update Source Server.
+    public func updateSourceServer(_ input: UpdateSourceServerRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> SourceServer {
+        return try await self.client.execute(operation: "UpdateSourceServer", path: "/UpdateSourceServer", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
     /// Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
@@ -500,6 +525,28 @@ extension Mgn {
             command: self.listApplications,
             inputKey: \ListApplicationsRequest.nextToken,
             outputKey: \ListApplicationsResponse.nextToken,
+            logger: logger,
+            on: eventLoop
+        )
+    }
+
+    /// List Connectors.
+    /// Return PaginatorSequence for operation.
+    ///
+    /// - Parameters:
+    ///   - input: Input for request
+    ///   - logger: Logger used flot logging
+    ///   - eventLoop: EventLoop to run this process on
+    public func listConnectorsPaginator(
+        _ input: ListConnectorsRequest,
+        logger: Logger = AWSClient.loggingDisabled,
+        on eventLoop: EventLoop? = nil
+    ) -> AWSClient.PaginatorSequence<ListConnectorsRequest, ListConnectorsResponse> {
+        return .init(
+            input: input,
+            command: self.listConnectors,
+            inputKey: \ListConnectorsRequest.nextToken,
+            outputKey: \ListConnectorsResponse.nextToken,
             logger: logger,
             on: eventLoop
         )

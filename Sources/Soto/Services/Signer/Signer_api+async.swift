@@ -41,9 +41,8 @@ extension Signer {
         return try await self.client.execute(operation: "DescribeSigningJob", path: "/signing-jobs/{jobId}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Retrieves the
-    /// 			revocation status of one or more of the signing profile, signing job, and signing
-    /// 			certificate.
+    /// Retrieves the revocation status of one or more of the signing profile, signing job,
+    /// 			and signing certificate.
     public func getRevocationStatus(_ input: GetRevocationStatusRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> GetRevocationStatusResponse {
         return try await self.client.execute(operation: "GetRevocationStatus", path: "/revocations", httpMethod: .GET, serviceConfig: self.config, input: input, hostPrefix: "verification.", logger: logger, on: eventLoop)
     }
@@ -63,36 +62,36 @@ extension Signer {
         return try await self.client.execute(operation: "ListProfilePermissions", path: "/signing-profiles/{profileName}/permissions", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists all your signing jobs. You can use the maxResults parameter to
-    /// 			limit the number of signing jobs that are returned in the response. If additional jobs
-    /// 			remain to be listed, code signing returns a nextToken value. Use this value in
+    /// Lists all your signing jobs. You can use the maxResults parameter to limit the
+    /// 			number of signing jobs that are returned in the response. If additional jobs remain to
+    /// 			be listed, AWS Signer returns a nextToken value. Use this value in
     /// 			subsequent calls to ListSigningJobs to fetch the remaining values. You can
     /// 			continue calling ListSigningJobs with your maxResults
-    /// 			parameter and with new values that code signing returns in the nextToken
+    /// 			parameter and with new values that Signer returns in the nextToken
     /// 			parameter until all of your signing jobs have been returned.
     public func listSigningJobs(_ input: ListSigningJobsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSigningJobsResponse {
         return try await self.client.execute(operation: "ListSigningJobs", path: "/signing-jobs", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists all signing platforms available in code signing that match the request parameters. If
-    /// 			additional jobs remain to be listed, code signing returns a nextToken value. Use
-    /// 			this value in subsequent calls to ListSigningJobs to fetch the remaining
-    /// 			values. You can continue calling ListSigningJobs with your
-    /// 				maxResults parameter and with new values that code signing returns in the
+    /// Lists all signing platforms available in AWS Signer that match the request parameters. If
+    /// 			additional jobs remain to be listed, Signer returns a nextToken value.
+    /// 			Use this value in subsequent calls to ListSigningJobs to fetch the
+    /// 			remaining values. You can continue calling ListSigningJobs with your
+    /// 				maxResults parameter and with new values that Signer returns in the
     /// 				nextToken parameter until all of your signing jobs have been
     /// 			returned.
     public func listSigningPlatforms(_ input: ListSigningPlatformsRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSigningPlatformsResponse {
         return try await self.client.execute(operation: "ListSigningPlatforms", path: "/signing-platforms", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Lists all available signing profiles in your AWS account. Returns only profiles with
-    /// 			an ACTIVE status unless the includeCanceled request field is
-    /// 			set to true. If additional jobs remain to be listed, code signing returns a
+    /// Lists all available signing profiles in your AWS account. Returns only profiles with an
+    /// 				ACTIVE status unless the includeCanceled request field is
+    /// 			set to true. If additional jobs remain to be listed, AWS Signer returns a
     /// 				nextToken value. Use this value in subsequent calls to
     /// 				ListSigningJobs to fetch the remaining values. You can continue calling
     /// 				ListSigningJobs with your maxResults parameter and with
-    /// 			new values that code signing returns in the nextToken parameter until all of your
-    /// 			signing jobs have been returned.
+    /// 			new values that Signer returns in the nextToken parameter until all of
+    /// 			your signing jobs have been returned.
     public func listSigningProfiles(_ input: ListSigningProfilesRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> ListSigningProfilesResponse {
         return try await self.client.execute(operation: "ListSigningProfiles", path: "/signing-profiles", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -102,7 +101,7 @@ extension Signer {
         return try await self.client.execute(operation: "ListTagsForResource", path: "/tags/{resourceArn}", httpMethod: .GET, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Creates a signing profile. A signing profile is a code signing template that can be used to
+    /// Creates a signing profile. A signing profile is a code-signing template that can be used to
     /// 			carry out a pre-defined signing job.
     ///
     public func putSigningProfile(_ input: PutSigningProfileRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> PutSigningProfileResponse {
@@ -127,8 +126,7 @@ extension Signer {
         return try await self.client.execute(operation: "RevokeSigningProfile", path: "/signing-profiles/{profileName}/revoke", httpMethod: .PUT, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
 
-    /// Signs a binary
-    /// 			payload and returns a signature envelope.
+    /// Signs a binary payload and returns a signature envelope.
     public func signPayload(_ input: SignPayloadRequest, logger: Logger = AWSClient.loggingDisabled, on eventLoop: EventLoop? = nil) async throws -> SignPayloadResponse {
         return try await self.client.execute(operation: "SignPayload", path: "/signing-jobs/with-payload", httpMethod: .POST, serviceConfig: self.config, input: input, logger: logger, on: eventLoop)
     }
@@ -142,14 +140,13 @@ extension Signer {
     ///
     /// 				           Your S3 source bucket must be version enabled.
     ///
-    /// 				           You must create an S3 destination bucket. Code signing uses your S3 destination
-    /// 					bucket to write your signed code.
+    /// 				           You must create an S3 destination bucket. AWS Signer uses your S3 destination bucket to
+    /// 					write your signed code.
     ///
     /// 				           You specify the name of the source and destination buckets when calling the
     /// 						StartSigningJob operation.
     ///
-    /// 				           You must also specify a request token that identifies your request to
-    /// 					code signing.
+    /// 				           You must also specify a request token that identifies your request to Signer.
     ///
     /// 		       You can call the DescribeSigningJob and the ListSigningJobs actions after you call
     /// 			StartSigningJob.
@@ -177,12 +174,12 @@ extension Signer {
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Signer {
-    /// Lists all your signing jobs. You can use the maxResults parameter to
-    /// 			limit the number of signing jobs that are returned in the response. If additional jobs
-    /// 			remain to be listed, code signing returns a nextToken value. Use this value in
+    /// Lists all your signing jobs. You can use the maxResults parameter to limit the
+    /// 			number of signing jobs that are returned in the response. If additional jobs remain to
+    /// 			be listed, AWS Signer returns a nextToken value. Use this value in
     /// 			subsequent calls to ListSigningJobs to fetch the remaining values. You can
     /// 			continue calling ListSigningJobs with your maxResults
-    /// 			parameter and with new values that code signing returns in the nextToken
+    /// 			parameter and with new values that Signer returns in the nextToken
     /// 			parameter until all of your signing jobs have been returned.
     /// Return PaginatorSequence for operation.
     ///
@@ -205,11 +202,11 @@ extension Signer {
         )
     }
 
-    /// Lists all signing platforms available in code signing that match the request parameters. If
-    /// 			additional jobs remain to be listed, code signing returns a nextToken value. Use
-    /// 			this value in subsequent calls to ListSigningJobs to fetch the remaining
-    /// 			values. You can continue calling ListSigningJobs with your
-    /// 				maxResults parameter and with new values that code signing returns in the
+    /// Lists all signing platforms available in AWS Signer that match the request parameters. If
+    /// 			additional jobs remain to be listed, Signer returns a nextToken value.
+    /// 			Use this value in subsequent calls to ListSigningJobs to fetch the
+    /// 			remaining values. You can continue calling ListSigningJobs with your
+    /// 				maxResults parameter and with new values that Signer returns in the
     /// 				nextToken parameter until all of your signing jobs have been
     /// 			returned.
     /// Return PaginatorSequence for operation.
@@ -233,14 +230,14 @@ extension Signer {
         )
     }
 
-    /// Lists all available signing profiles in your AWS account. Returns only profiles with
-    /// 			an ACTIVE status unless the includeCanceled request field is
-    /// 			set to true. If additional jobs remain to be listed, code signing returns a
+    /// Lists all available signing profiles in your AWS account. Returns only profiles with an
+    /// 				ACTIVE status unless the includeCanceled request field is
+    /// 			set to true. If additional jobs remain to be listed, AWS Signer returns a
     /// 				nextToken value. Use this value in subsequent calls to
     /// 				ListSigningJobs to fetch the remaining values. You can continue calling
     /// 				ListSigningJobs with your maxResults parameter and with
-    /// 			new values that code signing returns in the nextToken parameter until all of your
-    /// 			signing jobs have been returned.
+    /// 			new values that Signer returns in the nextToken parameter until all of
+    /// 			your signing jobs have been returned.
     /// Return PaginatorSequence for operation.
     ///
     /// - Parameters:
